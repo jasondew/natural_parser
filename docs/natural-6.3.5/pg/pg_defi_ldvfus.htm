@@ -1,0 +1,1569 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Using Dynamic and Large Variables</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="pg_defi_ldvfus"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_defi_ldvfus.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_defi_ldvfus.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_defi-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_defi_ldvfin.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_defi_udc.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Programming Guide&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x79"></a> Using Dynamic and Large Variables 
+         </h1>
+      </div> 
+         
+         
+      <p>This document covers the following topics:</p>
+         
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_defi_ldvfus.htm#intro_ldvf">General Remarks</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_ldvfus.htm#A_DV">Assignments with Dynamic Variables</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_ldvfus.htm#I_DV">Initialization of Dynamic Variables</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_ldvfus.htm#S_DAV">String Manipulation with Dynamic Alphanumeric Variables</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_ldvfus.htm#LCC_DV">Logical Condition Criterion (LCC) with Dynamic Variables</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_ldvfus.htm#at_if_break">AT/IF-BREAK of Dynamic Control Fields</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_ldvfus.htm#PT_DV">Parameter Transfer with Dynamic Variables</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_ldvfus.htm#Work_File_LDV_WINUX">Work File Access with Large and Dynamic Variables</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_ldvfus.htm#DDM_GE">DDM Generation and Editing for Varying Length Columns</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_ldvfus.htm#ALDO">Accessing Large Database Objects</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_ldvfus.htm#PA_DV">Performance Aspects with Dynamic Variables</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_ldvfus.htm#odv">Outputting Dynamic Variables</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_ldvfus.htm#dynam_xarray_pg_defi_ldvfus">Dynamic X-Arrays</a></p>
+         </li>
+      </ul> 
+        
+      <hr> 
+        
+      <div><a name="intro_ldvf"></a></div> 
+         
+      <h2> General Remarks </h2> 
+          
+          
+      <p>Generally, the following rules apply:</p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">A dynamic alphanumeric field may be used wherever an alphanumeric
+                      field is allowed. 
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">A dynamic binary field may be used wherever a binary field is allowed.
+                      
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">A dynamic Unicode field may be used wherever a Unicode field is
+                      allowed.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <h4 class="floating-title"> Exception:</h4> 
+          
+      <p> Dynamic variables are not allowed within the
+              <a href="../sm/sort.htm"><code>SORT</code></a> statement. To use
+              dynamic variables in a <a href="../sm/display.htm"><code>DISPLAY</code></a>,
+              <a href="../sm/write.htm"><code>WRITE</code></a>,
+              <a href="../sm/printsm.htm"><code>PRINT</code></a>,
+              <a href="../sm/reinput.htm"><code>REINPUT</code></a> or
+              <a href="../sm/input.htm"><code>INPUT</code></a> statement, you
+              must use either the session parameter <a href="../parms/sp_al.htm"><code>AL</code></a> or
+              <a href="../parms/sp_em.htm"><code>EM</code></a> to
+              define the length of the variable.
+      </p> 
+          
+      <p>The used length (as indicated by the Natural system variable
+              <a href="../vari/appl.htm#LENGTH"><code>*LENGTH</code></a>,
+              see <a href="pg_defi_ldvfin.htm#System_Variable_LENGTH_field">Value Space
+            Currently Used for a Dynamic Variable</a>) and the size of the
+              allocated storage of dynamic variables are equal to zero until the variable is
+              accessed as a target operand for the first time. Due to assignments or other
+              manipulation operations, dynamic variables may be firstly allocated or extended
+              (reallocated) to the exact size of the source operand.
+      </p> 
+          
+      <p>The size of a dynamic variable may be extended if it is used as a
+              modifiable operand (target operand) in the following statements:
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="35%">
+            <col width="62%">
+         </colgroup> 
+                
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> <a href="../sm/assign.htm"><code>ASSIGN</code></a>
+                         
+               </td> 
+                       
+               <td> <a href="../sm/compute.htm#operand1_compute">
+                      <code><var>operand1</var></code></a> (destination
+                  operand in an assignment).
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a href="../sm/callnat.htm"><code>CALLNAT</code></a> 
+               </td> 
+                       
+               <td>See <a href="../sm/callnat.htm#PT_DV_CALLNAT">Parameter Transfer with Dynamic
+                     Variables</a> (except if <code>AD=O</code>, or if
+                           <code>BY VALUE</code> exists in the corresponding parameter data area).
+               </td>
+                       
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a href="../sm/compress.htm"><code>COMPRESS</code></a> 
+               </td> 
+                       
+               <td> <code><var>operand2</var></code>, see
+                           <a href="../sm/compress.htm#Processing_compress">Processing</a>.
+               </td>
+                       
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a href="../sm/examine.htm"><code>EXAMINE</code></a> 
+               </td> 
+                       
+               <td> <code><var>operand1</var></code> in the
+                           <a href="../sm/examine.htm#del_repl_clause"><code>DELETE
+                                 REPLACE</code></a> clause. 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a href="../sm/move.htm"><code>MOVE</code></a>
+                       
+               </td> 
+                       
+               <td> <code><var>operand2</var></code> (destination
+                  operand), see <a href="../sm/move.htm#Function_Move">Function</a>.
+               </td>
+                       
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a href="../sm/perform.htm"><code>PERFORM</code></a> 
+               </td> 
+                       
+               <td>(except if <code>AD=O</code>, or if <code>BY
+                              VALUE</code> exists in the corresponding parameter data area).
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a href="../sm/readwork.htm"><code>READ WORK
+                        FILE</code></a> 
+               </td> 
+                       
+               <td> <code><var>operand1</var></code> and
+                           <code><var>operand2</var></code>, see
+                           <a href="../sm/readwork.htm#Handling_of_Large_and_Dynamic_Variables">Handling
+                              of Large and Dynamic Variables</a>.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a href="../sm/separate.htm"><code>SEPARATE</code></a> 
+               </td> 
+                       
+               <td> <a href="../sm/separate.htm#operand4_separate">
+                      <code><var>operand4</var></code></a>.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a href="../sm/select_sql.htm"><code>SELECT</code></a> (SQL)
+               </td> 
+                       
+               <td> <a href="../sm/select_sql.htm#parameter_INTO">Parameter</a> in the
+                           <code>INTO</code> clause.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a href="../sm/sendmeth.htm"><code>SEND
+                        METHOD</code></a> 
+               </td> 
+                       
+               <td> <a href="../sm/sendmeth.htm#operand3_sendmeth">
+                      <code><var>operand3</var></code></a> (except if
+                           <code>AD=O</code>).
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>Currently, there is the following limit concerning the usage of large
+              variables:
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="35%">
+            <col width="62%">
+         </colgroup> 
+                
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> <a href="../sm/call.htm"><code>CALL</code></a>
+                       
+               </td> 
+                       
+               <td>Parameter size less than 64 KB per parameter (no limit for the
+                  <code>CALL</code> with <code>INTERFACE4</code> option).
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>In the following sections, the use of dynamic variables is discussed in
+              more detail with examples.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_defi_ldvfus.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="A_DV"></a></div> 
+         
+      <h2> Assignments with Dynamic Variables </h2> 
+          
+          
+      <p>Generally, an assignment is done in the current used length (as
+              indicated by the Natural system variable
+              <a href="../vari/appl.htm#LENGTH"><code>*LENGTH</code></a>)
+              of the source operand. If the destination operand is a dynamic variable,&nbsp; its
+              current allocated size is possibly extended in order to move the source operand
+              without truncation.
+      </p> 
+          
+      <p> Example: </p> 
+          <pre class="verbatim">
+#MYDYNTEXT1 := OPERAND
+MOVE OPERAND TO #MYDYNTEXT1
+/* #MYDYNTEXT1 IS AUTOMATICALLY EXTENDED UNTIL THE SOURCE OPERAND CAN BE COPIED 
+</pre> 
+          <p> <a href="../sm/moveall.htm"><code>MOVE ALL</code></a>,
+              <a href="../sm/moveall.htm#operand3_moveall"><code>MOVE ALL
+               UNTIL</code></a> with dynamic target operands are defined as
+              follows:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem"> <code>MOVE ALL</code> moves the source operand repeatedly to the
+                      target operand until the used length (<code>*LENGTH</code>) of
+                      the target operand is reached. <code>*LENGTH</code> is not
+                      modified. If <code>*LENGTH</code> is zero, the statement will
+                      be ignored.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <code>MOVE ALL <var>operand1</var> TO
+                         <var>operand2</var> UNTIL operand3</code> moves
+                      <code><var>operand1</var></code> repeatedly to
+                      <code><var>operand2</var></code> until the length specified in
+                      <code><var>operand3</var></code> is reached. If
+                      <code><var>operand3</var></code> is greater than
+                      <code>*LENGTH(<var>operand2</var>)</code>,
+                      <code><var>operand2</var></code> is extended and
+                      <code>*LENGTH( <var>operand2</var>)</code> is
+                      set to <code><var>operand3</var></code>. If
+                      <code><var>operand3</var></code> is less than
+                      <code>*LENGTH(<var>operand2</var>)</code>, the
+                      used length is reduced to <code><var>operand3</var></code>. If
+                      <code><var>operand3</var></code> equals
+                      <code>*LENGTH(<var>operand2</var>)</code>, the
+                      behavior is equivalent to <code>MOVE ALL</code>.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p> Example: </p> 
+          <pre class="verbatim">
+#MYDYNTEXT1 := 'ABCDEFGHIJKLMNO'          /* *LENGTH(#MYDYNTEXT1) = 15
+MOVE ALL 'AB' TO #MYDYNTEXT1              /* CONTENT OF #MYDYNTEXT1 = 'ABABABABABABABA';  
+                                          /* *LENGTH IS STILL 15
+MOVE ALL 'CD' TO #MYDYNTEXT1 UNTIL 6      /* CONTENT OF #MYDYNTEXT1 = 'CDCDCD';
+                                          /* *LENGTH = 6
+MOVE ALL 'EF' TO #MYDYNTEXT1 UNTIL 10     /* CONTENT OF #MYDYNTEXT1 = 'EFEFEFEFEF'; 
+                                          /* *LENGTH = 10
+</pre> 
+          <p><code>MOVE JUSTIFIED</code> is rejected at compile time if the target
+              operand is a dynamic variable.
+      </p> 
+          
+      <p><code>MOVE SUBSTR</code> and <code>MOVE TO SUBSTR</code> are allowed.
+              <code>MOVE SUBSTR</code> will lead to a runtime error if a sub-string behind
+              the used length of a dynamic variable (<code>*LENGTH</code>) is
+              referenced. <code>MOVE TO SUBSTR</code> will lead to a runtime error if a
+              sub-string position behind <code>*LENGTH + 1</code> is
+              referenced, because this would lead to an undefined gap in the content of the
+              dynamic variable. If the target operand should be extended by <code>MOVE TO
+            SUBSTR</code> (for example if the second operand is set to
+              <code>*LENGTH+1</code>), the third operand is mandatory.
+      </p> 
+          
+      <p> Valid syntax: </p> 
+          <pre class="verbatim">
+#OP2 := *LENGTH(#MYDYNTEXT1)
+MOVE SUBSTR (#MYDYNTEXT1, #OP2) TO OPERAND                /* MOVE LAST CHARACTER TO OPERAND
+#OP2 := *LENGTH(#MYDYNTEXT1) + 1
+MOVE OPERAND TO SUBSTR(#MYDYNTEXT1, #OP2, #lEN_OPERAND)   /* CONCATENATE OPERAND TO #MYDYNTEXT1          
+</pre> 
+          <p> Invalid syntax: </p> 
+          <pre class="verbatim">
+#OP2 := *LENGTH(#MYDYNTEXT1) + 1
+MOVE SUBSTR (#MYDYNTEXT1, #OP2, 10) TO OPERAND            /* LEADS TO RUNTIME ERROR; UNDEFINED SUB-STRING  
+#OP2 := *LENGTH(#MYDYNTEXT1 + 10) 
+MOVE OPERAND TO SUBSTR(#MYDYNTEXT1, #OP2, #EN_OPERAND)    /* LEADS TO RUNTIME ERROR; UNDEFINED GAP
+#OP2 := *LENGTH(#MYDYNTEXT1) + 1
+MOVE OPERAND TO SUBSTR(#MYDYNTEXT1, #OP2)                 /* LEADS TO RUNTIME ERROR; UNDEFINED LENGTH
+</pre> 
+          <h4 class="floating-title"> Assignment Compatibility </h4> 
+          
+      <p> Example: </p> 
+          <pre class="verbatim">
+#MYDYNTEXT1   := #MYSTATICVAR1
+#MYSTATICVAR1 := #MYDYNTEXT2   
+</pre> 
+          <p>If the source operand is a static variable, the used length of the
+              dynamic destination operand (<code>*LENGTH(#MYDYNTEXT1)</code>)
+              is set to the format length of the static variable and the source value is
+              copied in this length including trailing blanks (alphanumeric and Unicode
+              fields) or binary zeros (for binary fields).
+      </p> 
+          
+      <p>If the destination operand is static and the source operand is dynamic,
+              the dynamic variable is copied in its currently used length. If this length is
+              less than the format length of the static variable, the remainder is filled
+              with blanks (for alphanumeric and Unicode fields) or binary zeros (for binary
+              fields). Otherwise, the value will be truncated. If the currently used length
+              of the dynamic variable is 0, the static target operand is filled with blanks
+              (for alphanumeric and Unicode fields) or binary zeros (for binary fields).
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_defi_ldvfus.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="I_DV"></a></div> 
+         
+      <h2> Initialization of Dynamic Variables </h2> 
+          
+          
+      <p>Dynamic variables can be initialized with blanks (alphanumeric and
+              Unicode fields) or zeros (binary fields) up to the currently used length (=
+              <a href="../vari/appl.htm#LENGTH"><code>*LENGTH</code></a>)
+              using the <a href="../sm/reset.htm"><code>RESET</code></a>
+              statement. <code>*LENGTH</code> is not modified.
+      </p> 
+          
+      <p> Example: </p> 
+          <pre class="verbatim">
+DEFINE DATA LOCAL
+1 #MYDYNTEXT1   (A)  DYNAMIC
+END-DEFINE
+#MYDYNTEXT1 := 'SHORT TEXT'
+WRITE *LENGTH(#MYDYNTEXT1)          /* USED LENGTH = 10
+RESET #MYDYNTEXT1                   /* USED LENGTH = 10, VALUE = 10 BLANKS  
+</pre> 
+          <p>To initialize a dynamic variable with a specified value in a specified
+              size, the <code>MOVE ALL UNTIL</code> statement may be used.
+      </p> 
+          
+      <p> Example: </p> 
+          <pre class="verbatim">
+MOVE ALL 'Y' TO #MYDYNTEXT1 UNTIL 15          /* #MYDYNTEXT1 CONTAINS 15 'Y'S, USED LENGTH = 15 
+</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_defi_ldvfus.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="S_DAV"></a></div> 
+         
+      <h2> String Manipulation with Dynamic Alphanumeric Variables </h2> 
+          
+          
+      <p>If a modifiable operand is a dynamic variable, its current allocated
+              size is possibly extended in order to perform the operation without truncation
+              or an error message. This is valid for the concatenation (<a href="../sm/compress.htm"><code>COMPRESS</code></a>) and separation of
+              dynamic alphanumeric variables (<a href="../sm/separate.htm"><code>SEPARATE</code></a>).
+      </p> 
+          
+      <p> Example:</p> 
+          <pre class="verbatim">
+** Example 'DYNAMX01': Dynamic variables (with COMPRESS and SEPARATE)   
+************************************************************************
+DEFINE DATA LOCAL                                                       
+1 #MYDYNTEXT1 (A)   DYNAMIC                                             
+1 #TEXT       (A20)                                                     
+1 #DYN1       (A)   DYNAMIC                                             
+1 #DYN2       (A)   DYNAMIC                                             
+1 #DYN3       (A)   DYNAMIC                                             
+END-DEFINE                                                              
+*                                                                       
+MOVE ' HELLO WORLD ' TO #MYDYNTEXT1                                     
+WRITE #MYDYNTEXT1 (AL=25) 'with length' *LENGTH (#MYDYNTEXT1)           
+/*  dynamic variable with leading and trailing blanks                   
+*                                                                       
+MOVE ' HELLO WORLD ' TO #TEXT                                           
+*                                                                       
+MOVE #TEXT TO #MYDYNTEXT1                                               
+WRITE #MYDYNTEXT1 (AL=25) 'with length' *LENGTH (#MYDYNTEXT1)           
+/*  dynamic variable with whole variable length of #TEXT
+*                                                              
+COMPRESS #TEXT INTO #MYDYNTEXT1                                
+WRITE #MYDYNTEXT1 (AL=25) 'with length' *LENGTH (#MYDYNTEXT1)  
+/*  dynamic variable with leading blanks of #TEXT              
+*                                                              
+*                                                              
+#MYDYNTEXT1 := 'HERE COMES THE SUN'                            
+SEPARATE #MYDYNTEXT1 INTO #DYN1 #DYN2 #DYN3 IGNORE             
+*                                                              
+WRITE / #MYDYNTEXT1 (AL=25) 'with length' *LENGTH (#MYDYNTEXT1)
+WRITE #DYN1 (AL=25) 'with length' *LENGTH (#DYN1)              
+WRITE #DYN2 (AL=25) 'with length' *LENGTH (#DYN2)              
+WRITE #DYN3 (AL=25) 'with length' *LENGTH (#DYN3)              
+/*  #DYN1, #DYN2, #DYN3 are automatically extended or reduced  
+*                                                              
+EXAMINE #MYDYNTEXT1 FOR 'SUN' REPLACE 'MOON'                   
+WRITE / #MYDYNTEXT1 (AL=25) 'with length' *LENGTH (#MYDYNTEXT1)
+/*  #MYDYNTEXT1 is automatically extended or reduced           
+*
+END
+</pre> 
+          <p class="note"><strong>Note:</strong><br> In case of non-dynamic variables, an error message may be
+              returned.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_defi_ldvfus.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="LCC_DV"></a></div> 
+         
+      <h2> 
+             <a name="x80"></a> Logical Condition Criterion (LCC) with Dynamic
+             Variables
+      </h2> 
+          
+          
+      <p>Generally, a read-only operation (such as a comparison) with a dynamic
+              variable is done with its currently used length. Dynamic variables are
+              processed like static variables if they are used in a read-only
+              (non-modifiable) context.
+      </p> 
+          
+      <p> Example:</p> 
+          <pre class="verbatim">
+IF  #MYDYNTEXT1  =  #MYDYNTEXT2  OR  #MYDYNTEXT1 =  "**"  THEN ...
+IF  #MYDYNTEXT1  &lt;  #MYDYNTEXT2  OR  #MYDYNTEXT1 &lt;  "**"  THEN ...  
+IF  #MYDYNTEXT1  &gt;  #MYDYNTEXT2  OR  #MYDYNTEXT1 &gt;  "**"  THEN ...
+</pre> 
+          <p>Trailing blanks for alphanumeric and Unicode variables or leading binary
+              zeros for binary variables are processed in the same way for static and dynamic
+              variables. For example, alphanumeric variables containing the values
+              <code>AA</code> and <code>AA</code> followed by a blank will be considered
+              being equal, and binary variables containing the values <code>H&#8217;0000031&#8217;</code>
+              and <code>H&#8217;3031&#8217;</code> will be considered being equal. If a comparison result
+              should only be TRUE in case of an exact copy, the used lengths of the dynamic
+              variables have to be compared in addition. If one variable is an exact copy of
+              the other, their used lengths are also equal.
+      </p> 
+          
+      <p> Example: </p> 
+          <pre class="verbatim">
+#MYDYNTEXT1  :=  'HELLO'                                     /* USED LENGTH IS 5
+#MYDYNTEXT2  :=  'HELLO     '                                /* USED LENGTH IS 10  
+IF   #MYDYNTEXT1  =  #MYDYNTEXT2   THEN  ...                 /* TRUE
+IF   #MYDYNTEXT1  =  #MYDYNTEXT2 AND     
+     *LENGTH(#MYDYNTEXT1) = *LENGTH(#MYDYNTEXT2)  THEN  ...  /* FALSE
+</pre> 
+          <p>Two dynamic variables are compared position by position (from left to
+              right for alphanumeric variables, and right to left for binary variables) up to
+              the minimum of their used lengths. The first position where the variables are
+              not equal determines if the first or the second variable is greater than, less
+              than or equal to the other. The variables are equal if they are equal up to the
+              minimum of their used lengths and the remainder of the longer variable contains
+              only blanks for alphanumeric dynamic variables or binary zeros for binary
+              dynamic variables. To compare two Unicode dynamic variables, trailing blanks
+              are removed from both values before the ICU collation algorithm is used to
+              compare the two resulting values. See also
+              <a href="../unicode/uni-language.htm#uni-language-lcc">Logical
+            Condition Criteria</a> in the <cite>Unicode and Code Page
+                 Support</cite> documentation.
+      </p> 
+          
+      <p> Example:</p> 
+          <pre class="verbatim">
+#MYDYNTEXT1  :=  'HELLO1'                    /* USED LENGTH IS 6
+#MYDYNTEXT2  :=  'HELLO2'                    /* USED LENGTH IS 10  
+IF #MYDYNTEXT1  &lt;  #MYDYNTEXT2 THEN  ...     /* TRUE
+#MYDYNTEXT2  :=  'HALLO'
+IF #MYDYNTEXT1  &gt;  #MYDYNTEXT2 THEN  ...     /* TRUE
+</pre> 
+          
+         <div><a name="d0e9711"></a></div> 
+          
+      <h3>Comparison Compatibility</h3> 
+           
+           
+      <p>Comparisons between dynamic and static variables are equivalent to
+               comparisons between dynamic variables. The format length of the static variable
+               is interpreted as its used length.
+      </p> 
+           
+      <p> Example: </p> 
+           <pre class="verbatim">
+#MYSTATTEXT1 :=  'HELLO'                      /* FORMAT LENGTH OF MYSTATTEXT1 IS A20  
+#MYDYNTEXT1  :=  'HELLO'                      /* USED LENGTH IS 5
+IF  #MYSTATTEXT1  =  #MYDYNTEXT1  THEN  ...   /* TRUE
+IF  #MYSTATTEXT1  &gt;  #MYDYNTEXT1  THEN  ...   /* FALSE
+</pre> 
+           
+          
+        
+        <div class="noprint">
+         <p><a href="pg_defi_ldvfus.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="at_if_break"></a></div> 
+         
+      <h2> AT/IF-BREAK of Dynamic Control Fields </h2> 
+          
+          
+      <p>The comparison of the break control field with its old value is
+              performed position by position from left to right. If the old and the new value
+              of the dynamic variable are of different length, then for comparison, the value
+              with shorter length is padded to the right (with blanks for alphanumeric and
+              Unicode dynamic values or binary zeros for binary values). 
+      </p> 
+          
+      <p>In case of an alphanumeric or Unicode break control field, trailing
+              blanks are not significant for the comparison, i.e. trailing blanks do not mean
+              a change of the value and no break occurs. 
+      </p> 
+          
+      <p>In case of a binary break control field, trailing binary zeros are not
+              significant for the comparison, i.e. trailing binary zeros do not mean a change
+              of the value and no break occurs.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_defi_ldvfus.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="PT_DV"></a></div> 
+         
+      <h2> Parameter Transfer with Dynamic Variables </h2> 
+          
+          
+      <p>Dynamic variables may be passed as parameters to a called program object
+              (<a href="../sm/callnat.htm"><code>CALLNAT</code></a>,
+              <a href="../sm/perform.htm"><code>PERFORM</code></a>).
+              Call-by-reference is possible because the value space of a dynamic variable is
+              contiguous. Call-by-value causes an assignment with the variable definition of
+              the caller as the source operand and the parameter definition as the
+              destination operand. Call-by-value result causes in addition the movement in
+              the opposite direction.
+      </p> 
+          
+      <p>For call-by-reference, both definitions must be <code>DYNAMIC</code>. If
+              only one of them is <code>DYNAMIC</code>, a runtime error is raised. In the
+              case of call-by-value (result), all combinations are possible. The following
+              table illustrates the valid combinations:
+      </p> 
+          
+      <h4 class="floating-title"> Call By Reference </h4> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th rowspan="2" align="left">Caller</th> 
+                       
+               <th colspan="2" align="center">Parameter</th> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th align="left">Static</th> 
+                       
+               <th align="left">Dynamic</th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th>Static</th> 
+                       
+               <td>Yes</td> 
+                       
+               <td>No</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th>Dynamic</th> 
+                       
+               <td>No</td> 
+                       
+               <td>Yes</td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>The formats of dynamic variables A or B must match.</p> 
+          
+      <h4 class="floating-title"> Call by Value (Result)</h4> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th rowspan="2" align="left">Caller</th> 
+                       
+               <th colspan="2" align="center">Parameter</th> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th align="left">Static</th> 
+                       
+               <th align="left">Dynamic</th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th>Static</th> 
+                       
+               <td>Yes</td> 
+                       
+               <td>Yes</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th>Dynamic</th> 
+                       
+               <td>Yes</td> 
+                       
+               <td>Yes</td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p class="note"><strong>Note:</strong><br> In the case of static/dynamic or dynamic/static definitions, a value
+              truncation may occur according to the data transfer rules of the appropriate
+              assignments.
+      </p> 
+          
+      <h4 class="floating-title"> Example 1: </h4> 
+          <pre class="verbatim">
+** Example 'DYNAMX02': Dynamic variables (as parameters)                
+************************************************************************
+DEFINE DATA LOCAL                                                       
+1 #MYTEXT (A) DYNAMIC                                                   
+END-DEFINE                                                              
+*                                                                       
+#MYTEXT := '123456'      /* extended to 6 bytes, *LENGTH(#MYTEXT) = 6   
+*                                                                       
+<strong>CALLNAT 'DYNAMX03' USING #MYTEXT </strong>                                       
+*                                                                       
+WRITE *LENGTH(#MYTEXT)          /* *LENGTH(#MYTEXT) = 8                 
+*                                                                       
+END                                                                  
+</pre> 
+          <p>Subprogram <code>DYNAMX03</code>:
+      </p> 
+          <pre class="verbatim">
+** Example 'DYNAMX03': Dynamic variables (as parameters)                
+************************************************************************
+DEFINE DATA PARAMETER                                                   
+1 #MYPARM (A) DYNAMIC  BY VALUE RESULT                                  
+END-DEFINE                                                              
+*                                                                       
+WRITE *LENGTH(#MYPARM)                  /* *LENGTH(#MYPARM) = 6         
+#MYPARM := '1234567'                    /* *LENGTH(#MYPARM) = 7         
+#MYPARM := '12345678'                   /* *LENGTH(#MYPARM) = 8         
+EXPAND DYNAMIC VARIABLE #MYPARM TO 10   /* 10 bytes are allocated       
+*                                                                       
+WRITE *LENGTH(#MYPARM)                  /* *LENGTH(#MYPARM) = 8         
+*                                                                       
+/* content of #MYPARM is moved back to #MYTEXT                          
+/* used length of #MYTEXT = 8                                           
+*                                                                       
+END                                                                    
+</pre> 
+          <h4 class="floating-title"> Example 2: </h4> 
+          <pre class="verbatim">
+** Example 'DYNAMX04': Dynamic variables (as parameters)                
+************************************************************************
+DEFINE DATA LOCAL                                                       
+1 #MYTEXT (A) DYNAMIC                                                   
+END-DEFINE                                                              
+*                                                                       
+#MYTEXT := '123456'      /* extended to 6 bytes, *LENGTH(#MYTEXT) = 6   
+*                                                                       
+<strong>CALLNAT 'DYNAMX05' USING #MYTEXT</strong>                                        
+*                                                                       
+WRITE *LENGTH(#MYTEXT)          /* *LENGTH(#MYTEXT) = 8                 
+                                /* at least 10 bytes are                
+                                /* allocated (extended in DYNAMX05)     
+*                                                                       
+END                                                               
+</pre> 
+          <p>Subprogram <code>DYNAMX05</code>:
+      </p> 
+          <pre class="verbatim">
+** Example 'DYNAMX05': Dynamic variables (as parameters)                
+************************************************************************
+DEFINE DATA PARAMETER                                                   
+1 #MYPARM (A) DYNAMIC                                                   
+END-DEFINE                                                              
+*                                                                       
+WRITE *LENGTH(#MYPARM)                  /* *LENGTH(#MYPARM) = 6         
+#MYPARM := '1234567'                    /* *LENGTH(#MYPARM) = 7         
+#MYPARM := '12345678'                   /* *LENGTH(#MYPARM) = 8         
+EXPAND DYNAMIC VARIABLE #MYPARM TO 10   /* 10 bytes are allocated       
+*                                                                       
+WRITE *LENGTH(#MYPARM)                  /* *LENGTH(#MYPARM) = 8         
+*                                                                       
+END                                                                    
+</pre> 
+          
+         <div><a name="d0e9944"></a></div> 
+          
+      <h3>CALL 3GL Program</h3> 
+           
+           
+      <p>Dynamic and large variables can sensibly be used with the
+               <a href="../sm/call.htm"><code>CALL</code></a> statement when the
+               option <a href="../sm/call.htm#INTERFACE4"><code>INTERFACE4</code></a> is used.
+               Using this option leads to an interface to the 3GL program with a different
+               parameter structure.
+      </p> 
+            
+            
+      <p>This usage requires some minor changes in the 3GL program, but
+                provides the following significant benefits as compared with the older
+                <code>FINFO</code> structure.
+      </p> 
+            
+      <ul> 
+                
+         <li> 
+                    
+            <p class="initem">No limitation on the number of passed parameters (former limit
+                        40).
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">No limitation on the parameter's data size (former limit 64 KB per
+                        parameter).
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">Full parameter information can be passed to the 3GL program
+                        including array information. Exported functions are provided which allow secure
+                        access to the parameter data (formerly you had to take care not to overwrite
+                        memory inside of Natural)
+            </p> 
+                   
+         </li> 
+               
+      </ul> 
+            
+      <p>For further information on the <code>FINFO</code> structure, see the
+                <a href="../sm/call.htm#INTERFACE4"><code>CALL
+               INTERFACE4</code></a> statement.
+      </p> 
+            
+           
+      <p>Before calling a 3GL program with dynamic parameters, it is important
+               to ensure that the necessary buffer size is allocated. This can be done
+               explicitly with the <code>EXPAND</code> statement.
+      </p> 
+           
+      <p>If an initialized buffer is required, the dynamic variable can be set
+               to the initial value and to the necessary size by using the <code>MOVE ALL
+            UNTIL</code> statement. Natural provides a set of functions that allow the 3GL
+               program to obtain information about the dynamic parameter and to modify the
+               length when parameter data is passed back.
+      </p> 
+           
+      <p> Example: </p> 
+           <pre class="verbatim">
+MOVE ALL ' ' TO  #MYDYNTEXT1 UNTIL 10000
+  /* a buffer of length 10000 is allocated
+  /* #MYDYNTEXT1 is initialized with blanks
+  /* and *LENGTH(#MYDYNTEXT1) = 10000
+CALL INTERFACE4  'MYPROG'  USING  #MYDYNTEXT1
+WRITE *LENGTH(#MYDYNTEXT1)
+  /* *LENGTH(#MYDYNTEXT1) may have changed in the 3GL program
+</pre> 
+           <p>For a more detailed description, refer to the
+               <a href="../sm/call.htm"><code>CALL</code></a> statement in the
+               <cite>Statements</cite> documentation.
+      </p> 
+           
+          
+        
+        
+        
+      <div class="noprint">
+         <p><a href="pg_defi_ldvfus.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Work_File_LDV_WINUX"></a></div> 
+         
+      <h2> 
+             <a name="x82"></a>Work File Access with Large and Dynamic Variables 
+      </h2> 
+          
+          
+      <p>The following topics are covered below:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_defi_ldvfus.htm#portable_unformatted">PORTABLE and UNFORMATTED</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_ldvfus.htm#ascii">ASCII, ASCII-COMPRESSED and SAG</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_ldvfus.htm#spec_condi">Special Conditions for TRANSFER and ENTIRE CONNECTION</a></p>
+         </li>
+      </ul> 
+          
+         
+      <div><a name="portable_unformatted"></a></div> 
+          
+      <h3> 
+              <a name="x83"></a> 
+              <a name="x84"></a> PORTABLE and UNFORMATTED 
+      </h3> 
+           
+           
+      <p>Large and dynamic variables can be written into work files or read from
+               work files using the two work file types <code>PORTABLE</code> and
+               <code>UNFORMATTED</code>. For these types, there is no size restriction for
+               dynamic variables. However, large variables may not exceed a maximum
+               field/record length of 32766 bytes.
+      </p> 
+           
+      <p>For the work file type <code>PORTABLE</code>, the field information is
+               stored within the work file. The dynamic variables are resized during
+               <code>READ</code> if the field size in the record is different from the current
+               size.
+      </p> 
+           
+      <p>The work file type <code>UNFORMATTED</code> can be used, for example,&nbsp;
+               to read a video from a database and store it in a file directly playable by
+               other utilities. In the <code>WRITE WORK</code> statement, the fields are
+               written to the file with their byte length. All data types
+               (<code>DYNAMIC</code> or not) are treated the same. No structural information
+               is inserted. Note that Natural uses a buffering mechanism, so you can expect
+               the data to be completely written only after a <code>CLOSE WORK</code>. This is
+               especially important if the file is to be&nbsp;processed with another utility while
+               Natural is running.
+      </p> 
+           
+      <p>With the <code>READ WORK</code> statement, fields of fixed length are
+               read with their whole length. If the end-of-file is reached, the remainder of
+               the current field is filled with blanks. The following fields are unchanged. In
+               the case of <code>DYNAMIC</code> data types, all the remainder of the file is
+               read unless it exceeds 1073741824 bytes. If the end of file is reached, the
+               remaining fields (variables) are kept unchanged (normal Natural behavior).
+      </p> 
+           
+          
+         
+      <div><a name="ascii"></a></div> 
+          
+      <h3> 
+              <a name="x85"></a> 
+              <a name="x86"></a> 
+              <a name="x87"></a>ASCII, ASCII-COMPRESSED and SAG 
+      </h3> 
+           
+           
+      <p>The work file types ASCII, ASCII-COMPRESSED and SAG (binary) cannot
+               handle dynamic variables and will produce an error. Large variables for these
+               work file types&nbsp;pose no problem unless the maximum field/record length of 32766
+               bytes is exceeded.
+      </p> 
+           
+          
+         
+      <div><a name="spec_condi"></a></div> 
+          
+      <h3> 
+              <a name="x88"></a> 
+              <a name="x89"></a> Special Conditions for TRANSFER and ENTIRE CONNECTION
+              
+      </h3> 
+           
+           
+      <p>In conjunction with the <a href="../sm/readwork.htm"><code>READ
+               WORK FILE</code></a> statement, the work file type <code>TRANSFER</code>
+               can handle dynamic variables. There is no size limit for dynamic variables. The
+               work file type <code>ENTIRE CONNECTION</code> cannot handle dynamic variables.
+               They can both, however, handle large variables with a maximum field/record
+               length of 1073741824 bytes.
+      </p> 
+           
+      <p>In conjunction with the <a href="../sm/writewor.htm"><code>WRITE
+               WORK FILE</code></a> statement, the work file type <code>TRANSFER</code>
+               can handle dynamic variables with a maximum field/record length of 32766 bytes.
+               The work file type <code>ENTIRE CONNECTION</code> cannot handle dynamic
+               variables. They can both, however, handle large variables with a maximum
+               field/record length of 1073741824 bytes.
+      </p> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_defi_ldvfus.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="DDM_GE"></a></div> 
+         
+      <h2> 
+             <a name="x90"></a> DDM Generation and Editing for Varying Length Columns 
+      </h2>
+         
+          
+          
+      <p>Depending on the data types, the related database format A or format B
+              is generated. For the databases' data type <code>VARCHAR</code> the Natural
+              length of the column is set to the maximum length of the data type as defined
+              in the DBMS. If a data type is very large, the keyword <code>DYNAMIC</code> is
+              generated at the length field position.
+      </p> 
+          
+      <p>For all varying length columns, an <code>LINDICATOR</code> field
+              <code>L@&lt;<var>column-name</var>&gt;</code> will be
+              generated. For the databases' data type <code>VARCHAR</code>, an
+              <code>LINDICATOR</code> field with format/length I2 will be generated. For
+              large data types (see list below) the format/length will be I4.
+      </p> 
+          
+      <p>In the context of database access, the <code>LINDICATOR</code> handling
+              offers the chance to get the length of the field to be read or to set the
+              length of the field to be written independent of a defined buffer length (or
+              independent of <a href="../vari/appl.htm#LENGTH"><code>*LENGTH</code></a>).
+              Usually, after a retrieval function, <code>*LENGTH</code> will
+              be set to the corresponding length indicator value.
+      </p> 
+          
+      <h4 class="floating-title"> Example DDM: </h4> 
+          <pre class="verbatim">  T  L  Name                      F   Leng        S   D   Remark
+     :
+     1  L@PICTURE1                I   4                                     /* length indicator
+     1  PICTURE1                  B   DYNAMIC             IMAGE
+     1  N@PICTURE1                I   2                                     /* NULL indicator
+     1  L@TEXT1                   I   4                                     /* length indicator
+     1  TEXT1                     A   DYNAMIC             TEXT
+     1  N@TEXT1                   I   2                                     /* NULL indicator
+     1  L@DESCRIPTION             I   2                                     /* length indicator
+     1  DESCRIPTION               A   1000                VARCHAR(1000) 
+     :
+     :
+  ~~~~~~~~~~~~~~~~~~~~~~Extended Attributes~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~/* concerning PICTURE1
+   Header               :    ---
+   Edit Mask            :    ---
+   Remarks              :   IMAGE</pre> 
+          <p>The generated formats are varying length formats. The Natural programmer
+              has the chance to change the definition from <code>DYNAMIC</code> to a fixed
+              length definition (extended field editing) and can change, for example, the
+              corresponding DDM field definition for <code>VARCHAR</code> data types to a
+              multiple value field (old generation).
+      </p> 
+          
+      <h4 class="floating-title"> Example: </h4> 
+          <pre class="verbatim">  T  L  Name                  F   Leng          S   D   Remark
+     :
+     1  L@PICTURE1            I   4                                         /* length indicator
+     1  PICTURE1              B   1000000000            IMAGE
+     1  N@PICTURE1            I   2                                         /* NULL indicator
+     1  L@TEXT1               I   4                                         /* length indicator
+     1  TEXT1                 A   5000                  TEXT
+     1  N@TEXT1               I   2                                         /* NULL indicator
+     1  L@DESCRIPTION         I   2                                         /* length indicator
+  M  1  DESCRIPTION           A   100                   VARCHAR(1000) 
+       :
+       :
+  ~~~~~~~~~~~~~~~~~~~~Extended Attributes~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~/* concerning PICTURE1
+   Header             :    ---
+   Edit Mask          :    ---
+   Remarks            :   IMAGE</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_defi_ldvfus.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="ALDO"></a></div> 
+         
+      <h2> 
+             <a name="x91"></a> 
+             <a name="x92"></a> 
+             <a name="x93"></a> 
+             <a name="x94"></a> Accessing Large Database Objects 
+      </h2> 
+          
+          
+      <p>To access a database with large objects (CLOBs or BLOBs), a DDM with
+              corresponding large alphanumeric, Unicode or binary fields is required. If a
+              fixed length is defined and if the database large object does not fit into this
+              field, the large object is truncated. If the programmer does not know the
+              definitive length of the database object, it will make sense to work with
+              dynamic fields. As many reallocations as necessary are done to hold the object.
+              No truncation is performed.
+      </p> 
+          
+      <h4 class="floating-title"> Example Program:</h4> 
+          <pre class="verbatim">
+DEFINE DATA LOCAL
+
+1 person VIEW OF xyz-person
+  2 nachname
+  2 vorname_1
+  2 L@PICTURE1                   /* I4 length indicator for PICTURE1
+  2 PICTURE1                     /* defined as dynamic in the DDM
+  2 TEXT1                        /* defined as non-dynamic in the DDM
+
+END-DEFINE
+
+SELECT * INTO VIEW person FROM xyz-person                   /* PICTURE1 will be read completely
+                             WHERE nachname = 'SMITH'       /* TEXT1 will be truncated to fixed length 5000  
+
+   WRITE  'length of PICTURE1: '  L@PICTURE1                /* the L-INDICATOR will contain the length 
+                                                     /* of PICTURE1 (= *LENGTH(PICTURE1)
+   /* do something with PICTURE1 and TEXT1
+
+   L@PICTURE1  :=  100000       
+   INSERT INTO xyz-person  (*) VALUES (VIEW person)         /* only the first 100000 Bytes of PICTURE1
+                                                     /* are inserted
+END-SELECT 
+</pre> 
+          <p>If a format-length definition is omitted in the view, this is taken from
+              the DDM. In reporting mode, it is now possible to specify any length, if the
+              corresponding DDM field is defined as <code>DYNAMIC</code>. The dynamic field
+              will be mapped to a field with a fixed buffer length. The other way round is
+              not possible.&nbsp;
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th>DDM format/length definition</th> 
+                       
+               <th>VIEW format / length definition</th> 
+                       
+               <th>&nbsp;</th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th rowspan="2"> (An) </th> 
+                       
+               <td>-</td> 
+                       
+               <td>valid</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>(An)</td> 
+                       
+               <td>valid</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th rowspan="2">&nbsp;</th> 
+                       
+               <td>(Am)</td> 
+                       
+               <td nowrap>only valid in reporting mode</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>(A) DYNAMIC</td> 
+                       
+               <td>invalid</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th rowspan="4"> (A) DYNAMIC </th> 
+                       
+               <td>&nbsp;-</td> 
+                       
+               <td>valid</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>(A) DYNAMIC</td> 
+                       
+               <td>valid</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>(An)</td> 
+                       
+               <td>only valid in reporting mode</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>(Am / i : j)</td> 
+                       
+               <td>only valid in reporting mode</td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>(equivalent for Format B variables)</p> 
+          
+         
+      <div><a name="d0e10500"></a></div> 
+          
+      <h3>Parameter with LINDICATOR Clause in SQL Statements</h3> 
+           
+           
+      <p>If the <code>LINDICATOR</code> field is defined as I2 field, the SQL
+               data type <code>VARCHAR</code> is used for sending or receiving the
+               corresponding column. If the <code>LINDICATOR</code> host variable is specified
+               as I4, a large object data type (CLOB/BLOB) is used.
+      </p> 
+           
+      <p>If the field is defined as <code>DYNAMIC</code>, the column is read in
+               an internal loop up to its real length. The <code>LINDICATOR</code> field and
+               <a href="../vari/appl.htm#LENGTH"><code>*LENGTH</code></a>
+               are set to this length. In the case of a fixed-length field, the column is read
+               up to the defined length. In both cases, the field is written up to the value
+               defined in the <code>LINDICATOR</code> field.
+      </p> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_defi_ldvfus.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="PA_DV"></a></div> 
+         
+      <h2> Performance Aspects with Dynamic Variables </h2> 
+          
+          
+      <p>If a dynamic variable is to be expanded in small quantities multiple
+              times (for example, byte-wise), use <a href="../sm/expand.htm"><code>EXPAND</code></a> before the iterations if
+              the upper limit of required storage is (approximately) known. This avoids
+              additional overhead to adjust the storage needed.
+      </p> 
+          
+      <p>Use <a href="../sm/reduce.htm"><code>REDUCE</code></a> or
+              <a href="../sm/resize.htm"><code>RESIZE</code></a> if the dynamic
+              variable will no longer be needed, especially for variables with a high value
+              of <a href="../vari/appl.htm#LENGTH"><code>*LENGTH</code></a>.
+              This enables Natural to release or reuse the storage. Thus, the overall
+              performance may be improved.
+      </p> 
+          
+      <p>The amount of the allocated memory of a dynamic variable may be reduced
+              using the <a href="../sm/reduce.htm"><code>REDUCE DYNAMIC
+               VARIABLE</code></a> statement. In order to (re)allocate a variable to a
+              specified length, the <a href="../sm/expand.htm"><code>EXPAND</code></a> statement can be used.
+              (If the variable should be initialized, use the <a href="../sm/move.htm"><code>MOVE ALL UNTIL</code></a> statement.)
+      </p> 
+          
+      <h4 class="floating-title"> Example:</h4> 
+          <pre class="verbatim">
+** Example 'DYNAMX06': Dynamic variables (allocated memory)             
+************************************************************************
+DEFINE DATA LOCAL                                                       
+1 #MYDYNTEXT1  (A)  DYNAMIC                                             
+1 #LEN         (I4)                                                     
+END-DEFINE                                                              
+*                                                                       
+#MYDYNTEXT1 := 'a'     /* used length is 1, value is 'a'                
+                       /* allocated size is still 1                     
+WRITE *LENGTH(#MYDYNTEXT1)                                              
+*                                                                       
+EXPAND DYNAMIC VARIABLE  #MYDYNTEXT1 TO 100                             
+                       /* used length is still 1, value is 'a'          
+                       /* allocated size is 100                         
+*                                                                       
+CALLNAT 'DYNAMX05' USING #MYDYNTEXT1                                    
+WRITE *LENGTH(#MYDYNTEXT1)                                              
+                       /* used length and allocated size                
+                       /* may have changed in the subprogram            
+*                                                                       
+#LEN := *LENGTH(#MYDYNTEXT1)                                            
+REDUCE DYNAMIC VARIABLE  #MYDYNTEXT1  TO  #LEN                          
+                       /* if allocated size is greater than used length,
+                       /* the unused memory is released                 
+*                                                                       
+REDUCE DYNAMIC VARIABLE  #MYDYNTEXT1  TO  0                             
+WRITE *LENGTH(#MYDYNTEXT1)                                              
+                       /* free allocated memory for dynamic variable    
+END
+</pre> 
+          <h4 class="floating-title"> Rules: </h4> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">Use dynamic operands where it makes sense.</p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Use <code>EXPAND</code> if upper limit of memory usage is known.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Use <code>REDUCE</code> if the dynamic operand will no longer be
+                      needed.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_defi_ldvfus.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="odv"></a></div> 
+         
+      <h2> Outputting Dynamic Variables </h2> 
+          
+          
+      <p>Dynamic variables may be used inside output statements like the
+              following:
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th> Statement</th> 
+                       
+               <th> Notes</th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> <a href="../sm/display.htm"><code>DISPLAY</code></a> 
+               </td> 
+                       
+               <td rowspan="3">With these statements, you must set the format of
+                  the output or input of dynamic variables using the
+                  <a href="../parms/sp_al.htm"><code>AL</code></a>
+                           (Alphanumeric Length for Output) or <a href="../parms/sp_em.htm"><code>EM</code></a> (Edit Mask)
+                           session parameters.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a href="../sm/write.htm"><code>WRITE</code></a>
+                        
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a href="../sm/input.htm"><code>INPUT</code></a>
+                        
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a href="../sm/reinput.htm"><code>REINPUT</code></a> 
+               </td> 
+                       
+               <td>--</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a href="../sm/printsm.htm"><code>PRINT</code></a>
+                        
+               </td> 
+                       
+               <td>Because the output of the <code>PRINT</code> statement is
+                  unformatted, the output of dynamic variables in the <code>PRINT</code>
+                           statement need not be set using <a href="../parms/sp_al.htm"><code>AL</code></a> and
+                           <a href="../parms/sp_em.htm"><code>EM</code></a>
+                           parameters. In other words, these parameters may be omitted.
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_defi_ldvfus.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="dynam_xarray_pg_defi_ldvfus"></a></div> 
+         
+      <h2> 
+             <a name="x95"></a> 
+             <a name="x96"></a> Dynamic X-Arrays 
+      </h2> 
+          
+          
+      <p>A dynamic X-array may be allocated by first specifying the number of
+              occurrences and then expanding the length of the previously allocated array
+              occurrences.
+      </p> 
+          
+      <p> Example:</p> 
+          <pre class="verbatim">
+DEFINE DATA LOCAL
+1 #X-ARRAY(A/1:*)  DYNAMIC
+END-DEFINE
+*
+EXPAND  ARRAY   #X-ARRAY TO (1:10)  /* Current boundaries (1:10) 
+#X-ARRAY(*) := 'ABC'
+EXPAND  ARRAY   #X-ARRAY TO (1:20)  /* Current boundaries (1:20)
+#X-ARRAY(11:20) := 'DEF'
+</pre> 
+          
+        
+       <div class="noprint">
+         <div class="nospy">
+            <p><a href="pg_defi_ldvfus.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_defi_ldvfus.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_defi_ldvfus.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_defi-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_defi_ldvfin.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_defi_udc.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

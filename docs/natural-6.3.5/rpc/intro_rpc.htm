@@ -1,0 +1,1062 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Introducing Natural RPC</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="intro_rpc"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../rpc/intro_rpc.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/rpc/intro_rpc.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="rpc-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="rpc-over.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="prereq.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Natural Remote Procedure Call (RPC)&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1>Introducing Natural RPC</h1>
+      </div> 
+         
+      <p>This section covers the following topics:</p>
+         
+      <ul>
+         <li>
+            <p class="initem"><a href="intro_rpc.htm#intro_rpc_General_Information">General Information</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="intro_rpc.htm#intro_rpc_Natural_RPC_Operation_in_Non-Conversational_Mode">Natural RPC Operation in Non-Conversational Mode</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="intro_rpc.htm#intro_rpc_Natural_RPC_Operation_in_Conversational_Mode">Natural RPC Operation in Conversational Mode</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="intro_rpc.htm#intro_rpc_Conversational_versus_Non-Conversational_Mode">Conversational versus Non-Conversational Mode</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="intro_rpc.htm#intro_rpc_DB_Trans">Database Transactions</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="intro_rpc.htm#intro_rpc_Location_of_Conversations">Location of Conversations</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="intro_rpc.htm#intro_rpc_Definition_of_Terms">Natural RPC Terminology</a></p>
+         </li>
+      </ul>
+      <hr>
+      <div><a name="intro_rpc_General_Information"></a></div> 
+         
+      <h2>General Information</h2> 
+      <ul>
+         <li>
+            <p class="initem"><a href="intro_rpc.htm#intro_rpc_Purpose">Purpose</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="intro_rpc.htm#intro_rpc_Advantages_of_Natural_Remote_Procedure_Calls">Advantages of Natural Remote Procedure Calls</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="intro_rpc.htm#intro_rpc_Natural_RPC_Modes_of_Operation">Natural RPC Modes of Operation</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="intro_rpc.htm#intro_rpc_Availability_on_Various_Platforms">Availability on Various Platforms</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="intro_rpc.htm#intro_rpc_Support_of_Non-Natural_Environments">Support of Non-Natural Environments (EntireX RPC)</a></p>
+         </li>
+      </ul> 
+         
+      <div><a name="intro_rpc_Purpose"></a></div> 
+          
+      <h3>Purpose</h3> 
+           
+           
+      <p>The Natural RPC facility enables a client Natural program to issue a
+               <a href="../sm/callnat.htm"><code>CALLNAT</code></a> statement to
+               invoke a subprogram in a server Natural. The Natural client and server sessions
+               may run on the same or on a different computer. For example, a Natural client
+               program on a Windows computer can issue a <code>CALLNAT</code> statement
+               against a mainframe server in order to retrieve data from a mainframe database.
+               The same Windows computer can act as a server if a Natural client program
+               running under, for example, UNIX issues a <code>CALLNAT</code> statement
+               requesting data from this server Natural.
+      </p> 
+          
+      <div><a name="intro_rpc_Advantages_of_Natural_Remote_Procedure_Calls"></a></div> 
+          
+      <h3>Advantages of Natural Remote Procedure Calls</h3> 
+           
+           
+      <p>Natural RPC exploits the advantages of client server computing. In a
+               typical scenario, Natural on a Windows client computer accesses server data
+               (using a middleware layer) from a Natural on a mainframe computer. The
+               following advantages arise from that:
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">The end user on the client side can use a Natural application with a
+                       graphical user interface.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">A large database can be accessed on a mainframe server.</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Network traffic can be minimized when only relevant data are sent
+                       from client to server and back.
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+          
+      <div><a name="intro_rpc_Natural_RPC_Modes_of_Operation"></a></div> 
+          
+      <h3>Natural RPC Modes of Operation</h3> 
+           
+           
+      <p>The Natural Remote Procedure Call offers the following modes of
+               operation:
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem"><a href="intro_rpc.htm#intro_rpc_Natural_RPC_Operation_in_Non-Conversational_Mode">non-conversational
+                          mode</a> (in the following texts this mode is meant unless otherwise
+                       specified)
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"><a href="intro_rpc.htm#intro_rpc_Natural_RPC_Operation_in_Conversational_Mode">conversational
+                          mode</a></p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>These modes are described in detail in the following sections. For a
+               comparison of the advantages and disadvantages of these modes, refer to
+               <a href="intro_rpc.htm#intro_rpc_Conversational_versus_Non-Conversational_Mode">Conversational
+            versus Non-Conversational Mode</a>.
+      </p> 
+          
+      <div><a name="intro_rpc_Availability_on_Various_Platforms"></a></div> 
+          
+      <h3>Availability on Various Platforms</h3> 
+           
+      <p>You can use the Natural RPC on various platforms under the following
+               operating systems:
+      </p>
+      <div><a name="d0e401"></a></div> 
+           
+      <h4>Mainframe Environments</h4> 
+            
+            
+      <ul> 
+                
+         <li> 
+                    
+            <p class="initem">z/OS</p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">z/VSE</p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">z/VSE</p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">VM/CMS</p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">BS2000/OSD</p> 
+                   
+         </li> 
+               
+      </ul> 
+            
+      <p>Natural RPC on mainframes is supported under the following TP
+                monitors:
+      </p> 
+            
+      <ul> 
+                
+         <li> 
+                    
+            <p class="initem">Com-plete</p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">CICS</p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">IMS/TM</p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">TSO</p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">UTM</p> 
+                   
+         </li> 
+               
+      </ul> 
+            
+      <p>Also, it is available in batch mode.</p> 
+           
+      <div><a name="d0e480"></a></div> 
+           
+      <h4>Other Environments</h4> 
+            
+            
+      <ul> 
+                
+         <li> 
+                    
+            <p class="initem">Windows</p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">UNIX</p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">OpenVMS</p> 
+                   
+         </li> 
+               
+      </ul> 
+            
+      <p>On all of these platforms, Natural can act as both client and
+                server.
+      </p> 
+           
+      <div><a name="intro_rpc_Support_of_Non-Natural_Environments"></a></div> 
+          
+      <h3>Support of Non-Natural Environments (EntireX RPC)</h3> 
+           
+           
+      <p>Non-Natural environments (3GL and other programming languages) are
+               supported on the client and the server side. Thus, a non-Natural client can
+               communicate with a Natural RPC server, and a Natural client can communicate
+               with a non-Natural RPC server. This is enabled by the use of the EntireX
+               RPC.
+      </p> 
+          
+      <div class="noprint">
+         <p><a href="intro_rpc.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="intro_rpc_Natural_RPC_Operation_in_Non-Conversational_Mode"></a></div> 
+         
+      <h2>Natural RPC Operation in Non-Conversational
+             Mode
+      </h2> 
+          
+      <p>The non-conversational mode should be used only to accomplish a single
+              exchange of data with a partner. See also
+              <a href="intro_rpc.htm#intro_rpc_Conversational_versus_Non-Conversational_Mode">Conversational
+                 versus Non-Conversational Mode.</a></p> 
+          
+      <p>The Natural RPC technique uses the Natural statement
+              <a href="../sm/callnat.htm"><code>CALLNAT</code></a>, so that both
+              local and remote subprogram calls can be issued in parallel. Remote program
+              calls work synchronously. As a remote procedure call, a <code>CALLNAT</code>
+              would, simply speaking, take the following route:
+      </p> 
+          
+      <p><img src="graphics/8rpc3.png" alt="" width="550" height="130"></p> 
+          
+      <p>The <code>CALLNAT</code> issued from the Natural client is routed via a
+              middleware layer to the Natural server which passes data back to the
+              client.
+      </p> 
+          
+      <p>Usually, the middleware layer consists of the Software AG product
+              EntireX Broker which uses the ACI protocol. EntireX Broker uses either Entire
+              Net-Work or TCP/IP as communication layer.
+      </p> 
+          
+      <p>A detailed example of the RPC control flow is described
+              below.
+      </p>
+      <div><a name="d0e555"></a></div> 
+          
+      <h3>Issuing CALLNATs in an RPC Environment</h3> 
+           
+           
+      <p><a href="../sm/callnat.htm"><code>CALLNAT</code></a>
+               control flow details in a remote procedure are illustrated below. For greater
+               clarity, the return path is not shown, but it is analogous; the numbers refer
+               to the description:
+      </p> 
+           
+      <p><img src="graphics/8rpc4.png" alt="" width="610" height="750"></p> 
+           
+      <ol> 
+               
+         <li> 
+                   
+            <p class="initem">From the Natural client, the program <code>PGM1</code> issues a
+                       <a href="../sm/callnat.htm"><code>CALLNAT</code></a> to the
+                       subprogram <code>SUB1</code>. <code>PGM1</code> does not know if its
+                       <code>CALLNAT</code> will result in a local or in a remote
+                       <code>CALLNAT</code>.
+            </p> 
+                   
+            <p class="initem"> As the target <code>SUB1</code> resides on a server, the
+                       <code>CALLNAT</code> accesses a stub subprogram (<a href="intro_rpc.htm#interface-object">interface object</a>) <code>SUB1</code>
+                       instead. This client stub subprogram has been created automatically or manually
+                       (by using the <code>SYSRPC</code> utility's stub generation (<code>SG</code>)
+                       function).
+            </p> 
+                   
+            <p class="initem"> The stub has the same name as the target subprogram and contains
+                       parameters identical with those used in program <code>PGM1</code> and in the
+                       target subprogram <code>SUB1</code> on the server. It also contains control
+                       information used internally by the RPC.
+            </p> 
+                   
+            <p class="initem"> If the <a href="../parms/autorpc.htm#autorpc"><code>AUTORPC</code></a>
+                       profile parameter  is set to
+                       <code>ON</code> and Natural cannot find the subprogram in the local
+                       environment, Natural interprets this as a remote procedure call and generates
+                       the <a href="../pg/pg_obj_darea.htm#Parameter_Data_Area">parameter data
+                          area</a> (PDA) dynamically during runtime.
+            </p> 
+                   
+            <p class="initem"> Natural also tries to find this subprogram in the
+                       <a href="../glossary/glossary.htm#glossary_service_directory">service
+                          directory</a> <code>NATCLTGS</code>. 
+            </p> 
+                   
+            <p class="initem">For further information on the <code>SYSRPC</code> stub generation
+                       function, see <a href="oper.htm#oper_Creating_Stub_Subprograms">Creating Stub
+                  Subprograms</a>.
+            </p> 
+                   
+            <p class="initem"> If you want to work without stubs, see
+                       <a href="oper.htm#oper_Working_with_Automatic_Natural_RPC_Execution">Working
+                  with Automatic Natural RPC Execution</a>.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">The stub then sets up a <code>CALLNAT</code> to an RPC client service
+                       routine.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">The client RPC runtime checks in the service directory
+                       <code>NATCLTGS</code> on which node and server the <code>CALLNAT</code> is to
+                       be performed and whether a logon is required.
+            </p> 
+                   
+            <p class="initem"> The <code>CALLNAT</code> data including the parameter list and, if
+                       required, the logon data are passed to a middleware layer.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">In this example, this middleware layer consists of the Software AG
+                       product EntireX Broker. Therefore, the <code>CALLNAT</code> data is first
+                       passed to an EntireX Broker stub on the client.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">From the EntireX Broker stub, the <code>CALLNAT</code> data is passed
+                       to the EntireX Broker. The EntireX Broker is a product that can reside: 
+            </p> 
+                   
+            <ul style="margin-top: 0px; margin-bottom: 0px;"> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem">on the client computer</p> 
+                          
+               </li> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem">on the server computer or</p> 
+                          
+               </li> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem">on a third platform.</p> 
+                          
+               </li> 
+                      
+            </ul> 
+                   
+            <p class="initem"> For the data to be passed on successfully, the server
+                       <code>SRV1</code> must be defined in the EntireX Broker attribute file and
+                       <code>SRV1</code> must be already up, thus having registered with EntireX
+                       Broker.
+            </p> 
+                   
+            <p class="initem"> For information on how to define servers in the EntireX Broker
+                       attribute file, see the EntireX Broker documentation.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">From the middleware layer, the <code>CALLNAT</code> data is passed on
+                       to the EntireX Broker Stub on the Natural Server platform and from there to the
+                       RPC server service routine.
+            </p> 
+                   
+            <p class="initem"> The RPC server service routine validates the logon data (if present)
+                       and performs a logon (if requested).
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">The RPC server service routine invokes the target subprogram
+                       <code>SUB1</code> and passes the data, if requested.
+            </p> 
+                   
+            <p class="initem"> At this point, the target subprogram <code>SUB1</code> has all the
+                       required data to execute just as if it had been invoked by a local program
+                       <code>PGM1</code>.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Then, for example, the subprogram <code>SUB1</code> can issue a
+                       <a href="../sm/find.htm"><code>FIND</code></a> statement to the
+                       server's Adabas database. <code>SUB1</code> does not know whether it has been
+                       started by a local or by a remote <code>CALLNAT</code>.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Adabas <code>FIND</code>s the data and passes them to
+                       <code>SUB1</code>.
+            </p> 
+                   
+            <p class="initem"> Then, <code>SUB1</code> returns the Adabas data to the calling
+                       server service routine. From there, it is passed it back to <code>PGM1</code>
+                       via the middleware layer. It takes the same route as described in Steps 1 to 8,
+                       but in reverse order.
+            </p> 
+                  
+         </li> 
+              
+      </ol> 
+          
+      <div class="noprint">
+         <p><a href="intro_rpc.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="intro_rpc_Natural_RPC_Operation_in_Conversational_Mode"></a></div> 
+         
+      <h2>Natural RPC Operation in Conversational Mode</h2> 
+          
+      <p>A conversational RPC is a static connection of limited duration between
+              a client and a server. It provides a number of services (subprograms) defined
+              by the client, which are all executed within one server task that is
+              exclusively available to the client for the duration of the conversation. It is
+              implemented in a program using an <a href="../sm/opencon.htm"><code>OPEN
+               CONVERSATION</code></a> statement and a
+              <a href="../sm/closecon.htm"><code>CLOSE CONVERSATION</code></a>
+              statement.
+      </p> 
+          
+      <p>Multiple connections (conversations) can exist at the same time. They
+              are maintained by the client by means of conversation IDs, and each of them is
+              performed on a different server. Remote procedure calls which do not belong to
+              a given conversation are executed on a different server, within a different
+              server task.
+      </p> 
+          
+      <p>During a conversation, you can define and share a data area called
+              context area between the remote subprograms on the server side. For further
+              information, see <a href="../sm/defineda_cv.htm">Defining
+            Context Variables for Natural RPC</a> in the Natural
+              <cite>Statements</cite> documentation.
+      </p> 
+          
+      <p>A conversation may be local or remote.</p> 
+          
+      <h4 class="floating-title">Example:</h4> 
+          <pre class="verbatim">OPEN CONVERSATION USING SUBPROGRAM 'S1''S2'
+     CALLNAT 'S1' PARMS1
+     CALLNAT 'S2' PARMS2
+CLOSE CONVERSATION ALL</pre> 
+          <p>Both subprograms (<code>S1</code> and <code>S2</code>) must be accessed
+              at the same location, that is, either locally or remotely. It is not admissible
+              to mix up local and remote <code>CALLNAT</code>s within a conversation. If the
+              subprograms are executed remotely, both subprograms will be executed by the
+              same server task.
+      </p> 
+          
+      <p>Analogously to non-conversational RPC <code>CALLNAT</code>s,
+              conversations may first be written and tested locally and can then be
+              transferred to the servers.
+      </p>
+      <div><a name="d0e883"></a></div> 
+          
+      <h3>General Rules for Local/Remote Subprogram Execution</h3>
+      <div><a name="d0e887"></a></div> 
+           
+      <h4>Local Subprogram Execution</h4> 
+            
+            
+      <p>If you execute subprograms locally, the following rule applies:</p> 
+            
+      <ul> 
+                
+         <li> 
+                    
+            <p class="initem">A subprogram may not call another subprogram which is a member of
+                        the conversation.
+            </p> 
+                   
+         </li> 
+               
+      </ul> 
+            
+      <p>Other subprograms not listed in the <a href="../sm/opencon.htm"><code>OPEN CONVERSATION</code></a> statement may
+                be called. They are however executed in
+                <a href="intro_rpc.htm#intro_rpc_Natural_RPC_Operation_in_Non-Conversational_Mode">non-conversational
+                   mode</a>.
+      </p> 
+           
+      <div><a name="d0e916"></a></div> 
+           
+      <h4>Remote Subprogram Execution</h4> 
+            
+            
+      <p>If you execute subprograms remotely, the following rule applies:</p> 
+            
+      <ul> 
+                
+         <li> 
+                    
+            <p class="initem">A subprogram <code>S1</code> may call another subprogram
+                        <code>S2</code> which is a member of the conversation.
+            </p> 
+                   
+         </li> 
+               
+      </ul> 
+            
+      <p>This <code>CALLNAT</code> will be executed in non-conversational mode
+                because it was invoked indirectly. Thus, the subprogram S2 does not have access
+                to the context area.
+      </p> 
+           
+      <div class="noprint">
+         <p><a href="intro_rpc.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="intro_rpc_Conversational_versus_Non-Conversational_Mode"></a></div> 
+         
+      <h2>Conversational versus Non-Conversational Mode</h2> 
+          
+      <p>In a client-server environment where several clients access several
+              servers in non-conversational mode, there may be the problem that identical
+              <a href="../sm/callnat.htm"><code>CALLNAT</code></a> requests from
+              different clients are executed on the same server.
+      </p> 
+          
+      <p>This means, for example, that a <code>CALLNAT 'S1'</code> from Client 1
+              executes Subprogram <code>S1</code> on Server 1 (<code>S1</code> is writing a
+              record to the database). The transaction for Client 1 is not yet complete (no
+              <a href="../sm/endtrans.htm"><code>END TRANSACTION</code></a>)
+              when Client 2 also sends a <code>CALLNAT 'S1'</code> to Server 1, thus
+              overwriting the data from Client 1. If Client 1 then sends a <code>CALLNAT
+            'S2'</code> (meaning <code>END TRANSACTION</code>), Client 1 supposes its data
+              have been saved correctly, although in fact the data from Client 2's identical
+              <code>CALLNAT</code> were saved.
+      </p> 
+          
+      <p>The diagram below illustrates this with two clients and two servers. In
+              such a scenario, you cannot control whether two identical <code>CALLNAT</code>s
+              from two different clients access the same subprogram on the same server:
+      </p> 
+          
+      <p><img src="graphics/rpc-nonconversationalmode.png" alt="" width="550" height="500"></p> 
+          
+      <p>In the above example, <code>CALLNAT 'S2'</code> from Client 1 can access
+              subprogram <code>S2</code> on Server 1 and on Server 2. <code>CALLNAT
+            'S2'</code> from Client 2 has the same choice.
+      </p> 
+          
+      <p> Similarly, <code>CALLNAT 'S1'</code> from Client 1 could access
+              Subprogram <code>S1</code> on Server 1 and on Server 2, while <code>CALLNAT
+            'S1'</code> from Client 2 has the same choice.
+      </p> 
+          
+      <p>It is obvious that interference can be a problem here if the subprograms
+              are designed to be executed within one server task context.
+      </p> 
+          
+      <p>You can avoid the potential problems of a non-conversational RPC by
+              defining a more complex RPC transaction in conversational mode:
+      </p> 
+          
+      <p><img src="graphics/rpc-conversationalmode.png" alt="" width="550" height="500"></p> 
+          
+      <p>You do this by opening a conversation. This involves the use of the
+              <code>OPEN CONVERSATION</code> statement on the client side, referring to
+              <code>CALLNAT 'S1'</code> and <code>CALLNAT 'S2'</code>. Opening such a
+              conversation reserves one entire server task (for example, Server 1) and no
+              other remote <code>CALLNAT</code>s may interrupt this conversation on this
+              server before this conversation has been closed. In addition, you can define a
+              common context area for the two subprograms on the server side by using the
+              <code>DEFINE DATA CONTEXT</code> statement.
+      </p>
+      <div><a name="d0e1045"></a></div> 
+          
+      <h3>General Rules for Use of Conversational/Non-Conversational
+              RPC
+      </h3> 
+           
+           
+      <p>As a general rule, the following applies:</p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">Use the <strong>conversational RPC</strong> to ensure
+                       that a defined list of subprograms is executed exclusively within one
+                       context.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Use the <strong>non-conversational RPC</strong> if each
+                       of your subprograms can be used within a different server task or if the
+                       transaction does not extend over more than one server call. The advantage of
+                       this is that no server blocks over a significant amount of time and you only
+                       need a relatively small number of server tasks.
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+          
+      <div><a name="d0e1076"></a></div> 
+          
+      <h3>Possible Disadvantage of Using Conversational RPC</h3> 
+           
+           
+      <p>A possible disadvantage of conversational RPCs is that you reserve an
+               entire server task, thus blocking all other subprograms on this server. As a
+               consequence, other <code>CALLNAT</code>s might have to wait or more server
+               tasks must be started.
+      </p> 
+          
+      <div class="noprint">
+         <p><a href="intro_rpc.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="intro_rpc_DB_Trans"></a></div> 
+         
+      <h2>Database Transactions</h2> 
+          
+          
+      <p>The database transactions on the client and server sides run independent
+              of each other. That is, an <a href="../sm/endtrans.htm"><code>END
+               TRANSACTION</code></a> or <a href="../sm/backout.htm"><code>BACKOUT TRANSACTION</code></a> executed on
+              the server side does not influence the database transaction on the client side
+              and vice-versa.
+      </p> 
+          
+      <p>At the end of each non-conversational <code>CALLNAT</code> and at the
+              end of each conversation, an implicit <a href="../sm/backout.htm"><code>BACKOUT TRANSACTION</code></a> is executed
+              on the server side. To commit the changes made by the remote
+              <code>CALLNAT</code>(s), you have the following options:
+      </p> 
+          
+      <p><strong>Non-conversational CALLNAT</strong></p> 
+          
+      <ol> 
+              
+         <li> 
+                  
+            <p class="initem">Execute an explicit <a href="../sm/endtrans.htm"><code>END
+                     TRANSACTION</code></a> before leaving the <code>CALLNAT</code>.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Set the Natural profile parameter <a href="../parms/eteop.htm"><code>ETEOP</code></a> to <code>ON</code>. This
+                      results in an implicit <a href="../sm/endtrans.htm"><code>END
+                     TRANSACTION</code></a> at the end of each non-conversational
+                      <code>CALLNAT</code>.
+            </p> 
+                  
+            <p class="initem">Depending on the setting of the parameter
+                      <a href="../parms/srvcmit.htm"><code>SRVCMIT</code></a>,
+                      the <code>END TRANSACTION</code> is executed either before the reply is sent to
+                      the client (<code>SRVCMIT=B</code>) or after the reply has been successfully
+                      sent to the client (<code>SRVCMIT=A</code>). <code>SRVCMIT=B</code> is the
+                      default and is compatible with earlier versions of the RPC.
+            </p> 
+                 
+         </li> 
+             
+      </ol> 
+          
+      <p><strong>Conversational CALLNAT</strong></p> 
+          
+      <ol> 
+              
+         <li> 
+                  
+            <p class="initem">Execute an explicit <a href="../sm/endtrans.htm"><code>END
+                     TRANSACTION</code></a> on the server before the conversation is
+                      terminated by the client
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Set the Natural profile parameter <a href="../parms/eteop.htm"><code>ETEOP</code></a> to <code>ON</code>. This
+                      results in an implicit <code>END TRANSACTION</code> at the end of each
+                      conversation.
+            </p> 
+                  
+            <p class="initem">Depending on the setting of the parameter
+                      <a href="../parms/srvcmit.htm"><code>SRVCMIT</code></a>,
+                      the <code>END TRANSACTION</code> is executed either before the reply is sent to
+                      the client (<code>SRVCMIT=B</code>) or after the reply has been successfully
+                      sent to the client (<code>SRVCMIT=A</code>). <code>SRVCMIT=B</code> is the
+                      default and is compatible with earlier versions of the RPC.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Before executing the <a href="../sm/closecon.htm"><code>CLOSE
+                     CONVERSATION</code></a> statement, call the application programming
+                      interface <a href="using.htm#using_Closing_a_Conversation"><code>USR2032N</code></a> on the
+                      client side. This will cause an implicit <code>END TRANSACTION</code> at the
+                      end of the individual conversation.
+            </p> 
+                 
+         </li> 
+             
+      </ol> 
+         
+      <div class="noprint">
+         <p><a href="intro_rpc.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="intro_rpc_Location_of_Conversations"></a></div> 
+         
+      <h2>Location of Conversations</h2> 
+          
+          
+      <p>Both subprograms <code>S1</code> and <code>S2</code> (shown in the
+              figure above) must be accessed at the same location, i.e. either locally or
+              remotely. You may not mix up local and remote <code>CALLNAT</code>s within a
+              conversation. If the subprograms are executed remotely, both subprograms will
+              be executed by the same server task.
+      </p> 
+         
+      <div class="noprint">
+         <p><a href="intro_rpc.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="intro_rpc_Definition_of_Terms"></a></div> 
+         
+      <h2>Natural RPC Terminology</h2> 
+          
+          
+      <p>The following table provides an overview of important key terms used in
+              the <code>SYSRPC</code> Utility and the Natural RPC documentation:
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td>Term</td> 
+                       
+               <td>Explanation</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><a name="intro_rpc_rpc_terms_client_stub"></a>Client&nbsp;Stub
+               </td> 
+                       
+               <td> 
+                  
+                  <p>Accepts the <code>CALLNAT</code> requests on the client side,
+                     marshalls the parameters passed, transmits the data through the Natural RPC
+                     runtime and the transport layer to the remote server, unmarshalls the result
+                      and returns it to the caller.
+                  </p> 
+                           
+                  <p>The client stub is the local subprogram via which the server
+                               subprogram is called. The client stub has the same name and contains the same
+                               parameters as the corresponding server subprogram.
+                  </p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>EntireX Broker Stub</td> 
+                       
+               <td>Interface between the Natural RPC runtime and the EntireX Broker
+                  transport layer which exchanges marshalled data between client and
+                  server.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><a name="intro_rpc_rpc_terms_impersonation"></a>Impersonation
+               </td> 
+                       
+               <td>Impersonation assumes that access to the operating system on
+                  which a Natural RPC server is running is controlled by an SAF-compliant
+                  external security system. User authentication is performed by this external
+                  security system. Impersonation means that after the authentication has been
+                  successful and the user's identity is established, any subsequent authorization
+                  checks will be performed based on this identity. This includes authorization
+                  checks for access to external resources (for example, databases or work files).
+                  After successful authentication the user cannot "change his/her
+                  identity", that is, he/she cannot use a different user ID. See
+                  <a href="securi.htm#securi_rpc_impersonation_zos">Impersonation</a> in
+                           <a href="securi.htm#securi">Using Security</a>.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><a name="interface-object"></a>Interface
+                  Object
+               </td> 
+                       
+               <td>In earlier versions of EntireX, the term
+                  "stub" was also used to refer to application-dependent,
+                  Workbench-generated pieces of code for issuing and receiving remote procedure
+                  calls. These objects are now referred to as <em>interface objects</em>.
+                           
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>NATCLTGS</code></td> 
+                       
+               <td>The name of the Natural subprogram generated with the
+                  <code>SYSRPC</code> utility to implement the
+                           <a href="intro_rpc.htm#intro_rpc_Service_Directory">service directory</a>
+                           (see below).
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>Node&nbsp;Name</td> 
+                       
+               <td>The name of the node to which the remote <code>CALLNAT</code> is
+                           sent. 
+                           
+                  <p>In case of communication via the EntireX Broker, the node name is
+                     the name of the EntireX Broker for example, as defined in the EntireX Broker
+                               attribute file, in the field <code>BROKER-ID</code>.
+                  </p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>RPC&nbsp;Parameters</td> 
+                       
+               <td> 
+                  
+                  <p>All parameters available to control a Natural RPC are described in
+                     detail in the Natural Parameter Reference documentation. See the section
+                               <a href="../parms/parms-over.htm">Profile
+                                  Parameters</a>.
+                  </p> 
+                            
+                            
+               </td> 
+                      
+            </tr> 
+                    
+                   
+            <tr> 
+                       
+               <td><a name="intro_rpc_Service_Directory"></a>Service&nbsp;Directory
+               </td> 
+                       
+               <td>The service directory contains information on the services
+                  (subprograms) that a server provides. It can be locally available on each
+                  client node, or it can be located on a remote directory server referenced by
+                  the profile parameter<a href="../parms/rds.htm"><code>RDS</code></a>.
+               </td>
+                       
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>Server&nbsp;Name</td> 
+                       
+               <td> 
+                  
+                  <p>The name of the server on which the <code>CALLNAT</code> is to be
+                               executed.
+                  </p> 
+                           
+                  <p>In case of communication via EntireX Broker, the server name is the
+                               name as defined in the EntireX Broker attribute file in the field
+                               <code>SERVER</code>.
+                  </p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><a name="intro_rpc_rpc_terms_server_task"></a>Server
+                  Task
+               </td> 
+                       
+               <td>A Natural task which offers services (subprograms). This is
+                  typically a batch task or asynchronous task. It is identified by a server
+                  name.
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+         
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="intro_rpc.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../rpc/intro_rpc.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/rpc/intro_rpc.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="rpc-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="rpc-over.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="prereq.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

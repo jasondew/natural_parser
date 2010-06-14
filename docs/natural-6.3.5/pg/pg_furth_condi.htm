@@ -1,0 +1,365 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Conditional Processing - IF Statement</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="pg_furth_condi"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_furth_condi.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_furth_condi.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_furth-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_furth_end.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_furth_loop.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Programming Guide&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x310"></a> 
+               <a name="x311"></a> Conditional Processing - IF Statement
+         </h1>
+      </div> 
+         
+         
+      <p>With the <a href="../sm/if.htm"><code>IF</code></a>
+             statement, you define a logical condition, and the execution of the statement
+             attached to the <code>IF</code> statement then depends on that condition.
+      </p> 
+         
+      <p>This document covers the following topics:</p>
+         
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_furth_condi.htm#if_statement">Structure of IF Statement</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_condi.htm#Nested_IF_Statements">Nested IF Statements</a></p>
+         </li>
+      </ul> 
+        
+      <hr> 
+        
+      <div><a name="if_statement"></a></div> 
+         
+      <h2> Structure of IF Statement </h2> 
+          
+          
+      <p>The <a href="../sm/if.htm"><code>IF</code></a> statement
+              contains three components:
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="20%">
+            <col width="77%">
+         </colgroup> 
+                
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th> <a href="../sm/if.htm">IF</a>
+                     
+               </th> 
+                       
+               <td>In the <code>IF</code> clause, you specify the logical condition
+                  which is to be met.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> <a href="../sm/if.htm#THEN_if">THEN</a> 
+               </th> 
+                       
+               <td>In the <code>THEN</code> clause you specify the statement(s) to
+                  be executed if this condition is met.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> <a href="../sm/if.htm#ELSE">ELSE</a>
+                       
+               </th> 
+                       
+               <td>In the (optional) <code>ELSE</code> clause, you can specify the
+                  statement(s) to be executed if this condition is <em>not</em> met.
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>So, an <code>IF</code> statement takes the following general form:
+      </p> 
+          <pre class="verbatim"><strong>IF</strong> <var>condition</var>  
+   <strong>THEN</strong> <var>execute statement(s)</var>  
+   <strong>ELSE</strong> <var>execute other statement(s)</var>  
+END-IF</pre> 
+          <p class="note"><strong>Note:</strong><br> If you wish a certain processing to be performed only if the
+              <code>IF</code> condition is <em>not</em> met, you can specify the clause
+              <code>THEN IGNORE</code>. The <a href="../sm/ignore.htm"><code>IGNORE</code></a> statement causes the
+              <code>IF</code> condition to be ignored if it is met.
+      </p> 
+          
+      <h4 class="floating-title"> Example 1: </h4> 
+          <pre class="verbatim">
+** Example 'IFX01': IF
+************************************************************************
+DEFINE DATA LOCAL
+1 MYVIEW VIEW OF EMPLOYEES
+  2 NAME
+  2 BIRTH
+  2 CITY
+  2 SALARY (1:1)
+END-DEFINE
+*
+LIMIT 7
+READ MYVIEW BY CITY STARTING FROM 'C'
+<strong> IF SALARY (1) LT 40000 THEN
+    WRITE NOTITLE '*****' NAME 30X 'SALARY LT 40000'
+  ELSE
+    DISPLAY NAME BIRTH (EM=YYYY-MM-DD) SALARY (1)
+  END-IF</strong>
+END-READ
+END
+</pre> 
+          <p>The <code>IF</code> statement block in the above program causes the
+              following conditional processing to be performed:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem"><code>IF</code> the salary is less than 40000, <code>THEN</code> the
+                      <a href="../sm/write.htm"><code>WRITE</code></a> statement is to
+                      be executed;
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">otherwise (<code>ELSE</code>), that is, if the salary is 40000 or
+                      more, the <a href="../sm/display.htm"><code>DISPLAY</code></a>
+                      statement is to be executed.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>Output of Program IFX01:</p> <pre class="system-output">
+        NAME            DATE      ANNUAL
+                         OF       SALARY
+                       BIRTH
+-------------------- ---------- ----------
+ 
+***** KEEN                                              SALARY LT 40000
+***** FORRESTER                                         SALARY LT 40000
+***** JONES                                             SALARY LT 40000
+***** MELKANOFF                                         SALARY LT 40000
+DAVENPORT            1948-12-25      42000
+GEORGES              1949-10-26     182800
+***** FULLERTON                                         SALARY LT 40000
+</pre> 
+          <h4 class="floating-title"> Example 2: </h4> 
+          <pre class="verbatim">
+** Example 'IFX03': IF
+************************************************************************
+DEFINE DATA LOCAL
+1 EMPLOY-VIEW VIEW OF EMPLOYEES
+  2 NAME
+  2 CITY
+  2 BONUS  (1,1)
+  2 SALARY (1)
+*
+1 #INCOME  (N9)
+1 #TEXT    (A26)
+END-DEFINE
+*
+WRITE TITLE '-- DISTRIBUTION OF CATALOGS I AND II --' /
+*
+READ (3) EMPLOY-VIEW BY CITY = 'SAN FRANSISCO'
+  COMPUTE #INCOME = BONUS(1,1) + SALARY(1)
+  /*
+<strong> IF #INCOME &gt; 40000
+    MOVE 'CATALOGS I AND II' TO #TEXT
+  ELSE
+    MOVE 'CATALOG I'         TO #TEXT
+  END-IF</strong>
+  /*
+  DISPLAY NAME 5X 'SALARY' SALARY(1) / BONUS(1,1)
+  WRITE T*SALARY '-'(10) /
+        16X 'INCOME:' T*SALARY #INCOME 3X #TEXT /
+        16X '='(19)
+  SKIP 1
+END-READ
+END
+</pre> 
+          <p>Output of Program IFX03:</p> <pre class="system-output">
+                    -- DISTRIBUTION OF CATALOGS I AND II --
+ 
+        NAME               SALARY
+                           BONUS
+--------------------     ----------
+ 
+COLVILLE JR                   56000
+                                  0
+                         ----------
+                INCOME:       56000   CATALOGS I AND II
+                ===================
+ 
+RICHMOND                       9150
+                                  0
+                         ----------
+                INCOME:        9150   CATALOG I
+                ===================
+ 
+MONKTON                       13500
+                                600
+                         ----------
+                INCOME:       14100   CATALOG I
+                ===================
+</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_furth_condi.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Nested_IF_Statements"></a></div> 
+         
+      <h2> 
+             <a name="x312"></a> Nested IF Statements 
+      </h2> 
+          
+          
+      <p>It is possible to use various nested <a href="../sm/if.htm"><code>IF</code></a> statements; for example, you can
+              make the execution of a <code>THEN</code> clause dependent on another
+              <code>IF</code> statement which you specify in the
+              <a href="../sm/if.htm#THEN_if"><code>THEN</code></a> clause.
+      </p> 
+          
+      <h4 class="floating-title"> Example: </h4> 
+          <pre class="verbatim">
+** Example 'IFX02': IF (two IF statements nested)
+************************************************************************
+DEFINE DATA LOCAL
+1 MYVIEW VIEW OF EMPLOYEES
+  2 NAME
+  2 CITY
+  2 SALARY (1:1)
+  2 BIRTH
+  2 PERSONNEL-ID
+1 MYVIEW2 VIEW OF VEHICLES
+  2 PERSONNEL-ID
+  2 MAKE
+*
+1 #BIRTH   (D)
+END-DEFINE
+*
+MOVE EDITED '19450101' TO #BIRTH (EM=YYYYMMDD)
+*
+LIMIT 20
+FND1. FIND MYVIEW WITH CITY = 'BOSTON'
+                  SORTED BY NAME
+<strong> IF SALARY (1) LESS THAN 20000
+    WRITE NOTITLE '*****' NAME 30X 'SALARY LT 20000'
+  ELSE
+    IF BIRTH GT #BIRTH
+      FIND MYVIEW2 WITH PERSONNEL-ID = PERSONNEL-ID (FND1.)
+        DISPLAY (IS=ON) NAME BIRTH (EM=YYYY-MM-DD)
+                        SALARY (1) MAKE (AL=8 IS=OFF)
+      END-FIND
+    END-IF
+  END-IF</strong>
+  SKIP 1
+END-FIND
+END
+</pre> 
+          <p>Output of Program IFX02:</p> <pre class="system-output">
+        NAME            DATE      ANNUAL     MAKE
+                         OF       SALARY
+                       BIRTH
+-------------------- ---------- ---------- --------
+ 
+***** COHEN                                             SALARY LT 20000
+ 
+CREMER               1972-12-14      20000 FORD
+ 
+***** FLEMING                                           SALARY LT 20000
+ 
+PERREAULT            1950-05-12      30500 CHRYSLER
+ 
+***** SHAW                                              SALARY LT 20000
+ 
+STANWOOD             1946-09-08      31000 CHRYSLER
+                                           FORD
+</pre> 
+          
+        
+       <div class="noprint">
+         <div class="nospy">
+            <p><a href="pg_furth_condi.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_furth_condi.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_furth_condi.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_furth-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_furth_end.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_furth_loop.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

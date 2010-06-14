@@ -1,0 +1,2034 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Using SYSMAIN with Subprogram</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="sysmain_ux_use_subprogram"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../utis/sysmain_ux_use_subprogram.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/utis/sysmain_ux_use_subprogram.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="sysmain_ux-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="sysmain_ux_sel_window.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="sysmain_ux_xref.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Tools and Utilities&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1>Using SYSMAIN with Subprogram</h1>
+      </div> 
+         
+      <p>The MAINUSER subprogram is an Application Programming Interface, which
+             allows you to perform SYSMAIN utility functions from any user-written object
+             (subroutine, program or subprogram) as an alternative to using SYSMAIN utility
+             menus. Upon completion of the SYSMAIN function, the utility is terminated and
+             control is returned to the object from which the request was issued. MAINUSER
+             can be used in either online or batch mode. An example of a callable routine is
+             the MAINCALL program, which is supplied in the SYSMAIN system library.
+      </p> 
+         
+      <p>This section provides instructions for using MAINUSER and the syntax that
+             applies when specifying commands for executing SYSMAIN utility functions.
+      </p>
+         
+      <ul>
+         <li>
+            <p class="initem"><a href="sysmain_ux_use_subprogram.htm#d0e188100">Invoking and Executing MAINUSER</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_Direct_Commands">Using Commands</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="sysmain_ux_use_subprogram.htm#sysmain_ux_LIST_FIND">LIST and FIND Command Syntax</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="sysmain_ux_use_subprogram.htm#sysmain_ux_COPY_MOVE">COPY and MOVE Command Syntax</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="sysmain_ux_use_subprogram.htm#sysmain_ux_DELETE">DELETE Command Syntax</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="sysmain_ux_use_subprogram.htm#sysmain_ux_RENAME">RENAME Command Syntax</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="sysmain_ux_use_subprogram.htm#sysmain_ux_IMPORT">IMPORT Command Syntax</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_where_clause">where-clause</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_with_clause">with-clause</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="sysmain_ux_use_subprogram.htm#sysmain_ux_keywords">Keywords and Variables in Commands</a></p>
+         </li>
+      </ul> 
+        
+      <hr>
+      <div><a name="d0e188100"></a></div> 
+         
+      <h2> Invoking and Executing MAINUSER</h2> 
+          
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong> To invoke and execute MAINUSER </strong></p>
+      <ul>
+         <li> 
+                   
+                   
+            <p class="instep">Issue a <code>CALLNAT</code> statement that contains the following
+                       syntax elements:
+            </p> 
+                   
+            <p class="instep"><code>CALLNAT 'MAINUSER' <var>command error message
+                             library</var></code></p> 
+                   
+            <p class="instep">where the variable values denote the following parameters: </p> 
+                    
+                    
+            <table border="1" class="color" cellpadding="3" width="no%"> 
+                        
+               <thead align="left" valign="top"> 
+                            
+                  <tr> 
+                                
+                     <th align="left">Parameter</th> 
+                                
+                     <th align="left">Natural Data Format/Length</th> 
+                                
+                     <th align="left">Explanation</th> 
+                               
+                  </tr> 
+                           
+               </thead> 
+                        
+               <tbody align="left" valign="top"> 
+                            
+                  <tr> 
+                                
+                     <td align="left" nowrap>
+                        <a name="sysmnux_command_string"></a><var>command</var>
+                                    
+                     </td> 
+                                
+                     <td align="left">A250</td> 
+                                
+                     <td align="left">The command string to be executed by SYSMAIN:
+                        see <a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_Direct_Commands">Using
+                                       Commands</a>.
+                     </td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td align="left"> <var>error</var> 
+                     </td> 
+                                
+                     <td align="left">N4</td> 
+                                
+                     <td align="left">The return code issued by SYSMAIN at the end of
+                        processing to indicate a normal end of processing or an error.
+                     </td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td align="left"> <var>message</var> 
+                     </td> 
+                                
+                     <td align="left">A72</td> 
+                                
+                     <td align="left">The message corresponding to the error given
+                        online.
+                     </td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td align="left"> <var>library</var> 
+                     </td> 
+                                
+                     <td align="left">A8</td> 
+                                
+                     <td align="left">The name of the library containing the utility
+                        SYSMAIN; by default, this is the library SYSMAIN. (This parameter is provided
+                        for compatibility reasons only.)
+                     </td> 
+                               
+                  </tr> 
+                           
+               </tbody> 
+                       
+            </table> 
+                    
+                   
+                 
+         </li>
+      </ul> 
+         
+      <div class="noprint">
+         <p><a href="sysmain_ux_use_subprogram.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="sysmain_ux_subpgm_Direct_Commands"></a></div> 
+         
+      <h2>Using Commands</h2> 
+          
+          
+      <p>SYSMAIN functions can be executed by using commands issued as a
+              parameter of the MAINUSER subprogram.
+      </p> 
+          
+      <p>A <a href="sysmain_ux_use_subprogram.htm#sysmnux_command_string"><var>command</var></a>
+              consists of keywords and variable values. For each SYSMAIN function to be
+              performed, the keywords and variable values are shown in the corresponding
+              syntax diagrams below and explained in the section
+              <a href="sysmain_ux_use_subprogram.htm#sysmain_ux_keywords">Keywords and Variables in
+            Commands</a>. The symbols in the syntax diagrams correspond to
+              the syntax symbols used for system commands. These symbols are explained in
+              <a href="../syscom/syntax.htm">System Command
+            Syntax</a> in the <cite>System Commands</cite>
+              documentation.
+      </p> 
+          
+      <p>The sequence of the command syntax is not completely fixed. The
+              following rules apply:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">SYSMAIN function, object type and object name must be the first three
+                      parameters of the command string.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">A period (.) indicates the end of a command. If this character is
+                      detected anywhere within a command string, all subsequent data is ignored.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">In the syntax diagrams, <code>FM</code> or <code>IN</code> is shown
+                      instead of the <code>FROM</code> keyword to make the diagrams easier to read;
+                      however, <code>FROM</code> can always be used as a synonym for <code>FM</code>
+                      or <code>IN</code> and vice versa.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">The syntax of the <var>where-clause</var> and the
+                      <var>with-clause</var> is identical for each command.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+         
+      <div class="noprint">
+         <p><a href="sysmain_ux_use_subprogram.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="sysmain_ux_LIST_FIND"></a></div> 
+         
+      <h2>LIST and FIND
+             Command Syntax
+      </h2> 
+          
+      <p>The following command syntax applies to the list and find functions:</p>
+          
+           
+           
+      <table border="0" class="syntax" cellpadding="3"> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td valign="middle"> 
+                  
+                  <p><img src="../graphics/cbo2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                       
+               <td valign="middle"> 
+                  
+                  <p class="mini-list"> 
+                                <code class="keyword"><u>L</u>IST</code><br> 
+                               <code class="keyword"><u>F</u>IND</code> 
+                              
+                  </p> 
+               </td> 
+                       
+               <td valign="middle"> 
+                  
+                  <p><img src="../graphics/cbc2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                       
+               <td valign="middle"> 
+                  
+                  <p><img src="../graphics/sbo4.gif" alt="" width="5" height="100"></p> 
+               </td> 
+                       
+               <td nowrap> 
+                  
+                  <p class="mini-list"> 
+                                <a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_ALL"><code class="keyword"><u>ALL</u></code></a><br> 
+                                <a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_CATALOGED"><code class="keyword"><u>C</u>ATALOGED</code></a><br> 
+                                <a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_SAVED"><code class="keyword"><u>SA</u>VED</code></a><br> 
+                                <a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_STOWED"><code class="keyword"><u>ST</u>OWED</code></a><br> 
+                                <a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_VIEW"><code class="keyword"><u>V</u>IEW</code></a> 
+                              
+                  </p> 
+               </td> 
+                       
+               <td valign="middle"> 
+                  
+                  <p><img src="../graphics/sbc4.gif" alt="" width="5" height="100"></p> 
+               </td> 
+                       
+               <td valign="middle"> <var>name</var> 
+               </td> 
+                       
+               <td valign="middle"> 
+                  
+                  <p><img src="../graphics/sbo2a.gif" alt="" width="5" height="30"></p> 
+               </td> 
+                       
+               <td valign="middle"> <a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_FROM"><code class="keyword">IN</code></a>
+                    [<a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_LIBRARY"><code class="keyword"><u>LIB</u>RARY</code></a>]
+                           <var>lib-name</var></td> 
+                       
+               <td valign="middle"> 
+                  
+                  <p><img src="../graphics/sbc2a.gif" alt="" width="5" height="30"></p> 
+               </td> 
+                       
+               <td valign="middle"> [<a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_where_clause"><var>where-clause</var></a>]
+                           [<a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_with_clause"><var>with-clause</var></a>]
+                           
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+         
+      <div><a name="sysmain_ux_ex_LIST_FIND"></a></div> 
+          
+      <h3>Examples of LIST and
+              FIND
+      </h3> 
+           <pre class="command-input">LIST VIEW * IN TESTLIB</pre><pre class="command-input">L SAVED TEST* IN TESTLIB TYPE PNS FNR 6</pre><pre class="command-input">L SA TEST* IN TESTLIB FNR 6 DBID 2 TYPE PM FMDATE 2007-01-01</pre><pre class="command-input">FIND PROG1 IN * DBID 1 FNR 6</pre><pre class="command-input">F STOWED MAINMENU IN SYS* WHERE DBID 1 FNR 5</pre><pre class="command-input">FIND ALL PROG2 IN PROD* FNR 27 DBID 1</pre> 
+          <div class="noprint">
+         <p><a href="sysmain_ux_use_subprogram.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="sysmain_ux_COPY_MOVE"></a></div> 
+         
+      <h2>COPY and MOVE
+             Command Syntax
+      </h2> 
+          
+      <p>The following command syntax applies to the copy and move functions:</p>
+          
+           
+           
+      <table border="0" class="syntax" cellpadding="3"> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td rowspan="3" valign="middle"> 
+                  
+                  <p><img src="../graphics/cbo2.gif" alt="" width="6" height="38"></p>
+               </td> 
+                       
+               <td rowspan="3" nowrap valign="middle"> 
+                  
+                  <p class="mini-list"> 
+                               <code class="keyword"><u>C</u>OPY</code><br> 
+                               <code class="keyword"><u>M</u>OVE</code> 
+                              
+                  </p> 
+               </td> 
+                       
+               <td rowspan="3" valign="middle"> 
+                  
+                  <p><img src="../graphics/cbc2.gif" alt="" width="6" height="38"></p>
+               </td> 
+                       
+               <td rowspan="3"> 
+                  
+                  <p><img src="../graphics/sbo4.gif" alt="" width="5" height="100"></p>
+               </td> 
+                       
+               <td rowspan="3" nowrap> 
+                  
+                  <p class="mini-list"> 
+                                <a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_ALL"><code class="keyword"><u>ALL</u></code></a> <br> 
+                                <a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_CATALOGED"><code class="keyword"><u>C</u>ATALOGED</code></a> <br> 
+                                <a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_SAVED"><code class="keyword"><u>SA</u>VED</code></a> <br> 
+                                <a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_STOWED"><code class="keyword"><u>ST</u>OWED</code></a> <br> 
+                                <a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_VIEW"><code class="keyword"><u>V</u>IEW</code></a> <br> 
+                                <a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_RESOURCE"><code class="keyword"><u>RES</u>OURCE</code></a>  
+                              
+                  </p> 
+               </td> 
+                       
+               <td rowspan="3"> 
+                  
+                  <p><img src="../graphics/sbc4.gif" alt="" width="5" height="100"></p>
+               </td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><var>name</var> 
+               </td> 
+                       
+               <td> 
+                  
+                  <p><img src="../graphics/sbo2a.gif" alt="" width="5" height="30"></p>
+               </td> 
+                       
+               <td nowrap>
+                  <a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_FROM"><code class="keyword">FM</code></a> [<code class="keyword"><u>LIB</u>RARY</code>]
+                           <a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_LIBRARY"><var>lib-name</var></a>
+                           
+               </td> 
+                       
+               <td> 
+                  
+                  <p><img src="../graphics/sbc2a.gif" alt="" width="5" height="30"></p>
+               </td> 
+                       
+               <td> [<a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_where_clause"><var>where-clause</var></a>]
+                           
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td nowrap>&nbsp;</td> 
+                       
+               <td colspan="2" nowrap><a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_TO"><code class="keyword">TO</code></a>
+                   [<code class="keyword"><u>LIB</u>RARY</code>]
+                           <a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_LIBRARY"><var>lib-name</var></a>
+                           
+               </td> 
+                       
+               <td nowrap>[<a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_where_clause"><var>where-clause</var></a>]
+                           [<a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_with_clause"><var>with-clause</var></a>]
+               </td>
+                       
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+         
+      <div><a name="sysmain_ux_ex_COPY_MOVE"></a></div> 
+          
+      <h3>Examples of COPY and
+              MOVE
+      </h3> 
+           <pre class="command-input">COPY PROG1 FM TESTORD TO ORDERS DBID 1 FNR 6 REP</pre><pre class="command-input">C PGM* FM TESTLIB TO PRODLIB WITH REP TYPE PNS</pre><pre class="command-input">C VIEW PERS FM OLDLIB FNR 10 TO NEWLIB FNR 16 REPLACE</pre><pre class="command-input">MOVE VIEW PERSONNEL FM OLDLIB FNR 20 TO NEWLIB FNR 24</pre><pre class="command-input">M PROG1 TO NEWLIB</pre><pre class="command-input">M STOWED * FM OLDLIB TO NEWLIB WHERE DBID 100 FNR 160 WITH XREF Y</pre> 
+          <div class="noprint">
+         <p><a href="sysmain_ux_use_subprogram.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="sysmain_ux_DELETE"></a></div> 
+         
+      <h2>DELETE Command
+             Syntax
+      </h2> 
+          
+      <p>The following command syntax applies to the delete function:</p> 
+           
+           
+      <table border="0" class="syntax" cellpadding="3"> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td nowrap valign="middle"> <code class="keyword"><u>D</u>ELETE</code> 
+               </td> 
+                       
+               <td> 
+                  
+                  <p><img src="../graphics/sbo4.gif" alt="" width="5" height="100"></p> 
+               </td> 
+                       
+               <td nowrap> 
+                  
+                  <p class="mini-list"> 
+                                <a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_ALL">
+                                   <code class="keyword"><u>ALL</u></code></a> <br> 
+                                <a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_CATALOGED"><code class="keyword"><u>C</u>ATALOGED</code></a> <br> 
+                                <a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_SAVED"><code class="keyword"><u>SA</u>VED</code></a> <br> 
+                                <a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_STOWED"><code class="keyword"><u>ST</u>OWED</code></a> <br> 
+                                <a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_VIEW"><code class="keyword"><u>V</u>IEW</code></a> <br> 
+                                <a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_RESOURCE"><code class="keyword"><u>RES</u>OURCE</code></a>  
+                              
+                  </p> 
+               </td> 
+                       
+               <td> 
+                  
+                  <p><img src="../graphics/sbc4.gif" alt="" width="5" height="100"></p> 
+               </td> 
+                       
+               <td nowrap valign="middle"> <var>name</var>
+                       
+               </td> 
+                       
+               <td valign="middle"> 
+                  
+                  <p><img src="../graphics/sbo2a.gif" alt="" width="5" height="30"></p> 
+               </td> 
+                       
+               <td nowrap valign="middle">
+                  <a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_FROM"><code class="keyword">IN</code></a> [<a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_LIBRARY"><code class="keyword"><u>LIB</u>RARY</code></a>]
+                           <var>lib-name</var> 
+               </td> 
+                       
+               <td valign="middle"> 
+                  
+                  <p><img src="../graphics/sbc2a.gif" alt="" width="5" height="30"></p> 
+               </td> 
+                       
+               <td nowrap valign="middle"> [<a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_where_clause"><var>where-clause</var></a>]
+                           [<a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_with_clause"><var>with-clause</var></a>]
+                           
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+         
+      <div><a name="sysmain_ux_ex_DELETE"></a></div> 
+          
+      <h3>Examples of DELETE</h3> 
+           <pre class="command-input">DELETE SA * IN LIBTEST TYPE GLA</pre><pre class="command-input">D * IN TESTORD TYPE PM</pre><pre class="command-input">D VIEW FINANCE IN TESTLIB DBID 12 FNR 27</pre> 
+          <div class="noprint">
+         <p><a href="sysmain_ux_use_subprogram.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="sysmain_ux_RENAME"></a></div> 
+         
+      <h2>RENAME Command
+             Syntax
+      </h2> 
+          
+      <p>The following command syntax applies to the rename function:</p> 
+           
+           
+      <table border="0" class="syntax" cellpadding="3"> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td rowspan="6" nowrap valign="middle"> <code class="keyword"><u>R</u>ENAME</code> 
+               </td> 
+                       
+               <td rowspan="6"> 
+                  
+                  <p><img src="../graphics/sbo4.gif" alt="" width="5" height="100"></p> 
+               </td> 
+                       
+               <td rowspan="6" nowrap> 
+                  
+                  <p class="mini-list"> 
+                                <a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_ALL"><code class="keyword"><u>ALL</u></code></a> <br> 
+                                <a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_CATALOGED"><code class="keyword"><u>C</u>ATALOGED</code></a> <br> 
+                                <a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_SAVED"><code class="keyword"><u>SA</u>VED</code></a> <br> 
+                                <a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_STOWED"><code class="keyword"><u>ST</u>OWED</code></a> <br> 
+                                <a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_VIEW"><code class="keyword"><u>V</u>IEW</code></a> <br> 
+                                <a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_RESOURCE"><code class="keyword"><u>RES</u>OURCE</code></a>  
+                              
+                  </p> 
+               </td> 
+                       
+               <td rowspan="6"> 
+                  
+                  <p><img src="../graphics/sbc4.gif" alt="" width="5" height="100"></p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td nowrap>&nbsp;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td nowrap>&nbsp;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <var>name</var> 
+               </td> 
+                       
+               <td nowrap> <a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_AS"><code class="keyword">AS</code></a> <var>new-name</var>
+                           [<a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_with_clause"><var>with-clause</var></a>]
+                           
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td nowrap> <a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_FROM"><code class="keyword">FM</code></a> [<a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_LIBRARY"><code class="keyword"><u>LIB</u>RARY</code></a>]
+                           <var>lib-name</var> [<a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_where_clause"><var>where-clause</var></a>]
+                           
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td nowrap> <a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_TO"><code class="keyword">TO</code></a> [<a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_LIBRARY"><code class="keyword"><u>LIB</u>RARY</code></a>]
+                           <var>lib-name</var> [<a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_where_clause"><var>where-clause</var></a>]
+                           
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+         
+      <div><a name="sysmain_ux_ex_RENAME"></a></div> 
+          
+      <h3>Examples of RENAME</h3> 
+           <pre class="command-input">RENAME PGM1 AS PROG1</pre><pre class="command-input">R PGM1 AS PROG1 FM TESTLIB DBID 1 FNR 5 TO PRODLIB DBID 2 FNR 6</pre> 
+          <div class="noprint">
+         <p><a href="sysmain_ux_use_subprogram.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="sysmain_ux_IMPORT"></a></div> 
+         
+      <h2>IMPORT Command
+             Syntax
+      </h2> 
+          
+      <p>The command syntax that applies to the import function is shown in the
+              following section.
+      </p> 
+          
+      <p>For the points that must be considered before importing objects, see the
+              description of the <a href="sysmain_ux_functions.htm#sysmain_ux_import_description">import</a> function.
+      </p> 
+           
+           
+      <table border="0" class="syntax" cellpadding="3"> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td rowspan="5" nowrap valign="middle"> <code class="keyword"><u>I</u>MPORT</code> 
+               </td> 
+                       
+               <td rowspan="5"> 
+                  
+                  <p><img src="../graphics/sbo4.gif" alt="" width="5" height="100"></p> 
+               </td> 
+                       
+               <td rowspan="5" nowrap> 
+                  
+                  <p class="mini-list"> 
+                                <a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_ALL">
+                                   <code class="keyword"><u>ALL</u></code></a> <br> 
+                                <a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_CATALOGED"><code class="keyword"><u>C</u>ATALOGED</code></a> <br> 
+                                <a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_SAVED"><code class="keyword"><u>SA</u>VED</code></a> <br> 
+                                <a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_STOWED"><code class="keyword"><u>ST</u>OWED</code></a> <br> 
+                                <a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_VIEW"><code class="keyword"><u>V</u>IEW</code></a> <br> 
+                                <a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_RESOURCE"><code class="keyword"><u>RES</u>OURCE</code></a>  
+                              
+                  </p> 
+               </td> 
+                       
+               <td rowspan="5"> 
+                  
+                  <p><img src="../graphics/sbc4.gif" alt="" width="5" height="100"></p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td nowrap>&nbsp;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td nowrap>&nbsp;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <var>name</var> 
+               </td> 
+                       
+               <td nowrap> <a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_FROM"><code class="keyword">FM</code></a> [<a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_PATH"><code class="keyword">PATH</code></a>]
+                           <var>path-name</var></td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td nowrap> <a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_TO"><code class="keyword">TO</code></a> [<a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_LIBRARY"><code class="keyword"><u>LIB</u>RARY</code></a>]
+                           <var>lib-name</var> [<a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_where_clause"><var>where-clause</var></a>]
+                           [<a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_with_clause"><var>with-clause</var></a>]
+                           
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+         
+      <div><a name="sysmain_ux_ex_IMPORT"></a></div> 
+          
+      <h3>Examples of IMPORT</h3> 
+           
+           <pre class="command-input">IMPORT ALL PGM* FM D:\NAT-PROGRAMS TO IMP-LIB</pre><pre class="command-input">I RES res1.bmp FM D:\RESOURCES TO IMP-LIB</pre> 
+            
+          <div class="noprint">
+         <p><a href="sysmain_ux_use_subprogram.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="sysmain_ux_subpgm_where_clause"></a></div> 
+         
+      <h2><var>where-clause</var></h2> 
+           
+           
+      <table border="0" class="syntax" cellpadding="3"> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td colspan="2" nowrap> [<a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_WHERE"><code class="keyword">WHERE</code></a>] [<a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_DBID"><code class="keyword">DBID</code></a>
+                           <var>dbid</var>] [<a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_FNR"><code class="keyword">FNR</code></a>
+                           <var>fnr</var>] 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td> [<a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_DIC"><code class="keyword">DIC</code></a>
+                      (<var>dbid</var>,<var>fnr</var>,<var>password</var>,<var>cipher</var>)]
+                           
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td> [<a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_SEC"><code class="keyword">SEC</code></a>
+                      (<var>dbid</var>,<var>fnr</var>,<var>password</var>,<var>cipher</var>)]
+                           
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+         
+      <div><a name="sysmain_ux_separators"></a></div> 
+          
+      <h3>Separators</h3> 
+           
+           
+      <p>Commas must be used as separators between the values following the
+               <code>DIC</code> and <code>SEC</code> keywords, or if a value is missing. For
+               example: <code>DIC (10,,secret,2a)</code>. If the <code>ID</code> session
+               parameter (see also <a href="../parms/id.htm">ID - Input
+            Delimiter Character</a> in the <cite>Parameter
+                  Reference</cite>) has been set to a comma, use a slash (/) as the separator
+               between values.
+      </p> 
+          
+      <div class="noprint">
+         <p><a href="sysmain_ux_use_subprogram.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="sysmain_ux_subpgm_with_clause"></a></div> 
+         
+      <h2><var>with-clause</var></h2> 
+          
+           
+           
+      <table border="0" class="syntax" cellpadding="3">
+         <colgroup>
+            <col width="NaN%">
+            <col width="NaN%">
+         </colgroup> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td nowrap> [<a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_WITH"><code class="keyword">WITH</code></a>]
+                        
+               </td> 
+                       
+               <td colspan="9" nowrap> [<a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_TYPE"><code class="keyword">TYPE</code></a>
+                        <var>type</var>] [<a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_FMDATE"><code class="keyword">FMDATE</code></a> <var>date</var>]
+                           [<a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_FMTIME"><code class="keyword">FMTIME</code></a> <var>time</var>]
+                           
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td colspan="3" nowrap> [<a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_USER"><code class="keyword">USER</code></a> <var>user-id</var>]
+                           
+               </td> 
+                       
+               <td nowrap> 
+                  
+                  <p><img src="../graphics/sbo2.gif" alt="" width="5" height="40"></p> 
+               </td> 
+                       
+               <td nowrap>
+                  <a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_XREF"><code class="keyword">XREF</code></a> 
+               </td> 
+                       
+               <td nowrap> 
+                  
+                  <p><img src="../graphics/cbo2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                       
+               <td nowrap> 
+                  
+                  <p class="mini-list"> 
+                                <code class="keyword">Y</code> <br> 
+                                <code class="keyword"><u>N</u></code> 
+                               
+                              
+                  </p> 
+               </td> 
+                       
+               <td nowrap> 
+                  
+                  <p><img src="../graphics/cbc2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                       
+               <td nowrap> 
+                  
+                  <p><img src="../graphics/sbc2.gif" alt="" width="5" height="40"></p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td colspan="9" nowrap> [<a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_REPLACE"><code class="keyword"><u>REP</u>LACE</code></a>] [<a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_RCOP"><code class="keyword"><u>RC</u>OP</code></a>] [<a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_NOPROMPT"><code class="keyword"><u>NOP</u>ROMPT</code></a>] [<a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_HELP"><code class="keyword"><u>H</u>ELP</code></a>] 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td nowrap> 
+                  
+                  <p><img src="../graphics/sbo3.gif" alt="" width="5" height="61"></p> 
+               </td> 
+                       
+               <td nowrap> 
+                  
+                  <p class="mini-list"> 
+                                <a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_STRUCT"><code class="keyword">STRUCT</code></a> <br> 
+                                <a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_STRUCT"><code class="keyword">SM</code></a> <br> 
+                                <a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_REPORT"><code class="keyword">REPORT</code></a>  
+                              
+                  </p> 
+               </td> 
+                       
+               <td nowrap> 
+                  
+                  <p><img src="../graphics/sbc3.gif" alt="" width="5" height="61"></p>
+               </td> 
+                       
+               <td nowrap>&nbsp;</td> 
+                       
+               <td nowrap>&nbsp;</td> 
+                       
+               <td nowrap>&nbsp;</td> 
+                       
+               <td nowrap>&nbsp;</td> 
+                       
+               <td nowrap>&nbsp;</td> 
+                       
+               <td nowrap>&nbsp;</td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+         
+      <div class="noprint">
+         <p><a href="sysmain_ux_use_subprogram.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="sysmain_ux_keywords"></a></div> 
+         
+      <h2>Keywords and Variables in Commands</h2> 
+          
+      <p>This section explains the keywords and corresponding variable values (if
+              required) used in a command.
+      </p> 
+          
+      <p>Keywords are listed alphabetically. Letters in italics represent
+              variable values that must be supplied with a keyword. For each variable value,
+              the Natural data format and length is indicated.
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="no%"> 
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th align="left">Keyword</th> 
+                       
+               <th align="left">Value</th> 
+                       
+               <th align="left"> 
+                  
+                  <p class="mini-list"> 
+                     Natural Data Format/<br> 
+                               Length 
+                              
+                  </p>
+               </th> 
+                       
+               <th align="left">Explanation</th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> <a name="sysmain_ux_subpgm_ALL"></a><code>ALL</code>
+                      
+               </td> 
+                       
+               <td> <var>name</var> 
+               </td> 
+                       
+               <td>A9</td> 
+                       
+               <td> Only applies to programming objects. 
+                  
+                  <p>The name of the object to be processed or a range of names; see
+                               <a href="sysmain_ux_sel_window.htm#sysmain_ux_specify_range">Specifying a Range of
+                                  Names</a>. Any saved (source) objects and/or cataloged objects
+                               are processed.
+                  </p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td nowrap> <a name="sysmain_ux_subpgm_CATALOGED"></a><code>CATALOGED</code> 
+               </td> 
+                       
+               <td> <var>name</var> 
+               </td> 
+                       
+               <td>A9</td> 
+                       
+               <td> Only applies to programming objects. 
+                  
+                  <p>The name of the cataloged object to be processed or a range of
+                               names; see <a href="sysmain_ux_sel_window.htm#sysmain_ux_specify_range">Specifying a
+                                  Range of Names</a>.
+                  </p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a name="sysmain_ux_subpgm_SAVED"></a><code>SAVED</code> 
+               </td> 
+                       
+               <td> <var>name</var> 
+               </td> 
+                       
+               <td>A9</td> 
+                       
+               <td> Only applies to programming objects. 
+                  
+                  <p>The name of the saved (source) object to be processed or a range of
+                               names; see <a href="sysmain_ux_sel_window.htm#sysmain_ux_specify_range">Specifying a
+                                  Range of Names</a>.
+                  </p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a name="sysmain_ux_subpgm_STOWED"></a><code>STOWED</code> 
+               </td> 
+                       
+               <td> <var>name</var> 
+               </td> 
+                       
+               <td>A9</td> 
+                       
+               <td> Only applies to programming objects. 
+                  
+                  <p>The name of an object (or a range of names) for which the saved
+                               (source) <em>and</em> the cataloged object are to be processed (see also
+                               <a href="sysmain_ux_sel_window.htm#sysmain_ux_specify_range">Specifying a Range of
+                                  Names</a>). Only an object that exists as both a saved
+                               (source) object <em>and</em> a cataloged object is processed.
+                  </p> 
+                           
+                  <p>The exceptions to this are copycode and text, neither of which can
+                               be cataloged. However, they are included in processing when this option is
+                               specified.
+                  </p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a name="sysmain_ux_subpgm_VIEW"></a><code>VIEW</code>
+                       
+               </td> 
+                       
+               <td> <var>name</var> 
+               </td> 
+                       
+               <td>A32</td> 
+                       
+               <td> Only applies to DDMs. 
+                  
+                  <p>The name of the DDM to be processed or a range of names; see
+                               <a href="sysmain_ux_sel_window.htm#sysmain_ux_specify_range">Specifying a Range of
+                                  Names</a>.
+                  </p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a name="sysmain_ux_subpgm_RESOURCE"></a><code>RESOURCE</code> 
+               </td> 
+                       
+               <td> <var>name</var> 
+               </td> 
+                       
+               <td>A255</td> 
+                       
+               <td> Only applies to shared resources. 
+                  
+                  <p>The name of the shared resource to be processed or a range of
+                               names; see <a href="sysmain_ux_sel_window.htm#sysmain_ux_specify_range">Specifying a
+                                  Range of Names</a>.
+                  </p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> 
+                  
+                  <p class="mini-list"> 
+                               <code>FROM</code> <a name="sysmain_ux_subpgm_FROM"></a><br> 
+                               or <br> 
+                                <code>FM</code> <br> 
+                               or <br> 
+                                <code>IN</code> 
+                              
+                  </p>
+               </td> 
+                       
+               <td> 
+                  
+                  <p class="mini-list"> 
+                               <var>lib-name</var> <br> 
+                               or <br> 
+                                <var>path-name</var> 
+                              
+                  </p>
+               </td> 
+                       
+               <td> 
+                  
+                  <p class="mini-list"> 
+                             A8 <br> 
+                               or <br> 
+                               A253 
+                              
+                  </p>
+               </td> 
+                       
+               <td>Specifies a source library or a source path. 
+                  
+                  <p>The source library or path contains the object to be
+                               processed.
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a name="sysmain_ux_subpgm_TO"></a><code>TO</code>
+                     
+               </td> 
+                       
+               <td> <var>lib-name</var> 
+               </td> 
+                       
+               <td>A8</td> 
+                       
+               <td>Specifies a target library.</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a name="sysmain_ux_subpgm_AS"></a><code>AS</code>
+                     
+               </td> 
+                       
+               <td> <var>new-name</var> 
+               </td> 
+                       
+               <td> 
+                  
+                  <p class="mini-list"> 
+                             A8 <br> 
+                               or <br> 
+                               A32 <br> 
+                               or <br> 
+                               A255 
+                              
+                  </p>
+               </td> 
+                       
+               <td> 
+                  
+                  <p>The new name to be given to an object when it is renamed with the
+                               <code>RENAME</code> command. Format/length A8 applies to programming objects,
+                               A32 to DDMs and A255 to shared resources.
+                  </p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a name="sysmain_ux_subpgm_LIBRARY"></a><code>LIBRARY</code> 
+               </td> 
+                       
+               <td> <var>lib-name</var> 
+               </td> 
+                       
+               <td>A8</td> 
+                       
+               <td> An optional keyword that indicates the name
+                  (<var>lib-name</var>) of a source or a target library. If you
+                  omit the keyword and respective value, the library where you logged on before
+                           you invoked SYSMAIN is used for processing. 
+                           
+                  <p>The source library contains the object to be processed. The target
+                               library is the library to which the object is to be copied or moved, or where
+                               the object is renamed.
+                  </p> 
+                           
+                  <p> <var>lib-name</var> must be specified immediately
+                               after the <code>FROM</code>/<code>FM</code>/<code>IN</code> or <code>TO</code>
+                               keyword. If <code>LIBRARY</code> is used, it must be entered between
+                               <code>FROM</code>/<code>FM</code>/<code>IN</code> or <code>TO</code> and
+                               <var>lib-name</var>.
+                  </p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a name="sysmain_ux_subpgm_PATH"></a><code>PATH</code>
+                       
+               </td> 
+                       
+               <td> <var>path-name</var> 
+               </td> 
+                       
+               <td>A253</td> 
+                       
+               <td> Only applies to the <code>IMPORT</code> command. 
+                           
+                  <p>An optional keyword that indicates the name
+                               (<var>path-name</var>) of a source path. For a valid path name,
+                               see <a href="sysmain_ux_sel_window.htm#path_import_fct"><span class="selectable_label">PATH</span></a>
+                               in <cite>Using the Fields in an Object-Specification Window</cite>.
+                  </p> 
+                           
+                  <p> <var>path-name</var> must be specified immediately
+                               after the <code>FROM</code>/<code>FM</code>/<code>IN</code> or <code>TO</code>
+                               keyword. If <code>PATH</code> is used, it must be entered between
+                               <code>FROM/FM/IN</code> or <code>TO</code> and
+                               <var>path-name</var>.
+                  </p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a name="sysmain_ux_subpgm_WHERE"></a><code>WHERE</code> 
+               </td> 
+                       
+               <td nowrap> <var>where-clause</var> 
+               </td> 
+                       
+               <td>N/A</td> 
+                       
+               <td> An optional keyword that indicates the start of a
+                  <var>where-clause</var>. 
+                           
+                  <p>The <var>where-clause</var> must always follow the
+                               <code>FROM</code>/<code>FM</code>/<code>IN</code> or <code>TO</code> keyword
+                               and the library name (<a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_LIBRARY"><var>lib-name</var></a>)
+                               or path name (<a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_PATH"><var>path-name</var></a>)
+                               if relevant; the sequence of the keywords and values within the clause can be
+                               specified in any order.
+                  </p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a name="sysmain_ux_subpgm_DBID"></a><code>DBID</code>
+                       
+               </td> 
+                       
+               <td> <var>dbid</var> 
+               </td> 
+                       
+               <td>N5</td> 
+                       
+               <td> The database ID (DBID) of a source or a target system file. 
+                  
+                  <p>The source system file contains the object to be processed. The
+                     target system file is the system file to which the object is to be copied or
+                               moved, or where the object is renamed if relevant.
+                  </p> 
+                           
+                  <p>Valid DBIDs are <code>1</code> to <code>65535</code>.
+                  </p> 
+                           
+                  <p class="mini-list"> 
+                               If no DBID or <a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_FNR">FNR</a> (file number) is specified, the
+                                following applies:<br> 
+                                The DBID and FNR of the system file where the current library
+                                resides are always used.<br> 
+                                For example: if you specify a library contained in the FUSER
+                                system file, the DBID and FNR of this file are used. 
+                              
+                  </p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a name="sysmain_ux_subpgm_FNR"></a><code>FNR</code>
+                      
+               </td> 
+                       
+               <td> <var>fnr</var> 
+               </td> 
+                       
+               <td>N5</td> 
+                       
+               <td> The file number (FNR) of a source or a target system file. 
+                  
+                  <p>The source system file contains the object to be processed. The
+                     target system file is the system file to which the object is to be copied or
+                               moved, or where the object is renamed if relevant.
+                  </p> 
+                           
+                  <p>Valid FNRs are <code>1</code> to <code>65535</code>.
+                  </p> 
+                           
+                  <p class="mini-list"> 
+                               If no <a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_DBID"><code>DBID</code></a> (database ID) or
+                                <code>FNR</code> is specified, the following applies:<br> 
+                                The DBID and FNR of the system file where the current library
+                                resides are always used.<br> 
+                                For example: if you specify a library contained in the FUSER
+                                system file, the DBID and FNR of this file are used. 
+                              
+                  </p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a name="sysmain_ux_subpgm_DIC"></a><code>DIC</code>
+                      
+               </td> 
+                       
+               <td> 
+                  
+                  <p class="mini-list"> 
+                                <var>dbid</var> <br> 
+                                <var>fnr</var> <br> 
+                                <var>password</var> <br> 
+                                <var>cipher</var>  
+                              
+                  </p> 
+               </td> 
+                       
+               <td>A80</td> 
+                       
+               <td> Specifies the environment of the FDIC source and/or target
+                  system file: database ID (<a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_DBID"><var>dbid</var></a>),
+                           file number (<a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_FNR"><var>fnr</var></a>),
+                           Adabas password (<var>password</var>) and Adabas cipher code
+                           (<var>cipher</var>). 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a name="sysmain_ux_subpgm_SEC"></a><code>SEC</code>
+                      
+               </td> 
+                       
+               <td> 
+                  
+                  <p class="mini-list"> 
+                                <var>dbid</var> <br> 
+                                <var>fnr</var> <br> 
+                                <var>password</var> <br> 
+                                <var>cipher</var> 
+                              
+                  </p> 
+               </td> 
+                       
+               <td>A80</td> 
+                       
+               <td> Specifies the environment of the FSEC source and/or target
+                  system file: database ID (<a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_DBID"><var>dbid</var></a>),
+                           file number (<a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_FNR"><var>fnr</var></a>),
+                           Adabas password (<var>password</var>) and Adabas cipher code
+                           (<var>cipher</var>).
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a name="sysmain_ux_subpgm_WITH"></a><code>WITH</code>
+                       
+               </td> 
+                       
+               <td> <var>with-clause</var> 
+               </td> 
+                       
+               <td>N/A</td> 
+                       
+               <td> An optional keyword that indicates the start of a
+                  <var>with-clause</var>. 
+                           
+                  <p>The keywords and values of the
+                               <var>with-clause</var> can be specified in any order, and the
+                               <var>with-clause</var> can be placed in any location within the
+                               command string, except in the first three positions.
+                  </p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a name="sysmain_ux_subpgm_TYPE"></a><code>TYPE</code>
+                       
+               </td> 
+                       
+               <td nowrap> <var>type</var> 
+               </td> 
+                       
+               <td>A20</td> 
+                       
+               <td>The type(s) of object to be processed as listed in
+                  <a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_TYPE_Objects">TYPE
+                              Specification</a> below.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a name="sysmain_ux_subpgm_FMDATE"></a><code>FMDATE</code> 
+               </td> 
+                       
+               <td> <var>date</var> 
+               </td> 
+                       
+               <td>A10</td> 
+                       
+               <td> 
+                  
+                  <p class="mini-list"> 
+                     The start date of a time period:<br> 
+                     All objects which were saved or cataloged on or after the
+                                specified date are processed. 
+                              
+                  </p> 
+                           
+                  <p>A date must be specified in a valid Natural date format. The
+                               default format is the international format
+                               <var>YYYY</var>-<var>MM</var>-<var>DD</var>
+                               (<var>YYYY</var> = year, <var>MM</var> = month,
+                               <var>DD</var> = day), for example, <code>2007-05-20</code>.
+                  </p>
+                           
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a name="sysmain_ux_subpgm_FMTIME"></a><code>FMTIME</code> 
+               </td> 
+                       
+               <td> <var>time</var> 
+               </td> 
+                       
+               <td>A5</td> 
+                       
+               <td>Only applies if <a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_FMDATE"><code>FMDATE</code></a>
+                  is specified. 
+                           
+                  <p class="mini-list"> 
+                               Specifies a start time:<br> 
+                     All objects which were saved or cataloged at or after the
+                                specified time (and date) are processed. 
+                              
+                  </p> 
+                           
+                  <p>A time must be specified in the format
+                               <var>HH</var>:<var>II</var>
+                               (<var>HH</var> = hours, <var>II</var> =
+                               minutes), for example, <code>11:33</code>.
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a name="sysmain_ux_subpgm_USER"></a><code>USER</code>
+                       
+               </td> 
+                       
+               <td nowrap> <var>user-id</var> 
+               </td> 
+                       
+               <td>A8</td> 
+                       
+               <td> 
+                  
+                  <p class="mini-list"> 
+                      A user ID:<br> 
+                     All objects that were saved or cataloged by the specified
+                        user are processed. 
+                              
+                  </p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><a name="sysmain_ux_subpgm_XREF"></a><code>XREF</code></td> 
+                       
+               <td> 
+                  
+                  <p class="mini-list"> 
+                               <code>N</code><br> 
+                               or<br> 
+                               <code>Y</code> 
+                              
+                  </p>
+               </td> 
+                       
+               <td>A1</td> 
+                       
+               <td>
+                  <table border="0" width="100%">
+                     <colgroup>
+                        <col width="4%">
+                        <col width="96%">
+                     </colgroup> 
+                              
+                     <tbody align="left" valign="top"> 
+                                  
+                        <tr> 
+                                      
+                           <td colspan="2">Only applies to programming
+                              objects and if Predict is installed. 
+                           </td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td>&nbsp;</td> 
+                                      
+                           <td>&nbsp;</td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td colspan="2"> Indicates whether
+                              cross-reference (XRef) data stored on Predict system files is to be
+                              processed.
+                           </td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td>&nbsp;</td> 
+                                      
+                           <td>&nbsp;</td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td colspan="2">You can specify one of the
+                              following values: 
+                           </td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td>&nbsp;</td> 
+                                      
+                           <td>&nbsp;</td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td><code>N</code></td> 
+                                      
+                           <td>XRef data is not processed, except when using
+                              the <code>DELETE</code> command. If a cataloged object is deleted, SYSMAIN
+                                          always deletes any existing XRef data for this object.
+                           </td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td>&nbsp;</td> 
+                                      
+                           <td>&nbsp;</td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td><code>Y</code></td> 
+                                      
+                           <td>All XRef data is processed.</td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td>&nbsp;</td> 
+                                      
+                           <td>&nbsp;</td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td colspan="2">See also
+                              <a href="sysmain_ux_xref.htm#sysmain_ux_xref">XRef
+                                        Considerations</a>.
+                           </td> 
+                                     
+                        </tr> 
+                                 
+                     </tbody> 
+                             
+                  </table>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a name="sysmain_ux_subpgm_REPLACE"></a><code>REPLACE</code> 
+               </td> 
+                       
+               <td>N/A</td> 
+                       
+               <td>N/A</td> 
+                       
+               <td>Activates the replace option used in a
+                  <var>with-clause</var>. 
+                           
+                  <p>An object is automatically replaced.</p> See also
+                           <a href="sysmain_ux_sel_window.htm#sysmain_ux_replace_option">Using the Replace
+                              Option</a>.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a name="sysmain_ux_subpgm_RCOP"></a><code>RCOP</code>
+                       
+               </td> 
+                       
+               <td>N/A</td> 
+                       
+               <td>N/A</td> 
+                       
+               <td>Specifies that a copy of the object being renamed is to be
+                  made.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a name="sysmain_ux_subpgm_NOPROMPT"></a><code>NOPROMPT</code> 
+               </td> 
+                       
+               <td>N/A</td> 
+                       
+               <td>N/A</td> 
+                       
+               <td> Not applicable in batch mode. 
+                  
+                  <p class="mini-list"> 
+                               Disables (<code>NOPROMPT</code>) the SYSMAIN prompts.<br> 
+                               With <code>NOPROMPT</code>, no confirmation screen is
+                                displayed.<br> 
+                                For example, before any deletion, SYSMAIN prompts you for
+                                confirmation. 
+                              
+                  </p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a name="sysmain_ux_subpgm_HELP"></a><code>HELP</code>
+                       
+               </td> 
+                       
+               <td>N/A</td> 
+                       
+               <td>N/A</td> 
+                       
+               <td>This keyword is provided for compatibility reasons only.
+                  
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> 
+                  
+                  <p class="mini-list"> 
+                               <code>STRUCT</code> <a name="sysmain_ux_subpgm_STRUCT"></a><br> 
+                               or<br> 
+                                <code>SM</code> 
+                              
+                  </p>
+               </td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td> Only applies to the <code>IMPORT</code> command. 
+                           
+                  <p>Indicates <a href="../pg/pg_mode.htm#struct_mode">structured
+                                  mode</a> described in <cite>Natural Programming Modes</cite> in
+                               the <cite>Programming Guide</cite>.
+                  </p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <code>REPORT</code> <a name="sysmain_ux_subpgm_REPORT"></a>
+                          
+               </td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td> Only applies to the <code>IMPORT</code> command. 
+                           
+                  <p>Indicates <a href="../pg/pg_mode.htm#rep_mode">reporting
+                                  mode</a> described in <cite>Natural Programming Modes</cite> in
+                               the <cite>Programming Guide</cite>.
+                  </p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <code class="keyword">.</code> 
+               </td> 
+                       
+               <td>N/A</td> 
+                       
+               <td>N/A</td> 
+                       
+               <td>A period (.) indicates the end of a command. If this character
+                  is detected anywhere within a command string, all subsequent data is
+                  ignored.
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+         
+      <div><a name="sysmain_ux_subpgm_TYPE_Objects"></a></div> 
+          
+      <h3>TYPE Specification</h3> 
+           
+           
+      <p>The following table lists all valid object-type codes for programming
+               objects that can be used with the <code>TYPE</code> keyword:
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="no%"> 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th align="left" nowrap>Code
+                  <a name="sysmain_ux_subpgm_Object_Type_Code"></a></th> 
+                        
+               <th align="left">Object Type</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> <code>P</code> 
+               </td> 
+                        
+               <td>Program</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>N</code> 
+               </td> 
+                        
+               <td>Subprogram</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>S</code> 
+               </td> 
+                        
+               <td>Subroutine</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>M</code> 
+               </td> 
+                        
+               <td>Map</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>H</code> 
+               </td> 
+                        
+               <td>Helproutine</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>3</code> 
+               </td> 
+                        
+               <td>Dialog</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>5</code> 
+               </td> 
+                        
+               <td>Processor</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>A</code> 
+               </td> 
+                        
+               <td>Parameter data area</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>G</code> 
+               </td> 
+                        
+               <td>Global data area</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>L</code> 
+               </td> 
+                        
+               <td>Local data area</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>C</code> 
+               </td> 
+                        
+               <td>Copycode</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>T</code> 
+               </td> 
+                        
+               <td>Text</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>4</code> 
+               </td> 
+                        
+               <td>Class</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>7</code> 
+               </td> 
+                        
+               <td>Function</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>V</code> 
+               </td> 
+                        
+               <td>View (DDM)</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><code>8</code></td> 
+                        
+               <td>Adapter</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>*</td> 
+                        
+               <td>All programming object types</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+          
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="sysmain_ux_use_subprogram.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../utis/sysmain_ux_use_subprogram.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/utis/sysmain_ux_use_subprogram.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="sysmain_ux-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="sysmain_ux_sel_window.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="sysmain_ux_xref.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

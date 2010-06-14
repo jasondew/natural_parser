@@ -1,0 +1,1270 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>INPL Utility</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="inpl" id="15541"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../utis/inpl.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/utis/inpl.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="utis-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="ftouch.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="term.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Tools and Utilities&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x25"></a> 
+               <a name="x26"></a> 
+               <a name="x27"></a> 
+               <a name="x28"></a> 
+               <a name="x29"></a> 
+               <a name="x30"></a> 
+               <a name="x31"></a> 
+               <a name="x32"></a> 
+               <a name="x33"></a> 
+               <a name="x34"></a>INPL Utility
+         </h1>
+      </div> 
+         
+         
+      <p>The INPL utility (Initial Natural Program Load) is used to load or scan
+             Natural objects and shared resources from
+             files supplied
+             by Software AG.
+      </p> 
+         
+      <p>The <cite>INPL Utility</cite> documentation covers
+             the following topics:
+      </p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="inpl.htm#inpl_intro">Introducing the INPL Utility</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="inpl.htm#inpl_lib">Load Libraries Only</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="inpl.htm#inpl_ddm">Load DDMs Only</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="inpl.htm#inpl_mess">Load Error Messages Only</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="inpl.htm#inpl_lde">Load All Objects</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="inpl.htm#inpl_scan">Scan INPL File</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="inpl.htm#inpl_recov">Natural Security Recover</a></p>
+         </li>
+      </ul> 
+        
+      <hr>
+      <div><a name="inpl_intro"></a></div> 
+         
+      <h2>Introducing the INPL Utility</h2> 
+          
+      <p>The INPL utility processes Natural objects and
+              shared resources provided by Software AG.
+      </p> 
+          
+      <p>The following diagram is a basic illustration of the INPL
+              functionality:
+      </p> 
+          
+      <p><img src="graphics/inpl_gen_winux.png" alt="graphics/inpl_gen_winux.png"></p> 
+          
+      <p>The Natural objects and shared resources
+              are delivered as installation or update files which are
+              assigned to Work File 1. The INPL utility loads the Natural objects
+              and shared resources from Work File 1 into
+              Natural system files.
+      </p> 
+          
+      <p>The Natural objects and shared resources
+              include cataloged objects and source objects that are contained in
+              libraries in the Natural system files FNAT and FUSER.
+      </p> 
+          
+      <p>In addition to loading Natural objects and shared
+              resources, the INPL utility provides a scan function to check the
+              contents of the file assigned to Work File 1 and a <span class="selectable_label">Natural
+            Security Recover</span> function which forces initialization of the Natural
+              Security environment.
+      </p> 
+          
+      <p>When loading cataloged objects into Natural system files,
+              the INPL utility deletes any buffer pool entries of cataloged objects with
+              identical names if contained in the same buffer pool used by the INPL
+              utility.
+      </p> 
+          
+      <p>If an error occurs during INPL execution, the INPL will be interrupted
+              and terminate abnormally with <span class="errorcode">Condition Code 40</span>.
+      </p> 
+          
+      <p>This section covers the following
+              topics:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="inpl.htm#inpl_intro_Restrictions">Restrictions</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="inpl.htm#inpl_intro_Special_Cases">Special Case</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="inpl.htm#inpl_intro_Invoking_the_INPL_Utility">Invoking INPL</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="inpl.htm#inpl_intro_Options_Available">Options Available</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="inpl.htm#inpl_intro_INPL_Report">INPL Report</a></p>
+         </li>
+      </ul>
+      <div><a name="inpl_intro_Restrictions"></a></div> 
+          
+      <h3> Restrictions </h3> 
+           
+           
+      <p>You can process only files which are marked as "SAG system
+               INPL file".
+      </p> 
+          
+      <div><a name="inpl_intro_Special_Cases"></a></div> 
+          
+      <h3>Special Case </h3> 
+           
+            
+            
+           
+      <p>When an INPL is to be performed in a Natural Security
+               environment, the INPL command can be specified using the dynamic Natural
+               profile parameter <code>STACK</code>.
+      </p> 
+           
+         
+      <div><a name="inpl_intro_Invoking_the_INPL_Utility"></a></div> 
+          
+      <h3> Invoking INPL </h3> 
+           
+           
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong> To invoke the INPL utility</strong></p>
+      <ol class="steps">
+         <li> 
+                    
+                    
+            <p class="instep">Enter the following Natural system command:</p> <pre class="command-input">INPL</pre> 
+                    
+                    
+                    <p class="instep">An INPL menu similar to the example below is displayed: </p> 
+                    
+            <table border="1" cellpadding="5" class="screen">
+               <tr>
+                  <td><pre>
+11:04:48               ***** NATURAL INPL UTILITY *****             2001-11-09 
+User: SAG                                                    Library: SYSTEM   
+                     Code   Function                                           
+                                                                               
+                       L    Load Libraries Only                                  
+                       D    Load DDMs Only                                     
+                       E    Load Error Messages Only                           
+                       B    Load All Objects              
+                       S    Scan INPL File                                     
+                       R    Natural Security Recover                           
+                       ?    Help                                               
+                       .    Exit                                               
+                                                                               
+                                                                               
+         Code ........ B                                                       
+         Replace ..... Y  (Y/N/O)     Load Except . N  (Y/N)                   
+         DDM Name ....                                                         
+         Library .....                                                         
+         Object Name .                Date ........             (YYYY-MM-DD)   
+         Check Date .. N  (Y/N)       Number ...... 0                          
+         File Type ... D  (D/P)                                                
+         Load File ... $NATWORK/SAGLOAD.sag                                    
+         Report File . $HOME/report.txt
+</pre></td>
+               </tr>
+            </table> 
+                    
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">From the INPL menu, you can choose one of the following functions by
+                        entering the corresponding function code in the <span class="selectable_label">Code</span>
+                        field: 
+            </p> 
+                    
+            <ul> 
+                        
+               <li> 
+                            
+                  <p class="initem"> <a href="inpl.htm#inpl_lib">Load Libraries Only</a> 
+                  </p>
+                            
+                           
+               </li> 
+                        
+               <li> 
+                            
+                  <p class="initem"> <a href="inpl.htm#inpl_ddm">Load DDMs Only</a> 
+                  </p> 
+                           
+               </li> 
+                        
+               <li> 
+                            
+                  <p class="initem"> <a href="inpl.htm#inpl_mess">Load Error Messages
+                                   Only</a> 
+                  </p> 
+                           
+               </li> 
+                        
+               <li> 
+                            
+                  <p class="initem"> <a href="inpl.htm#inpl_lde">Load All Objects</a> 
+                  </p> 
+                           
+               </li> 
+                        
+               <li> 
+                            
+                  <p class="initem"> <a href="inpl.htm#inpl_scan">Scan INPL File</a> 
+                  </p> 
+                           
+               </li> 
+                        
+               <li> 
+                            
+                  <p class="initem"> <a href="inpl.htm#inpl_recov">Natural Security
+                                   Recover</a> 
+                  </p> 
+                           
+               </li> 
+                       
+            </ul> 
+                    
+            <p class="instep"> For detailed information on these functions, refer to the
+                        corresponding sections.Modify or complete the remaining input fields as
+                        described in <a href="inpl.htm#inpl_intro_Options_Available">Options
+                  Available</a>.
+            </p> 
+                    
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">Choose <span class="key">ENTER</span> to confirm your entries.
+            </p> 
+                    
+                  
+         </li>
+      </ol> 
+           
+         
+      <div><a name="inpl_intro_Options_Available" id="15553"></a></div> 
+          
+      <h3> Options Available </h3> 
+           
+           
+      <p>The following section describes the input fields
+               on the INPL menu where you can specify the file to be used
+               for the INPL and one or more parameters as object selection criteria
+               for the INPL function specified in the
+               <span class="selectable_label">Code</span> field. The use of a parameter depends on
+               the respective function as indicated in the relevant documentation
+               sections.
+      </p> 
+            
+            
+            
+      <table border="1" class="color" cellpadding="3" width="no%"> 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th align="left">Field</th> 
+                        
+               <th align="left">Description</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr>
+                       
+                        
+               <td> <a name="inpl_intro_Replace"></a> <span class="selectable_label">Replace</span>
+                           
+               </td> 
+                        
+               
+                        
+                        
+               <td> 
+                  
+                  <p> Specifies whether the Natural objects and shared resources to be
+                     processed are to replace any that already exist on the system files. 
+                  </p> 
+                            
+                  <p> Possible settings are: </p> 
+                            
+                  <table border="0" cellpadding="3" margin-top="9pt">
+                     <tbody valign="top">
+                        <tr align="left"> 
+                                       
+                           <td class="titem"> <code>Y</code> 
+                           </td> 
+                                       
+                           <td class="titem"> All existing Natural objects and shared resources are
+                                           replaced. This is the default setting. 
+                           </td> 
+                                      
+                        </tr>
+                        <tr align="left"> 
+                                       
+                           <td class="titem"> <code>N</code> 
+                           </td> 
+                                       
+                           <td class="titem">Existing Natural objects and shared resources are
+                                           <em>not</em> replaced.
+                           </td> 
+                                      
+                        </tr>
+                        <tr align="left"> 
+                                       
+                           <td class="titem"> <code>O</code> 
+                           </td> 
+                                       
+                           <td class="titem"> Resets the owner information of specified objects. Only
+                                           applies to the function <a href="inpl.htm#inpl_recov"><span class="selectable_label">Natural
+                                                 Security Recover</span></a>. 
+                           </td> 
+                                      
+                        </tr>
+                     </tbody>
+                  </table> 
+                            
+                  <p> See also <a href="inpl.htm#inpl_intro_Check_Date"><span class="selectable_label">Check Date</span></a> to
+                                replace only Natural objects and shared resources that are older than the
+                                Natural objects and shared resources to be processed. 
+                  </p> 
+                            
+                  <p> If you use the function <a href="inpl.htm#inpl_recov"><span class="selectable_label">Natural Security Recover</span></a>,
+                                you can enter Option <code>O</code> in this field to reset the owner
+                                information of specified objects. 
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a name="inpl_intro_DDM_Name"></a> <span class="selectable_label">DDM
+                     Name</span> 
+               </td> 
+                       
+                         
+                       
+                        
+               <td> 
+                  
+                  <p>The name of a DDM or a range of names.</p> 
+                            
+                  <p>If you enter a value that ends with an asterisk (*), each DDM with
+                     a name that starts with the specified value is processed. If only an asterisk
+                     (*) is entered or if this field is empty, all DDMs are processed.
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a name="inpl_intro_Library"></a> <span class="selectable_label">Library</span>
+                           
+               </td> 
+                       
+                         
+                       
+                        
+               <td>The name of a library or a range of names. 
+                  
+                  <p>If you enter a value that ends with an asterisk (*), each library
+                     with a name that starts with the specified value is processed. The library name
+                                is mandatory if <span class="selectable_label">Object Name</span> is specified.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td nowrap> <a name="inpl_intro_Object_Name"></a>
+                   <span class="selectable_label">Object Name</span>  
+               </td> 
+                       
+                        
+               
+                        
+                        
+               <td> 
+                  
+                  <p>The name of a Natural object (except DDMs) or a range of
+                           names.
+                  </p> 
+                            
+                  <p>If the value ends with an asterisk (*), each object with a name
+                                that starts with the specified value is processed.
+                  </p> 
+                            
+                  <p>If this field is empty, all objects contained in the library
+                                specified in the <span class="selectable_label">Library</span> field are processed.
+                  </p> 
+               </td>
+                        
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td nowrap> <a name="inpl_intro_Check_Date"></a>
+                   <span class="selectable_label">Check Date</span> 
+               </td> 
+                        
+                       
+                         
+                        
+                        
+               <td> 
+                  
+                  <p> Specifies whether existing Natural objects and shared resources
+                     are to be replaced depending on their time stamp. 
+                  </p> 
+                            
+                  <p> This parameter has no effect if
+                                <a href="inpl.htm#inpl_intro_Replace"><span class="selectable_label">Replace</span></a>
+                                is set to <code>N</code>. 
+                  </p> 
+                            
+                  <p> Possible settings are: </p> 
+                            
+                  <table border="0" cellpadding="3" margin-top="9pt">
+                     <tbody valign="top">
+                        <tr align="left"> 
+                                       
+                           <td class="titem"> <code>Y</code> 
+                           </td> 
+                                       
+                           <td class="titem">Only objects which are older than the Natural objects or
+                                           shared resources of the same name are replaced. An object is older if it was
+                                           saved or cataloged before the object to be loaded.
+                           </td> 
+                                      
+                        </tr>
+                        <tr align="left"> 
+                                       
+                           <td class="titem"> <code>N</code> 
+                           </td> 
+                                       
+                           <td class="titem">All objects are replaced. This is the default
+                                           setting.
+                           </td> 
+                                      
+                        </tr>
+                     </tbody>
+                  </table> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a name="inpl_intro_Load_Except"></a> <span class="selectable_label">Load
+                     Except</span>  
+               </td>
+                       
+                        
+                         
+                        
+               <td> 
+                  
+                  <p> Specifies whether to exclude Natural objects and shared resources
+                     from processing. 
+                  </p> 
+                            
+                  <p> This parameter does not apply to error messages. </p> 
+                            
+                  <p> Possible settings are: </p> 
+                            
+                  <table border="0" cellpadding="3" margin-top="9pt">
+                     <tbody valign="top">
+                        <tr align="left"> 
+                                       
+                           <td class="titem"> <code>Y</code> 
+                           </td> 
+                                       
+                           <td class="titem"> All Natural objects and shared resources are processed
+                                           except for the objects specified in the fields <span class="selectable_label">DDM Name</span>,
+                                           <span class="selectable_label">Library</span> and/or <span class="selectable_label">Object Name</span>. 
+                           </td> 
+                                      
+                        </tr>
+                        <tr align="left"> 
+                                       
+                           <td class="titem"> <code>N</code> 
+                           </td> 
+                                       
+                           <td class="titem">No exceptions; all Natural objects and shared resources are
+                                           processed. This is the default setting.
+                           </td> 
+                                      
+                        </tr>
+                     </tbody>
+                  </table> 
+                            
+                  <div><strong class="floating-title">Examples of load exceptions:</strong></div> 
+                            
+                  <p class="mini-list"> 
+                                 All libraries except the library ABC are loaded: <br> 
+                                 <span class="selectable_label">Code</span> = <code>L</code> <br> 
+                                 <span class="selectable_label">Library</span> = <code>ABC</code>  
+                               
+                  </p> 
+                            
+                  <p class="mini-list"> 
+                                 All DDMs with a prefix other than XY are loaded: <br> 
+                                 <span class="selectable_label">Code</span> = <code>D</code> <br> 
+                                 <span class="selectable_label">DDM Name</span> = <code>XY*</code>  
+                               
+                  </p> 
+                            
+                  <p class="mini-list"> 
+                                 All objects contained in libraries with a prefix other than
+                                 AB and all DDMs with a prefix other than CD are loaded: <br> 
+                                 <span class="selectable_label">Code</span> = <code>B</code> <br> 
+                                 <span class="selectable_label">Library</span> = <code>AB*</code> <br> 
+                                 <span class="selectable_label">DDM Name</span> = <code>CD*</code>  
+                               
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a name="inpl_intro_Date"></a> <span class="selectable_label">Date</span>
+                        
+               </td>
+                       
+                        
+                        
+                        
+               <td> 
+                  
+                  <p>Restricts processing to Natural objects and shared resources which
+                     were saved or cataloged on or after the date entered in this field. 
+                  </p> 
+                            
+                  <p>The date must be entered in the format
+                                <var>YYYY-MM-DD</var> (<var>YYYY</var> = year,
+                                <var>MM</var> = month, <var>DD</var> =
+                                day).
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a name="inpl_intro_Number"></a> <span class="selectable_label">Number</span>
+                          
+               </td> 
+                       
+                         
+                       
+                        
+               <td> 
+                  
+                  <p>Limits processing of Natural objects and shared resources to a
+                     specified number. All objects are counted which are loaded or scanned according
+                     to the selection criteria specified in the INPL menu. 
+                  </p> 
+                            
+                  <p>If the number of Natural objects processed has reached the value
+                                entered in the <span class="selectable_label">Number</span> field, processing is terminated with
+                                a corresponding message.
+                  </p>
+               </td> 
+                       
+            </tr>
+                   
+                   
+                    
+            <tr> 
+                        
+               <td> <span class="selectable_label">File Type</span> 
+                            
+                  <p>(batch or direct commands only)</p> 
+               </td> 
+                        
+               <td> INPL automatically recognizes the type of the load file such
+                  as binary or portable. However, due to compatibility reasons, the
+                  <code>File type</code> parameter must still be specified when
+                            executing INPL in batch or direct command mode, but it will not be
+                            evaluated.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <span class="selectable_label">Load File</span> 
+               </td> 
+                        
+               <td> The name of the file to be loaded. </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <span class="selectable_label">Report File</span> 
+               </td> 
+                        
+               <td> The name of the file into which the
+                  <a href="inpl.htm#inpl_intro_INPL_Report">INPL report</a> (see below)
+                            is to be written. 
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+          
+      <div><a name="inpl_intro_INPL_Report"></a></div> 
+          
+      <h3> INPL Report </h3> 
+           
+           
+      <p>When the selected INPL function is complete, a corresponding INPL
+               report is written to the file you specified in the <span class="selectable_label">Report
+            File</span> field. If no work file was specified, the report is displayed
+               on a screen.
+      </p> 
+          
+      <div class="noprint">
+         <p><a href="inpl.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="inpl_lib"></a></div> 
+         
+      <h2> 
+             <a name="x35"></a> 
+             <a name="x36"></a><span class="selectable_label">Load Libraries Only</span> 
+      </h2> 
+          
+          
+      <p>This function of the INPL utility is used to load Natural cataloged
+              objects and source objects and shared resources
+              into specified libraries in the Natural system file FNAT or FUSER.
+      </p>
+          
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong> To load libraries </strong></p>
+      <ol class="steps">
+         <li> 
+                   
+                   
+            <p class="instep">In the
+                       INPL menu, enter function code <code>L</code>. You can
+                       specify parameters to be valid during execution of this function:
+            </p> 
+                   
+            <ul> 
+                       
+               <li> 
+                           
+                  <p class="initem"> <a href="inpl.htm#inpl_intro_Replace">Replace</a>
+                               (Y/N)
+                  </p> 
+                          
+               </li> 
+                       
+               <li> 
+                           
+                  <p class="initem"> <a href="inpl.htm#inpl_intro_Load_Except">Load Except</a>
+                               (Y/N)
+                  </p> 
+                          
+               </li> 
+                       
+               <li> 
+                           
+                  <p class="initem"> <a href="inpl.htm#inpl_intro_Library">Library</a> 
+                  </p> 
+                          
+               </li> 
+                       
+               <li> 
+                           
+                  <p class="initem"> <a href="inpl.htm#inpl_intro_Object_Name">Object Name</a>
+                               
+                  </p> 
+                          
+               </li> 
+                       
+               <li> 
+                           
+                  <p class="initem"> <a href="inpl.htm#inpl_intro_Date">Date</a>
+                               (YYYY-MM-DD)
+                  </p> 
+                          
+               </li> 
+                       
+               <li> 
+                           
+                  <p class="initem"> <a href="inpl.htm#inpl_intro_Check_Date">Check Date</a>
+                               (Y/N)
+                  </p> 
+                          
+               </li> 
+                       
+               <li> 
+                           
+                  <p class="initem"> <a href="inpl.htm#inpl_intro_Number">Number</a> 
+                  </p> 
+                          
+               </li> 
+                      
+            </ul> 
+                    
+                   
+            <p class="instep"> For detailed information on these parameters, refer to
+                       <a href="inpl.htm#inpl_intro_Options_Available">Options
+                  Available</a> in the section <cite>Introducing the INPL
+                          Utility</cite>.
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Confirm your entries.</p> 
+                   
+                 
+         </li>
+      </ol> 
+          
+      <p>When the function is complete, a corresponding
+              <a href="inpl.htm#inpl_intro_INPL_Report">INPL report</a> (see the
+              section <cite>Introducing the INPL Utility</cite>) is output.
+      </p> 
+         
+      <div class="noprint">
+         <p><a href="inpl.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="inpl_ddm"></a></div> 
+         
+      <h2> 
+             <a name="x37"></a> 
+             <a name="x38"></a><span class="selectable_label">Load DDMs Only</span> 
+      </h2> 
+          
+          
+      <p>This function of the INPL utility is used to load DDMs into the
+              libraries
+              indicated in the work file.
+      </p> 
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong> To load DDMs </strong></p>
+      <ol class="steps">
+         <li> 
+                   
+                   
+            <p class="instep">In the INPL
+                       menu, enter function code <code>D</code>. You can
+                       specify parameters to be valid during execution of this function:
+            </p> 
+                   
+            <ul> 
+                       
+               <li> 
+                           
+                  <p class="initem"> <a href="inpl.htm#inpl_intro_Replace">Replace</a>
+                               (Y/N)
+                  </p> 
+                          
+               </li> 
+                       
+               <li> 
+                           
+                  <p class="initem"> <a href="inpl.htm#inpl_intro_Load_Except">Load Except</a>
+                               (Y/N)
+                  </p> 
+                          
+               </li> 
+                       
+               <li> 
+                           
+                  <p class="initem"> <a href="inpl.htm#inpl_intro_DDM_Name">DDM Name</a> 
+                  </p> 
+                          
+               </li> 
+                       
+               <li> 
+                           
+                  <p class="initem"> <a href="inpl.htm#inpl_intro_Number">Number</a> 
+                  </p> 
+                          
+               </li> 
+                      
+            </ul> 
+                    
+                   
+            <p class="instep"> For detailed information on these parameters, refer to
+                       <a href="inpl.htm#inpl_intro_Options_Available">Options
+                  Available</a> in the section <cite>Introducing the INPL
+                          Utility</cite>.
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Confirm your entries.</p> 
+                   
+                 
+         </li>
+      </ol> 
+          
+      <p>When the function is complete, a corresponding
+              <a href="inpl.htm#inpl_intro_INPL_Report">INPL report</a> (see the
+              section <cite>Introducing the INPL Utility</cite>) is output.
+      </p> 
+         
+      <div class="noprint">
+         <p><a href="inpl.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="inpl_mess"></a></div> 
+         
+      <h2> 
+             <a name="x39"></a> 
+             <a name="x40"></a><span class="selectable_label">Load Error Messages Only</span> 
+      </h2> 
+          
+          
+      <p>This function of the INPL utility is used to load user-defined error
+              messages or system error messages into specified libraries in the Natural
+              system file FUSER or FNAT respectively.
+      </p> 
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong> To load error messages </strong></p>
+      <ol class="steps">
+         <li> 
+                   
+                   
+            <p class="instep">In
+                       the INPL menu, enter function code <code>E</code>. You
+                       can specify parameters to be valid during execution of this function:
+            </p> 
+                   
+            <ul> 
+                       
+               <li> 
+                           
+                  <p class="initem"> <a href="inpl.htm#inpl_intro_Replace">Replace</a>
+                               (Y/N)
+                  </p> 
+                          
+               </li> 
+                       
+               <li> 
+                           
+                  <p class="initem"> <a href="inpl.htm#inpl_intro_Library">Library</a> 
+                  </p> 
+                          
+               </li> 
+                      
+            </ul> 
+                    
+                   
+            <p class="instep">For detailed information on these parameters, refer to
+                       <a href="inpl.htm#inpl_intro_Options_Available">Options
+                  Available</a> in the section <cite>Introducing the INPL
+                          Utility</cite>.
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Confirm your entries.</p> 
+                   
+                 
+         </li>
+      </ol> 
+          
+      <p>When the function is complete, a corresponding
+              <a href="inpl.htm#inpl_intro_INPL_Report">INPL report</a> (see the
+              section <cite>Introducing the INPL Utility</cite>) is output.
+      </p> 
+         
+      <div class="noprint">
+         <p><a href="inpl.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="inpl_lde"></a></div> 
+         
+      <h2> 
+             <a name="x41"></a> 
+             <a name="x42"></a><span class="selectable_label">Load All Objects</span> 
+      </h2> 
+          
+          
+      <p>This function of the INPL utility is used to load all Natural objects
+              (including error messages and DDMs) and shared resources
+              into the libraries indicated in Work File 1. 
+      </p> 
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong> To load all objects and shared
+                  resources</strong></p>
+      <ol class="steps">
+         <li> 
+                   
+                   
+            <p class="instep">In the INPL
+                       menu, enter function code <code>B</code>. You can
+                       specify parameters to be valid during execution of this function:
+            </p> 
+                   
+            <ul> 
+                       
+               <li> 
+                           
+                  <p class="initem"> <a href="inpl.htm#inpl_intro_Replace">Replace</a>
+                               (Y/N)
+                  </p> 
+                          
+               </li> 
+                       
+               <li> 
+                           
+                  <p class="initem"> <a href="inpl.htm#inpl_intro_Load_Except">Load Except</a>
+                               (Y/N)
+                  </p> 
+                          
+               </li> 
+                       
+               <li> 
+                           
+                  <p class="initem"> <a href="inpl.htm#inpl_intro_DDM_Name">DDM Name</a> 
+                  </p> 
+                          
+               </li> 
+                       
+               <li> 
+                           
+                  <p class="initem"> <a href="inpl.htm#inpl_intro_Library">Library</a> 
+                  </p> 
+                          
+               </li> 
+                       
+               <li> 
+                           
+                  <p class="initem"> <a href="inpl.htm#inpl_intro_Object_Name">Object Name</a>
+                               
+                  </p> 
+                          
+               </li> 
+                       
+               <li> 
+                           
+                  <p class="initem"> <a href="inpl.htm#inpl_intro_Date">Date</a>
+                               (YYYY-MM-DD)
+                  </p> 
+                          
+               </li> 
+                       
+               <li> 
+                           
+                  <p class="initem"> <a href="inpl.htm#inpl_intro_Check_Date">Check Date</a>
+                               (Y/N)
+                  </p> 
+                          
+               </li> 
+                       
+               <li> 
+                           
+                  <p class="initem"> <a href="inpl.htm#inpl_intro_Number">Number</a> 
+                  </p> 
+                          
+               </li> 
+                      
+            </ul> 
+                    
+                   
+            <p class="instep">For detailed information on these parameters, refer to
+                       <a href="inpl.htm#inpl_intro_Options_Available">Options
+                  Available</a> in the section <cite>Introducing the INPL
+                          Utility</cite>.
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Confirm your entries.</p> 
+                   
+                 
+         </li>
+      </ol> 
+          
+      <p>When the function is complete, a corresponding
+              <a href="inpl.htm#inpl_intro_INPL_Report">INPL report</a> (see the
+              section <cite>Introducing the INPL Utility</cite>) is output.
+      </p> 
+         
+      <div class="noprint">
+         <p><a href="inpl.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="inpl_scan"></a></div> 
+         
+      <h2> 
+             <a name="x43"></a> 
+             <a name="x44"></a><span class="selectable_label">Scan INPL File</span> 
+      </h2> 
+          
+          
+      <p>This function of the INPL utility is used to scan the contents of the
+              file assigned
+              to Work File 1.
+      </p> 
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong> To scan an INPL File </strong></p>
+      <ol class="steps">
+         <li> 
+                   
+                   
+            <p class="instep">In the INPL
+                       menu, enter function code <code>S</code>. You can
+                       specify parameters to be valid during execution of this function:
+            </p> 
+                   
+            <ul> 
+                       
+               <li> 
+                           
+                  <p class="initem"> <a href="inpl.htm#inpl_intro_Load_Except">Load Except</a>
+                               (Y/N)
+                  </p> 
+                          
+               </li> 
+                       
+               <li> 
+                           
+                  <p class="initem"> <a href="inpl.htm#inpl_intro_DDM_Name">DDM Name</a> 
+                  </p> 
+                          
+               </li> 
+                       
+               <li> 
+                           
+                  <p class="initem"> <a href="inpl.htm#inpl_intro_Library">Library</a> 
+                  </p> 
+                          
+               </li> 
+                       
+               <li> 
+                           
+                  <p class="initem"> <a href="inpl.htm#inpl_intro_Object_Name">Object Name</a>
+                               
+                  </p> 
+                          
+               </li> 
+                       
+               <li> 
+                           
+                  <p class="initem"> <a href="inpl.htm#inpl_intro_Date">Date</a>
+                               (YYYY-MM-DD)
+                  </p> 
+                          
+               </li> 
+                       
+               <li> 
+                           
+                  <p class="initem"> <a href="inpl.htm#inpl_intro_Number">Number</a> 
+                  </p> 
+                          
+               </li> 
+                      
+            </ul> 
+                    
+                   
+            <p class="instep">For detailed information on these parameters, refer to
+                       <a href="inpl.htm#inpl_intro_Options_Available">Options
+                  Available</a> in the section <cite>Introducing the INPL
+                          Utility</cite>.
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Confirm your entries.</p> 
+                   
+                 
+         </li>
+      </ol> 
+          
+      <p>When the function is complete, a corresponding
+              <a href="inpl.htm#inpl_intro_INPL_Report">INPL report</a> (see the
+              section <cite>Introducing the INPL Utility</cite>) is output.
+      </p> 
+         
+      <div class="noprint">
+         <p><a href="inpl.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="inpl_recov"></a></div> 
+         
+      <h2> 
+             <a name="x45"></a> 
+             <a name="x46"></a><span class="selectable_label">Natural Security Recover</span>
+             
+      </h2> 
+          
+      <p>This function of the INPL utility is used to force initialization of the
+              Natural Security environment.
+      </p> 
+          
+      <p>The following options are provided:</p>
+          
+      <ul>
+         <li>
+            <p class="initem"><a href="inpl.htm#inpl_recov_Reset_Environment">Reset Environment</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="inpl.htm#inpl_recov_Remove_Owners">Remove Owners</a></p>
+         </li>
+      </ul>
+      <div><a name="inpl_recov_Reset_Environment"></a></div> 
+          
+      <h3> Reset Environment </h3> 
+           
+           
+      <table border="0" cellspacing="0" width="80%" class="warning">
+         <tr>
+            <td valign="top" width="36"><img src="../graphics/warning.png" alt="" width="28" height="28"></td>
+            <td valign="top"><strong>Warning:<br> Execution of this function will reset the user profile DBA and
+                        the library profile SYSSEC as well as the link between these two objects as
+                        they were after the initial installation; all other links to the library SYSSEC
+                        will be canceled. Other Natural Security profiles and links will not be
+                        modified. Contact Software AG technical support for further
+                        information.</strong></td>
+         </tr>
+      </table> 
+           
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong> To reset the environment </strong></p>
+      <ul>
+         <li> 
+                    
+                    
+            <p class="instep">In
+                        the INPL menu, enter function code <code>R</code>.
+            </p> 
+                    
+                  
+         </li>
+      </ul> 
+          
+      <div><a name="inpl_recov_Remove_Owners"></a></div> 
+          
+      <h3> Remove Owners </h3> 
+           
+           
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong> To remove owners </strong></p>
+      <ol class="steps">
+         <li> 
+                    
+                    
+            <p class="instep">In the INPL menu, enter function code <code>R</code>
+                        and enter an <code>O</code> in the <span class="selectable_label">Replace</span> field to reset
+                        the owner information of specified objects.
+            </p> 
+                    
+                  
+         </li>
+      </ol> 
+          
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="inpl.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../utis/inpl.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/utis/inpl.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="utis-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="ftouch.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="term.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

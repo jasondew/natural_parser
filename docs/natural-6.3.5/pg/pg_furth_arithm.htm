@@ -1,0 +1,3078 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Rules for Arithmetic Assignment</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="pg_furth_arithm"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_furth_arithm.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_furth_arithm.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_furth-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_furth_lcc.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_furth_3glsub.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Programming Guide&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x370"></a> Rules for Arithmetic Assignment 
+         </h1>
+      </div> 
+         
+         
+      <p>This document covers the following topics:</p>
+         
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_furth_arithm.htm#Field_Init">Field Initialization</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_arithm.htm#Data_Transfer">Data Transfer</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_arithm.htm#Field_Trunc_Round">Field Truncation and Field Rounding</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_arithm.htm#AO_Result_FL">Result Format and Length in Arithmetic Operations</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_arithm.htm#AO_FP_Numbers">Arithmetic Operations with Floating-Point Numbers</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_arithm.htm#AO_DT">Arithmetic Operations with Date and Time</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_arithm.htm#Perf_Con_MFE">Performance Considerations for Mixed Format Expressions</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_arithm.htm#AO_Prec_Results">Precision of Results for Arithmetic Operations</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_arithm.htm#AO_Err_Cond">Error Conditions in Arithmetic Operations</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_arithm.htm#Array_Processing">Processing of Arrays</a></p>
+         </li>
+      </ul> 
+        
+      <hr> 
+        
+      <div><a name="Field_Init"></a></div> 
+         
+      <h2> 
+             <a name="x371"></a> Field Initialization 
+      </h2> 
+          
+          
+      <p>A field (user-defined variable or database field) which is to be used as
+              an operand in an arithmetic operation must be defined with one of the following
+              formats:
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th colspan="2"> Format</th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> N </td> 
+                       
+               <td>Numeric unpacked</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> P </td> 
+                       
+               <td>Packed numeric</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> I </td> 
+                       
+               <td>Integer</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> F </td> 
+                       
+               <td>Floating point</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> D </td> 
+                       
+               <td>Date</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> T </td> 
+                       
+               <td>Time</td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p class="note"><strong>Note:</strong><br>For reporting mode: A field which is to be used as an operand in an
+              arithmetic operation must have been previously defined. A user-defined variable
+              or database field used as a result field in an arithmetic operation need not
+              have been previously defined.
+      </p> 
+          
+      <p>All user-defined variables and all database fields defined in a
+              <a href="../sm/defineda.htm"><code>DEFINE DATA</code></a>
+              statement are initialized to the appropriate zero or blank value when the
+              program is invoked for execution.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_furth_arithm.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Data_Transfer"></a></div> 
+         
+      <h2> 
+             <a name="x372"></a>Data Transfer
+      </h2> 
+          
+          
+      <p>Data transfer is performed with a <a href="../sm/move.htm"><code>MOVE</code></a> or
+              <a href="../sm/compute.htm"><code>COMPUTE</code></a> statement.
+              The following table summarizes the data transfer compatibility of the
+              <a href="../sm/synsym.htm#statem_poss_form">formats</a> an operand
+              may take. 
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="7%">
+            <col width="7%">
+            <col width="7%">
+            <col width="7%">
+            <col width="7%">
+            <col width="7%">
+            <col width="7%">
+            <col width="6%">
+            <col width="7%">
+            <col width="7%">
+            <col width="7%">
+            <col width="7%">
+            <col width="7%">
+            <col width="7%">
+         </colgroup> 
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+                
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th rowspan="2" align="left">Sending Field
+                  Format
+               </th> 
+                       
+               <th colspan="13" align="center">
+                  Receiving Field Format
+               </th> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th align="center" nowrap>N or P</th> 
+                       
+               <th align="center">A</th> 
+                       
+               <th align="center">U</th> 
+                       
+               <th align="center">B<var>n</var>
+                   (<var>n</var>&lt;5)
+               </th> 
+                       
+               <th align="center">B<var>n</var>
+                   (<var>n</var>&gt;4)
+               </th> 
+                       
+               <th align="center">I</th> 
+                       
+               <th align="center">L</th> 
+                       
+               <th align="center">C</th> 
+                       
+               <th align="center">D</th> 
+                       
+               <th align="center">T</th> 
+                       
+               <th align="center">F</th> 
+                       
+               <th align="center">G</th> 
+                       
+               <th align="center">O</th> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th align="left">N or P</th> 
+                       
+               <td align="center">Y</td> 
+                       
+               <td align="center">[ <a href="pg_furth_arithm.htm#bin2alpha">2</a>
+                    ]
+               </td> 
+                       
+               <td align="center">[ <a href="pg_furth_arithm.htm#bin2u">14</a>
+                     ]
+               </td> 
+                       
+               <td align="center">[ <a href="pg_furth_arithm.htm#npif2bin">3</a>
+                    ]
+               </td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">Y</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">Y</td> 
+                       
+               <td align="center">Y</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th align="left">A</th> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">Y</td> 
+                       
+               <td align="center">[ <a href="pg_furth_arithm.htm#alpha2u">13</a>
+                     ]
+               </td> 
+                       
+               <td align="center">[ <a href="pg_furth_arithm.htm#alpha2bin">1</a>
+                    ]
+               </td> 
+                       
+               <td align="center">[ <a href="pg_furth_arithm.htm#alpha2bin">1</a>
+                    ]
+               </td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th align="left">U</th> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">[ <a href="pg_furth_arithm.htm#u2alpha">11</a>
+                     ]
+               </td> 
+                       
+               <td align="center">Y</td> 
+                       
+               <td align="center">[ <a href="pg_furth_arithm.htm#u2bin">12</a>
+                     ]
+               </td> 
+                       
+               <td align="center">[ <a href="pg_furth_arithm.htm#u2bin">12</a>
+                     ]
+               </td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th align="left">B<var>n</var>
+                   (<var>n</var>&lt;5)
+               </th> 
+                       
+               <td align="center">[ <a href="pg_furth_arithm.htm#bin2num">4</a>
+                    ]
+               </td> 
+                       
+               <td align="center">[ <a href="pg_furth_arithm.htm#bin2alpha">2</a>
+                    ]
+               </td> 
+                       
+               <td align="center">[ <a href="pg_furth_arithm.htm#bin2u">14</a>
+                     ]
+               </td> 
+                       
+               <td align="center">[ <a href="pg_furth_arithm.htm#bin2bin">5</a>
+                    ]
+               </td> 
+                       
+               <td align="center">[ <a href="pg_furth_arithm.htm#bin2bin">5</a>
+                    ]
+               </td> 
+                       
+               <td align="center">Y</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">Y</td> 
+                       
+               <td align="center">Y</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th align="left">B<var>n</var>
+                   (<var>n</var>&gt;4)
+               </th> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">[ <a href="pg_furth_arithm.htm#bin2alpha">6</a>
+                    ]
+               </td> 
+                       
+               <td align="center">[ <a href="pg_furth_arithm.htm#bingtfour2u">15</a>
+                     ]
+               </td> 
+                       
+               <td align="center">[ <a href="pg_furth_arithm.htm#bin2bin">5</a>
+                    ]
+               </td> 
+                       
+               <td align="center">[ <a href="pg_furth_arithm.htm#bin2bin">5</a>
+                    ]
+               </td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th align="left">I</th> 
+                       
+               <td align="center">Y</td> 
+                       
+               <td align="center">[ <a href="pg_furth_arithm.htm#bin2alpha">2</a>
+                    ]
+               </td> 
+                       
+               <td align="center">[ <a href="pg_furth_arithm.htm#bin2u">14</a>
+                     ]
+               </td> 
+                       
+               <td align="center">[ <a href="pg_furth_arithm.htm#npif2bin">3</a>
+                    ]
+               </td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">Y</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">Y</td> 
+                       
+               <td align="center">Y</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th align="left">L</th> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">[ <a href="pg_furth_arithm.htm#ldtf2a">9</a>
+                    ]
+               </td> 
+                       
+               <td align="center">[ <a href="pg_furth_arithm.htm#ldtf2u">16</a>
+                     ]
+               </td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">Y</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th align="left">C</th> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">Y</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th align="left">D</th> 
+                       
+               <td align="center">Y</td> 
+                       
+               <td align="center">[ <a href="pg_furth_arithm.htm#ldtf2a">9</a>
+                    ]
+               </td> 
+                       
+               <td align="center">[ <a href="pg_furth_arithm.htm#ldtf2u">16</a>
+                     ]
+               </td> 
+                       
+               <td align="center">Y</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">Y</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">Y</td> 
+                       
+               <td align="center">[<a href="pg_furth_arithm.htm#d2t">7</a>]
+               </td> 
+                       
+               <td align="center">Y</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th align="left">T</th> 
+                       
+               <td align="center">Y</td> 
+                       
+               <td align="center">[ <a href="pg_furth_arithm.htm#ldtf2a">9</a>
+                    ]
+               </td> 
+                       
+               <td align="center">[ <a href="pg_furth_arithm.htm#ldtf2u">16</a>
+                     ]
+               </td> 
+                       
+               <td align="center">Y</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">Y</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">[ <a href="pg_furth_arithm.htm#t2d">8</a> ]
+               </td>
+                       
+                       
+               <td align="center">Y</td> 
+                       
+               <td align="center">Y</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th align="left">F</th> 
+                       
+               <td align="center">Y</td> 
+                       
+               <td align="center" nowrap>[ <a href="pg_furth_arithm.htm#ldtf2a">9</a> ] [ <a href="pg_furth_arithm.htm#f2u">10</a>
+                           ]
+               </td> 
+                       
+               <td align="center" nowrap>[ <a href="pg_furth_arithm.htm#f2u">10</a> ] [ <a href="pg_furth_arithm.htm#ldtf2u">16</a>
+                           ]
+               </td> 
+                       
+               <td align="center">[ <a href="pg_furth_arithm.htm#npif2bin">3</a>
+                    ]
+               </td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">Y</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">Y</td> 
+                       
+               <td align="center">Y</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th align="left">G</th> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">Y</td> 
+                       
+               <td align="center">-</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th align="left">O</th> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">Y</td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>Where:</p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th> Y </th> 
+                       
+               <td>indicates data transfer compatibility.</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> - </th> 
+                       
+               <td>indicates data transfer incompatibility.</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> [ ] </th> 
+                       
+               <td>brackets [ ] refer to the corresponding rule for data transfer
+                  given below.
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+         
+      <div><a name="Data_Conversion"></a></div> 
+          
+      <h3> 
+              <a name="x373"></a> 
+              <a name="x374"></a> Data Conversion 
+      </h3> 
+           
+           
+      <p>The following rules apply to converting data values:</p> 
+           
+      <ol> 
+               
+         <li><a name="alpha2bin"></a> 
+                    
+                   
+            <p class="initem"><strong>Alphanumeric to binary:</strong><br> The value will be moved byte by byte from left to right. The result
+                       may be truncated or padded with trailing blank characters depending on the
+                       length defined and the number of bytes specified.
+            </p> 
+                  
+         </li> 
+               
+         <li><a name="bin2alpha"></a> 
+                    
+                   
+            <p class="initem"><strong>(N,P,I) and binary (length 1-4) to alphanumeric:</strong><br> The value will be converted to unpacked form and moved into the
+                       alphanumeric field left justified, i.e., leading zeros will be suppressed and
+                       the field will be filled with trailing blank characters. For negative numeric
+                       values, the sign will be converted to the hexadecimal notation
+                       <code>D<var>x</var></code>. Any decimal point in the numeric
+                       value will be ignored. All digits before and after the decimal point will be
+                       treated as one integer value.
+            </p> 
+                  
+         </li> 
+               
+         <li><a name="npif2bin"></a> 
+                    
+                   
+            <p class="initem"><strong>(N,P,I,F) to binary (1-4 bytes):</strong><br> The numeric value will be converted to binary (4 bytes). Any decimal
+                       point in the numeric value will be ignored (the digits of the value before and
+                       after the decimal point will be treated as an integer value). The resulting
+                       binary number will be positive or a two's complement of the number depending on
+                       the sign of the value.
+            </p> 
+                  
+         </li> 
+               
+         <li><a name="bin2num"></a> 
+                    
+                   
+            <p class="initem"><strong>Binary (1-4 bytes) to numeric:</strong><br> The value will be converted and assigned to the numeric value right
+                       justified, i.e., with leading zeros. (Binary values of the length 1-3 bytes are
+                       always assumed to have a positive sign. For binary values of 4 bytes, the
+                       leftmost bit determines the sign of the number: 1=negative, 0=positive.) Any
+                       decimal point in the receiving numeric value will be ignored. All digits before
+                       and after the decimal point will be treated as one integer value.
+            </p> 
+                  
+         </li> 
+               
+         <li><a name="bin2bin"></a> 
+                    
+                   
+            <p class="initem"><strong>Binary to binary:</strong><br> The value will be moved from right to left byte by byte. Leading
+                       binary zeros will be inserted into the receiving field.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                    
+                   
+            <p class="initem"><strong>Binary (&gt;4 bytes) to alphanumeric:</strong><br> The value will be moved byte by byte from left to right. The result
+                       may be truncated or padded with trailing blanks depending on the length defined
+                       and the number of bytes specified.
+            </p> 
+                  
+         </li> 
+               
+         <li><a name="d2t"></a> 
+                    
+                   
+            <p class="initem"><strong>Date (D) to time (T):</strong><br> If date is moved to time, it is converted to time assuming time
+                       00:00:00:0.
+            </p> 
+                  
+         </li> 
+               
+         <li><a name="t2d"></a> 
+                    
+                   
+            <p class="initem"><strong>Time (T) to date (D):</strong><br> If time is moved to date, the time information is truncated, leaving
+                       only the date information.
+            </p> 
+                  
+         </li> 
+               
+         <li><a name="ldtf2a"></a> 
+                    
+                   
+            <p class="initem"><strong>L,D,T,F to A:</strong><br> The values are converted to display form and are assigned left
+                       justified.
+            </p> 
+                  
+         </li> 
+               
+         <li><a name="f2u"></a> 
+                    
+                   
+            <p class="initem"><strong>F:</strong><br>If F is assigned to an alphanumeric or Unicode field which is too
+                       short, the mantissa is reduced accordingly.
+            </p> 
+                  
+         </li> 
+               
+         <li><a name="u2alpha"></a> 
+                    
+                   
+            <p class="initem"><strong>Unicode to alphanumeric:</strong><br> The Unicode value will be converted to alphanumeric character codes
+                       according to the default code page (value of the system variable
+                       <a href="../vari/sysenv.htm#CODEPAGE"><code>*CODEPAGE</code></a>)
+                       using the International Components for Unicode (ICU) library. The result may be
+                       truncated or padded with trailing blank characters, depending on the length
+                       defined and the number of bytes specified. 
+            </p>
+                   
+                  
+         </li> 
+               
+         <li><a name="u2bin"></a> 
+                    
+                   
+            <p class="initem"><strong>Unicode to binary:</strong><br> The value will be moved code unit by code unit from left to right.
+                       The result may be truncated or padded with trailing blank characters, depending
+                       on the length defined and the number of bytes specified. The length of the
+                       receiving binary field must be even.
+            </p> 
+                  
+         </li> 
+               
+         <li><a name="alpha2u"></a> 
+                    
+                   
+            <p class="initem"><strong>Alphanumeric to Unicode:</strong><br> The alphanumeric value will be converted from the default code page
+                       to a Unicode value using the International Components for Unicode (ICU)
+                       library. The result may be truncated or padded with trailing blank characters,
+                       depending on the length defined and the number of code units specified.
+            </p> 
+                  
+         </li> 
+               
+         <li><a name="bin2u"></a> 
+                    
+                   
+            <p class="initem"><strong>(N,P,I) and binary (length 1-4) to Unicode:</strong><br> The value will be converted to unpacked form from which an
+                       alphanumeric value will be obtained by suppression of leading zeros. For
+                       negative numeric values, the sign will be converted to the hexadecimal notation
+                       <code>D<var>x</var></code>. Any decimal point in the numeric
+                       value will be ignored. All digits before and after the decimal point will be
+                       treated as one integer value. The resulting value will be converted from
+                       alphanumeric to Unicode. The result may be truncated or padded with trailing
+                       blank characters, depending on the length defined and the number of code units
+                       specified.
+            </p> 
+                  
+         </li> 
+               
+         <li><a name="bingtfour2u"></a> 
+                    
+                   
+            <p class="initem"><strong>Binary (&gt;4 bytes) to Unicode:</strong><br> The value will be moved byte by byte from left to right. The result
+                       may be truncated or padded with trailing blanks, depending on the length
+                       defined and the number of bytes specified. The length of the sending binary
+                       field must be even.
+            </p> 
+                  
+         </li> 
+               
+         <li><a name="ldtf2u"></a> 
+                    
+                   
+            <p class="initem"><strong>L,D,T,F to U:</strong><br> The values are converted to an alphanumeric display form. The
+                       resulting value will be converted from alphanumeric to Unicode and assigned
+                       left justified.
+            </p> 
+                  
+         </li> 
+              
+      </ol> 
+           
+      <p>If source and target format are identical, the result may be truncated
+               or padded with trailing blank characters (format A and U) or leading binary
+               zeros (format B) depending on the length defined and the number of bytes
+               (format A and B) or code units (format U) specified.
+      </p> 
+           
+      <p>See also <a href="pg_defi_ldvfus.htm#pg_defi_ldvfus">Using Dynamic
+            Variables</a>.
+      </p> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_furth_arithm.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Field_Trunc_Round"></a></div> 
+         
+      <h2> 
+             <a name="x375"></a> 
+             <a name="x376"></a> 
+             <a name="x377"></a> 
+             <a name="x378"></a> Field Truncation and Field Rounding 
+      </h2> 
+          
+          
+      <p>The following rules apply to field truncation and rounding:</p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">High-order numeric field truncation is allowed only when the digits to
+                      be truncated are leading zeros. Digits following an expressed or implied
+                      decimal point may be truncated.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Trailing positions of an alphanumeric field may be truncated.</p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">If the option <code>ROUNDED</code> is specified, the last position of
+                      the result will be rounded up if the first truncated decimal position of the
+                      value being assigned contains a value greater than or equal to 5. For the
+                      result precision of a division, see also <a href="pg_furth_arithm.htm#AO_Prec_Results">Precision of Results for Arithmetic
+                  Operations</a>.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_furth_arithm.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="AO_Result_FL"></a></div> 
+         
+      <h2> 
+             <a name="x379"></a> Result Format and Length in Arithmetic Operations 
+      </h2> 
+          
+          
+      <p>The following table shows the format and length of the result of an
+              arithmetic operation:
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+                
+                 
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th>&nbsp;</th> 
+                       
+               <th> I1 </th> 
+                       
+               <th> I2 </th> 
+                       
+               <th> I4 </th> 
+                       
+               <th> N or P </th> 
+                       
+               <th> F4 </th> 
+                       
+               <th> F8 </th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th> I1 </th> 
+                       
+               <td>I1</td> 
+                       
+               <td>I2</td> 
+                       
+               <td>I4</td> 
+                       
+               <td>P*</td> 
+                       
+               <td>F4</td> 
+                       
+               <td>F8</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> I2 </th> 
+                       
+               <td>I2</td> 
+                       
+               <td>I2</td> 
+                       
+               <td>I4</td> 
+                       
+               <td>P*</td> 
+                       
+               <td>F4</td> 
+                       
+               <td>F8</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> I4 </th> 
+                       
+               <td>I4</td> 
+                       
+               <td>I4</td> 
+                       
+               <td>I4</td> 
+                       
+               <td>P*</td> 
+                       
+               <td>F4</td> 
+                       
+               <td>F8</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> N or P </th> 
+                       
+               <td>P*</td> 
+                       
+               <td>P*</td> 
+                       
+               <td>P*</td> 
+                       
+               <td>P*</td> 
+                       
+               <td>F4</td> 
+                       
+               <td>F8</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> F4 </th> 
+                       
+               <td>F4</td> 
+                       
+               <td>F4</td> 
+                       
+               <td>F4</td> 
+                       
+               <td>F4</td> 
+                       
+               <td>F4</td> 
+                       
+               <td>F8</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> F8 </th> 
+                       
+               <td>F8</td> 
+                       
+               <td>F8</td> 
+                       
+               <td>F8</td> 
+                       
+               <td>F8</td> 
+                       
+               <td>F8</td> 
+                       
+               <td>F8</td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>On a mainframe computer, format/length F8 is used instead of F4 for
+              improved precision of the results of an arithmetic operation.
+      </p> 
+          
+      <p>P* is determined from the integer length and precision of the operands
+              individually for each operation, as shown under
+              <a href="pg_furth_arithm.htm#AO_Prec_Results">Precision of Results for
+            Arithmetic Operations</a>.
+      </p> 
+          
+      <p>The following decimal integer lengths and possible values are applicable
+              for format I:
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th> Format/Length </th> 
+                       
+               <th> Decimal Integer Length </th> 
+                       
+               <th> Possible Values </th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td>I1</td> 
+                       
+               <td>3</td> 
+                       
+               <td>-128 to 127</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>I2</td> 
+                       
+               <td>5</td> 
+                       
+               <td>-32 768 to 32 767</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>I4</td> 
+                       
+               <td>10</td> 
+                       
+               <td>-2 147 483 648 to 2 147 483 647</td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_furth_arithm.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="AO_FP_Numbers"></a></div> 
+         
+      <h2> 
+             <a name="x380"></a> Arithmetic Operations with Floating-Point Numbers 
+      </h2> 
+          
+          
+      <p>The following topics are covered below:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_furth_arithm.htm#gen_cons">General Considerations</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_arithm.htm#fp_number_prec">Precision of Floating-Point Numbers</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_arithm.htm#fp_number_conv">Conversion to Floating-Point Representation</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_arithm.htm#platform_dep">Platform Dependency</a></p>
+         </li>
+      </ul> 
+          
+         
+      <div><a name="gen_cons"></a></div> 
+          
+      <h3> General Considerations </h3> 
+           
+           
+      <p>Floating-point numbers (format F) are represented as a sum of powers of
+               two (as are integer numbers (format I)), whereas unpacked and packed numbers
+               (formats N and P) are represented as a sum of powers of ten.
+      </p> 
+           
+      <p>In unpacked or packed numbers, the position of the decimal point is
+               fixed. In floating-point numbers, however, the position of the decimal point
+               (as the name indicates) is "floating", that is, its position is
+               not fixed, but depends on the actual value.
+      </p> 
+           
+      <p>Floating-point numbers are essential for the computing of trigonometric
+               functions or <a href="../func/func_math.htm">mathematical
+                  functions</a> such as sinus or logarithm.
+      </p> 
+           
+          
+         
+      <div><a name="fp_number_prec"></a></div> 
+          
+      <h3> Precision of Floating-Point Numbers </h3> 
+           
+           
+      <p>Due to the nature of floating-point numbers, their precision is
+               limited:
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">For a variable of format/length F4, the precision is limited to
+                       approximately 7 digits.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">For a variable of format/length F8, the precision is limited to
+                       approximately 15
+                       digits.
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>Values which have more significant digits cannot be represented exactly
+               as a floating-point number. No matter how many additional digits there are
+               before or after the decimal point, a floating-point number can cover only the
+               leading 7 or 15
+               digits respectively.
+      </p> 
+           
+      <p>An integer value can only be represented exactly in a variable of
+               format/length F4 if its absolute value does not exceed 2
+               <sup>23</sup>  -1.
+      </p> 
+           
+          
+         
+      <div><a name="fp_number_conv"></a></div> 
+          
+      <h3> Conversion to Floating-Point Representation </h3> 
+           
+           
+      <p>When an alphanumeric, unpacked numeric or packed numeric value is
+               converted to floating-point format (for example, in an assignment operation),
+               the representation has to be changed, that is, a sum of powers of ten has to be
+               converted to a sum of powers of two.
+      </p> 
+           
+      <p>Consequently, only numbers that are representable as a finite sum of
+               powers of two can be represented exactly; all other numbers can only be
+               represented approximately.
+      </p> 
+           
+      <h4 class="floating-title"> Examples: </h4> 
+           
+      <p>This number has an exact floating-point representation:</p> 
+           <pre class="verbatim">
+ 1.25 = 2<sup>0</sup> + 2<sup>-2</sup>
+</pre> 
+           <p>This number is a periodic floating-point number without an exact
+               representation:
+      </p> 
+           <pre class="verbatim">
+ 1.2 = 2<sup>0</sup> + 2<sup>-3</sup> + 2<sup>-4</sup> + 2<sup>-7</sup> + 2<sup>-8</sup> + 2<sup>-11</sup> + 2<sup>-12</sup> + ...
+</pre> 
+           <p>Thus, the conversion of alphanumeric, unpacked numeric or packed
+               numeric values to floating-point values, and vice versa, can introduce small
+               errors.
+      </p> 
+            
+           
+          
+         
+      <div><a name="platform_dep"></a></div> 
+          
+      <h3> Platform Dependency </h3> 
+           
+           
+      <p>Because of different hardware architecture, the representation of
+               floating-point numbers varies according to platforms. This explains why the
+               same application, when run on different platforms, may return slightly
+               different results when floating-point arithmetics are involved. The respective
+               representation also determines the range of possible values for floating-point
+               variables, which is (approximately) 
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">&plusmn;1.17 * 10<sup>-38</sup> to &plusmn;3.40 * 10<sup>38</sup> for F4
+                       variables,
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">&plusmn;2.22 * 10<sup>-308</sup> to &plusmn;1.79 * 10<sup>308</sup> for F8
+                       variables.
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p class="note"><strong>Note:</strong><br> The representation used by your pocket calculator may also be
+               different from the one used by your computer - which explains why results for
+               the same computation may differ.
+      </p> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_furth_arithm.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="AO_DT"></a></div> 
+         
+      <h2> 
+             <a name="x381"></a> 
+             <a name="x382"></a>Arithmetic Operations with Date and Time 
+      </h2> 
+          
+          
+      <p>With formats D (date) and T (time), only addition, subtraction,
+              multiplication and division are allowed. Multiplication and division are
+              allowed on intermediate results of additions and subtractions only.
+      </p> 
+          
+      <p>Date/time values can be added to/subtracted from one another; or integer
+              values (no decimal digits) can be added to/subtracted from date/time values.
+              Such integer values can be contained in fields of formats N, P, I, D, or T.
+      </p>
+          
+          
+      <p>The intermediate results of such an addition or subtraction may be used
+              as a multiplicand or dividend in a subsequent operation.
+      </p> 
+          
+      <p>An integer value added to/subtracted from a date value is assumed to be
+              in days. An integer value added to/subtracted from a time value is assumed to
+              be in tenths of seconds.
+      </p> 
+          
+      <p>For arithmetic operations with date and time, certain restrictions
+              apply, which are due to the Natural's internal handling of arithmetic
+              operations with date and time, as explained below.
+      </p> 
+          
+      <p>Internally, Natural handles an arithmetic operation with date/time
+              variables as follows:
+      </p> 
+           
+           
+      <table border="0" class="syntax" cellpadding="3">  
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td nowrap> <code class="keyword">COMPUTE</code>
+                          <var>result-field</var> = <var>operand1</var>
+                           +/- <var>operand2</var> 
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>The above statement is resolved as:</p> 
+          
+      <ol> 
+              
+         <li> 
+                  
+            <p class="initem"><code> <var>intermediate-result</var> =
+                         <var>operand1</var> +/-
+                         <var>operand2</var></code></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"><code> <var>result-field</var> =
+                         <var>intermediate-result</var></code></p> 
+                 
+         </li> 
+             
+      </ol> 
+          
+      <p>That is, in a first step Natural computes the result of the
+              addition/subtraction, and in a second step assigns this result to the result
+              field.
+      </p> 
+          
+      <p>More complex arithmetic operations are resolved following the same
+              pattern:
+      </p> 
+           
+           
+      <table border="0" class="syntax" cellpadding="3">  
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td nowrap> <code class="keyword">COMPUTE</code>
+                          <var>result-field</var> = <var>operand1</var>
+                           +/- <var>operand2</var> +/- <var>operand3</var>
+                           +/- <var>operand4</var> 
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>The above statement is resolved as:</p> 
+          
+      <ol> 
+              
+         <li> 
+                  
+            <p class="initem"> <code> <var>intermediate-result1</var> =
+                         <var>operand1</var> +/-
+                         <var>operand2</var></code></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <code> <var>intermediate-result2</var> =
+                         <var>intermediate-result1</var> +/-
+                         <var>operand3</var></code></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <code> <var>intermediate-result3</var> =
+                         <var>intermediate-result2</var> +/-
+                         <var>operand4</var></code></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <code> <var>result-field</var> =
+                         <var>intermediate-result3</var></code></p> 
+                 
+         </li> 
+             
+      </ol> 
+          
+      <p>The resolution of multiplication and division operations is similar to
+              the resolution for addition and subtraction.
+      </p> 
+          
+      <p>The internal format of such an
+              <var>intermediate-result</var> depends on the formats of the
+              operands, as shown in the tables below.
+      </p> 
+          
+      <h4 class="floating-title">Addition</h4> 
+          
+      <p>The following table shows the format of the intermediate result of an
+              addition (<var>intermediate-result</var> =
+              <var>operand1</var> + <var>operand2</var>):
+      </p>
+          
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="32%">
+            <col width="32%">
+            <col width="32%">
+         </colgroup> 
+               
+                
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th>Format of <var>operand1</var> 
+               </th> 
+                       
+               <th>Format of <var>operand2</var> 
+               </th> 
+                       
+               <th>Format of <var>intermediate-result</var>
+                           
+               </th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> D </td> 
+                       
+               <td> D </td> 
+                       
+               <td> Di </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> D </td> 
+                       
+               <td> T </td> 
+                       
+               <td> T </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> D </td> 
+                       
+               <td> Di, Ti, N, P, I </td> 
+                       
+               <td> D </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> T </td> 
+                       
+               <td> D, T, Di, Ti, N, P, I </td> 
+                       
+               <td> T </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> Di, Ti, N, P, I </td> 
+                       
+               <td> D </td> 
+                       
+               <td> D </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> Di, Ti, N, P, I </td> 
+                       
+               <td> T </td> 
+                       
+               <td> T </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> Di, N, P, I </td> 
+                       
+               <td> Di </td> 
+                       
+               <td> Di </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> Ti, N, P, I </td> 
+                       
+               <td> Ti </td> 
+                       
+               <td> Ti </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> Di </td> 
+                       
+               <td> Ti, N, P, I </td> 
+                       
+               <td> Di </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> Ti </td> 
+                       
+               <td> Di, N, P, I </td> 
+                       
+               <td> Ti </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <h4 class="floating-title">Subtraction</h4> 
+          
+      <p>The following table shows the format of the intermediate result of a
+              subtraction (<var>intermediate-result</var> =
+              <var>operand1</var> - <var>operand2</var>):
+      </p>
+          
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="32%">
+            <col width="32%">
+            <col width="32%">
+         </colgroup> 
+               
+                
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th>Format of <var>operand1</var> 
+               </th> 
+                       
+               <th>Format of <var>operand2</var> 
+               </th> 
+                       
+               <th>Format of <var>intermediate-result</var>
+                           
+               </th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> D </td> 
+                       
+               <td> D </td> 
+                       
+               <td> Di </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> D </td> 
+                       
+               <td> T </td> 
+                       
+               <td> Ti </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> D </td> 
+                       
+               <td> Di, Ti, N, P, I </td> 
+                       
+               <td> D </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> T </td> 
+                       
+               <td> D, T </td> 
+                       
+               <td> Ti </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> T </td> 
+                       
+               <td> Di, Ti, N, P, I </td> 
+                       
+               <td> T </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> Di, N, P, I </td> 
+                       
+               <td> D </td> 
+                       
+               <td> Di </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> Di, N, P, I </td> 
+                       
+               <td> T </td> 
+                       
+               <td> Ti </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> Di </td> 
+                       
+               <td> Di, Ti, N, P, I </td> 
+                       
+               <td> Di </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> Ti </td> 
+                       
+               <td> D, T, Di, Ti, N, P, I </td> 
+                       
+               <td> Ti </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> N, P, I </td> 
+                       
+               <td> Di, Ti </td> 
+                       
+               <td> P12 </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <h4 class="floating-title">Multiplication or Division</h4> 
+          
+      <p>The following table shows the format of the intermediate result of a
+              multiplication (<var>intermediate-result</var> =
+              <var>operand1</var> * <var>operand2</var>) or
+              division (<var>intermediate-result</var> =
+              <var>operand1</var> / <var>operand2</var>):
+      </p>
+          
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="32%">
+            <col width="32%">
+            <col width="32%">
+         </colgroup> 
+               
+                
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th>Format of <var>operand1</var> 
+               </th> 
+                       
+               <th>Format of <var>operand2</var> 
+               </th> 
+                       
+               <th>Format of <var>intermediate-result</var>
+                           
+               </th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> D </td> 
+                       
+               <td> D, Di, Ti, N, P, I </td> 
+                       
+               <td> Di </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> D </td> 
+                       
+               <td> T </td> 
+                       
+               <td> Ti </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> T </td> 
+                       
+               <td> D, T, Di, Ti, N, P, I </td> 
+                       
+               <td> Ti </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> Di </td> 
+                       
+               <td> T </td> 
+                       
+               <td> Ti </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> Di </td> 
+                       
+               <td> D, Di, Ti, N, P, I </td> 
+                       
+               <td> Di </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> Ti </td> 
+                       
+               <td> D </td> 
+                       
+               <td> Di </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> Ti </td> 
+                       
+               <td> Di, T, Ti, N, P, I </td> 
+                       
+               <td> Ti </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> N, P, I </td> 
+                       
+               <td> D, Di </td> 
+                       
+               <td> Di </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> N, P, I </td> 
+                       
+               <td> T, Ti </td> 
+                       
+               <td> Ti </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <h4 class="floating-title">Internal Assignments</h4> 
+          
+      <p> Di is a value in internal date format; Ti is a value in internal time
+              format; such values can be used in further arithmetic date/time operations, but
+              they cannot be assigned to a result field of format D (see the assignment table
+              below).
+      </p> 
+          
+      <p>In complex arithmetic operations in which an intermediate result of
+              internal format Di or Ti is used as operand in a further
+              addition/subtraction/multiplication/division, its format is assumed to be D or
+              T respectively.
+      </p> 
+          
+      <p>The following table shows which intermediate results can internally be
+              assigned to which result fields (<var>result-field</var> =
+              <var>intermediate-result</var>).
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="32%">
+            <col width="32%">
+            <col width="32%">
+         </colgroup> 
+               
+                
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th>Format of <var>result-field</var> 
+               </th> 
+                       
+               <th>Format of <var>intermediate-result</var>
+                           
+               </th> 
+                       
+               <th>Assignment possible</th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> D </td> 
+                       
+               <td> D, T </td> 
+                       
+               <td>yes</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> D </td> 
+                       
+               <td> Di, Ti, N, P, I </td> 
+                       
+               <td> no </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> T </td> 
+                       
+               <td> D, T, Di, Ti, N, P, I </td> 
+                       
+               <td>yes</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> N, P, I </td> 
+                       
+               <td> D, T, Di, Ti, N, P, I </td> 
+                       
+               <td>yes</td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>A result field of format D or T must not contain a negative value.</p> 
+          
+      <h4 class="floating-title">Examples 1 and 2 (invalid):</h4> 
+          <pre class="verbatim">
+COMPUTE DATE1 (D) = DATE2 (D) + DATE3 (D)
+COMPUTE DATE1 (D) = DATE2 (D) - DATE3 (D)
+</pre> 
+          <p>These operations are not possible, because the intermediate result of
+              the addition/subtraction would be format D<var>i</var>, and a
+              value of format D<var>i</var> cannot be assigned to a result
+              field of format D.
+      </p> 
+          
+      <h4 class="floating-title"> Examples 3 and 4 (invalid): </h4> 
+          <pre class="verbatim">COMPUTE DATE1 (D) = TIME2 (T) - TIME3 (T)
+COMPUTE DATE1 (D) = DATE2 (D) - TIME3 (T)</pre> 
+          <p>These operations are not possible, because the intermediate result of
+              the addition/subtraction would be format T<var>i</var>, and a
+              value of format T <var>i</var> cannot be assigned to a result
+              field of format D.
+      </p> 
+          
+      <h4 class="floating-title"> Example 5 (valid): </h4> 
+          <pre class="verbatim">COMPUTE DATE1 (D) = DATE2 (D) - DATE3 (D) + TIME3 (T)</pre> 
+          <p>This operation is possible. First, <code>DATE3</code> is subtracted from
+              <code>DATE2</code>, giving an intermediate result of format
+              D<var>i</var>; then, this intermediate result is added to
+              <code>TIME3</code>, giving an intermediate result of format T; finally, this
+              second intermediate result is assigned to the result field
+              <code>DATE1</code>.
+      </p> 
+          
+      <h4 class="floating-title"> Examples 6 and 7 (invalid): </h4> 
+          <pre class="verbatim">COMPUTE DATE1 (D) = DATE2 (D) + DATE3 (D) * 2
+COMPUTE TIME1 (T) = TIME2 (T) - TIME3 (T) / 3</pre> 
+          <p>These operations are not possible, because the attempted
+              multiplication/division is performed with date/time fields and not with
+              intermediate results.
+      </p> 
+          
+      <h4 class="floating-title"> Example 8 (valid): </h4> 
+          <pre class="verbatim">COMPUTE DATE1 (D) = DATE2 (D) + (DATE3(D) - DATE4 (D)) * 2</pre> 
+          <p>This operation is possible. First, <code>DATE4</code> is subtracted from
+              <code>DATE3</code> giving an intermediate result of format Di; then, this
+              intermediate result is multiplied by two giving an intermediate result of
+              format Di; this intermediate result is added to <code>DATE2</code> giving an
+              intermediate result of format D; finally, this third intermediate result is
+              assigned to the result field <code>DATE1</code>.
+      </p> 
+          
+      <p>If a format T value is assigned to a format D field, you must ensure
+              that the time value contains a valid date component.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_furth_arithm.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Perf_Con_MFE"></a></div> 
+         
+      <h2> Performance Considerations for Mixed Format Expressions </h2> 
+          
+          
+      <p>When doing arithmetic operations, the choice of field formats has
+              considerable impact on performance:
+      </p> 
+          
+      <p>For business arithmetic, only fields of format I
+              (integer) should be used, if possible. 
+      </p> 
+           
+          
+      <p>For scientific arithmetic, fields of format F (floating point) should be
+              used, if possible.
+      </p> 
+          
+      <p>In expressions where formats are mixed between numeric (N, P) and
+              floating point (F), a conversion to floating point format is performed. This
+              conversion results in considerable CPU load. Therefore it is recommended to
+              avoid mixed format expressions in arithmetic operations.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_furth_arithm.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="AO_Prec_Results"></a></div> 
+         
+      <h2> 
+             <a name="x383"></a> Precision of Results for Arithmetic Operations
+      </h2> 
+          
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th>Operation</th> 
+                       
+               <th>Digits Before Decimal Point</th> 
+                       
+               <th>Digits After Decimal Point</th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> Addition/Subtraction </td> 
+                       
+               <td> Fi + 1 or Si + 1 (whichever is greater)</td> 
+                       
+               <td> Fd or Sd (whichever is greater)</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> Multiplication </td> 
+                       
+               <td> Fi + Si + 2 </td> 
+                       
+               <td> Fd + Sd (maximum 7)</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> Division </td> 
+                       
+               <td> Fi + Sd </td> 
+                       
+               <td>(see below)</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> Exponentiation </td> 
+                       
+               <td> 15 - Fd </td> 
+                       
+               <td> Fd </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> Square Root </td> 
+                       
+               <td> Fi </td> 
+                       
+               <td> Fd </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>- where:</p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th> F </th> 
+                       
+               <td>First operand</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> S </th> 
+                       
+               <td>Second operand</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> R </th> 
+                       
+               <td>Result</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> i </th> 
+                       
+               <td>Digits before decimal point</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> d </th> 
+                       
+               <td>Digits after decimal point</td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+           
+          
+         
+      <div><a name="digits-after-dec-point"></a></div> 
+          
+      <h3>Digits after Decimal Point for Division Results</h3> 
+           
+           
+      <p>The precision of the result of a division depends whether a result
+               field is available or not:
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">If a result field is available, the precision is: <code>Rd</code> or
+                       <code>Fd</code> (whichever is greater) <sup>*</sup>.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">If no result field is available, the precision is: <code>Fd</code> or
+                       <code>Sd</code> (whichever is greater) <sup>*</sup>.
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p><sup>*</sup> If the <code>ROUNDED</code> option is used, the precision
+               of the result is internally increased by one digit before the result is
+               actually rounded.
+      </p> 
+           
+      <p>A result field is available (or assumed to be available) in a
+               <code>COMPUTE</code> and <code>DIVIDE</code> statement, and in a logical
+               condition in which the division is placed after the comparison operator (for
+               example: <code>IF #A = #B / #C THEN ...</code>). 
+      </p> 
+           
+      <p>A result field is not (or not assumed to be) available in a logical
+               condition in which the division is placed before the comparison operator (for
+               example: <code>IF #B / #C = #A THEN ...</code>).
+      </p> 
+           
+      <h4 class="floating-title">Exception:</h4> 
+           
+      <p> If both dividend and divisor are of integer format and at least one of
+               them is a variable, the division result is always of integer format (regardless
+               of the precision of the result field and of whether the <code>ROUNDED</code>
+               option is used or not).
+      </p> 
+          
+      <div><a name="precision-arithm-expr"></a></div> 
+          
+      <h3>Precision of Results for Arithmetic Expressions</h3> 
+           
+           
+      <p>The precision of arithmetic expressions, for example: <code>#A / (#B *
+            #C) + #D * (#E - #F + #G)</code>, is derived by evaluating the results of the
+               arithmetic operations in their processing order. For further information on
+               arithmetic expressions, see <a href="../sm/compute.htm#arith_expression"><var>arithmetic-expression</var></a>
+               in the <a href="../sm/compute.htm"><code>COMPUTE</code></a>
+               statement description.
+      </p> 
+          
+        
+      <div class="noprint">
+         <p><a href="pg_furth_arithm.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="AO_Err_Cond"></a></div> 
+         
+      <h2> Error Conditions in Arithmetic Operations </h2> 
+          
+          
+      <p>In an addition, subtraction, multiplication or division, an error occurs
+              if the total number of digits (before and after the decimal point) of the
+              result is greater than 31.
+      </p> 
+          
+      <p>In an exponentiation, an error occurs in any of the following
+              situations:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">if the base is of packed format and either the result has over 16
+                      digits or any intermediate result has over 15 digits;
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">if the base is of floating-point format and the result is greater than
+                      approximately 7 * 10<sup>75</sup>.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_furth_arithm.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Array_Processing"></a></div> 
+         
+      <h2> 
+             <a name="x384"></a> Processing of Arrays 
+      </h2> 
+          
+          
+      <p>Generally, the following rules apply:</p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">All scalar operations may be applied to array elements which consist
+                      of a single occurrence.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">If a variable is defined with a constant value (for example,
+                      <code>#FIELD (I2) CONSTANT &lt;8&gt;</code>), the value will be assigned to the
+                      variable at compilation, and the variable will be treated as a constant. This
+                      means that if such a variable is used in an array index, the dimension
+                      concerned has a <em>definite</em> number of occurrences.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">If an assignment/comparison operation involves two arrays with a
+                      different number of dimensions, the "missing" dimension in the
+                      array with fewer dimensions is assumed to be (1:1). 
+            </p> 
+                  
+            <p class="initem">Example: If <code>#ARRAY1 (1:2)</code> is assigned to <code>#ARRAY2
+                  (1:2,1:2)</code>, <code>#ARRAY1</code> is assumed to be <code>#ARRAY1
+                  (1:1,1:2)</code>. 
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>The following topics are covered below:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_furth_arithm.htm#def_array_dim">Definitions of Array Dimensions</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_arithm.htm#assignment_operations">Assignment Operations with Arrays</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_arithm.htm#comarison_operations">Comparison Operations with Arrays</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_arithm.htm#AO_Arrays">Arithmetic Operations with Arrays</a></p>
+         </li>
+      </ul> 
+          
+         
+      <div><a name="def_array_dim"></a></div> 
+          
+      <h3> Definitions of Array Dimensions </h3> 
+           
+           
+      <p>The first, second and third dimensions of an array are defined as
+               follows:
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th># of Dimensions</th> 
+                        
+               <th>Properties</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td>3</td> 
+                        
+               <td>#a3(3rd dim., 2nd dim., 1st dim.)</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>2</td> 
+                        
+               <td>#a2(2nd dim., 1st dim.)</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>1</td> 
+                        
+               <td>#a1(1st dim.)</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+          
+         
+      <div><a name="assignment_operations"></a></div> 
+          
+      <h3> Assignment Operations with Arrays </h3> 
+           
+           
+      <p>If an array range is assigned to another array range, the assignment is
+               performed element by element.
+      </p> 
+           
+      <p> Example: </p> 
+           <pre class="verbatim">DEFINE DATA LOCAL
+1 #ARRAY(I4/1:5) INIT &lt;10,20,30,40,50&gt;
+END-DEFINE
+*
+MOVE #ARRAY(2:4) TO #ARRAY(3:5)
+/* is identical to
+/* MOVE #ARRAY(2) TO #ARRAY(3)
+/* MOVE #ARRAY(3) TO #ARRAY(4)
+/* MOVE #ARRAY(4) TO #ARRAY(5)
+/*  
+/* #ARRAY contains  10,20,20,20,20</pre> 
+           <p>If a single occurrence is assigned to an array range, each element of
+               the range is filled with the value of the single occurrence. (For a
+               mathematical function, each element of the range is filled with the result of
+               the function.)
+      </p> 
+           
+      <p>Before an assignment operation is executed, the individual dimensions
+               of the arrays involved are compared with one another to check if they meet one
+               of the conditions listed below. The dimensions are compared independently of
+               one another; that is, the 1st dimension of the one array is compared with the
+               1st dimension of the other array, the 2nd dimension of the one array is
+               compared with the 2nd dimension of the other array, and the 3rd dimension of
+               the one array is compared with the 3rd dimension of the other array.
+      </p> 
+           
+      <p>The assignment of values from one array to another is only allowed
+               under one of the following conditions:
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">The number of occurrences is the same for both dimensions
+                       compared.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">The number of occurrences is indefinite for both dimensions
+                       compared.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">The dimension that is assigned to another dimension consists of a
+                       single occurrence.
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <h4 class="floating-title"> Example - Array Assignments: </h4> 
+           
+      <p>The following program shows which array assignment operations are
+               possible.
+      </p> 
+           <pre class="verbatim"> DEFINE DATA LOCAL
+ 1 A1   (N1/1:8)
+ 1 B1   (N1/1:8)
+ 1 A2   (N1/1:8,1:8)
+ 1 B2   (N1/1:8,1:8)
+ 1 A3   (N1/1:8,1:8,1:8)
+ 1 I    (I2)          INIT &lt;4&gt;
+ 1 J    (I2)          INIT &lt;8&gt;
+ 1 K    (I2)          CONST &lt;8&gt;
+ END-DEFINE
+ *
+ COMPUTE A1(1:3) = B1(6:8)                                      /* allowed
+ COMPUTE A1(1:I) = B1(1:I)                                      /* allowed
+ COMPUTE A1(*)   = B1(1:8)                                      /* allowed
+ COMPUTE A1(2:3) = B1(I:I+1)                                    /* allowed
+ COMPUTE A1(1)   = B1(I)                                        /* allowed
+ COMPUTE A1(1:I) = B1(3)                                        /* allowed
+ COMPUTE A1(I:J) = B1(I+2)                                      /* allowed
+ COMPUTE A1(1:I) = B1(5:J)                                      /* allowed
+ COMPUTE A1(1:I) = B1(2)                                        /* allowed
+ COMPUTE A1(1:2) = B1(1:J)                                      /* NOT ALLOWED (NAT0631)
+ COMPUTE A1(*)   = B1(1:J)                                      /* NOT ALLOWED (NAT0631)
+ COMPUTE A1(*)   = B1(1:K)                                      /* allowed
+ COMPUTE A1(1:J) = B1(1:K)                                      /* NOT ALLOWED (NAT0631)
+ *
+ COMPUTE A1(*)       = B2(1,*)                                  /* allowed
+ COMPUTE A1(1:3)     = B2(1,I:I+2)                              /* allowed
+ COMPUTE A1(1:3)     = B2(1:3,1)                                /* NOT ALLOWED (NAT0631)
+ *
+ COMPUTE A2(1,1:3)   = B1(6:8)                                  /* allowed
+ COMPUTE A2(*,1:I)   = B1(5:J)                                  /* allowed
+ COMPUTE A2(*,1)     = B1(*)                                    /* NOT ALLOWED (NAT0631)
+ COMPUTE A2(1:I,1)   = B1(1:J)                                  /* NOT ALLOWED (NAT0631)
+ COMPUTE A2(1:I,1:J) = B1(1:J)                                  /* allowed
+ *
+ COMPUTE A2(1,I)     = B2(1,1)                                  /* allowed
+ COMPUTE A2(1:I,1)   = B2(1:I,2)                                /* allowed
+ COMPUTE A2(1:2,1:8) = B2(I:I+1,*)                              /* allowed
+ *
+ COMPUTE A3(1,1,1:I)   = B1(1)                                  /* allowed
+ COMPUTE A3(1,1,1:J)   = B1(*)                                  /* NOT ALLOWED (NAT0631)
+  COMPUTE A3(1,1,1:I)   = B1(1:I)                               /* allowed
+ COMPUTE A3(1,1:2,1:I) = B2(1,1:I)                              /* allowed
+ COMPUTE A3(1,1,1:I)   = B2(1:2,1:I)                            /* NOT ALLOWED (NAT0631)
+ END</pre> 
+           
+          
+         <div><a name="comarison_operations"></a></div> 
+          
+      <h3> Comparison Operations with Arrays </h3> 
+           
+           
+      <p>Generally, the following applies: if arrays with multiple dimensions
+               are compared, the individual dimensions are handled independently of one
+               another; that is, the 1st dimension of the one array is compared with the 1st
+               dimension of the other array, the 2nd dimension of the one array is compared
+               with the 2nd dimension of the other array, and the 3rd dimension of the one
+               array is compared with the 3rd dimension of the other array.
+      </p> 
+           
+      <p>The comparison of two array dimensions is only allowed under one of the
+               following conditions:
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">The array dimensions compared with one another have the same number
+                       of occurrences.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">The array dimensions compared with one another have an indefinite
+                       number of occurrences.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">All array dimensions of one of the arrays involved are single
+                       occurrences.
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <h4 class="floating-title"> Example - Array Comparisons: </h4> 
+           
+      <p>The following program shows which array comparison operations are
+               possible:
+      </p> 
+           <pre class="verbatim"> DEFINE DATA LOCAL
+ 1 A3  (N1/1:8,1:8,1:8)
+ 1 A2  (N1/1:8,1:8
+
+  1 A1  (N1/1:8)
+ 1 I   (I2)   INIT &lt;4&gt;
+ 1 J   (I2)   INIT &lt;8&gt;
+ 1 K   (I2)   CONST &lt;8&gt;
+ END-DEFINE
+ *
+ IF A2(1,1)     = A1(1)               THEN IGNORE END-IF /* allowed
+ IF A2(1,1)     = A1(I)               THEN IGNORE END-IF /* allowed
+ IF A2(1,*)     = A1(1)               THEN IGNORE END-IF /* allowed
+ IF A2(1,*)     = A1(I)               THEN IGNORE END-IF /* allowed
+ IF A2(1,*)     = A1(*)               THEN IGNORE END-IF /* allowed
+ IF A2(1,*)     = A1(I -3:I+4)        THEN IGNORE END-IF /* allowed
+ IF A2(1,5:J)   = A1(1:I)             THEN IGNORE END-IF /* allowed
+ IF A2(1,*)     = A1(1:I)             THEN IGNORE END-IF /* NOT ALLOWED(NAT0629)
+ IF A2(1,*)     = A1(1:K)             THEN IGNORE END-IF /* allowed
+ *
+ IF A2(1,1)     = A2(1,1)             THEN IGNORE END-IF /* allowed
+ IF A2(1,1)     = A2(1,I)             THEN IGNORE END-IF /* allowed
+ IF A2(1,*)     = A2(1,1:8)           THEN IGNORE END-IF /* allowed
+ IF A2(1,*)     = A2(I,I -3:I+4)      THEN IGNORE END-IF /* allowed
+ IF A2(1,1:I)   = A2(1,I+1:J)         THEN IGNORE END-IF /* allowed
+ IF A2(1,1:I)   = A2(1,I:I+1)         THEN IGNORE END-IF /* NOT ALLOWED(NAT0629)
+ IF A2(*,1)     = A2(1,*)             THEN IGNORE END-IF /* NOT ALLOWED(NAT0629)
+ IF A2(1,1:I)   = A1(2,1:K)           THEN IGNORE END-IF /* NOT ALLOWED(NAT0629)
+ *
+ IF A3(1,1,*)   = A2(1,*)             THEN IGNORE END-IF /* allowed
+ IF A3(1,1,*)   = A2(1,I -3:I+4)      THEN IGNORE END-IF /* allowed
+ IF A3(1,*,I:J) = A2(*,1:I+1)         THEN IGNORE END-IF /* allowed
+ IF A3(1,*,I:J) = A2(*,I:J)           THEN IGNORE END-IF /* allowed
+ END</pre> 
+           <p>When you compare two array ranges, note that the following two
+               expressions lead to different results:
+      </p> 
+           <pre class="verbatim">#ARRAY1(*) NOT EQUAL #ARRAY2(*) 
+NOT #ARRAY1(*) = #ARRAY2(*)</pre> 
+           <p> Example:</p> 
+           
+      <ul> 
+               
+         <li> 
+                   <strong> Condition A: </strong> 
+                   <pre class="verbatim">IF #ARRAY1(1:2) NOT EQUAL #ARRAY2(1:2)</pre> 
+                   <p class="initem">This is equivalent to:</p> 
+                   <pre class="verbatim">IF (#ARRAY1(1) NOT EQUAL #ARRAY2(1)) AND (#ARRAY1(2) NOT EQUAL #ARRAY2(2))</pre> 
+                   <p class="initem">Condition A is therefore true if the first occurrence of
+                       <code>#ARRAY1</code> does not equal the first occurrence of
+                       <code>#ARRAY2</code> <em>and</em> the second occurrence of <code>#ARRAY1</code>
+                       does not equal the second occurrence of <code>#ARRAY2</code>.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   <strong>Condition B:</strong> 
+                   <pre class="verbatim">IF NOT #ARRAY1(1:2) = #ARRAY2(1:2)</pre> 
+                   <p class="initem">This is equivalent to:</p> 
+                   <pre class="verbatim">IF NOT (#ARRAY1(1)= #ARRAY2(1) AND #ARRAY1(2) = #ARRAY2(2))
+</pre> 
+                   <p class="initem">This in turn is equivalent to:</p> 
+                   <pre class="verbatim">IF (#ARRAY1(1) NOT EQUAL #ARRAY2(1)) OR (#ARRAY1(2) NOT EQUAL #ARRAY2(2))</pre> 
+                   <p class="initem">Condition B is therefore true if <em>either</em> the first occurrence
+                       of <code>#ARRAY1</code> does not equal the first occurrence of
+                       <code>#ARRAY2</code> <em>or</em> the second occurrence of <code>#ARRAY1</code>
+                       does not equal the second occurrence of <code>#ARRAY2</code>.
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+          
+         
+      <div><a name="AO_Arrays"></a></div> 
+          
+      <h3> Arithmetic Operations with Arrays </h3> 
+           
+           
+      <p>A general rule about arithmetic operations with arrays is that the
+               number of occurrences of the corresponding dimensions must be equal.
+      </p> 
+           
+      <p>The following illustrates this rule:</p> 
+           <pre class="verbatim">#c(2:3,2:4) := #a(3:4,1:3) + #b(3:5)</pre> 
+           <p>In other words:</p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>Array</th> 
+                        
+               <th>Dimension #</th> 
+                        
+               <th># of Occurrences</th> 
+                        
+               <th>Range</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td>#c</td> 
+                        
+               <td>2nd</td> 
+                        
+               <td>2</td> 
+                        
+               <td>2:3</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>#c</td> 
+                        
+               <td>1st</td> 
+                        
+               <td>3</td> 
+                        
+               <td>2:4</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>#a</td> 
+                        
+               <td>2nd</td> 
+                        
+               <td>2</td> 
+                        
+               <td>3:4</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>#a</td> 
+                        
+               <td>1st</td> 
+                        
+               <td>3</td> 
+                        
+               <td>1:3</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>#b</td> 
+                        
+               <td>1st</td> 
+                        
+               <td>3</td> 
+                        
+               <td>3:5</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>The operation is performed element by element.</p> 
+           
+      <p class="note"><strong>Note:</strong><br> An arithmetic operation of a different number of dimensions is
+               allowed.
+      </p> 
+           
+      <p>For the example above, the following operations are executed:</p> 
+           <pre class="verbatim">#c(2,2) := #a(3,1) + #b(3)
+
+#c(2,3) := #a(3,2) + #b(4)
+
+#c(2,4) := #a(3,3) + #b(5)
+
+#c(3,2) := #a(4,1) + #b(3)
+
+#c(3,3) := #a(4,2) + #b(4)
+
+#c(3,4) := #a(4,3) + #b(5)</pre> 
+           <p>Below is a list of examples of how array ranges may be used in the
+               following ways in arithmetic operations (in <a href="../sm/compute.htm"><code>COMPUTE</code></a>,
+               <a href="../sm/add.htm"><code>ADD</code></a> or
+               <a href="../sm/multiply.htm"><code>MULTIPLY</code></a>
+               statements). In examples 1-4, the number of occurrences of the corresponding
+               dimensions must be equal.
+      </p> 
+           
+      <ol> 
+               
+         <li> 
+                   
+            <p class="initem"> <var>range</var> + <var>range</var>
+                       = <var>range</var>.
+            </p> 
+                   
+            <p class="initem"> The addition is performed element by element.</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"> <var>range</var> * <var>range</var>
+                       = <var>range</var>. 
+            </p> 
+                   
+            <p class="initem">The multiplication is performed element by element.</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"> <var>scalar</var> + <var>range</var>
+                       = <var>range</var>. 
+            </p> 
+                   
+            <p class="initem">The scalar is added to each element of the range.</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"> <var>range</var> * <var>scalar</var>
+                       = <var>range</var>. 
+            </p> 
+                   
+            <p class="initem">Each element of the range is multiplied by the scalar.</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"> <var>range</var> + <var>scalar</var>
+                       = <var>scalar</var>. 
+            </p> 
+                   
+            <p class="initem">Each element of the range is added to the scalar and the result is
+                       assigned to the scalar.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"> <var>scalar</var> * <var>range</var>
+                       = <var>scalar2</var>.
+            </p> 
+                   
+            <p class="initem"> The scalar is multiplied by each element of the array and the result
+                       is assigned to <var>scalar2</var>.
+            </p> 
+                  
+         </li> 
+              
+      </ol> 
+            
+            
+      <p>Since intermediate results will be generated for arithmetic operations
+                as shown in the above examples, the result of overlapping index ranges is
+                computed element by element in an intermediate result array and finally the
+                intermediate result array is assigned to the result field.
+      </p> 
+            
+      <p>Example:</p> 
+            <pre class="verbatim">DEFINE DATA LOCAL
+1 #ARRAY(I4/1:5) INIT &lt;10,20,30,40,50&gt;            
+END-DEFINE
+
+#ARRAY(3:5) := #ARRAY(2:4) + 1
+
+/* A temporary array for the 
+/* intermediate result values is 
+/* generated implicitly: #temp(1:3).
+/* The following operations are 
+/* performed internally:                             
+/* #temp(1) := #ARRAY(2) + 1
+/* #temp(2) := #ARRAY(3) + 1
+/* #temp(3) := #ARRAY(4) + 1
+/* #ARRAY(3:5) := #temp(1:3)
+/*  
+/* #ARRAY contains  10,20,21,31,41	 
+</pre> 
+           
+          
+        
+       <div class="noprint">
+         <div class="nospy">
+            <p><a href="pg_furth_arithm.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_furth_arithm.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_furth_arithm.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_furth-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_furth_lcc.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_furth_3glsub.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

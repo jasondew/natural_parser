@@ -1,0 +1,699 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Workplans</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="sysobjh_workplan" id="17060"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../utis/sysobjh_workplan.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/utis/sysobjh_workplan.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="sysobjh.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="sysobjh_settings.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="sysobjh_dat_time.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Tools and Utilities&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x87"></a>Workplans 
+         </h1>
+      </div> 
+         
+      <p>Workplans define individual standard procedures for command execution,
+             object selection and parameter or option settings which can be used to further
+             automate function processing.
+      </p> 
+         
+      <p>Workplans are Natural objects of the type Text. They are, by default,
+             stored in the library WORKPLAN located in the current FUSER system file.
+      </p> 
+         
+      <p>This section covers the following topics:</p>
+         
+      <ul>
+         <li>
+            <p class="initem"><a href="sysobjh_workplan.htm#sysobjh_workplan_Workplan_Create">Creating, Selecting and Modifying Workplans</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="sysobjh_workplan.htm#sysobjh_workplan_Workplan_Cont">Contents of Workplans</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="sysobjh_workplan.htm#sysobjh_workplan_Workplan_Examples">Examples of Workplans</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="sysobjh_workplan.htm#sysobjh_workplan_Referencing_Workplans">Referencing Workplans</a></p>
+         </li>
+      </ul>
+      <hr>
+      <div><a name="sysobjh_workplan_Workplan_Create"></a></div> 
+         
+      <h2>Creating, Selecting and Modifying Workplans</h2> 
+          
+          
+      <p>You can use the <a href="sysobjh_admin.htm#sysobjh_admin">administration</a> function (see the relevant
+              section) to create a Workplan, select a Workplan from a list, modify a
+              Workplan, or change the default library for Workplans. The default library can also be changed by specifying the
+              <code>Workplan-Library</code> parameter in your Object Handler
+              profile (see <a href="sysobjh_profile.htm#sysobjh_profile">Profile
+            Settings</a>).
+      </p> 
+         
+      <div class="noprint">
+         <p><a href="sysobjh_workplan.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="sysobjh_workplan_Workplan_Cont" id="17061"></a></div> 
+         
+      <h2> Contents of Workplans </h2> 
+          
+          
+      <p>A Workplan consists of a header (generated by the Object Handler) and an
+              associated instructional or textual part. Instructional parts contain Object
+              Handler commands and parameter and/or option settings. Textual parts contain
+              plain text only. Header and instructional or textual parts can contain comments
+              (for example, the short description of the Workplan) that must start with the
+              delimiter characters <code>/*</code> and are restricted to one line.
+      </p> 
+          
+      <p>There are six types of Workplan: PROCEDURE, SELECTION, LIST, PARAMETER,
+              OPTION and TEXT.
+      </p> 
+          
+      <p>The table below lists the valid headers (to be entered if creating a
+              Workplan outside the Object Handler) for the corresponding types of Workplan
+              and describes the contents of the instructional or textual part. Additionally,
+              it provides cross references to the clauses that apply when specifying Object
+              Handler direct commands. The Object Handler direct commands provided are
+              explained in the section <a href="sysobjh_commands.htm#sysobjh_commands">Direct
+            Commands</a>.
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="no%"> 
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th>Valid Headers</th> 
+                       
+               <th>Contents</th> 
+                       
+               <th>Related Topic in <cite>Direct Commands</cite></th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td nowrap> <code> TYPE PROCEDURE</code> 
+               </td> 
+                       
+               <td> 
+                  
+                  <p>An Object Handler command procedure.</p> 
+                           
+                  <p>This Workplan can contain any combination of Object Handler
+                     commands available for PROCEDURE. Enter a sequence of commands separated by
+                               semicolons (;).
+                  </p> 
+               </td> 
+                       
+               <td> <a href="sysobjh_commands.htm#sysobjh_commands">Basic Command
+                     Syntax</a> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a name="workplan_TYPE_SELECTION"></a><code> TYPE
+                     SELECTION</code> 
+               </td> 
+                       
+               <td> 
+                  
+                  <p>Selection criteria for objects.</p> 
+                           
+                  <p>This Workplan can be used in Object Handler Workplan commands.</p>
+                           
+               </td> 
+                       
+               <td> <a href="sysobjh_select.htm#sysobjh_select">
+                      <var>select-clause</var> </a>
+                           
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a name="workplan_TYPE_LIST"></a><code> TYPE
+                     LIST</code> 
+               </td> 
+                       
+               <td> A list of objects. 
+                  
+                  <p>This Workplan can be used in Object Handler Workplan commands.</p>
+                           
+               </td> 
+                       
+               <td> <a href="sysobjh_select.htm#sysobjh_select">
+                      <var>select-clause</var> </a> 
+                           
+                  <p><a href="sysobjh_object.htm#sysobjh_object">Object List - LIST
+                                  Workplan</a> 
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <code> TYPE PARAMETER</code> 
+               </td> 
+                       
+               <td> 
+                  
+                  <p>Parameters for the unload or load function.</p> 
+                           
+                  <p>This Workplan can be used to change attributes for the objects to
+                     be processed such as the name of a new target library where objects are
+                               loaded.
+                  </p> 
+                           
+                  <p><code>TYPE PARAMETER</code> can be used in Object Handler Workplan
+                               commands.
+                  </p> 
+               </td> 
+                       
+               <td> <a href="sysobjh_parm.htm#sysobjh_parm">
+                      <var>parameter-setting</var> </a>
+                           
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <code> TYPE OPTION</code> 
+               </td> 
+                       
+               <td> 
+                  
+                  <p>Options for the unload or load function, for example, report
+                       settings.
+                  </p> 
+                           
+                  <p>This Workplan can be used in Object Handler Workplan commands.</p>
+                           
+               </td> 
+                       
+               <td> <a href="sysobjh_option.htm#sysobjh_option">
+                      <var>option-setting</var> </a>
+                           
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <code> TYPE TEXT</code> 
+               </td> 
+                       
+               <td>Comments or any other text that can be used for documentation
+                  purpose.
+               </td> 
+                       
+               <td>Not applicable</td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+         
+      <div class="noprint">
+         <p><a href="sysobjh_workplan.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="sysobjh_workplan_Workplan_Examples" id="28015"></a></div> 
+         
+      <h2> Examples of Workplans</h2> 
+          
+      <p>The following table lists examples of instructional parts contained in a
+              Workplan.
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="no%"> 
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th nowrap>Workplan Type</th> 
+                       
+               <th>Instruction</th> 
+                       
+               <th>Explanation</th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td>PROCEDURE</td> 
+                       
+               <td> <code> FINDLIB * LIB TEST</code> 
+               </td> 
+                       
+               <td>Check whether the library TEST exists.</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>PROCEDURE</td> 
+                       
+               <td> <code> UNLOAD A* LIB TEST</code> 
+               </td> 
+                       
+               <td> 
+                  
+                  
+                  
+                  <p>Unload from the library TEST into Work File 1 all
+                     Natural programming objects and shared resources starting with <code>A</code>,
+                               and all user-defined error messages; write the report into Work File 4.
+                  </p> 
+                           
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>SELECTION</td> 
+                       
+               <td> <code> * LIB TEST</code> 
+               </td> 
+                       
+               <td>Process all objects from the library TEST.</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>TEXT</td> 
+                       
+               <td> <code> This is a Workplan comment.</code> 
+               </td> 
+                       
+               <td>Any text.</td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>This section covers the following topic:</p>
+          
+      <ul>
+         <li>
+            <p class="initem"><a href="sysobjh_workplan.htm#sysobjh_workplan_Workplan_Contents">Example of Workplan Contents</a></p>
+         </li>
+      </ul>
+      <div><a name="sysobjh_workplan_Workplan_Contents"></a></div> 
+          
+      <h3>Example of Workplan Contents </h3> 
+           
+           
+      <p>The following is an example listing of a PROCEDURE Workplan where the
+               <code>UNLOAD</code> command is executed:
+      </p> 
+           <pre class="verbatim">TYPE PROCEDURE /* VERSION=03.01 NATURAL VERSION=04.02.01 PL=0 AUTHOR=SAG DATE=2006-07-20 09:40:12
+/* unload from library TEST with target library PROD01       
+UNLOAD * LIB TEST OBJTYPE N                                  
+WITH NEWLIBRARY PROD01                                       
+WHERE REPORT MYREP01</pre> 
+          <div class="noprint">
+         <p><a href="sysobjh_workplan.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="sysobjh_workplan_Referencing_Workplans" id="17062"></a></div> 
+         
+      <h2> Referencing Workplans </h2> 
+          
+      <p>You can reference a Workplan by using Object Handler menu functions or
+              direct commands (see also the section <a href="sysobjh_commands.htm#sysobjh_commands">Direct Commands</a>).
+      </p>
+          
+          
+      <p>The following syntax applies when referencing a Workplan with the Object
+              Handler direct commands described in the section
+              <a href="sysobjh_commands.htm#sysobjh_commands">Direct
+            Commands</a>.
+      </p> 
+           
+           
+      <table border="0" class="syntax" cellpadding="3"> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td colspan="8" nowrap> (
+                  <a href="sysobjh_workplan.htm#sysobjh_workplan_name_workplan"><var>workplan-name</var></a>
+                           
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td colspan="7"> [ <code class="keyword"><u>LIB</u>RARY</code>
+                           <a href="sysobjh_workplan.htm#sysobjh_workplan_lib_workplan"><var>library-name</var></a>
+                           ]
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td colspan="7" nowrap> [<code class="keyword">DBID</code> <a href="sysobjh_workplan.htm#sysobjh_workplan_dbid_workplan"><var>dbid</var></a>
+                           [<code class="keyword">FNR</code>
+                           <a href="sysobjh_workplan.htm#sysobjh_workplan_fnr_workplan"><var>fnr</var></a>
+                           ] ] [<code class="keyword">NAME</code>
+                           <a href="sysobjh_workplan.htm#sysobjh_workplan_vsam_workplan"><var>vsam-name</var></a>
+                           ]
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> &nbsp;</td> 
+                       
+               <td colspan="7"> [<code class="keyword">CIPHER</code>
+                          <a href="sysobjh_workplan.htm#sysobjh_workplan_cipher_workplan"><var>cipher</var></a>
+                           ]
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> &nbsp;</td> 
+                       
+               <td> 
+                  
+                  <p><img src="../graphics/sbo3.gif" alt="" width="5" height="61"></p> 
+               </td> 
+                       
+               <td> 
+                  
+                  <p><img src="../graphics/cbo2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                       
+               <td align="center"> 
+                  
+                  <p class="mini-list"> 
+                               <code class="keyword">PASSWORD</code><br> 
+                               <code class="keyword">PSW</code> 
+                              
+                  </p>
+               </td> 
+                       
+               <td align="center"> 
+                  
+                  <p><img src="../graphics/cbc2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                       
+               <td align="center">
+                  <a href="sysobjh_workplan.htm#sysobjh_workplan_psw_workplan"><var>password</var></a>
+                           
+               </td> 
+                       
+               <td> &nbsp;</td> 
+                       
+               <td> 
+                  
+                  <p><img src="../graphics/sbc3.gif" alt="" width="5" height="61"></p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> ) </td> 
+                       
+               <td colspan="7"> &nbsp;</td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>The syntactical options are explained in the following
+              section:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="sysobjh_workplan.htm#d0e51129">Keyword Explanation</a></p>
+         </li>
+      </ul>
+      <div><a name="d0e51129"></a></div> 
+          
+      <h3>Keyword Explanation</h3> 
+           
+           
+      <p>The table below describes the keywords and values that apply to the
+               syntax for referencing Workplans.
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="no%"> 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>Keyword</th> 
+                        
+               <th>Values</th> 
+                        
+               <th>Default Value</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td nowrap> <a name="sysobjh_workplan_name_workplan"></a><var>workplan-name</var>
+                            
+               </td> 
+                        
+               <td>The name of the Natural text member in the Workplan library to
+                  be used as the Workplan. 
+               </td> 
+                        
+               <td>No default</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>LIBRARY</code>
+                          <a name="sysobjh_workplan_lib_workplan"></a></td> 
+                        
+               <td>The name of the library where the Workplan is located.</td> 
+                        
+               <td><code>WORKPLAN</code></td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><code>DBID</code> <a name="sysobjh_workplan_dbid_workplan"></a></td> 
+                        
+               <td>The ID of the Adabas database where the Workplan library is
+                  located.
+               </td> 
+                        
+               <td> 
+                  
+                  <p class="mini-list"> 
+                                <code>0</code><br> 
+                     (current FNAT/FUSER) 
+                               
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><code>FNR</code> <a name="sysobjh_workplan_fnr_workplan"></a></td> 
+                        
+               <td>The number of the Adabas file where the Workplan library is
+                  located.
+               </td> 
+                        
+               <td> 
+                  
+                  <p class="mini-list"> 
+                                <code>0</code><br> 
+                     (current FNAT/FUSER) 
+                               
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><code>NAME</code> <a name="sysobjh_workplan_vsam_workplan"></a></td> 
+                        
+               <td> 
+                  
+                  <p>Only applies to objects on mainframes.</p> 
+                            
+                  <p>The name of a valid VSAM file where the Workplan library is
+                                located.
+                  </p> 
+               </td> 
+                        
+               <td> 
+                  
+                  <p class="mini-list"> 
+                            blank<br> 
+                     (current FNAT/FUSER) 
+                               
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><code>CIPHER</code>
+                        <a name="sysobjh_workplan_cipher_workplan"></a></td> 
+                        
+               <td> 
+                  
+                  <p>Only applies to objects on mainframes.</p> 
+                            
+                  <p>An 8-digit cipher code.</p> 
+               </td> 
+                        
+               <td> 
+                  
+                  <p class="mini-list"> 
+                            blank<br> 
+                     (current FNAT/FUSER) 
+                               
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><code>PASSWORD</code>
+                          <a name="sysobjh_workplan_psw_workplan"></a></td> 
+                        
+               <td> 
+                  
+                  <p>Only applies to objects on mainframes.</p> 
+                            
+                  <p>An 8-character Adabas password.</p> 
+               </td> 
+                        
+               <td> 
+                  
+                  <p class="mini-list"> 
+                            blank<br> 
+                     (current FNAT/FUSER) 
+                               
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+          
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="sysobjh_workplan.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../utis/sysobjh_workplan.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/utis/sysobjh_workplan.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="sysobjh.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="sysobjh_settings.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="sysobjh_dat_time.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

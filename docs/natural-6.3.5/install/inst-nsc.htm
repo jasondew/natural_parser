@@ -1,0 +1,1457 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Installing Natural Security on UNIX</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="inst-nsc"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../install/inst-nsc.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/install/inst-nsc.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="inst-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="inst-nwodaemon.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="inst-after.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Installation on UNIX&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x12"></a> 
+               <a name="x13"></a>Installing Natural Security on UNIX
+         </h1>
+      </div> 
+         
+      <p>This document describes how to install Natural
+         Security on a UNIX platform. 
+      </p> 
+         
+      <p>It is recommended that you install Natural Security <em>after</em> having
+             installed all other subproducts of Natural, as this makes defining the
+             subproducts' system libraries to Natural Security easier.
+      </p> 
+         
+      <p class="important"><strong>Important:</strong><br>Once Natural Security is installed, Natural on the assigned
+             system file (<code>FNAT</code>) can only be accessed under the control of
+             Natural Security. Natural Security cannot be removed once it has been
+             installed. It is therefore recommended that you make a backup copy of your
+             <code>FNAT</code> system file before you install Natural Security.
+      </p> 
+         
+      <p>The following topics are covered:</p>
+      <ul>
+         <li>
+            <p class="initem"><a href="inst-nsc.htm#inst-ncs-require">Product Requirements</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="inst-nsc.htm#inst-ncs-steps">Installation Steps</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="inst-nsc.htm#inst-nsc-after">After the Natural Security Installation</a></p>
+         </li>
+      </ul> 
+         
+      <p>See also <a href="../nsc/nsc_platf.htm">Natural Security On Different
+            Platforms</a> in the <cite>Natural Security</cite>
+             documentation.
+      </p>
+      <hr>
+      <div><a name="inst-ncs-require"></a></div> 
+         
+      <h2>Product Requirements</h2> 
+          
+      <p>The following topics are covered
+              below:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="inst-nsc.htm#inst-ncs-require-prereq">Prerequisites</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="inst-nsc.htm#inst-ncs-require-lic">License Key File Issues</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="inst-nsc.htm#inst-ncs-require-fsec">Shared Natural Security System File FSEC</a></p>
+         </li>
+      </ul>
+      <div><a name="inst-ncs-require-prereq"></a></div> 
+          
+      <h3>Prerequisites</h3> 
+           
+           
+      <p>Make sure that the following software has been installed on your
+               computer:
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">Natural (same version and update package or patch level as that of
+                       Natural Security).
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Adabas.</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Entire Net-Work (only required if the <code>FSEC</code> system file
+                       is located in a remote database).
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>Natural Security uses the same versions of Adabas and Entire Net-Work
+               as Natural. For the supported versions, see
+               <a href="inst-prod.htm#inst-nat-require-related">Related Software AG
+            Products</a>.
+      </p> 
+           
+      <p>Also, make sure that the environment variables for the above products
+               have been set correctly.
+      </p> 
+          
+      <div><a name="inst-ncs-require-lic"></a></div> 
+          
+      <h3>License Key File Issues</h3> 
+           
+           
+      <p>You need a license key file to install and activate
+               Natural Security. 
+      </p> 
+           
+      <p>During the Natural Security installation,
+               you will be required to specify the location of the license key file provided
+               by Software AG. 
+      </p> 
+           
+      <p>Before you start the installation, ensure that the license key file is
+               available locally on the machine where you intend to install
+               Natural Security.
+      </p> 
+           
+      <p> In general, Software AG recommends you to place the license key file
+               on the file system before starting the installation. 
+      </p> 
+          
+      <div><a name="inst-ncs-require-fsec"></a></div> 
+          
+      <h3>Shared Natural Security System File FSEC</h3> 
+           
+           
+      <p>With this version, you can continue to use your existing FSEC system
+               file. No migration of Natural Security data from the previous version to the
+               current version is necessary. 
+      </p> 
+          
+        
+      <div class="noprint">
+         <p><a href="inst-nsc.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="inst-ncs-steps"></a></div> 
+         
+      <h2>Installation Steps</h2> 
+          
+      <p>The first steps of the installation are the same as during the
+              installation of Natural. If you are installing Natural and Natural Security
+              together, they need not be performed again. You can then continue the
+              installation with the step <a href="inst-nsc.htm#inst-ncs-steps-sagenv">SAG Environment
+            Shell</a>. 
+      </p> 
+          
+      <p>The installation can be performed in two installation modes, either in
+              graphical mode or in character mode.
+      </p> 
+          
+      <p>See the following list for an overview of the necessary steps:
+              
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="inst-nsc.htm#inst-ncs-steps-mount">Step 1: Mount the Drive for Your Installation Medium</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="inst-nsc.htm#inst-ncs-steps-mode">Step 2: Choose Character or Graphical Mode</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="inst-nsc.htm#inst-ncs-steps-start">Step 3: Start the Installation Process</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="inst-nsc.htm#inst-ncs-steps-welcome">Step 4: Welcome</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="inst-nsc.htm#inst-ncs-steps-user">Step 5: SAG User</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="inst-nsc.htm#inst-ncs-steps-destination">Step 6: Destination Location</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="inst-nsc.htm#inst-ncs-steps-sagenv">Step 7: SAG Environment Shell</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="inst-nsc.htm#inst-ncs-steps-progs">Step 8: Choose Programs</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="inst-nsc.htm#inst-ncs-steps-lic">Step 9: Software License Agreement</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="inst-nsc.htm#inst-ncs-steps-nsclic">Step 10: License File</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="inst-nsc.htm#inst-ncs-steps-installinfo">Step 11: Installation Information</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="inst-nsc.htm#inst-ncs-steps-installstatus">Step 12: Installation Status</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="inst-nsc.htm#inst-ncs-steps-envcheck">Step 13: Environment Check</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="inst-nsc.htm#inst-ncs-steps-parmtemplate">Step 14: Parameter File Template</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="inst-nsc.htm#inst-ncs-steps-fnat">Step 15: FNAT System File Settings</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="inst-nsc.htm#inst-ncs-steps-fsec">Step 16: FSEC File Selection</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="inst-nsc.htm#inst-ncs-steps-log">Step 17: Log File Selection</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="inst-nsc.htm#inst-ncs-steps-relink">Step 18: Relinking Natural or Shared Library Nucleus</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="inst-nsc.htm#inst-ncs-steps-relinkparmnat">Step 19: Parameters for Relinking Natural Nucleus</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="inst-nsc.htm#inst-ncs-steps-relinkprocnat">Step 20: Relinking Process (for Natural Nucleus)</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="inst-nsc.htm#inst-ncs-steps-relinkparmlib">Step 21: Parameters for Relinking Shared Library Nucleus</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="inst-nsc.htm#inst-ncs-steps-relinkproclib">Step 22: Relinking Process (for Shared Library Nucleus)</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="inst-nsc.htm#inst-ncs-steps-inpl">Step 23: INPL Process</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="inst-nsc.htm#inst-ncs-steps-complete">Step 24: Installation Complete</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="inst-nsc.htm#inst-ncs-steps-activate">Step 25: Activate Installed Products</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="inst-nsc.htm#inst-ncs-steps-finished">Step 26: Installation Finished</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="inst-nsc.htm#inst-ncs-steps-execenvfile">Step 27: Execute the SAG Environment File</a></p>
+         </li>
+      </ul> 
+          
+          
+      <div><a name="inst-ncs-steps-mount"></a></div>
+      <h4>Step 1: Mount the Drive for Your Installation Medium</h4>
+      <ul style="margin-left: 0.7in">
+         <li> 
+                   
+                   
+            <p class="instep">If your drive for the installation medium has not yet been mounted,
+                       mount it now as described in the section <a href="inst-common.htm#inst-common-cd">Installing the Contents of the Installation
+                  Medium to Disk</a> of the steps common to all Software AG
+                       products.
+            </p> 
+                   
+                   
+                   
+            <p class="instep">When the installation is started, the setup procedure will check the
+                       hardware platform and operating system version and then start the appropriate
+                       installation program.
+            </p> 
+                 
+         </li>
+      </ul>
+      <div><a name="inst-ncs-steps-mode"></a></div>
+      <h4>Step 2: Choose Character or Graphical Mode</h4>
+      <p style="margin-left: 0.5in;">The installation procedure examines the environment variable
+               <code>DISPLAY</code> to determine whether to run in graphical
+               or character mode. 
+      </p>
+      <ul style="margin-left: 0.7in">
+         <li> 
+                   
+                   
+            <p class="instep">To use graphical mode, the environment variable
+                       <code>DISPLAY</code> must be set. If it is not yet set in your
+                       environment and you want to use graphical mode, set it using the following
+                       commands:
+            </p> <pre class="command-input">DISPLAY="<var>machine_name</var>:0" 
+export DISPLAY</pre> 
+                   
+                   
+                   <p class="instep">Character mode will be used automatically if the environment variable
+                       <code>DISPLAY</code> is not set. If
+                       <code>DISPLAY</code> has been set in your environment but you
+                       want to use character mode, you can use the <code>-nw</code> option when you
+                       start the installation.
+            </p> 
+                   
+            <p class="instep">At the end of an installation process, in either mode, a batch script
+                       is generated and written to the end of the installation log. It lists the
+                       parameters specified for that particular installation.
+            </p> 
+                   
+            <p class="instep">You can use the <code>-help</code> option to display a list of all
+                       supported parameters. 
+            </p> 
+                   
+            <p class="instep">To display the Natural-specific batch mode parameters, enter the
+                       following command: 
+            </p><pre class="command-input">setup.ux nat <var>version</var> -help</pre> 
+                   <p class="instep">where <var>version</var> represents the version of
+                       the current Natural installation medium; for example,
+                       "v6320".
+            </p>
+                   
+                   
+            <p class="instep">To display the Natural Security parameters which are supported in
+                       batch mode, enter the following command:
+            </p><pre class="command-input">setup.ux nsc <var>version</var> -help</pre> 
+                   <p class="instep">where <var>version</var> represents the version of
+                       the current Natural installation medium; for example,
+                       "v6320".
+            </p>
+                   
+                   
+                 
+         </li>
+      </ul>
+      <div><a name="inst-ncs-steps-start"></a></div>
+      <h4>Step 3: Start the Installation Process</h4>
+      <p style="margin-left: 0.5in;">To perform this step, you must be either the user
+               "sag" or a member of the group
+               "sag" to which the administrator and all users of
+               Software AG products are assigned. Do not perform this step as the user
+               "root".
+      </p>
+      <ul style="margin-left: 0.7in">
+         <li> 
+                   
+                   
+            <p class="instep">Start the installation procedure from a writable working directory.
+                       We recommend <cite>$SAG/INSTALL</cite>. Enter the command:
+            </p> <pre class="command-input">sh /<var>mount_dir</var>/setup.ux [-nw]</pre> 
+                   <p class="instep">where <var>mount_dir</var> is the starting directory
+                       on your product installation medium. Upper/lower case usage is possible
+                       depending on your local settings.
+            </p> 
+                   
+            <p class="note"><strong>Note:</strong><br>The following descriptions of installation steps assume that the
+                       graphical installation mode is used. The step sequence is the same in character
+                       mode.
+            </p> 
+                   
+                   
+                   
+            <p class="instep">The setup program is started and guides you through the installation.
+                       During installation you have to provide the license key. 
+            </p> 
+                   
+                 
+         </li>
+      </ul>
+      <div><a name="inst-ncs-steps-welcome"></a></div>
+      <h4>Step 4: Welcome</h4>
+      <p style="margin-left: 0.5in;">In this screen, the variant of Natural that is to be installed is
+               displayed.
+      </p>
+      <ul style="margin-left: 0.7in">
+         <li> 
+                   
+                   
+            <p class="instep">Choose <span class="guibutton">Next</span> to proceed.
+            </p> 
+                   
+                 
+         </li>
+      </ul>
+      <div><a name="inst-ncs-steps-user"></a></div>
+      <h4>Step 5: SAG User</h4>
+      <p style="margin-left: 0.5in;">This screen appears only when you are logged in as the user
+               "root".
+      </p>
+      <p style="margin-left: 0.5in;">It is not intended that you perform the installation as
+               "root". It is recommended to use the Software AG
+               user "sag" instead. 
+      </p><ol style="margin-left: 0.75in;">
+      <li> 
+                
+                
+         <p class="instep">If you still need to perform the installation as
+                    "root", enter the user ID of the Software AG user to
+                    be able to continue.
+         </p> 
+                
+              
+      </li>
+      <li> 
+                
+                
+         <p class="instep">Choose <span class="guibutton">Next</span> to proceed.
+         </p> 
+                
+              
+      </li></ol>
+      <div><a name="inst-ncs-steps-destination"></a></div>
+      <h4>Step 6: Destination Location</h4>
+      <p style="margin-left: 0.5in;">In this screen, you can change the value of the
+               <code>SAG</code> environment variable, which is the path name
+               of the directory tree where all Software AG products are installed. 
+      </p>
+      <p style="margin-left: 0.5in;">By default, the content of the current <cite>$SAG</cite>
+               variable is displayed. 
+      </p><ol style="margin-left: 0.75in;">
+      <li> 
+                
+                
+         <p class="instep">Optional. Enter a different path or use the
+                    <span class="guibutton">Browse</span> button to change the path.
+         </p> 
+                
+              
+      </li>
+      <li> 
+                
+                
+         <p class="instep">Choose <span class="guibutton">Next</span> to proceed.
+         </p> 
+                
+              
+      </li></ol>
+      <div><a name="inst-ncs-steps-sagenv"></a></div>
+      <h4>Step 7: SAG Environment Shell</h4>
+      <p style="margin-left: 0.5in;">This screen appears only if you are installing Natural Security
+               separately. In this case, you have to select the path to the environment
+               file.
+      </p>
+      <p class="note" style="margin-left: 0.5in;"><strong>Note:</strong><br>This screen does not appear if you have selected to install both
+               Natural and Natural Security at the same time. In this case, the environment
+               settings were selected during the Natural installation.
+      </p>
+      <p style="margin-left: 0.5in;">The default name is <cite>sagenv.new</cite>. This documentation
+               assumes that the environment file is called <cite>sagenv.new</cite>.
+               
+      </p><ol style="margin-left: 0.75in;">
+      <li> 
+                
+                
+         <p class="instep">Optional. Select another environment file. </p> 
+                
+         <p class="instep">You can use any name for your environment file. </p> 
+                
+              
+      </li>
+      <li> 
+                
+                
+         <p class="instep">Choose <span class="guibutton">Next</span> to proceed.
+         </p> 
+                
+              
+      </li></ol>
+      <div><a name="inst-ncs-steps-progs"></a></div>
+      <h4>Step 8: Choose Programs</h4>
+      <p style="margin-left: 0.5in;">This screen appears only if you are installing Natural Security
+               separately. 
+      </p>
+      <p class="note" style="margin-left: 0.5in;"><strong>Note:</strong><br>Natural must have been installed before you can install Natural
+               Security.
+      </p><ol style="margin-left: 0.75in;">
+      <li> 
+                
+                
+         <p class="instep">Activate the check box for Natural Security.</p> 
+                
+              
+      </li>
+      <li> 
+                
+                
+         <p class="instep">Choose <span class="guibutton">Next</span> to proceed.
+         </p> 
+                
+              
+      </li></ol>
+      <div><a name="inst-ncs-steps-lic"></a></div>
+      <h4>Step 9: Software License Agreement</h4>
+      <p style="margin-left: 0.5in;">When you have selected to install both Natural and Natural Security at
+               the same time, this is the first Natural Security installation screen to appear
+               after you have chosen <span class="guibutton">Finish</span> in the
+               <a href="inst-prod.htm#inst-nat-steps-complete"><span class="selectable_label">Installation
+               Complete</span></a> screen.
+      </p>
+      <p style="margin-left: 0.5in;">In this screen, the license agreement is displayed.</p>
+      <ul style="margin-left: 0.7in">
+         <li> 
+                   
+                   
+            <p class="instep">Choose the <span class="guibutton">I Accept</span> button to proceed.
+            </p> 
+                   
+            <p class="note"><strong>Note:</strong><br>If you run the installation procedure in character mode, at each
+                       command prompt, you must type in the exact wording (for example:
+                       "accept", not just "y" or
+                       the <span class="key">ENTER</span> key).
+            </p> 
+                   
+                 
+         </li>
+      </ul>
+      <div><a name="inst-ncs-steps-nsclic"></a></div>
+      <h4>Step 10: License File</h4>
+      <p style="margin-left: 0.5in;"> In this screen, you specify the path to the Natural Security license
+               key file.
+      </p>
+      <p class="note" style="margin-left: 0.5in;"><strong>Note:</strong><br>If no common Software AG environment exists yet,
+               <cite><var>&lt;your-current-directory&gt;</var>/<var>&lt;product-code&gt;</var>.xml</cite>
+               is displayed. 
+      </p><ol style="margin-left: 0.75in;">
+      <li> 
+                
+                
+         <p class="instep">If you do not want to use the displayed license key file, specify the
+                    path to your license key file.
+         </p> 
+                
+                
+                
+         <p class="instep">Or:<br>Choose the <span class="guibutton">Browse</span> button to select the license
+                    key file from a dialog.
+         </p> 
+                
+              
+      </li>
+      <li> 
+                
+                
+         <p class="instep">If you choose the <span class="guibutton">View</span> button, the content of
+                    your license key file is displayed in a separate screen. Choose
+                    <span class="guibutton">OK</span> or <span class="guibutton">Quit</span> to go back to the
+                    <span class="selectable_label">License File</span> screen.
+         </p> 
+                
+              
+      </li>
+      <li> 
+                
+                
+         <p class="instep">Choose <span class="guibutton">Next</span> to proceed. 
+         </p> 
+                
+              
+      </li></ol>
+      <div><a name="inst-ncs-steps-installinfo"></a></div>
+      <h4>Step 11: Installation Information</h4>
+      <p style="margin-left: 0.5in;">In this screen, the name of the source directory and
+               <cite>$SAG</cite> directory are shown.
+      </p><ol style="margin-left: 0.75in;">
+      <li> 
+                
+                
+         <p class="instep">To review or change your settings, choose the
+                    <span class="guibutton">Back</span> button.
+         </p> 
+                
+              
+      </li>
+      <li> 
+                
+                
+         <p class="instep">Choose <span class="guibutton">Next</span> to begin extracting files. 
+         </p> 
+                
+              
+      </li></ol>
+      <div><a name="inst-ncs-steps-installstatus"></a></div>
+      <h4>Step 12: Installation Status</h4>
+      <p style="margin-left: 0.5in;">This screen, which contains a progress indicator, informs you about the
+               installation status.
+      </p>
+      <ul style="margin-left: 0.7in">
+         <li> 
+                   
+                   
+            <p class="instep">When all files have been extracted, choose
+                       <span class="guibutton">Next</span> to proceed.
+            </p> 
+                   
+                 
+         </li>
+      </ul>
+      <div><a name="inst-ncs-steps-envcheck"></a></div>
+      <h4>Step 13: Environment Check</h4>
+      <p style="margin-left: 0.5in;">In this screen, you have to specify where Adabas is installed
+               (<cite>$ADADIR/$ADAVERS</cite>).
+      </p>
+      <p style="margin-left: 0.5in;">If you use Natural Security on multiple platforms, see also the section
+               <a href="../nsc/nsc_platf.htm#CentralFSEC">Central FSEC System File</a> in the
+               Natural Security documentation.
+      </p><ol style="margin-left: 0.75in;">
+      <li> 
+                
+                
+         <p class="instep">Specify the path to the directory in which Adabas has been
+                    installed.
+         </p> 
+                
+         <p class="instep">You can also use the browse button to select to the required
+                    directory. 
+         </p> 
+                
+                
+                
+         <p class="instep">Or:<br>To use a remote <code>FSEC</code>, select <span class="selectable_label">Use remote
+               database</span>. 
+         </p> 
+                
+         <p class="instep">Adabas databases outside of the current <cite>$SAG</cite>
+                    directory (that is: in another <cite>$SAG</cite> directory) must be
+                    defined as remote.
+         </p> 
+                
+              
+      </li>
+      <li> 
+                
+                
+         <p class="instep">Choose <span class="guibutton">Next</span> to proceed. 
+         </p> 
+                
+              
+      </li></ol>
+      <div><a name="inst-ncs-steps-parmtemplate"></a></div>
+      <h4>Step 14: Parameter File Template</h4>
+      <p style="margin-left: 0.5in;">In this screen, you specify the Natural parameter file you want to use
+               as a template. 
+      </p><ol style="margin-left: 0.75in;">
+      <li> 
+                
+                
+         <p class="instep">Select the Natural parameter file.</p> 
+                
+         <p class="instep">The settings in this Natural parameter file will be used to create a
+                    new parameter file for Natural Security called <code>NSCPARM</code>. If
+                    <code>NSCPARM</code> already exists, a copy of it will be saved.
+         </p> 
+                
+         <p class="instep">If you want to create a Natural Development Server environment with
+                    Natural Security, use the parameter file named <code>NDVPARM</code> as a
+                    template.
+         </p> 
+                
+         <p class="note"><strong>Note:</strong><br>You can choose the command button displaying a magnifying glass to
+                    display the contents of the currently selected parameter file.
+         </p> 
+                
+              
+      </li>
+      <li> 
+                
+                
+         <p class="instep">Choose <span class="guibutton">Next</span> to proceed.
+         </p> 
+                
+              
+      </li></ol>
+      <div><a name="inst-ncs-steps-fnat"></a></div>
+      <h4>Step 15: FNAT System File Settings</h4>
+      <p style="margin-left: 0.5in;">In this screen, the environment settings for <code>FNAT</code> are
+               shown.
+      </p><ol style="margin-left: 0.75in;">
+      <li> 
+                
+                
+         <p class="instep">If required, select a different system file. </p> 
+                
+              
+      </li>
+      <li> 
+                
+                
+         <p class="instep">Choose <span class="guibutton">Next</span> to proceed.
+         </p> 
+                
+              
+      </li></ol>
+      <div><a name="inst-ncs-steps-fsec"></a></div>
+      <h4>Step 16: FSEC File Selection</h4>
+      <p style="margin-left: 0.5in;">In this screen, you have to enter a database ID and file number for the
+               <code>FSEC</code> system file.
+      </p><ol style="margin-left: 0.75in;">
+      <li> 
+                
+                
+         <p class="instep">Select an existing DBID and FNR.</p> 
+                
+         <p class="instep">If you are using a local <code>FSEC</code> system file, all available
+                    databases are available for selection. 
+         </p> 
+                
+         <p class="instep"> If you specified <span class="selectable_label">Use remote database</span> in the
+                    step <a href="inst-nsc.htm#inst-ncs-steps-envcheck">Environment
+               Check</a>, enter the DBID and FNR of an existing
+                    <code>FSEC</code> on your remote database you want to use.
+         </p> 
+                
+                
+                
+         <p class="instep">Or:<br>To create a new system file, select an existing DBID and enter an
+                    unused number for FNR. In this case, you will be asked whether you want the new
+                    system file to be created.
+         </p> 
+                
+                
+                
+         <p class="instep">If no local <code>FSEC</code> exists yet, the system file will be
+                    created and initialized. If you choose an existing <code>FSEC</code>, its
+                    contents will not be modified.
+         </p> 
+                
+         <p class="instep"><code>FNAT</code>/<code>FUSER</code> reside on the file system and
+                    the <code>FSEC</code> in Adabas. It is therefore not possible to use the same
+                    DBID for <code>FNAT</code>/<code>FUSER</code> and
+                    <code>FSEC</code>.
+         </p> 
+              
+      </li>
+      <li> 
+                
+                
+         <p class="instep">Choose <span class="guibutton">Next</span> to proceed.
+         </p> 
+                
+              
+      </li></ol>
+      <div><a name="inst-ncs-steps-log"></a></div>
+      <h4>Step 17: Log File Selection</h4>
+      <p style="margin-left: 0.5in;">Before this screen appears, you are asked whether you want to use a log
+               file with your Natural Security installation.
+      </p><ol style="margin-left: 0.75in;">
+      <li> 
+                
+                
+         <p class="instep">Choose <span class="guibutton">Yes</span>, if you want to use the Natural
+                    Security feature <span class="selectable_label">Logging of Maintenance Functions</span> (see
+                    <a href="../nsc/nsc_admin.htm#Processing_of_Maintenance_Log_Records">Maintenance Log Records</a> in the
+                    <cite>Natural Security</cite> documentation).
+         </p> 
+                
+         <p class="note"><strong>Note:</strong><br> The option
+                    <a href="../nsc/nsc_admin.htm#Logging_of_Maintenance_Functions"><span class="selectable_label">Logging of Maintenance Functions</span></a>
+                    must additionally be enabled in Natural Security after the installation.
+         </p>
+                
+                
+              
+      </li>
+      <li> 
+                
+                
+         <p class="instep">Enter or select the database ID and file number for the Natural
+                    Security log file. If you do not want to use this feature, enter
+                    "0" as DBID.
+         </p> 
+                
+         <p class="instep">If you are using a local database, all available database IDs and
+                    file numbers are available for selection. 
+         </p> 
+                
+         <p class="instep">If you want to use an existing log file, select the DBID and FNR. If
+                    no log file exists yet, the Natural Security installation creates a new log
+                    file. Enter a DBID and FNR.
+         </p> 
+                
+         <p class="instep">If you specified <span class="selectable_label">Use remote database</span> in the step
+                    <a href="inst-nsc.htm#inst-ncs-steps-envcheck">Environment
+               Check</a>, enter the DBID and FNR of an existing log file on
+                    the remote database you want to use.
+         </p> 
+                
+              
+      </li>
+      <li> 
+                
+                
+         <p class="instep">Choose <span class="guibutton">Next</span> to proceed.
+         </p> 
+                
+                
+                
+         <p class="instep">You are asked whether you want to create a log system file with the
+                    specified numbers.
+         </p> 
+              
+      </li>
+      <li> 
+                
+                
+         <p class="instep">Choose <span class="guibutton">Yes</span> to create the log system file.
+         </p> 
+                
+              
+      </li></ol>
+      <div><a name="inst-ncs-steps-relink"></a></div>
+      <h4>Step 18: Relinking Natural or Shared Library Nucleus </h4>
+      <p style="margin-left: 0.5in;">In this screen, you can decide whether you want to link a new Natural
+               nucleus and/or a new shared library nucleus. 
+      </p>
+      <p style="margin-left: 0.5in;">If you have selected Entire Screen Builder,
+               ApplinX and/or Natural for
+         Tamino or if Entire Access is
+               installed, the option <span class="selectable_label">Relink Natural nucleus</span> is
+               preselected.
+      </p>
+      <p style="margin-left: 0.5in;">Natural Security is delivered with a prelinked Natural Security nucleus
+               called "natsec" and a Natural Security shared
+               library nucleus. However, if you want to use additional packages such as Entire
+               Screen Builder, ApplinX, Natural for Tamino or Entire Access, you need to
+               relink the Natural Security nucleus. See
+               <a href="inst-prod.htm#inst-nat-require-compiler">Compilers Used to Build
+            Natural</a> for the compiler you must use.
+      </p><ol style="margin-left: 0.75in;">
+      <li> 
+                
+                
+         <p class="instep">Select the option <span class="selectable_label">Relink Natural nucleus</span> and/or
+                    <span class="selectable_label">Relink shared library nucleus</span></p> 
+                
+              
+      </li>
+      <li> 
+                
+                
+         <p class="instep">Choose <span class="guibutton">Next</span> to proceed.
+         </p> 
+                
+              
+      </li></ol>
+      <div><a name="inst-ncs-steps-relinkparmnat"></a></div>
+      <h4>Step 19: Parameters for Relinking Natural Nucleus</h4>
+      <p style="margin-left: 0.5in;">This screen appears only when you have selected the option
+               <span class="selectable_label">Relink Natural nucleus</span>.
+      </p><ol style="margin-left: 0.75in;">
+      <li> 
+                
+                
+         <p class="instep">Select the required options.</p> 
+                
+              
+      </li>
+      <li> 
+                
+                
+         <p class="instep">Choose <span class="selectable_label">Next</span> to proceed.
+         </p> 
+                
+              
+      </li></ol>
+      <div><a name="inst-ncs-steps-relinkprocnat"></a></div>
+      <h4>Step 20: Relinking Process (for Natural Nucleus)</h4>
+      <p style="margin-left: 0.5in;">This screen appears only when you have selected the option
+               <span class="selectable_label">Relink Natural nucleus</span>. It displays the output of this
+               relinking process. 
+      </p>
+      <p style="margin-left: 0.5in;">The relinking process creates a new Natural Security nucleus called
+               "natnsc". 
+      </p>
+      <p style="margin-left: 0.5in;">When you have not selected to relink Entire Screen Builder or ApplinX,
+               you are first asked whether the new nucleus shall be the default nucleus and
+               replace the current Natural nucleus which is called
+               "natural".
+      </p>
+      <p style="margin-left: 0.5in;">If you have selected to relink Entire Screen Builder or ApplinX, a
+               nucleus called "natnsw" (for Entire Screen Builder)
+               or "natapx" (for ApplinX) is created. The Natural
+               nucleus called "natural" is not replaced in this
+               case. Therefore, you are not asked whether you want to replace the current
+               nucleus.
+      </p><ol style="margin-left: 0.75in;">
+      <li> 
+                
+                
+         <p class="instep">Review the results of the relinking process.</p> 
+                
+              
+      </li>
+      <li> 
+                
+                
+         <p class="instep">Choose <span class="selectable_label">Next</span> to proceed.
+         </p> 
+                
+              
+      </li></ol>
+      <div><a name="inst-ncs-steps-relinkparmlib"></a></div>
+      <h4>Step 21: Parameters for Relinking Shared Library Nucleus</h4>
+      <p style="margin-left: 0.5in;">This screen appears only when you have selected the option
+               <span class="selectable_label">Relink shared library nucleus</span>.
+      </p>
+      <p style="margin-left: 0.5in;">The relinking process creates a new shared library nucleus.</p><ol style="margin-left: 0.75in;">
+      <li> 
+                
+                
+         <p class="instep">Select the required options.</p> 
+                
+              
+      </li>
+      <li> 
+                
+                
+         <p class="instep">Choose <span class="selectable_label">Next</span> to proceed.
+         </p> 
+                
+              
+      </li></ol>
+      <div><a name="inst-ncs-steps-relinkproclib"></a></div>
+      <h4>Step 22: Relinking Process (for Shared Library Nucleus)</h4>
+      <p style="margin-left: 0.5in;">This screen appears only when you have selected the option
+               <span class="selectable_label">Relink shared library nucleus</span>. It displays the output of
+               this relinking process. 
+      </p>
+      <p style="margin-left: 0.5in;">However, you are first asked whether the new nucleus shall be the
+               default nucleus and replace the current shared library nucleus.
+      </p><ol style="margin-left: 0.75in;">
+      <li> 
+                
+                
+         <p class="instep">Choose <span class="guibutton">Yes</span> to use the new nucleus.
+         </p> 
+                
+              
+      </li>
+      <li> 
+                
+                
+         <p class="instep">Review the results of the relinking process.</p> 
+                
+              
+      </li>
+      <li> 
+                
+                
+         <p class="instep">Choose <span class="selectable_label">Next</span> to proceed. 
+         </p> 
+                
+              
+      </li></ol>
+      <div><a name="inst-ncs-steps-inpl"></a></div>
+      <h4>Step 23: INPL Process</h4>
+      <p style="margin-left: 0.5in;">This screen, which contains a progress indicator, appears after the
+               above configuration steps have been completed. The installation now loads the
+               libraries.
+      </p>
+      <ul style="margin-left: 0.7in">
+         <li> 
+                   
+                   
+            <p class="instep">When the loading of the libraries is complete, choose
+                       <span class="guibutton">Next</span> to proceed. 
+            </p> 
+                   
+                 
+         </li>
+      </ul>
+      <div><a name="inst-ncs-steps-complete"></a></div>
+      <h4>Step 24: Installation Complete</h4>
+      <p style="margin-left: 0.5in;">This screen informs you that the installation of Natural Security has
+               finished successfully. You are asked whether you want to read the Readme file
+               for Natural Security.
+      </p>
+      <p style="margin-left: 0.5in;">It is recommended that you read the Readme file.</p><ol style="margin-left: 0.75in;">
+      <li> 
+                
+                
+         <p class="instep">If you do not want to display the Readme file, remove the
+                    corresponding selection.
+         </p> 
+                
+              
+      </li>
+      <li> 
+                
+                
+         <p class="instep">Choose <span class="guibutton">Finish</span>.
+         </p> 
+                
+              
+      </li></ol>
+      <div><a name="inst-ncs-steps-activate"></a></div>
+      <h4>Step 25: Activate Installed Products</h4>
+      <p style="margin-left: 0.5in;">You have to activate Natural Security in this screen.</p>
+      <p class="note" style="margin-left: 0.5in;"><strong>Note:</strong><br>This screen is also shown when you install both Natural and Natural
+               Security at the same time.
+      </p><ol style="margin-left: 0.75in;">
+      <li> 
+                
+                
+         <p class="instep">Select the product(s) you want to activate in the Software AG
+                    environment file.
+         </p> 
+                
+              
+      </li>
+      <li> 
+                
+                
+         <p class="instep"> Choose <span class="guibutton">Next</span> to proceed. 
+         </p> 
+                
+              
+      </li></ol>
+      <div><a name="inst-ncs-steps-finished"></a></div>
+      <h4>Step 26: Installation Finished</h4>
+      <p style="margin-left: 0.5in;">This screen appears when the installation has finished.</p>
+      <ul style="margin-left: 0.7in">
+         <li> 
+                   
+                   
+            <p class="instep">Choose <span class="guibutton">Finish</span> to exit the installation
+                       program.
+            </p> 
+                   
+                 
+         </li>
+      </ul>
+      <div><a name="inst-ncs-steps-execenvfile"></a></div>
+      <h4>Step 27: Execute the SAG Environment File</h4>
+      <p style="margin-left: 0.5in;">It is necessary to execute the <cite>sagenv.new</cite> file
+               after finishing this installation program to set the environment variables
+               <code>NATDIR</code>, <code>NATVERS</code> and
+               <code>PATH</code>. You can do this now, if you want to work
+               with Natural immediately, or later, if you want to perform other tasks first.
+               But the environment file must have been executed before using Natural. 
+      </p>
+      <p class="note" style="margin-left: 0.5in;"><strong>Note:</strong><br>When you install both Natural and Natural Security at the same time,
+               this step is required only once. When you install Natural and Natural Security
+               separately and do not use Natural in the meantime, you can perform this step
+               directly after the installation of Natural Security. Otherwise, you have to
+               perform this step twice (after the installation of Natural and after the
+               installation of Natural Security).
+      </p>
+      <ul style="margin-left: 0.7in">
+         <li> 
+                   
+                   
+            <p class="instep">Check these settings and insert them into your profile (for example,
+                       <cite>.profile</cite>). 
+            </p> 
+                   
+            <p class="instep">Once the installation has been successfully completed, you can remove
+                       the working directory (which you specified in step
+                       <a href="inst-nsc.htm#inst-ncs-steps-start">Start the Installation
+                  Process</a>) and all of its contents. 
+            </p> 
+                   
+                 
+         </li>
+      </ul> 
+          
+         
+      
+      
+      <div class="noprint">
+         <p><a href="inst-nsc.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="inst-nsc-after"></a></div> 
+         
+       
+      <h2>After the Natural Security Installation</h2> 
+         
+        
+      <p>The following steps are only relevant if your <code>FSEC</code>
+            system file was initialized for the first time. Perform these steps immediately
+            after a successful installation of Natural Security:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="inst-nsc.htm#inst-nsc-after-pw">Step 1: Change the Password of the User DBA</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="inst-nsc.htm#inst-nsc-after-adm">Step 2: Define Administrators</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="inst-nsc.htm#inst-nsc-after-syslib">Step 3: Define System Libraries</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="inst-nsc.htm#inst-nsc-after-verify">Step 4: Installation Verification</a></p>
+         </li>
+      </ul>
+      <div><a name="inst-nsc-after-pw"></a></div> 
+        
+      <h3>Step 1: Change the Password of the User
+            "DBA"
+      </h3> 
+         
+         
+      <ol> 
+             
+         <li> 
+                 
+            <p class="initem">Invoke Natural with the parameter file which contains the
+                     <code>FSEC</code> definition.
+            </p> 
+                
+         </li> 
+             
+         <li> 
+                 
+            <p class="initem">On the Natural Security logon screen, enter the library ID
+                     "SYSSEC", the user ID
+                     "DBA", the password
+                     "DBA", a new password, and press
+                     <span class="key">ENTER</span>.
+            </p> 
+                
+         </li> 
+             
+         <li> 
+                 
+            <p class="initem">Type the new password again and press <span class="key">ENTER</span> to confirm the
+                     password change.
+            </p> 
+                
+         </li> 
+            
+      </ol> 
+         
+       
+      <div><a name="inst-nsc-after-adm"></a></div> 
+        
+      <h3>Step 2: Define Administrators</h3> 
+         
+         
+      <p>Create a user security profile for each person who is to be a Natural
+             Security administrator and then link each Natural Security administrator to the
+             library <code>SYSSEC</code>. 
+      </p> 
+         
+      <p>The following is an example of how to do this:</p> 
+         
+      <ol> 
+             
+         <li> 
+                 
+            <p class="initem">In the logon dialog box, type the library ID
+                     "SYSSEC", the user ID
+                     "DBA" and the new password.
+            </p> 
+                 
+            <p class="initem">The Natural Security <span class="selectable_label">Main Menu</span> is displayed.
+            </p> 
+                
+         </li> 
+             
+         <li> 
+                 
+            <p class="initem">Enter the code "M".</p> 
+                 
+            <p class="initem">A window is displayed.</p> 
+                
+         </li> 
+             
+         <li> 
+                 
+            <p class="initem">Mark the object type <span class="selectable_label">User</span> with a character or with
+                     the cursor.
+            </p> 
+                 
+            <p class="initem">The <span class="selectable_label">User Maintenance</span> selection list is
+                     displayed.
+            </p> 
+                
+         </li> 
+             
+         <li> 
+                 
+            <p class="initem">In the command line of the <span class="selectable_label">User Maintenance</span>
+                     selection list, enter the command <code>ADD</code>. 
+            </p> 
+                 
+            <p class="initem">A window is displayed.</p> 
+                
+         </li> 
+             
+         <li> 
+                 
+            <p class="initem">Choose a user ID for your Natural Security administrator. </p> 
+                 
+            <p class="initem">For example, if the administrator's name is "Arthur
+                     Dent", you can choose "AD" as his user
+                     ID. The following steps in this example will use this ID.
+            </p> 
+                
+         </li> 
+             
+         <li> 
+                 
+            <p class="initem">Enter the user ID "AD" and the user type
+                     "A". 
+            </p> 
+                 
+            <p class="initem">The <span class="selectable_label">Add User</span> screen is displayed.
+            </p> 
+                
+         </li> 
+             
+         <li> 
+                 
+            <p class="initem">Enter the user name "Arthur Dent" and set
+                     <span class="selectable_label">Private Library</span> to "N" (and
+                     press <span class="key">ENTER</span>).
+            </p> 
+                
+         </li> 
+             
+         <li> 
+                 
+            <p class="initem">Press <span class="key">PF3</span>. 
+            </p> 
+                 
+            <p class="initem">The user "Arthur Dent" is now defined to
+                     Natural Security under the user ID "AD". The
+                     <span class="selectable_label">User Maintenance</span> selection list is displayed again.
+            </p> 
+                
+         </li> 
+             
+         <li> 
+                 
+            <p class="initem">In the <span class="selectable_label">Co</span> column of the selection list, mark the
+                     user "AD" with the function code
+                     "LL". 
+            </p> 
+                 
+            <p class="initem">A window is displayed.</p> 
+                
+         </li> 
+             
+         <li> 
+                 
+            <p class="initem">Enter the library ID "SYSSEC".</p> 
+                 
+            <p class="initem">The <span class="selectable_label">Link User To Libraries</span> selection list is
+                     displayed.
+            </p> 
+                
+         </li> 
+             
+         <li> 
+                 
+            <p class="initem">In the <span class="selectable_label">Co</span> column of the selection list, mark the
+                     library <code>SYSSEC</code> with the function code
+                     "LK". 
+            </p> 
+                 
+            <p class="initem">The user "Arthur Dent" is now linked to the
+                     library <code>SYSSEC</code>.
+            </p> 
+                
+         </li> 
+             
+         <li> 
+                 
+            <p class="initem">In the command line, enter the direct command
+                     <code>LOGOFF</code>. 
+            </p> 
+                 
+            <p class="initem">The Natural Security logon dialog box is displayed.</p> 
+                 
+            <p class="initem">Now you can log on to <code>SYSSEC</code> with the user ID
+                     "AD" and the password
+                     "AD". When you log on with the new user ID for the
+                     first time, you must change the password (by typing in a new password in
+                     addition to the user ID and password).
+            </p> 
+                 
+            <p class="note"><strong>Note:</strong><br> Once you have successfully defined administrators, it may be
+                     advisable to delete the user "DBA" to make sure that
+                     the user ID "DBA" cannot be used by unauthorized
+                     users to gain access to <code>SYSSEC</code>. To delete the user
+                     "DBA", log on to <code>SYSSEC</code> with the user
+                     ID "AD". Go to the <span class="selectable_label">User
+                  Maintenance</span> selection list as described above. On the list, mark the
+                     user "DBA" with the function code
+                     "DE". A window is displayed, in which you enter the
+                     user ID "DBA". The user
+                     "DBA" is now deleted.
+            </p> 
+                
+         </li> 
+            
+      </ol> 
+         
+       
+      <div><a name="inst-nsc-after-syslib"></a></div> 
+        
+      <h3>Step 3: Define System Libraries</h3> 
+         
+         
+      <p>This step should not be performed for "SYS"
+             libraries containing Natural utilities, as it is recommended that these
+             utilities be protected as described in the section
+             <a href="../nsc/nsc_util.htm">Protecting
+            Utilities</a>. 
+      </p> 
+         
+      <p>Create security profiles for all system libraries of Natural and Natural
+             subproducts installed at your site (as described in the <cite>Natural
+                Security</cite> documentation in section <cite>Library
+                Maintenance</cite> under
+             <a href="../nsc/nsc_lib.htm#Adding_a_New_Library">Adding a New Library</a>). Refer to
+             the installation instructions for other Software AG products for the
+             corresponding security definitions to be performed.
+      </p> 
+         
+      <p>To automatically create security profiles for system libraries (that is,
+             libraries whose IDs begin with "SYS"), you may use
+             the function <span class="selectable_label">System-Library Definitions</span>:
+      </p> 
+         
+      <ol> 
+             
+         <li> 
+                 
+            <p class="initem">Log on to the library <code>SYSSEC</code>.
+            </p> 
+                
+         </li> 
+             
+         <li> 
+                 
+            <p class="initem">On the Natural Security <span class="selectable_label">Main Menu</span>, select
+                     <span class="selectable_label">Administrator Services</span>.
+            </p> 
+                
+         </li> 
+             
+         <li> 
+                 
+            <p class="initem">On the <span class="selectable_label">Administrator Services Menu</span>, press
+                     <span class="key">PF8</span>. 
+            </p> 
+                
+         </li> 
+             
+         <li> 
+                 
+            <p class="initem">On the <span class="selectable_label">Administrator Services Menu 2</span>, select
+                     <span class="selectable_label">System-Library Definitions</span>.
+            </p> 
+                 
+            <p class="initem">A list of the system libraries of Natural and all Natural subproducts
+                     installed at your site will be displayed. For each system library, a
+                     library-specific security profile is provided in which all the necessary
+                     components are already defined appropriately.
+            </p> 
+                 
+            <p class="note"><strong>Note:</strong><br>If you use the function <span class="selectable_label">System-Library
+                  Definitions</span> in an initial installation, you have to set the Natural
+                     profile parameter <a href="../parms/madio.htm"><code>MADIO</code></a> to a value of at least
+                     "2000".
+            </p> 
+                
+         </li> 
+             
+         <li> 
+                 
+            <p class="initem">On the list, you can either mark with "AD"
+                     individual libraries to which you wish their predefined profiles to be applied;
+                     or you can choose to have the predefined profiles applied to all product system
+                     libraries simultaneously by marking the corresponding product with
+                     "AD".
+            </p> 
+                
+         </li> 
+            
+      </ol> 
+         
+       
+      <div><a name="inst-nsc-after-verify"></a></div> 
+        
+      <h3>Step 4: Installation Verification</h3> 
+         
+         
+      <p>The fact that you were able to perform
+             <a href="inst-nsc.htm#inst-nsc-after-pw">Step 1: Change the Password of
+            the User DBA</a> means that Natural Security is operational.
+             No further verification is required.
+      </p> 
+         
+         
+        
+      
+        
+       
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="inst-nsc.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../install/inst-nsc.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/install/inst-nsc.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="inst-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="inst-nwodaemon.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="inst-after.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

@@ -1,0 +1,411 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Use and Structure of DEFINE DATA Statement</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="pg_defi"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_defi.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_defi.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_defi-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_defi-over.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_defi_dv.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Programming Guide&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x52"></a>Use and Structure of DEFINE DATA Statement 
+         </h1>
+      </div> 
+         
+         
+      <p>The first statement in a Natural program written in
+             <a href="pg_mode.htm#pg_mode">structured mode</a> must always be a
+             <a href="../sm/defineda.htm"><code>DEFINE DATA</code></a>
+             statement which is used to define fields for use in a program.
+      </p> 
+         
+      <p>This document covers the following topics:</p>
+         
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_defi.htm#definedata_use">Field Definitions in DEFINE DATA Statement</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi.htm#fields_within">Defining Fields within a DEFINE DATA Statement</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi.htm#fields_in_lda">Defining Fields in a Separate Data Area</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi.htm#Structure_of_a_DEFINE_DATA_Statement_-_Level_Numbers">Structuring a DEFINE DATA Statement Using Level Numbers</a></p>
+         </li>
+      </ul> 
+         
+      <p>For information on structural indentation of a source program, see the
+             Natural system command <a href="../syscom/struct.htm"><code>STRUCT</code></a>.
+      </p> 
+        
+      <hr> 
+        
+      <div><a name="definedata_use"></a></div> 
+         
+      <h2> Field Definitions in DEFINE DATA Statement </h2> 
+          
+          
+      <p>In the <a href="../sm/defineda.htm"><code>DEFINE
+               DATA</code></a> statement, you define all the fields - database fields
+              as well as user-defined variables - that are to be used in the program.
+      </p> 
+          
+      <p>All fields to be used <em>must be</em> defined in the <code>DEFINE
+            DATA</code> statement.
+      </p> 
+          
+      <p>There are two ways to define the fields:</p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">The fields can be defined within the <code>DEFINE DATA</code>
+                      statement itself (see <a href="pg_defi.htm#fields_within">below</a>).
+            </p>
+                  
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">The fields can be defined outside the program in a
+                      <a href="pg_obj_darea.htm#pg_obj_darea">local or global data area</a>, with
+                      the <code>DEFINE DATA</code> statement referencing that data area (see
+                      <a href="pg_defi.htm#fields_in_lda">below</a>).
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>If fields are used by multiple programs/routines, they should be defined
+              in a data area outside the programs.
+      </p> 
+          
+      <p>For a clear application structure, it is usually better to define fields
+              in data areas outside the programs.
+      </p> 
+          
+      <p>Data areas are created and maintained with the <a href="../edis/edis_ux_data.htm">data area editor</a>, which is
+              described in the <cite>Editors</cite> documentation.
+      </p> 
+          
+      <p>In the <a href="pg_defi.htm#fields_within">first example</a>
+              below, the fields are defined within the <code>DEFINE DATA</code> statement of
+              the program. In the <a href="pg_defi.htm#fields_in_lda">second
+                 example</a>, the same fields are defined in a
+              <a href="pg_obj_darea.htm#Local_Data_Area">local data area</a> (LDA), and the
+              <code>DEFINE DATA</code> statement only contains a reference to that data
+              area.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_defi.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="fields_within"></a></div> 
+         
+      <h2> Defining Fields within a DEFINE DATA Statement </h2> 
+          
+          
+      <p>The following example illustrates how fields can be defined within the
+              <a href="../sm/defineda.htm"><code>DEFINE DATA</code></a>
+              statement itself:
+      </p> 
+          <pre class="verbatim">
+DEFINE DATA LOCAL 
+1 VIEWEMP VIEW OF EMPLOYEES 
+  2 NAME 
+  2 FIRST-NAME 
+  2 PERSONNEL-ID 
+1 #VARI-A (A20) 
+1 #VARI-B (N3.2) 
+1 #VARI-C (I4) 
+END-DEFINE 
+...
+</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_defi.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="fields_in_lda"></a></div> 
+         
+      <h2> Defining Fields in a Separate Data Area </h2> 
+          
+          
+      <p>The following example illustrates how fields can be defined in a
+              <a href="pg_obj_darea.htm#Local_Data_Area">local data area</a> (LDA):
+      </p> 
+          
+      <p> Program:</p> 
+          <pre class="verbatim">
+DEFINE DATA LOCAL 
+  <strong>USING LDA39</strong> 
+END-DEFINE 
+... 
+</pre> 
+          <p> Local Data Area <code>LDA39</code>: 
+      </p> <pre class="system-output">
+I T L Name                             F Leng Index/Init/EM/Name/Comment       
+- - - -------------------------------- - ---- ---------------------------------
+  V 1 VIEWEMP                                 EMPLOYEES    
+    2 NAME                             A   20                           
+    2 FIRST-NAME                       A   20
+    2 PERSONNEL-ID                     A    8                   
+    1 #VARI-A                          A   20
+    1 #VARI-B                          N  3.2
+    1 #VARI-C                          I    4
+ 
+</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_defi.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Structure_of_a_DEFINE_DATA_Statement_-_Level_Numbers"></a></div> 
+         
+      <h2> Structuring a DEFINE DATA Statement Using Level Numbers </h2> 
+          
+          
+      <p>The following topics are covered:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_defi.htm#struct_grouping">Structuring and Grouping Your Definitions</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi.htm#Level_Numbers_in_View_Definitions">Level Numbers in View Definitions</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi.htm#Field_Groups">Level Numbers in Field Groups</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi.htm#Level_Numbers_in_Redefinitions">Level Numbers in Redefinitions</a></p>
+         </li>
+      </ul> 
+          
+         
+      <div><a name="struct_grouping"></a></div> 
+          
+      <h3> Structuring and Grouping Your Definitions </h3> 
+           
+           
+      <p>Level numbers are used within the <a href="../sm/defineda.htm"><code>DEFINE DATA</code></a> statement to
+               indicate the structure and grouping of the definitions. This is relevant
+               with:
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem"> <a href="pg_defi.htm#Level_Numbers_in_View_Definitions">view
+                          definitions</a> 
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"> <a href="pg_defi.htm#Field_Groups">field groups</a> 
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"> <a href="pg_defi.htm#Level_Numbers_in_Redefinitions">redefinitions</a> 
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>Level numbers are 1- or 2-digit numbers in the range from 01 to 99 (the
+               leading zero is optional).
+      </p> 
+           
+      <p>Generally, variable definitions are on Level 1.</p> 
+           
+      <p>The level numbering in view definitions, redefinitions and groups must
+               be sequential; no level numbers may be skipped.
+      </p> 
+           
+          
+         
+      <div><a name="Level_Numbers_in_View_Definitions"></a></div> 
+          
+      <h3> Level Numbers in View Definitions </h3> 
+           
+           
+      <p>If you define a view, the specification of the view name must be on
+               Level 1, and the fields the view is comprised of must be on Level 2. (For
+               details on view definitions, see <a href="pg_dbms_ada.htm#pg_dbms_ada">Database Access</a>.)
+      </p> 
+           
+      <h4 class="floating-title"> Example of Level Numbers in View Definition:
+               
+      </h4> 
+           <pre class="verbatim">
+DEFINE DATA LOCAL 
+<strong>1</strong> VIEWEMP VIEW OF EMPLOYEES 
+  <strong>2</strong> NAME 
+  <strong>2</strong> FIRST-NAME 
+  <strong>2</strong> BIRTH 
+... 
+END-DEFINE
+</pre> 
+           
+          
+         <div><a name="Field_Groups"></a></div> 
+          
+      <h3> Level Numbers in Field Groups </h3> 
+           
+           
+      <p>The definition of groups provides a convenient way of referencing a
+               series of consecutive fields. If you define several fields under a common group
+               name, you can reference the fields later in the program by specifying only the
+               group name instead of the names of the individual fields.
+      </p> 
+           
+      <p>The group name must be specified on Level 1, and the fields contained
+               in the group must be one level lower.
+      </p> 
+           
+      <p>For group names, the same naming conventions apply as for user-defined
+               variables.
+      </p> 
+           
+          
+      <div><a name="d0e5197"></a></div> 
+           
+      <h4>Example of Level Numbers in Group:</h4> 
+            
+            <pre class="verbatim">
+DEFINE DATA LOCAL 
+1 #FIELDA (N2.2) 
+1 #FIELDB (I4) 
+<strong>1 #GROUPA 
+  2 #FIELDC (A20) 
+  2 #FIELDD (A10) 
+  2 #FIELDE (N3.2)</strong>
+1 #FIELDF (A2) 
+... 
+END-DEFINE 
+</pre> 
+            <p>In this example, the fields <code>#FIELDC</code>, <code>#FIELDD</code>
+                and <code>#FIELDE</code> are defined under the common group name
+                <code>#GROUPA</code>. The other three fields are not part of the group. Note
+                that <code>#GROUPA</code> only serves as a group name and is not a field in its
+                own right (and therefore does not have a format/length definition).
+      </p> 
+            
+           
+          
+         
+      <div><a name="Level_Numbers_in_Redefinitions"></a></div> 
+          
+      <h3> Level Numbers in Redefinitions </h3> 
+           
+           
+      <p>If you redefine a field, the <a href="../sm/defineda_redef.htm"><code>REDEFINE</code></a> option must be
+               on the same level as the original field, and the fields resulting from the
+               redefinition must be one level lower. For details on redefinitions, see
+               <a href="pg_defi_redef.htm#pg_defi_redef">Redefining
+            Fields</a>.
+      </p> 
+           
+      <h4 class="floating-title"> Example of Level Numbers in
+               Redefinition:
+      </h4> 
+           <pre class="verbatim">
+DEFINE DATA LOCAL 
+1 VIEWEMP VIEW OF STAFFDDM 
+  2 BIRTH 
+<strong>  2 REDEFINE BIRTH 
+    3 #YEAR-OF-BIRTH  (N4) 
+    3 #MONTH-OF-BIRTH (N2) 
+    3 #DAY-OF-BIRTH   (N2)</strong> 
+1 #FIELDA (A20) 
+<strong>1 REDEFINE #FIELDA 
+  2 #SUBFIELD1 (N5) 
+  2 #SUBFIELD2 (A10) 
+  2 #SUBFIELD3 (N5)</strong> 
+...  
+END-DEFINE 
+</pre> 
+           <p>In this example, the database field <code>BIRTH</code> is redefined as
+               three user-defined variables, and the user-defined variable
+               <code>#FIELDA</code> is redefined as three other user-defined variables.
+      </p> 
+           
+          
+        
+       
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="pg_defi.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_defi.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_defi.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_defi-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_defi-over.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_defi_dv.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

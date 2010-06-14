@@ -1,0 +1,289 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Examples of Using Direct Commands</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="sysobjh_example_cmds"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../utis/sysobjh_example_cmds.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/utis/sysobjh_example_cmds.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="sysobjh.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="sysobjh_option.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="sysobjh_int_cmd.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Tools and Utilities&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1>Examples of Using Direct Commands</h1>
+      </div> 
+         
+      <p>This section provides examples for using Object Handler direct
+             commands.
+      </p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="sysobjh_example_cmds.htm#sysobjh_example_cmds_Unload_Same_Platform">Unloading Objects for the Same Platform</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="sysobjh_example_cmds.htm#sysobjh_example_cmds_Unload_Different">Unloading Objects for Different Platforms</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="sysobjh_example_cmds.htm#sysobjh_example_cmds_Load_Internal">Loading Objects in Internal Format</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="sysobjh_example_cmds.htm#sysobjh_example_cmds_Load_Transfer">Loading Objects in Transfer Format</a></p>
+         </li>
+      </ul> 
+         
+      <p class="tip"><strong>Tip:</strong><br>For additional examples, you can view the command generated for an
+             Object Handler function. This command is automatically displayed when you use a
+             wizard. In advanced-user mode, you can activate the display of the command by
+             either entering the Object Handler command <code>SET ADVANCEDCMD
+            ON</code> or setting the parameter
+             <code>Display-Cmd-in-Advanced-Mode</code> to <code>Y</code> (Yes) in
+             the Object Handler profile (see also <a href="sysobjh_profile.htm#sysobjh_profile">Profile
+            Settings</a>).
+      </p>
+      <hr>
+      <div><a name="sysobjh_example_cmds_Unload_Same_Platform"></a></div> 
+         
+      <h2>Unloading Objects for the Same Platform </h2> 
+          
+          
+      <p>This section contains examples of how to unload objects in internal
+              format to a work file in order to load them on the same platform, within either
+              a local mainframe, UNIX, OpenVMS or Windows environment:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">Unload all Natural programming objects (source objects only) from
+                      library <code>ABC</code>:
+            </p> <pre class="command-input">UNLOAD * LIB ABC OBJTYPE N SCKIND S</pre> 
+                 </li> 
+              
+         <li> 
+                  
+            <p class="initem">Unload all Natural programming objects (cataloged objects only) from
+                      library <code>ABC</code>: 
+            </p> <pre class="command-input">UNLOAD * LIB ABC OBJTYPE N SCKIND C</pre> 
+                 </li> 
+              
+         <li> 
+                  
+            <p class="initem">Unload all Natural programming objects (cataloged objects and source
+                      objects) from library <code>ABC</code>: 
+            </p> <pre class="command-input">UNLOAD * LIB ABC OBJTYPE N SCKIND A</pre> 
+                 </li> 
+              
+         <li> 
+                  
+            <p class="initem">Unload all Natural programming objects (source objects only) from
+                      library <code>ABC</code> to load in library <code>ABCNEW</code>: 
+            </p> <pre class="command-input">UNLOAD * LIB ABC OBJTYPE N SCKIND S WITH NEWLIBRARY ABCNEW</pre> 
+                 </li> 
+              
+         <li> 
+                  
+            <p class="initem">On a mainframe: Unload all DDMs whose names start with
+                      <code>EMP</code> and which point to database <code>88</code>: 
+            </p> <pre class="command-input">UNLOAD EMP* LIB * OBJTYPE D DDMDBID 88</pre> 
+                 </li> 
+              
+         <li> 
+                  
+            <p class="initem">On UNIX, OpenVMS or Windows: Unload all DDMs whose names start with
+                      <code>EMP</code> and which point to database <code>88</code>: 
+            </p> <pre class="command-input">UNLOAD EMP* LIB * OBJTYPE N NATTYPE V DDMDBID 88</pre> 
+                 </li> 
+              
+         <li> 
+                  
+            <p class="initem">On UNIX, OpenVMS or Windows: Unload all DDMs whose names start with
+                      <code>EMP</code> from library <code>VLIB</code> to load in library
+                      <code>VLIBNEW</code>: 
+            </p> <pre class="command-input">UNLOAD EMP* LIB VLIB OBJTYPE N NATTYPE V WITH NEWLIBRARY VLIBNEW</pre> 
+                 </li> 
+              
+         <li> 
+                  
+            <p class="initem">Unload all user-defined error messages from library
+                      <code>ERRLIB</code> to load in library <code>NEWERR</code>: 
+            </p> <pre class="command-input">UNLOAD * LIB ERRLIB OBJTYPE E SLKIND A WITH NEWLIBRARY NEWERR</pre> 
+                 </li> 
+              
+         <li> 
+                  
+            <p class="initem"> On Windows: Unload all Natural programming objects (cataloged objects
+                      and source objects) from library <code>ABC</code> to a portable work file on a
+                      PC: 
+            </p> <pre class="command-input">UNLOAD * LIB ABC OBJTYPE N WHERE WORKFILE C:\WF1.SAG WORKFILETYPE PORTABLE</pre> 
+                  <p class="initem"> or </p> <pre class="command-input">UNLOAD * LIB ABC OBJTYPE N WHERE WORK C:\WF1.SAG WFT P</pre> 
+                 </li> 
+             
+      </ul> 
+         
+      <div class="noprint">
+         <p><a href="sysobjh_example_cmds.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="sysobjh_example_cmds_Unload_Different"></a></div> 
+         
+      <h2>Unloading Objects for Different Platforms </h2> 
+          
+          
+      <p>This section contains command examples of how to unload objects in
+              Transfer format to a work file in order to load them on a different platform
+              such as unloading in a mainframe and loading in a UNIX, an OpenVMS or a Windows
+              environment.
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">Unload all Natural programming objects (source objects only) from
+                      library <code>ABC</code>: 
+            </p> <pre class="command-input">UNLOAD * LIB ABC OBJTYPE N WHERE TRANSFER</pre> 
+                 </li> 
+              
+         <li> 
+                  
+            <p class="initem">Unload all Natural programming objects (source objects only) and
+                      user-defined error messages from library <code>ABC</code>: 
+            </p> <pre class="command-input">UNLOAD * LIB ABC WHERE TRANSFER</pre> 
+                 </li> 
+              
+         <li> 
+                  
+            <p class="initem">Unload all Natural programming objects (source objects only) from
+                      library <code>ABC</code> with fixed record length: 
+            </p> <pre class="command-input">UNLOAD * LIB ABC OBJTYPE N WHERE TRANSFER FIXEDLENGTH</pre> 
+                 </li> 
+             
+      </ul> 
+         
+      <div class="noprint">
+         <p><a href="sysobjh_example_cmds.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="sysobjh_example_cmds_Load_Internal"></a></div> 
+         
+      <h2>Loading Objects in Internal Format </h2> 
+          
+          
+      <p>This section contains command examples of how to load objects from a
+              work file in internal format.
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">Load all objects to library <code>LIBNEW</code> and replace any that
+                      already exist: 
+            </p> <pre class="command-input">LOADALL WITH NEWL LIBNEW WHERE REPLACE ALL</pre> 
+                 </li> 
+              
+         <li> 
+                  
+            <p class="initem">Load all object with target library <code>TGTLIB</code> to the new
+                      target library <code>NEWTGT</code>: 
+            </p> <pre class="command-input">LOAD * LIB TGTLIB WITH NEWLIBRARY NEWTGT</pre> 
+                 </li> 
+              
+         <li> 
+                  
+            <p class="initem">Load the user-defined error messages <code>1000</code> to
+                      <code>1500</code> from library <code>ERRLIB</code> only: 
+            </p> <pre class="command-input">LOAD * LIB ERRLIB OBJTYPE E FMNUM 1000 TONUM 1500</pre> 
+                 </li> 
+             
+      </ul> 
+         
+      <div class="noprint">
+         <p><a href="sysobjh_example_cmds.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="sysobjh_example_cmds_Load_Transfer"></a></div> 
+         
+      <h2>Loading Objects in Transfer Format </h2> 
+          
+          
+      <p>This section contains command examples of how to load objects from a
+              work file in Transfer format.
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">Load all objects to library <code>LIBNEW</code> and replace any that
+                      already exist: 
+            </p> <pre class="command-input">LOADALL WITH NEWL LIBNEW WHERE TRANSFER REPLACE ALL</pre> 
+                 </li> 
+              
+         <li> 
+                  
+            <p class="initem">Load all object with target library <code>TGTLIB</code> to new target
+                      library <code>NEWTGT</code>: 
+            </p> <pre class="command-input">LOAD * LIB TGTLIB WITH NEWLIBRARY NEWTGT WHERE TRANSFER</pre> 
+                 </li> 
+             
+      </ul> 
+         
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="sysobjh_example_cmds.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../utis/sysobjh_example_cmds.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/utis/sysobjh_example_cmds.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="sysobjh.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="sysobjh_option.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="sysobjh_int_cmd.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

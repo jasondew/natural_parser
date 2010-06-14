@@ -1,0 +1,1538 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Service Directory Maintenance</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="sysrpc_sm"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../utis/sysrpc_sm.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/utis/sysrpc_sm.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="sysrpc-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="sysrpc_main.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="sysrpc_stub-over.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Tools and Utilities&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x223"></a>Service Directory Maintenance 
+         </h1>
+      </div> 
+          
+          
+         
+      <p>The <span class="selectable_label">Service Directory Maintenance</span>
+             function is used to maintain a service directory in order to connect the
+             client's calling program to a subprogram on a server. 
+      </p>
+      <p>The service directory information
+             is stored in the NATCLTGS subprogram in the library that is defined with the profile parameter <a href="../parms/rpcsdir.htm"><code>RPCSDIR</code></a> (see the <cite>Parameter Reference</cite> documentation). If <code>RPCSDIR</code> is set, the <span class="selectable_label">Service Directory Maintenance</span> function references the library specified with <code>RPCSDIR</code>. If <code>RPCSDIR</code> is not set (this is the default), the library where you are logged on  is referenced. In this case, log on to the library
+         (or one of its steplibs) used by the client at runtime before you perform the <span class="selectable_label">Service Directory Maintenance</span> function.
+      </p>
+      <p>The name of the library referenced for service directory maintenance is indicated in the upper right corner of the <a href="sysrpc_sm.htm#sysrpc_serv_dir_screen"><span class="selectable_label">Service Directory</span></a>  screen (see <cite>Invoking Service Directory Maintenance</cite>). If <code>RPCSDIR</code> is set, the screen title contains <span class="selectable_label">Central</span>, which indicates that the library displayed on the screen is <em>not</em> the library where you are currently logged on, but the central library specified with <code>RPCSDIR</code>.
+      </p>
+         
+         
+      <h4 class="floating-title">Attention:</h4> 
+         
+      <p>If NATCLTGS is stored in the Natural system library SYSRPC, we strongly
+             recommend that you move NATCLTGS to the application library (or one of its
+             steplibs) used by the client.
+      </p> 
+         
+      <p>For further information on how to apply the
+             <span class="selectable_label">Service Directory Maintenance</span> function, refer to
+             <a href="../rpc/oper.htm#oper_Spec_RPC_Address">Specifying RPC
+            Server Addresses</a> described in <cite>Operating a Natural
+                RPC Environment</cite> in the <cite>Natural Remote Procedure Call
+                (RPC)</cite> documentation.
+      </p> 
+         
+      <p>This section covers the following topics:</p>
+         
+      <ul>
+         <li>
+            <p class="initem"><a href="sysrpc_sm.htm#sysrpc_sm_SM_Conc">Service Directory Concept</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="sysrpc_sm.htm#sysrpc_sm_Invoking_Service_Directory_Maintenance">Invoking Service Directory Maintenance</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="sysrpc_sm.htm#sysrpc_sm_Fields">Fields on the Service Directory Screen</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="sysrpc_sm.htm#sysrpc_sm_Commands">Commands for Service Directory Maintenance</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="sysrpc_sm.htm#sysrpc_sm_Def_Log">Defining Logical Node Names and Logical Services</a></p>
+         </li>
+      </ul> 
+        
+      <hr>
+      <div><a name="sysrpc_sm_SM_Conc"></a></div> 
+         
+      <h2>Service Directory Concept </h2> 
+          
+      <p>A service directory has a hierarchical structure with a
+              cascading list to assign subordinate to superior fields. The highest
+              hierarchical level is node and the lowest is program.&nbsp;You cannot enter node,
+              server, library and program in the same line. If you do so, an appropriate
+              error message appears. You need to enter the value of a subordinate field in
+              the lines below the superior field. You can assign several servers to a node,
+              several libraries to a server and several programs to a library.
+      </p> 
+          
+      <p>The node and server names specified in the service
+              directory are either physical names or logical names and logical services:
+      </p> 
+           
+           
+           
+      <ul>
+         <li>
+            <p class="initem"><a href="sysrpc_sm.htm#sysrpc_sm_Physical">Physical Nodes and Servers</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="sysrpc_sm.htm#sysrpc_sm_Loc_Trans">Location Transparency</a></p>
+         </li>
+      </ul> 
+          
+         
+      <div><a name="sysrpc_sm_Physical"></a></div> 
+          
+      <h3> Physical Nodes and Servers</h3> 
+           
+           
+      <p>Physical node and server names denote the names of real
+               nodes (valid TCP/IP or Entire Net-Work addresses) and servers.
+      </p> 
+           
+      <p>In <a href="sysrpc_sm.htm#sysrpc_sm_Example1">Example 1 - Standard View of Service
+            Directory</a>, two servers are defined for one node. Both
+               servers are connected to the same node: <code>ETB045</code>. The remote
+               <code>CALLNAT</code> to subprogram <code>SUB1</code> is executed on server
+               <code>NRPC001</code>, whereas subprograms <code>SUB2</code> and
+               <code>SUB3</code> are executed on server <code>NRPC002</code>.
+      </p> 
+           
+      <p>The server names specified here must be identical to the
+               server names specified for the server with the profile parameter
+               <a href="../parms/srvname.htm"><code>SRVNAME</code></a>
+               described in the <cite>Parameter Reference</cite> documentation.
+               Analogously, the node name in the service directory must be identical to the
+               node name specified for the server with the profile parameter
+               <a href="../parms/srvnode.htm"><code>SRVNODE</code></a>
+               in the <cite>Parameter Reference</cite> documentation.
+      </p> 
+            
+            
+            
+            
+          
+      <div><a name="sysrpc_sm_Loc_Trans" id="12871"></a></div> 
+          
+      <h3> Location Transparency</h3> 
+           
+           
+      <p>Location transparency is a concept where physical node
+               names can be replaced by logical node names, and a combination of physical node
+               and server names can be replaced by logical services.
+      </p> 
+           
+      <p>Logical node names and logical services are defined with
+               EntireX and are assigned to physical node and server names at Natural
+               runtime.
+      </p> 
+           
+      <p>In <a href="sysrpc_sm.htm#sysrpc_sm_Example1">Example 1 - Standard View of Service
+            Directory</a>, <code>*LOCTRAN</code> in the field
+               <span class="selectable_label">Node</span> indicates that the field <span class="selectable_label">Server</span>
+               contains the logical service <code>NRPC001-LOGICAL</code>.
+               <code>LOGBROKER=NODE</code> in the field <span class="selectable_label">Node</span> indicates
+               the logical node name.
+      </p> 
+           
+      <h4 class="floating-title">Related Topics:</h4> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem"> <a href="sysrpc_sm.htm#sysrpc_sm_Def_Log">Defining Logical
+                  Node Names and Logical Services</a>.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"> <a href="../rpc/oper.htm#oper_use_location_transparency">Using Location
+                  Transparency</a> in the section <cite>Operating a Natural
+                          RPC Environment</cite> in the <cite>Natural Remote Procedure Call
+                          (RPC)</cite> documentation.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">The relevant sections in the EntireX documentation.</p> 
+                  
+         </li> 
+              
+      </ul> 
+            
+            
+            
+            
+            
+           
+         
+      <div class="noprint">
+         <p><a href="sysrpc_sm.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="sysrpc_sm_Invoking_Service_Directory_Maintenance"></a></div> 
+         
+      <h2> Invoking Service Directory Maintenance</h2> 
+          
+          
+      <h4 class="floating-title">Attention:</h4> 
+          
+      <p>The <span class="selectable_label">Service Directory Maintenance</span> function invokes
+              the Natural editor. As a result, data stored in the source work area may be
+              lost when invoking <span class="selectable_label">Service Directory Maintenance</span>. An
+              appropriate message will warn you not to delete any existing entries
+              unintentionally: choose <span class="key">PF12</span> to cancel the function or choose
+              <span class="key">ENTER</span> to confirm the action and clear the source work area.
+      </p> 
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong> To invoke the <span class="selectable_label">Service Directory Maintenance</span>
+                  function </strong></p>
+      <ol class="steps">
+         <li> 
+                   
+                   
+            <p class="instep">In the <span class="selectable_label">Code</span> field of the <span class="selectable_label">Client
+                  Maintenance</span> menu, enter the following command: 
+            </p> <pre class="command-input">SM</pre> 
+                   
+                 </li>
+         <li> 
+                   
+                   
+            <p class="instep"><a name="sysrpc_sm_Example1"></a>Choose <span class="key">ENTER</span>. 
+            </p> 
+                   
+            <ul> 
+                       
+               <li> 
+                           
+                  <p class="initem">If the service directory already contains service definitions, a
+                               window appears with the following message:
+                  </p> <pre class="system-output">Existing service definitions found</pre> 
+                           <p class="initem">In the <span class="selectable_label">Code</span> field of the window, enter an
+                               <code>A</code> (default) to keep old definitions and append new ones and choose
+                               <span class="key">ENTER</span>.
+                  </p> 
+                           
+                  <p class="initem"> Or:<br>In the <span class="selectable_label">Code</span> field of the
+                               window, enter an <code>I</code> to ignore all existing definitions and delete
+                               them from the service directory and choose <span class="key">ENTER</span>.
+                  </p> 
+                          
+               </li> 
+                      
+            </ul> 
+                   
+            <p class="instep"> The standard view of the <a name="sysrpc_serv_dir_screen"></a><span class="selectable_label">Service Directory</span>
+                       screen is displayed as shown in the following example:
+            </p> 
+                   
+            <h4 class="floating-title">Example 1 - Standard View of Service
+                       Directory
+            </h4> 
+                   
+            <table border="1" cellpadding="5" class="screen">
+               <tr>
+                  <td><pre>
+ 15:32:25            *** NATURAL Remote Procedure Call ***           2004-04-14
+                              Service Directory                        SYSRPC 
+                                                                               
+              Node        Tr.        Server      Logon  Library     Program    
+ 1      ETB045__________   B    ________________   _   ________    ________   
+ 2      ________________   _    NRPC001_________   N    ________    ________   
+ 3      ________________   _    ________________   _    SYSTEM__    ________   
+ 4      ________________   _    ________________   _    ________    SUB1____   
+ 5      ________________   _    NRPC002_________   Y    ________    ________   
+ 6      ________________   _    ________________   _    SYSTEM__    ________   
+ 7      ________________   _    ________________   _    ________    SUB2____   
+ 8      ________________   _    ________________   _    ________    SUB3____   
+ 9      *LOCTRAN________   _    ________________   _    ________    ________   
+ 10     ________________   B    NRPC001-LOGICAL_   N    ________    ________   
+ 11     ________________   _    ________________   _    SYSTEM__    ________   
+ 12     ________________   _    ________________   _    ________    SUB1____   
+ 13     LOGBROKER=NODE     B    ________________   N    ________    ________   
+ 14     ________________   _    NRPC002_________   N    ________    ________   
+ 15     ________________   _    ________________   _    SYSTEM__    ________   
+ 16     ________________   _    ________________   _    ________    S?B*____   
+                                                                               
+Command ==&gt;                                                                    
+Enter-PF1---PF2---PF3---PF4---PF5---PF6---PF7---PF8---PF9---PF10--PF11--PF12---
+      Help  LocTr Exit  Find  -H    +H    -P    +P    Top   Bot   &lt;     Canc   
+</pre></td>
+               </tr>
+            </table> 
+                   
+            <p class="instep"> The <span class="selectable_label">Service Directory</span> screen provides a maximum
+                       of 500 lines for input.
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep"><a name="sysrpc_sm_Example2"></a> If you choose <span class="key">PF11</span> or enter the
+                       less than (&lt;) sign in the Command line, the extended node/server view of the
+                       <span class="selectable_label">Service Directory</span> screen is displayed similar to the
+                       following example:
+            </p> 
+                   
+            <h4 class="floating-title"> Example 2 - Extended Node/Server View of Service
+                       Directory
+            </h4> 
+                   
+            <table border="1" cellpadding="5" class="screen">
+               <tr>
+                  <td><pre>
+   14:48:33            *** NATURAL Remote Procedure Call ***           2004-04-14
+                               Service Directory                        SYSRPC     
+                                                                                
+                     Node               Tr.              Server            Logon
+  1    ETB045__________________________  B  ________________________________  _ 
+  2    ________________________________  _  NRPC001_________________________  N 
+  3    ________________________________  _  ________________________________  _ 
+  4    ________________________________  _  ________________________________  _ 
+  5    ________________________________  _  NRPC002_________________________  Y 
+  6    ________________________________  _  ________________________________  _ 
+  7    ________________________________  _  ________________________________  _ 
+  8    ________________________________  _  ________________________________  _ 
+  9    *LOCTRAN________________________  _  ________________________________  _ 
+  10   ________________________________  B  NRPC001-LOGICAL_________________  N 
+  11   ________________________________  _  ________________________________  _ 
+  12   ________________________________  _  ________________________________  _ 
+  13   LOGBROKER=NODE__________________  B  ________________________________  N 
+  14   ________________________________  _  NRPC002_________________________  N 
+  15   ________________________________  _  ________________________________  _ 
+  16   ________________________________  _  ________________________________  _ 
+                                                                                
+ Command ==&gt;                                                                    
+ Enter-PF1---PF2---PF3---PF4---PF5---PF6---PF7---PF8---PF9---PF10--PF11--PF12---
+       Help  LocTr Exit  Find  -H    +H    -P    +P    Top   Bot   &gt;     Canc   
+</pre></td>
+               </tr>
+            </table> 
+                   
+            <p class="instep"> If you choose <span class="key">PF11</span> or enter the greater than (&gt;) sign
+                       in the Command line, the standard view of the <span class="selectable_label">Service
+                  Directory</span> screen is displayed as shown in
+                       <a href="sysrpc_sm.htm#sysrpc_sm_Example1">Example 1 - Standard View of
+                  Service Directory</a>. 
+            </p> 
+                   
+                 
+         </li>
+      </ol> 
+         
+      <div class="noprint">
+         <p><a href="sysrpc_sm.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="sysrpc_sm_Fields"></a></div> 
+         
+      <h2> Fields on the <span class="selectable_label">Service Directory</span> Screen
+             
+      </h2> 
+          
+      <p>The <span class="selectable_label">Service Directory</span> screen contains the following
+              input fields (one entry per line):
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="no%"> 
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th>Field</th> 
+                       
+               <th>Description</th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> <span class="selectable_label">Node</span> 
+               </td> 
+                       
+               <td> 
+                  
+                  <p>The name of the node to which the remote <code>CALLNAT</code> is
+                               sent. See also
+                               <a href="../rpc/intro_rpc.htm#intro_rpc_Definition_of_Terms">Natural RPC
+                                  Terminology</a> in the <cite>Natural Remote Procedure Call
+                                  (RPC)</cite> documentation.
+                  </p> 
+                           
+                  <p>The maximum length of input is as follows:</p> 
+                           
+                  <table border="0" cellpadding="3" margin-top="9pt">
+                     <tbody valign="top">
+                        <tr align="left"> 
+                                      
+                           <td class="titem">Standard view of the <span class="selectable_label">Service Directory</span>
+                                          screen:
+                           </td> 
+                                      
+                           <td class="titem">16 characters</td> 
+                                     
+                        </tr>
+                        <tr align="left"> 
+                                      
+                           <td class="titem">Extended node/server view of the <span class="selectable_label">Service
+                                             Directory</span> screen:
+                           </td> 
+                                      
+                           <td class="titem">32 characters</td> 
+                                     
+                        </tr>
+                        <tr align="left"> 
+                                      
+                           <td class="titem">Using the <span class="selectable_label">Location Transparency</span> window
+                                          (see <a href="sysrpc_sm.htm#sysrpc_sm_PF2"><span class="key">PF2</span></a> in
+                                          <cite>Direct Commands and PF Keys</cite>):
+                           </td> 
+                                      
+                           <td class="titem">192 characters</td> 
+                                     
+                        </tr>
+                     </tbody>
+                  </table> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <span class="selectable_label">Tr.</span> 
+               </td> 
+                       
+               <td> 
+                  
+                  <p>The transport protocol: </p> 
+                           
+                  <p><code>B</code> indicates EntireX Broker ACI protocol.
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <span class="selectable_label">Server</span> 
+               </td> 
+                       
+               <td> 
+                  
+                  <p>The name of the server to which the remote <code>CALLNAT</code> is
+                               sent. See also
+                               <a href="../rpc/intro_rpc.htm#intro_rpc_Definition_of_Terms">Natural RPC
+                                  Terminology</a> in the <cite>Natural Remote Procedure Call
+                                  (RPC)</cite> documentation.
+                  </p> 
+                           
+                  <p>The maximum length of input is as follows:</p> 
+                           
+                  <table border="0" cellpadding="3" margin-top="9pt">
+                     <tbody valign="top">
+                        <tr align="left"> 
+                                      
+                           <td class="titem">Standard view of the <span class="selectable_label">Service Directory</span>
+                                          screen:
+                           </td> 
+                                      
+                           <td class="titem">16 characters</td> 
+                                     
+                        </tr>
+                        <tr align="left"> 
+                                      
+                           <td class="titem">Extended node/server view of the <span class="selectable_label">Service
+                                             Directory</span> screen:
+                           </td> 
+                                      
+                           <td class="titem">32 characters</td> 
+                                     
+                        </tr>
+                        <tr align="left"> 
+                                      
+                           <td class="titem">Using the <span class="selectable_label">Location Transparency</span> window
+                                          (see <a href="sysrpc_sm.htm#sysrpc_sm_PF2"><span class="key">PF2</span></a> in
+                                          <cite>Direct Commands and PF Keys</cite>):
+                           </td> 
+                                      
+                           <td class="titem">192 characters</td> 
+                                     
+                        </tr>
+                     </tbody>
+                  </table> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><a name="sysrpc_sm_LOGON_mfux"></a><span class="selectable_label">Logon</span></td> 
+                       
+               <td>
+                  <table border="0" width="100%">
+                     <colgroup>
+                        <col width="4%">
+                        <col width="96%">
+                     </colgroup> 
+                              
+                     <tbody align="left" valign="top"> 
+                                  
+                        <tr> 
+                                      
+                           <td colspan="2"> 
+                              
+                              <p> Initiates a Natural logon to the server. </p>
+                           </td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td colspan="2">&nbsp;</td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td colspan="2"> 
+                              
+                              <p> This is possible at server or node level and applies to all
+                                 definitions made at a hierarchically lower level. If the
+                                              <span class="selectable_label">Logon</span> option has been set for a specific server, it
+                                              applies to all associated library and subprogram definitions. 
+                              </p>
+                           </td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td colspan="2">&nbsp;</td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td colspan="2"> 
+                              
+                              <p>Possible values are as follows:</p>
+                           </td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td>&nbsp;</td> 
+                                      
+                           <td>&nbsp;</td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td><code>Y</code></td> 
+                                      
+                           <td>If set to <code>Y</code> (Yes), for each
+                              non-conversational <code>CALLNAT</code> request or for each start of a
+                              conversation, the client initiates a Natural logon to the server using the
+                              current library name on the client, regardless of the libraries in the
+                                          subordinate <span class="selectable_label">Library</span> column that belongs to the
+                                          <span class="selectable_label">Server</span> field. You can use the Application Programming
+                                          Interface USR4008N to specify a different library (see also <cite>Logging on
+                                             to a Different Library</cite> in
+                                          <a href="../rpc/oper.htm#oper_Using_LOGON">Using the Logon
+                                             Option</a>).
+                           </td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td><code>N</code><br>or<br>
+                                 <var>blank</var> 
+                           </td> 
+                                      
+                           <td>If set to <code>N</code> (No) or if&nbsp; no value
+                              is entered, no logon is initiated.
+                           </td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td colspan="2">&nbsp;</td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td colspan="2"> 
+                              
+                              <p> After the remote <code>CALLNAT</code> has been executed
+                                 (successfully or not) or at the end of a conversation, the server library is
+                                 reset to its previous state. For more information, see
+                                              <a href="../rpc/oper.htm#oper_Using_LOGON">Using the Logon
+                                                 Option</a> in the <cite>Natural Remote Procedure Call
+                                                 (RPC)</cite> documentation.
+                              </p>
+                           </td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td colspan="2">&nbsp;</td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td colspan="2"> 
+                              
+                              <p> See also <a href="sysrpc_com_exec.htm#sysrpc_com_exec">Server
+                                           Command Execution</a>. 
+                              </p>
+                           </td> 
+                                     
+                        </tr> 
+                                 
+                     </tbody> 
+                             
+                  </table>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <span class="selectable_label">Library</span> 
+               </td> 
+                       
+               <td>SYSTEM or the name of the library to which your client
+                  application is logged on during the execution of the remote
+                  <code>CALLNAT</code>.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><span class="selectable_label">Program</span></td> 
+                       
+               <td>
+                  <table border="0" width="100%">
+                     <colgroup>
+                        <col width="7%">
+                        <col width="93%">
+                     </colgroup> 
+                              
+                     <tbody align="left" valign="top"> 
+                                  
+                        <tr> 
+                                      
+                           <td colspan="2"> 
+                              
+                              <p> The name of the remote subprogram to be accessed from the
+                                       client. 
+                              </p>
+                           </td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td colspan="2">&nbsp;</td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td colspan="2"> 
+                              
+                              <p> You can enter a name or a range of names. Valid names are any
+                                 combinations of one or more alphanumeric characters with one or more asterisks
+                                 (*) and/or one or more question marks (?) where:
+                              </p>
+                           </td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td colspan="2">asterisk (*) denotes any string
+                              of characters,<br>question mark (?) denotes a single character.
+                           </td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td colspan="2">&nbsp;</td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td colspan="2"> 
+                              
+                              <p>Invalid combinations are:</p>
+                           </td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td>&nbsp;</td> 
+                                      
+                           <td>&nbsp;</td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td><code>*?</code></td> 
+                                      
+                           <td>An asterisk followed by a question mark is
+                              converted to <code>?*</code>.
+                           </td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td><code>**</code></td> 
+                                      
+                           <td>Two or more consecutive asterisks are
+                              converted to a single asterisk.
+                           </td> 
+                                     
+                        </tr> 
+                                 
+                     </tbody> 
+                             
+                  </table>
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+          
+      <div><a name="d0e206171"></a></div> 
+          
+      <h3>Selection Criteria for Node and Server</h3> 
+           
+           
+      <p>At Natural runtime, the selection of a node and server depends on the
+               value of the fields <span class="selectable_label">Program</span> and
+               <span class="selectable_label">Library</span>. Comply with the following conditions:
+      </p> 
+           
+      <h4 class="floating-title">Non-conversational <code>CALLNAT</code></h4> 
+           
+      <ol> 
+               
+         <li> 
+                   
+            <p class="initem">The <span class="selectable_label">Library</span> field must contain the name of the
+                       current application library or SYSTEM.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">The name of the subprogram specified in the <code>CALLNAT</code>
+                       statement must be contained in the <span class="selectable_label">Program</span> field, which
+                       belongs to the <span class="selectable_label">Library</span> field in point (1).
+            </p> 
+                  
+         </li> 
+              
+      </ol> 
+           
+      <h4 class="floating-title">Conversational <code>CALLNAT</code></h4> 
+           
+      <ol> 
+               
+         <li> 
+                   
+            <p class="initem">The <span class="selectable_label">Library</span> field must contain the name of the
+                       current application library or SYSTEM.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">All subprograms specified in the <code>OPEN CONVERSATION</code>
+                       statement must be contained in a <span class="selectable_label">Program</span> field, which
+                       belongs to <span class="selectable_label">Library</span> field in point (1).
+            </p> 
+                  
+         </li> 
+              
+      </ol> 
+           
+      <p>The node and server used for a non-conversational or conversational
+               <code>CALLNAT</code> are taken from the superior <span class="selectable_label">Node</span> and
+               <span class="selectable_label">Server</span> fields of the <span class="selectable_label">Library</span> field in
+               point (1).
+      </p> 
+          
+      <div class="noprint">
+         <p><a href="sysrpc_sm.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="sysrpc_sm_Commands"></a></div>
+         
+         
+      <h2> Commands for Service Directory Maintenance </h2> 
+          
+      <p>This section contains information on the commands provided on the
+              <span class="selectable_label">Service Directory</span> screen:
+      </p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="sysrpc_sm.htm#sysrpc_sm_Line_Commands">Line Commands</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="sysrpc_sm.htm#sysrpc_sm_Direct_Com">Direct Commands and PF Keys</a></p>
+         </li>
+      </ul> 
+         
+      <div><a name="sysrpc_sm_Line_Commands"></a></div> 
+          
+      <h3> Line Commands </h3> 
+           
+           
+      <p>The line commands provided on the <span class="selectable_label">Service
+            Directory</span> screen can be used to copy, move or delete single or
+               multiple lines that contain field values.
+      </p> 
+           
+      <p>Enter a line command at the beginning of a line, that is, overwrite the
+               sequential number and choose <span class="key">ENTER</span>.
+      </p> 
+           
+      <p>See also <a href="sysrpc_sm.htm#sysrpc_sm_To_copy_or_move">To
+            copy or move a block of lines</a> and the direct command
+               <a href="sysrpc_sm.htm#sysrpc_sm_RESET"><code>RESET</code></a>.
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="no%"> 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th nowrap>Line Command</th> 
+                        
+               <th>Function</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> <code>A</code> 
+               </td> 
+                        
+               <td>Copies or moves the block of lines marked with
+                  <code>CC</code> or <code>MM</code> below the line
+                            in which the command was entered.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>CC</code> 
+               </td> 
+                        
+               <td>Marks the block of lines to be copied.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>D</code> 
+               </td> 
+                        
+               <td>Deletes the marked line.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>DD</code> 
+               </td> 
+                        
+               <td>Marks and deletes a block of lines. 
+                  
+                  <p>Mark a block of lines by entering this command in the first and
+                              the last line of the block and choose <span class="key">ENTER</span> to execute the
+                                command.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>I</code> 
+               </td> 
+                        
+               <td>Inserts five empty lines below the line in which the command
+                  was entered.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>MM</code> 
+               </td> 
+                        
+               <td>Marks the block of lines to be moved.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>P</code> 
+               </td> 
+                        
+               <td>Copies or moves the block of lines marked with
+                  <code>CC</code> or <code>MM</code> above the line
+                            in which the command was entered.
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong> <a name="sysrpc_sm_To_copy_or_move"></a>To copy or move a block of
+                   lines </strong></p>
+      <ol class="steps">
+         <li> 
+                    
+                    
+            <p class="instep">At the beginning of the line where the block starts, overwrite the
+                        sequence number with either of the following line commands:
+            </p> <pre class="command-input">CC</pre> 
+                    <p class="instep"> to copy the block or</p><pre class="command-input">MM</pre> 
+                    <p class="instep"> to move the block.</p> 
+                    
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">At the beginning of the line where the block ends, overwrite the
+                        sequence number with either of the following line commands: 
+            </p> <pre class="command-input">CC</pre> 
+                    <p class="instep"> to copy the block or</p><pre class="command-input">MM</pre> 
+                    <p class="instep"> to move the block.</p> 
+                    
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">Choose <span class="key">ENTER</span>.
+            </p> 
+                    
+                    
+                    
+            <p class="instep">The line commands disappear, the sequence numbers are displayed
+                        again and the block of lines has been marked.
+            </p> 
+                    
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">At the beginning of the line below or above which you want to place
+                        the marked block of lines, enter either of the following line commands:
+            </p> <pre class="command-input">A</pre> 
+                    <p class="instep"> to copy or move the block <em>below</em> the specified line or
+            </p><pre class="command-input">P</pre> 
+                    <p class="instep"> to copy or move the block <em>above</em> the specified line.
+            </p> 
+                    
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">Note that you can only execute <code>A</code> or
+                        <code>P</code> on lines where at least one field is filled.
+            </p> 
+                    
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">Choose <span class="key">ENTER</span>.
+            </p> 
+                    
+                    
+                    
+            <p class="instep">The block of lines is copied or moved below or above the specified
+                        line.
+            </p> 
+                    
+                  
+         </li>
+      </ol> 
+          
+      <div><a name="sysrpc_sm_Direct_Com"></a></div> 
+          
+      <h3> Direct Commands and PF Keys </h3> 
+           
+           
+      <p>The following direct commands and PF keys are provided on the
+               <span class="selectable_label">Service Directory</span> screen:
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="no%"> 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th nowrap>Direct Command</th> 
+                        
+               <th nowrap>PF Key</th> 
+                        
+               <th>Function</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td>
+                  <code><u>EXP</u>IRATION</code><code> </code>
+                            
+               </td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td> The remote directory data is loaded at runtime. The expiration
+                  time in seconds determines the period of validity of this data. If directory
+                  data is requested after the expiration time set, it will automatically be
+                  reloaded. If the expiration time is set to <code>0</code>, the remote directory
+                            data will not be reloaded. 
+                            
+                  <p>With the direct command <code>EXPIRATION</code>, you
+                                can enter an expiration time in seconds, for example, <code>EXPIRATION
+                                   86400</code>. Maximum is an 8-digit number.
+                  </p> 
+                            
+                  <p>If you do not provide a parameter with the command, the
+                                <span class="selectable_label">Expiration Time</span> window appears where you can display or
+                                modify the current time.
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a name="sysrpc_sm_RESET"></a> <code>RESET</code>
+                         
+               </td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td> 
+                  
+                  <p>Removes the line marks set with a line command as described in
+                                <cite>Line Commands</cite>.
+                  </p> 
+                            
+                  <p> Note that if lines have been marked incorrectly, an appropriate
+                                message occurs and you must remove the erroneous line command before you enter
+                                <code>RESET</code>.
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td><span class="key">PF1</span></td> 
+                        
+               <td>Invokes the editor online help.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td> <a name="sysrpc_sm_PF2"></a><span class="key">PF2</span> 
+               </td> 
+                        
+               <td> 
+                  
+                  <p>Invokes the <span class="selectable_label">Location Transparency</span> window
+                     where you can define a logical node name or a logical service as described in
+                                <a href="sysrpc_sm.htm#sysrpc_sm_Def_Log">Defining Logical Node Names and
+                                   Logical Services</a>.
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td><span class="key">PF3</span></td> 
+                        
+               <td>Exit. Prompts you to save modifications and exit the
+                  <span class="selectable_label">Service Directory</span> screen.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>FIND</code> 
+               </td> 
+                        
+               <td> <a name="sysrpc_sm_PF4"></a><span class="key">PF4</span></td> 
+                        
+               <td> 
+                  
+                  <p>Invokes the <span class="selectable_label">Find Item</span> window where you can
+                                search for a name:
+                  </p> 
+                            
+                  <table border="0" cellpadding="3" margin-top="9pt">
+                     <tbody valign="top">
+                        <tr align="left"> 
+                                       
+                           <td class="titem"><span class="selectable_label">Find what</span></td> 
+                                       
+                           <td class="titem">Enter an alphanumeric search string of up to 32
+                                           characters.
+                           </td> 
+                                      
+                        </tr>
+                        <tr align="left"> 
+                                       
+                           <td class="titem"><span class="selectable_label">Case sensitive</span></td> 
+                                       
+                           <td class="titem">Replace the default setting <code>N</code> (No) by
+                                           <code>Y</code> (Yes) to distinguish between uppercase and lowercase
+                                           characters.
+                           </td> 
+                                      
+                        </tr>
+                        <tr align="left"> 
+                                       
+                           <td class="titem"><span class="selectable_label">Whole words only</span></td> 
+                                       
+                           <td class="titem">Replace the default setting <code>N</code> (No) by
+                                           <code>Y</code> (Yes) to search for complete search strings only.
+                           </td> 
+                                      
+                        </tr>
+                     </tbody>
+                  </table> 
+                            
+                  <p> Choose <span class="key">ENTER</span> to start searching and move from one hit
+                                to the next if one exists. Press <span class="key">PF4</span> to restart searching from the
+                                beginning. 
+                  </p> 
+                            
+                  <p> The hits are marked with the cursor. </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>-H</code> 
+               </td> 
+                        
+               <td><span class="key">PF5</span></td> 
+                        
+               <td rowspan="2">Scrolls half a page backward/forward.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>+H</code> 
+               </td> 
+                        
+               <td><span class="key">PF6</span></td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>-P</code> 
+               </td> 
+                        
+               <td><span class="key">PF7</span></td> 
+                        
+               <td rowspan="2">Scrolls one page backward/forward.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>+P</code> 
+               </td> 
+                        
+               <td><span class="key">PF8</span></td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>TOP</code> 
+               </td> 
+                        
+               <td><span class="key">PF9</span></td> 
+                        
+               <td>Scrolls to the beginning of the list.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>BOT</code> 
+               </td> 
+                        
+               <td><span class="key">PF10</span></td> 
+                        
+               <td>Scrolls to the end of the list.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td> <a name="sysrpc_sm_PF11"></a><span class="key">PF11</span> 
+               </td> 
+                        
+               <td> 
+                  
+                  <p>Toggles between the standard view of the <span class="selectable_label">Service
+                                   Directory</span> screen (see <a href="sysrpc_sm.htm#sysrpc_sm_Example1">Example 1 - Standard View of Service
+                                   Directory</a>) and the extended view of the fields
+                                <span class="selectable_label">Node</span> and <span class="selectable_label">Server</span> (see
+                                <a href="sysrpc_sm.htm#sysrpc_sm_Example2">Example 2 - Extended
+                                   Node/Server View of Service Directory</a>).
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>&gt;</code> 
+               </td> 
+                        
+               <td><span class="key">PF11</span> 
+               </td> 
+                        
+               <td>Displays the extended view of the fields
+                  <span class="selectable_label">Node</span> and <span class="selectable_label">Server</span>. The extended
+                            node/server view does not display the fields <span class="selectable_label">Library</span> and
+                            <span class="selectable_label">Program</span> as shown in
+                            <a href="sysrpc_sm.htm#sysrpc_sm_Example2">Example 2 - Extended
+                               Node/Server View of Service Directory</a>.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>&lt;</code> 
+               </td> 
+                        
+               <td><span class="key">PF11</span> 
+               </td> 
+                        
+               <td>Displays the standard view of the <span class="selectable_label">Service
+                               Directory</span> screen as shown in <a href="sysrpc_sm.htm#sysrpc_sm_Example1">Example 1 - Standard View of Service
+                               Directory</a>.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code><u>CA</u>NCEL</code>
+                         
+               </td> 
+                        
+               <td><span class="key">PF12</span> 
+               </td> 
+                        
+               <td>Exits the <span class="selectable_label">Service Directory</span> screen without
+                    saving any modifications.
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+          
+      <div class="noprint">
+         <p><a href="sysrpc_sm.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="sysrpc_sm_Def_Log"></a></div> 
+         
+      <h2> Defining Logical Node Names and Logical Services</h2> 
+          
+          
+      <p>Logical node names or logical services can only be defined for node or
+              server fields that already contain any values.
+      </p> 
+          
+      <p>Note that defining a logical service, the original (physical) node name
+              will be replaced by <code>*LOCTRAN</code> and it is <em>not</em> possible to
+              automatically convert back logical node names or logical services. For
+              instructions on removing logical names and servers, see
+              <a href="sysrpc_sm.htm#sysrpc_sm_To_rem_log">To remove a logical node
+            name or logical service</a>.
+      </p> 
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong> To define a logical service </strong></p>
+      <ol class="steps">
+         <li> 
+                   
+                   
+            <p class="instep">Place the cursor on a <span class="selectable_label">Server</span> field and choose
+                       <span class="key">PF2</span> (LocTr).
+            </p> 
+                   
+                   
+                   
+            <p class="instep">The <span class="selectable_label">Location Transparency - Logical Service</span>
+                       window appears.
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">If desired, modify the existing values and choose <span class="key">ENTER</span>.
+                       
+            </p> 
+                   
+            <p class="instep">The <span class="selectable_label">Server Type Conversion</span> window appears as an
+                       additional window. Choose either of the following options: 
+            </p> 
+                   
+            <ul> 
+                       
+               <li> 
+                           
+                  <p class="initem">Enter a <code>Y</code> (Yes) and choose <span class="key">ENTER</span> to confirm
+                               and execute the conversion.
+                  </p> 
+                           
+                  <p class="initem"> The value in the field <span class="selectable_label">Node</span> that relates to
+                               the specified server is replaced by the following character string:
+                               <code>*LOCTRAN</code>. This string indicates that a node/server combination was
+                               converted to a logical service.
+                  </p> 
+                          
+               </li> 
+                       
+               <li> 
+                           
+                  <p class="initem">Enter any character except <code>Y</code> or do not enter any value
+                               to cancel the conversion.
+                  </p> 
+                           
+                  <p class="initem"> The physical node and server names are retained.</p> 
+                          
+               </li> 
+                      
+            </ul> 
+                   
+                 
+         </li>
+      </ol> 
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong> To define a logical node name </strong></p>
+      <ol class="steps">
+         <li> 
+                   
+                   
+            <p class="instep">Place the cursor on a <span class="selectable_label">Node</span> field and choose
+                       <span class="key">PF2</span> (LocTr).
+            </p> 
+                   
+            <p class="instep"> The <span class="selectable_label">Location Transparency - Logical Node Name</span>
+                       window appears with the preset value of
+                       <code>LOGBROKER=<var>name</var></code> where
+                       <var>name</var> denotes the logical EntireX Broker name.
+            </p> 
+                   
+            <p class="instep">If desired, modify <var>name</var> but do not modify
+                       the character string <code>LOGBROKER=</code>.
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Choose <span class="key">ENTER</span> to confirm and execute the conversion.
+            </p> 
+                   
+            <p class="instep"> The physical node name is converted to a logical name. </p> 
+                   
+                   
+                   
+            <p class="instep">Or:<br>Choose <span class="key">PF12</span> (Canc) to cancel the conversion.
+            </p> 
+                   
+            <p class="instep"> The physical node name is retained.</p> 
+                   
+                 
+         </li>
+      </ol> 
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong> <a name="sysrpc_sm_To_rem_log"></a> To remove a logical node name or
+                  logical service </strong></p>
+      <ul>
+         <li> 
+                   
+                   
+            <p class="mini-list"> 
+                       For a logical node name:<br> 
+                       In the <span class="selectable_label">Node</span> field, remove the character
+                        string <code>LOGBROKER=</code>. 
+                      
+            </p> 
+                   
+            <p class="mini-list"> 
+                       For a logical service:<br> 
+                       Delete the logical service and insert physical server(s) by
+                        using the <a href="sysrpc_sm.htm#sysrpc_sm_Line_Commands">line commands</a>
+                        <code>D</code> and <code>I</code> as described in
+                        <cite>Line Commands</cite>. 
+                      
+            </p> 
+                   
+                 
+         </li>
+      </ul> 
+         
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="sysrpc_sm.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../utis/sysrpc_sm.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/utis/sysrpc_sm.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="sysrpc-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="sysrpc_main.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="sysrpc_stub-over.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

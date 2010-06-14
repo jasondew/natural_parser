@@ -1,0 +1,141 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Trust Files (J2EE only)</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="clientcfg-trust"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../webio/clientcfg-trust.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/webio/clientcfg-trust.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="clientcfg-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="clientcfg-security.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="clientcfg-log.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Natural Web I/O Interface&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1>Trust Files (J2EE only)</h1>
+      </div> 
+         
+         
+      <p>Trust files are used for a secure connection between the Natural Web I/O
+             Interface server and the Natural Web I/O Interface client or Natural for Ajax.
+             Server authentication cannot be switched off. A trust file is always
+             required.
+      </p> 
+         
+      <p>A trust file contains the certificates that you trust. These can be
+             certificates of a CA (Certificate Authority) such as VeriSign, or self-signed
+             certificates.
+      </p> 
+         
+      <p>In the <a href="clientcfg-tool.htm#clientcfg-tool">configuration tool</a>,
+             you define the path and, if required, the password for the trust file. With the
+             server authentication, the Natural Web I/O Interface client or Natural for Ajax
+             checks whether the certificate of the Natural Web I/O Interface server is
+             known. If it is not known, the connection is rejected.
+      </p> 
+         
+      <p>When a trust file is not defined in the configuration tool, the Natural
+             Web I/O Interface client or Natural for Ajax tries to read the file
+             <cite>calist</cite> from the <cite>lib/security</cite>
+             directory of the Java Runtime Environment (JRE). The default password for this
+             file is "changeit".
+      </p> 
+         
+      <p>To create your own trust file, you can use, for example, Sun's keytool
+             utility which can be found in the <cite>bin</cite> directory of the
+             Java Runtime Environment (JRE). Here are some helpful examples:
+      </p> 
+         
+      <ul> 
+             
+         <li> 
+                 
+            <p class="initem">Create an empty, password-protected trust file:</p> 
+                 <pre class="verbatim">keytool -genkey -alias foo -keystore truststore.jks -storepass "<var>your-passwort</var>"
+keytool -delete -alias foo -keystore truststore.jks </pre> 
+                </li> 
+             
+         <li> 
+                 
+            <p class="initem">Import a certificate:</p> 
+                 <pre class="verbatim">keytool -import -alias "<var>name-for-ca</var>" -keystore truststore.jks -storepass "<var>your-passwort</var>" -file server.cert.crt</pre> 
+                 <p class="initem">You should use a meaningful name for the alias.</p> 
+                
+         </li> 
+             
+         <li> 
+                 
+            <p class="initem">List the certificates in a trust file:</p> 
+                 <pre class="verbatim">keytool -list -v -keystore truststore.jks</pre> 
+                </li> 
+             
+         <li> 
+                 
+            <p class="initem">Delete a certificate from a trust file:</p> 
+                 <pre class="verbatim">keytool -delete -alias "<var>name-for-ca</var>" -keystore truststore.jks</pre> 
+                </li> 
+            
+      </ul> 
+         
+      <p>When you modify the trust file or its password, you have to restart the
+             application server so that your modification takes effect.
+      </p> 
+        
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="clientcfg-trust.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../webio/clientcfg-trust.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/webio/clientcfg-trust.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="clientcfg-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="clientcfg-security.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="clientcfg-log.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

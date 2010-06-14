@@ -1,0 +1,362 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Development Environment</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="uni-devenv"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../unicode/uni-devenv.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/unicode/uni-devenv.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="uni-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="uni-config.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="uni-io.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Unicode and Code Page Support&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1>Development Environment</h1>
+      </div> 
+         
+      <p>This document covers the following
+             topics:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="uni-devenv.htm#uni-devenv-gen">Development Environment</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="uni-devenv.htm#uni-devenv-customize">Customizing Your Environment</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="uni-devenv.htm#uni-devenv-editors">Editors</a></p>
+         </li>
+      </ul>
+      <hr>
+      <div><a name="uni-devenv-gen"></a></div> 
+         
+      <h2>Development Environment</h2> 
+          
+          
+      <p>The development environment for Unicode applications is Natural Single
+              Point of Development (SPoD).
+      </p> 
+          
+      <p><img src="graphics/uni-dev-env.png" alt="Development environment" width="500" height="500"></p> 
+          
+      <p>In a SPoD environment, the Natural objects of a Unicode application
+              which are located on a Natural Development Server (NDV) can be modified using
+              Natural Studio. If supported by the server, the sources are exchanged between
+              client and server in UTF-8 format. 
+      </p> 
+          
+      <p>On NDV servers for UNIX and OpenVMS, the setting of the profile
+              parameter <a href="../parms/sutf8.htm"><code>SUTF8</code></a> determines the format
+              that is used when storing the Natural object on the server. This is handled
+              just like the local Windows case.
+      </p> 
+          
+      <p>On NDV servers for mainframes, the objects are stored with the default
+              or their original encoding, depending on the setting of the profile parameter
+              <a href="../parms/sretain.htm"><code>SRETAIN</code></a>.
+      </p> 
+         
+      <div class="noprint">
+         <p><a href="uni-devenv.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="uni-devenv-customize"></a></div> 
+         
+      <h2>Customizing Your Environment</h2> 
+          
+          
+          
+      <p>On Windows, UNIX and OpenVMS platforms, it is important that you define
+              the correct default code page for your environment before changing any Natural
+              code. For more information, see <a href="uni-migrate.htm#uni-migrate">Migrating Existing
+            Applications</a>.
+      </p> 
+          
+      <p>If you want to store characters from different languages in your
+              sources, you have to save the sources in UTF-8 format on Windows, UNIX or
+              OpenVMS platforms, or you have to use hexadecimal UH constants in the sources.
+              With the profile parameters <a href="../parms/sutf8.htm"><code>SUTF8</code></a> and
+              <a href="../parms/sretain.htm"><code>SRETAIN</code></a> you can control in
+              which format sources are saved. The following table lists some situations and
+              the recommended settings.
+      </p> 
+          
+      <p class="note"><strong>Note:</strong><br>On UNIX and OpenVMS, the parameter <code>SUTF8</code> can
+              only be used in a SPoD environment.
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th>Situation</th> 
+                       
+               <th>Settings</th> 
+                       
+               <th>Effect</th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td>Sources are located on Windows; U constants are
+                  needed. 
+               </td> 
+                       
+               <td> 
+                  <pre class="verbatim">SUTF8=ON, 
+SRETAIN=OFF</pre> </td> 
+                       
+               <td>All sources are saved in UTF-8 format when saving
+                  them with Natural 6.2 or above. New sources are created in UTF-8 format. All
+                  characters can be stored in a source. 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>Sources are located on Windows, UNIX and/or
+                  OpenVMS; U constants are needed and SPoD is used for development. 
+               </td> 
+                       
+               <td> 
+                  <pre class="verbatim">SUTF8=ON, 
+SRETAIN=ON</pre> </td> 
+                       
+               <td>All sources are saved in UTF-8 format when a
+                  conversion to the original code page is no longer possible; if it is possible,
+                  the code page of a source will not be changed. New sources are created in UTF-8
+                  format. All characters can be stored in a source. A source with UTF-8 format
+                  can only be changed with SPoD; it can no longer be handled with the Natural for
+                  UNIX or Natural for OpenVMS editors. 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>Sources are located on Windows; UNIX and/or
+                  OpenVMS; no U constants are needed. 
+               </td> 
+                       
+               <td> 
+                  <pre class="verbatim">SUTF8=OFF, 
+SRETAIN=ON</pre> </td> 
+                       
+               <td>All sources are saved with the original code
+                  page. New sources are saved with the default code page (of server). Only
+                  characters from the source code page can be stored in a source. The sources can
+                  further be handled with the Natural for UNIX or Natural for OpenVMS editors.
+                  
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>Sources are located on Windows, UNIX, OpenVMS
+                  and/or mainframe; U constants are needed and SPoD is used for development.
+                  
+               </td> 
+                       
+               <td> 
+                  <pre class="verbatim">SUTF8=OFF, 
+SRETAIN=ON</pre> </td> 
+                       
+               <td>All sources are saved with the original code
+                  page. New sources are saved with the default code page (of the server). Only
+                  characters from the source code page can be stored in a source. The sources can
+                  further be handled with the Natural for UNIX, Natural for OpenVMS and Natural
+                  for Mainframes editors. All Unicode constants have to be defined as hexadecimal
+                  constants (UH). 
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>If the parameter <code>SUTF8</code> is set to
+              "OFF" and you stow a source which contains
+              characters from different character sets, but which was not yet saved in UTF-8
+              format, it is possible that the generated program is created, but that the
+              source cannot be saved and thus remains unchanged. This happens if characters
+              from different character sets are used in a comment or in a U constant. For
+              this reason, it is recommended that you set the parameter
+              <code>SUTF8</code> to "ON" if you want to
+              create sources with characters from different character sets and if your
+              sources do not need to be distributed to mainframe platforms.
+      </p> 
+          
+      <p>If the parameter <code>SRETAIN</code> is set to
+              "OFF", all sources are saved with the default code
+              page. You have to be careful with this setting because it may lead to improper
+              code page information if you have sources which were created with an earlier
+              Natural version. In this case, the encoding information of the source is
+              unassigned and the source is always opened with the default code page (value of
+              the system variable <a href="../vari/sysenv.htm#CODEPAGE"><code>*CODEPAGE</code></a>).
+              This will often work even if the default code page is not the correct encoding
+              of the source. Some language-specific characters will be displayed incorrectly
+              in this case. If such a source is opened with the wrong code page and is saved
+              with <code>SRETAIN</code> being set to
+              "ON", no encoding will be stored for the source; the
+              source can later be opened correctly if Natural is started with the correct
+              default code page. However, once you have saved the source with
+              <code>SRETAIN</code> being set to "OFF",
+              the default code page will be saved as the encoding of the source; from this
+              time on, the source will only be opened with this code page. For this reason,
+              you should use this setting only if you are certain that all of your Natural
+              sources are encoded in the default code page. 
+      </p> 
+          
+      <p>See also:
+              <a href="../config/cfg-profileparm.htm#cfg-prf-exe-regional">Regional Settings</a> in the
+              <cite>Configuration Utility</cite> documentation.
+      </p> 
+         
+      <div class="noprint">
+         <p><a href="uni-devenv.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="uni-devenv-editors"></a></div> 
+         
+      <h2>Editors</h2> 
+          
+          
+      <p>The Natural for Windows editors are fully Unicode-enabled. Via SPoD they
+              can also be used for mainframe, UNIX and OpenVMS sources. The editors provided
+              with Natural for Mainframes, Natural for UNIX and Natural for OpenVMS are not
+              Unicode-enabled.
+      </p> 
+           
+          
+      <p>When a source is opened with an editor in Natural Studio (Natural for
+              Windows), the content of the source will be converted from the corresponding
+              code page to Unicode before it is loaded into the editor. This will guarantee
+              that all characters can be displayed correctly even if the source contains
+              characters which are not included in the system code page. If the conversion
+              from the source's code page to Unicode fails, an error will be displayed and
+              the editor is not opened. In this case, the user has to define the correct
+              encoding of the source. The source encoding can be changed in the
+              <span class="selectable_label">Properties</span> dialog box (see
+              <cite>Properties for the Nodes</cite> in the
+              <cite>Using Natural Studio</cite> documentation).
+      </p> 
+          
+      <p>For Windows, UNIX and OpenVMS sources, the Natural for Windows editors
+              allow saving sources which contain characters from different languages in UTF-8
+              format. On mainframes, it will not be possible to save UTF-8 sources. 
+      </p> 
+          
+      <p class="note"><strong>Note:</strong><br>If you save a UNIX or OpenVMS source in UTF-8 format or with a code
+              page which differs from the default code page, the source can no longer be
+              opened with the native Natural for UNIX or Natural for OpenVMS editor.
+              Mainframe sources can be saved with a different code page and can be edited
+              with the native Natural for Mainframes editors. 
+      </p> 
+          
+      <p>Even if you do not want to use Unicode strings in your programs and
+              sources, the Unicode-enabled editors have the advantage that you can write
+              sources in all code pages, no matter which system code page is installed. For
+              example, if you have installed the "windows-1252"
+              (Latin 1) code page, you can write a program containing Cyrillic characters and
+              save this program with the "windows-1251" (Cyrillic)
+              code page. You only have to select code page
+              "windows-1251" in the <span class="selectable_label">Save As</span>
+              dialog box (see <cite>Saving an Object with a New Name</cite> in the
+              <cite>Using Natural Studio</cite> documentation).
+      </p> 
+          
+      <p>Using the Natural for Windows program editor, you can convert text
+              constants into their hexadecimal Unicode representations (see
+              <cite>Converting to Hexadecimal Format</cite> in the
+              <cite>Program Editor</cite> section of the Natural for Windows
+              <cite>Editors</cite> documentation). If you are developing for a
+              platform where UTF-8 sources are not preferred, you can thus enter all
+              characters for a Unicode constant, select all the characters of the constant,
+              convert them to their hexadecimal representation and then add the
+              "UH" prefix for Unicode hexadecimal constants.
+              Furthermore, when you hover the mouse pointer over a character or a selected
+              character range of a text constant, a tool tip shows the corresponding
+              hexadecimal Unicode representation.
+      </p> 
+          
+      <p>A byte order mark (BOM) consists of the character code
+              "U+FEFF" at the beginning of a data stream where it
+              can be used as a signature defining the byte order and encoding form, primarily
+              of unmarked plain-text files. On Windows, a byte order mark is used by some
+              editors (for example, Notepad) to mark UTF-8 files. The Natural for Windows
+              editors will recognize an UTF-8 byte order mark when reading an object. If the
+              object has no other encoding defined so far, Natural will interpret it as UTF-8
+              and when the object is saved, UTF-8 will be stored as the encoding for the
+              object. The byte order mark is removed in this case. 
+      </p> 
+         
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="uni-devenv.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../unicode/uni-devenv.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/unicode/uni-devenv.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="uni-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="uni-config.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="uni-io.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

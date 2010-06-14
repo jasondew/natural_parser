@@ -1,0 +1,470 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Helproutines</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="pg_obj_help"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_obj_help.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_obj_help.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_obj-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_obj_maps.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_obj_copy.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Programming Guide&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> Helproutines 
+               <a name="x32"></a> 
+               <a name="x33"></a></h1>
+      </div> 
+         
+         
+      <p>Helproutines have specific characteristics to facilitate the processing
+             of help requests. They may be used to implement complex and interactive help
+             systems. They are created with the program editor.
+      </p> 
+         
+      <p>This document covers the following topics:</p>
+         
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_obj_help.htm#Invoking_Help">Invoking Help</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_obj_help.htm#Specifying_Helproutines">Specifying Helproutines</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_obj_help.htm#Programming_Considerations_for_Helproutines">Programming Considerations for Helproutines</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_obj_help.htm#Passing_Parameters_to_Helproutines">Passing Parameters to Helproutines</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_obj_help.htm#Equal_Sign_Option">Equal Sign Option</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_obj_help.htm#Array_Indices">Array Indices</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_obj_help.htm#Help_as_a_Window">Help as a Window</a></p>
+         </li>
+      </ul> 
+        
+      <hr> 
+        
+      <div><a name="Invoking_Help"></a></div> 
+         
+      <h2> Invoking Help </h2> 
+          
+          
+      <p>A Natural user can invoke a Natural helproutine either by entering the
+              help character in a field, or by pressing the help key (usually
+              <span class="key">PF1</span>). The default help character is a question mark (?).
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">The help character must be entered only once.</p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">The help character must be the only character modified in the input
+                      string.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">The help character must be the first character in the input
+                      string.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>If a helproutine is specified for a numeric field, Natural will allow a
+              question mark to be entered for the purpose of invoking the helproutine for
+              that field. Natural will still check that valid numeric data are provided as
+              field input.
+      </p> 
+          
+      <p>If not already specified, the help key may be specified with the
+              <a href="../sm/setkey.htm"><code>SET KEY</code></a> statement:
+      </p>
+          
+          <pre class="verbatim">SET KEY PF1=HELP</pre> 
+          <p>A helproutine can only be invoked by a user if it has been specified in
+              the <a href="pg_obj_prog.htm#pg_obj_prog">program</a> or
+              <a href="pg_obj_maps.htm#pg_obj_maps">map</a> from which it is to be
+              invoked.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_obj_help.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Specifying_Helproutines"></a></div> 
+         
+      <h2> Specifying Helproutines </h2> 
+          
+          
+      <p>A helproutine may be specified:</p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">in a program: at statement level and at field level;</p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">in a map: at map level and at field level.</p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>If a user requests help for a field for which no help has been
+              specified, or if a user requests help without a field being referenced, the
+              helproutine specified at the statement or map level is invoked.
+      </p> 
+          
+      <p>A helproutine may also be invoked by using a
+              <a href="../sm/reinput.htm#USING_HELP"><code>REINPUT USING
+               HELP</code></a> statement (either in the program itself or in a
+              processing rule). If the <code>REINPUT USING HELP</code> statement contains a
+              <a href="../sm/reinput.htm#MARK-option"><code>MARK</code></a>
+              option, the helproutine assigned to the <code>MARK</code>ed field is invoked.
+              If no field-specific helproutine is assigned, the map helproutine is
+              invoked.
+      </p> 
+          
+      <p>A <a href="../sm/reinput.htm"><code>REINPUT</code></a>
+              statement in a helproutine may only apply to <a href="../sm/input.htm"><code>INPUT</code></a> statements within the same
+              helproutine.
+      </p> 
+          
+      <p>The name of a helproutine may be specified either with the session
+              parameter <a href="../parms/sp_he.htm"><code>HE</code></a> of an
+              <code>INPUT</code> statement:
+      </p> 
+          <pre class="verbatim">INPUT (HE='HELP2112')</pre> 
+          <p>or using the extending field editing facility of the map editor (see
+              <a href="pg_obj_maps.htm#map_create">Creating Maps</a> and
+              the <a href="../edis/edis-over.htm">Editors</a>
+              documentation).
+      </p> 
+          
+      <p>The name of a helproutine may be specified as an alphanumeric constant
+              or as an alphanumeric variable containing the name. If it is a constant, the
+              name of the helproutine must be specified within apostrophes.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_obj_help.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Programming_Considerations_for_Helproutines"></a></div> 
+         
+      <h2> Programming Considerations for Helproutines </h2> 
+          
+          
+      <p>Processing of a helproutine can be stopped with an
+              <a href="../sm/escape.htm#ESCAPE_ROUTINE"><code>ESCAPE
+               ROUTINE</code></a> statement.
+      </p> 
+          
+      <p>Be careful when using <a href="../sm/endtrans.htm"><code>END OF
+               TRANSACTION</code></a> or <a href="../sm/backout.htm"><code>BACKOUT TRANSACTION</code></a> statements
+              in a helproutine, because this will affect the transaction logic of the main
+              program.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_obj_help.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Passing_Parameters_to_Helproutines"></a></div> 
+         
+      <h2> 
+             <a name="x34"></a>Passing Parameters to Helproutines 
+      </h2> 
+          
+          
+      <p>A helproutine can access the currently active
+              <a href="pg_obj_darea.htm#Global_Data_Area">global data area</a> (but it
+              cannot have its own global data area). In addition, it can have its own
+              <a href="pg_obj_darea.htm#Local_Data_Area">local data area</a>.
+      </p> 
+          
+      <p>Data may also be passed from/to a helproutine via parameters. A
+              helproutine may have up to 20 explicit parameters and one implicit parameter.
+              The explicit parameters are specified with the <code>HE</code> operand after
+              the helproutine name:
+      </p> 
+          <pre class="verbatim">HE='MYHELP','001'</pre> 
+          <p>The implicit parameter is the field for which the helproutine was
+              invoked:
+      </p> 
+          <pre class="verbatim">INPUT #A (A5) (HE='YOURHELP','001')</pre> 
+          <p>where <code>001</code> is an explicit parameter and <code>#A</code> is
+              the implicit parameter/the field.
+      </p> 
+          
+      <p>This is specified within the <a href="../sm/defineda.htm"><code>DEFINE DATA PARAMETER</code></a>
+              statement of the helproutine as:
+      </p> 
+          <pre class="verbatim">
+DEFINE DATA PARAMETER 
+1 #PARM1 (A3)          /* explicit parameter 
+1 #PARM2 (A5)          /* implicit parameter 
+END-DEFINE
+</pre> 
+          <p>Please note that the implicit parameter (<code>#PARM2</code> in the
+              above example) may be omitted. The implicit parameter is used to access the
+              field for which help was requested, and to return data from the helproutine to
+              the field. For example, you might implement a calculator program as a
+              helproutine and have the result of the calculations returned to the field.
+      </p> 
+          
+      <p>When help is called, the helproutine is called before the data are
+              passed from the screen to the program data areas. This means that helproutines
+              cannot access data entered within the same screen transaction.
+      </p> 
+          
+      <p>Once help processing is complete, the screen data will be refreshed: any
+              fields which have been modified by the helproutine will be updated - excluding
+              fields which had been modified by the user before the helproutine was invoked,
+              but including the field for which help was requested. <em>Exception:</em> If
+              the field for which help was requested is split into several parts by dynamic
+              attributes (<a href="../parms/sp_dy.htm"><code>DY</code></a> session
+              parameter), and the part in which the question mark is entered is
+              <em>after</em> a part modified by the user, the field content will not be
+              modified by the helproutine.
+      </p> 
+          
+      <p>Attribute control variables are not evaluated again after the processing
+              of the helproutine, even if they have been modified within the helproutine.
+      </p>
+          
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_obj_help.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Equal_Sign_Option"></a></div> 
+         
+      <h2> 
+             <a name="x35"></a>Equal Sign Option 
+      </h2> 
+          
+          
+      <p>The equal sign (=) may be specified as an explicit parameter:</p> 
+          <pre class="verbatim">INPUT PERSONNEL-NUMBER (HE='HELPROUT',=)</pre> 
+          <p>This parameter is processed as an internal field (<a href="pg_defi_dv.htm#Format_Length_Def">format</a>/length A65) which contains the
+              field name (or map name if specified at map level). The corresponding
+              helproutine starts with:
+      </p> 
+          <pre class="verbatim">
+DEFINE DATA PARAMETER 
+1 FNAME (A65)             /* contains 'PERSONNEL-NUMBER' 
+1 FVALUE (N8)             /* value of field (optional) 
+END-DEFINE
+</pre> 
+          <p>This option may be used to access one common helproutine which reads the
+              field name and provides field-specific help by accessing the application online
+              documentation or the Predict data dictionary.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_obj_help.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Array_Indices"></a></div> 
+         
+      <h2> 
+             <a name="x36"></a>Array Indices 
+      </h2> 
+          
+          
+      <p>If the field selected by the help character or the help key is an
+              <a href="pg_defi_array.htm#pg_defi_array">array</a> element, its indices are
+              supplied as implicit parameters (1 - 3 depending on rank, regardless of the
+              explicit parameters).
+      </p> 
+          
+      <p>The <a href="pg_defi_dv.htm#Format_Length_Def">format</a>/length of
+              these parameters is I2.
+      </p> 
+          <pre class="verbatim">INPUT A(*,*)  (HE='HELPROUT',=)</pre> 
+          <p>The corresponding helproutine starts with:</p> 
+          <pre class="verbatim">
+DEFINE DATA PARAMETER 
+1 FNAME   (A65)            /* contains 'A' 
+1 FVALUE  (N8)             /* value of selected element 
+1 FINDEX1 (I2)             /* 1st dimension index 
+1 FINDEX2 (I2)             /* 2nd dimension index 
+END-DEFINE 
+...
+</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_obj_help.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Help_as_a_Window"></a></div> 
+         
+      <h2> 
+             <a name="x37"></a>Help as a Window 
+      </h2> 
+          
+          
+      <p>The size of a help to be displayed may be smaller than the screen size.
+              In this case, the help appears on the screen as a window, enclosed by a frame,
+              for example:
+      </p> <pre class="system-output">
+*******************************************************************************
+                           PERSONNEL INFORMATION
+PLEASE ENTER NAME: ?_________________
+PLEASE ENTER CITY: __________________
+                   +---------------------------+
+                   !                           !
+                   ! Type in the name of an    !
+                   ! employee in the first     !
+                   ! field and press ENTER.    !
+                   ! You will then receive     !
+                   ! a list of all employees   !
+                   ! of that name.             !
+                   !                           !
+                   ! For a list of employees   !
+                   ! of a certain name who     ! 
+                   ! live in a certain city,   !
+                   ! type in a name in the     !
+                   ! first field and a city    !
+                   ! in the second field       !
+                   ! and press ENTER.          !
+*******************!                           !*******************************
+                   +---------------------------+
+</pre> 
+          <p>Within a helproutine, the size of the window may be specified as
+              follows:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">by a <a href="../sm/format.htm"><code>FORMAT</code></a>
+                      statement (for example, to specify the page size and line size: <code>FORMAT
+                  PS=15 LS=30</code>);
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">by an <a href="../sm/input2.htm"><code>INPUT USING
+                     MAP</code></a> statement; in this case, the size defined for the map (in
+                      its map settings) is used;
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">by a <a href="../sm/definewi.htm"><code>DEFINE
+                     WINDOW</code></a> statement; this statement allows you to either
+                      explicitly define a window size or leave it to Natural to automatically
+                      determine the size of the window depending on its contents.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>The position of a help window is computed automatically from the
+              position of the field for which help was requested. Natural places the window
+              as close as possible to the corresponding field without overlaying the field.
+              With the <code>DEFINE WINDOW</code> statement, you may bypass the automatic
+              positioning and determine the window position yourself.
+      </p> 
+          
+      <p>For further information on window processing, please refer to the
+              <a href="../sm/definewi.htm"><code>DEFINE WINDOW</code></a>
+              statement in the <cite>Statements</cite> documentation and the terminal
+              command <a href="../tcom/pcw.htm"><code>%W</code></a> in the
+              <cite>Terminal Commands</cite> documentation.
+      </p> 
+          
+        
+       
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="pg_obj_help.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_obj_help.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_obj_help.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_obj-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_obj_maps.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_obj_copy.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

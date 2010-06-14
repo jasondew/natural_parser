@@ -1,0 +1,3335 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>MOVE</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="move" id="16825"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../sm/move.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/sm/move.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="sm-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="method.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="moveall.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Statements&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> MOVE 
+               <a name="x119"></a></h1>
+      </div> 
+         
+         
+      <p>This document covers the following topics:</p>
+         
+      <ul>
+         <li>
+            <p class="initem"><a href="move.htm#Function_Move">Function</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="move.htm#syntax_descr_move">Syntax Description</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="move.htm#move_exa">Examples</a></p>
+         </li>
+      </ul> 
+         
+      <p>Related Statements: <a href="add.htm#add">ADD</a> |
+             <a href="compress.htm#compress">COMPRESS</a> |
+             <a href="compute.htm#compute">COMPUTE</a> | <a href="divide.htm#divide">DIVIDE</a> | <a href="examine.htm#examine">EXAMINE</a> | <a href="moveall.htm#moveall">MOVE
+                ALL</a> | <a href="multiply.htm#multiply">MULTIPLY</a> |
+             <a href="reset.htm#reset">RESET</a> | <a href="separate.htm#separate">SEPARATE</a> | <a href="subtract.htm#subtract">SUBTRACT</a> 
+      </p> 
+         
+      <p>Belongs to Function Group:
+             <a href="stmt.htm#Arithmetic_and_Data_Movement_Operations">Arithmetic and Data
+            Movement Operations</a></p> 
+        
+      <hr> 
+        
+      <div><a name="Function_Move"></a></div> 
+         
+      <h2> Function </h2> 
+          
+          
+      <p>The <code>MOVE</code> statement is used to move the value of an operand
+              to one or more operands (field or array).
+      </p> 
+          
+      <p>A <code>MOVE</code> statement with multiple target operands is identical
+              to the corresponding individual <code>MOVE</code> statements:
+      </p> 
+          <pre class="verbatim">MOVE #SOURCE TO #TARGET1 #TARGET2</pre> 
+          <p>is identical to</p> 
+          <pre class="verbatim">MOVE #SOURCE TO #TARGET1 
+MOVE #SOURCE TO #TARGET2</pre> 
+          <p> Example:</p> 
+          <pre class="verbatim">DEFINE DATA LOCAL
+1 #ARRAY(I4/1:3) INIT &lt;3,0,9&gt;
+1 #INDEX(I4)
+1 #RESULT(I4)
+END-DEFINE
+*
+#INDEX := 1
+MOVE #ARRAY(#INDEX) TO #INDEX       /* #INDEX is 3 
+                       #RESULT      /* #RESULT is 9  
+*
+#INDEX := 2
+MOVE #ARRAY(#INDEX) TO  #INDEX     /* #INDEX is 0
+                        #ARRAY(3)  /* returns run time error NAT1316 </pre> 
+          <p>If <var>operand2</var> is a dynamic variable, its length
+              may be modified by the <code>MOVE</code> operation. The current length of a
+              dynamic variable can be ascertained by using the system variable
+              <a href="../vari/appl.htm#LENGTH"><code>*LENGTH</code></a>.
+              For general information on the dynamic variable, see the section
+              <a href="../pg/pg_defi_ldvfin.htm">Large and Dynamic
+            Variables/Fields</a> in the <cite>Programming
+                 Guide</cite>.
+      </p> 
+          
+      <p>If <var>operand2</var> is of format C,
+              <var>operand1</var> may also be specified as
+              <a href="move.htm#parameter_move"><code>(<var>parameter</var>)</code></a>.
+              Valid parameters are:
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th colspan="2">Parameters that can be specified
+                  with the MOVE statement
+               </th> 
+                       
+               <th>Specification (S = at statement level, E = at element
+                  level)
+               </th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> <a href="../parms/sp_ad.htm">AD</a> 
+               </td> 
+                       
+               <td>Attribute Definition</td> 
+                       
+               <td align="center">SE</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a href="../parms/sp_cd.htm">CD</a> 
+               </td> 
+                       
+               <td>Color Definition</td> 
+                       
+               <td align="center">S</td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>For more information on data transfer compatibility and the rules for
+              data transfer, see the section
+              <a href="../pg/pg_furth_arithm.htm#Data_Transfer">Data
+            Transfer</a> in the <cite>Programming
+                 Guide</cite>.
+      </p> 
+          
+         
+      <div><a name="Other_Considerations"></a></div> 
+          
+      <h3> Other Considerations </h3> 
+           
+           
+      <p>If a database field is used as the result field, the <code>MOVE</code>
+               operation results in an update only to the internal value of the field as used
+               within the program. The value of the field in the database remains
+               unchanged.
+      </p> 
+           
+      <p>A Natural system function may be used only if the <code>MOVE</code>
+               statement is specified in conjunction with an <a href="atbreak.htm#atbreak"><code>AT BREAK</code></a>,
+               <a href="atenddat.htm#atenddat"><code>AT END OF DATA</code></a> or
+               <a href="atendpag.htm#atendpag"><code>AT END OF PAGE</code></a>
+               statement.
+      </p> 
+           
+      <p>See also the section <a href="../pg/pg_furth_arithm.htm">Rules for Arithmetic
+            Assignment</a> in the <cite>Programming
+                  Guide</cite>.
+      </p> 
+           
+      <p class="note"><strong>Note:</strong><br> If <var>operand1</var> is a time variable (Format
+               T), only the time component of the variable content is transferred, but not the
+               date component (except with <code>MOVE EDITED</code>, described under
+               <a href="move.htm#syntax4_move">Syntax 4</a> and
+               <a href="move.htm#syntax5_move">Syntax
+            5</a>).
+      </p> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="move.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="syntax_descr_move"></a></div> 
+         
+      <h2> Syntax Description </h2> 
+          
+          
+      <p>Different structures are possible for this
+              statement.
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="move.htm#syntax1_move">Syntax 1 - MOVE ROUNDED</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="move.htm#syntax2_move">Syntax 2 - MOVE SUBSTRING</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="move.htm#syntax3_move">Syntax 3 - MOVE BY NAME / POSITION</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="move.htm#syntax4_move">Syntax 4 - MOVE EDITED (Edit Mask Specified with operand2)</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="move.htm#syntax5_move">Syntax 5 - MOVE EDITED (Edit Mask Specified with operand1)</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="move.htm#syntax6_move">Syntax 6 - MOVE LEFT / RIGHT JUSTIFIED</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="move.htm#syntax7_move">Syntax 7 - MOVE NORMALIZED</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="move.htm#syntax8_move">Syntax 8 - MOVE ENCODED</a></p>
+         </li>
+      </ul> 
+          
+      <p>For an explanation of the symbols used in the syntax diagrams below, see
+              <a href="synsym.htm#Syntax_Symbols">Syntax
+            Symbols</a>.
+      </p> 
+         
+      <div><a name="syntax1_move"></a></div> 
+          
+      <h3>Syntax 1 - MOVE ROUNDED</h3> 
+           
+            
+            
+      <table border="0" class="syntax" cellpadding="3">  
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> <a href="move.htm#Function_Move"> <code class="keyword">MOVE</code> </a> [<a href="move.htm#Rounded"><code class="keyword">ROUNDED</code></a>]
+                            <var>operand1</var> [(<a href="move.htm#parameter_move">
+                               <var>parameter</var></a>)] <code class="keyword">TO</code> <var>operand2</var>
+                            <img src="../graphics/dot3.gif" alt="" width="12" height="4">
+                            
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>Operand Definition Table:</p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                  
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>Operand</th> 
+                        
+               <th colspan="5" align="center">
+                  <a href="synsym.htm#statem_poss_struct">Possible Structure</a> 
+               </th> 
+                        
+               <th colspan="13" align="center">
+                  <a href="synsym.htm#statem_poss_form">Possible Formats</a> 
+               </th> 
+                        
+               <th align="center"> <a href="synsym.htm#statem_ref_perm">Referencing Permitted</a> 
+               </th> 
+                        
+               <th align="center"> <a href="synsym.htm#statem_dyn_def">Dynamic
+                     Definition</a> 
+               </th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> <var>operand1</var> 
+               </td> 
+                        
+               <td>C</td> 
+                        
+               <td>S</td> 
+                        
+               <td>A</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>N</td> 
+                        
+               <td>A</td> 
+                        
+               <td>U</td> 
+                        
+               <td>N</td> 
+                        
+               <td>P</td> 
+                        
+               <td>I</td> 
+                        
+               <td>F</td> 
+                        
+               <td>B</td> 
+                        
+               <td>D</td> 
+                        
+               <td>T</td> 
+                        
+               <td>L</td> 
+                        
+               <td>C</td> 
+                        
+               <td align="center">G</td> 
+                        
+               <td align="center">O</td> 
+                        
+               <td align="center">yes</td> 
+                        
+               <td align="center">no</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <var>operand2</var> 
+               </td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>S</td> 
+                        
+               <td>A</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>M</td> 
+                        
+               <td>A</td> 
+                        
+               <td>U</td> 
+                        
+               <td>N</td> 
+                        
+               <td>P</td> 
+                        
+               <td>I</td> 
+                        
+               <td>F</td> 
+                        
+               <td>B</td> 
+                        
+               <td>D</td> 
+                        
+               <td>T</td> 
+                        
+               <td>L</td> 
+                        
+               <td>C</td> 
+                        
+               <td align="center">G</td> 
+                        
+               <td align="center">O</td> 
+                        
+               <td align="center">yes</td> 
+                        
+               <td align="center">yes</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>Syntax Element Description:</p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                  
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th nowrap> MOVE <a name="Rounded"></a>ROUNDED 
+               </th> 
+                        
+               <td colspan="2"> 
+                  
+                  <p>This option causes <var>operand2</var> to be
+                                rounded.
+                  </p> 
+                            
+                  <p><code>ROUNDED</code> is ignored if
+                                <var>operand2</var> is not numeric.
+                  </p> 
+                            
+                  <p>If <var>operand2</var> is of format N or P and
+                                <var>operand2</var> is specified more than once,
+                                <code>ROUNDED</code> is ignored for target operands with seven positions after
+                                the decimal point.
+                  </p> 
+                            
+                  <p>See also <a href="move.htm#Example_1_move">Example 1 -
+                                   Various Samples of MOVE Statement Usage</a>.
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th rowspan="3" nowrap>(<a name="parameter_move"></a><var>parameter</var>)
+               </th> 
+                        
+               <td colspan="2">As
+                  <var>parameter</var>, you can specify the option
+                            <a href="../parms/pm.htm#sp_pm"><code>PM=I</code></a> or
+                            the session parameter <a href="../parms/sp_df.htm"><code>DF</code></a>:
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a name="PM"></a>PM=I 
+               </td> 
+                        
+               <td> 
+                  
+                  <p>In order to support languages whose writing direction is from
+                     right to left, you can specify <code>PM=I</code> so as to transfer
+                                the value of <var>operand1</var> in inverse (right-to-left)
+                                direction to <var>operand2</var>.
+                  </p> 
+                            
+                  <p>For example, as a result of the following statements, the content
+                                of <code>#B</code> would be <code>ZYX</code>:
+                  </p> 
+                            <pre class="verbatim">MOVE 'XYZ' TO #A
+MOVE #A <strong>(PM=I)</strong> TO #B</pre> 
+                            <p><code>PM=I</code> can only be specified if
+                                <var>operand2</var> has alphanumeric format.
+                  </p> 
+                            
+                  <p>Any trailing blanks in <var>operand1</var> will be
+                                removed , then
+                                the value is reversed and moved to <var>operand2</var>. If
+                                <var>operand1</var> is not of alphanumeric format, the value
+                                will be converted to alphanumeric format before it is reversed.
+                  </p> 
+                            
+                  <p>See also the use of <code>PM=I</code> in conjunction
+                                with <a href="move.htm#MOVE_LEFT_-_RIGHT_JUSTIFIED"><code>MOVE LEFT/RIGHT
+                                      JUSTIFIED</code></a>.
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a name="DF"></a>DF 
+               </td> 
+                        
+               <td>If <var>operand1</var> is a date variable and
+                            <var>operand2</var> is an alphanumeric field, you can specify
+                            the session parameter <code>DF</code> as parameter for this date
+                            variable. The session parameter <a href="../parms/sp_df.htm"><code>DF</code></a> is described in
+                            the <cite>Parameter Reference</cite>.
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+         
+      <div><a name="syntax2_move"></a></div> 
+          
+      <h3> Syntax 2 - MOVE SUBSTRING</h3> 
+           
+            
+            
+      <table border="0" class="syntax" cellpadding="3"> 
+                 
+                 
+                 
+                  
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td rowspan="2" nowrap> <a href="move.htm#Function_Move">
+                      <code class="keyword">MOVE</code> </a> 
+               </td> 
+                        
+               <td rowspan="2" nowrap> 
+                  
+                  <p><img src="../graphics/cbo2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                        
+               <td nowrap> <var>operand1</var> 
+               </td> 
+                        
+               <td rowspan="2" nowrap> 
+                  
+                  <p><img src="../graphics/cbc2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                        
+               <td rowspan="2" nowrap> [(<a href="move.htm#parameter_move"><var>parameter</var></a>)]
+                            <code class="keyword">TO</code> 
+               </td> 
+                        
+               <td rowspan="2" nowrap> 
+                  
+                  <p><img src="../graphics/cbo2.gif" alt="" width="8" height="38"></p> 
+               </td> 
+                        
+               <td nowrap> <var>operand2</var> 
+               </td> 
+                        
+               <td rowspan="2" nowrap> 
+                  
+                  <p><img src="../graphics/cbc2.gif" alt="" width="8" height="38"></p> 
+               </td> 
+                        
+               <td rowspan="2" nowrap> 
+                  
+                  <p><img src="../graphics/dot3.gif" alt="" width="12" height="4"></p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td nowrap> <a href="move.htm#Substring">
+                      <code class="keyword"><u>SUBSTR</u>ING</code> </a>
+                            (<var>operand1</var><code class="keyword">,</code><var>operand3</var><code class="keyword">,</code><var>operand4</var>) 
+               </td> 
+                        
+               <td nowrap> <a href="move.htm#Substring">
+                      <code class="keyword"> <u>SUBSTR</u>ING</code>
+                               </a>(<var>operand2</var>,<var>operand5</var>,<var>operand6</var>)
+                            
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>Operand Definition Table:</p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                  
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>Operand</th> 
+                        
+               <th colspan="5" align="center">
+                  <a href="synsym.htm#statem_poss_struct">Possible Structure</a> 
+               </th> 
+                        
+               <th colspan="13" align="center">
+                  <a href="synsym.htm#statem_poss_form">Possible Formats</a> 
+               </th> 
+                        
+               <th align="center"> <a href="synsym.htm#statem_ref_perm">Referencing Permitted</a> 
+               </th> 
+                        
+               <th align="center"> <a href="synsym.htm#statem_dyn_def">Dynamic
+                     Definition</a> 
+               </th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> <var>operand1</var> 
+               </td> 
+                        
+               <td>C</td> 
+                        
+               <td>S</td> 
+                        
+               <td>A</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>A</td> 
+                        
+               <td>U</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>B</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">yes</td> 
+                        
+               <td align="center">no</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <var>operand2</var> 
+               </td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>S</td> 
+                        
+               <td>A</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>A</td> 
+                        
+               <td>U</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>B</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">yes</td> 
+                        
+               <td align="center">no</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <var>operand3</var> 
+               </td> 
+                        
+               <td>C</td> 
+                        
+               <td>S</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>N</td> 
+                        
+               <td>P</td> 
+                        
+               <td>I</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>B*</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">yes</td> 
+                        
+               <td align="center">no</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <var>operand4</var> 
+               </td> 
+                        
+               <td>C</td> 
+                        
+               <td>S</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>N</td> 
+                        
+               <td>P</td> 
+                        
+               <td>I</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>B*</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">yes</td> 
+                        
+               <td align="center">no</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <var>operand5</var> 
+               </td> 
+                        
+               <td>C</td> 
+                        
+               <td>S</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>N</td> 
+                        
+               <td>P</td> 
+                        
+               <td>I</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>B*</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">yes</td> 
+                        
+               <td align="center">no</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <var>operand6</var> 
+               </td> 
+                        
+               <td>C</td> 
+                        
+               <td>S</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>N</td> 
+                        
+               <td>P</td> 
+                        
+               <td>I</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>B*</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">yes</td> 
+                        
+               <td align="center">no</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p> <sup>*</sup> See text.
+      </p> 
+           
+      <p>Syntax Element Description:</p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th nowrap> MOVE <a name="Substring"></a>SUBSTRING 
+               </th> 
+                        
+               <td colspan="NaN"> 
+                  
+                  <p>Without the <code>SUBSTRING</code> option, the whole content of a
+                                field is moved.
+                  </p> 
+                            
+                  <p>The <code>SUBSTRING</code> option allows you to move only a
+                                certain part of an alphanumeric, Unicode or a binary field. After the field
+                                name (<var>operand1</var>) in the <code>SUBSTRING</code> clause
+                                you specify first the starting position (<var>operand3</var>)
+                                and then the length (<var>operand4</var>) of the field portion
+                                to be moved.
+                  </p> 
+                            
+                  <p>If the underlying field format of
+                                <var>operand1</var> is
+                  </p> 
+                            
+                  <ul> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">alphanumeric (A) or binary (B), then the values supplied with
+                                        <var>operand3</var> or <var>operand4</var> are
+                                        considered as byte numbers;
+                        </p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">Unicode (U), then the values supplied with
+                                        <var>operand3</var> or <var>operand4</var> are
+                                        considered as number of Unicode code units; that is, as double-bytes.
+                        </p> 
+                                   
+                     </li> 
+                               
+                  </ul> 
+                            
+                  <p>For example, to move the 5th to 12th position inclusive of the
+                                value in a field <code>#A</code> into a field <code>#B</code>, you would
+                                specify:
+                  </p> 
+                            <pre class="verbatim">MOVE SUBSTRING(#A,5,8) TO #B</pre> 
+                            <p>If <var>operand1</var> is a dynamic variable, the
+                                specified field portion to be moved must be within its current length;
+                                otherwise, a runtime error will occur.
+                  </p> 
+                            
+                  <p>Also, you can move a value of an alphanumeric, Unicode or binary
+                                field into a certain part of the target field. After the field name
+                                (<var>operand2</var>) in the <code>SUBSTRING</code> clause you
+                                specify first the starting position (<var>operand5</var>) and
+                                then the length (<var>operand6</var>) of the field portion into
+                                which the value is to be moved.
+                  </p> 
+                            
+                  <p>If the underlying field format of
+                                <var>operand2</var> is
+                  </p> 
+                            
+                  <ul> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">alphanumeric (A) or binary (B), then the values supplied with
+                                        <var>operand5</var> or <var>operand6</var> are
+                                        considered as byte numbers;
+                        </p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">Unicode (U), then the values supplied with
+                                        <var>operand3</var> or <var>operand4</var> are
+                                        considered as number of Unicode code units; that is, as double-bytes.
+                        </p> 
+                                   
+                     </li> 
+                               
+                  </ul> 
+                            
+                  <p>For example, to move the value of a field <code>#A</code> into the
+                                3rd to 6th position inclusive of a field <code>#B</code>, you would
+                                specify:
+                  </p> 
+                            <pre class="verbatim">MOVE #A TO SUBSTRING(#B,3,4)</pre> 
+                            <p>If <var>operand2</var> is a dynamic variable, the
+                                specified starting position (<var>operand5</var>) must not be
+                                greater than the variable's current length plus 1; a greater starting position
+                                will lead to a runtime error, because it would cause an undefined gap within
+                                the content of <var>operand2</var>.
+                  </p> 
+                            
+                  <p>If <var>operand3/5</var> or
+                                <var>operand4/6</var> is a binary variable, it may be used only
+                                with a length of less than or equal to 4.
+                  </p> 
+                            
+                  <p>If you omit <var>operand3/5</var>, the starting
+                                position is assumed to be <code>1</code>. If you omit
+                                <var>operand4/6</var>, the length is assumed to range from the
+                                starting position to the end of the field.
+                  </p> 
+                            
+                  <p>If <var>operand2</var> is a dynamic variable and
+                                the specified starting position (<var>operand5</var>) is the
+                                variable's current length plus 1, which means that the <code>MOVE</code>
+                                operation is used to increase the length of the variable,
+                                <var>operand6</var> must be specified in order to determine the
+                                new length of the variable.
+                  </p> 
+                            
+                  <p class="note"><strong>Note:</strong><br> <code>MOVE</code> with the <code>SUBSTRING</code> option is a
+                                byte-by-byte move (that is, the rules described under
+                                <a href="../pg/pg_furth_arithm.htm">Rules for Arithmetic
+                                   Assignment</a> in the <cite>Programming Guide</cite>
+                                do not apply).
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+         
+      <div><a name="syntax3_move" id="10808"></a></div> 
+          
+      <h3>Syntax 3 - MOVE BY NAME / POSITION</h3> 
+           
+            
+            
+      <table border="0" class="syntax" cellpadding="3"> 
+                 
+                 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td rowspan="2"> <a href="move.htm#Function_Move">
+                      <code class="keyword">MOVE</code> </a> 
+               </td> 
+                        
+               <td rowspan="2"> <code class="keyword">BY</code> 
+               </td> 
+                        
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/cbo2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                        
+               <td> <a href="move.htm#MOVE_BY_NAME">[<code class="keyword">NAME</code>]</a> 
+               </td> 
+                        
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/cbc2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                        
+               <td rowspan="2" colspan="NaN" nowrap>
+                  <var>operand1</var> <code class="keyword">TO</code>
+                            <var>operand2</var> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a href="move.htm#MOVE_BY_POS"> <code class="keyword">POSITION</code> </a> 
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>Operand Definition Table:</p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>Operand</th> 
+                        
+               <th colspan="5" align="center">
+                  <a href="synsym.htm#statem_poss_struct">Possible Structure</a> 
+               </th> 
+                        
+               <th colspan="12" align="center">
+                  <a href="synsym.htm#statem_poss_form">Possible Formats</a> 
+               </th> 
+                        
+               <th align="center"> <a href="synsym.htm#statem_ref_perm">Referencing Permitted</a> 
+               </th> 
+                        
+               <th align="center"> <a href="synsym.htm#statem_dyn_def">Dynamic
+                     Definition</a> 
+               </th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> <var>operand1</var> 
+               </td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>G</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">yes</td> 
+                        
+               <td align="center">no</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <var>operand2</var> 
+               </td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>G</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">yes</td> 
+                        
+               <td align="center">no</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>Syntax Element Description:</p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th nowrap> <a name="MOVE_BY_NAME"></a> MOVE BY
+                  NAME <var>operand1</var> TO
+                            <var>operand2</var> 
+               </th> 
+                        
+               <td> 
+                  
+                  <p>This option is used to move individual fields contained in a data
+                     structure to another data structure, independent of their position in the
+                       structure.
+                  </p> 
+                            
+                  <p>A field is moved only if its name appears in both structures (this
+                                includes <code>REDEFINE</code>d fields as well as fields resulting from a
+                                redefinition). The individual fields may be of any format. The operands can
+                                also be views.
+                  </p> 
+                            
+                  <p class="note"><strong>Note:</strong><br> The sequence of the individual moves is determined by the
+                                sequence of the fields in <var>operand1</var>.
+                  </p> 
+                            
+                  <p>See also <a href="move.htm#Example_2_move">Example 2 -
+                                   MOVE BY NAME Statement</a>.
+                  </p> 
+                            
+                  <div><strong class="floating-title"> MOVE BY NAME with Arrays: </strong></div> 
+                            
+                  <p>If the data structures contain arrays, these will internally be
+                                assigned the index <code>(*)</code> when moved; this may lead to an error if
+                                the arrays do not comply with the rules for assignment operations with arrays;
+                                see the section <a href="../pg/pg_furth_arithm.htm#Array_Processing">Processing of
+                                   Arrays</a> in the <cite>Programming Guide</cite>.
+                  </p> 
+                            
+                  <p>See also <a href="move.htm#Example_3_move">Example 3 -
+                                   MOVE BY NAME with Arrays</a>.
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th nowrap>
+                  <a name="MOVE_BY_POS" id="10809"></a>MOVE BY POSITION
+                            <var>operand1</var> TO <var>operand2</var>
+                            
+               </th> 
+                        
+               <td> 
+                  
+                  <p>This option allows you to move the contents of fields in a group
+                     to another group, regardless of the field names.
+                  </p> 
+                            
+                  <p>The values are moved field by field from one group to the other in
+                                the order in which the fields are defined (this does not include fields
+                                resulting from a redefinition).
+                  </p> 
+                            
+                  <p>The individual fields may be of any format. The number of fields
+                                in each group must be the same; also, the level structure and array dimensions
+                                of the fields must match. Format conversion is done according to the rules for
+                                arithmetic assignment; see the section
+                                <a href="../pg/pg_furth_arithm.htm">Rules for Arithmetic
+                                   Assignments</a> in the <cite>Programming Guide</cite>.
+                                The operands can also be views.
+                  </p> 
+                            
+                  <p>See also <a href="move.htm#Example_4_move">Example 4 -
+                                   MOVE BY POSITION</a>.
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+         
+      <div><a name="syntax4_move"></a></div> 
+          
+      <h3> Syntax 4 - MOVE EDITED (Edit Mask Specified with
+              <var>operand2</var>)
+      </h3> 
+           
+            
+            
+      <table border="0" class="syntax" cellpadding="3">  
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td rowspan="2" colspan="NaN">
+                  <a href="move.htm#Function_Move"> <code class="keyword">MOVE</code></a>
+                            <a href="move.htm#MOVE_ED"><code class="keyword">EDITED</code></a>
+                            <var>operand1</var> <code class="keyword">TO</code>
+                            <var>operand2</var> 
+               </td> 
+                         
+                        
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/cbo2.gif" alt="" width="6" height="38"></p>
+               </td> 
+                        
+               <td>(<a href="move.htm#edit_mask1"><code class="keyword">EM</code></a>=<var>value</var>) 
+               </td> 
+                        
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/cbc2.gif" alt="" width="6" height="38"></p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>(<a href="move.htm#edit_mask2"><code class="keyword">EMU</code></a>=<var>value</var>) 
+               </td>
+                        
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>Operand Definition Table:</p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                  
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>Operand</th> 
+                        
+               <th colspan="5" align="center">
+                  <a href="synsym.htm#statem_poss_struct">Possible Structure</a> 
+               </th> 
+                        
+               <th colspan="13" align="center">
+                  <a href="synsym.htm#statem_poss_form">Possible Formats</a> 
+               </th> 
+                        
+               <th align="center"> <a href="synsym.htm#statem_ref_perm">Referencing Permitted</a> 
+               </th> 
+                        
+               <th align="center"> <a href="synsym.htm#statem_dyn_def">Dynamic
+                     Definition</a> 
+               </th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> <var>operand1</var> 
+               </td> 
+                        
+               <td>C</td> 
+                        
+               <td>S</td> 
+                        
+               <td>A</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>A</td> 
+                        
+               <td>U</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>B</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">yes</td> 
+                        
+               <td align="center">no</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <var>operand2</var> 
+               </td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>S</td> 
+                        
+               <td>A</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>A</td> 
+                        
+               <td>U</td> 
+                        
+               <td>N</td> 
+                        
+               <td>P</td> 
+                        
+               <td>I</td> 
+                        
+               <td>F</td> 
+                        
+               <td>B</td> 
+                        
+               <td>D</td> 
+                        
+               <td>T</td> 
+                        
+               <td>L</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">yes</td> 
+                        
+               <td align="center">yes</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>Syntax Element Description:</p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th nowrap>
+                  <a name="MOVE_ED" id="10810"></a>MOVE EDITED 
+               </th> 
+                        
+               <td> 
+                  
+                  <p>If an edit mask is specified for
+                                <var>operand2</var>, the value of
+                                <var>operand1</var> will be placed into
+                                <var>operand2</var> using this edit mask.
+                  </p> 
+                            
+                  <p>The edit mask can be considered as an <em>input</em> edit mask for
+                                <var>operand2</var>, that is used to specify at which positions
+                                in the alphanumeric contents of <var>operand1</var> the
+                                significant input data for <var>operand2</var> can be found.
+                                
+                  </p> 
+                            
+                  <p>If the edit mask refers more characters or digits than existent in
+                                <var>operand2</var>, it is truncated accordingly. The length of
+                                <var>operand1</var> may not be smaller than the length of the
+                                input value represented by the edit mask. If
+                                <var>operand1</var> is longer than the edit mask length, all
+                                the overhanging data is ignored.
+                  </p> 
+                            
+                  <p>Under the pre-condition not to have an
+                                <var>operand1</var> length larger than the edit mask length,
+                                you may regard a 
+                  </p> 
+                            <pre class="verbatim">MOVE EDITED <var>operand1</var> TO <var>operand2</var> (EM=<var>value</var>)</pre> 
+                            <p>operation like the execution of</p> 
+                            <pre class="verbatim">STACK TOP DATA <var>operand1</var>
+INPUT <var>operand2</var> (EM=<var>value</var>)</pre> 
+                            <p>See also <a href="move.htm#Example_1_move">Example 1 -
+                                   Various Samples of MOVE Statement Usage</a>.
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th nowrap> <a name="edit_mask1"></a>EM 
+               </th> 
+                        
+               <td>For details on edit masks, see the session parameter
+                  <a href="../parms/sp_em.htm"><code>EM</code></a> in the
+                            <cite>Parameter Reference</cite>.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th nowrap><a name="edit_mask2"></a>EMU 
+               </th> 
+                        
+               <td>For details on Unicode edit masks, see the session parameter
+                  <a href="../parms/sp_emu.htm"><code>EMU</code></a> in
+                            the <cite>Parameter Reference</cite>.
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+         
+      <div><a name="syntax5_move"></a></div> 
+          
+      <h3> Syntax 5 - MOVE EDITED (Edit Mask Specified with
+              <var>operand1</var>)
+      </h3> 
+           
+            
+            
+      <table border="0" class="syntax" cellpadding="3">  
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td rowspan="2" colspan="NaN">
+                  <a href="move.htm#Function_Move"> <code class="keyword">MOVE</code>
+                               </a> <a href="move.htm#MOVE_ED"> <code class="keyword">EDITED</code>
+                               </a> <var>operand1</var> 
+               </td> 
+                         
+                        
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/cbo2.gif" alt="" width="6" height="38"></p>
+               </td> 
+                        
+               <td>(<a href="move.htm#edit_mask3"><code class="keyword">EM</code></a>=<var>value</var>) 
+               </td> 
+                        
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/cbc2.gif" alt="" width="6" height="38"></p>
+               </td> 
+                        
+               <td rowspan="2"><code class="keyword">TO</code>
+                    <var>operand2</var></td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>(<a href="move.htm#edit_mask4"><code class="keyword">EMU</code></a>=<var>value</var>)
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>Operand Definition Table:</p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="97%">
+         </colgroup> 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>Operand</th> 
+                        
+               <th colspan="5" align="center">
+                  <a href="synsym.htm#statem_poss_struct">Possible Structure</a> 
+               </th> 
+                        
+               <th colspan="13" align="center">
+                  <a href="synsym.htm#statem_poss_form">Possible Formats</a> 
+               </th> 
+                        
+               <th align="center">
+                  <a href="synsym.htm#statem_ref_perm">Referencing Permitted</a> 
+               </th> 
+                        
+               <th align="center">
+                  <a href="synsym.htm#statem_dyn_def">Dynamic Definition</a> 
+               </th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> <var>operand1</var> 
+               </td> 
+                        
+               <td>C</td> 
+                        
+               <td>S</td> 
+                        
+               <td>A</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>N</td> 
+                        
+               <td>A</td> 
+                        
+               <td>U</td> 
+                        
+               <td>N</td> 
+                        
+               <td>P</td> 
+                        
+               <td>I</td> 
+                        
+               <td>F</td> 
+                        
+               <td>B</td> 
+                        
+               <td>D</td> 
+                        
+               <td>T</td> 
+                        
+               <td>L</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">yes</td> 
+                        
+               <td align="center">no</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <var>operand2</var> 
+               </td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>S</td> 
+                        
+               <td>A</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>A</td> 
+                        
+               <td>U</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>B</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">yes</td> 
+                        
+               <td align="center">yes</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>Syntax Element Description:</p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th nowrap> <a href="move.htm#MOVE_ED">MOVE
+                     EDITED</a> 
+               </th> 
+                        
+               <td colspan="NaN"> 
+                  
+                  <p>If an edit mask is specified for
+                                <var>operand1</var>, the edit mask will be applied to
+                                <var>operand1</var> and the result will be moved to
+                                <var>operand2</var>.
+                  </p> 
+                            
+                  <p>The edit mask can be considered as an <em>output</em> edit mask
+                                for <var>operand1</var>, that is used to create an alphanumeric
+                                string with the layout and length described by the edit mask. Besides data
+                                characters or digits originating from <var>operand1</var>, you
+                                may include additional decoration characters into the output string. 
+                  </p> 
+                            
+                  <p>If the edit mask refers more characters or digits than existent in
+                                <var>operand1</var>, it is truncated accordingly. The length of
+                                the created output string (resulting from <var>operand1</var>
+                                value after the edit mask has been applied) must not exceed the length of
+                                <var>operand2</var>. 
+                  </p> 
+                            
+                  <p>Under the pre-condition not to have an
+                                <var>operand2</var> length smaller than the edit mask length,
+                                you may regard a 
+                  </p> 
+                            <pre class="verbatim">MOVE EDITED <var>operand1</var> (EM=<var>value</var>) TO <var>operand2</var></pre> 
+                            <p>operation like a</p> 
+                            <pre class="verbatim">WRITE <var>operand1</var> (EM=<var>value</var>)</pre> 
+                            <p>that does not write the output to the screen, but fills it into
+                                variable <var>operand2</var>.
+                  </p> 
+                            
+                  <p>See also <a href="move.htm#Example_1_move">Example 1 -
+                                   Various Samples of MOVE Statement Usage</a>.
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th nowrap> <a name="edit_mask3"></a>
+                  EM 
+               </th> 
+                        
+               <td colspan="NaN"> For details on edit masks, see
+                  the session parameter <a href="../parms/sp_em.htm"><code>EM</code></a> in the
+                            <cite>Parameter Reference</cite>. 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th nowrap><a name="edit_mask4"></a>EMU 
+               </th> 
+                        
+               <td colspan="NaN">For details on Unicode edit masks,
+                  see the session parameter <a href="../parms/sp_emu.htm"><code>EMU</code></a> in the
+                            <cite>Parameter Reference</cite>.
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+          
+      <div><a name="syntax6_move"></a></div> 
+          
+      <h3> Syntax 6 - MOVE LEFT / RIGHT JUSTIFIED</h3> 
+           
+            
+            
+      <table border="0" class="syntax" cellpadding="3"> 
+                 
+                  
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td rowspan="2"> <a href="move.htm#Function_Move">
+                      <code class="keyword">MOVE</code> </a> 
+               </td> 
+                        
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/cbo2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                        
+               <td align="left"> <a href="move.htm#MOVE_LEFT_-_RIGHT_JUSTIFIED">
+                      <code class="keyword">LEFT</code> </a> 
+               </td> 
+                        
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/cbc2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                        
+               <td rowspan="2" colspan="NaN">
+                  <a href="move.htm#MOVE_LEFT_-_RIGHT_JUSTIFIED">[<code class="keyword">JUSTIFIED</code>]</a> <var>operand1</var>
+                            <a href="move.htm#parameter_move">[(<var>parameter</var>)]</a>
+                            <code class="keyword">TO</code> <var>operand2</var> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td align="left"> <a href="move.htm#MOVE_LEFT_-_RIGHT_JUSTIFIED">
+                      <code class="keyword">RIGHT</code> </a> 
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>Operand Definition Table:</p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                  
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>Operand</th> 
+                        
+               <th colspan="5" align="center">
+                  <a href="synsym.htm#statem_poss_struct">Possible Structure</a> 
+               </th> 
+                        
+               <th colspan="13" align="center">
+                  <a href="synsym.htm#statem_poss_form">Possible Formats</a> 
+               </th> 
+                        
+               <th align="center"> <a href="synsym.htm#statem_ref_perm">Referencing Permitted</a> 
+               </th> 
+                        
+               <th align="center"> <a href="synsym.htm#statem_dyn_def">Dynamic
+                     Definition</a> 
+               </th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> <var>operand1</var> 
+               </td> 
+                        
+               <td>C</td> 
+                        
+               <td>S</td> 
+                        
+               <td>A</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>N</td> 
+                        
+               <td>A</td> 
+                        
+               <td>U</td> 
+                        
+               <td>N</td> 
+                        
+               <td>P</td> 
+                        
+               <td>I</td> 
+                        
+               <td>F</td> 
+                        
+               <td>B</td> 
+                        
+               <td>D</td> 
+                        
+               <td>T</td> 
+                        
+               <td>L</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">yes</td> 
+                        
+               <td align="center">no</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <var>operand2</var> 
+               </td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>S</td> 
+                        
+               <td>A</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>A</td> 
+                        
+               <td>U</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">yes</td> 
+                        
+               <td align="center">yes</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>Syntax Element Description:</p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>
+                  <a name="MOVE_LEFT_-_RIGHT_JUSTIFIED" id="16826"></a>MOVE LEFT / RIGHT
+                   JUSTIFIED 
+               </th> 
+                        
+               <td colspan="NaN"> 
+                  
+                  <p>This option is used to cause the values to be moved to be left- or
+                     right-justified in <var>operand2</var>.
+                  </p> 
+                            
+                  <p><code>MOVE LEFT/RIGHT JUSTIFIED</code> cannot be used if
+                                <var>operand2</var> is a dynamic variable.
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th>MOVE LEFT JUSTIFIED</th> 
+                        
+               <td colspan="NaN">With <code>MOVE LEFT
+                     JUSTIFIED</code>, any leading blanks in <var>operand1</var> are
+                   removed before
+                            the value is placed left-justified into <var>operand2</var>.
+                            The remainder of <var>operand2</var> will then be filled with
+                            blanks. If the value is longer than <var>operand2</var>, the
+                            value will be truncated on the right-hand side.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th>MOVE RIGHT JUSTIFIED</th> 
+                        
+               <td colspan="NaN"> 
+                  
+                  <p>With <code>MOVE RIGHT JUSTIFIED</code>, any trailing blanks in
+                                <var>operand1</var> are truncated before the value is placed right-justified
+                                into <var>operand2</var>. The remainder of
+                                <var>operand2</var> will then be filled with blanks. If the
+                                value is longer than <var>operand2</var>, the value will be
+                                truncated on the left-hand side.
+                  </p> 
+                            
+                  <p>See also <a href="move.htm#Example_1_move">Example 1 -
+                                   Various Samples of MOVE Statement Usage</a>.
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th> <var>parameter</var> 
+               </th> 
+                        
+               <td colspan="NaN"> 
+                  
+                  <p>When you use <code>MOVE LEFT/RIGHT JUSTIFIED</code> in conjunction
+                                with <a href="../parms/pm.htm#sp_pm"><code>PM=I</code></a>, the move is
+                                performed in the following steps:
+                  </p> 
+                            
+                  <ol> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">If <var>operand1</var> is not of alphanumeric
+                                        format, the value is converted to alphanumeric format.
+                        </p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">Any trailing blanks in <var>operand1</var> are
+                                        removed.
+                        </p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">In the case of <code>LEFT JUSTIFIED</code>, any leading blanks
+                                        in <var>operand1</var> are also removed.
+                        </p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">The value is reversed, and then moved to
+                                        <var>operand2</var>.
+                        </p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">If applicable, the remainder of
+                                        <var>operand2</var> is filled with blanks, or the value is
+                                        truncated (see above).
+                        </p> 
+                                   
+                     </li> 
+                               
+                  </ol> 
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+         
+      <div><a name="syntax7_move"></a></div> 
+          
+      <h3>Syntax 7 - MOVE NORMALIZED</h3> 
+           
+           
+      <p>The <code>MOVE NORMALIZED</code> statement converts a Unicode string
+               into the "Unicode Normalization Form C" (NFC). The resulting
+               Unicode string does no longer contain combining sequences for characters which
+               are available as pre-composed characters. 
+      </p> 
+           
+      <p>If the format of the target operand is not Unicode itself, an implicit
+               conversion from Unicode into the target operand takes place - during this
+               conversion the default code page (see system variable
+               <a href="../vari/sysenv.htm#CODEPAGE"><code>*CODEPAGE</code></a>)
+               will be used. 
+      </p> 
+           
+      <p>For further information on the <code>MOVE NORMALIZED</code> statement,
+               see the section
+               <a href="../unicode/uni-language.htm#uni-language-statements">Statements</a>
+               in the <cite>Unicode and Code Page Support</cite> documentation. 
+      </p> 
+           
+      <p>Syntax Diagram: </p> 
+            
+            
+      <table border="0" class="syntax" cellpadding="3">  
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td nowrap> <code class="keyword">MOVE</code>
+                       <code class="keyword">NORMALIZED</code> <var>operand1</var>
+                            <code class="keyword">TO</code> <var>operand2</var> 
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>Operand Definition Table:</p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                  
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>Operand</th> 
+                        
+               <th colspan="5" align="center">
+                  <a href="synsym.htm#statem_poss_struct">Possible Structure</a> 
+               </th> 
+                        
+               <th colspan="13" align="center">
+                  <a href="synsym.htm#statem_poss_form">Possible Formats</a> 
+               </th> 
+                        
+               <th align="center"> <a href="synsym.htm#statem_ref_perm">Referencing Permitted</a> 
+               </th> 
+                        
+               <th align="center"> <a href="synsym.htm#statem_dyn_def">Dynamic
+                     Definition</a> 
+               </th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> <var>operand1</var> 
+               </td> 
+                        
+               <td>C</td> 
+                        
+               <td>S</td> 
+                        
+               <td>A</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>U</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">yes</td> 
+                        
+               <td align="center">no</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <var>operand2</var> 
+               </td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>S</td> 
+                        
+               <td>A</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>A</td> 
+                        
+               <td>U</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">yes</td> 
+                        
+               <td align="center">yes</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>Syntax Element Description:</p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>MOVE NORMALIZED</th> 
+                        
+               <td colspan="NaN"> 
+                  
+                  <p>This option is used to convert Unicode fields with potentially
+                     unnormalized content into the "Unicode Normalization Form C"
+                     (NFC). This composite form of a Unicode string does not contain combining
+                     sequences for characters which are available as pre-composed characters. See
+                     also:
+                                <a href="http://www.unicode.org/reports/tr15/#Canonical_Composition_Examples" target="_blank">http://www.unicode.org/reports/tr15/#Canonical_Composition_Examples</a>
+                                ("Normalization Forms D and C Examples").
+                  </p> 
+                            
+                  <p>Example: </p> 
+                            <pre class="verbatim">MOVE NORMALIZED #SCR TO #TGT</pre> </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th> <var>operand1</var> 
+               </th> 
+                        
+               <td colspan="NaN">Unicode string to be
+                  converted.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th> <var>operand2</var> 
+               </th> 
+                        
+               <td colspan="NaN"> Target operand. </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>Example:</p> 
+           
+      <p>Some code points have different representations in Unicode. For
+               example, the German letter '&Auml;': the decomposed representation in Unicode is
+               U+0041 followed by U+0308 and uses a combining character (U+0308); another
+               representation is the pre-composed character U+00C4 . The <code>MOVE
+            NORMALIZED</code> statement converts the Unicode representation with combining
+               characters into a normalized Unicode representation using pre-composed
+               characters where possible.
+      </p> 
+           
+         
+      <div><a name="syntax8_move"></a></div> 
+          
+      <h3> Syntax 8 - MOVE ENCODED</h3> 
+           
+           
+      <p>This section explains the syntax of the MOVE ENCODED statement. For
+               information on the purpose of this statement, see the section
+               <a href="../unicode/uni-language.htm#uni-language-statements">Statements</a>
+               in the <cite>Unicode and Code Page Support</cite> documentation. 
+      </p> 
+           
+      <p>Syntax Diagram:</p> 
+            
+            
+      <table border="0" class="syntax" cellpadding="3">  
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td nowrap> <a href="move.htm#move_encoded_kw"><code class="keyword">MOVE ENCODED</code></a> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td nowrap>&nbsp;&nbsp;&nbsp;<a href="move.htm#move-encoded-op1"><var>operand1</var></a>
+                           [[<code class="keyword">IN</code>] <code class="keyword">CODEPAGE</code>
+                            <a href="move.htm#move-encoded-op2"><var>operand2</var></a>]
+                            <code class="keyword">TO</code></td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td nowrap>&nbsp;&nbsp;&nbsp;<a href="move.htm#move-encoded-op3"><var>operand3</var></a>
+                           [[<code class="keyword">IN</code>] <code class="keyword">CODEPAGE</code>
+                            <a href="move.htm#move-encoded-op4"><var>operand4</var></a>]
+               </td>
+                        
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td nowrap>&nbsp;&nbsp;&nbsp;[<code class="keyword">GIVING</code> <a href="move.htm#move-encoded-op5"><var>operand5</var></a>]
+               </td>
+                        
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>Operand Definition Table:</p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                  
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>Operand</th> 
+                        
+               <th colspan="5" align="center">
+                  <a href="synsym.htm#statem_poss_struct">Possible Structure</a> 
+               </th> 
+                        
+               <th colspan="13" align="center">
+                  <a href="synsym.htm#statem_poss_form">Possible Formats</a> 
+               </th> 
+                        
+               <th align="center"> <a href="synsym.htm#statem_ref_perm">Referencing Permitted</a> 
+               </th> 
+                        
+               <th align="center"> <a href="synsym.htm#statem_dyn_def">Dynamic
+                     Definition</a> 
+               </th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> <var>operand1</var> 
+               </td> 
+                        
+               <td>C</td> 
+                        
+               <td>S</td> 
+                        
+               <td>A</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>A</td> 
+                        
+               <td>U</td> 
+                        
+               <td>B</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">yes</td> 
+                        
+               <td align="center">no</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <var>operand2</var> 
+               </td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>S</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>A</td> 
+                        
+               <td>U</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">yes</td> 
+                        
+               <td align="center">no</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <var>operand3</var> 
+               </td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>S</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>A</td> 
+                        
+               <td>U</td> 
+                        
+               <td>B</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">yes</td> 
+                        
+               <td align="center">yes</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <var>operand4</var> 
+               </td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>S</td> 
+                        
+               <td>A</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>A</td> 
+                        
+               <td>U</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">yes</td> 
+                        
+               <td align="center">no</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><var>operand5</var></td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>S</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>I4</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">yes</td> 
+                        
+               <td align="center">yes</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>Syntax Element Description:</p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th><a name="move_encoded_kw"></a>MOVE
+                  ENCODED
+               </th> 
+                        
+               <td colspan="NaN"> The <code>MOVE ENCODED</code>
+                  statement converts a character string, encoded in one code page, into the
+                  equivalent character string of another code page. 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th> <a name="move-encoded-op1"></a><var>operand1</var> 
+               </th> 
+                        
+               <td colspan="NaN"> String to be converted. </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th><a name="move-encoded-op2"></a><var>operand2</var> 
+               </th> 
+                        
+               <td colspan="NaN"> Code page of
+                  <var>operand1</var>. Can only be supplied if
+                            <var>operand1</var> is of format A or B. See Note 1. 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th><a name="move-encoded-op3"></a><var>operand3</var> 
+               </th> 
+                        
+               <td colspan="NaN"> 
+                  
+                  <p>Target. </p> 
+                            
+                  <p>If the conversion result does not fit into the target field, the
+                     result is padded or truncated, respectively, and as padding character the blank
+                     of the resulting code page is used. 
+                  </p> 
+                            
+                  <p>If the target field is defined as a dynamic variable, no padding
+                                or truncation is needed, since the length of the dynamic variable is
+                                automatically adjusted to the length of the conversion result. 
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th><a name="move-encoded-op4"></a><var>operand4</var> 
+               </th> 
+                        
+               <td colspan="NaN"> Code page of
+                  <var>operand3</var>. Can only be supplied if operand3 is of
+                       format A or B. See Note 1. 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th><a name="move-encoded-op5"></a><var>operand5</var></th> 
+                        
+               <td colspan="NaN"> 
+                  
+                  <p>Without the keyword <code>GIVING</code>, a Natural error message
+                     is returned in case of an error. If the keyword <code>GIVING</code> is used,
+                                <var>operand5</var> returns 0 or the Natural error code instead
+                                of the Natural error message. 
+                  </p> 
+                            
+                  <p>If the target gets truncated, no Natural error message is given,
+                                but when the keyword <code>GIVING</code> is used,
+                                <var>operand5</var> will contain an appropriate error code to
+                                indicate truncation. 
+                  </p>
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p class="notes"><strong>Notes:</strong></p>
+      <ol class="note-list"> 
+               
+         <li>If a code page operand is not supplied, then the default code page
+                   (value of the system variable <a href="../vari/sysenv.htm#CODEPAGE"><code>*CODEPAGE</code></a>)
+                   is used. 
+         </li> 
+               
+         <li>If the session parameter <a href="../parms/cpcverr.htm"><code>CPCVERR</code></a> in the
+                   statement <a href="setgloba.htm#setgloba"><code>SET GLOBALS</code></a> or
+                   in the system command <a href="../syscom/globals.htm"><code>GLOBALS</code></a> is
+                   set to <code>ON</code>, an error is output if at least one character of the
+                   source field could not be converted properly into the destination code page,
+                   but was replaced in the target field by a substitution character.
+         </li> 
+                
+              
+      </ol> 
+           
+      <p>Examples:</p> 
+           <pre class="verbatim">MOVE ENCODED A-FIELD1 TO A-FIELD2</pre> 
+           <p>Invalid: This results in a syntax error, since the code page names are
+               taken by default and are the same for <var>operand1</var> and
+               <var>operand3</var>.
+      </p> 
+           <pre class="verbatim">MOVE ENCODED A-FIELD1 CODEPAGE 'IBM01140' TO A-FIELD2 CODEPAGE 'IBM01140'</pre> 
+           <p>Invalid: This results in an error, since the coded code page names are
+               the same for <var>operand1</var> and
+               <var>operand3</var>.
+      </p> 
+           <pre class="verbatim">MOVE ENCODED A-FIELD1 CODEPAGE 'IBM01140' TO A-FIELD2 CODEPAGE 'IBM037'</pre> 
+           <p>Valid: The string in <code>A-FIELD1</code> which is coded in IBM01140
+               is converted into <code>A-FIELD2</code> which is coded in IBM037.
+      </p> 
+           <pre class="verbatim">MOVE ENCODED U-FIELD TO U-FIELD</pre> 
+           <p>Invalid: This results in an error, since at least one operand must be
+               of format A or B.
+      </p> 
+           <pre class="verbatim">MOVE ENCODED U-FIELD TO A-FIELD</pre> 
+           <p>Valid: The Unicode string in <code>U-FIELD</code> which, considered to
+               be encoded in UTF-16, is converted into the alphanumeric <code>A-FIELD</code>
+               in the default code page (<a href="../vari/sysenv.htm#CODEPAGE"><code>*CODEPAGE</code></a>).
+      </p>
+           
+           <pre class="verbatim">MOVE ENCODED A-FIELD TO U-FIELD</pre> 
+           <p>Valid: The string in <code>A-FIELD</code> which, considered to be
+               encoded in the default code page (<a href="../vari/sysenv.htm#CODEPAGE"><code>*CODEPAGE</code></a>),
+               is converted into the Unicode field <code>U-FIELD</code>.
+      </p> 
+           <pre class="verbatim">MOVE ENCODED A100-FIELD CODEPAGE 'IBM1140' TO A50-FIELD CODEPAGE 'IBM037'</pre> 
+           <p>Valid: Conversion is done from <code>A100-FIELD</code> (format/length:
+               A100) to <code>A50-FIELD</code> (format/length: A50), using the relevant code
+               pages. The target is truncated. No Natural error message is returned. 
+      </p> 
+           <pre class="verbatim">MOVE ENCODED A100-FIELD CODEPAGE 'IBM1140' TO A50-FIELD CODEPAGE 'IBM037' GIVING RC-FIELD</pre> 
+           <p>Valid: Conversion is done from <code>A100-FIELD</code> (format/length:
+               A100) to <code>A50-FIELD</code> (format/length: A50), using the relevant code
+               pages. The target is truncated. Since a <code>GIVING</code> clause is supplied,
+               the <code>RC-FIELD</code> receives an error code, indicating that a value
+               truncation has taken place.
+      </p> 
+           
+        
+        
+      <div class="noprint">
+         <p><a href="move.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="move_exa"></a></div> 
+         
+      <h2> Examples</h2>
+      <ul>
+         <li>
+            <p class="initem"><a href="move.htm#Example_1_move">Example 1 - Various Samples of MOVE Statement Usage</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="move.htm#Example_2_move">Example 2 - MOVE BY NAME</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="move.htm#Example_3_move">Example 3 - MOVE BY NAME with Arrays</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="move.htm#Example_4_move">Example 4- MOVE BY POSITION</a></p>
+         </li>
+      </ul>
+      <div><a name="Example_1_move"></a></div> 
+          
+      <h3>Example 1 - Various Samples of MOVE Statement Usage</h3> 
+           
+           <pre class="verbatim">** Example 'MOVEX1': MOVE                                               
+************************************************************************
+DEFINE DATA LOCAL                                                       
+1 #A (N3)                                                               
+1 #B (A5)                                                               
+1 #C (A2)                                                               
+1 #D (A7)                                                               
+1 #E (N1.0)                                                             
+1 #F (A5)                                                               
+1 #G (N3.2)                                                             
+1 #H (A6)                                                               
+END-DEFINE                                                              
+*                                                                       
+<strong>MOVE 5 TO #A</strong>                                                            
+WRITE NOTITLE 'MOVE 5 TO #A'      30X '=' #A                            
+*                                                                       
+<strong>MOVE 'ABCDE' TO #B #C #D</strong>                                                
+WRITE 'MOVE ABCDE TO #B #C #D'    20X '=' #B '=' #C '=' #D              
+*                                                                       
+<strong>MOVE -1  TO #E</strong>                                             
+WRITE 'MOVE -1  TO #E'            28X '=' #E               
+*                                                          
+<strong>MOVE ROUNDED 1.995 TO #E</strong>                                   
+WRITE 'MOVE ROUNDED 1.995 TO #E'  18X '=' #E               
+*                                                          
+*                                                          
+<strong>MOVE RIGHT JUSTIFIED 'ABC' TO #F</strong>                           
+WRITE 'MOVE RIGHT JUSTIFIED ''ABC'' TO #F'       10X '=' #F
+*                                                          
+<strong>MOVE EDITED '003.45' TO #G (EM=999.99)</strong>                     
+WRITE 'MOVE EDITED ''003.45'' TO #G (EM=999.99)'  4X '=' #G
+*                                                          
+<strong>MOVE EDITED 123.45 (EM=999.99) TO #H</strong>                      
+WRITE 'MOVE EDITED 123.45 (EM=999.99) TO #H'      6X '=' #H
+*                                                          
+END                                   </pre> 
+           <h4 class="floating-title">Output of Program MOVEX1:</h4> <pre class="system-output">MOVE 5 TO #A                              #A:    5                  
+MOVE ABCDE TO #B #C #D                    #B: ABCDE #C: AB #D: ABCDE
+MOVE -1  TO #E                            #E: -1                    
+MOVE ROUNDED 1.995 TO #E                  #E:  2                    
+MOVE RIGHT JUSTIFIED 'ABC' TO #F          #F:   ABC                 
+MOVE EDITED '003.45' TO #G (EM=999.99)    #G:    3.45               
+MOVE EDITED 123.45 (EM=999.99) TO #H      #H: 123.45            </pre> 
+          <div><a name="Example_2_move"></a></div> 
+          
+      <h3>Example 2 - MOVE BY NAME</h3> 
+           
+           <pre class="verbatim">** Example 'MOVEX2': MOVE BY NAME                                       
+************************************************************************
+DEFINE DATA LOCAL                                                       
+1 #SBLOCK                                                               
+  2 #FIELDA (A10) INIT &lt;'AAAAAAAAAA'&gt;                                   
+  2 #FIELDB (A10) INIT &lt;'BBBBBBBBBB'&gt;                                   
+  2 #FIELDC (A10) INIT &lt;'CCCCCCCCCC'&gt;                                   
+  2 #FIELDD (A10) INIT &lt;'DDDDDDDDDD'&gt;                                   
+1 #TBLOCK                                                               
+  2 #FIELD1 (A15) INIT &lt;' '&gt;                                            
+  2 #FIELDA (A10) INIT &lt;' '&gt;                                            
+  2 #FIELD2 (A10) INIT &lt;' '&gt;                                            
+  2 #FIELDB (A10) INIT &lt;' '&gt;                                            
+  2 #FIELD3 (A20) INIT &lt;' '&gt;                                            
+  2 #FIELDC (A10) INIT &lt;' '&gt;                                            
+END-DEFINE                                                              
+*                                                                       
+<strong>MOVE BY NAME #SBLOCK TO #TBLOCK</strong>                                      
+*                                                                       
+WRITE NOTITLE 'CONTENTS OF #TBLOCK AFTER MOVE BY NAME:'
+       // '=' #TBLOCK.#FIELD1                          
+        / '=' #TBLOCK.#FIELDA                          
+        / '=' #TBLOCK.#FIELD2                          
+        / '=' #TBLOCK.#FIELDB                          
+        / '=' #TBLOCK.#FIELD3                          
+        / '=' #TBLOCK.#FIELDC                          
+*                                                      
+END                                                   </pre> 
+           <h4 class="floating-title">Contents of #TBLOCK after MOVE BY NAME
+               Processing:
+      </h4> 
+           <pre class="verbatim">CONTENTS OF #TBLOCK AFTER MOVE BY NAME:
+                                       
+#FIELD1:                               
+#FIELDA: AAAAAAAAAA                    
+#FIELD2:                               
+#FIELDB: BBBBBBBBBB                    
+#FIELD3:                               
+#FIELDC: CCCCCCCCCC                   </pre> 
+          <div><a name="Example_3_move"></a></div> 
+          
+      <h3>Example 3 - MOVE BY NAME with Arrays</h3> 
+           
+           <pre class="verbatim">DEFINE DATA LOCAL
+  1 #GROUP1
+    2 #FIELD (A10/1:10)
+  1 #GROUP2
+    2 #FIELD (A10/1:10)
+END-DEFINE
+... 
+<strong>MOVE BY NAME #GROUP1 TO #GROUP2</strong>
+...</pre> 
+           <p>In this example, the <code>MOVE</code> statement would internally be
+               resolved as:
+      </p> 
+           <pre class="verbatim">MOVE #GROUP1.#FIELD (*) TO #GROUP2.#FIELD (*)</pre> 
+           <p>If part of an indexed group is moved to another part of the same group,
+               this may lead to unexpected results as shown in the example below.
+      </p> 
+           <pre class="verbatim">DEFINE DATA LOCAL
+  1 #GROUP1 (1:5)
+    2 #FIELDA (N1) INIT &lt;1,2,3,4,5&gt;
+    2 REDEFINE #FIELDA
+      3 #FIELDB (N1)
+END-DEFINE
+...
+<strong>MOVE BY NAME #GROUP1 (2:4) TO #GROUP1 (1:3)</strong>
+...</pre> 
+           <p>In this example, the <code>MOVE</code> statement would internally be
+               resolved as:
+      </p> 
+           <pre class="verbatim">MOVE #FIELDA (2:4) TO #FIELDA (1:3)MOVE #FIELDB (2:4) TO #FIELDB (1:3)</pre> 
+           <p>First, the contents of the occurrences 2 to 4 of <code>#FIELDA</code>
+               are moved to the occurrences 1 to 3 of <code>#FIELDA</code>; that is, the
+               occurrences receive the following values:
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td>Occurrence:</td> 
+                        
+               <td align="center">1.</td> 
+                        
+               <td align="center">2.</td> 
+                        
+               <td align="center">3.</td> 
+                        
+               <td align="center">4.</td> 
+                        
+               <td align="center">5.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>Value before:</td> 
+                        
+               <td align="center">1</td> 
+                        
+               <td align="center"> <strong>2</strong></td> 
+                        
+               <td align="center"> <strong>3</strong> 
+               </td> 
+                        
+               <td align="center"> <strong>4</strong></td> 
+                        
+               <td align="center">5</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>Value after:</td> 
+                        
+               <td align="center"> <strong>2</strong></td> 
+                        
+               <td align="center"> <strong>3</strong></td> 
+                        
+               <td align="center"> <strong>4</strong></td> 
+                        
+               <td align="center">4</td> 
+                        
+               <td align="center">5</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>Then the contents of the occurrences 2 to 4 of <code>#FIELDB</code> are
+               moved to the occurrences 1 to 3 of <code>#FIELDB</code>; that is, the
+               occurrences receive the following values:
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td>Occurrence:</td> 
+                        
+               <td align="center">1.</td> 
+                        
+               <td align="center">2.</td> 
+                        
+               <td align="center">3.</td> 
+                        
+               <td align="center">4.</td> 
+                        
+               <td align="center">5.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>Value before:</td> 
+                        
+               <td align="center">2</td> 
+                        
+               <td align="center"> <strong>3</strong> 
+               </td> 
+                        
+               <td align="center"> <strong>4</strong> 
+               </td> 
+                        
+               <td align="center"> <strong>4</strong> 
+               </td> 
+                        
+               <td align="center">5</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>Value after:</td> 
+                        
+               <td align="center"> <strong>3</strong> 
+               </td> 
+                        
+               <td align="center"> <strong>4</strong> 
+               </td> 
+                        
+               <td align="center"> <strong>4</strong> 
+               </td> 
+                        
+               <td align="center">4</td> 
+                        
+               <td align="center">5</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+          
+      <div><a name="Example_4_move"></a></div> 
+          
+      <h3>Example 4- MOVE BY POSITION</h3> 
+           
+           <pre class="verbatim">DEFINE DATA LOCAL
+  1 #GROUP1
+    2 #FIELD1A (N5)
+    2 #FIELD1B (A3/1:3)
+    2 REDEFINE #FIELD1B
+      3 #FIELD1BR (A9)
+  1 #GROUP2
+    2 #FIELD2A (N5)
+    2 #FIELD2B (A3/1:3)
+    2 REDEFINE #FIELD2B
+      3 #FIELD2BR (A9)
+END-DEFINE
+...
+<strong>MOVE BY POSITION #GROUP1 TO #GROUP2</strong>   
+...</pre> 
+           <p>In this example, the content of <code>#FIELD1A</code> is moved to
+               <code>#FIELD2A</code>, and the content of <code>#FIELD1B</code> to
+               <code>#FIELD2B</code>; the fields <code>#FIELD1BR</code> and
+               <code>#FIELD2BR</code> are not affected.
+      </p> 
+           
+        
+       
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="move.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../sm/move.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/sm/move.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="sm-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="method.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="moveall.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

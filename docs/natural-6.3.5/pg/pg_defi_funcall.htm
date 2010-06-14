@@ -1,0 +1,1040 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Function Call</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="pg_defi_funcall"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_defi_funcall.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_defi_funcall.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_defi-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_defi_dv.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_defi_ldvfin.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Programming Guide&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x74"></a> Function Call
+         </h1>
+      </div> 
+          
+          
+      <table border="0" class="syntax" cellpadding="3">  
+              
+         <tbody align="left" valign="top"> 
+                  
+            <tr> 
+                      
+               <td> <a href="pg_defi_funcall.htm#call_name">
+                      <var>call-name</var></a> ( &lt; ( [
+                          <a href="pg_defi_funcall.htm#pro_cast"><var>prototype-cast</var></a> ]
+                          [<var>intermediate-result-definition</var>] ) [
+                          <a href="pg_defi_funcall.htm#param_pg_defi_funcall"><var>parameter</var></a>
+                          ] [ , [ <a href="pg_defi_funcall.htm#param_pg_defi_funcall"><var>parameter</var></a>
+                          ] ] ... &gt; )
+               </td> 
+                     
+            </tr> 
+                 
+         </tbody> 
+             
+      </table> 
+          
+         
+      <p>This document covers the following topics:</p>
+         
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_defi_funcall.htm#GD">Calling User-Defined Functions</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_funcall.htm#fc_restr">Restrictions</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_funcall.htm#syntdesc">Syntax Description</a></p>
+         </li>
+      </ul> 
+         
+      <p>Related Topics: <a href="../sm/definefu.htm">DEFINE
+                FUNCTION</a> | <a href="../sm/definepro.htm">DEFINE
+                PROTOTYPE</a></p> 
+        
+      <hr> 
+        
+      <div><a name="GD"></a></div> 
+         
+      <h2> 
+             <a name="x75"></a> 
+             <a name="x76"></a> Calling User-Defined Functions 
+      </h2> 
+          
+          
+      <p>Function calls can be used to call <a href="pg_udf.htm#pg_udf">user-defined functions</a> which are defined inside
+              special objects of type <a href="pg_obj_prog.htm#pg_obj_prog">function</a>.
+      </p> 
+          
+      <p>There are different ways to call a function:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_defi_funcall.htm#symbolic_fc">Symbolic Function Call</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_funcall.htm#fc_using_vari">Function Call Using a Variable</a></p>
+         </li>
+      </ul> 
+          
+         
+      <div><a name="symbolic_fc"></a></div> 
+          
+      <h3> 
+              <a name="x77"></a> Symbolic Function Call
+      </h3> 
+           
+           
+      <p>When using the symbolic function call, the user specifies exactly the
+               name of the function to be executed at runtime. 
+      </p> 
+           
+      <p>If only a symbolic function call is specified in the Natural source,
+               the corresponding Natural function definition is retrieved automatically,
+               unless a suitable prototype definition has been specified before. The
+               corresponding name of the object, which contains the Natural function
+               definition, is retrieved according to the symbolic logical function name. This
+               is done using the link records of the <cite>FILEDIR.SAG</cite> file. In
+               this case, the corresponding function definition must have been stowed before
+               the link record can be generated for the first time. 
+      </p> 
+           
+      <p>This feature causes that all parameter definitions of a Natural
+               function call are always checked for valid format/length definitions. 
+      </p> 
+           
+          
+         
+      <div><a name="fc_using_vari"></a></div> 
+          
+      <h3> Function Call Using a Variable</h3> 
+           
+           
+      <p>In a function call using a variable, the name of the desired function
+               definition is stored inside an alphanumeric variable. At runtime, Natural jumps
+               into the corresponding function definition, the name of which has been stored
+               inside the variable.
+      </p> 
+           
+      <p>In order to identify these two kinds of function calls, a corresponding
+               prototype definition must be specified. Additionally, the prototype may contain
+               the whole signature of the function definition. If no signature has been given,
+               the function call must contain a <a href="pg_defi_funcall.htm#pro_cast"><code>PT</code></a> clause in order to specify the
+               missing parts of the signature. Therefore, the
+               <a href="../sm/definepro.htm#pro_var_name"><code>VARIABLE</code></a> keyword
+               of such a prototype specified inside the <code>PT</code> clause has no effect.
+               For variable function calls, there must be a valid prototype with the same name
+               as the alphanumeric variable containing the function name.
+      </p> 
+           
+      <p>If no prototype can be assigned to the function call, a special
+               <var>prototype-cast</var> is necessary in order to define the
+               return format/length at compilation time. The
+               <var>prototype-cast</var> and the parameter list must be
+               enclosed in pointy brackets and parentheses, as displayed in the syntax
+               diagram.
+      </p> 
+           
+      <p>If you want to use the variable method, you must define a prototype
+               with the same name as the <var>variable-name</var> using the
+               keyword <a href="../sm/definepro.htm#pro_var_name"><code>VARIABLE</code></a>.
+      </p> 
+           
+      <p> Example:</p> 
+           <pre class="verbatim">DEFINE PROTOTYPE VARIABLE <var>variable-name</var></pre> 
+           <p class="note"><strong>Note:</strong><br> You can only use a function call when the operand involved cannot
+               be modified. However, if a function call is used in an
+               <a href="../sm/input.htm"><code>INPUT</code></a> statement, the
+               return value will be displayed as an "output only" field
+               (<a href="../parms/sp_ad.htm#sp_ad_ad_o"><code>AD=O</code></a>).
+      </p>
+           
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_defi_funcall.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="fc_restr"></a></div> 
+         
+      <h2> Restrictions </h2> 
+          
+          
+      <p>Function calls are <em>not</em> allowed in the following situations:
+      </p>
+          
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">in a <a href="../sm/defineda.htm"><code>DEFINE
+                     DATA</code></a> statement;
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">in a database access or update statement (<a href="../sm/read.htm"><code>READ</code></a>,
+                      <a href="../sm/find.htm"><code>FIND</code></a>,
+                      <a href="../sm/select_sql.htm"><code>SELECT</code></a>,
+                      <a href="../sm/update.htm"><code>UPDATE</code></a>,
+                      <a href="../sm/store.htm"><code>STORE</code></a>, etc.);
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">in an <a href="../sm/atbreak.htm"><code>AT
+                     BREAK</code></a> or <a href="../sm/if.htm"><code>IF
+                     BREAK</code></a> statement;
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">as an argument of the system functions
+                      <a href="../func/func_sf.htm#AVER"><code>AVER</code></a>,
+                      <a href="../func/func_sf.htm#COUNT"><code>COUNT</code></a>,
+                      <a href="../func/func_sf.htm#MAX_System_Function"><code>MAX</code></a>,
+                      <a href="../func/func_sf.htm#MIN_System_Function"><code>MIN</code></a>,
+                      <a href="../func/func_sf.htm#NAVER"><code>NAVER</code></a>,
+                      <a href="../func/func_sf.htm#NCOUNT"><code>NCOUNT</code></a>,
+                      <a href="../func/func_sf.htm#NMIN"><code>NMIN</code></a>,
+                      <a href="../func/func_sf.htm#OLD"><code>OLD</code></a>,
+                      <a href="../func/func_sf.htm#SUM"><code>SUM</code></a>,
+                      <a href="../func/func_sf.htm#TOTAL"><code>TOTAL</code></a>;
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">as index notation.</p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_defi_funcall.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="syntdesc"></a></div> 
+         
+      <h2> Syntax Description </h2> 
+          
+          
+      <p>A function call may consist of the following syntax elements:</p>
+          
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_defi_funcall.htm#call_name">call-name</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_funcall.htm#pro_cast">prototype-cast</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_funcall.htm#intermediate-result-definition">intermediate-result-definition</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_funcall.htm#param_pg_defi_funcall">parameter</a></p>
+         </li>
+      </ul> 
+          
+         
+      <div><a name="call_name"></a></div> 
+          
+      <h3><var> call-name</var></h3> 
+           
+            
+            
+      <table border="0" class="syntax" cellpadding="3"> 
+                  
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/cbo2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                        
+               <td> <var>function-name</var> 
+               </td> 
+                        
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/cbc2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <var>prototype-variable-name</var> 
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>Operand Definition Table:</p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                  
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>Operand</th> 
+                        
+               <th colspan="5" align="center">Possible
+                  Structure
+               </th> 
+                        
+               <th colspan="12" align="center">Possible
+                  Formats
+               </th> 
+                        
+               <th align="center">Referencing Permitted</th> 
+                        
+               <th align="center">Dynamic Definition</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> <var>prototype-variable-name</var> 
+               </td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>S</td> 
+                        
+               <td>A</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>A</td> 
+                        
+               <td>&nbsp;U</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">yes</td> 
+                        
+               <td align="center">no</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>Syntax Element Description:</p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th> <var>function-name</var>
+                            
+               </th> 
+                        
+               <td>The <var>function-name</var> clause is the
+                  symbolic function name. The corresponding function definition is defined in a
+                  certain function object file.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th>
+                  <var>prototype-variable-name</var> 
+               </th> 
+                        
+               <td>The <var>prototype-variable-name</var> is the
+                  name of the variable containing the real name of the function which is to be
+                  called. An alphanumeric or Unicode variable with the same name must have
+                        already been defined.
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+          
+         
+      <div><a name="pro_cast"></a></div> 
+          
+      <h3><var> prototype-cast</var></h3> 
+           
+            
+            
+      <table border="0" class="syntax" cellpadding="3"> 
+                 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td rowspan="2"> <code class="keyword">PT=</code> 
+               </td> 
+                        
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/cbo2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                        
+               <td> <var>prototype-name</var> 
+               </td> 
+                        
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/cbc2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <var>prototype-variable-name</var> 
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>The <var>prototype-cast</var> must be used for function
+               calls where no signature is specified in the corresponding function prototype
+               (for example, <a href="../sm/definepro.htm#signature_clause_txt">signature clause</a> of
+               prototype definition is defined as <code>UNKNOWN</code>).
+      </p> 
+           
+          
+         
+      <div><a name="intermediate-result-definition"></a></div> 
+          
+      <h3><var>intermediate-result-definition</var></h3> 
+           
+            
+            
+      <table border="0" class="syntax" cellpadding="3"> 
+                 
+                 
+                 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td rowspan="4"> &nbsp; <code class="keyword">IR=</code>
+                        
+               </td> 
+                        
+               <td rowspan="4"> 
+                  
+                  <p><img src="../graphics/cbo4.gif" alt="" width="6" height="100"></p>
+               </td> 
+                        
+               <td colspan="7" nowrap>
+                  <var>format-length</var>
+                            [/<var>array-definition</var>]
+               </td> 
+                        
+               <td rowspan="4"> 
+                  
+                  <p><img src="../graphics/cbc4.gif" alt="" width="6" height="100"></p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td rowspan="3"> ( </td> 
+                        
+               <td rowspan="3"> 
+                  
+                  <p><img src="../graphics/cbo3.gif" alt="" width="6" height="59"></p> 
+               </td> 
+                        
+               <td> A</td> 
+                        
+               <td rowspan="3">
+                  [/<var>array-definition</var>]
+               </td> 
+                        
+               <td rowspan="3"> 
+                  
+                  <p><img src="../graphics/cbc3.gif" alt="" width="6" height="59"></p>
+               </td> 
+                        
+               <td rowspan="3" nowrap> <code class="keyword">DYNAMIC</code></td> 
+                        
+               <td rowspan="3" nowrap>)</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>B</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>U</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>This clause enables you to specify the
+               <var>format-length/array-definition</var> of the return value
+               for a function call without using an explicit or implicit prototype definition,
+               that is, it enables the explicit specification of an intermediate result. 
+      </p> 
+           
+      <p>If, in addition, a prototype is valid for the function call, it is
+               checked that the <var>format-length/array-definition</var> of
+               the return value of the function definition is move-compatible to the
+               intermediate result. If this is not the case, an error will be raised. The
+               intermediate result is taken for the return value. 
+      </p> 
+           
+      <p>Alternatively, arrays are possible as return values, that is, array
+               definitions may be specified as intermediate results. With an
+               <var>array-definition</var>, you define the lower and upper
+               bound of a dimension in an array definition. See
+               <a href="../sm/defineda_array.htm">Array Dimension
+            Definition</a> in the <cite>Statements</cite>
+               documentation. 
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td><code><var>format-length</var></code></td> 
+                        
+               <td>The format and length of the field. For
+                  information on format/length definition of user-defined variables, see
+                  <a href="pg_defi_dv.htm#Format_Length_Def">Format and Length of
+                               User-Defined Variables</a>. 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><code>A</code>, <code>B</code> or
+                      <code>U</code></td> 
+                        
+               <td>Data format: Alphanumeric, Binary or Unicode for
+                  dynamic variables. 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><code><var>array-definition</var></code></td>
+                        
+                        
+               <td>With an
+                  <var>array-definition</var>, you define the lower and upper
+                  bounds of the dimensions in an array definition. See
+                            <a href="../sm/defineda_array.htm">Array Dimension
+                               Definition</a> in the <cite>Statements</cite>
+                            documentation. 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><code>DYNAMIC</code></td> 
+                        
+               <td>A field may be defined as <code>DYNAMIC</code>.
+                  For further information on processing dynamic variables, see
+                            <a href="pg_defi_ldvfin.htm#pg_defi_ldvfin">Introduction to Dynamic Variables
+                               and Fields</a>.
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+          
+      <div><a name="param_pg_defi_funcall"></a></div> 
+          
+      <h3> <var>parameter</var></h3> 
+           
+           
+      <p>Each parameter may be an operand when calling the function. If a
+               parameter is defined with the keyword <code>OPTIONAL</code> in the subprogram's
+               <a href="../sm/defineda_pda.htm"><code>DEFINE DATA
+               PARAMETER</code></a> statement, the corresponding operand values may be
+               omitted in the function call. In this case, use the
+               <code><var>n</var>X</code> notation (where
+               <var>n</var> is a whole integer greater than or equal to 1) or
+               just omit this argument.
+      </p> 
+           
+      <p>You can specify the session parameter
+               <a href="../parms/sp_ad.htm#sp_ad_Field_Representation"><code>AD</code></a>
+               for each argument.
+      </p> 
+            
+            
+      <table border="0" class="syntax" cellpadding="3"> 
+                 
+                 
+                 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td rowspan="4"> 
+                  
+                  <p><img src="../graphics/cbo4.gif" alt="" width="6" height="100"></p> 
+               </td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td> <a href="pg_defi_funcall.htm#nX"><var>n</var><code class="keyword">X</code></a> 
+               </td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td rowspan="4"> 
+                  
+                  <p><img src="../graphics/cbc4.gif" alt="" width="6" height="100"></p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td rowspan="3"> 
+                  
+                  <p><img src="../graphics/sbo3b.gif" alt="" width="5" height="80"></p> 
+               </td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td rowspan="3"> 
+                  
+                  <p><img src="../graphics/cbo3b.gif" alt="" width="6" height="80"></p> 
+               </td> 
+                        
+               <td> <code class="keyword">M</code> 
+               </td> 
+                        
+               <td rowspan="3"> 
+                  
+                  <p><img src="../graphics/cbc3b.gif" alt="" width="6" height="80"></p> 
+               </td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td rowspan="3"> 
+                  
+                  <p><img src="../graphics/sbc3b.gif" alt="" width="5" height="80"></p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <var>operand</var> 
+               </td> 
+                        
+               <td> (<a href="pg_defi_funcall.htm#AD"><code class="keyword">AD=</code></a> 
+               </td> 
+                        
+               <td> <code class="keyword">O</code> 
+               </td> 
+                        
+               <td> <code class="keyword">)</code> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td> <code class="keyword">A</code> 
+               </td> 
+                        
+               <td>&nbsp;</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>Operand Definition Table:</p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>Operand</th> 
+                        
+               <th colspan="5" align="center">Possible
+                  Structure
+               </th> 
+                        
+               <th colspan="12" align="center">Possible
+                  Formats
+               </th> 
+                        
+               <th align="center">Referencing Permitted</th> 
+                        
+               <th align="center">Dynamic Definition</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> <var>operand</var> 
+               </td> 
+                        
+               <td>C</td> 
+                        
+               <td>S</td> 
+                        
+               <td>A</td> 
+                        
+               <td>G</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>A</td> 
+                        
+               <td>N</td> 
+                        
+               <td>P</td> 
+                        
+               <td>I</td> 
+                        
+               <td>F</td> 
+                        
+               <td>B</td> 
+                        
+               <td>D</td> 
+                        
+               <td>T</td> 
+                        
+               <td>L</td> 
+                        
+               <td>C</td> 
+                        
+               <td align="center">G</td> 
+                        
+               <td align="center">O</td> 
+                        
+               <td align="center">yes</td> 
+                        
+               <td align="center">yes</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>For an example of the proper usage of this function call, see the
+               <a href="../sm/definepro.htm#ex_definepro">example</a> in the
+               description of the <a href="../sm/definepro.htm"><code>DEFINE
+               PROTOTYPE</code></a> statement.
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                  
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th nowrap> <a name="nX"></a>
+                   <code><var>n</var>X</code> 
+               </th> 
+                        
+               <td colspan="2"> 
+                  
+                  <div><strong class="floating-title"> Parameters to be Skipped:</strong></div> 
+                            
+                  <p>With the notation <code><var>n</var>X</code> you
+                                can specify that the next <var>n</var> parameters are to be
+                                skipped (for example, <code>1X</code> to skip the next parameter, or
+                                <code>3X</code> to skip the next three parameters); this means that for the
+                                next <var>n</var> parameters no values are passed to the
+                                subprogram.
+                  </p> 
+                            
+                  <p>A parameter that is to be skipped must be defined with the keyword
+                                <a href="../sm/defineda_pda.htm#OPTIONAL"><code>OPTIONAL</code></a> in the
+                                subprogram's <a href="../sm/defineda_pda.htm"><code>DEFINE DATA
+                                      PARAMETER</code></a> statement. <code>OPTIONAL</code> means that a value
+                                can - but need not - be passed from the invoking object to such a
+                                parameter.
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th rowspan="5"> <a name="AD"></a><code>AD=</code> 
+               </th> 
+                        
+               <td colspan="2"> 
+                  
+                  <div><strong class="floating-title"> Attribute Definition:</strong></div> 
+                            
+                  <p>If <var>operand</var> is a variable, you can mark
+                                it in one of the following ways:
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a name="AD_O"></a> <code>AD=O</code> 
+               </td> 
+                        
+               <td> 
+                  
+                  <p>Non-modifiable, see session parameter
+                                <a href="../parms/sp_ad.htm#sp_ad_ad_o"><code>AD=O</code></a>.
+                  </p>
+                            
+                            
+                  <p class="note"><strong>Note:</strong><br> Internally, <code>AD=O</code> is processed in the
+                                same way as <code>BY VALUE </code>(see the section
+                                <a href="../sm/defineda_pda.htm#param_data_def"><var>parameter-data-definition</var></a>
+                                in the description of the <code>DEFINE DATA</code> statement).
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a name="AD_M"></a> <code>AD=M</code> 
+               </td> 
+                        
+               <td> 
+                  
+                  <p>Modifiable, see session parameter
+                                <a href="../parms/sp_ad.htm#sp_ad_ad_m"><code>AD=M</code></a>.
+                  </p>
+                            
+                            
+                  <p>This is the default setting.</p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a name="AD_A"></a> <code>AD=A</code> 
+               </td> 
+                        
+               <td>Input only, see session parameter
+                  <a href="../parms/sp_ad.htm#sp_ad_ad_a"><code>AD=A</code></a>.
+               </td>
+                        
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td colspan="2">If
+                  <var>operand</var> is a constant,
+                            <a href="../parms/sp_ad.htm"><code>AD</code></a> cannot
+                          be explicitly specified. For constants, <code>AD=O</code> always
+                            applies.
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+          
+        
+       
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="pg_defi_funcall.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_defi_funcall.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_defi_funcall.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_defi-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_defi_dv.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_defi_ldvfin.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

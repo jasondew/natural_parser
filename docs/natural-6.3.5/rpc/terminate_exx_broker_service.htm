@@ -1,0 +1,388 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Terminating an EntireX Broker Service</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="terminate_exx_broker_service"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../rpc/terminate_exx_broker_service.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/rpc/terminate_exx_broker_service.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="rpc-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="end.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="oper.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Natural Remote Procedure Call (RPC)&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1>Terminating an EntireX Broker Service</h1>
+      </div> 
+         
+      <p>This section describes how to terminate an EntireX Broker Service.
+             Several methods exist.
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="terminate_exx_broker_service.htm#terminate_exx_broker_service_sysrpc">Using SYSRPC</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="terminate_exx_broker_service.htm#terminate_exx_broker_service_smh">Using EntireX System Management Hub</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="terminate_exx_broker_service.htm#terminate_exx_broker_service_usr2075n">Using Application Programming Interface USR2075N</a></p>
+         </li>
+      </ul>
+      <hr>
+      <div><a name="terminate_exx_broker_service_sysrpc"></a></div> 
+         
+      <h2>Using SYSRPC</h2> 
+          
+          
+      <p>Use the <code>TS</code> (Terminate
+              EntireX Broker Service) command of the <code>SYSRPC</code>
+              utility as described in <a href="../utis/sysrpc_com_exec.htm#sysrpc_com_exec_Terminating_a_Server">Terminating
+            a Server</a> in the <cite>SYSRPC
+                 Utility</cite> documentation.
+      </p> 
+         
+      <div class="noprint">
+         <p><a href="terminate_exx_broker_service.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="terminate_exx_broker_service_smh"></a></div> 
+         
+      <h2>Using EntireX System Management Hub</h2> 
+          
+          
+      <p>Use the <span class="guibutton">Deregister</span> button in the Service subtree
+              of the EntireX System Management Hub.
+      </p> 
+         
+      <div class="noprint">
+         <p><a href="terminate_exx_broker_service.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="terminate_exx_broker_service_usr2075n"></a></div> 
+         
+      <h2>Using Application Programming Interface USR2075N</h2> 
+          
+          
+      <p>The Application Programming Interface (API) <code>USR2075N</code>
+              enables you to terminate an EntireX Broker Service from within your
+              application.
+      </p> 
+          
+      <p>With the command <code>TERMINATE-SERVICE</code> the
+              interface uses the command and information service of EntireX to fulfill the
+              task. First of all, it sends a logon request to the EntireX Broker. Then it
+              gets a list of all servers specified by server class, server name, and service
+              type. Finally, it sends a shutdown request to each server. A message indicates
+              how many servers were terminated.
+      </p> 
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To make use of <code>USR2075N</code></strong></p>
+      <ol class="steps">
+         <li> 
+                   
+                   
+            <p class="instep">Copy the subprogram <code>USR2075N</code> from libray
+                       <code>SYSEXT</code> to the library <code>SYSTEM</code> or to the steplib
+                       library or to any application in the server environment.
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Using a <a href="../sm/defineda_parms.htm"><code>DEFINE DATA
+                     PARAMETER</code></a> statement in structured mode or a
+                       <code>RESET</code> statement in reporting mode, specify the following
+                       parameters: 
+            </p> 
+                    
+                    
+            <table border="1" class="color" cellpadding="3" width="97%"> 
+                        
+               <thead align="left" valign="top"> 
+                            
+                  <tr> 
+                                
+                     <th align="left">Parameter</th> 
+                                
+                     <th>Format</th> 
+                                
+                     <th>I/O</th> 
+                                
+                     <th colspan="2">Description</th> 
+                               
+                  </tr> 
+                           
+               </thead> 
+                        
+               <tbody align="left" valign="top"> 
+                            
+                  <tr> 
+                                
+                     <td align="left" nowrap><code>FUNCTION</code></td> 
+                                
+                     <td>A18</td> 
+                                
+                     <td>I</td> 
+                                
+                     <td colspan="2">Specify
+                        <code>TERMINATE-SERVICE</code>. 
+                                    
+                        <p>This sends a shutdown request to each server specified with the
+                                        parameters <code>SRVCLASS</code>, <code>SRVNAME</code>, and
+                                        <code>SERVICE</code> (service type), see below.
+                        </p>
+                     </td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td align="left"><code>SRVNODE</code></td> 
+                                
+                     <td>A192</td> 
+                                
+                     <td>I</td> 
+                                
+                     <td colspan="2">Specify the Broker name or an
+                        asterisk (*) if the server name represents a Location Transparency of EntireX
+                        or a logical Broker node name as
+                        <code>LOGBROKER=<var>nodename</var>)</code>. 
+                                    
+                        <p>See the profile parameter <a href="../parms/srvnode.htm"><code>SRVNODE</code></a>.
+                        </p>
+                     </td>
+                                
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td align="left"><code>SRVCLASS</code></td> 
+                                
+                     <td>A32</td> 
+                                
+                     <td>I</td> 
+                                
+                     <td colspan="2">Specify the server class. For
+                        Natural RPC servers, this is <code>RPC</code>. 
+                     </td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td align="left"><code>SRVNAME</code></td> 
+                                
+                     <td>A32/A192</td> 
+                                
+                     <td>I</td> 
+                                
+                     <td colspan="2">Server name (A32) or EntireX
+                        Location Transparency (A192). See the profile
+                        parameter 
+                        <a href="../parms/srvname.htm"><code>SRVNAME</code></a>
+                                    .
+                     </td>
+                                
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td align="left"><code>SERVICE</code></td> 
+                                
+                     <td>A32</td> 
+                                
+                     <td>I</td> 
+                                
+                     <td colspan="2">Specify the type of service. For
+                        Natural RPC servers, this is <code>CALLNAT</code>.
+                     </td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td rowspan="2" align="left"><code>IMMEDIATE</code></td> 
+                                
+                     <td rowspan="2">L</td> 
+                                
+                     <td rowspan="2">&nbsp;</td> 
+                                
+                     <td><code>TRUE</code></td> 
+                                
+                     <td>Immediately terminate all conversations for
+                        the specified server. 
+                     </td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td><code>FALSE</code></td> 
+                                
+                     <td>Existing conversations are allowed to end
+                        normally; no new conversations are accepted. 
+                     </td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td align="left"><code>USER-ID</code></td> 
+                                
+                     <td>A32</td> 
+                                
+                     <td>I</td> 
+                                
+                     <td colspan="2"> Specify the user ID to logon to
+                        the EntireX Broker. 
+                     </td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td align="left"><code>PASSWORD</code></td> 
+                                
+                     <td>A32</td> 
+                                
+                     <td>I</td> 
+                                
+                     <td colspan="2">Specify the password for EntireX
+                        Broker Security, if it is used on the EntireX Broker side.
+                     </td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td align="left"><code>MSG</code></td> 
+                                
+                     <td>A (dynamic)</td> 
+                                
+                     <td>O</td> 
+                                
+                     <td colspan="2">Message returned.</td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td rowspan="4" align="left"><code>RC</code></td> 
+                                
+                     <td rowspan="4">I2</td> 
+                                
+                     <td rowspan="4">O</td> 
+                                
+                     <td colspan="2">Response code; possible
+                        values:
+                     </td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td><code>0</code></td> 
+                                
+                     <td><code>MSG</code> contains a normal message from the
+                        EntireX Broker.
+                     </td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td><code>1</code></td> 
+                                
+                     <td><code>MSG</code> contains an error message from the
+                        EntireX Broker.
+                     </td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td><code>3</code></td> 
+                                
+                     <td><code>MSG</code> contains an error message from
+                        Natural Security on the client side. 
+                     </td> 
+                               
+                  </tr> 
+                           
+               </tbody> 
+                       
+            </table> 
+                    
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Before invoking the API, fill the input variables listed above.</p> 
+                   
+                 
+         </li>
+      </ol> 
+         
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="terminate_exx_broker_service.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../rpc/terminate_exx_broker_service.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/rpc/terminate_exx_broker_service.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="rpc-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="end.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="oper.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

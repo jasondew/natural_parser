@@ -1,0 +1,407 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Processing Work Files and Nested Loops</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="ntc-proc"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../ntc/ntc-proc.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/ntc/ntc-proc.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="ntc-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="ntc-state.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="ntc-over.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Natural Connection&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x20"></a>Processing Work Files and Nested Loops
+         </h1>
+      </div> 
+         
+      <p>This document describes restrictions on the use of work file
+             attributes, the support of work file formats and the impact of
+             <code>READ</code> loops.
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="ntc-proc.htm#ntc-proc-format">Work File Format and Attributes</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="ntc-proc.htm#ntc-proc-max">Maximum File Transfer Record Length for Natural Connection</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="ntc-proc.htm#ntc-proc-stream">Streaming</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="ntc-proc.htm#ntc-proc-dyn">Dynamic Variables in READ WORK FILE</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="ntc-proc.htm#ntc-proc-nested">Nested READ Loops</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="ntc-proc.htm#ntc-proc-subseq">Subsequent READ Loops</a></p>
+         </li>
+      </ul>
+      <hr>
+      <div><a name="ntc-proc-format"></a></div> 
+         
+      <h2> 
+             <a name="x21"></a>Work File Format and Attributes
+      </h2> 
+          
+          
+      <p>Below are the restrictions that apply to the use of work file
+              attributes:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">Accessing PC work files is restricted to a fixed record length of
+                      1073741823 bytes or 32767 bytes when using the statement
+                      <a href="../sm/writewor.htm"><code>WRITE WORK FILE
+                     VARIABLE</code></a>. Depending on the Entire Connection version
+                      installed on the PC, additional restrictions may apply as described below.
+            </p> 
+                 
+         </li> 
+               
+             
+      </ul> 
+         
+      <div class="noprint">
+         <p><a href="ntc-proc.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="ntc-proc-max"></a></div> 
+         
+      <h2>Maximum File Transfer Record Length for Natural Connection</h2> 
+          
+          
+      <p>As of Natural for UNIX Version 6.1, the maximum record length supported for file
+              transfer depends on the version of Entire Connection installed on the PC.
+      </p> 
+          
+      <p>For Entire Connection up to Version 4.2, the maximum record length is
+              limited by the number of bytes that can be displayed on the appropriate 3270
+              model. For example, for a 3270 Model 2 device the record length is 24*80 = 1920
+              bytes. Since all data buffers are enclosed by a header and trailer, the
+              resulting net record length is 1887 bytes. 
+      </p> 
+          
+      <p>For Entire Connection Version 4.3.1, the maximum record length is
+              limited to 32 KB - 1 byte = 32767 bytes. 
+      </p> 
+          
+      <p>As of Entire Connection Version 4.3.2 Patch Level 1 and Entire Screen
+              Builder Version 5.2.1, the maximum record length is increased to 1 GB - 1 byte
+              = 1073741823 bytes. But writing work files in variable format (<code>WRITE WORK
+            VARIABLE</code>) is still restricted to a maximum record length of 32 KB - 1
+              byte. 
+      </p> 
+         
+      <div class="noprint">
+         <p><a href="ntc-proc.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="ntc-proc-stream"></a></div> 
+         
+      <h2> 
+             <a name="x22"></a>Streaming
+      </h2> 
+          
+      <p>Entire Connection provides the option to transfer byte-streamed data
+              that are non-record-oriented. A byte-streamed data transfer is activated when a
+              <a href="../sm/readwork.htm"><code>READ WORK FILE</code></a> or
+              <a href="../sm/writewor.htm"><code>WRITE WORK FILE</code></a>
+              statement is coded with only one single operand of binary format.
+              
+      </p>
+      <div><a name="ntc-proc-stream-bin"></a></div> 
+          
+      <h3> 
+              <a name="x23"></a>Downloading and Uploading Binary Data
+      </h3> 
+           
+           
+      <p>Binary data is usually object code or executable code that does not
+               contain displayable or printable characters. To prevent standard character
+               translations being performed during data transfer, Natural and Entire
+               Connection use special methods for transferring binary data.
+      </p> 
+           
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To download binary data</strong></p>
+      <ol class="steps">
+         <li> 
+                    
+                    
+            <p class="instep">Define a binary variable. </p> 
+                    
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">If the last block of downloaded data contains less data than the
+                        block size chosen, insert <code>X'FF'</code> at the position that marks the end
+                        of the binary data. (If you omit <code>X'FF'</code>, the rest of the last block
+                        will be filled with <code>X00</code>.) 
+            </p> 
+                    
+                  
+         </li>
+      </ol> 
+           
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To upload binary data</strong></p>
+      <ol class="steps">
+         <li> 
+                    
+                    
+            <p class="instep">Define a binary variable. </p> 
+                    
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">Remove <code>X'FF</code> from the last block. <code>X'FF</code>
+                        marks the end of the binary data. 
+            </p> 
+                    
+                  
+         </li>
+      </ol> 
+          
+      <div class="noprint">
+         <p><a href="ntc-proc.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="ntc-proc-dyn"></a></div> 
+         
+      <h2>Dynamic Variables in READ WORK FILE</h2> 
+          
+          
+      <p>If you define a dynamic variable of the format binary or alphanumeric as
+              operand of a <a href="../sm/readwork.htm"><code>READ WORK
+               FILE</code></a> statement, when processing the corresponding
+              <code>READ</code> loop, any resize operation on this variable will only be
+              valid until the next <code>READ</code> is performed. While processing the
+              <code>READ</code>, Natural resizes all dynamic variables to the size they had
+              when the work file was opened. This is required in the open process which
+              determines the record layout. The record layout is mandatory for processing the
+              corresponding work file. The record layout is valid until the next close of the
+              work file occurs.
+      </p> 
+          
+      <p>Exception: An internal resize cannot be performed for inner loops if
+              nested <code>READ</code> loops are processed on the same work file. See also
+              the programming recommendations about nested loops below. If a dynamic variable
+              of size 0 is used as the only operand of a <code>READ WORK FILE</code>
+              statement, Natural issues the error NAT1500. 
+      </p> 
+         
+      <div class="noprint">
+         <p><a href="ntc-proc.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="ntc-proc-nested"></a></div> 
+         
+      <h2> 
+             <a name="x24"></a> 
+             <a name="x25"></a>Nested READ Loops
+      </h2> 
+          
+      <p>Do not specify nested <code>READ</code> loops on one work file. The
+              result of the inner loop(s) can be unpredictable if the operands of the inner
+              loop do not correspond to the operands of the outer loop. The reason is that
+              all records uploaded from the PC are processed in the format that was
+              determined when the work file was opened in the outermost loop.
+      </p> 
+          
+      <p>Below are example programs that demonstrate the unpredictable results
+              the inner loop(s) of nested <code>READ</code> loops can
+              have:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="ntc-proc.htm#ntc-proc-nested-inner">Example of Inner READ Loop</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="ntc-proc.htm#ntc-proc-nested-callnat">Example of READ Loop and CALLNAT</a></p>
+         </li>
+      </ul>
+      <div><a name="ntc-proc-nested-inner"></a></div> 
+          
+      <h3>Example of Inner READ Loop</h3> 
+           
+           
+      <p>In the example program <code>PCNESTED</code>, during <code>READ</code>
+               processing, another <code>READ</code> is performed:
+      </p> 
+           <pre class="verbatim">/* PCNESTED                                
+/*                                         
+DEFINE DATA LOCAL                          
+  1 #REC1   (A) DYNAMIC                    
+  1 #NUMBER (N10)                          
+END-DEFINE                                 
+*                                          
+MOVE ALL 'TEST RECORD 1' TO #REC1 UNTIL 100
+READ WORK FILE 1 #REC1                     
+   <strong>READ WORK FILE 1 #NUMBER</strong>                
+     DISPLAY #NUMBER                       
+   END-WORK                                
+END-WORK                                   
+END  </pre> 
+          <div><a name="ntc-proc-nested-callnat"></a></div> 
+          
+      <h3>Example of READ Loop and CALLNAT</h3> 
+           
+           
+      <p>In the example program <code>PCMAIN</code> and subprogram
+               <code>PCRSUB01</code>, during <code>READ</code> loop processing, an external
+               object is called:
+      </p> 
+           <pre class="verbatim">/* PCMAIN                                  
+/*                                           
+DEFINE DATA                     
+LOCAL                                      
+  1 RECL (A2000)                           
+  1 REDEFINE RECL                         
+    2 RECNR (N4)                          
+  1 CO   (N4                               
+END-DEFINE                                  
+*                                        
+WRITE WORK 1 COMMAND                       
+ 'SET PCFILE 2 UP DATA C:/TSTPCAM/PCMAIN.TXT'
+READ WORK 2 RECL                          
+  DISPLAY RECL (AL=72)                     
+  <strong>CALLNAT 'PCRSUB01' RECL</strong>                
+END-WORK                                   
+END</pre> 
+           <p>Subprogram <code>PCRSUB01</code>:
+      </p> 
+           <pre class="verbatim">/*Subprogram PCRSUB01
+/*                   
+DEFINE DATA          
+PARAMETER            
+  1 RECL (A2000)     
+LOCAL                
+  1 #CC1 (A20)       
+  1 #CC2 (N4)        
+*
+END-DEFINE
+<strong>READ WORK 2 RECL</strong> 
+  #CC1 #CC2 
+  DISPLAY #CC1 #CC2 
+END-WORK 
+END</pre> 
+          <div class="noprint">
+         <p><a href="ntc-proc.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="ntc-proc-subseq"></a></div> 
+         
+      <h2>Subsequent READ Loops</h2> 
+          
+      <p>If a <code>READ</code> loop is terminated by a conditional
+              <code>ESCAPE</code>, close the work file explicitly with the
+              <a href="../sm/closewf.htm"><code>CLOSE WORK FILE</code></a>
+              statement so that the same work file can be processed in a subsequent
+              <code>READ</code> in the same object. 
+      </p> 
+          
+      <p>Exception: You can omit the <code>CLOSE WORK FILE</code> if you need not
+              read the file again from the beginning, and if the subsequent <code>READ</code>
+              uses the same record layout as the preceding one. 
+      </p> 
+          
+      <p>Below is an example that demonstrates how to correctly code a program
+              with two <code>READ</code> loops on one work file.
+      </p>
+      <div><a name="ntc-proc-subseq-exa"></a></div> 
+          
+      <h3>Example of Loop with ESCAPE and
+             CLOSE
+      </h3> 
+           
+           
+      <p>In the example program <code>PCESCAPE</code>, the work file is
+               explicitly closed after the first <code>READ</code> loop has been terminated by
+               <code>ESCAPE BOTTOM</code> so that the second <code>READ</code> loop must
+               reopen the work file:
+      </p> 
+           <pre class="verbatim">/*PCESCAPE            
+/*
+DEFINE DATA 
+LOCAL 
+  1 #CC1        (A20)
+  1 #CC2        (A40) 
+  1 #COUNTER    (I2) 
+*                   
+END-DEFINE  
+READ WORK 2 #CC1 
+  DISPLAY #CC2  
+  ADD 1 TO #COUNTER
+  IF #COUNTER GE 3 
+    <strong>ESCAPE BOTTOM</strong>
+  END-IF 
+END-WORK 
+<strong>CLOSE WORK FILE 2</strong> 
+*               
+READ WORK 2 #CC2
+  DISPLAY #CC2
+END-WORK 
+END </pre> 
+          <div class="noprint">
+         <div class="nospy">
+            <p><a href="ntc-proc.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../ntc/ntc-proc.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/ntc/ntc-proc.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="ntc-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="ntc-state.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="ntc-over.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

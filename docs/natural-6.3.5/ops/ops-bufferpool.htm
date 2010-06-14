@@ -1,0 +1,1285 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Natural Buffer Pool</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="ops-bufferpool"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../ops/ops-bufferpool.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/ops/ops-bufferpool.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="ops-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="ops-workfiles.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="ops-natbpmon.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Operations&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+         
+      <div class="nospytext">
+         <h1> 
+                <a name="x42"></a>Natural Buffer Pool
+         </h1>
+      </div> 
+          
+      <p>This document covers the following
+              topics:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="ops-bufferpool.htm#ops-bp-general">General Information</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="ops-bufferpool.htm#ops-bp-setup">Setting up a Buffer Pool</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="ops-bufferpool.htm#ops-bp-natbpsrv">Using the Utility NATBPSRV for Creating the Buffer Pool</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="ops-bufferpool.htm#ops-bp-natbpsrv-err">NATBPSRV Error Messages</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="ops-bufferpool.htm#d0e5956">Monitoring the Buffer Pool</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="ops-bufferpool.htm#ops-bp-trouble">Trouble Shooting</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="ops-bufferpool.htm#ops-bp-shutdown">Shutting Down and Restarting the Buffer Pool</a></p>
+         </li>
+      </ul> 
+         
+      <hr>
+      <div><a name="ops-bp-general"></a></div> 
+          
+      <h2>General Information</h2> 
+           
+      <p>The Natural buffer pool is used to share Natural objects between
+               several Natural processes that access objects on the same computer. It is a
+               storage area into which compiled Natural programs are placed in preparation for
+               their execution. Programs are moved into and out of the buffer pool as Natural
+               users request Natural objects. 
+      </p> 
+           
+      <p>Since Natural generates reentrant Natural object code, it is possible
+               that a single copy of a Natural program can be executed by more than one user
+               at the same time. For this purpose, each object is loaded only once from the
+               system file into the Natural buffer pool, instead of being loaded by every
+               caller of the object. 
+      </p> 
+           
+      <p>The following topics are covered
+               below:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="ops-bufferpool.htm#ops-bp-gen-objects">Objects in the Buffer Pool</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="ops-bufferpool.htm#ops-bp-gen-coordux">Coordination under UNIX</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="ops-bufferpool.htm#ops-bp-gen-multiple">Multiple Buffer Pools</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="ops-bufferpool.htm#ops-bp-gen-store">Storing Objects in the Buffer Pool</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="ops-bufferpool.htm#ops-bp-gen-readonly">Read-Only Buffer Pool</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="ops-bufferpool.htm#ops-bp-gen-restriction">Restrictions</a></p>
+         </li>
+      </ul>
+      <div><a name="ops-bp-gen-objects"></a></div> 
+           
+      <h3> 
+               <a name="x43"></a> 
+               <a name="x44"></a>Objects in the Buffer Pool
+      </h3> 
+            
+            
+      <p>Objects in the buffer pool can be any executable objects such as
+                programs and maps.
+                The following executable objects are only placed in the buffer pool for
+                compilation purposes: local data areas, parameter data areas and copycodes.
+      </p>
+            
+            
+      <p>When a Natural object is loaded into the buffer pool, a control block
+                called a directory entry is allocated for that object. This control block
+                contains information such as the name of the object, to which library or
+                application the object belongs, from which database ID and Natural system file
+                number the object was retrieved, and certain statistical information (for
+                example, the number of users who are concurrently executing a program). 
+      </p> 
+           
+      <div><a name="ops-bp-gen-coordux"></a></div> 
+           
+      <h3>Coordination under UNIX</h3> 
+            
+            
+      <p>Resource sharing requires that access to the buffer pool be
+                coordinated among all users. Several system resources are necessary to
+                accomplish this. For example, shared memory on the UNIX operating system is
+                used to store the objects and their administrative information. To synchronize
+                access to these objects, a set of semaphores is used. The amount of available
+                shared memory and the number of semaphores is configured statically in the
+                operating system, and as a result, it may be necessary to change system
+                parameters and to recreate the operating system kernel for your installation.
+                Further information about these topics is system-dependent and is described in
+                the installation documentation for your UNIX computer.
+      </p> 
+           
+      <div><a name="ops-bp-gen-multiple"></a></div> 
+           
+      <h3> 
+               <a name="x46"></a> 
+               <a name="x47"></a> 
+               <a name="x48"></a>Multiple Buffer Pools
+      </h3> 
+            
+            
+      <p>Depending on the individual requirements, it is possible to run
+                different buffer pools of the same Natural version simultaneously on the same
+                computer.
+      </p> 
+             
+           
+      <div><a name="ops-bp-gen-store"></a></div> 
+           
+      <h3> 
+               <a name="x49"></a>Storing Objects in the Buffer Pool
+      </h3> 
+            
+            
+      <p>When a user executes a program, a call is made to the buffer pool
+                manager. The directory entries are searched to determine whether the program
+                has already been loaded into the buffer pool. If it does not yet exist in the
+                buffer pool, a copy is retrieved from the appropriate library and loaded into
+                the buffer pool. 
+      </p> 
+            
+      <p>When a Natural object is being loaded into the buffer pool, a new
+                directory entry is defined to identify this program, and one or more other
+                Natural objects which are currently not being executed may be deleted from the
+                buffer pool in order to make room for the newly loaded object. 
+      </p> 
+            
+      <p>For this purpose, the buffer pool maintains a record of which user is
+                currently using which object, and it detects situations in which a user exits
+                Natural without releasing all its objects. It dynamically deletes unused or
+                out-of-date objects to accommodate new objects belonging to other applications.
+                
+      </p> 
+           
+      <div><a name="ops-bp-gen-readonly"></a></div> 
+           
+      <h3> 
+               <a name="x50"></a>Read-Only Buffer Pool
+      </h3> 
+            
+            
+      <p>A read-only buffer pool is a special buffer pool that only allows read
+                access. If an object is not found in the read-only buffer pool, Natural issues
+                error 82 (object not found). As no attempt is made to retrieve the missing
+                object in the system files, all lock operations on the system file as well as
+                on the buffer pool are skipped. No account data are gathered. An unlimited
+                number of users can access read-only buffer pool.
+      </p> 
+            
+      <p>A read-only buffer pool is defined in the Configuration Utility (see
+                also <a href="ops-bufferpool.htm#ops-bp-setup">Setting up a Buffer
+            Pool</a> below). If a buffer pool has been defined as a
+                read-only buffer pool, the values defined for the
+                maximum number of users and for the semaphore key
+                are ignored.
+      </p> 
+            
+      <p> The utility <a href="ops-bufferpool.htm#ops-bp-natbpsrv"><code>NATBPSRV</code></a> does not allocate
+                semaphores for a read-only buffer pool. It expects, however, a preload list in
+                a file named <cite>&lt;bufferpool-name&gt;.PRL</cite> at the location
+                of the Natural parameter files, which is defined in the local configuration
+                file (<a href="../config/cfg-confparm.htm#cfg-cf-loc-install">installation
+                   assignments</a>). For example, if the name of the read-only buffer pool
+                is "ROBP", the file name must be
+                <cite>ROBP.PRL</cite>. 
+      </p> 
+            
+      <p>A preload list can be generated using the Natural utility
+                <a href="ops-bufferpool.htm#ops-bp-gen-crtprl"><code>CRTPRL</code></a>. This
+                utility extracts the contents of a buffer pool and merges it with the existing
+                preload data of a buffer pool.
+      </p> 
+            
+      <p>The preload list in the <cite>PRL</cite> file contains records
+                with comma-separated data in the following form:
+      </p> 
+            <pre class="verbatim"><var>database-ID</var>,<var>file-number</var>,<var>library</var>,<var>object-name</var>,<var>kind</var>,<var>type</var></pre> 
+            <p>The keywords in the file have the same meaning as the keywords shown
+                by the <a href="ops-natbpmon.htm#ops-natbpmon-dir"><code>DIR</code></a>
+                command of the <a href="ops-natbpmon.htm"><code>NATBPMON</code></a> utility. 
+      </p> 
+            
+      <p>With the exception of directory-describing records (the kind of object
+                is "D", which means the object is part of
+                <cite>FILEDIR.SAG</cite>), a value must be assigned to all keywords.
+                Examples:
+      </p> 
+             
+             
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+         <thead align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <th>Keywords</th> 
+                         
+               <th><code>NATBPSRV</code> loads the following into
+                  the buffer pool
+               </th> 
+                        
+            </tr> 
+                    
+         </thead> 
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <td><code>222,111,MY_LIB,PGM1,G,P</code></td> 
+                         
+               <td>Object code of program <code>PGM1</code> from
+                             library <code>MY_LIB</code> which is located on database 222 and file number
+                             111.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td><code>222,113,*,*,D</code></td> 
+                         
+               <td> <cite>LIBDIR.SAG</cite> which is
+                  located on <code>FNAT=222,113</code>.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td><code>222,111,MY_LIB,*,D</code></td> 
+                         
+               <td><cite>FILEDIR.SAG</cite> from library
+                             <code>MY_LIB</code> which is located on <code>FUSER=222,111</code> . 
+               </td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+      <p>Using a read-only buffer pool has the disadvantage that the
+                application must be known in detail (as missing objects cannot be loaded). This
+                means that all objects needed by an application must be specified in the
+                preload list. In seldom cases, the complete set of objects needed by an
+                application can be determined in advance. 
+      </p> 
+           
+      <div><a name="ops-bp-gen-secondary"></a></div> 
+            
+      <h4>Secondary Read/Write Buffer Pool</h4> 
+             
+             
+      <p>Natural can run with a read-only buffer pool as the primary buffer
+                 pool. Such a buffer pool is not modifiable. Objects missing in the read-only
+                 buffer pool cannot be loaded. If an object is not found in the read-only buffer
+                 pool, Natural issues error 82 (object not found). To avoid this, Natural can
+                 attach during execution to a secondary standard buffer pool (which allows
+                 read/write access) and activate the missing objects there. The dynamic
+                 parameter <a href="../parms/bpid2.htm"><code>BPID2</code></a> identifies the
+                 secondary buffer pool. 
+      </p> 
+             
+      <p>Other than for the read-only buffer pool, there is a maximum number
+                 of users that can attach to the secondary buffer pool and object locking
+                 through semaphores takes place each time the secondary buffer pool is accessed.
+                 
+      </p> 
+             
+      <p>The preload list of the read-only buffer pool can be updated/enhanced
+                 by merging the contents of the secondary read/write buffer pool with the
+                 preload list of a read-only buffer pool using the utility
+                 <a href="ops-bufferpool.htm#ops-bp-gen-crtprl"><code>CRTPRL</code></a>. 
+      </p> 
+            
+      <div><a name="ops-bp-gen-alternate"></a></div> 
+            
+      <h4>Alternate Read-Only Buffer Pool</h4> 
+             
+             
+      <p>For a read-only buffer pool, it is possible to define the name of an
+                 alternate buffer pool in the Configuration Utility (see also
+                 <a href="ops-bufferpool.htm#ops-bp-setup">Setting up a Buffer
+            Pool</a> below). 
+      </p> 
+             
+      <p>Using the <a href="ops-natbpmon.htm#ops-natbpmon-cmds"><code>SWAP</code></a> command
+                 of the <code>NATBPMON</code> utility, which is only available for a read-only
+                 buffer pool, you can tag a read-only buffer pool as "obsolete".
+                 All Natural sessions attached to an obsolete buffer pool will detach from this
+                 buffer pool and will attach to the alternate buffer pool - but only if the
+                 alternate buffer pool is also a read-only buffer pool. The swap from one buffer
+                 pool to the other occurs either when Natural tries to load a new object (for
+                 example, when executing a <code>CALLNAT</code> or <code>RETURN</code>
+                 statement) or when Natural tries to interpret a command which has been put on
+                 the stack. The IPC resources (that is, the shared memory segment) of a buffer
+                 pool tagged as obsolete can be removed after issuing the
+                 <code>SWAP</code> command of the <code>NATBPMON</code> utility.
+                 This feature allows exchanging a buffer and its contents by another read-only
+                 buffer pool with updated contents without stopping Natural sessions. 
+      </p> 
+             
+      <p>Known issues: The <code>IPCRM</code> command of the
+                 <code>NATBPMON</code> utility will report an error trying to delete the
+                 semaphores associated to a read-only buffer pool.
+      </p> 
+            
+      <div><a name="ops-bp-gen-crtprl"></a></div> 
+            
+      <h4> 
+                <a name="x51"></a> 
+                <a name="x52"></a>Creating a Preload List Using the CRTPRL
+               Utility
+      </h4> 
+             
+             
+      <p>The Natural utility <code>CRTPRL</code>, which is located in the
+                 library <code>SYSBPM</code>, is used to create a preload list for a read-only
+                 buffer pool. 
+      </p> 
+             
+      <p>The utility uses the content of a source buffer pool as the basis for
+                 the preload list and checks whether the preload list already exists for a
+                 read-only (target) buffer pool:
+      </p> 
+             
+      <ul> 
+                 
+         <li> 
+                     
+            <p class="initem"> If the preload list exists, the existing data in the preload list
+                         is merged with the data from the source buffer pool, and the preload list is
+                         saved with the new content. 
+            </p> 
+                    
+         </li> 
+                 
+         <li> 
+                     
+            <p class="initem">If the preload list does not yet exist, it is created using the
+                         content from the source buffer pool. 
+            </p> 
+                    
+         </li> 
+                
+      </ul> 
+             
+      <p>The content of the resulting preload list determines the content of
+                 the read-only buffer pool. The preload list is read by the utility
+                 <a href="ops-bufferpool.htm#ops-bp-natbpsrv"><code>NATBPSRV</code></a> which
+                 loads the corresponding objects into the read-only buffer pool.
+      </p> 
+            
+      <div><a name="ops-bp-gen-restriction"></a></div> 
+           
+      <h3> 
+               <a name="x53"></a>Restrictions
+      </h3> 
+            
+            
+      <p>When using the Natural buffer pool, only minimum restrictions must be
+                considered: 
+      </p> 
+            
+      <ul> 
+                
+         <li> 
+                    
+            <p class="initem">When a Natural session hangs up, do not terminate it by using the
+                        UNIX command
+                        <code>kill</code>, the terminal command
+                        <code>break</code> or the interrupt key.
+            </p> 
+                    
+            <p class="initem">If this session is currently performing changes to the buffer pool
+                        internal data structures, an interruption may occur at a stage where the update
+                        is not fully completed. If the buffer pool internal data structures are
+                        inconsistent, this could have negative effects.
+            </p> 
+                    
+            <p class="note"><strong>Note:</strong><br>This can only happen when the Natural nucleus is executing buffer
+                        pool routines. 
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">All resources must be shared among all users of one Natural buffer
+                        pool. Group membership of a process is used to give access rights for the
+                        buffer pool. This means that the shared memory can be changed by all group
+                        members, but not by anyone else. The same applies to the
+                        semaphores. 
+            </p> 
+                    
+            <p class="note"><strong>Note:</strong><br>All users of the same Natural buffer pool must belong to
+                        the same user group on the UNIX operating system.
+            </p> 
+                     
+                   
+         </li> 
+                 
+               
+      </ul> 
+           
+      <div class="noprint">
+         <p><a href="ops-bufferpool.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="ops-bp-setup"></a></div> 
+          
+      <h2> 
+              <a name="x54"></a>Setting up a Buffer Pool
+      </h2> 
+           
+           
+      <p>The buffer pool assignments are stored in the local configuration file.
+               To set up a buffer pool, you have to specify specific values in the local
+               configuration file using the <a href="../config/cfg-over.htm">Configuration Utility</a>. For a list of
+               these values, see <a href="../config/cfg-confparm.htm#cfg-cf-loc-buffer">Buffer Pool
+            Assignments</a> in the <cite>Configuration
+                  Utility</cite> documentation.
+      </p> 
+          
+      <div class="noprint">
+         <p><a href="ops-bufferpool.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="ops-bp-natbpsrv"></a></div> 
+          
+      <h2> 
+              <a name="x69"></a> 
+              <a name="x70"></a> 
+              <a name="x71"></a>Using the Utility NATBPSRV for Creating the
+             Buffer Pool
+      </h2> 
+           
+           
+      <p>The buffer pool is created using the utility <code>NATBPSRV</code>.
+      </p>
+           
+           
+           
+           
+      <p class="note"><strong>Note:</strong><br>The utility <code>NATBPSRV</code> should not be accessible to all
+               Natural users, because it can cause damage to the work of other buffer pool
+               users. 
+      </p> 
+            
+           
+      <p><code>NATBPSRV</code> allocates the resources required by the buffer
+               pool and creates the permanent communication facilities (that is, shared memory
+               and semaphores) used for the buffer pool. The necessary specifications for the
+               resources and facilities are made with the Configuration Utility (see
+               <a href="ops-bufferpool.htm#ops-bp-setup">Setting up a Buffer
+            Pool</a>).
+      </p> 
+           
+      <p>The <code>NATBPSRV</code> utility should only be used during
+               system startup, from within the startup procedure <cite>natstart.bsh</cite>. 
+      </p> 
+           
+      <p>By default, the buffer pool <code>NATBP</code> is
+               started. If another buffer pool is
+               to be started, you specify its name with the following <code>NATBPSRV</code>
+               command line option: 
+      </p><pre class="command-input">NATBPSRV BP = <var>buffer-pool-name</var></pre> 
+           <p>If <code>NATBPSRV</code> discovers in the process of
+               creating a buffer pool that a buffer pool of the same name is already active,
+               it deletes the already active buffer pool. If the deletion fails,
+               <code>NATBPSRV</code> terminates with an appropriate error message. 
+      </p> 
+          
+      <div class="noprint">
+         <p><a href="ops-bufferpool.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="ops-bp-natbpsrv-err"></a></div> 
+          
+      <h2>NATBPSRV Error Messages</h2> 
+           
+           
+      <p><code>NATBPSRV</code> can issue the following error messages if the
+               buffer pool that is to be created is meant to be a read-only buffer pool: 
+      </p> 
+           
+      <div><a name="d0e5743"></a></div>
+      <table border="0" cellspacing="12">
+         <colgroup valign="top"></colgroup>
+         <tbody> 
+                  
+            <tr>
+               <td colspan="2"><strong>Unable to attach to buffer pool. Return code ... received from bp_init.</strong></td>
+            </tr> 
+                  
+            <tr>
+               <td><strong>Explanation</strong></td>
+               <td>
+                  <p>To load the objects described in the preload list,
+                             <code>NATBPSRV</code> attaches to the previously created buffer pool as a user.
+                             The attach process failed. 
+                  </p>
+               </td>
+            </tr> 
+                  
+            <tr>
+               <td><strong>Action</strong></td>
+               <td>
+                  <p>Contact Software AG Technical Support.</p>
+               </td>
+            </tr> 
+                 
+         </tbody>
+      </table>
+      <hr> 
+           
+      <div><a name="d0e5766"></a></div>
+      <table border="0" cellspacing="12">
+         <colgroup valign="top"></colgroup>
+         <tbody> 
+                  
+            <tr>
+               <td colspan="2"><strong>Unable to get parameter path.</strong></td>
+            </tr> 
+                  
+            <tr>
+               <td><strong>Explanation</strong></td>
+               <td>
+                  <p>The path defined in the local configuration file identifying
+                             Natural's parameter files could not be established.
+                  </p>
+               </td>
+            </tr> 
+                  
+            <tr>
+               <td><strong>Action</strong></td>
+               <td>
+                  <p>Contact Software AG Technical Support.</p>
+               </td>
+            </tr> 
+                 
+         </tbody>
+      </table>
+      <hr> 
+           
+      <div><a name="d0e5786"></a></div>
+      <table border="0" cellspacing="12">
+         <colgroup valign="top"></colgroup>
+         <tbody> 
+                  
+            <tr>
+               <td colspan="2"><strong>File ... is not accessible.</strong></td>
+            </tr> 
+                  
+            <tr>
+               <td><strong>Explanation</strong></td>
+               <td>
+                  <p>The preload list is not accessible or not present. </p>
+               </td>
+            </tr> 
+                  
+            <tr>
+               <td><strong>Action</strong></td>
+               <td>
+                  <p>Revise access rights or create a preload list. </p>
+               </td>
+            </tr> 
+                 
+         </tbody>
+      </table>
+      <hr> 
+           
+      <div><a name="d0e5806"></a></div>
+      <table border="0" cellspacing="12">
+         <colgroup valign="top"></colgroup>
+         <tbody> 
+                  
+            <tr>
+               <td colspan="2"><strong>Unable to open file ...</strong></td>
+            </tr> 
+                  
+            <tr>
+               <td><strong>Explanation</strong></td>
+               <td>
+                  <p>The preload list cannot be read.</p>
+               </td>
+            </tr> 
+                  
+            <tr>
+               <td><strong>Action</strong></td>
+               <td>
+                  <p>Re-create preload list. </p>
+               </td>
+            </tr> 
+                 
+         </tbody>
+      </table>
+      <hr> 
+           
+      <div><a name="d0e5826"></a></div>
+      <table border="0" cellspacing="12">
+         <colgroup valign="top"></colgroup>
+         <tbody> 
+                  
+            <tr>
+               <td colspan="2"><strong>Skipped erroneous record: '...'. Buffer pool may not operate correctly.</strong></td>
+            </tr> 
+                  
+            <tr>
+               <td><strong>Explanation</strong></td>
+               <td>
+                  <p>An invalid record was found in the preload list. The record is
+                             skipped and the load process is continued. There may arise errors in your
+                             application due to missing objects. 
+                  </p>
+               </td>
+            </tr> 
+                  
+            <tr>
+               <td><strong>Action</strong></td>
+               <td>
+                  <p>Correct the record if it has been created manually, or contact
+                             Software AG Technical Support. 
+                  </p>
+               </td>
+            </tr> 
+                 
+         </tbody>
+      </table>
+      <hr> 
+           
+      <div><a name="d0e5846"></a></div>
+      <table border="0" cellspacing="12">
+         <colgroup valign="top"></colgroup>
+         <tbody> 
+                  
+            <tr>
+               <td colspan="2"><strong>Unable to retrieve LIBDIR.SAG in FNAT(...,...).  Application will not run.</strong></td>
+            </tr> 
+                  
+            <tr>
+               <td><strong>Explanation</strong></td>
+               <td>
+                  <p><cite>LIBDIR.SAG</cite> was not found. An application
+                             depending on <code>FNAT(...,...)</code> will not run. 
+                  </p>
+               </td>
+            </tr> 
+                  
+            <tr>
+               <td><strong>Action</strong></td>
+               <td>
+                  <p>Correct the record if it has been created manually, or contact
+                             Software AG Technical Support. 
+                  </p>
+               </td>
+            </tr> 
+                 
+         </tbody>
+      </table>
+      <hr> 
+           
+      <div><a name="d0e5871"></a></div>
+      <table border="0" cellspacing="12">
+         <colgroup valign="top"></colgroup>
+         <tbody> 
+                  
+            <tr>
+               <td colspan="2"><strong>Buffer pool manager returned with error code ... . Buffer pool is not operational.</strong></td>
+            </tr> 
+                  
+            <tr>
+               <td><strong>Explanation</strong></td>
+               <td>
+                  <p><cite>FILEDIR.SAG</cite> could not be loaded into the buffer
+                             pool. The buffer pool is either too small to hold
+                             <cite>FILEDIR.SAG</cite> or <cite>FILEDIR.SAG</cite> is
+                             damaged. The previously listed message tells which
+                             <cite>FILEDIR.SAG</cite> is causing the trouble. 
+                  </p>
+               </td>
+            </tr> 
+                  
+            <tr>
+               <td><strong>Action</strong></td>
+               <td>
+                  <p>Correct the record if it has been created manually, or contact
+                             Software AG Technical Support. 
+                  </p>
+               </td>
+            </tr> 
+                 
+         </tbody>
+      </table>
+      <hr> 
+           
+      <div><a name="d0e5902"></a></div>
+      <table border="0" cellspacing="12">
+         <colgroup valign="top"></colgroup>
+         <tbody> 
+                  
+            <tr>
+               <td colspan="2"><strong>Buffer pool manager returned with error code ... . Error ... occurred.</strong></td>
+            </tr> 
+                  
+            <tr>
+               <td><strong>Explanation</strong></td>
+               <td>
+                  <p>An error occurred loading an object into the buffer pool. </p>
+               </td>
+            </tr> 
+                  
+            <tr>
+               <td><strong>Action</strong></td>
+               <td>
+                  <p>Normally, the size of the buffer pool is too small. Increase its size
+                             and repeat the operation. If the problem remains, contact Software AG Technical
+                             Support.
+                  </p>
+               </td>
+            </tr> 
+                 
+         </tbody>
+      </table>
+      <hr> 
+           
+      <div><a name="d0e5922"></a></div>
+      <table border="0" cellspacing="12">
+         <colgroup valign="top"></colgroup>
+         <tbody> 
+                  
+            <tr>
+               <td colspan="2"><strong>Object ... in library ... on system file (...,...) not found. Application may not run.</strong></td>
+            </tr> 
+                  
+            <tr>
+               <td><strong>Explanation</strong></td>
+               <td>
+                  <p>The preload record processed pointed to an object that was not found.
+                             This normally happens if an application is modified and the corresponding
+                             preload list is not updated. 
+                  </p>
+               </td>
+            </tr> 
+                  
+            <tr>
+               <td><strong>Action</strong></td>
+               <td>
+                  <p>Remove/revise preload record in question</p>
+               </td>
+            </tr> 
+                 
+         </tbody>
+      </table>
+      <hr> 
+           
+      <div><a name="d0e5942"></a></div>
+      <table border="0" cellspacing="12">
+         <colgroup valign="top"></colgroup>
+         <tbody> 
+                  
+            <tr>
+               <td colspan="2"><strong>Preload executed. Buffer pool is ready to run. </strong></td>
+            </tr> 
+                  
+            <tr>
+               <td><strong>Explanation</strong></td>
+               <td>
+                  <p>All preload records were processed. The buffer pool is unlocked and
+                             Natural can access that buffer pool. 
+                  </p>
+               </td>
+            </tr> 
+                 
+         </tbody>
+      </table>
+      <hr> 
+          
+      <div class="noprint">
+         <p><a href="ops-bufferpool.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="d0e5956"></a></div> 
+          
+      <h2> 
+              <a name="x72"></a> 
+              <a name="x73"></a>Monitoring the Buffer Pool
+      </h2> 
+           
+           
+      <p>The Buffer Pool Monitor is used to oversee the buffer pool's activity
+               during its operation. The Buffer Pool Monitor can also be used to shut down the
+               buffer pool when Natural must be stopped on a computer.
+      </p> 
+           
+      <p>The Buffer Pool Monitor collects information on the current state of
+               your Natural buffer pool.
+      </p> 
+           
+      <p>If multiple buffer pools are active on the same computer and an object
+               that is loaded to more than one buffer pool is modified by a Natural process,
+               the object will only be removed from the buffer pool to which the modifying
+               Natural process is attached. 
+      </p> 
+            
+           
+      <p>For detailed information for how to use the Buffer Pool Monitor, see
+               <a href="ops-natbpmon.htm#ops-natbpmon">Using the Buffer Pool Monitor
+            (<code>NATBPMON</code>)</a>.
+      </p> 
+          
+      <div class="noprint">
+         <p><a href="ops-bufferpool.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="ops-bp-trouble"></a></div> 
+          
+      <h2>Trouble Shooting</h2> 
+           
+      <p>This section describes problems that may occur when using the Natural
+               buffer pool and how to solve them. 
+      </p> 
+           
+      <p>It is assumed that you are familiar with the UNIX commands
+               <code>ipcs</code> and <code>adb</code>. 
+      </p> 
+           
+      <p>The following are typical command output examples, with an explanation of what went wrong during execution.
+               
+      </p>
+      <div><a name="ops-bp-trouble-prob1"></a></div> 
+           
+      <h3>Problem 1</h3> 
+            
+            
+      <p>Either Natural or the Natural Buffer Pool Monitor (<a href="ops-natbpmon.htm#ops-natbpmon"><code>NATBPMON</code> utility</a>) cannot be
+                started.
+      </p> 
+            
+      <h4 class="floating-title">Examples</h4> 
+            
+      <p>The following examples describe the most typical problems you are
+                likely to encounter as a Natural administrator or user. These problems occur
+                when you start Natural or the Natural Buffer Pool Monitor, and the buffer pool
+                is not active. 
+      </p> 
+            
+      <ul> 
+                
+         <li> 
+                    
+            <p class="initem">You try to start Natural with the following command:</p><pre class="command-input">natural bp = sag </pre> 
+                    <p class="initem">The following message appears:</p><pre class="system-output">Natural Startup Error:    16
+Unable to open Buffer Pool, 
+Buffer Pool error:   "unexpected system call error occurred "  (20) 
+Global shared memory could not be attached.:   shmkey = 11111111
+ 
+Operating System Error 2 - No such file or directory </pre> 
+                   </li> 
+                
+         <li> 
+                    
+            <p class="initem">You try to start the Natural Buffer Pool Monitor with the following
+                        command:
+            </p><pre class="command-input">natbpmon bp = sag</pre> 
+                    <p class="initem">When you enter the <code>WHO</code> command at the
+                        <code>NATBPMON</code> prompt, the following message appears:
+            </p> <pre class="system-output">Buffer Pool error:   unexpected system call error occurred  (20) 
+Global shared memory could not be attached.:   shmkey = 11111111
+Operating System Error 2 - No such file or directory </pre> 
+                   </li> 
+               
+      </ul> 
+            
+      <h4 class="floating-title">Solution</h4> 
+            
+      <ol> 
+                
+         <li> 
+                    
+            <p class="initem">Start the buffer pool service as described in
+                        <a href="ops-bufferpool.htm#ops-bp-natbpsrv">Using the Utility NATBPSRV for
+                  Creating the Buffer Pool</a>.
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">Use the UNIX command <code>ipcs</code> to verify the
+                        existence of the necessary semaphores and the shared memory: 
+            </p><pre class="command-input">ipcs -m -s</pre> 
+                    <p class="initem">This results in the following output:</p><pre class="system-output">IPC status from /dev/kmem as of Mon 23-MAY-2005 12:03:24.30 
+T     ID     KEY        MODE       OWNER    GROUP     
+Shared Memory: 
+m    807 0x4e425031 --rw-rw----      sag  natural     
+Semaphores:                         
+s     85 0x4e425031 --ra-ra----      sag  natural</pre>
+                    <p class="note"><strong>Note:</strong><br>The above output was edited to exclude memory segments and
+                        semaphores that do not belong to the Natural buffer pool. 
+            </p> 
+                    
+            <p class="initem">If you cannot find a shared memory segment or a set of semaphores
+                        with the key you assigned them, the buffer pool was not started.
+            </p> 
+                   
+         </li> 
+               
+      </ol> 
+           
+      <div><a name="ops-bp-trouble-prob2"></a></div> 
+           
+      <h3>Problem 2</h3> 
+            
+            
+      <p>The Natural buffer pool and a Natural utility are not of the same
+                Natural version. 
+      </p> 
+            
+      <h4 class="floating-title">Examples</h4> 
+            
+      <p>If a utility tries to use the buffer pool, the utility and buffer pool
+                versions are checked for equality. If they differ, the access is denied and an
+                error message is output. 
+      </p> 
+            
+      <ul> 
+                
+         <li> 
+                    
+            <p class="initem">You try to start Natural with the following command:</p><pre class="command-input">natural</pre> 
+                    <p class="initem">The following message appears:</p><pre class="system-output">Unable to open buffer pool, 
+contact your system administrator 
+bp_error: 25, version mismatch of buffer pool </pre> 
+                   </li> 
+                
+         <li> 
+                    
+            <p class="initem">You try to start the Natural Buffer Pool Monitor (<a href="ops-natbpmon.htm#ops-natbpmon"><code>NATBPMON</code>
+                           utility</a>) with the following command:
+            </p><pre class="command-input">natbpmon</pre> 
+                    <p class="initem">When you enter the <code>DIR</code> command at the
+                        <code>NATBPMON</code> prompt, the following message appears:
+            </p> <pre class="system-output">bp_init: res = -1, bp_errno = 25, errno = 0         
+buffer pool error message: "version mismatch of buffer pool"  </pre> 
+                   </li> 
+               
+      </ul> 
+            
+      <h4 class="floating-title">Solution</h4> 
+            
+      <p>Verify that all utility programs used with the buffer pool are of the
+                same Natural version.
+      </p> 
+            
+      <ol> 
+                
+         <li> 
+                    
+            <p class="initem">To ascertain the versions, use the UNIX command
+                        <code>adb</code>:
+            </p><pre class="command-input">adb $NATDIR/$NATVERS/bin/natural</pre> 
+                   </li> 
+                
+         <li> 
+                    
+            <p class="initem">Enter the following:</p><pre class="command-input">bp_majrel?D</pre> 
+                    <p class="initem">This results in the following output:</p><pre class="system-output">natural&#8217;bp_majrel:
+natural&#8217;bp_majrel:    1</pre> 
+                   </li> 
+                
+         <li> 
+                    
+            <p class="initem">Enter the following:</p><pre class="command-input">bp_minrel?D</pre> 
+                    <p class="initem">This results in the following output:</p><pre class="system-output">natural&#8217;bp_minrel:
+natural&#8217;bp_minrel:    3</pre> 
+                   </li> 
+                
+         <li> 
+                    
+            <p class="initem">Enter the following:</p><pre class="command-input">bp_version?D</pre> 
+                    <p class="initem">This results in the following output:</p><pre class="system-output">natural&#8217;bp_version:
+natural&#8217;bp_version:   435</pre> 
+                    <p class="initem">The output from the above commands identifies a buffer pool for
+                        Version 1.3, which has the sequence version 435. 
+            </p> 
+                    
+            <p class="initem">If all programs are of the same Natural version, but contain
+                        different buffer pool versions, contact Software AG Support. 
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">Press <span class="key">CTRL+D</span>.
+            </p> 
+                   
+         </li> 
+               
+      </ol> 
+            
+      <p class="note"><strong>Note:</strong><br>The above commands also work with the images <code>NATBPMON</code>
+                and <code>NATBPSRV</code>. 
+      </p> 
+           
+      <div class="noprint">
+         <p><a href="ops-bufferpool.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="ops-bp-shutdown"></a></div> 
+          
+      <h2> 
+              <a name="x74"></a> 
+              <a name="x75"></a> 
+              <a name="x76"></a> 
+              <a name="x77"></a>Shutting Down and Restarting the Buffer Pool
+      </h2> 
+           
+           
+      <p>Usually it should not be necessary to shut down and restart the buffer
+               pool. This may only be necessary if the buffer pool should become unusable due
+               to serious internal errors in the buffer pool, which is extremely unlikely to
+               occur, or because the parameters defining the buffer pool structure became
+               obsolete. 
+      </p> 
+           
+      <p>If the <a href="ops-natbpmon.htm#ops-natbpmon"><code>NATBPMON</code>
+                  utility</a> is still able to access the buffer pool, proceed as
+               follows:
+      </p> 
+           
+      <ol> 
+               
+         <li> 
+                   
+            <p class="initem">Shut down the buffer pool with the
+                       <code>SHUTDOWN</code> command of the <code>NATBPMON</code>
+                       utility.
+            </p> 
+                   
+            <p class="initem">Once the <code>SHUTDOWN</code> command is executed, new
+                       users are denied access to the buffer pool. 
+            </p> 
+                   
+            <p class="tip"><strong>Tip:</strong><br>Active buffer pool users can be monitored by issuing the
+                       <code>WHO</code> and <code>STATUS</code> commands
+                       of the <code>NATBPMON</code> utility. 
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">After the last user has stopped accessing the buffer pool, buffer
+                       pool resources can be deleted by issuing the <code>IPCRM</code>
+                       command of the <code>NATBPMON</code> utility. 
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">To restart the buffer pool, call the file <cite>natstart.bsh</cite> from a
+                       sufficiently privileged account.
+            </p> 
+                  
+         </li> 
+              
+      </ol> 
+           
+      <p>If you have super user rights, you can use the <code>FORCE</code> option of the
+               <code>SHUTDOWN</code> command:
+      </p> 
+           
+      <ol> 
+               
+         <li> 
+                   
+            <p class="initem">Shut down the buffer pool with the <code>SHUTDOWN FORCE
+                  <var>grace-period</var></code> command of the
+                       <code>NATBPMON</code> utility.
+            </p> 
+                   
+            <p class="initem">This command - like the <code>SHUTDOWN</code> command
+                       without options - denies new users access the buffer pool. However, the
+                       terminate signal <code>SIGTERM</code> is sent to all active Natural sessions,
+                       forcing them to log off from the buffer pool. 
+            </p> 
+                   
+            <p class="initem">If the optional parameter <var>grace-period</var> is
+                       omitted, this command waits until all active sessions have performed their
+                       shutdown processing and then executes the <code>IPCRM</code>
+                       command of the <code>NATBPMON</code> utility . 
+            </p> 
+                   
+            <p class="initem">If the optional parameter <var>grace-period</var> has
+                       been specified, <code>NATBPMON</code> waits the specified number of seconds
+                       before it executes its <code>IPCRM</code> command - regardless of
+                       the closedown status of the sessions logged on to the buffer pool. Therefore,
+                       the value defined for the grace period should be sufficiently large to allow
+                       the sessions to terminate in time. 
+            </p> 
+                   
+            <p class="note"><strong>Note:</strong><br><code>SHUTDOWN FORCE 0</code> is the same as
+                       <code>SHUTDOWN FORCE</code> (without the parameter
+                       <var>grace-period</var>).
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">To restart the buffer pool after successful execution of the
+                       <code>SHUTDOWN FORCE</code> command, call the file
+                       <cite>natstart.bsh</cite> from a
+                       sufficiently privileged account. 
+            </p> 
+                  
+         </li> 
+              
+      </ol> 
+           
+      <p>If the <code>NATBPMON</code> utility is not able to perform a clean
+               shutdown of the buffer pool, the buffer pool must be deleted by using operating
+               system commands:
+      </p> 
+           
+      <ol> 
+               
+         <li> 
+                   
+            <p class="initem">Use the UNIX command <code>ipcs</code> to find out the
+                       status of the buffer pool's shared memory and semaphores:
+            </p><pre class="command-input">ipcs -a -m</pre> 
+                   <p class="initem">In the column <span class="selectable_label">NATTCH</span> of the output of an
+                       <code>ipcs -m -a</code> command, you can see the number of
+                       processes currently attached to a shared memory segment. For example: 
+            </p> <pre class="system-output">IPC status from /dev/kmem as of Mon May 23 12:15:38.39 2002   
+T        ID    KEY      ...  OWNER  GROUP  ... NATTCH    SEGSZ 
+Shared Memory:                                             
+m        707 0x4e425031  ... sag    natural ...      7   153600 </pre> 
+                  </li> 
+               
+         <li> 
+                   
+            <p class="initem">It is highly probable that the number of processes attached to shared
+                       memory incorporates a Natural nucleus or the <code>NATBPMON</code> utility
+                       currently running. Inform the users who run these processes and ask them to
+                       terminate their sessions or terminate them yourself by using the UNIX command
+                       <code>kill</code> once you have found out their process IDs using
+                       the <code>ps</code> command. 
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Once you are sure that no one is using the buffer pool for important
+                       work, its resources can be deleted by using the UNIX command
+                       <code>ipcrm</code>. For example:
+            </p><pre class="command-input">ipcrm -M 0x4e425031 -S 0x4e425031</pre> 
+                   <p class="initem">The values specified for the <code>-M</code> and <code>-S</code>
+                       options must be those that were specified inside the parameter file used to
+                       start the buffer pool. 
+            </p> 
+                   
+            <p class="initem">Be careful when you delete shared memory and semaphores using the
+                       UNIX command <code>ipcrm</code>. If you accidentally delete the
+                       wrong resource, this might have a serious impact on other software products
+                       running on your computer. 
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">The result of deletion can be verified by using the UNIX command
+                       <code>ipcs</code> again. 
+            </p> 
+                   
+            <p class="initem">If there are still some memory segments or message queues displayed,
+                       they could belong to other software, or they are marked for deletion because
+                       some other process is still attached to them. 
+            </p> 
+                  
+         </li> 
+              
+      </ol> 
+           
+      <p>If the buffer pool cannot be started after removing the shared
+               memory and semaphores, you should consider either rebooting your computer or
+               contacting Software AG Support. 
+      </p> 
+          
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="ops-bufferpool.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../ops/ops-bufferpool.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/ops/ops-bufferpool.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="ops-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="ops-workfiles.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="ops-natbpmon.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

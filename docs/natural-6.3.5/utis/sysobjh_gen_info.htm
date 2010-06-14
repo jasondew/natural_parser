@@ -1,0 +1,668 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>General Information on the Object Handler</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="sysobjh_gen_info" id="17047"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../utis/sysobjh_gen_info.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/utis/sysobjh_gen_info.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="sysobjh.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="sysobjh.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="sysobjh_func.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Tools and Utilities&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1>General Information on the Object Handler</h1>
+      </div> 
+         
+      <p>The Object Handler consists of the utility SYSOBJH which is located in
+             the library SYSOBJH, and the direct command interface. Additionally, the
+             Application Programming Interface OBJHAPI is provided for executing Object
+             Handler functions from a Natural program.
+      </p> 
+         
+      <p> This section covers the following topics:</p>
+         
+      <ul>
+         <li>
+            <p class="initem"><a href="sysobjh_gen_info.htm#d0e22166">Principles of Object Transfer</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="sysobjh_gen_info.htm#sysobjh_gen_info_Invoking_SYSOBJH">Invoking the Object Handler</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="sysobjh_gen_info.htm#sysobjh_gen_info_Batch_or_Direct_Command_Calls">Batch or Direct Command Calls</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="sysobjh_gen_info.htm#sysobjh_gen_info_Issue_Cmds">Issuing Object Handler Commands from a Natural Program</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="sysobjh_gen_info.htm#sysobjh_gen_info_Natural_Security">Natural Security</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="sysobjh_gen_info.htm#sysobjh_gen_info_Standard_PF_Keys">Standard PF Keys</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="sysobjh_gen_info.htm#sysobjh_gen_info_FDDM">Using FDDM System Files</a></p>
+         </li>
+      </ul>
+      <hr> 
+        
+      <div><a name="d0e22166"></a></div> 
+         
+      <h2> Principles of Object Transfer</h2> 
+          
+      <p>The diagram below illustrates how the Object Handler transfers objects
+              by unloading them from the source environment into work files and loading them
+              from work files into the target environment. If required, an application
+              protocol such as FTP can be used for transferring work files from source to
+              target environments.
+      </p> 
+           
+          
+      <p><img src="graphics/sysobjh.png" alt="" width="540" height="375"></p> 
+           
+          
+      <p>This section covers the following
+              topics:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="sysobjh_gen_info.htm#d0e22193">Transfer Environment and File Security</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="sysobjh_gen_info.htm#d0e22206">Objects Processed by the Object Handler</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="sysobjh_gen_info.htm#d0e22227">Formatting Options</a></p>
+         </li>
+      </ul>
+      <div><a name="d0e22193"></a></div> 
+          
+      <h3>Transfer Environment and File Security</h3> 
+           
+           
+      <p>An old or a new environment is an FNAT, FUSER or FDIC system file
+               contained in an Adabas database or a VSAM file system on a mainframe, or in the
+               file system on a UNIX, an OpenVMS or a Windows platform. Natural objects on the
+               FNAT or FUSER system file can be contained in libraries as indicated in the
+               following section.
+      </p> 
+           
+      <p>The file security (that is, passwords and cipher codes) relates to the
+               security that has been defined for a system file in an Adabas or a VSAM
+               environment. If file security has been defined for a system file, you need to
+               specify a password, cipher code and/or VSAM name for the source and/or target
+               system file required before you perform an Object Handler function. Otherwise,
+               Adabas or VSAM will issue an appropriate error message. You do not have to
+               provide security information for the default system files assigned to the
+               Natural session at the start of the Object Handler.
+      </p> 
+          
+      <div><a name="d0e22206"></a></div> 
+          
+      <h3>Objects Processed by the Object Handler</h3> 
+           
+           
+      <p>The Object Handler transfers Natural source objects (also referred to
+               as saved objects) and cataloged objects which are contained in Natural
+               libraries, Natural error messages, Natural command processor sources,
+               
+               Natural-related objects, Adabas FDTs (Field
+               Definition Tables) and external files (external
+               objects).
+      </p> 
+          
+      <div><a name="d0e22227"></a></div> 
+          
+      <h3>Formatting Options</h3> 
+           
+           
+      <p> You can transfer data of binary or text format, depending on the
+               source and target environment where the objects are processed. 
+      </p> 
+           
+      <p>Binary format can be used for source objects and cataloged
+               objects, error messages, Natural
+               command processor sources, Natural-related objects and Adabas FDTs and external files (external
+               objects).
+      </p> 
+           
+      <p>Text format applies to source objects, Natural command processor
+               sources, error messages and Adabas FDTs. You can
+               only transfer text data between mainframe and UNIX/OpenVMS/Windows platforms.
+               You can transfer binary data between identical platforms.
+               Between UNIX or OpenVMS and Windows platforms, you can
+               transfer binary data by using portable work files of internal
+               format.
+      </p> 
+          
+        
+      <div class="noprint">
+         <p><a href="sysobjh_gen_info.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="sysobjh_gen_info_Invoking_SYSOBJH" id="17048"></a></div> 
+         
+      <h2> Invoking the Object Handler </h2> 
+          
+          
+      <p>This section provides instructions for invoking the Object Handler by
+              using either menu functions or direct commands:
+      </p> 
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong> To invoke the Object Handler online from any Natural library </strong></p>
+      <ol class="steps">
+         <li> 
+                   
+                   
+            <p class="instep">Enter the following system command: </p> <pre class="command-input">SYSOBJH</pre> 
+                   
+                   
+                   <p class="instep">The <span class="selectable_label">Main Menu</span> of the Object Handler appears with
+                       the following options:
+            </p> 
+                   
+            <ul> 
+                       
+               <li> 
+                           
+                  <p class="initem">Unload</p> 
+                          
+               </li> 
+                       
+               <li> 
+                           
+                  <p class="initem">Load</p> 
+                          
+               </li> 
+                       
+               <li> 
+                           
+                  <p class="initem">Scan</p> 
+                          
+               </li> 
+                       
+               <li> 
+                           
+                  <p class="initem">View</p> 
+                          
+               </li> 
+                       
+               <li> 
+                           
+                  <p class="initem">Administration</p> 
+                          
+               </li> 
+                      
+            </ul> 
+                   
+            <p class="instep">See the section <a href="sysobjh_func.htm#sysobjh_func">Functions</a> for
+                       descriptions of these functions, and how to process the functions in
+                       advanced-user mode or by using wizards.
+            </p> 
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Select a function by choosing one of the following methods:</p> 
+                   
+            <p class="instep">Enter any character in the input field next to the item that
+                       corresponds to the function required.
+            </p> 
+                   
+                   
+                   
+            <p class="instep">Or:<br>Choose the PF key that corresponds to the function required.
+            </p> 
+                   
+                   
+                   
+            <p class="instep">Or:<br>In the Command line, enter the Object Handler command that
+                       corresponds to the function required. For information on the commands provided,
+                       see the section <a href="sysobjh_commands.htm#sysobjh_commands">Direct
+                  Commands</a>.
+            </p> 
+                   
+                 
+         </li>
+      </ol> 
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong> To invoke the Object Handler in batch or direct command online mode
+                  </strong></p>
+      <ul>
+         <li> 
+                   
+                   
+            <p class="instep">Enter the system command <code>SYSOBJH</code> followed
+                       by a direct command as described in
+                       <a href="sysobjh_gen_info.htm#sysobjh_gen_info_Batch_or_Direct_Command_Calls">Batch or
+                  Direct Command Calls</a> and in
+                       <a href="sysobjh_commands.htm#sysobjh_commands">Direct
+                  Commands</a>.
+            </p> 
+                   
+            <p class="instep"> After execution of a direct command, you can enter either another
+                       direct command or a period (.) to exit the Object Handler.
+            </p> 
+                   
+                 
+         </li>
+      </ul> 
+           
+           
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="sysobjh_gen_info.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="sysobjh_gen_info_Batch_or_Direct_Command_Calls" id="17075"></a></div> 
+         
+      <h2> Batch or Direct Command Calls </h2> 
+          
+      <p>Several commands can be issued to the Object Handler online or in batch
+              mode. The last command in the command sequence must be a period
+              (<code>.</code>), <code>STOP</code>,
+              <code>END</code>, <code>QUIT</code> or
+              <code>FIN</code>, where <code>FIN</code> ends the
+              Natural session.
+      </p> 
+          
+      <p>The section covers the following
+              topics:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="sysobjh_gen_info.htm#sysobjh_gen_info_Batch">Batch Mode</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="sysobjh_gen_info.htm#sysobjh_gen_info_Online">Online Mode</a></p>
+         </li>
+      </ul>
+      <div><a name="sysobjh_gen_info_Batch"></a></div> 
+          
+      <h3>Batch Mode </h3> 
+           
+            
+           
+      <p>The commands to the Object Handler are read from standard input. Each
+               command can be separated into a maximum of 20 command parts/strings by entering
+               input delimiters (session parameter <code>ID</code>) after any
+               keyword or keyword value. Each command part/string must not exceed 248
+               bytes.
+      </p> 
+           
+      <p>If the command is longer than a single line, at the end of every line
+               except the last that belongs to the command, enter the character defined with
+               the session parameter <code>CF</code> (default is <code>%</code>)
+               This indicates continuation on the next line. However, this is only possible if
+               you specify the command <code>SYSOBJH</code> in a line by itself.
+               That is, you cannot use <code>CF</code>, if you enter
+               <code>SYSOBJH</code> in the same line where a multi-line command
+               starts. In addition, we recommend that you set the
+               <code>LS</code> profile parameter to <code>250</code>.
+      </p> 
+           
+      <h4 class="floating-title">Example (assuming ID is set to
+               <code>,</code>):
+      </h4> <pre class="command-input">UNLOAD * LIB EXAMPLE, WHERE, WORK $HOME\TEST.SAG 
+   STOP</pre>   
+           <h4 class="floating-title">Related Topics:</h4> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem"><a href="sysobjh_commands.htm#sysobjh_commands">Direct
+                  Commands</a></p> 
+                  
+         </li> 
+                
+               
+         <li> 
+                   
+            <p class="initem"><a href="../ops/ops-batchmode.htm#ops-batchmode">Natural in Batch
+                  Mode</a> - <cite>Operations</cite>
+                       documentation
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+          
+      <div><a name="sysobjh_gen_info_Online"></a></div> 
+          
+      <h3>Online Mode </h3> 
+           
+           
+      <p>The command to the Object Handler in the Command line can consist of up
+               to 20 command parts. 
+      </p> 
+           
+      <h4 class="floating-title">Example:</h4> <pre class="command-input">SYSOBJH UNLOAD * LIB EXAMPLE WHERE TRANSFER WORK $HOME/TEST.DAT</pre>   
+           
+        <div class="noprint">
+         <p><a href="sysobjh_gen_info.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="sysobjh_gen_info_Issue_Cmds"></a></div> 
+         
+      <h2>Issuing Object Handler Commands from a Natural Program </h2> 
+          
+          
+      <p>You can issue commands to the Object Handler with a Natural program by
+              using the OBJHAPI Application Programming Interface. For the parameters
+              required and examples, see the Natural program DOC-API supplied in the Natural
+              system library SYSOBJH.
+      </p> 
+         
+        
+        
+      <div class="noprint">
+         <p><a href="sysobjh_gen_info.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="sysobjh_gen_info_Natural_Security"></a></div> 
+         
+      <h2> Natural Security </h2> 
+          
+          
+      <p>The use of the Object Handler under Natural Security requires that
+              utility profiles be defined for it in Natural Security. At least, a default
+              profile must be defined. For information on utility profiles, see the section
+              <a href="../nsc/nsc_util.htm">Protecting
+            Utilities</a> in the <cite>Natural Security</cite>
+              documentation.
+      </p> 
+          
+      <p>If Natural Security is installed, the Object Handler checks the SYSOBJH
+              utility profiles in Natural Security to find out whether the requested function
+              is allowed.
+      </p> 
+          
+      <p>Should a Natural Security error occur during the load function, the
+              following applies:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">If the <span class="selectable_label">Write report</span> option is set, in online
+                      mode, the error message is written to the report file and processing continues
+                      for the current load command.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">If the <span class="selectable_label">Write report</span> option is set, in batch mode,
+                      the error message is written to the report file and the Object Handler
+                      terminates after the load command where the error occurred has finished
+                      processing.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">If the <span class="selectable_label">Write report</span> option is not set, an error
+                      message is issued and the load command is terminated.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+         
+        
+      <div class="noprint">
+         <p><a href="sysobjh_gen_info.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="sysobjh_gen_info_Standard_PF_Keys"></a></div> 
+         
+      <h2> Standard PF Keys </h2> 
+          
+          
+      <p>The following PF keys are available on all full-screen maps:</p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="no%"> 
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th nowrap>PF Key</th> 
+                       
+               <th>Explanation</th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td><span class="key">PF1</span></td> 
+                       
+               <td> Invokes the help function for the field at which the cursor is
+                  positioned. 
+                  
+                  <p>If positioned at the fields <span class="selectable_label">Work
+                                  file</span>, <span class="selectable_label">External path</span>, <span class="selectable_label">Ext.
+                                  Path</span>, <span class="selectable_label">Object name</span>, <span class="selectable_label">Report
+                                  file</span> or <span class="selectable_label">Restart file</span>: invokes an extra window
+                               where you can enter a long work file name of up to 253 characters.
+                  </p> 
+               </td>
+                       
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><span class="key">PF3</span></td> 
+                       
+               <td>Exits the current screen and returns to the previous
+                  screen.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><span class="key">PF6</span></td> 
+                       
+               <td>Goes to the top of a list.</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><span class="key">PF7</span></td> 
+                       
+               <td> Scrolls up one page in a list. 
+                  
+                  <p>On wizard screens: goes back one screen/step.</p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><span class="key">PF8</span></td> 
+                       
+               <td> Scrolls down one page in a list. 
+                  
+                  <p>On wizard screens: goes to the next screen/step.</p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><span class="key">PF9</span></td> 
+                       
+               <td>Goes to the bottom of a list.</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><span class="key">PF10</span></td> 
+                       
+               <td>Invokes the <span class="selectable_label">Commands</span> menu to select
+                  commands for navigation purpose and to assign special settings. See also
+                           <a href="sysobjh_int_cmd.htm#sysobjh_int_cmd">Commands for Navigation and
+                              Special Functions</a> in <cite>Direct
+                              Commands</cite>.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><span class="key">PF12</span></td> 
+                       
+               <td>Cancels the current function.</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><span class="key">PF20</span></td> 
+                       
+               <td>Lists all active programs of the Object Handler. This can be
+                  helpful information for reporting technical problems to Software AG.
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+         
+        
+      <div class="noprint">
+         <p><a href="sysobjh_gen_info.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="sysobjh_gen_info_FDDM"></a></div> 
+         
+      <h2> Using FDDM System Files</h2> 
+          
+          
+      <p>Natural DDMs (data definition modules) can be stored in libraries or the
+              system file FDDM. See also: <a href="../parms/fddm.htm">FDDM -
+            Natural System File for DDMs</a> in the <cite>Parameter
+                 Reference</cite> documentation).
+      </p> 
+          
+      <p>To use the system file FDDM for processing DDMs with the load, unload or
+              find function, the Object Handler provides the option <a href="sysobjh_settings.htm#sysobjh_settings_Use_FDDM"><span class="selectable_label">Use FDDM
+               file for processing DDMs</span></a>. This option is set by
+              using <span class="selectable_label">Set additional
+            options</span> (see the section <cite>Settings</cite>).
+      </p> 
+          
+      <p>Consider the following when selecting <span class="selectable_label">Use FDDM file for
+            processing DDMs</span>:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">This option is selected by default if FDDM has been activated in the
+                      NATPARM module.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">You cannot process DDMs that are stored in libraries.</p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">You need to specify the library SYSTEM and the Natural object type
+                      <code>V</code> (see <a href="sysobjh_library.htm#sysobjh_library_Nat_Lib_Obj_Det">Natural Library Object
+                  Details</a> in the section <cite>Object
+                         Specification</cite>.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">If used with the load function, all DDMs are loaded into the system
+                      file FDDM. In this case, the parameter <code>NEWLIBRARY</code> is ignored.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+         
+       
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="sysobjh_gen_info.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../utis/sysobjh_gen_info.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/utis/sysobjh_gen_info.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="sysobjh.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="sysobjh.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="sysobjh_func.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

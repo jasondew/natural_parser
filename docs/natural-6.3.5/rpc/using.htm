@@ -1,0 +1,345 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Using a Conversational RPC</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="using"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../rpc/using.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/rpc/using.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="rpc-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="oper.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="reliable_rpc.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Natural Remote Procedure Call (RPC)&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1>Using a Conversational RPC</h1>
+      </div> 
+         
+      <p>This section covers the following topics:</p>
+         
+      <ul>
+         <li>
+            <p class="initem"><a href="using.htm#using_Opening_a_Conversation">Opening a Conversation</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="using.htm#using_Closing_a_Conversation">Closing a Conversation</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="using.htm#using_Defining_a_Conversation_Context">Defining a Conversation Context</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="using.htm#using_Modifying_the_System_Variable__CONVID">Modifying the System Variable *CONVID</a></p>
+         </li>
+      </ul>
+      <hr>
+      <div><a name="using_Opening_a_Conversation"></a></div> 
+         
+      <h2>Opening a Conversation</h2> 
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To open a conversation</strong></p>
+      <ol class="steps">
+         <li> 
+                   
+                   
+            <p class="instep">Specify an <a href="../sm/opencon.htm"><code>OPEN
+                     CONVERSATION</code></a> statement on the client side.
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">In the <code>OPEN CONVERSATION</code> statement, specify a list of
+                       services (subprograms) as members of this conversation.
+            </p> 
+                   
+                 
+         </li>
+      </ol> 
+          
+      <p>The <code>OPEN CONVERSATION</code> statement assigns a unique
+              conversation identifier to the system variable
+              <a href="../vari/appl.htm#CONVID"><code>*CONVID</code></a>.
+      </p>
+          
+          
+      <p>More than one conversation may be open in parallel. If subprograms
+              interfere with each other, the application programs are responsible to manage
+              the various conversations by setting the appropriate
+              <code>*CONVID</code>, which is evaluated by the
+              <a href="../sm/callnat.htm"><code>CALLNAT</code></a>
+              instruction.
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">If the subprogram is a member of the current conversation (referred to
+                      by <code>*CONVID</code>), it will be executed at the server
+                      task which is exclusively reserved for this conversation.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">If it is not member of the current conversation, it will be executed
+                      in a different server task. This also applies to different conversations.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>A conversation can be opened on any program level and
+              <code>CALLNAT</code>s within this conversation can be executed on
+              any other program level below or above.
+      </p> 
+          
+      <p>It is possible to open a client conversation within a remote
+              <code>CALLNAT</code> executed on a server so the server acts as
+              an agent. As the client only controls its own conversations, and not the
+              server's, it is the application programmer's responsibility to ensure that the
+              conversation on the server is closed properly before the main client is
+              closed.
+      </p>
+      <div><a name="d0e12428"></a></div> 
+          
+      <h3>Additional Restrictions</h3> 
+           
+           
+      <p>The conversational RPC can still be tested locally. To keep the
+               behavior identical if you execute a conversational <code>CALLNAT</code>
+               remotely or locally, the following additional restrictions apply:
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">A <a href="../sm/closecon.htm"><code>CLOSE
+                     CONVERSATION</code></a> is not possible within an object which is
+                       currently running as a member of this conversation<var>.</var>
+                       This corresponds to the restriction that it is not possible to close a
+                       conversation from within a remotely running program.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">It is not possible to execute a conversational <code>CALLNAT</code>
+                       which is member of the conversation from within another (or the same) member of
+                       this conversation. This corresponds to the restriction that it is not possible
+                       to execute a conversational <code>CALLNAT</code> which is member of the
+                       client's conversation from a server subprogram.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">It is not recommended to open a conversation from within another
+                       conversation's subprogram.
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+          
+      <div class="noprint">
+         <p><a href="using.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="using_Closing_a_Conversation"></a></div> 
+         
+      <h2>Closing a Conversation</h2> 
+          
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To close a conversation</strong></p>
+      <ul>
+         <li> 
+                   
+                   
+            <p class="instep">Specify a <a href="../sm/closecon.htm"><code>CLOSE
+                     CONVERSATION</code></a> statement on the client side.
+            </p> 
+                   
+                 
+         </li>
+      </ul> 
+          
+      <p>This enables the client to close a specific conversation or all
+              conversations. All context variables of the closed conversation are then
+              released and the server task will be available again for another client.
+      </p> 
+          
+      <p>If you terminate Natural, you implicitly close all conversations.</p> 
+          
+      <p>When a server receives a <code>CLOSE CONVERSATION</code> request, it
+              issues a <code>CLOSE CONVERSATION ALL</code> statement so that all
+              conversations the server might have opened (as agent) are also closed.
+      </p> 
+          
+      <div><a name="using_Closing_a_Conversation_rollback"></a></div>
+      <h4 class="floating-title">Close a
+              conversation with implicit <code>BACKOUT TRANSACTION</code>
+              (Rollback)
+      </h4> 
+          
+      <p>By default, when a <code>CLOSE CONVERSATION</code> statement is
+              executed, the Rollback option will be sent to the server together with the
+              <code>CLOSE CONVERSATION</code> statement. This will cause an implicit
+              <a href="../sm/backout.htm"><code>BACKOUT TRANSACTION</code></a>
+              on the server side at the end of the conversation processing.
+      </p> 
+          
+      <div><a name="using_Closing_a_Conversation_usr2032n"></a></div>
+      <h4 class="floating-title">Close a
+              conversation with implicit <code>END TRANSACTION</code>
+              (Commit)
+      </h4> 
+          
+      <p>You can use the application programming interface <code>USR2032N</code>
+              available in library <code>SYSEXT</code> to cause an implicit <code>END
+            TRANSACTION</code> on the server side.
+      </p> 
+          
+      <p>The application programming interface has to be called before the next
+              <code>CLOSE CONVERSATION</code> statement is executed. The result is that the
+              commit option is sent to the server together with the <code>CLOSE
+            CONVERSATION</code> statement and that the server executes an
+              <a href="../sm/endtrans.htm"><code>END TRANSACTION</code></a>
+              statement at the end of the conversation processing.
+      </p> 
+          
+      <p>The commit option applies to the next <code>CLOSE CONVERSATION</code>
+              statement executed by the client application. After the conversation(s) has
+              (have) been closed, the default option is used again. This means, that the
+              following <code>CLOSE CONVERSATION</code> statements will result again in a
+              <code>BACKOUT TRANSACTION</code> statement.
+      </p>
+         
+      <div class="noprint">
+         <p><a href="using.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="using_Defining_a_Conversation_Context"></a></div> 
+         
+      <h2>Defining a Conversation Context</h2> 
+          
+          
+      <p>During a conversation the subprograms that are members of this
+              conversation may share a context area on this server.
+      </p> 
+          
+      <p>To do so, declare a data area with the
+              <a href="../sm/defineda_cv.htm#context_data_definition"><code>DEFINE DATA
+               CONTEXT</code></a> statement in each of the concerned subprograms.
+      </p> 
+          
+      <p>The subprograms, using a context area, behave in the same way if the
+              conversation were local or remote. The <code>DEFINE DATA CONTEXT</code>
+              statement closely corresponds to the <a href="../sm/defineda_aiv.htm"><code>DEFINE DATA INDEPENDENT</code></a>
+              statement. All rules which apply to the definition of AIV variables also apply
+              to context variables, with the exception that a context variable does not need
+              to be prefixed by a plus sign (+).
+      </p> 
+          
+      <p>The compiler does not check format/length definition because this
+              requires that the variables be created by running a program which includes all
+              definitions for this application (as usual with AIVs). This makes no sense for
+              context variables, because a library containing RPC service routines is usually
+              not application-dependent.
+      </p> 
+          
+      <p>In contrast to AIVs, the caller's context variables are not passed
+              across <a href="../sm/callnat.htm"><code>CALLNAT</code></a>
+              boundaries. Context variables are referenced by their name and the context ID
+              they apply to. A context variable is shared by all service routines referring
+              to the same variable name within one conversation. Therefore each conversation
+              has its own set of context variables. Context variables cannot be shared
+              between different conversations even if they have the same variable name.
+      </p> 
+          
+      <p>The context area will be reset to initial values when an <code>OPEN
+            CONVERSATION</code> statement or a non-conversational <code>CALLNAT</code>
+              statement is performed.
+      </p> 
+         
+      <div class="noprint">
+         <p><a href="using.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="using_Modifying_the_System_Variable__CONVID"></a></div> 
+         
+      <h2>Modifying the System Variable *CONVID</h2> 
+          
+          
+      <p>The system variable <a href="../vari/appl.htm#CONVID"><code>*CONVID</code></a>
+              (format I4) is set by the <a href="../sm/opencon.htm"><code>OPEN
+               CONVERSATION</code></a> statement and may be modified by the application
+              program.
+      </p> 
+          
+      <p>Modifying <code>*CONVID</code> is only necessary if you
+              are using multiple conversations in parallel.
+      </p> 
+         
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="using.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../rpc/using.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/rpc/using.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="rpc-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="oper.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="reliable_rpc.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

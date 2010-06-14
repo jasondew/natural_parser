@@ -1,0 +1,667 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Using Natural Libraries</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="use-lib"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../using/use-lib.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/using/use-lib.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="use-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="use-main.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="use-syscmd.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Using Natural&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> Using Natural Libraries</h1>
+      </div> 
+         
+         
+      <p>This document covers the following
+             topics:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="use-lib.htm#use-lib-general">General Information</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="use-lib.htm#use-lib-steplib">Steplibs</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="use-lib.htm#use-lib-searchseq">Search Sequence for Object Execution</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="use-lib.htm#use-lib-logon">Logging on to a Library</a></p>
+         </li>
+      </ul> 
+         
+      <p> For more information on libraries, see
+             <a href="../utis/sysmain_ux-over.htm">SYSMAIN
+            Utility</a> in the <cite>Tools and Utilities</cite>
+             documentation. 
+      </p> 
+        
+      <hr>
+      <div><a name="use-lib-general"></a></div> 
+         
+      <h2>General Information</h2> 
+          
+          
+      <p>Libraries are used to store Natural objects such as programs,
+              subprograms, subroutines, helproutines or text.
+      </p> 
+          
+      <p>Some libraries are delivered with Natural, such as libraries beginning
+              with the prefix "SYS". The library
+              <code>SYSTEM</code>, for example, contains system-related programs, error
+              messages and DDMs (data definition modules).
+      </p> 
+          
+      <p>When you first logon to Natural, your default library will in most cases
+              be <code>SYSTEM</code>. Since this library generally contains system-related
+              objects, you will probably want to use a different library to store your
+              programs. You can add your own libraries to the Natural environment or use
+              libraries set up for this purpose.
+      </p> 
+          
+      <p class="note"><strong>Note:</strong><br>You can alter your default library from <code>SYSTEM</code> to any
+              other library by specifying the Natural profile parameter
+              <a href="../parms/init-lib.htm"><code>INIT-LIB</code></a> in the
+              <a href="../config/cfg-over.htm">Configuration Utility</a>.
+      </p>
+          
+         
+      <div class="noprint">
+         <p><a href="use-lib.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="use-lib-steplib"></a></div> 
+         
+      <h2> 
+             <a name="x23"></a> 
+             <a name="x24"></a>Steplibs
+      </h2> 
+          
+          
+      <p>A steplib is a Natural user library or system library that is
+              concatenated with the current user or system library. This avoids redundant
+              storage of identical objects and helps organize applications. In addition, if
+              <a href="../nsc/nsc-over.htm">Natural Security</a> is installed, a
+              steplib can be used to restrict access to particular objects. 
+      </p> 
+          
+      <p>Natural searches in a steplib when an object is not found in the current
+              library (see <a href="use-lib.htm#use-lib-searchseq">Search Sequence
+            for Object Execution</a> for further information). The
+              standard steplibs are the libraries <code>SYSTEM</code> in the
+              <code>FUSER</code> and the <code>FNAT</code> system files. 
+      </p> 
+          
+      <p>If Natural Security is active, you can define additional steplibs in the
+              security profile of each library. The entries in a library security profile
+              override any definitions made outside Natural Security.
+      </p> 
+          
+      <p>If Natural Security is not active, you can specify additional steplibs
+              in the <a href="../config/cfg-over.htm">Configuration Utility</a>,
+              with the profile parameter <a href="../parms/steplib.htm"><code>STEPLIB</code></a>. In
+              addition, you can define further steplibs by using one of the application
+              programming interfaces (for example, <code>USR1025N</code> or
+              <code>USR3025N</code>) that are supplied for this purpose in the Natural system
+              library <a href="../utis/sysext.htm"><code>SYSEXT</code></a>.
+      </p> 
+          
+      <p>The additional steplibs are searched for an object before the standard
+              steplibs <code>SYSTEM</code> (<code>FUSER</code> and <code>FNAT</code>). 
+      </p> 
+          
+      <p>The currently active steplibs are shown when you enter the system
+              command <a href="../syscom/tech.htm"><code>TECH</code></a>.
+      </p> 
+         
+      <div class="noprint">
+         <p><a href="use-lib.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="use-lib-searchseq"></a></div> 
+         
+      <h2>Search Sequence for Object Execution</h2> 
+         
+      
+      <p>This section describes the sequence in which Natural libraries and system
+          files are searched for a requested object that is to be executed from either a
+          user library or a system library.
+      </p> 
+       
+       
+      <p class="note"><strong>Note:</strong><br>If the profile parameter <a href="../parms/bpsfi.htm"><code>BPSFI</code></a> is set to
+           "ON" (the default setting is
+           "OFF"), objects are searched
+           for in the buffer pool first. 
+      </p> 
+       
+      <h4 class="floating-title">The search sequence for a user-written object to be executed
+           from a user library is as follows:
+      </h4> 
+      
+      <ol> 
+          
+         <li> 
+              
+            <p class="initem">The current library in the <code>FUSER</code> system file as defined by the system
+                  variable <a href="../vari/appl.htm#LIBRARY_ID"><code>*LIBRARY-ID</code></a>.
+            </p>
+              
+             
+         </li> 
+          
+         <li> 
+              
+            <p class="initem">The steplibs (in sequence) as specified in the Natural Security profile
+                  for the current library or in the steplib table.
+            </p> 
+             
+         </li> 
+          
+         <li> 
+              
+            <p class="initem">The default steplib as defined by the system variable
+                  <a href="../vari/appl.htm#STEPLIB"><code>*STEPLIB</code></a>.
+            </p>
+              
+             
+         </li> 
+          
+         <li> 
+              
+            <p class="initem">The library  <code>SYSTEM</code> in the <code>FUSER</code> system
+                  file.
+            </p> 
+             
+         </li> 
+          
+         <li> 
+              
+            <p class="initem">The library <code>SYSTEM</code> in the <code>FNAT</code> system
+                  file.
+            </p> 
+             
+         </li> 
+         
+      </ol> 
+      
+      <h4 class="floating-title">The search sequence for a Natural object to be executed from a
+          system library is as follows:
+      </h4> 
+      
+      <ol> 
+          
+         <li> 
+              
+            <p class="initem">The current "SYS" library in the
+                  <code>FNAT</code>
+                  system file as defined by the system variable
+                  <a href="../vari/appl.htm#LIBRARY_ID"><code>*LIBRARY-ID</code></a>.
+            </p>
+              
+             
+         </li> 
+          
+         <li> 
+              
+            <p class="initem">The steplibs (in sequence) as specified in the Natural Security profile
+                  for the current library or in the steplib table.
+            </p> 
+             
+         </li> 
+          
+         <li> 
+              
+            <p class="initem">The library <code>SYSLIBS</code> in the <code>FNAT</code> system
+                  file, which contains objects shared by system commands and utilities.
+            </p> 
+             
+         </li> 
+          
+         <li> 
+              
+            <p class="initem">The library  <code>SYSTEM</code> in the <code>FNAT</code> system
+                  file.
+            </p> 
+             
+         </li> 
+          
+         <li> 
+              
+            <p class="initem">The library  <code>SYSTEM</code> in the <code>FUSER</code> system
+                  file.
+            </p> 
+              
+            <p class="initem">Since the <code>FUSER</code> system file is searched last, you
+                  must provide an object that is used in both the <code>FUSER</code> and
+                  the <code>FNAT</code> system files (for example, a
+                  user-exit routine for a Natural utility) only in one location, namely in
+                  <code>FUSER</code>. 
+            </p> 
+             
+         </li> 
+         
+      </ol> 
+       
+         
+      <div class="noprint">
+         <p><a href="use-lib.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="use-lib-logon"></a></div> 
+         
+      <h2> 
+             <a name="x25"></a> 
+             <a name="x26"></a>Logging on to a Library
+      </h2> 
+          
+          
+      <p>To log on to a library, select the <span class="guimenu">Library</span> menu and
+              press <span class="key">ENTER</span>. A window appears showing the command
+              <span class="guimenuitem">&lt;LOGON&gt;</span> followed by a list of all existing
+              libraries. For example:
+      </p> 
+          
+      <table border="1" cellpadding="5" class="screen">
+         <tr>
+            <td><pre>+----------+
+&brvbar; &lt;LOGON&gt;  &brvbar;
+&brvbar; DEMO1    &brvbar;
+&brvbar; DEMO2    &brvbar;
+&brvbar; DEMO3    &brvbar;
+&brvbar; SAMPLES  &brvbar;
+&brvbar; SYSEXPG  &brvbar;
+&brvbar; SYSEXSYN &brvbar;
+&brvbar; SYSTEM   &brvbar;
++----------+</pre></td>
+         </tr>
+      </table> 
+          
+      <p>To create a new library, choose the
+              <span class="guimenuitem">&lt;LOGON&gt;</span> command. A window is then displayed in
+              which you enter the name of the library to be created. See also
+              <a href="use_rules.htm#use_rules-Library_Names">Library Naming
+            Conventions</a>.
+      </p> 
+          
+      <p>To use an existing library, you can either choose the library from the
+              list, or choose the <span class="guimenuitem">&lt;LOGON&gt;</span> command and then
+              enter the name of the desired library. The contents of the library are then
+              displayed. For example: 
+      </p> 
+          
+      <table border="1" cellpadding="5" class="screen">
+         <tr>
+            <td><pre>+------------------------------- List * * -------------------------------+
+&brvbar; Cmd Name     Type        SM S/C User ID  SRC Date       GP Date        &brvbar;
+&brvbar; --- -------- ----------- -- --- -------- -------------- -------------- &brvbar;
+&brvbar; &lt;DIRECT COMMAND&gt;                                                       &brvbar;
+&brvbar;     ARRAYD   Program     S  S   SAGPC    07:45 02-02-07                &brvbar;
+&brvbar;     ARRAYE   Program     S  S/C SAGPC    07:45 02-02-07 09:25 02-02-07 &brvbar;
+&brvbar;     BREAK1   Program     S  S/C SAGPC    07:45 02-02-07 09:25 02-02-07 &brvbar;
+</pre></td>
+         </tr>
+      </table> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="14%">
+            <col width="83%">
+         </colgroup> 
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th>Field</th> 
+                       
+               <th>Explanation</th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td><span class="selectable_label">Cmd</span></td> 
+                       
+               <td>
+                  <table border="0" width="100%">
+                     <colgroup>
+                        <col width="6%">
+                        <col width="94%">
+                     </colgroup> 
+                              
+                     <tbody align="left" valign="top"> 
+                                  
+                        <tr> 
+                                      
+                           <td colspan="2"> 
+                              <a name="x27"></a>In this field, you can enter a function code. Enter
+                               "?" or press <span class="key">F2</span> to display the list of
+                                  the available function codes for the selected object. The function codes
+                                          are:
+                           </td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td>C</td> 
+                                      
+                           <td> 
+                              <a name="x28"></a>Check the object's source code for syntax errors.
+                                          
+                           </td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td>D</td> 
+                                      
+                           <td> 
+                              <a name="x29"></a>Read the object's source code into work area. 
+                           </td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td>E</td> 
+                                      
+                           <td> 
+                              <a name="x30"></a>Edit the object's source. 
+                           </td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td>L</td> 
+                                      
+                           <td> 
+                              <a name="x31"></a>List the object's source code.
+                           </td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td>I </td> 
+                                      
+                           <td> 
+                              <a name="x32"></a>Display the directory information about the
+                                     object.
+                           </td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td>H</td> 
+                                      
+                           <td> 
+                              <a name="x33"></a> 
+                                          <a name="x34"></a>Print hardcopy of the object's source.
+                           </td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td>R</td> 
+                                      
+                           <td> 
+                              <a name="x35"></a>Run (that is, compile and execute) the object's
+                                     source.
+                           </td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td>X</td> 
+                                      
+                           <td> 
+                              <a name="x36"></a>Execute the object.
+                           </td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td>S</td> 
+                                      
+                           <td> 
+                              <a name="x37"></a>Stow the object in source and object form.
+                           </td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td>U</td> 
+                                      
+                           <td> 
+                              <a name="x38"></a>Scratch (that is, delete) the object's source and
+                                object form.
+                           </td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td>.</td> 
+                                      
+                           <td>End.</td> 
+                                     
+                        </tr> 
+                                 
+                     </tbody> 
+                             
+                  </table>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><span class="selectable_label">Name</span></td> 
+                       
+               <td>Object name. </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><span class="selectable_label">Type</span></td> 
+                       
+               <td>Object type. </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><span class="selectable_label">SM</span></td> 
+                       
+               <td>
+                  <table border="0" width="100%">
+                     <colgroup>
+                        <col width="6%">
+                        <col width="94%">
+                     </colgroup> 
+                              
+                     <tbody align="left" valign="top"> 
+                                  
+                        <tr> 
+                                      
+                           <td colspan="2">Programming mode:</td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td>S</td> 
+                                      
+                           <td>Structured mode.</td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td>R</td> 
+                                      
+                           <td>Reporting mode.</td> 
+                                     
+                        </tr> 
+                                 
+                     </tbody> 
+                             
+                  </table>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><span class="selectable_label">S/C</span></td> 
+                       
+               <td>
+                  <table border="0" width="100%">
+                     <colgroup>
+                        <col width="6%">
+                        <col width="94%">
+                     </colgroup> 
+                              
+                     <tbody align="left" valign="top"> 
+                                  
+                        <tr> 
+                                      
+                           <td>S</td> 
+                                      
+                           <td>The object exists in source form. </td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td>C</td> 
+                                      
+                           <td>The object exists in object (cataloged) form.
+                              
+                           </td> 
+                                     
+                        </tr> 
+                                 
+                     </tbody> 
+                             
+                  </table>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><span class="selectable_label">User ID</span></td> 
+                       
+               <td>The ID of the user who saved/cataloged the
+                  object. 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><span class="selectable_label">SRC Date</span></td> 
+                       
+               <td>Source program date. The time and date when the
+                  object was last saved. 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><span class="selectable_label">GP Date</span></td> 
+                       
+               <td>Generated program date. The time and date when
+                  the object was last cataloged. 
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p class="note"><strong>Note:</strong><br>It is also possible to enter the system command
+              <a href="../syscom/logon.htm"><code>LOGON
+               <var>library-name</var></code></a> in the
+              <a href="use-main.htm#use-main-menus-direct"><span class="selectable_label">Direct
+               Command</span></a> window.
+      </p> 
+         
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="use-lib.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../using/use-lib.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/using/use-lib.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="use-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="use-main.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="use-syscmd.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

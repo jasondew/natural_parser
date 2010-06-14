@@ -1,0 +1,1242 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Overview of Configuration File Elements</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="clientcfg-elements"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../webio/clientcfg-elements.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/webio/clientcfg-elements.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="clientcfg-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="clientcfg-tool.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="clientcfg-url.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Natural Web I/O Interface&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x31"></a> 
+               <a name="x32"></a> Overview of Configuration File Elements
+         </h1>
+      </div> 
+         
+      <p>This document covers the following
+             topics:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="clientcfg-elements.htm#clientcfg-elements-contents">Contents of the Configuration File</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="clientcfg-elements.htm#clientcfg-elements-sessions">Sessions</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="clientcfg-elements.htm#clientcfg-elements-global">Global Settings</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="clientcfg-elements.htm#clientcfg-elements-users">Users and Passwords</a></p>
+         </li>
+      </ul>
+      <hr>
+      <div><a name="clientcfg-elements-contents"></a></div> 
+         
+      <h2>Contents of the Configuration File</h2> 
+          
+          
+      <p>By default, the configuration file is delivered with the following
+              entries, depending on the type of client that you are using:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  <strong>Natural Web I/O Interface Client</strong> 
+                  <pre class="verbatim">&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;settings&gt;
+     &lt;global&gt;
+        &lt;last_activity_timeout&gt;3600&lt;/last_activity_timeout&gt;
+     &lt;/global&gt;
+    &lt;sessions&gt;
+        <strong>&lt;session id="Connect to Natural" trace="false"&gt;
+        &lt;/session&gt;</strong> 
+        &lt;session id="localtestserver" trace="false"&gt;
+            &lt;natural_server&gt;localhost&lt;/natural_server&gt;
+            &lt;natural_port&gt;6640&lt;/natural_port&gt;
+            &lt;natural_program/&gt;
+            &lt;user id="" pwd=""/&gt;
+            &lt;natural_parameter/&gt;
+        &lt;/session&gt;
+    &lt;/sessions&gt;
+&lt;/settings&gt;</pre> 
+                 </li> 
+              
+         <li> 
+                  <strong>Natural for Ajax</strong> 
+                  <pre class="verbatim">&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;settings&gt;
+     &lt;global&gt;
+        &lt;last_activity_timeout&gt;3600&lt;/last_activity_timeout&gt;
+     &lt;/global&gt;
+    &lt;sessions&gt;
+        <strong>&lt;session id="Connect to Natural" trace="false"&gt;
+        &lt;/session&gt;</strong>
+        &lt;session id="Natural for Ajax Examples (UNIX)" trace="false"&gt;
+            &lt;natural_server&gt;127.0.0.1&lt;/natural_server&gt;
+            &lt;natural_port&gt;2800&lt;/natural_port&gt;
+            &lt;natural_program&gt;nwo.sh&lt;/natural_program&gt;
+            &lt;natural_parameter&gt;STACK=(LOGON SYSEXNJX;MENU-NJX;FIN)&lt;/natural_parameter&gt;
+        &lt;/session&gt;
+        &lt;session id="Natural for Ajax Examples (Windows)" trace="false"&gt;
+            &lt;natural_server&gt;127.0.0.1&lt;/natural_server&gt;
+            &lt;natural_port&gt;2900&lt;/natural_port&gt;
+            &lt;natural_program&gt;nwo.bat&lt;/natural_program&gt;
+            &lt;natural_parameter&gt;STACK=(LOGON SYSEXNJX;MENU-NJX;FIN)&lt;/natural_parameter&gt;
+        &lt;/session&gt;
+        &lt;session id="Local" trace="false"&gt;
+            &lt;natural_program&gt;nwo.bat&lt;/natural_program&gt;
+        &lt;/session&gt;
+        &lt;session id="127.0.0.1" trace="false"&gt;
+            &lt;natural_program&gt;nwo.bat&lt;/natural_program&gt;
+        &lt;/session&gt;
+        &lt;session id="Session template" trace="false"&gt;
+            &lt;natural_server&gt;&lt;/natural_server&gt;
+            &lt;natural_port&gt;&lt;/natural_port&gt;
+            &lt;natural_program&gt;&lt;/natural_program&gt;
+            &lt;user id="" pwd=""/&gt;
+            &lt;natural_parameter&gt;&lt;/natural_parameter&gt;
+        &lt;/session&gt;
+    &lt;/sessions&gt;
+&lt;/settings&gt;</pre> 
+                 </li> 
+             
+      </ul> 
+          
+      <p>The first session that is defined in the configuration file has the name
+              "Connect to Natural". This session is automatically
+              preselected in the logon page. Since no further elements are defined for this
+              session, all required input fields for logging on to a session are shown on the
+              logon page and the user has to specify all required information.
+      </p> 
+          
+      <p class="note"><strong>Note:</strong><br>The <code>global</code> section containing the timeout
+              value is only available in a J2EE configuration file. See also
+              <a href="clientcfg-elements.htm#clientcfg-elements-global-timeout">Setting the
+            Timeout</a>.
+      </p> 
+          
+      <p>To add a new session definition to the configuration file, you must add
+              a new <code>session</code> element. It should have the following
+              minimum entries: 
+      </p> 
+          <pre class="verbatim">&lt;session id="<var>your-session-name</var>" trace="false"&gt;
+  &lt;natural_server&gt;<var>your-Natural-server</var>&lt;/natural_server&gt;
+  &lt;natural_port&gt;<var>port-ID-of-Natural-server</var>&lt;/natural_port&gt;
+  &lt;natural_program&gt;<var>Natural-program-name</var>&lt;/natural_program&gt;
+&lt;/session&gt;</pre> 
+         <div class="noprint">
+         <p><a href="clientcfg-elements.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="clientcfg-elements-sessions"></a></div> 
+         
+      <h2>Sessions</h2> 
+          
+          
+      <p>The following table explains the elements and attributes that can be
+              used in the <code>sessions</code> section of the configuration
+              file for adding a new session.
+      </p> 
+          
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th>Element Name</th> 
+                       
+               <th>Attribute Name</th> 
+                       
+               <th>Description</th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td><code>session</code></td> 
+                       
+               <td><code>id</code></td> 
+                       
+               <td>Mandatory. A session name of your choice. On the
+                  logon page, the session name is provided in a drop-down list box.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>session</code></td> 
+                       
+               <td><code>type</code></td> 
+                       
+               <td>Optional. The platform on which user ID and
+                  password are authenticated. Possible values: 
+                  
+                  <ul> 
+                               
+                     <li> 
+                                    
+                                   
+                        <p class="initem"><strong>MF</strong><br>Natural for Mainframes. User ID and password can have a maximum
+                                       of 8 characters.
+                        </p> 
+                                  
+                     </li> 
+                               
+                     <li> 
+                                    
+                                   
+                        <p class="initem"><strong>MF-NSC</strong><br>Natural for Mainframes with Natural Security. User ID and
+                                       password can have a maximum of 8 characters. The user ID must comply with the
+                                       <a href="../using/use_rules.htm#use_rules-Library_Names">Natural naming conventions for library names</a>.
+                        </p> 
+                                  
+                     </li> 
+                               
+                     <li> 
+                                    
+                                   
+                        <p class="initem"><strong>OS</strong><br>Natural for UNIX, Natural for OpenVMS or Natural for Windows:
+                                       User ID and password can have a maximum of 32 characters. When a domain is
+                                       required, you have to specify it together with the user ID (in the form
+                                       "<var>domain</var>\<var>user-ID</var>").
+                        </p>
+                                   
+                                  
+                     </li> 
+                              
+                  </ul> 
+                           
+                  <p>Default: "OS".</p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>session</code></td> 
+                       
+               <td><code>protocol</code></td> 
+                       
+               <td>Optional. The current protocol version for the Natural Web
+                  I/O Interface is 5. The latest Natural versions automatically use the
+                  appropriate protocol version. For older Natural versions, it is required to
+                  define the appropriate protocol version in the configuration file: 
+                  
+                  <ul> 
+                               
+                     <li> 
+                                   
+                        <p class="initem">Natural versions 6.2.1 through 6.2.4 (UNIX) require protocol
+                                       version 2.
+                        </p> 
+                                   
+                        <p class="initem">As of version 6.2.5 it is no longer required to define a protocol
+                                       version.
+                        </p> 
+                                  
+                     </li> 
+                               
+                     <li> 
+                                   
+                        <p class="initem">Natural versions 6.3.1 and 6.3.2 (UNIX) require protocol version
+                                       3.
+                        </p> 
+                                   
+                        <p class="initem">As of version 6.3.3, it is no longer required to define a
+                                       protocol version.
+                        </p> 
+                                  
+                     </li> 
+                               
+                     <li> 
+                                   
+                        <p class="initem">Natural versions up to version 4.2.3.2 (mainframe) require
+                                       protocol version 3.
+                        </p> 
+                                   
+                        <p class="initem">As of version 4.2.3.3 and 4.2.4, it is no longer required to
+                                       define a protocol version.
+                        </p> 
+                                  
+                     </li> 
+                              
+                  </ul> 
+                           
+                  <p>Possible values: 2, 3, 4 and 5. Default: 5.</p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>session</code></td> 
+                       
+               <td><code>ssl</code></td> 
+                       
+               <td> 
+                  
+                  <p>J2EE only.</p> 
+                           
+                  <p>Optional. If set to "true", a secure
+                     connection is established between the Natural Web I/O Interface client or
+                     Natural for Ajax on the application server and the Natural Web I/O Interface
+                               server.
+                  </p> 
+                           
+                  <p class="important"><strong>Important:</strong><br>If you want to use SSL with Natural for Mainframes, the
+                               type "MF" or "MF-NSC"
+                               must be defined; the type must not be "OS". The
+                               other way around, if you want to use SSL with Natural for Windows, UNIX or
+                               OpenVMS, the type must be "OS".
+                  </p> 
+                           
+                  <p>Default: "false". </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>session</code></td> 
+                       
+               <td><code>trace</code></td> 
+                       
+               <td> Optional. Should only be set to
+                  "true" when requested by Software AG support. For
+                  further information, see <a href="clientcfg-elements.htm#clientcfg-elements-global-tracing">Tracing</a>.
+                           
+                           
+                  <p>Default: "false".</p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>session</code></td> 
+                       
+               <td><code>savesessionuser</code></td> 
+                       
+               <td> 
+                  
+                  <p>Natural for Ajax only. Applies only to applications that are
+                     designed as Application Designer workplaces.
+                  </p> 
+                           
+                  <p>If set to "true" (default), the default
+                               behavior of <code>sharesessionuser</code> applies.
+                  </p> 
+                           
+                  <p> If set to "false", the user credentials
+                               (user ID and password) are not saved in the Application Designer session and
+                               are therefore not available for an Application Designer subsession.
+                  </p> 
+                           
+                  <p class="note"><strong>Note:</strong><br>An example for a workplace application is available under the
+                               URL
+                               <cite>http://<var>&lt;host&gt;</var>:<var>&lt;port&gt;</var>/cisnatural/servlet/StartCISPage?PAGEURL=/njxdemos/wpworkplace.html</cite>,
+                               where <var>&lt;host&gt;</var> and
+                               <var>&lt;port&gt;</var> are the host name and port number of
+                               your application server.
+                  </p> 
+                           
+                  <p>Default: "true". </p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>session</code></td> 
+                       
+               <td><code>sharesessionuser</code></td> 
+                       
+               <td> 
+                  
+                  <p>Natural for Ajax only. Applies only to applications that are
+                     designed as Application Designer workplaces.
+                  </p> 
+                           
+                  <p>If set to "false" (default), the user
+                     credentials of the main Application Designer session are automatically used in
+                     an Application Designer subsession if the server and port of the subsession is
+                     the same as in the main session. If the server and port are not the same, the
+                               user has to specify the user ID and password in a logon dialog.
+                  </p> 
+                           
+                  <p> If set to "true", the user credentials
+                               of the Application Designer main session are always used for all Application
+                               Designer subsessions on all involved servers - even if the server and port are
+                               different. 
+                  </p> 
+                           
+                  <p>Default: "false". </p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>user</code></td> 
+                       
+               <td><code>id</code></td> 
+                       
+               <td>Optional. A valid user ID for the current
+                  machine. When this attribute is specified, the corresponding field does not
+                  appear on the logon page. 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>user</code></td> 
+                       
+               <td><code>pwd</code></td> 
+                       
+               <td>Optional. A valid password for the above user ID.
+                  When this attribute is specified, the corresponding field does not appear on
+                  the logon page. 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>user</code></td> 
+                       
+               <td><code>encrypted</code></td> 
+                       
+               <td> 
+                  
+                  
+                  <p>J2EE only.</p> 
+                           
+                  <p>Used by the configuration tool which stores the password in
+                               encrypted form.
+                  </p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>user</code></td> 
+                       
+               <td><code>ucase</code></td> 
+                       
+               <td> Optional. If set to
+                  "true", the input field for the user ID is in
+                  upper-case mode. 
+                  
+                  <p>Default: "false".</p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>natural_server</code></td>
+                       
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>The name or TCP/IP address of the server on which
+                  Natural and the Natural Web I/O Interface daemon (Natural for UNIX and Natural
+                  for OpenVMS) or the Natural Web I/O Interface server (Natural for Mainframes)
+                  or the Natural Web I/O Interface service (Natural for Windows) are running.
+                  When this element is specified, the corresponding field does not appear on the
+                  logon page. 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>natural_port</code></td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>The TCP/IP port number on which the Natural Web
+                  I/O Interface daemon (Natural for UNIX and Natural for OpenVMS) or the Natural
+                  Web I/O Interface server (Natural for Mainframes) or the Natural Web I/O
+                  Interface service (Natural for Windows) is listening. When this element is
+                  specified, the corresponding field does not appear on the logon page. 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>natural_program</code></td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td> 
+                  
+                  <ul> 
+                               
+                     <li> 
+                                   
+                                   
+                        <p class="initem"><strong>Natural for Mainframes</strong><br>The name of the Natural program or a command sequence that starts
+                                       your application as you would enter it on the <code>NEXT</code> prompt.
+                                       Example:
+                        </p> 
+                                   
+                        <p class="initem"><code>TEST01 data1,data2</code></p> 
+                                  
+                     </li> 
+                               
+                     <li> 
+                                    
+                                   
+                        <p class="initem"><strong>Natural for UNIX</strong><br>The name of the UNIX shell script for starting the Natural
+                                       application (a file similar to <cite>nwo.sh</cite>). 
+                        </p> 
+                                  
+                     </li> 
+                               
+                     <li> 
+                                    
+                                   
+                        <p class="initem"><strong>Natural for OpenVMS</strong><br>The name of the Natural image file (for example,
+                                       <cite>natural&lt;version&gt;</cite> or
+                                       <cite>natural&lt;version&gt;.exe</cite>).
+                        </p> 
+                                  
+                     </li> 
+                               
+                     <li> 
+                                    
+                                   
+                        <p class="initem"><strong>Natural for Windows</strong><br>The name of the Windows command file (<cite>.bat</cite>)
+                                       for starting the Natural application.
+                        </p> 
+                                  
+                     </li> 
+                              
+                  </ul> 
+                           
+                  <p>When this element is specified, the corresponding field does not
+                               appear on the logon page. 
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>natural_parameter</code></td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td> 
+                  
+                  <p>Optional. Parameters for starting the Natural application. This can
+                     be stack parameters, a parameter file/module or other Natural-specific
+                     information.
+                  </p> 
+                           
+                  <ul> 
+                               
+                     <li> 
+                                    
+                                   
+                        <p class="initem"><strong>Natural for Mainframes</strong><br>This element is used for starting a Natural application, for
+                                       example:
+                        </p> 
+                                   
+                        <p class="initem"><code>STACK=(LOGON MYAPPL)</code></p> 
+                                  
+                     </li> 
+                               
+                     <li> 
+                                    
+                                   
+                        <p class="initem"><strong>Natural for UNIX and Natural for Windows</strong><br>This element is used when the above shell script (UNIX) or
+                                       command file (Windows) uses the parameter <code>$5</code> after
+                                       "natural", for example: 
+                        </p> 
+                                   
+                        <p class="initem"><code>parm=myparm stack=(logon mylib;menu;fin)</code></p> 
+                                  
+                     </li> 
+                               
+                     <li> 
+                                    
+                                   
+                        <p class="initem"><strong>Natural for OpenVMS</strong><br>This element is used for starting a Natural application, for
+                                       example:
+                        </p> 
+                                   
+                        <p class="initem"><code>BP=BP<var>node-name</var> NLDCHK webio=on
+                                          "stack=(logon sysext;menu;fin)"</code></p> 
+                                  
+                     </li> 
+                              
+                  </ul> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>natural_parameter</code></td> 
+                       
+               <td><code>visible</code></td> 
+                       
+               <td> 
+                  
+                  <p>IIS only.</p> 
+                           
+                  <p> If set to "true", a field containing
+                     the Natural parameters is shown on the logon page. 
+                  </p> 
+                           
+                  <p>Default: "false". </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>language</code></td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td> 
+                  
+                  <p>Natural for Ajax only.</p> 
+                           
+                  <p>Sets the language to be used. You can specify a one-character code
+                     which corresponds to one of the language codes which can be set in the Natural
+                               system variable <a href="../vari/natenv.htm#LANGUAGE"><code>*LANGUAGE</code></a>. See also
+                               <a href="../njx/njx-multilang.htm">Multi Language
+                                  Management</a> in the <cite>Natural for Ajax</cite>
+                               documentation.
+                  </p> 
+                           
+                  <p>Default: English.</p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>nattimeout</code></td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td> 
+                  
+                  <p>J2EE only.</p> 
+                           
+                  <p>Optional. Timeout for the response from the host. See
+                               <a href="clientcfg-elements.htm#clientcfg-elements-global-timeout">Setting the
+                                  Timeout</a>.
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>theme</code></td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td> 
+                  
+                  <p>IIS only.</p> 
+                           
+                  <p>The theme (style) that the web page is using. For a first test, you
+                     can use the theme with the name "3270Theme" (see
+                               <a href="clientcfg-themes.htm#clientcfg-themes">Using Themes (IIS
+                                  only)</a>). When this element is specified, the corresponding
+                               field does not appear on the logon page. When themes are shown on the logon
+                               page, they are provided in a drop-down list box. 
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>style_sheet</code></td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td> 
+                  
+                  <p>Natural for Ajax only.</p> 
+                           
+                  <p>The name of the style sheet which determines the colors, fonts and
+                     PF key button style of the current session. See
+                               <a href="clientcfg-css.htm#clientcfg-css">Using Style
+                                  Sheets</a>. 
+                  </p> 
+                           
+                  <p>When this element is specified, a fixed style sheet is used. In
+                               this case, the corresponding field does not appear on the logon page and the
+                               user is thus not able to select a different style sheet. 
+                  </p> 
+                           
+                  <p>Default: natural.css.</p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>screen</code></td> 
+                       
+               <td><code>styleselect</code></td> 
+                       
+               <td> 
+                  
+                  <p>Natural for Ajax only.</p> 
+                           
+                  <p>With Natural for Ajax, the users can switch to another style sheet
+                               during a running session.
+                  </p> 
+                           
+                  <p>Optional. If set to "false", the users
+                               are no longer able to select another style sheet.
+                  </p> 
+                           
+                  <p>Default: "true". </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>screen</code></td> 
+                       
+               <td><code>rows</code></td> 
+                       
+               <td> 
+                  
+                  <p>Optional. The number of rows in the output window. Possible values:
+                     minimum 24, no upper limit. Default: 24.
+                  </p> 
+                           
+                  <p>Not used by Natural for Mainframes which uses the profile parameter
+                               <code>TMODEL</code> instead. 
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>screen</code></td> 
+                       
+               <td><code>columns</code></td> 
+                       
+               <td> 
+                  
+                  <p>Optional. The number of columns in the output window. Possible
+                     values: minimum 80, no upper limit. Default: 80.
+                  </p> 
+                           
+                  <p>Not used by Natural for Mainframes which uses the profile parameter
+                               <code>TMODEL</code> instead. 
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>screen</code></td> 
+                       
+               <td><code>top</code></td> 
+                       
+               <td> 
+                  
+                  <p>IIS only.</p> 
+                           
+                  <p>The top position of the output window inside the browser. Use
+                     "0" for the very top. This value is given in Natural
+                               units, not pixels. 
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>screen</code></td> 
+                       
+               <td><code>left</code></td> 
+                       
+               <td> 
+                  
+                  <p>IIS only.</p> 
+                           
+                  <p>The left position of the output window inside the browser. Use
+                     "0" for the very left. This value is given in
+                         Natural units, not pixels. 
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>screen</code></td> 
+                       
+               <td><code>size</code></td> 
+                       
+               <td> 
+                  
+                  <p>IIS only.</p> 
+                           
+                  <p>The size of the output window. Possible values:
+                     "normal", "small",
+                     "tiny" and "extratiny".
+                               Default: "normal".
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>screen</code></td> 
+                       
+               <td><code>pfkeypos</code></td> 
+                       
+               <td> 
+                  
+                  <p>IIS only.</p> 
+                           
+                  <p>The position of the PF keys. Possible values:
+                     "bottom" and "right".
+                               Default: "bottom".
+                  </p> 
+                           
+                  <p class="note"><strong>Note:</strong><br>For J2EE, the position of the PF keys is determined in the style
+                               sheet. See <a href="clientcfg-css.htm#clientcfg-css">Using Style
+                                  Sheets</a>.
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>screen</code></td> 
+                       
+               <td><code>showfkeynumbers</code></td> 
+                       
+               <td> 
+                  
+                  <p>J2EE only. </p> 
+                           
+                  <p>Optional. If set to "true", the PF key
+                     numbers are shown next to the PF keys. 
+                  </p> 
+                           
+                  <p>Default: "false". </p>
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>If a field is not to appear on the logon page, you can specify the
+              corresponding element or attribute as described above. To do so, you either
+              specify a value for the attribute or element or you omit the value. For
+              example, you can specify either of the following:
+      </p> 
+          <pre class="verbatim">&lt;natural_program&gt;&lt;/natural_program&gt;</pre> 
+          <p>or</p> 
+          <pre class="verbatim">&lt;natural_program&gt;sysprof&lt;/natural_program&gt;</pre> 
+          <p>In both cases, the corresponding field does not appear on the logon
+              page.
+      </p> 
+          
+      <p>Only when an element name or attribute name is not mentioned at all, the
+              corresponding field is shown on the logon page.
+      </p> 
+         
+      <div class="noprint">
+         <p><a href="clientcfg-elements.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="clientcfg-elements-global"></a></div> 
+         
+      <h2>Global Settings</h2> 
+          
+      <p>The following table explains the global settings that can be defined in
+              the <code>global</code> section of the configuration file.
+      </p> 
+          
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th>Element</th> 
+                       
+               <th>Description</th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td><code>last_activity_timeout</code></td> 
+                       
+               <td> The timeout after the last activity of the user.
+                  See <a href="clientcfg-elements.htm#clientcfg-elements-global-timeout">Setting the
+                              Timeout (J2EE only)</a> below.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>trace_dir</code></td> 
+                       
+               <td> Optional. Location of a different trace
+                  directory. See <a href="clientcfg-elements.htm#clientcfg-elements-global-tracing">Tracing</a>
+                           below.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>trustfile_name</code></td>
+                       
+                       
+               <td> 
+                  
+                  <p>J2EE only.</p> 
+                           
+                  <p>Optional. The path to your trust file. See
+                               <a href="clientcfg-trust.htm#clientcfg-trust">Trust Files (J2EE
+                                  only)</a> for further information.
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>trustfile_password</code></td> 
+                       
+               <td> 
+                  
+                  <p>J2EE only.</p> 
+                           
+                  <p>If your trust file is password-protected, the appropriate password
+                     is required. The password can only be specified with the
+                               <a href="clientcfg-tool.htm#clientcfg-tool-session">configuration tool</a>. It
+                               is stored in encrypted form.
+                  </p>
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+          
+      <div><a name="clientcfg-elements-global-timeout"></a></div> 
+          
+      <h3>Setting the Timeout (J2EE only)</h3> 
+           
+           
+      <p>You can set two different timeouts:</p> 
+           
+      <ul> 
+               
+         <li> 
+                    
+                   
+            <p class="initem"><strong>Last activity timeout</strong><br>This is the timeout after the last activity of the user. It is
+                       defined with <code>last_activity_timeout</code> in the
+                       <code>global</code> section of the configuration file and is set
+                       in seconds. The default is 3600 seconds (1 hour). When the defined number of
+                       seconds has been reached, the session is closed.
+            </p> 
+                   <pre class="verbatim">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;settings&gt;
+<strong>  &lt;global&gt;
+     &lt;last_activity_timeout&gt;3600&lt;/last_activity_timeout&gt;
+  &lt;/global&gt;</strong>
+  &lt;sessions&gt;
+  ...</pre> 
+                  </li> 
+               
+         <li> 
+                    
+                   
+            <p class="initem"><strong>Natural server timeout</strong><br>This timeout defines the number of seconds that the client waits for
+                       an answer from Natural after an update of a page was sent to Natural. It is
+                       defined in the <code>nattimeout</code> element of a session
+                       definition. The default is 60 seconds. Normally, you need not change this
+                       default value. This timeout can be set individually for each session.
+            </p> 
+                   <pre class="verbatim">...
+    &lt;session id="Test (UNIX)" trace="false"&gt;
+      &lt;natural_server&gt;Myserver2&lt;/natural_server&gt;
+      &lt;natural_port&gt;4321&lt;/natural_port&gt;
+      &lt;natural_program&gt;test.sh&lt;/natural_program&gt;
+      <strong>&lt;nattimeout&gt;60&lt;/nattimeout&gt;</strong>
+    &lt;/session&gt;
+...</pre> 
+                  </li> 
+              
+      </ul> 
+          
+      <div><a name="clientcfg-elements-global-tracing"></a></div> 
+          
+      <h3>Tracing</h3> 
+           
+      <p>Tracing should only be enabled when requested by Software AG support.
+               To enable tracing, you set the <code>trace</code> attribute
+               in a session definition to "true". Example:
+      </p> 
+           <pre class="verbatim">&lt;session id="MySession" <strong>trace="true"</strong>&gt;</pre><div><a name="d0e17929"></a></div>
+           
+           
+      <h4>Default Trace Directory for J2EE</h4> 
+            
+            
+      <p>By default, the trace files are written to the directory which has
+                been set by the Java property <code>java.io.tmpdir</code>. On
+                Windows, this is normally the environment variable
+                <code>TMP</code> for the user who started the application
+                server. On UNIX, this is normally <cite>/tmp</cite> or
+                <cite>/var/tmp</cite>.
+      </p> 
+            
+      <p>You can also set this property in the start script for the application
+                server. The following examples apply to JBoss.
+      </p> 
+            
+      <ul> 
+                
+         <li> 
+                    
+            <p class="initem">Example for Windows (<cite>run.bat</cite>):
+            </p> 
+                    <pre class="verbatim">set JAVA_OPTS=%JAVA_OPTS% -Djava.io.tmpdir=C:\temp</pre> 
+                   </li> 
+                
+         <li> 
+                    
+            <p class="initem">Example for UNIX (<cite>run.sh</cite>):
+            </p> 
+                    <pre class="verbatim">set JAVA_OPTS="$JAVA_OPTS -Djava.io.tmpdir=/tmp</pre> 
+                   </li> 
+               
+      </ul> 
+           
+      <div><a name="d0e17981"></a></div> 
+           
+      <h4>Default Trace Directory for IIS</h4> 
+            
+            
+      <p>By default, the trace files are written to the <cite>Software
+                   AG\Natural WebIO\Traces</cite> directory. The path to this directory
+                depends on the operating system:
+      </p> 
+            
+      <ul> 
+                
+         <li> 
+                     
+                    
+            <p class="initem"><strong>Windows XP</strong><br><cite><var>&lt;drive&gt;</var>:\Documents and
+                           Settings\<var>&lt;pc-name&gt;</var>\ASPNET\Local
+                           Settings\Application Data\Software AG\Natural WebIO\Traces</cite></p> 
+                   
+         </li> 
+                
+         <li> 
+                     
+                    
+            <p class="initem"><strong>Windows 2003 Server</strong><br><cite><var>&lt;drive&gt;</var>:\Documents and
+                           Settings\Default User\Application Data\Software AG\Natural
+                           WebIO\Traces</cite></p> 
+                   
+         </li> 
+                
+         <li> 
+                     
+                    
+            <p class="initem"><strong>Windows Vista</strong><br><cite><var>&lt;drive&gt;</var>:\Windows\ServiceProfiles\NetworkService\AppData\Local\Software
+                           AG\Natural WebIO\Traces</cite></p> 
+                   
+         </li> 
+               
+      </ul> 
+           
+      <div><a name="d0e18036"></a></div> 
+           
+      <h4>Defining a Different Trace Directory</h4> 
+            
+            
+      <p>It is possible to define a different trace directory by defining the
+                element <code>trace_dir</code> in the
+                <code>global</code> element of the configuration file. Example:
+                
+      </p> 
+            <pre class="verbatim">&lt;global&gt;
+  &lt;trace_dir&gt;E:\mytracedir&lt;/trace_dir&gt;
+&lt;/global&gt;</pre> 
+            <p>When a different trace directory is not defined, the default trace
+                directory will be used.
+      </p> 
+           
+      <div class="noprint">
+         <p><a href="clientcfg-elements.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="clientcfg-elements-users"></a></div>
+         
+         
+      <h2>Users and Passwords</h2> 
+          
+          
+      <p>It is possible to predefine Natural users and their passwords. This is
+              done in the <code>users</code> section of the configuration
+              file.
+      </p> 
+          
+      <p>The syntax is as follows: </p> 
+          <pre class="verbatim">&lt;settings&gt;
+  ...
+  &lt;users&gt;
+    &lt;user id="user1" pwd="password1"/&gt;
+    &lt;user id="user2" pwd="password2"/&gt;
+    &lt;user id="user3" pwd="password3"/&gt;
+  &lt;/users&gt;
+  ... 
+&lt;/settings&gt;</pre> 
+          <p>When a Natural page is opened with a URL that specifies a user in the
+              URL parameter <code>natuser</code>, the specified user is matched against the
+              list of users in the configuration file. When the specified user is defined in
+              the configuration file, the corresponding password is used to authenticate the
+              user when the Natural session is started. See also
+              <a href="clientcfg-url.htm#clientcfg-url">Starting a Natural Application with
+            a URL</a>.
+      </p> 
+          
+      <h4 class="floating-title">Example</h4> 
+          
+      <p>When the following URL is used, the password defined for
+              "user1" is used (which is
+              "password1" in the above syntax example):
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                   
+                  
+            <p class="initem"><strong>Natural Web I/O Interface Client</strong><br><cite>http://myhost:8080/natuniweb/natural.jsp?natuser=user1...</cite></p>
+                  
+                 
+         </li> 
+              
+         <li> 
+                   
+                  
+            <p class="initem"><strong>Natural for Ajax</strong><br><cite>http://myhost:8080/cisnatural/servlet/StartCISPage?PAGEURL=/cisnatural/NatLogon.html&amp;xciParameters.natuser=user1
+                         ...</cite></p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p class="note"><strong>Note:</strong><br>With Natural for Ajax, the URL parameters have the prefix
+              <code>xciParameters</code>.
+      </p> 
+         
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="clientcfg-elements.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../webio/clientcfg-elements.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/webio/clientcfg-elements.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="clientcfg-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="clientcfg-tool.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="clientcfg-url.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

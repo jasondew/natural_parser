@@ -1,0 +1,490 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Using the XML Toolkit</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="xml_run"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../webtech/xml_run.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/webtech/xml_run.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="xml-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="xml.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="xml_opti.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Web Technology&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> Using the XML Toolkit 
+               <a name="x523"></a> 
+               <a name="x524"></a></h1>
+      </div> 
+         
+         
+      <p>The following topics are covered:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="xml_run.htm#xml_prereq">Prerequisites</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="xml_run.htm#xml_wf_proc">Work File Processing</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="xml_run.htm#xml_print_files">Print Files</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="xml_run.htm#xml_invoking">Invoking the Application</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="xml_run.htm#pf_key_assignm">PF-Key Assignments</a></p>
+         </li>
+      </ul> 
+        
+      <hr> 
+        
+      <div><a name="xml_prereq"></a></div> 
+         
+      <h2> Prerequisites</h2> 
+         
+      <div><a name="d0e43467"></a></div> 
+          
+      <h3>Storage Requirements</h3> 
+           
+           
+      <p>Depending on the size, complexity or the recursion depth of the
+               processed XML DTD, the XML Toolkit might require up to several hundred
+               kilobytes of space in the DATSIZE buffer.
+      </p> 
+           
+      <p>Parsing an XML document using the generated callback routine requires
+               that the entire document is contained in a dynamic variable.
+      </p> 
+           
+          
+         
+      <div><a name="d0e43482"></a></div> 
+          
+      <h3>Schema Support</h3> 
+           
+           
+      <p>Schemas are not supported by the XML Toolkit on mainframe computers;
+               only DTDs can be processed.
+      </p> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="xml_run.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="xml_wf_proc"></a></div> 
+         
+      <h2> Work File Processing 
+             <a name="x525"></a> 
+             <a name="x526"></a></h2> 
+          
+           
+           
+          
+      <p>By default, the XML Toolkit uses Natural Work File 12 and
+              Work File 13 internally.
+      </p> 
+          
+         
+      <div><a name="d0e43529"></a></div> 
+          
+      <h3>Work File Support</h3> 
+           
+           
+      <p>Running the XML Toolkit under TP monitors which do not support Natural
+               work files is possible using PC work files, if you are working with a PC on
+               which Entire Connection is in use.
+      </p> 
+           
+      <p>XML Documents which shall be parsed using the generated callback
+               routine or which shall be generated using the generated serialization code can
+               be accessed via work files as well. Data must be accessed with a variable of
+               type ALPHA DYNAMIC. The work file should be of type UNFORMATTED.
+      </p> 
+           
+      <p>PC files can be accessed using the subprogram XML2PCWR provided in the
+               SYSXTK library. XML2PCWR writes or reads an ALPHA DYNAMIC variable to or from a
+               PC work file.
+      </p> 
+           
+      <h4 class="floating-title">Calling Conventions for XML2PCWR:</h4> 
+           <pre class="verbatim">
+CALLNAT 'XML2PCWR' XML-PAGE FILENUMBER OPERATION RETCODE
+</pre> 
+           <h4 class="floating-title">Parameter Definition:</h4> 
+           <pre class="verbatim">
+DEFINE DATA LOCAL
+  1 XML-PAGE            (A)     DYNAMIC         /* XML page
+  1 FILENUMBER          (I2)                    /* work file number: 1 - 31
+  1 OPERATION           (A2)                    /* W/R: write/read
+  1 RETCODE             (I4)                    /* must be 0!
+END-DEFINE
+</pre> 
+           <h4 class="floating-title">Example:</h4> 
+           
+      <p>The following example writes the generated document to Standard Work
+               File 10 and to PC Work File 15:
+      </p> 
+           <pre class="verbatim">
+* ----------------------------------------------------------------------
+* CLASS NATURAL XML TOOLKIT - UTILITIES
+* 
+* SDEMO_P1 
+* 
+* DESCRIPTION 
+* Serialize a given Data structure. 
+* 
+* 
+* AUTHOR SAG 01.2005 
+* 
+* VERSION 4.12. 
+* 
+* (c) Copyright Software AG 2001-2005. All rights reserved. 
+* 
+* ----------------------------------------------------------------------
+* 
+DEFINE DATA 
+LOCAL USING EMPL /* add generated data structure 
+LOCAL 
+1 XML (A) DYNAMIC 
+* 
+1 OUT (A72) 
+1 II (I4) 
+* 
+1 #CX (I4) 
+1 #CY (I4) 
+1 #CZ (I4) 
+1 FILENUMBER (I2) 
+1 OPERATION (A2) 
+1 RETCODE (I4) 
+END-DEFINE 
+/*[ initialize 
+EMPLOYEE.PERSONNEL-ID := 4711 
+* 
+EMPLOYEE.FIRST-NAME := "ADKINSON" 
+EMPLOYEE.NAME := "MARTHA" 
+* 
+EMPLOYEE.C&Acirc;&sect;ADDRESS-LINE := 2 
+EMPLOYEE.ADDRESS-LINE(1) := "8603 GARLAND COURT" 
+EMPLOYEE.ADDRESS-LINE(2) := "FRAMINGHAM" 
+EMPLOYEE.ADDRESS-LINE(2) := "MA" 
+EMPLOYEE.CITY := "FRAMINGHAM" 
+EMPLOYEE.ZIP := "17010" 
+EMPLOYEE.COUNTRY := "USA" 
+* 
+EMPLOYEE.AREA-CODE := "617" 
+EMPLOYEE.PHONE := "210-4703" 
+* 
+EMPLOYEE.JOB-TITLE := "MANAGER" 
+EMPLOYEE.C&Acirc;&sect;INCOME := 2 
+EMPLOYEE.SALARY(1) := 47000 
+EMPLOYEE.C&Acirc;&sect;BONUS(1) := 2 
+EMPLOYEE.BONUS(1,1) := 10500 
+EMPLOYEE.BONUS(1,2) := 7875 
+* 
+EMPLOYEE.SALARY(2) := 47000 
+EMPLOYEE.C&Acirc;&sect;BONUS(2) := 1 
+EMPLOYEE.BONUS(2,1) := 35700 
+*
+INCLUDE EMPL-C "XML" "#CX" "#CY" "#CZ" 
+/* add generated Serialize 
+/*] 
+* 
+ASSIGN FILENUMBER = 15 /* PC FILE 
+ASSIGN OPERATION = 'W' 
+CALLNAT 'XML2PCWR' XML FILENUMBER OPERATION RETCODE 
+PRINT XML 
+DEFINE WORK FILE 10 TYPE 'UNFORMATTED' /* STD WORK FILE
+WRITE WORK FILE 10 VARIABLE XML 
+CLOSE WORK FILE 10 
+* 
+END
+</pre> 
+           
+          
+          
+        
+        <div class="noprint">
+         <p><a href="xml_run.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="xml_print_files"></a></div> 
+         
+      <h2> Print Files 
+             <a name="x527"></a> 
+             <a name="x528"></a></h2> 
+          
+          
+      <p>The XML Toolkit writes to Report 2.</p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="xml_run.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="xml_invoking" id="30200"></a></div> 
+         
+      <h2> Invoking the Application 
+             <a name="x529"></a> 
+             <a name="x530"></a></h2> 
+          
+          
+      <p>The XML toolkit is included in the library SYSXTK.</p>
+      
+          
+          
+      
+          
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong> To use the XML Toolkit </strong></p>
+      <ul>
+         <li> 
+                   
+                   
+            <p class="instep">In the Natural command line, enter LOGON SYSXTK.</p> 
+                   
+            <p class="instep">Enter Menu.</p> 
+                   
+                   
+                   
+            <p class="instep"> The Main Menu is displayed.</p> 
+                   
+            <table border="1" cellpadding="5" class="screen">
+               <tr>
+                  <td><pre>
+ 15:03:24        ***** NATURAL XML Toolkit - Page 1 of 7 *****       2007-01-16 
+                                 - Main Menu -               Library SYSXTK     
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+             Code  Function                                                     
+               L   Generate from Natural Data Structure                         
+               X   Generate from XML Schema or Document Type Definiton          
+               O   Set up Specific Generation Options                           
+                                                                                
+  Function Code X                                                              
+                                                                                
+                                                                                
+Enter-PF1---PF2---PF3---PF4---PF5---PF6---PF7---PF8---PF9---PF10--PF11--PF12--- 
+      Help        Exit  LDA   XSD                           Optio       Canc
+</pre></td>
+               </tr>
+            </table> 
+                   
+            <p class="instep">The following functions are available:</p> 
+                   
+            <ul> 
+                       
+               <li> 
+                           
+                  <p class="initem"> <a href="xml_nda.htm#xml_nda">Generate from Natural Data
+                                  Structure</a> Uses the Natural Data Area as a data source.
+                  </p> 
+                          
+               </li> 
+                       
+               <li> 
+                           
+                  <p class="initem"> <a href="xml_dtd.htm#xml_dtd">Generate from Document Type
+                                  Definition</a> Uses the Document Type Definition (.dtd) as a data
+                               source.
+                  </p> 
+                          
+               </li> 
+                       
+               <li> 
+                           
+                  <p class="initem"> <a href="xml_opti.htm#xml_opti">Set up Specific Generation
+                                  Options</a> 
+                  </p> 
+                          
+               </li> 
+                      
+            </ul> 
+                   
+            <p class="instep">For details, refer to the corresponding sections.</p> 
+                   
+                 
+         </li>
+      </ul>
+         
+         
+           
+          
+        
+        
+        
+      <div class="noprint">
+         <p><a href="xml_run.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="pf_key_assignm"></a></div> 
+         
+      <h2> PF-Key Assignments 
+             <a name="x533"></a> 
+             <a name="x534"></a></h2> 
+          
+          
+      <p>The following function keys are used for navigation and processing.</p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th align="left">PF1</th> 
+                       
+               <td align="left">Help</td> 
+                       
+               <td align="left">Context-related help. For more information, refer
+                  to the online documentation.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th align="left">PF3</th> 
+                       
+               <td align="left">Exit</td> 
+                       
+               <td align="left"> 
+                  
+                  <p class="mini-list"> 
+                     On an options map: closes the function and saves the
+                        changes.<br> 
+                                On a generation map: closes the function after a generation
+                                is done.<br> 
+                                On the Main Menu map: closes the application. 
+                              
+                  </p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th align="left">PF7</th> 
+                       
+               <td align="left">Prev</td> 
+                       
+               <td align="left">Previous step (previous map).</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th align="left">PF8</th> 
+                       
+               <td align="left">Next</td> 
+                       
+               <td align="left">Next step (next map).</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th align="left">PF9</th> 
+                       
+               <td align="left">Finis(h)</td> 
+                       
+               <td align="left">Closes the function after a generation is
+                  done.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th align="left">PF12</th> 
+                       
+               <td align="left">Cancel</td> 
+                       
+               <td align="left"> 
+                  
+                  <p class="mini-list"> 
+                     Closes the function without saving the changes. <br> 
+                     Closes the function if no generation has already be
+                                done. 
+                              
+                  </p>
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+        
+       
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="xml_run.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../webtech/xml_run.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/webtech/xml_run.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="xml-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="xml.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="xml_opti.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

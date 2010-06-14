@@ -1,0 +1,1439 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Starting a Natural RPC Server</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="start"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../rpc/start.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/rpc/start.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="rpc-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="setup.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="end.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Natural Remote Procedure Call (RPC)&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1>Starting a Natural RPC Server</h1>
+      </div> 
+         
+      <p>This section describes how to start a Natural RPC server on the different
+             platforms.
+      </p> 
+         
+      <p>The following topics are covered:</p>
+         
+      <ul>
+         <li>
+            <p class="initem"><a href="start.htm#start_Starting_a_Natural_Server">Preliminaries before Starting a Natural RPC Server</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="start.htm#start_start_server_mf_online_all_tps">Starting a Natural RPC Server in a Mainframe Online Environment (all TP Monitors)</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="start.htm#start_start_server_mf_online_nci_ncf">Starting a Natural RPC Server in a Mainframe Online Environment (Com-plete and CICS only)</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="start.htm#start_start_server_mf_batch">Starting a Batch Server in a Mainframe Environment</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="start.htm#start_start_server_win">Starting a Natural RPC Server in a Windows Environment</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="start.htm#start_start_server_ux">Starting a Natural RPC Server in a UNIX Environment</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="start.htm#start_start_server_ov">Starting a Natural RPC Server in an OpenVMS Environment</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="start.htm#start_Considerations_for_Natural_RPC_Servers_with_Replicates">Considerations for Mainframe Natural RPC Servers with Replicas</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="start.htm#start_server_start_via_front_end">Starting a Natural RPC Server Using the RPC Server Front-End (z/OS Batch Mode only)</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="start.htm#start_server_start_via_front_end_cics">Starting a Natural RPC Server Using the RPC Server Front-End (CICS only)</a></p>
+         </li>
+      </ul>
+      <hr>
+      <div><a name="start_Starting_a_Natural_Server"></a></div> 
+         
+      <h2>Preliminaries before Starting a Natural RPC Server</h2> 
+          
+          
+      <p>Any kind of Natural session can be used as a Natural RPC server, but
+              typically a Natural server is a Natural session which is started as an
+              asynchronous or as a background task.
+      </p> 
+          
+      <h4 class="floating-title">On Mainframes:</h4> 
+          
+      <p>For the purpose of starting a server, you have the following
+              options:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">Create an RPC-specific Natural parameter module.</p> 
+                  
+            <p class="initem"> For a list of the relevant parameters, refer to the section
+                      <a href="setup.htm#setup">Setting Up a Natural RPC
+                  Environment</a>,
+                      <a href="setup.htm#setup_rpc_setup_srv_profparms">Set the RPC
+                  Server-Specific Natural Parameters</a>.
+            </p> 
+                  
+            <p class="initem"> This parameter module is either specified dynamically with
+                      <a href="../parms/parm.htm"><code>PARM</code></a><code>=<var>serverparm</var></code>,
+                      where <code><var>serverparm</var></code> is the name of the
+                      parameter module linked to your Natural.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Alternatively, you can also specify the profile parameters
+                      dynamically.
+            </p> 
+                  
+            <p class="initem"> The RPC-specific Natural profile parameters may be specified in a
+                      profile created with the <code>SYSPARM</code> utility. Natural would
+                      then be started with
+            </p> 
+                  
+            <p class="initem"> <code>PROFILE</code><code>=<var>serverprofile</var></code></p>
+                  
+                  
+            <p class="initem"> where <code><var>serverprofile</var></code> is the
+                      name of the profile.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <h4 class="floating-title">On Windows, UNIX or OpenVMS:</h4> 
+          
+      <p>For the purpose of starting a server, you have the following
+              options:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">Create an RPC-specific Natural parameter file.</p> 
+                  
+            <p class="initem"> For a list of the relevant parameters, refer to the section
+                      <a href="setup.htm#setup">Setting Up a Natural RPC
+                  Environment</a>,
+                      <a href="setup.htm#setup_rpc_setup_srv_profparms">Set the RPC
+                  Server-Specific Natural Parameters</a>.
+            </p> 
+                  
+            <p class="initem"> This parameter file is specified dynamically with
+                      <a href="../parms/parm.htm"><code>PARM</code></a><code>=<var>serverparm</var></code>,
+                      where <code><var>serverparm</var></code> is the name of the
+                      parameter file.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Alternatively, you can specify the profile parameters dynamically.</p>
+                  
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>How a Natural server is started depends on the environment and is
+              described in the corresponding paragraphs below.
+      </p> 
+         
+      <div class="noprint">
+         <p><a href="start.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="start_start_server_mf_online_all_tps"></a></div> 
+         
+      <h2>Starting a Natural RPC Server in a Mainframe Online Environment (all
+             TP Monitors)
+      </h2> 
+          
+          
+      <p>To start a Natural server in a mainframe online environment, enter the
+              following command in your TP monitor environment:
+      </p> 
+          <pre class="verbatim"><var>&lt;natural&gt;</var>
+  RPC=(SERVER=ON, SRVNAME=<var>servername</var>, SRVNODE=<var>nodename</var>,
+              RPCSIZE=<var>n</var>, MAXBUFF=<var>n</var>)</pre> 
+          <p>Where <code><var>&lt;natural&gt;</var></code> is the
+              name with which you start your Natural (transaction code, transaction ID,
+              environment-dependent nucleus name).
+      </p> 
+         
+      <div class="noprint">
+         <p><a href="start.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="start_start_server_mf_online_nci_ncf"></a></div> 
+         
+      <h2>Starting a Natural RPC Server in a Mainframe Online Environment
+             (Com-plete and CICS only)
+      </h2> 
+          
+          
+      <p>In a Com-plete or CICS environment, you have the following options to
+              start a Natural RPC server:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">You can use the same command as described above for all TP
+                      monitors.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">You can use the Natural program <code>STARTSRV</code> in library
+                      <code>SYSRPC</code> to start a Natural server in asynchronous mode.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">You can start a Natural RPC server in asynchronous mode during startup
+                      of your TP monitor.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <h4 class="floating-title">Starting a Natural RPC Server in Asynchronous Mode with
+              STARTSRV
+      </h4> 
+          
+      <p><code>STARTSRV</code> is a sample front-end for <code>RPCSSRV</code>
+              that starts the asynchronous Natural session.
+      </p> 
+          
+      <p>By default, the asynchronous Natural is started with the same Natural
+              name in the same library as the current session.
+      </p> 
+          
+      <p>If <a href="../nsc/nsc-over.htm">Natural Security
+                 Security</a> (NSC) is used, the user ID of the current Natural session
+              is propagated, too. You may adapt the input to your requirements.
+      </p> 
+          
+      <p>Note that some Natural profile parameters are implicitly added by
+              <code>RPCSSRV</code>. This applies especially to the keyword subparameter
+              <code>RPCSIZE</code> of profile
+              parameter <code>RPC</code> or parameter macro
+              <code>NTRPC</code>. <code>RPCSIZE</code>
+              defaults to <code>MAXBUFF+4</code>, where <code>MAXBUFF</code> is the value
+              entered in the map field <span class="selectable_label">Receiving buffer</span>. You may
+              overwrite the default value for <code>RPCSIZE</code> by entering
+              <code>RPC=(RPCSIZE=<var>n</var>)</code> in the map field
+              <span class="selectable_label">Session parameter</span>.
+      </p> 
+          
+      <p>If you want to execute a Natural program during startup of the Natural
+              session, you may use the map field <span class="selectable_label">User Stack</span>. The content
+              of <span class="selectable_label">User Stack</span> is put on the Natural <code>STACK</code> and
+              executed before the Natural server is activated. 
+      </p> 
+          
+      <p>To show the Natural profile parameters involved, enter
+              <code>*SHOW*</code> in the <span class="selectable_label">Transaction ID</span> field.
+              <code>STARTSRV</code> will show you all dynamic profile parameters that will be
+              used by <code>RPCSSRV</code> to start the asynchronous Natural session.
+      </p> 
+          
+      <p>See also <a href="start.htm#rpc-start-cics-note">Note
+            Concerning CICS</a> below.
+      </p> 
+          
+      <h4 class="floating-title">Starting a Natural RPC Server Session in Asynchronous Mode
+              during Startup of TP Monitor 
+      </h4> 
+          
+      <p>To start a Natural RPC server session in asynchronous mode during
+              startup of your TP monitor, proceed as follows:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <h4 class="floating-title">Under Com-plete:</h4> 
+                  
+            <p class="initem">Use the startup option (sysparms) <code>STARTUPPGM</code> to start a
+                      Natural session with all required RPC specific Natural profile parameters.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <h4 class="floating-title">Under CICS:</h4> 
+                  
+            <p class="initem">Use the <code>PLTPI</code> to start a program that uses <code>EXEC
+                  CICS START</code> to start a Natural session with all required RPC specific
+                      Natural profile parameters. You may adapt the sample <code>PLTPI</code> program
+                      <code>XNCIFRNP</code> that is provided in the Natural CICS source library.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>Please note that in both cases the Natural session is started under a
+              user ID that is assigned by the TP monitor: 
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">Under Com-plete, this user ID is the user ID under which Com-plete is
+                      started. 
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Under CICS, this user ID is the CICS default user ID (whose default is
+                      <code>CICSUSER</code>). 
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>In both cases, this user ID is assigned to the Natural system variables
+              <a href="../vari/natenv.htm#INIT_USER"><code>*INIT-USER</code></a>
+              and <a href="../vari/natenv.htm#USER"><code>*USER</code></a>. If
+              your Natural session is running under Natural Security, you may therefore have
+              to put a Natural <code>LOGON</code> command on the Natural
+              <code>STACK</code>. 
+      </p> 
+          
+      <div><a name="rpc-start-cics-note"></a></div>
+      <h4 class="floating-title">Note Concerning
+              CICS:
+      </h4> 
+          
+      <p>It is recommended to use the following settings of the Natural profile
+              parameters <code>TTYPE</code> and
+              <code>SENDER</code> when starting the asynchronous
+              Natural RPC server:
+      </p> 
+          <pre class="verbatim">TTYPE=ASYL,SENDER=CSSL</pre> 
+          <p>This will cause each output to the primary output destination to be
+              written in line mode rather than in 3270 mode. Instead of <code>CSSL</code>,
+              you may use any other CICS output destination.
+      </p> 
+          
+      <p>The use of <code>TTYPE=ASYL</code> requires that <code>NATBTCH</code> is
+              linked to your Natural nucleus.
+      </p> 
+         
+      <div class="noprint">
+         <p><a href="start.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="start_start_server_mf_batch"></a></div> 
+         
+      <h2>Starting a Batch Server in a Mainframe
+             Environment
+      </h2> 
+          
+      <p>A batch server is a standard Natural batch session that is started with
+              the RPC parameters described in the section <a href="setup.htm#setup">Setting Up a Natural RPC
+            Environment</a>,
+              <a href="setup.htm#setup_rpc_setup_srv_profparms">Set the RPC
+            Server-Specific Natural Parameters</a>.
+      </p> 
+          
+      <p>The following topics are covered below:</p>
+      <ul>
+         <li>
+            <p class="initem"><a href="start.htm#start_start_server_mf_batch_zos">Starting a Batch Server under z/OS</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="start.htm#start_start_server_mf_batch_zvse">Starting a Batch Server under z/VSE</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="start.htm#start_start_server_mf_batch_bs2k">Starting a Batch Server under BS2000/OSD</a></p>
+         </li>
+      </ul> 
+          
+      <p class="note"><strong>Note:</strong><br>For a sample JCL using the trace facility, refer to
+              <a href="oper.htm#oper">Operating a Natural RPC
+            Environment</a>,
+              <a href="oper.htm#oper_Using_the_Server_Trace_Facility">Using the
+            Server Trace Facility</a>.
+      </p>
+      <div><a name="start_start_server_mf_batch_zos"></a></div> 
+          
+      <h3>Starting a Batch Server under z/OS</h3> 
+           
+           
+      <h4 class="floating-title">Sample JCL for z/OS</h4> 
+           <pre class="verbatim">//NATRPC   JOB  CLASS=K,MSGCLASS=X 
+//         EXEC PGM=NATOS,REGION=8M
+//STEPLIB  DD   DISP=SHR,DSN=SAG.NAT.LOAD
+//         DD   DISP=SHR,DSN=SAG.EXX.LOAD
+//         DD   DISP=SHR,DSN=SAG.ADA.LOAD         &lt;== Note 1
+//         DD   DISP=SHR,DSN=DB2_load_library     &lt;== Note 2
+//         DD   DISP=SHR,DSN=SAG.SSX.LOAD         &lt;== Note 3
+//CMPRMIN  DD   * 
+IM=D,MADIO=0,MT=0,OBJIN=R,AUTO=OFF,MAXCL=0,ID=',',INTENS=1,
+RPC=(SERVER=ON,SRVNAME=<var>servername</var>,SRVNODE=<var>nodename</var>)
+RPC=(RPCSIZE=<var>m</var>,MAXBUFF=<var>n</var>),
+STACK=(LOGON <var>serverlibrary</var>,<var>userID</var>,<var>password</var>)
+/*
+//CEEOPTS  DD *                                   &lt;== Note 4
+POSIX(ON)
+/*
+//SYSUDUMP DD SYSOUT=X 
+//CMPRINT  DD SYSOUT=X 
+/*</pre> 
+           <p class="notes"><strong>Notes:</strong></p>
+      <ol class="note-list"> 
+               
+         <li>Applies only if the Adabas link routine <code>ADAUSER</code> or
+                   the Natural profile parameter <code>ADANAME</code> is used.
+         </li> 
+               
+         <li>Applies to DB2 users only.</li> 
+               
+         <li>Applies only if the Integrated Authentication Framework (IAF) is
+                   used.
+         </li> 
+               
+         <li>Applies only if SSL is used.</li> 
+              
+      </ol> 
+           
+      <h4 class="floating-title">Sample JCL for a Started Task</h4> 
+           
+      <p> A sample JCL for a started task is provided in the Natural for
+               mainframes <cite>Installation</cite> documentation, part
+               <cite>Installing Natural under z/OS</cite>,
+               <cite>Create
+                  Sample JCL for Natural RPC Server</cite>.
+      </p> 
+           
+      <h4 class="floating-title">Running a Batch Server with Replicas</h4> 
+           
+      <p> You can also run a batch server with replicas by setting the keyword
+               subparameter <code>NTASKS</code> of profile
+               parameter <code>RPC</code> or parameter macro
+               <code>NTRPC</code> to a value greater than 1. 
+      </p>
+           
+           
+      <p>Replicas are attached to a Natural main task as additional server
+               tasks. They enable you to start several identical servers in the same
+               region.
+      </p> 
+          
+      <div><a name="start_start_server_mf_batch_zvse"></a></div> 
+          
+      <h3>Starting a Batch Server under z/VSE</h3> 
+           
+           
+      <h4 class="floating-title">Sample JCL for z/VSE</h4> 
+           <pre class="verbatim">// LIBDEF PHASE,SEARCH=(SAGLIB.NAT<var>vrs</var>,SAGLIB.EXX<var>vrs</var>,SAGLIB.ADA<var>vrs</var>),TEMP
+// ASSGN SYS000,READER
+// ASSGN SYSLST,FEE
+// EXEC NATVSE,SIZE=AUTO,PARM='SYSRDR'
+IM=D,MADIO=0,MT=0,OBJIN=R,AUTO=OFF,MAXCL=0,ID=',',INTENS=1,
+RPC=(SERVER=ON,SRVNAME=<var>servername</var>,SRVNODE=<var>nodename</var>)
+RPC=(RPCSIZE=<var>m</var>,MAXBUFF=<var>n</var>),
+STACK=(LOGON <var>serverlibrary</var>,<var>userID</var>,<var>password</var>)
+/*</pre> 
+           <h4 class="floating-title">Running a Batch Server with Replicas</h4> 
+           
+      <p> You can also run a batch server with replicas by setting the keyword
+               subparameter <code>NTASKS</code> of profile
+               parameter <code>RPC</code> or parameter macro
+               <code>NTRPC</code> to a value greater than 1. 
+      </p>
+           
+           
+      <p>Replicas are attached to a Natural main task as additional server
+               tasks. They enable you to start several identical servers in the same
+               region.
+      </p> 
+          
+      <div><a name="start_start_server_mf_batch_bs2k"></a></div> 
+          
+      <h3>Starting a Batch Server under BS2000/OSD</h3> 
+           
+           
+      <h4 class="floating-title">Sample JCL for BS2000/OSD</h4> 
+           <pre class="verbatim">/.NATRPC      LOGON
+/             SYSFILE   SYSOUT=<var>output-file</var>
+/             SYSFILE   SYSDTA=(SYSCMD)
+/             SYSFILE   SYSIPT=(SYSCMD)
+/             STEP
+/             SETSW      ON=2
+/             EXEC NATBS2
+IM=D,MADIO=0,MT=0,OBJIN=R,AUTO=OFF,MAXCL=0,ID=',',INTENS=1,
+RPC=(SERVER=ON,SRVNAME=<var>servername</var>,SRVNODE=<var>nodename</var>)
+RPC=(RPCSIZE=<var>m</var>,MAXBUFF=<var>n</var>),
+STACK=(LOGON <var>serverlibrary</var>,<var>userID</var>,<var>password</var>)
+/             EOF</pre> 
+          <div class="noprint">
+         <p><a href="start.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="start_start_server_win"></a></div> 
+         
+      <h2>Starting a Natural RPC Server in a Windows Environment</h2> 
+          
+          
+      <p>To start a Natural RPC server under Windows, proceed as follows:</p> 
+          
+      <ol> 
+              
+         <li> 
+                  
+            <p class="initem">Create a shortcut for Natural.</p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Enter the shortcut properties.</p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Create a Natural parameter file (see
+                      <a href="../config/cfg-invokenat.htm#cfg-invokenat">Invoking Natural with
+                  an Alternative Parameter File</a>) with the
+                      <a href="setup.htm#setup_rpc_setup_srv_profparms">RPC
+                  server parameters</a> set.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">In the <strong>Target</strong> text box, edit the
+                      Natural path and append:
+            </p> 
+                 
+         </li> 
+             
+      </ol> 
+          <pre class="verbatim">parm=<var>serverparm</var> batch</pre> 
+          <p>where <var>serverparm</var> is the name of the parameter
+              file,
+      </p> 
+          
+      <p>or</p> 
+          <pre class="verbatim">server=on,srvname=<var>servername</var>,srvnode=<var>nodename</var>,maxbuff=<var>n</var> batch</pre> 
+         <div class="noprint">
+         <p><a href="start.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="start_start_server_ux"></a></div> 
+         
+      <h2>Starting a Natural RPC Server in a UNIX Environment</h2> 
+          
+          
+      <p>To start a Natural RPC server under UNIX, enter the following
+              command:
+      </p> 
+          <pre class="verbatim">natural parm=<var>serverparm</var> &gt;/dev/null &lt;/dev/null &amp;</pre> 
+          <p>where <code><var>serverparm</var></code> is the name of
+              the parameter file,
+      </p> 
+          
+      <p>or</p> 
+          <pre class="verbatim">natural server=on,srvname=<var>servername</var>,srvnode=<var>nodename</var>,maxbuff=<var>n</var> &gt;/dev/null &lt;/dev/null &amp;</pre> 
+         <div class="noprint">
+         <p><a href="start.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="start_start_server_ov"></a></div> 
+         
+      <h2>Starting a Natural RPC Server in an OpenVMS Environment</h2> 
+          
+          
+      <p>To start a Natural RPC server under OpenVMS, enter the following
+              commands in the DCL command procedure
+              <code><var>myserver</var>.com</code>: 
+      </p> 
+          <pre class="verbatim">$ DEFINE NATOUTPUT NLA0:
+$ NAT parm=<var>serverparm</var></pre> 
+          <p>Then submit <code><var>myserver</var>.com</code> to a
+              batch queue:
+      </p> 
+          <pre class="verbatim">$ SUBMIT <var>myserver</var>.com</pre> 
+         <div class="noprint">
+         <p><a href="start.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="start_Considerations_for_Natural_RPC_Servers_with_Replicates"></a></div> 
+         
+      <h2>Considerations for Mainframe Natural RPC Servers with
+             Replicas
+      </h2> 
+          
+      <p>This section applies to mainframe Natural servers under z/OS and
+              z/VSE.
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem"><a href="start.htm#start_rpc_batch_srv">Natural RPC Batch Server with
+                         <code>NTASKS &gt;1</code></a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"><a href="start.htm#start_rpc_batch_srv_replic">Running a Batch Server
+                         with Replicas</a></p> 
+                 
+         </li> 
+             
+      </ul>
+      <div><a name="start_rpc_batch_srv"></a></div> 
+          
+      <h3>Natural RPC Batch Server with NTASKS &gt;1</h3> 
+           
+           
+      <p>The main task and all replicas run in the same z/OS region or z/VSE
+               partition.
+      </p> 
+           
+      <ol> 
+               
+         <li> 
+                   
+            <p class="initem">Use the reentrant batch link routine <code>ADALNKR</code> instead of
+                       <code>ADALNK</code>.
+            </p> 
+                   
+            <p class="initem"> If you want to use <code>ADAUSER</code>, you must not link
+                       <code>ADAUSER</code> with your front-end, because <code>ADAUSER</code> is
+                       non-reentrant (see Item 5). Instead, use the Natural profile parameter
+                       <code>ADANAME</code> and set
+                       <code>ADANAME=ADAUSER</code>. This will cause Natural to load
+                       <code>ADAUSER</code> dynamically at runtime.
+            </p> 
+                   
+            <p class="initem"><strong>Note for z/VSE:</strong> If you use
+                       <code>ADAUSER</code>, you must rename <code>ADALNKR</code> to
+                       <code>ADALNK</code>. 
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">In the <code>NATPARM</code> module: 
+            </p> 
+                   
+            <ul style="margin-top: 0px; margin-bottom: 0px;"> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem">Set the keyword subparameter
+                               <code>NTASKS=<var>n</var></code>
+                               of profile parameter <code>RPC</code> or parameter macro
+                               <code>NTRPC</code>, where
+                               <code><var>n</var></code> is the number of parallel servers
+                               (&lt; 100) to be started, including the main task.
+                  </p> 
+                           
+                  <p class="initem"> <strong>Note for z/VSE:</strong> The number of
+                               subtasks is restricted by the operating system. Ask your system
+                               administrator.
+                  </p> 
+                          
+               </li> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem">Use the Natural profile parameter <a href="../parms/etid.htm"><code>ETID</code></a> to specify the
+                               Adabas user identification as a blank character. This is necessary to prevent a
+                               NAT3048 error (ETID not unique in Adabas nucleus) when the subtask is
+                               started.
+                  </p> 
+                          
+               </li> 
+                      
+            </ul> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">When using dynamic Natural profile parameters:</p> 
+                   
+            <p class="initem"> Use the dynamic parameter dataset
+                       <code>CMPRMIN</code>
+                       to pass the dynamic Natural profile parameters to Natural. Do <em>not</em> use
+                       the <code>PARM</code> card or the primary command input dataset
+                       <code>CMSYNIN</code>.
+            </p>
+                   
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">When using a local buffer pool (z/OS only):</p> 
+                   
+            <p class="initem"> Each subtask allocates its own local buffer pool unless you specify
+                       a shared local buffer pool. See the parameter
+                       <code>LBPNAME</code>
+                       in the section
+                       <cite>Natural
+                          z/OS Generation Parameters</cite> (in the Natural
+                       <cite>Operations</cite> documentation).
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">In the Natural front-end link job (z/OS only):</p> 
+                   
+            <p class="initem"> Link the front-end reentrant by using the <code>RENT</code> option
+                       of the linkage editor.
+            </p> 
+                   
+            <p class="initem"> If the front-end were not linked with the <code>RENT</code> option,
+                       only the main task would start the communication with the EntireX Broker. All
+                       subtasks would be set to a <code>WAIT</code> status by z/OS, until the main
+                       task would have been terminated. If you would terminate the RPC server lateron,
+                       the address space would hang and would have to be cancelled.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Make sure that any other modules that are additionally linked to the
+                       Natural nucleus are reentrant. Any dynamically loaded programs must also be
+                       reentrant.
+            </p> 
+                   
+            <p class="initem"> <strong>Note for z/OS:</strong> If you cannot make a
+                       module reentrant, link the module as non-reusable; this means, you should
+                       <em>not</em> specify the link option <code>RENT</code> or <code>REUS</code>.
+                       This is to ensure that each subtask will get its own copy.
+            </p> 
+                  
+         </li> 
+              
+      </ol> 
+          
+      <div><a name="start_rpc_batch_srv_replic"></a></div> 
+          
+      <h3>Running a Batch Server with Replicas</h3> 
+           
+           
+      <p>For a sample JCL, see
+               <a href="oper.htm#oper_Using_the_Server_Trace_Facility">Using the
+            Server Trace Facility</a>.
+      </p> 
+          
+      <div class="noprint">
+         <p><a href="start.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="start_server_start_via_front_end"></a></div>
+         
+         
+      <h2>Starting a Natural RPC Server Using the RPC Server Front-End (z/OS
+             Batch Mode only)
+      </h2> 
+          
+          
+      <p>In z/OS batch
+              mode, a Natural RPC server may alternatively be started using the
+              RPC server front-end. This approach is required with
+              <a href="securi.htm#securi_rpc_impersonation_zos">impersonation</a> and
+              is optional in other cases.
+      </p> 
+          
+      <p>If you use the RPC server front-end without impersonation, you are
+              recommended to set the keyword subparameter
+              <code>NTASKS</code> of profile
+              parameter <code>RPC</code> or parameter macro
+              <code>NTRPC</code> to a value greater than 1.
+              Otherwise, there will be no benefit. The
+              <a href="start.htm#start_Considerations_for_Natural_RPC_Servers_with_Replicates">Considerations
+            for Mainframe Natural RPC Servers with Replicas</a> apply also
+              when you are using the RPC server front-end.
+      </p> 
+          
+      <p>The RPC server front-end uses the Natural Server functionality; see
+              <cite>Natural as a Server
+                 under z/OS</cite> (in the Natural <cite>Operations</cite>
+              documentation). It is characterized by the following features:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">The Natural RPC server front-end starts a number of Natural RPC server
+                      sessions as specified by the keyword subparameter
+                      <code>NTASKS</code> of profile
+                      parameter <code>RPC</code> or parameter macro
+                      <code>NTRPC</code>.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">All Natural RPC server sessions run with the same Natural profile
+                      parameter settings.
+            </p> 
+                  
+            <p class="initem"> The Natural profile parameter settings are taken from the Natural
+                      parameter module <code>NATPARM</code> and the dynamic
+                      parameter dataset
+                      <code>CMPRMIN</code>
+                      (if available). The parameter <code>PARM=</code> of the JCL statement
+                      <code>EXEC</code> is not used to provide Natural profile parameters.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">If all Natural RPC server sessions are currently in use by clients
+                      (executing a client request or waiting for the next request within a
+                      conversation) and if the keyword subparameter
+                      <code>NTASKS</code> of profile
+                      parameter <code>RPC</code> or parameter macro
+                      <code>NTRPC</code> is set to a value greater than
+                      one, auxiliary Natural RPC server sessions are started. These Natural RPC
+                      server sessions are automatically terminated on the first EntireX Broker
+                      timeout, provided that there is at least one other Natural RPC server session
+                      not in use by a client. If all other Natural RPC server sessions are being used
+                      by clients, the auxiliary RPC server session will stay up until the next
+                      EntireX Broker timeout. This makes sure that there is always a Natural RPC
+                      server available to process a new client request.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">The Natural RPC server sessions are executed in a thread environment
+                      that is similar to Natural sessions executing in a TP monitor system.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">All inactive Natural RPC server sessions (sessions that wait for a
+                      client request) are rolled out to the
+                      Natural Roll
+                      Server.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"><strong>With impersonation:</strong><br>
+                      At the end of a non-conversational <code>CALLNAT</code> and at the end
+                      of a conversation, all database sessions and all work files are closed. This
+                      ensures that the next client request will open the database and the work files
+                      with its own user ID.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"><strong>Without impersonation:</strong><br>
+                      After the first EntireX Broker timeout, all database sessions and all
+                      work files are closed. This ensures that no resources are blocked during wait
+                      times.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <div><a name="startup-parms-zos"></a></div>
+      <h4 class="floating-title">Startup Parameters:</h4>
+          
+          
+      <p>The required startup parameters are passed in the
+              <code>PARM=</code> parameter of the <code>EXEC</code> statement in
+              the JCL. These parameters are:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">The name of the Natural z/OS batch nucleus.</p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">The size of a storage thread.</p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">The number of storage threads to be allocated.</p> 
+                  
+            <p class="initem"> The number of storage threads determines the number of Natural RPC
+                      server sessions that can be concurrently executed and should not be smaller
+                      than the value of the keyword subparameter
+                      <code>NTASKS=<var>n</var></code>
+                      of profile parameter <code>RPC</code> or parameter macro
+                      <code>NTRPC</code>.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">The optional keyword <code>UCTRAN</code>.
+            </p> 
+                  
+            <p class="initem"><code>UCTRAN</code> indicates that all messages of the RPC Server
+                      front-end are translated into upper case. 
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>These parameters must be separated by commas and must be entered without
+              leading or trailing blanks:
+      </p> 
+           
+           
+      <table border="0" class="syntax" cellpadding="3"> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td>PARM='<var>Natural-z/OS-batch-nucleus,size-of-thread,number-of-threads</var>[,<var>UCTRAN</var>]'
+               </td>
+                       
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>See also the <a href="start.htm#start_jcl_exa">Sample
+            JCL</a> below.
+      </p> 
+          
+      <h4 class="floating-title">Execution Notes:</h4> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">The Natural Roll
+                      Server is required.
+            </p> 
+                  
+            <p class="initem"> You must
+                      start a
+                      Natural Roll Server for the used
+                      <code><var>subsystem-id</var></code>
+                      (as defined by Natural profile parameter
+                      <code>SUBSID</code>) before the
+                      Natural RPC server front-end is started.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">The job name, or the name of the started task, is used as high level
+                      qualifier for all Natural sessions rolled out to the roll file.
+            </p> 
+                  
+            <p class="initem"> It is strongly recommended not to start more than one Natural RPC
+                      server front-end with the same job name, or with the same started task, and the
+                      same <code><var>subsystem-id</var></code>.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">The Natural z/OS batch nucleus is dynamically loaded.</p> 
+                  
+            <p class="initem"> The load library containing the z/OS batch nucleus must be available
+                      in the steplib concatenation.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">The EntireX Broker stub <code>NATETB23</code> must <em>not</em> be
+                      used.
+            </p> 
+                  
+            <p class="initem"> The EntireX Broker is accessed
+                      <code><var>outside</var></code> the Natural context. Therefore
+                      you must use the EntireX Broker stub <code>BKIMBTSO</code>.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p><strong>With impersonation only:</strong><br>
+              When the <a href="intro_rpc.htm#intro_rpc_rpc_terms_impersonation">impersonation</a> feature
+              is used, the RPC server front end must be executed from an Authorized Program
+              Facility (APF) library. You
+              are recommended to execute the RPC server front-end from an APF-authorized
+              <code>LINKLIST</code> library. This eliminates the need of providing the whole
+              steplib concatenation APF authorized.
+      </p> 
+          
+      <p><strong>With Natural Security only:</strong><br>
+              If the Natural RPC server front-end is started with profile parameter
+              <a href="../parms/auto.htm"><code>AUTO</code></a><code>=OFF</code>, you must
+              provide a Natural <a href="../syscom/logon.htm"><code>LOGON</code></a> command
+              with library ID, user ID and password on the Natural stack: <code>STACK=(LOGON
+            <var>library-id;user-id;password</var>)</code>.
+      </p> 
+          
+      <h4 class="floating-title"><a name="start_jcl_exa"></a>Sample
+              JCL:
+      </h4> 
+          <pre class="verbatim">//NATRPC   JOB  CLASS=K,MSGCLASS=X 
+//         EXEC PGM=<var>RPC-FRONT</var>,REGION=8M
+//         PARM='<var>Natural-z/OS-interface-module</var>,1000,5'
+//STEPLIB  DD   DISP=SHR,DSN=SAG.NAT.LOAD
+//         DD   DISP=SHR,DSN=SAG.EXX.LOAD
+//         DD   DISP=SHR,DSN=SAG.ADA.LOAD         &lt;== Note 1
+//         DD   DISP=SHR,DSN=DB2_load_library     &lt;== Note 2
+//         DD   DISP=SHR,DSN=SAG.SSX.LOAD         &lt;== Note 3
+//CMPRMIN  DD   * 
+IM=D,MADIO=0,MT=0,OBJIN=R,AUTO=OFF,MAXCL=0,ID=',',INTENS=1,
+PRINT=((10),AM=STD)
+RPC=(SERVER=ON,SRVNAME=<var>servername</var>,SRVNODE=<var>nodename</var>,NTASKS=3)
+RPC=(RPCSIZE=<var>m</var>,MAXBUFF=<var>n</var>,TRACE=2),
+RCA=BROKER,RCALIAS=(BROKER,BKIMBTSO)
+STACK=(LOGON <var>serverlibrary</var>,<var>userID</var>,<var>password</var>)
+/*
+//CEEOPTS  DD *                                   &lt;== Note 4
+POSIX(ON)
+*
+//SYSUDUMP DD SYSOUT=X 
+//CMPRT10  DD SYSOUT=X 
+//CMPRT101 DD SYSOUT=X 
+//CMPRT102 DD SYSOUT=X 
+//CMPRT199 DD SYSOUT=X 
+//CMPRINT  DD SYSOUT=X 
+//CMPRINT1 DD SYSOUT=X 
+//CMPRINT2 DD SYSOUT=X 
+//CMPRIN99 DD SYSOUT=X 
+/*</pre> 
+          <h4 class="floating-title">Notes:</h4> 
+          
+      <ol> 
+              
+         <li> 
+                  
+            <p class="initem">Applies only if the Adabas link routine <code>ADAUSER</code> or the
+                      Natural profile parameter <code>ADANAME</code> is used.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Applies to DB2 users only.</p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Applies only if the Integrated Authentication Framework (IAF) is
+                      used.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Applies only if SSL is used.</p> 
+                 
+         </li> 
+             
+      </ol> 
+         
+      <div class="noprint">
+         <p><a href="start.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="start_server_start_via_front_end_cics"></a></div> 
+         
+      <h2>Starting a Natural RPC Server Using the RPC Server Front-End (CICS
+             only)
+      </h2> 
+          
+          
+      <p>In CICS, a Natural RPC server may alternatively be started using the RPC
+              server front-end. This approach is required when impersonation is used and is
+              optional in other cases.
+      </p> 
+          
+      <p>If you use the RPC server front-end without impersonation, you are
+              recommended to set the keyword subparameter
+              <code>NTASKS</code> of profile
+              parameter <code>RPC</code> or parameter macro
+              <code>NTRPC</code> to a value greater than 1.
+              Otherwise, there will be no benefit.
+      </p> 
+          
+      <p>The RPC server front-end uses the Natural Server functionality. It is
+              characterized by the following features:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">The Natural RPC server front-end is started via the transaction ID
+                      defined in the <cite>Customize CICS</cite> step for the Natural RPC
+                      server front-end;
+            </p> 
+                  
+            <p class="initem"> see <cite>Installing
+                         the Natural CICS Interface</cite>,
+                      <cite>Customize
+                         CICS</cite>.
+            </p> 
+                  
+            <p class="initem"> The transaction ID may either be entered at a terminal or you may use
+                      the Natural program <code>STARTSFE</code> in library <code>SYSRPC</code> to
+                      start the Natural RPC server front-end in asynchronous mode.
+            </p> 
+                  
+            <p class="initem"> The Natural RPC server front-end requires the name of the Natural
+                      CICS interface nucleus as startup parameter. This startup parameter is passed
+                      with the transaction ID.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">The Natural RPC server front-end starts a number of Natural RPC server
+                      sessions as specified by the keyword subparameter
+                      <code>NTASKS</code> of profile
+                      parameter <code>RPC</code> or parameter macro
+                      <code>NTRPC</code>.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">All Natural RPC server sessions run with the same Natural profile
+                      parameter settings.
+            </p> 
+                  
+            <p class="initem"> The Natural profile parameter settings are taken from the Natural
+                      parameter module <code>NATPARM</code> and the dynamic
+                      parameter dataset
+                      <code>CMPRMIN</code>
+                      (if available) and may be overwritten by dynamically specified profile
+                      parameters that are passed with the transaction ID. The dynamically specified
+                      profile parameters must follow the startup parameter.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">If all Natural RPC server sessions are currently in use by clients
+                      (executing a client request or waiting for the next request within a
+                      conversation) and if the keyword subparameter
+                      <code>NTASKS</code> of profile
+                      parameter <code>RPC</code> or parameter macro
+                      <code>NTRPC</code> is set to a value greater than
+                      one, auxiliary Natural RPC server sessions are started. These Natural RPC
+                      server sessions are automatically terminated on the first EntireX Broker
+                      timeout, provided that there is at least one other Natural RPC server session
+                      not in use by a client. If all other Natural RPC server sessions are being used
+                      by clients, the auxiliary RPC server session will stay up until the next
+                      EntireX Broker timeout. This will ensure that there is always a Natural RPC
+                      server available to process a new client request.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">The Natural RPC server sessions are executed in a thread environment
+                      that is similar to Natural sessions executing in a TP monitor system.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">All inactive Natural RPC server sessions (sessions that wait for a
+                      client request) are rolled out to the
+                      Natural Roll
+                      Server.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <h4 class="floating-title">With impersonation:</h4> 
+                  
+            <p class="initem">At the start of a non-conversational <code>CALLNAT</code> and at the
+                      start of a conversation, a new CICS worker task is started under the user ID of
+                      the client by using the <code>USERID()</code> option of the <code>EXEC CICS
+                  START TRANSID()</code> command. The client request is executed by Natural in
+                      this worker task. While the client request is executed, the Natural RPC server
+                      session waits for the worker task to finish.
+            </p> 
+                  
+            <p class="initem"> At the end of a non-conversational <code>CALLNAT</code> and at the
+                      end of a conversation, the worker task is terminated and all databases are
+                      closed and all CICS resources are freed. This ensures that the next client
+                      request will open the database and access the CICS resources with its own user
+                      ID.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <h4 class="floating-title">Without impersonation:</h4> 
+                  
+            <p class="initem">The client request is executed by the Natural RPC server session
+                      itself.
+            </p> 
+                  
+            <p class="initem"> After the first EntireX Broker timeout, all databases are closed and
+                      all CICS resources are freed. This will ensure that no resources are blocked
+                      during wait times.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <div><a name="startup-parms-cics"></a></div>
+      <h4 class="floating-title">Startup
+              Parameters:
+      </h4> 
+          
+      <p>The required startup parameters are passed with the transaction ID.
+              These parameters are: 
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">The name of the Natural CICS interface nucleus
+                      <var>&lt;ncistart&gt;</var>.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">The optional keyword <code>UCTRAN</code>.
+            </p> 
+                  
+            <p class="initem"><code>UCTRAN</code> indicates that all messages of the RPC Server
+                      front-end are translated into upper case.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">An optional Natural profile parameter string.</p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <div><a name="start_cics_exa"></a></div>
+      <h4 class="floating-title">Sample Start at a
+              Terminal:
+      </h4> 
+          <pre class="verbatim"><var>&lt;natural&gt; &lt;ncistart&gt;</var>[,<var>UCTRAN</var>]
+RPC=(SERVER=ON,SRVNAME=<var>servername</var>,SRVNODE=<var>nodename</var>,RPCSIZE=<var>n</var>, MAXBUFF=<var>n</var>)
+RCA=BROKER,RCALIAS=(BROKER,CICSETB)</pre> 
+          <p>Where <code><var> &lt;natural&gt;</var></code> is the
+              transaction ID with which you start your Natural RPC server front-end and
+              <code><var> &lt;ncistart&gt;</var></code> is the name of your
+              Natural CICS interface nucleus.
+      </p> 
+          
+      <h4 class="floating-title">Execution Notes:</h4> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">The Natural Roll
+                      Server is required if the
+                      <code>NCMDIR</code>
+                      parameter <code>ROLLSRV</code> is
+                      set to <code>YES</code>.
+            </p> 
+                  
+            <p class="initem"> You must start a Natural Roll Server for the used subsystem-id (as
+                      defined by Natural profile parameter
+                      <code>SUBSID</code>) before the
+                      Natural RPC server front-end is started.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">The transaction ID of the RPC server front-end is used to identify the
+                      RPC server environment.
+            </p> 
+                  
+            <p class="initem"> Do not to start more than one Natural RPC server front-end with the
+                      same transaction ID.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">The executable NCI module is dynamically loaded.</p> 
+                  
+            <p class="initem"> The load library containing the executable NCI module must be
+                      available in the <code>DFHRPL</code> concatenation.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">The EntireX Broker stub <code>NATETB23</code> must not be used.
+            </p> 
+                  
+            <p class="initem"> The EntireX Broker is accessed outside the Natural context.
+                      Therefore, you must use the EntireX Broker stub <code>CICSETB</code>.
+            </p> 
+                  
+            <p class="initem">Depending on the version of <code>CICSETB</code>, you cannot use the
+                      profile parameter <code>RCA</code>. In that case, you must link
+                      <code>CICSETB</code> to your Natural CICS interface nucleus instead.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p><strong>With impersonation only:</strong><br>
+              When the impersonation feature is used, the RPC server front-end starts
+              worker tasks. Ensure that the setting of the CICS configuration option
+              <code>MAXTASKS</code> of your CICS installation is high enough.
+      </p> 
+          
+      <p><strong>With Natural Security only:</strong><br>
+              If the Natural RPC server front-end is started with profile parameter
+              <a href="../parms/auto.htm"><code>AUTO</code></a><code>=OFF</code>,
+              you must provide a Natural <code>LOGON</code> command with
+              library ID, user ID and password on the Natural stack: <code>STACK=(LOGON
+            <var>library-id;user-id;password</var>)</code>.
+      </p> 
+         
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="start.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../rpc/start.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/rpc/start.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="rpc-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="setup.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="end.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

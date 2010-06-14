@@ -1,0 +1,526 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Installing and Setting Up Software AG Products on UNIX</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="inst-common"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../install/inst-common.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/install/inst-common.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="inst-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="inst-over.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="inst-prod.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Installation on UNIX&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+       
+       
+      <div class="nospytext">
+         <h1>Installing and Setting Up Software AG Products on UNIX
+              
+         </h1>
+      </div> 
+        
+      <p>This document contains general information which applies when installing
+            and setting up any Software AG product on a UNIX platform.
+            The following topics are covered:
+      </p>
+        
+      <ul>
+         <li>
+            <p class="initem"><a href="inst-common.htm#inst-common-geninfo">General Information</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="inst-common.htm#inst-common-before">Before Installing Your Software AG Product</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="inst-common.htm#inst-common-cd">Installing the Contents of the Installation Medium to Disk</a></p>
+         </li>
+      </ul>
+      <hr>
+      <div><a name="inst-common-geninfo"></a></div> 
+        
+      <h2>General Information</h2>
+      <div><a name="inst-common-geninfo-package"></a></div> 
+         
+      <h3>Installation Package</h3> 
+          
+          
+      <p>The installation package containing Software AG products is provided on
+              an installation medium conforming to the ISO 9660 standard.
+      </p> 
+          
+      <p>The installation medium contains a complete directory structure which
+              clearly specifies product and platform.
+      </p> 
+         
+      <div><a name="inst-common-geninfo-env"></a></div> 
+         
+      <div><a name="sag_env"></a></div>
+      <h3>Software AG Environment</h3> 
+          
+          
+      <p>The following figure shows the general directory structure generated
+              during installation and the environment variables which reference the specified
+              directories:
+      </p> 
+          
+      <p><img src="graphics/ux-install-common-sagenv.png" alt="General directory structure" width="400" height="200"></p> 
+          
+      <p>The environment variable <code>$SAG</code> defines the
+              root directory for all Software AG products. It is recommended to define
+              <code>SAG=/opt/softwareag</code>.
+      </p> 
+          
+      <p>For each product, the variable
+              <code>$<var>prod</var>DIR</code> is set to the
+              path of the main directory of the product specified, where
+              <var>prod</var> is a three-letter product code in upper-case
+              letters. For example, all files for Natural, whose
+              product code is "NAT", are contained in the
+              directory <cite>$NATDIR</cite>.
+      </p> 
+          
+      <p>However, there are exceptions to this convention. For example, the
+              product code for Predict is
+              "PRD" but the environment variables use the prefix
+              "DIC" instead.
+      </p> 
+          
+      <p>The name of the main directory is usually the same as the product code
+              in lower-case letters. For example, the main directory for
+              Natural is named "nat".
+              
+      </p> 
+          
+      <p>Version-independent parts of the product, such as examples or data, are
+              stored in a subdirectory of the product main directory. For example, all
+              Adabas demonstration data is contained in the
+              directory <cite>$ADADIR/adademo</cite>. 
+      </p> 
+          
+      <p>Version-dependent components of the product are kept in the version
+              directory
+              <cite>$<var>&lt;prod&gt;</var>DIR/$<var>&lt;prod&gt;</var>VERS</cite>.
+              For example, the current version of Natural is
+              stored in the directory <cite>$NATDIR/$NATVERS</cite>.
+      </p> 
+          
+      <p>The environment variables
+              <code><var>prod</var>DIR</code> and
+              <code><var>prod</var>VERS</code> for all
+              products specified during installation are defined via the file
+              <cite>sagenv.new</cite>. The same applies for any other environment
+              variables needed for the various products.
+      </p> 
+         
+      <div class="noprint">
+         <p><a href="inst-common.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="inst-common-before"></a></div> 
+        
+      <h2>Before Installing Your Software AG Product</h2> 
+         
+      <p>It is recommended that you use <cite>/opt/softwareag</cite> as
+             one common root directory for all of your Software AG products. For Linux
+             systems, this location is the registered name with LANANA.
+      </p> 
+         
+      <p> The default search path for dependent libraries of some Software AG
+             products is <cite>/opt/softwareag</cite>. They are loaded from this
+             location or using the environment variable
+             <code>$LD_LIBRARY_PATH</code>
+             (<code>$SHLIB_PATH</code> on HP-UX systems). If you install the
+             product to a different location (for example, <cite>/usr/SAG</cite>
+             instead of <cite>/opt/softwareag</cite>), you may create a symbolic
+             link to your <cite>$SAG</cite> directory to get a valid default search
+             path: 
+      </p> 
+         <pre class="verbatim">su
+cd /opt
+ln -s $SAG softwareag</pre> 
+         <p>The following activities must be performed if you are installing a
+             Software AG product for the first time, or if your environment is not yet set
+             correctly due to any other causes.
+      </p> 
+         
+      <p>This section covers the following topics:</p>
+      <ul>
+         <li>
+            <p class="initem"><a href="inst-common.htm#inst-common-before-account">Creating the Administrator's Account and Group</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="inst-common.htm#inst-common-before-backup">Backing Up Your Current Product Version</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="inst-common.htm#inst-common-before-login">Logging in as User "sag"</a></p>
+         </li>
+      </ul> 
+        
+      <div><a name="inst-common-before-account"></a></div> 
+         
+      <h3>Creating the Administrator's Account and Group </h3> 
+          
+          
+      <p>You must create one administrator account and one group for all Software
+              AG products when you install your first Software AG product.
+      </p> 
+          
+      <ol> 
+              
+         <li> 
+                  
+            <p class="initem">Define an administrator account to which all of the Software AG
+                      products installed at your site belong. Since all environment definition files
+                      for the products are written in Bourne shell syntax, the Bourne (or Korn) shell
+                      is recommended as the login shell for the administrator account. This section
+                      assumes that the administrator account is called
+                      "sag". 
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Define a group to which the administrator belongs. This section
+                      assumes that this group is also called "sag". 
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Create a login directory for the user "sag"
+                      (for example, <cite>/opt/softwareag</cite>).
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Make sure that the group "sag" is defined
+                      in the system file <cite>/etc/group</cite> and the user
+                      "sag" is defined in the system file
+                      <cite>/etc/passwd</cite>.
+            </p> 
+                 
+         </li> 
+             
+      </ol> 
+          
+      <p class="note"><strong>Note:</strong><br>To perform these steps, use an appropriate system administration
+              tool. 
+      </p> 
+         
+      <div><a name="inst-common-before-backup"></a></div> 
+         
+      <h3>Backing Up Your Current Product Version</h3> 
+          
+          
+      <p>When upgrading a product, it is strongly recommended that you back up
+              your current product version. 
+      </p> 
+         
+      <div><a name="inst-common-before-login"></a></div> 
+         
+      <h3>Logging in as User "sag"</h3> 
+          
+          
+          
+      <p>This description assumes that the user "sag"
+              is the administrator for Software AG products. It is recommended to log in as
+              the user "sag".
+      </p> 
+         
+      <div class="noprint">
+         <p><a href="inst-common.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="inst-common-cd"></a></div> 
+        
+      <h2>Installing the Contents of the Installation Medium to Disk</h2> 
+         
+         
+      <p>Before performing the following steps, make sure that the administrator
+             user and group have been created and defined.
+      </p> 
+         
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To install the contents of the installation medium to disk</strong></p>
+      <ol class="steps">
+         <li> 
+                  
+                  
+            <p class="instep">Load the installation medium and mount it if this is not done
+                      automatically.
+            </p> 
+                   
+                   
+            <table border="1" class="color" cellpadding="3" width="80%">
+               <colgroup>
+                  <col width="27%">
+                  <col width="53%">
+               </colgroup> 
+                       
+               <thead align="left" valign="top"> 
+                           
+                  <tr> 
+                               
+                     <th>Command </th> 
+                               
+                     <th>Description</th> 
+                              
+                  </tr> 
+                          
+               </thead> 
+                       
+               <tbody align="left" valign="top"> 
+                           
+                  <tr> 
+                               
+                     <td><pre class="command-input">su - root</pre></td> 
+                               
+                     <td>To mount an installation medium you may need to
+                        be root. 
+                     </td> 
+                              
+                  </tr> 
+                           
+                  <tr> 
+                               
+                     <td><pre class="command-input">mkdir /<var>mount-dir</var></pre></td> 
+                               
+                     <td>You may need to create a mount directory for
+                        the installation medium. 
+                     </td> 
+                              
+                  </tr> 
+                           
+                  <tr> 
+                               
+                     <td><pre class="command-input">mount <var>platform-specific_mount_options</var> <var>device-name</var> /<var>mount-dir</var></pre></td> 
+                               
+                     <td>Execute the mount command (see the table below
+                        for operating system-specific mount commands). 
+                     </td> 
+                              
+                  </tr> 
+                           
+                  <tr> 
+                               
+                     <td><pre class="command-input">exit</pre></td> 
+                               
+                     <td>Return to "sag"
+                        user. 
+                     </td> 
+                              
+                  </tr> 
+                          
+               </tbody> 
+                      
+            </table> 
+                   
+                  
+            <p class="instep">Platform-specific mount command and options to mount the installation
+                      medium as ISO9660 or High-Sierra file system: 
+            </p> 
+                   
+                   
+            <table border="1" class="color" cellpadding="3" width="80%">
+               <colgroup>
+                  <col width="17%">
+                  <col width="63%">
+               </colgroup> 
+                       
+               <thead align="left" valign="top"> 
+                           
+                  <tr> 
+                               
+                     <th>Platform</th> 
+                               
+                     <th> Mount Command </th> 
+                              
+                  </tr> 
+                          
+               </thead> 
+                       
+               <tbody align="left" valign="top"> 
+                           
+                  <tr> 
+                               
+                     <td>AIX</td> 
+                               
+                     <td><pre class="command-input">/etc/mount -v-cdrfs -o ro <var>device-name</var> /<var>mount-dir</var></pre></td> 
+                              
+                  </tr> 
+                           
+                  <tr> 
+                               
+                     <td>HP-UX</td> 
+                               
+                     <td><pre class="command-input">/usr/sbin/mount -F cdfs -o cdcase <var>device-name</var> /<var>mount-dir</var></pre></td> 
+                              
+                  </tr> 
+                           
+                  <tr> 
+                               
+                     <td>Solaris</td> 
+                               
+                     <td> <pre class="command-input">/usr/sbin/mount -F hsfs -o ro <var>device-name</var> /<var>mount-dir</var></pre></td> 
+                              
+                  </tr> 
+                           
+                  <tr> 
+                               
+                     <td>Linux</td> 
+                               
+                     <td> <pre class="command-input">/bin/mount -t iso9660 -o ro <var>device-name</var> /<var>mount-dir</var></pre> </td> 
+                              
+                  </tr> 
+                          
+               </tbody> 
+                      
+            </table> 
+                   
+                  
+            <p class="note"><strong>Note:</strong><br>On Solaris, the volume management daemon <cite>vold</cite>
+                      might be active. This daemon mounts the installation medium
+                      automatically.
+            </p> 
+                  
+                  
+                  
+            <p class="instep">Example for Linux: </p><pre class="command-input">/bin/mount -t iso9660 -o ro /dev/cdrom /mnt</pre> 
+                </li>
+         <li><a name="inst-common-cdstructure"></a> 
+                  
+                  
+                  
+            <p class="instep">Check the directory structure of the UNIX part of the installation
+                      medium. When you run an <code>ls(1)</code> command on the
+                      installation medium, you will see a structure like the following:
+            </p> 
+                  
+            <p><img src="graphics/ux-install-common-cdrom.png" alt="Installation medium" width="400" height="400"></p> 
+                  
+            <p class="note"><strong>Note:</strong><br>Depending on the mount options used, the files will be all upper
+                      case or all lower case. If you mount the installation medium as a pure ISO 9660
+                      Interchange Level I CD, you will also see a version number
+                      ";1" appended to all files. Please note this for the
+                      following steps and use the correct name format. 
+            </p> 
+                  
+                
+         </li>
+         <li> 
+                  
+                  
+            <p class="instep">For Linux S/390, a single archive is provided for your convenience
+                      (for example, for Natural this is the file
+                      <cite>NATv<var>&lt;version&gt;</var>n.tgz</cite>). The
+                      following steps can be performed after you have loaded the installation medium
+                      on a Windows or UNIX machine that has a network connection to the Linux S/390
+                      system: 
+            </p> 
+                  
+            <ol> 
+                      
+               <li> 
+                          
+                  <p class="initem">Copy the archive file
+                              (<cite><var>&lt;file-name&gt;</var>.tgz</cite>) that is
+                              located in the root directory of the installation medium to a temporary area
+                              such as <cite>/tmp/cdrom</cite> in your Linux S/390 environment, using
+                              for example ftp in binary mode. 
+                  </p> 
+                         
+               </li> 
+                      
+               <li> 
+                          
+                  <p class="initem">Unpack the archive using the command <code>tar -xzvf
+                        <var>file-name</var>.tgz</code>.
+                  </p> 
+                         
+               </li> 
+                      
+               <li> 
+                          
+                  <p class="initem">Read the installation instructions for details on how to start the
+                              installation from this media in the file <cite>setup.txt</cite> in this
+                              directory. Instructions of how to proceed after installing the software will be
+                              displayed at the end of the installation and also copied onto your hard disk.
+                              
+                  </p> 
+                         
+               </li> 
+                     
+            </ol> 
+                  
+                
+         </li>
+         <li> 
+                  
+                  
+            <p class="instep">Please continue reading the step-by-step installation instructions for
+                      the Software AG product being installed.
+            </p> 
+                  
+                
+         </li>
+      </ol> 
+        
+      
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="inst-common.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../install/inst-common.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/install/inst-common.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="inst-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="inst-over.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="inst-prod.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

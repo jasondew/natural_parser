@@ -1,0 +1,1268 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Working with the Natural Web Interface</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="nwx_working"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../webtech/nwx_working.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/webtech/nwx_working.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="nwx-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="nwx_inter.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="nwx_adapt.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Web Technology&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+         
+      <div class="nospytext">
+         <h1>Working with the Natural Web Interface 
+                <a name="x23"></a> 
+                <a name="x24"></a></h1>
+      </div> 
+          
+          
+      <p>This section covers the following topics:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="nwx_working.htm#setting_up_your_environment">Setting up your Environment</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nwx_working.htm#building_subprograms">Building Subprograms in Natural</a></p>
+         </li>
+      </ul> 
+         
+      <hr> 
+         
+      <div><a name="setting_up_your_environment" id="27103"></a></div> 
+          
+      <h2>Setting up your Environment</h2> 
+          
+      <div><a name="d0e2291"></a></div> 
+           
+      <h3>Prerequisites on the Web Environment Side</h3> 
+            
+            
+      <p>The following software must be installed:</p> 
+            
+      <table border="0" cellpadding="3" margin-top="9pt">
+         <tbody valign="top">
+            <tr align="left"> 
+                       
+               <td class="titem"><strong>On the web client</strong></td> 
+                       
+               <td class="titem">Browser software, such as Mozilla Firefox or Microsoft Internet
+                           Explorer.
+               </td> 
+                      
+            </tr>
+            <tr align="left"> 
+                       
+               <td class="titem"><strong>On the web server</strong></td> 
+                       
+               <td class="titem">HTTP server software, such as Apache Server or Microsoft
+                           Internet Information Server.
+               </td> 
+                      
+            </tr>
+         </tbody>
+      </table> 
+            
+           
+          
+      <div><a name="d0e2326"></a></div> 
+           
+      <h3>Middleware Prerequisites</h3> 
+            
+            
+      <p>Different prerequisites must be met if communication is to be used by
+                RPC:
+      </p> 
+            
+      <table border="0" cellpadding="3" margin-top="9pt">
+         <tbody valign="top">
+            <tr align="left"> 
+                       
+               <td class="titem"><strong>RPC</strong></td> 
+                       
+               <td class="titem"> The broker of the Software AG product EntireX Communicator must
+                           be installed (for installation information, see the EntireX Communicator
+                           documentation). 
+               </td> 
+                      
+            </tr>
+         </tbody>
+      </table> 
+            
+      <p>The Natural Web Server Extensions part is needed for communication
+                between a web browser and a Natural RPC server.
+      </p> 
+            
+           
+          
+      <div><a name="d0e2354"></a></div> 
+           
+      <h3>Prerequisites on Natural Server Side</h3> 
+            
+            
+      <p>For Natural Web Interface
+                <strong>SYSWEB</strong> the following prerequisites must be
+                met:
+      </p> 
+            
+      <ul> 
+                
+         <li> 
+                    
+            <p class="initem">Current Natural Version must be installed.</p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="mini-list"> 
+                        The library SYSWEB.<br> 
+                        Either Natural steplibs must be available or the contents of
+                         the library SYSWEB must be copied to the library SYSTEM or to the user library
+                         that will be called by the RPC. 
+                       
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">The parameter data Area W3PARM.</p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">The Natural RPC stub or NaturalX.</p> 
+                   
+         </li> 
+               
+      </ul> 
+            
+      <p>For Natural Web Interface
+                <strong>SYSWEB3</strong> the following prerequisites must be
+                met:
+      </p> 
+            
+      <ul> 
+                
+         <li> 
+                    
+            <p class="initem">Current Natural Version must be installed.</p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="mini-list"> 
+                        The library SYSWEB3.<br> 
+                        Either Natural steplibs must be available or the contents of
+                         the library SYSWEB3 must be copied to the library SYSTEM or to the user library
+                         that will be called by the RPC. 
+                       
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">The parameter data Area W3PARM.</p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">The Natural RPC stub or NaturalX.</p> 
+                   
+         </li> 
+               
+      </ul> 
+            
+           
+         
+         
+      <div class="noprint">
+         <p><a href="nwx_working.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="building_subprograms" id="27104"></a></div> 
+          
+      <h2>Building Subprograms in Natural 
+              <a name="x25"></a> 
+              <a name="x26"></a></h2> 
+           
+           
+      <p>The following diagram illustrates how you can build a subprogram:</p> 
+           
+      <ol> 
+               
+         <li> 
+                   
+            <p class="initem">Using an HTML editor</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">You use an HTML editor to enter HTML and Natural code.</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Then convert it to Natural source.</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Finally move the generated program to Natural. (You code directly in
+                       Natural.)
+            </p> 
+                  
+         </li> 
+              
+      </ol> 
+           
+      <p>Each stage of the process is identified by a number; what happens at
+               these stages is explained below.
+      </p> 
+      <p><img src="graphics/nat_build_sub.png" alt="graphics/nat_build_sub.png"></p> 
+           
+      <ol> 
+               
+         <li> 
+                   
+            <ul style="margin-top: 0px; margin-bottom: 0px;"> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem">1a. Natural Code is written and stored in User Library.</p> 
+                           
+                  <p class="initem"> You write Natural code on the server side either by including HTML
+                               tags in the code or by calling pre-fabricated subprograms that generate HTML
+                               tags. Then you store it as a server program or use the subprogram WEB-WIZ to
+                               generate a default program. 
+                  </p> 
+                          
+               </li> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem">1b. Natural Code is entered as HTML. Continue with 2.</p> 
+                           
+                  <p class="initem"> You use an HTML editor to create HTML pages.</p> 
+                          
+               </li> 
+                      
+            </ul> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Program HTML2NAT generates Natural Sources out of HTML.</p> 
+                   
+            <p class="initem">You start the program HTML2NAT out of the library SYSWEB3 (or SYSWEB respectively) and let it convert your HTML
+                       pages created in step 1b. 
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Generated Natural Source is moved to the User Library.</p> 
+                  
+         </li> 
+              
+      </ol> 
+           
+          
+      <div><a name="before_you_write_subprograms" id="12352"></a></div> 
+           
+      <h3>Before You Write Your Subprograms</h3> 
+           
+      <div><a name="d0e2563"></a></div> 
+            
+      <h4>Keep the following things in mind:</h4> 
+             
+             
+      <ul> 
+                 
+         <li> 
+                     
+            <p class="initem">The returning HTML page is limited to the maximum data that can be
+                         transmitted. This maximum is determined by the return page variable.
+            </p> 
+                    
+         </li> 
+                 
+         <li> 
+                     
+            <p class="initem">You must initialize and end the access to the Natural server
+                         subroutines by calling the subroutines W3INIT and W3END in the library
+                         SYSWEB3 (or SYSWEB respectively).
+            </p> 
+                    
+         </li> 
+                 
+         <li> 
+                     
+            <p class="initem">Always use the parameter data areas W3PARM and W3CONST.</p> 
+                    
+         </li> 
+                 
+         <li> 
+                     
+            <p class="initem">Use the subprogram WEB-WIZ to generate a frame (default program)
+                         for your own program.
+            </p> 
+                    
+         </li> 
+                
+      </ul> 
+             
+            
+           
+          
+      <div><a name="alternatives_to_create_your_subprograms" id="12353"></a></div> 
+           
+      <h3>Ways to Create Your Subprograms</h3> 
+            
+            
+      <p>There are two basic alternatives. You can either start coding directly
+                in Natural or use an HTML editor.
+      </p> 
+            
+           
+      <div><a name="d0e2614"></a></div> 
+            
+      <h4>Alternative 1: Coding Directly In Natural</h4> 
+             
+             
+      <p>When coding directly in Natural again there are two alternatives:</p>
+             
+             
+      <ul> 
+                 
+         <li> 
+                     
+            <p class="initem">Entering calls to SYSWEB3 (or
+                         SYSWEB) subroutines (such as W3HTML or W3TEXT) for your return page in
+                         the program editor. See the programs in the library SYSWEB3 (or SYSWEB), which help you perform only basic system
+                         functions; this approach requires a good knowledge of the data type you are
+                         creating, for example HTML or XML; or
+            </p> 
+                    
+         </li> 
+                 
+         <li> 
+                     
+            <p class="initem">calling subprograms that generate HTML tags. See the library
+                         SYSWEB3 (or SYSWEB respectively); the programs in the library SYSWEB3 (or SYSWEB respectively) enable you to perform basic
+                         system functions and in addition, the programs in the library SYSWEB3 (or SYSWEB respectively) generate HTML tags; this
+                         approach requires less explicit HTML knowledge and you can still modify the
+                         programs you are calling.
+            </p> 
+                    
+         </li> 
+                
+      </ul> 
+             
+      <h4 class="floating-title">Example: Entering Calls to SYSWEB3 (or SYSWEB) Subroutines in the Program
+                 Editor
+      </h4> 
+             <pre class="verbatim">
+* 
+* Example <a href="nwx_examp-over_t31_0300.htm#W3END">E3END</a> 
+* 
+DEFINE DATA 
+PARAMETER USING W3PARM 
+LOCAL USING W3CONST 
+LOCAL 
+1 W3VALUE        (A250) 
+END-DEFINE 
+* --- ERROR HANDLING --- 
+ON ERROR 
+  PERFORM W3ERROR ##W3ERROR 
+  PERFORM W3END ##RPC 
+  ESCAPE ROUTINE 
+END-ERROR 
+* 
+* --- INITIALIZE W3 PROCESSING --- 
+PERFORM W3INIT ##RPC 
+* 
+* --- SET TYPE OF RETURN-PAGE --- 
+PERFORM W3CONTENT-TYPE 'text/html' 
+* --- WRITE THE DOCUMENT --- 
+PERFORM W3TEXT '&lt;HTML&gt;&lt;BODY&gt;&lt;H2&gt;Initialize&lt;/H2&gt;' 
+* 
+* --- END THE HTML PAGE --- 
+COMPRESS '&lt;HR&gt;generated:' *DATE *TIME ##HTTP_NEWLINE 
+         '&lt;/BODY&gt;&lt;/HTML&gt;' ##HTTP_END INTO W3VALUE 
+PERFORM W3TEXT W3VALUE 
+* 
+* --- END W3 PROCESSING --- 
+PERFORM W3END ##RPC 
+* 
+END
+</pre> 
+             <p> <strong>Example: Calling Subprograms that Generate
+                    HTML Tags</strong> 
+      </p> 
+             <pre class="verbatim">
+* 
+* Example <a href="nwx_examp-over_t31_0300.htm#H3IMAGE">E3IMAGE</a> 
+* 
+DEFINE DATA 
+PARAMETER USING W3PARM 
+LOCAL USING W3CONST 
+LOCAL 
+1 H3VALUE            (A250) 
+1 H3VALUE-MAX        (I004) 
+1 H3URL              (A250) 
+* 
+1 II                 (I001) 
+1 GIF                (A064) 
+END-DEFINE 
+* --- ERROR HANDLING --- 
+ON ERROR 
+  PERFORM W3ERROR ##W3ERROR 
+  PERFORM W3END ##RPC 
+  ESCAPE ROUTINE 
+END-ERROR 
+* 
+* --- INITIALIZE W3 PROCESSING --- 
+PERFORM W3INIT ##RPC 
+* 
+* --- Pathname of picture --- 
+PERFORM W3READ-ENVIRONMENT "PICTURES" ' ' H3VALUE H3VALUE-MAX 
+IF H3VALUE-MAX EQ 0 THEN 
+  GIF  := "/pictures" 
+ELSE 
+  GIF  := H3VALUE 
+END-IF 
+* 
+* --- START HTML API --- 
+PERFORM H3-OPEN-HTML 'HTML Api -Image' " " " " 
+* --- THE LEVEL 2 HEADER --- 
+PERFORM H3-HEADER 2 'Image' 
+* 
+PERFORM H3-RULE 0 
+* 
+PERFORM H3-HEADER 4 'left:' 
+* 
+COMPRESS GIF '/natw_sam.gif' INTO H3URL LEAVING NO 
+PERFORM H3-IMAGE H3URL 'NATweb left' 219 229 "L" 
+* 
+FOR II 1 TO 10 
+  PERFORM H3-LINE-BREAK 
+END-FOR 
+PERFORM H3-RULE 80 
+* 
+PERFORM H3-HEADER 4 'small right:' 
+* 
+COMPRESS GIF '/natw_sam.gif' INTO H3URL LEAVING NO 
+PERFORM H3-IMAGE H3URL 'NATweb small right' 100 100 'R' 
+* 
+FOR II 1 TO 5 
+  PERFORM H3-LINE-BREAK 
+END-FOR 
+* 
+PERFORM H3-RULE 0 
+* 
+PERFORM H3-TIME_DATE 
+* 
+* --- END HTML API --- 
+PERFORM H3-CLOSE-HTML 
+* --- END W3 PROCESSING --- 
+PERFORM W3END ##RPC 
+* 
+END
+</pre> 
+             
+            
+           <div><a name="using_an_html_editor" id="12355"></a></div> 
+            
+      <h4>Alternative 2: Using an HTML Editor</h4> 
+             
+             
+      <p>There are two alternatives:</p> 
+             
+      <ul> 
+                 
+         <li> 
+                     
+            <p class="initem">Creating static pages (you only enter HTML, which will be converted
+                         to a Natural subprogram)
+            </p> 
+                    
+         </li> 
+                 
+         <li> 
+                     
+            <p class="initem">Creating dynamic pages (you enter HTML plus Natural program
+                         code).
+            </p> 
+                    
+         </li> 
+                
+      </ul> 
+             
+      <p>You can, of course, also create pages that are partly dynamic, partly
+                 static.
+      </p> 
+             
+      <div><a name="Example:_Creating_Static_Pages" id="12356"></a></div>
+      <h4 class="floating-title">Example: Creating Static
+                 Pages
+      </h4> 
+             <pre class="verbatim">
+&lt;HTML&gt; 
+&lt;TITLE&gt;NATweb - Test&lt;/TITLE&gt; 
+&lt;BODY bgColor=d3d3d3 &gt; 
+&lt;BR&gt; 
+&lt;center&gt; 
+&lt;h2&gt; 
+This Natural subprogram was generated by a HTML page. 
+&lt;/h2&gt; 
+&lt;/CENTER&gt; 
+&lt;/BODY&gt;&lt;/HTML&gt;  
+</pre> 
+             <p>This Natural subprogram will be generated from the above HTML
+                 page:
+      </p> 
+             <pre class="verbatim">
+* ----- SUBPROGRAM generated out of file: 
+* ----- C:\static.htm 
+DEFINE DATA 
+PARAMETER USING W3PARM 
+LOCAL USING W3CONST 
+LOCAL 
+* ----- PRIVATE VARIABLES ----- 
+1 W3VALUE        (A250) 
+END-DEFINE 
+* 
+* ----- ERROR HANDLER ----- 
+ON ERROR 
+  PERFORM W3ERROR ##W3ERROR 
+  PERFORM W3END ##RPC 
+  ESCAPE ROUTINE 
+END-ERROR 
+* ----- INITIALISE HTTP API ----- 
+PERFORM W3INIT ##RPC 
+* ----- HEADER FOR SERVER ----- 
+PERFORM W3CONTENT-TYPE 'text/html' 
+* 
+PERFORM W3TEXTLINE '&lt;HTML&gt;' 
+PERFORM W3TEXTLINE '&lt;TITLE&gt;NATweb - Test&lt;/TITLE&gt;' 
+PERFORM W3TEXTLINE '&lt;BODY bgColor=d3d3d3 &gt;' 
+PERFORM W3TEXTLINE '&lt;BR&gt;' 
+PERFORM W3TEXTLINE '&lt;center&gt;' 
+PERFORM W3TEXTLINE '&lt;h2&gt;' 
+PERFORM W3TEXTLINE 'This Natural subprogram was generated by a HTML page.' 
+PERFORM W3TEXTLINE '&lt;/h2&gt;' 
+PERFORM W3TEXTLINE '&lt;/CENTER&gt;' 
+PERFORM W3TEXTLINE '&lt;/BODY&gt;&lt;/HTML&gt;' 
+* ----- END HTTP API ----- 
+PERFORM W3END ##RPC 
+* ----- END MAIN PROGRAM ----- 
+* 
+* ----- SUBROUTINES ----- 
+* 
+END 
+</pre> 
+             <p><a name="Example:_Creating_Dynamic_Pages" id="12357"></a>
+                 <strong>Example: Creating Dynamic Pages</strong> 
+      </p> 
+             <pre class="verbatim">
+<strong>&lt;Natural&gt;&lt;!--
+*
+* Read form Pers-View starting with value given by the
+* Parameter START
+*
+* Use HTML2NAT to generate a Natural Program
+*
+* 22.09.03
+*
+--&gt;&lt;/Natural&gt;</strong>
+&lt;! --- Variables to read the environment ---&gt;
+<strong>&lt;Natural data&gt;&lt;!--
+* ----- DATA -----
+1 H3VALUE        (A250)
+1 H3MAX            (I4)
+--&gt;&lt;/Natural&gt;</strong>
+&lt;! --- Head of the HTML page ---&gt;
+&lt;HTML&gt;
+&lt;TITLE&gt;Natural - Environment Test&lt;/TITLE&gt;
+&lt;BODY bgColor=d3d3d3 &gt;
+&lt;BR&gt;
+&lt;center&gt;
+&lt;h2&gt;
+This Natural subprogram was generated by a HTML page. The program had been
+precompiled out of a HTML page.
+&lt;br&gt;&lt;br&gt;
+&lt;/h2&gt;
+&lt;/center&gt;
+&lt;br&gt;
+&lt;hr&gt;
+&lt;! --- Subprogram to write the output to work file,
+       from where the server will read it --- &gt;
+<strong>&lt;Natural DATA&gt;&lt;!--
+1 #CONTENT (A1/1:48)
+1 REDEFINE #CONTENT
+  2 #PERSONNEL-NUMBER  (N8)
+  2 FILLER 1X
+  2 #NAME              (A20)
+  2 FILLER 1X
+  2 #FIRST-NAME        (A15)
+  2 FILLER 1X
+  2 #AGE               (N2)
+--&gt;&lt;/Natural&gt;</strong>
+<strong>&lt;Natural SUB&gt;&lt;!--
+* ----- Do the OUTPUT -----
+DEFINE SUBROUTINE WRITELINE
+  PERFORM W3TEXT "&lt;LI&gt;"
+*
+  #PERSONNEL-NUMBER:=PERSONNEL-NUMBER
+  #NAME:=NAME
+  #FIRST-NAME:=FIRST-NAME
+  #AGE:=AGE
+  PERFORM W3HTMLARRAY #CONTENT(*) 48
+*
+  PERFORM H3-LINE-BREAK
+END-SUBROUTINE
+--&gt;&lt;/Natural&gt;</strong>
+&lt;UL&gt;&lt;PRE&gt;
+&lt;! --- Parameter used for reading data from the DATABASE ---&gt;
+<strong>&lt;Natural DATA&gt;&lt;!--
+* ----- DATA -----
+1 #VALUE (A20)
+1 PERS-VIEW VIEW OF PERSONNEL
+  2 PERSONNEL-NUMBER
+  2 NAME
+  2 FIRST-NAME
+  2 AGE
+--&gt;&lt;/Natural&gt;</strong>
+&lt;! --- Main program to read the data ---&gt;
+<strong>&lt;Natural NOT&gt;
+&lt;LI&gt;Value1
+&lt;LI&gt;Value2
+&lt;LI&gt;...
+&lt;/Natural&gt;</strong>
+<strong>&lt;Natural&gt;&lt;!--
+* --- READ ENVIRONMENT ---
+PERFORM W3READ-ENVIRONMENT 'START' 'P' H3VALUE H3MAX
+IF H3MAX GT 0 THEN
+  #VALUE := H3VALUE
+ELSE
+  #VALUE := "A"
+END-IF
+*
+* ----- MAIN -----
+F. FIND (100) PERS-VIEW NAME &gt; #VALUE
+  IF NO
+    COMPRESS 'Sorry nothing found for:' #value '!' INTO H3VALUE
+    PERFORM W3HTMLLINE H3VALUE
+  END-NOREC
+  IF *NUMBER &gt; 0
+    PERFORM WRITELINE
+  END-IF
+END-FIND
+*
+IF *NUMBER(F.) &gt; 0
+  PERFORM H3-RULE 0
+*
+  COMPRESS 'well done for: ' #value '!' ##HTTP_END INTO H3VALUE
+  PERFORM W3HTMLLINE H3VALUE
+END-IF
+--&gt;&lt;/Natural&gt;</strong>
+&lt;/PRE&gt;&lt;/UL&gt;
+&lt;! --- The footer of the HTML page --- &gt;
+&lt;hr&gt;
+&lt;BR&gt;
+&lt;center&gt;
+&lt;A HREF="index.htm"&gt;back to Index&lt;/A&gt;
+This program has been generated.
+<strong>&lt;Natural&gt;&lt;!--
+PERFORM H3-TIME_DATE
+--&gt;&lt;/Natural&gt;</strong>
+&lt;/P&gt;
+&lt;/CENTER&gt;
+&lt;/BODY&gt;&lt;/HTML&gt;
+</pre> 
+             <p>This Natural subprogram will be generated from the above HTML
+                 page:
+      </p> 
+             <pre class="verbatim">
+* ----- SUBPROGRAM generated out of file:
+* ----- C:\doit.htm
+DEFINE DATA
+PARAMETER USING W3PARM
+LOCAL USING W3CONST
+LOCAL
+* ----- DATA -----
+1 H3VALUE        (A250)
+1 H3MAX            (I4)
+1 #CONTENT (A1/1:48)
+1 REDEFINE #CONTENT
+  2 #PERSONNEL-NUMBER  (N8)
+  2 FILLER 1X
+  2 #NAME              (A20)
+  2 FILLER 1X
+  2 #FIRST-NAME        (A15)
+  2 FILLER 1X
+  2 #AGE               (N2)
+* ----- DATA -----
+1 #VALUE (A20)
+1 PERS-VIEW VIEW OF PERSONNEL
+  2 PERSONNEL-NUMBER
+  2 NAME
+  2 FIRST-NAME
+  2 AGE
+* ----- PRIVATE VARIABLES -----
+1 W3VALUE        (A250)
+END-DEFINE
+*
+* ----- ERROR HANDLER -----
+ON ERROR
+  PERFORM W3ERROR ##W3ERROR
+  PERFORM W3END ##RPC
+  ESCAPE ROUTINE
+END-ERROR
+* ----- INITIALISE HTTP API -----
+PERFORM W3INIT ##RPC
+* ----- HEADER FOR SERVER -----
+PERFORM W3CONTENT-TYPE 'text/html'
+*
+* ----- MAIN PROGRAM -----
+*
+* Read form Pers-View starting with value given by the
+* Parameter START
+*
+* Use HTML2NAT to generate a Natural Program
+*
+* 22.09.2003
+*
+PERFORM W3TEXTLINE '&lt;! --- Variables to read the environment ---&gt;'
+PERFORM W3TEXTLINE '&lt;! --- Head of the HTML page ---&gt;'
+PERFORM W3TEXTLINE '&lt;HTML&gt;'
+PERFORM W3TEXTLINE '&lt;TITLE&gt;Natural - Environment Test&lt;/TITLE&gt;'
+PERFORM W3TEXTLINE '&lt;BODY bgColor=d3d3d3 &gt;'
+PERFORM W3TEXTLINE '&lt;BR&gt;'
+PERFORM W3TEXTLINE '&lt;center&gt;'
+PERFORM W3TEXTLINE '&lt;h2&gt;'
+PERFORM W3TEXTLINE 'This Natural subprogram was generated by a HTML page. Th'
+ -'e program had been'
+PERFORM W3TEXTLINE 'precompiled out of a HTML page.'
+PERFORM W3TEXTLINE '&lt;br&gt;&lt;br&gt;'
+PERFORM W3TEXTLINE '&lt;/h2&gt;'
+PERFORM W3TEXTLINE '&lt;/center&gt;'
+PERFORM W3TEXTLINE '&lt;br&gt;'
+PERFORM W3TEXTLINE '&lt;hr&gt;'
+PERFORM W3TEXTLINE '&lt;! --- Subprogram to write the output to work file'
+PERFORM W3TEXTLINE '       from where the server will read it --- &gt;'
+PERFORM W3TEXTLINE '&lt;PRE&gt;'
+PERFORM W3TEXTLINE '&lt;! --- Parameter used for reading data from the'
+ -' DATABASE ---&gt;'
+PERFORM W3TEXTLINE '&lt;! --- Main Program to read the data ---&gt;'
+* --- READ ENVIRONMENT ---
+PERFORM W3READ-ENVIRONMENT 'START' 'P' H3VALUE H3MAX
+IF H3MAX GT 0 THEN
+  #VALUE := H3VALUE
+ELSE
+  #VALUE := "A"
+END-IF
+*
+* ----- MAIN -----
+F. FIND (100) PERS-VIEW NAME &gt; #VALUE
+  IF NO
+    COMPRESS 'Sorry nothing found for:' #value '!' INTO H3VALUE
+    PERFORM W3HTMLLINE H3VALUE
+  END-NOREC
+  IF *NUMBER &gt; 0
+    PERFORM WRITELINE
+  END-IF
+END-FIND
+*
+IF *NUMBER(F.) &gt; 0
+  PERFORM H3-RULE 0
+*
+  COMPRESS 'well done for: ' #value '!' ##HTTP_END INTO H3VALUE
+  PERFORM W3HTMLLINE H3VALUE
+END-IF
+PERFORM W3TEXTLINE '&lt;/PRE&gt;'
+PERFORM W3TEXTLINE '&lt;! --- The footer of the HTML page --- &gt;'
+PERFORM W3TEXTLINE '&lt;hr&gt;'
+PERFORM W3TEXTLINE '&lt;BR&gt;'
+PERFORM W3TEXTLINE '&lt;center&gt;'
+PERFORM W3TEXTLINE '&lt;A HREF="index.htm"&gt;back to Index&lt;/A&gt;'
+PERFORM W3HTMLLINE 'This program has been generated.'
+PERFORM H3-TIME_DATE
+PERFORM W3TEXTLINE '&lt;/P&gt;'
+PERFORM W3TEXTLINE '&lt;/CENTER&gt;'
+PERFORM W3TEXTLINE '&lt;/BODY&gt;&lt;/HTML&gt;'
+* ----- END HTTP API -----
+PERFORM W3END ##RPC
+* ----- END MAIN PROGRAM -----
+*
+*
+* ----- SUBROUTINES -----
+* ----- Do the OUTPUT -----
+DEFINE SUBROUTINE WRITELINE
+  PERFORM W3TEXT "&lt;LI&gt;"
+*
+  #PERSONNEL-NUMBER:=PERSONNEL-NUMBER
+  #NAME:=NAME
+  #FIRST-NAME:=FIRST-NAME
+  #AGE:=AGE
+  PERFORM W3HTMLARRAY #CONTENT(*) 48
+*
+  PERFORM H3-LINE-BREAK
+END-SUBROUTINE
+END
+</pre> 
+             
+            
+           
+          <div><a name="general_programming_considerations" id="12358"></a></div> 
+           
+      <h3>General Programming Considerations 
+               <a name="x27"></a> 
+               <a name="x28"></a></h3> 
+           
+      <div><a name="d0e2781"></a></div> 
+            
+      <h4>Constant Values in the Local Data Area W3CONST</h4> 
+             
+             
+      <p>The local data area W3CONST contains a number of constant values
+                 which you might find useful:
+      </p> 
+             
+      <dl> 
+                  
+                  
+         <dt><a name="d0e2793"><strong> <code><strong>##HTTP_NEWLINE,
+                        ##HTTP_NEWLINE_LENGTH</strong></code> </strong></a></dt> 
+                  
+         <dd> 
+                      
+            <p class="definition">If you enter the <code>##HTTP_NEWLINE</code> string into your
+                          HTML, you can use all the subroutines beginning with <code>W3TEXT</code> in the
+                          library SYSWEB3 (or SYSWEB) to create a physical new line by compressing
+                          <code>#HTTP_NEWLINE</code> into the string by using
+                          <code>W3TextDynamic</code>.
+            </p> 
+                     
+         </dd> 
+                  
+                  
+                  
+         <dt><a name="d0e2821"><strong> <code><strong>##W3ERROR</strong></code> </strong></a></dt> 
+                  
+         <dd> 
+                      
+            <p class="definition">Parameter used for calling W3ERROR.</p>
+         </dd> 
+                  
+                  
+                  
+         <dt><a name="d0e2836"><strong> <code><strong>##HTML_LT</strong></code> </strong></a></dt> 
+                  
+         <dd> 
+                      
+            <p class="definition">Constant HTML value for "less than" sign (&lt;).</p>
+         </dd> 
+                  
+                  
+                  
+         <dt><a name="d0e2851"><strong> <code><strong>##HTML_GT</strong></code> </strong></a></dt> 
+                  
+         <dd> 
+                      
+            <p class="definition">Constant HTML value for "greater than" sign
+                          (&gt;).
+            </p>
+         </dd> 
+                  
+                  
+                  
+         <dt><a name="d0e2866"><strong> <code><strong>##HTML_AMP</strong></code> </strong></a></dt> 
+                  
+         <dd> 
+                      
+            <p class="definition">Constant HTML value for "ampersand" sign (&amp;).</p>
+         </dd>
+                  
+                  
+                  
+                  
+         <dt><a name="d0e2881"><strong> <code><strong>##HTML_QUOT</strong></code> </strong></a></dt>
+                  
+                  
+         <dd> 
+                      
+            <p class="definition">Constant HTML value for "double quote" sign (").</p>
+         </dd> 
+                  
+                  
+                  
+         <dt><a name="d0e2896"><strong> <code><strong>##HTML_REG</strong></code> </strong></a></dt> 
+                  
+         <dd> 
+                      
+            <p class="definition">Constant HTML value for "Registered Trademark"
+                          sign.
+            </p>
+         </dd> 
+                  
+                  
+                  
+         <dt><a name="d0e2911"><strong> <code><strong>##HTML_COPY</strong></code> </strong></a></dt>
+                  
+                  
+         <dd> 
+                      
+            <p class="definition">Constant HTML value for "copyright" sign.</p>
+         </dd> 
+                  
+                  
+                  
+         <dt><a name="d0e2926"><strong> <code><strong>##HTML_NBSP</strong></code> </strong></a></dt>
+                  
+                  
+         <dd> 
+                      
+            <p class="definition">Constant HTML value for "no page breaking" space ('
+                          ').
+            </p>
+         </dd> 
+                  
+                
+      </dl> 
+             
+      <h4 class="floating-title">Variables Defined by Value</h4> 
+             
+      <p> All input variables are defined BY VALUE, that is, every value which
+                 is MOVE compatible can be used, especially strings. 
+      </p> 
+             
+      <h4 class="floating-title">Creating a Next Page</h4> 
+             
+      <p> If your output possibly exceeds the limits of your return page, use
+                 the subroutine W3COUNTER in the library SYSWEB3 (or
+                 SYSWEB) to evaluate how many bytes are free in the return page. 
+      </p> 
+             
+            
+           
+          
+      <div><a name="testing_subprograms" id="27105"></a></div> 
+           
+      <h3>Testing Subprograms 
+               <a name="x29"></a> 
+               <a name="x30"></a></h3> 
+            
+            
+      <p>There are three ways to test your subprograms:</p> 
+            
+      <h4 class="floating-title">When using SYSWEB:</h4> 
+            
+      <ol> 
+                
+         <li> 
+                    
+            <p class="initem">Call the subprogram from your web browser.</p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem"> Call the subprogram NAT-DIR in the library SYSWEB to see the
+                        contents of a Natural library. You can also specify the name of the library in
+                        the parameters, for example <cite>http://.../sysweb/NAT-DIR?LIB=SYSEXT</cite>.
+                        Click on your program to start it. 
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem"> If you do not want to call your subprogram from the web, you can
+                        use the Natural program WEB-ONL to simulate a remote call. The output of this
+                        program will be saved as a Natural text object. This "online execution" allows
+                        you to use the Natural Debugger. 
+            </p> 
+                   
+         </li> 
+               
+      </ol> 
+            
+      <h4 class="floating-title">When using SYSWEB3:</h4> 
+            
+      <ol> 
+                
+         <li> 
+                    
+            <p class="initem">Call the subprogram from your web browser.</p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">Call the subprogram NAT-DIR in the library SYSWEB3 to see the
+                        contents of a Natural library. You can also specify the name of the library in
+                        the parameters, for example <cite>http://.../sysweb3/NAT-DIR?LIB=SYSEXT.</cite>
+                        Click on your program to start it.
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">If you do not want to call your subprogram from the web, you can use
+                        the Natural program WEB-ONL3 to simulate a remote call. The output of this
+                        program will be saved as a Natural text object. This "online execution" allows
+                        you to use the Natural Debugger.
+            </p> 
+                   
+         </li> 
+               
+      </ol> 
+            
+           
+          
+      <div><a name="nat_web_server_extension" id="12360"></a></div> 
+           
+      <h3>Natural Web Server Extensions</h3> 
+            
+            
+      <p> The Natural Web Server Extension is called from a HTTP server. The
+                program repackages the parameters it receives from the HTTP server and performs
+                an Entire Broker RPC or a DCOM call to the specified Natural subprogram or
+                method. 
+      </p> 
+            
+           
+      <div><a name="d0e3054"></a></div> 
+            
+      <h4>Parameters</h4> 
+             
+             
+      <p> Data sent by the HTTP server is recognized and preprocessed. The
+                 URL, which was transmitted to the HTTP server in a URL-decoded (modified) form,
+                 is reset to its original state. All non-binary data can be transmitted as data
+                 and will be converted from ASCII to EBCDIC and vice versa, if necessary. 
+      </p> 
+             
+            
+           
+      <div><a name="d0e3066"></a></div> 
+            
+      <h4>Initialization File</h4> 
+             
+             
+      <p> Only variables specified in your HTML page will automatically be
+                 transferred to the subprogram called. All other variables to be transferred
+                 must be specified in an ENV= entry of the .ini file. In this way, it is
+                 possible to add variables which will be treated as system environment
+                 variables. To add a system environment variable, specify a SETENV= entry in the
+                 <code>.ini</code> file. 
+      </p> 
+             
+      <h4 class="floating-title">Example .ini file</h4> 
+             <pre class="verbatim">
+ENV=HTTP_REFERRER 
+  ENV=HTTP_HOST  
+  ;
+  SETENV=VERSION:=alpha 
+  SETENV=BROKER:=local 
+</pre> 
+             
+            
+           <div><a name="d0e3087"></a></div> 
+            
+      <h4>Error Logging</h4> 
+             
+             
+      <p> To save the last HTML page that was transmitted from the server to a
+                 file, specify the TRACE_FILE parameter in your configuration file. 
+      </p> 
+             
+      <p> To return an error log, specify the ERROR_LOG_FILE parameter as
+                 log-file name in your configuration file. 
+      </p> 
+             
+      <p> To get your own error screen, specify the ERROR_TEMPLATE parameter
+                 in your configuration file with your desired HTML error page's name.
+                 Environment variables can be specified in the HTML error page by using the
+                 prefix "$". With the environment variable $NWW_ENVIRONMENT, all environment
+                 variables transmitted to the subroutine called will be written as comment lines
+                 to the error page. 
+      </p> 
+             
+            
+           
+          
+      <div><a name="d0e3106"></a></div> 
+           
+      <h3>Naming Conventions of the Libraries SYSWEB
+               and SYSWEB3 
+               <a name="x31"></a> 
+               <a name="x32"></a></h3> 
+            
+            
+      <dl> 
+                 
+                 
+         <dt><a name="d0e3133"><strong>Subroutines W3*</strong></a></dt> 
+                 
+         <dd> 
+                     
+            <p class="definition"> <code>W3*</code> subroutines access the interface to your HTTP
+                         server in the Natural Web Server Extension. Such an interface consists
+                         (basically) of a parameter data area and of a log of the data transmitted. The
+                         <code>W3*</code> subroutines used by the subprogram are called by the HTTP
+                         server using the Natural RPC. 
+            </p> 
+                    
+         </dd> 
+                 
+                 
+                 
+         <dt><a name="d0e3151"><strong>Subroutines H3*</strong></a></dt> 
+                 
+         <dd> 
+                     
+            <p class="definition">If you call one the <code>H3*</code> subroutines from one of your
+                         subroutines, it creates a basic HTML tag.
+            </p> 
+                    
+         </dd> 
+                 
+                 
+                 
+         <dt><a name="d0e3166"><strong>Subprograms NAT*</strong></a></dt> 
+                 
+         <dd> 
+                     
+            <p class="definition">The <code>NAT*</code> subprograms are utilities that can be called
+                         from the Internet.
+            </p> 
+                    
+         </dd> 
+                 
+                 
+                 
+         <dt><a name="d0e3181"><strong>Natural Text Members T3*</strong></a></dt> 
+                 
+         <dd> 
+                     
+            <p class="definition"> The <code>T3*</code> text members describe the contents of the
+                         library SYSWEB3 (or SYSWEB respectively), what
+                         the subroutine names are and which parameters can be passed. They also provide
+                         a code sample of how to invoke them. Use the utility nat-docu to access this
+                         online documentation. 
+            </p> 
+                    
+         </dd> 
+                 
+                 
+                 
+         <dt><a name="d0e3199"><strong>Subprograms E3*</strong></a></dt> 
+                 
+         <dd> 
+                     
+            <p class="definition">Sample code of the online documentation.</p> 
+                    
+         </dd> 
+                 
+                 
+                 
+         <dt><a name="d0e3211"><strong>Members D3* and D4*</strong></a></dt> 
+                 
+         <dd> 
+                     
+            <p class="definition">The <code>D3*</code> and <code>D4*</code> members are demonstration
+                         applications.
+            </p> 
+                    
+         </dd> 
+                 
+                 
+                 
+         <dt><a name="d0e3229"><strong>Programs Web*</strong></a></dt> 
+                 
+         <dd> 
+                     
+            <p class="definition">The <code>Web*</code> programs are utilities that run from the
+                         Natural NEXT prompt.
+            </p> 
+                    
+         </dd> 
+                 
+               
+      </dl> 
+            
+           
+         
+        
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="nwx_working.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../webtech/nwx_working.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/webtech/nwx_working.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="nwx-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="nwx_inter.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="nwx_adapt.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

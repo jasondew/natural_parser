@@ -1,0 +1,967 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Mailboxes</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="nsc_mail"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../nsc/nsc_mail.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/nsc/nsc_mail.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc_extobj.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc_retrie.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Natural Security&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x54"></a>Mailboxes
+         </h1>
+      </div> 
+         
+         
+      <p>This section covers the following topics:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="nsc_mail.htm#What_is_a_Mailbox">What is a Mailbox?</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_mail.htm#Broadcasting_a_Message">Broadcasting a Message</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_mail.htm#Receiving_a_Message">Receiving a Message</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_mail.htm#Mailbox_ID">Mailbox ID</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_mail.htm#Components_of_a_Mailbox_Profile">Components of a Mailbox Profile</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_mail.htm#CreaMainMailbox">Creating and Maintaining Mailbox Profiles</a></p>
+         </li>
+      </ul> 
+        
+      <hr> 
+        
+      <div><a name="What_is_a_Mailbox"></a></div> 
+         
+      <h2> What is a Mailbox?</h2> 
+          
+          
+      <p>A mailbox is an information screen which may be used to broadcast
+              messages to Natural users. It can best be described as a notice board.
+      </p> 
+          
+      <p>Mailboxes may be assigned to users and/or to libraries.</p> 
+          
+      <p><img src="graphics/mail1.png" alt="" width="450" height="230"></p> 
+          
+      <p>When a user logs on to a library, the mailboxes assigned to his or her
+              security profile, as well as the mailboxes assigned to the security profile of
+              the library, will be displayed to the user.
+      </p> 
+          
+      <p>You create a mailbox by defining it to Natural Security, that is,
+              creating a security profile for it.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="nsc_mail.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Broadcasting_a_Message"></a></div> 
+         
+      <h2> 
+             <a name="x55"></a>Broadcasting a Message
+      </h2> 
+          
+          
+      <p>Everybody specified as a <em>mailer</em> in a mailbox security profile
+              may use the mailbox. If a group is specified as a mailer, every user contained
+              in the group may use the mailbox. If no mailer is specified, any user may use
+              the mailbox.
+      </p> 
+          
+      <p>A mailer can invoke a mailbox with the Natural system command MAIL
+              (provided that the mailer is logged on to a library for which command mode is
+              allowed).
+      </p> 
+          
+      <h4 class="floating-title"> Examples:</h4> <pre class="command-input">MAIL FUGAZI</pre> 
+          <p>This command invokes the message screen of the mailbox FUGAZI.</p><pre class="command-input">MAIL ?</pre> 
+          <p>This command displays a list of all mailboxes which the mailer may use;
+              the mailer can then select a mailbox from the list.
+      </p> 
+          
+      <p>Once the desired mailbox is invoked, the mailer may enter a message, add
+              text to or delete text from an existing message, or change the "Valid
+              from/to" dates.
+      </p> 
+          
+      <p>Mailers have access only to the message screen of a mailbox, not to the
+              mailbox security profile. Owners may also broadcast messages, as they have
+              access to a mailbox message screen via the security profile. However, it is
+              only mailers who may use the MAIL command.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="nsc_mail.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Receiving_a_Message"></a></div> 
+         
+      <h2> 
+             <a name="x56"></a>Receiving a Message
+      </h2> 
+          
+          
+      <p>Once a mailbox is defined, it may be assigned to users and libraries by
+              entering the mailbox ID in the "Mailboxes" window (under
+              "Additional Options") of the respective user security profiles and
+              library security profiles.
+      </p> 
+          
+      <p>Owner logic applies to the assigning of mailboxes; that is, if owners
+              are specified in the mailbox profile (see
+              <a href="nsc_mail.htm#Components_of_a_Mailbox_Profile">Components of a Mailbox
+                 Profile</a> below), only these owners will be allowed to assign the
+              mailbox to a user or library.
+      </p> 
+          
+      <p>Mailboxes will be displayed to a user immediately after every successful
+              logon to a library. The following mailboxes will be displayed to the user in
+              the following order:
+      </p> 
+          
+      <ol> 
+              
+         <li> 
+                  
+            <p class="initem">all mailboxes assigned to the user;</p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">all mailboxes assigned to the library;</p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">all mailboxes assigned to the group via which the user is logged on
+                      (if the library is people-protected and the user is linked via a group);
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">all mailboxes assigned to the user's terminal and all mailboxes
+                      assigned to the group via which the terminal is linked (if the library is
+                      terminal-protected ("Terminal-protected" set to
+                      "A")).
+            </p> 
+                 
+         </li> 
+             
+      </ol> 
+          
+      <p>If one mailbox would have to be displayed more than once to a user (for
+              example, if the same mailbox is assigned to the user's own security profile as
+              well as to that of the group via which he/she is linked), it will only be
+              displayed once; a repeated display will be suppressed.
+      </p> 
+          
+      <p>The display of mailboxes cannot be suppressed by the user.</p> 
+          
+      <p>A mailbox will not be displayed</p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">if it is empty, that is, if it contains nothing but blanks;</p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">if the "Valid from" date has not yet been reached, or the
+                      "Valid to" date has passed.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="nsc_mail.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Mailbox_ID"></a></div> 
+         
+      <h2> 
+             <a name="x57"></a>Mailbox ID
+      </h2> 
+          
+          
+      <p>Mailbox IDs are used by Natural Security to identify mailboxes and their
+              security profiles.
+      </p> 
+          
+      <p>A mailbox ID may be up to 8 characters long, it must start with an
+              alphabetical character, and it must be unique amongst all mailbox IDs defined
+              to Natural Security.
+      </p> 
+          
+      <p>Before you start defining mailboxes, it may be advisable to conceive a
+              logical system of mailbox IDs; this will help you to identify mailboxes easier
+              when doing Natural Security maintenance.
+      </p> 
+          
+         
+      <div><a name="Mailbox_for_Initial_Logon"></a></div> 
+          
+      <h3> Mailbox for Initial Logon</h3> 
+           
+           
+      <p>The mailbox ID "1INITIAL" serves a special purpose: if you
+               define a mailbox with this mailbox ID, it will be displayed to every user after
+               a successful initial logon to Natural.
+      </p> 
+           
+      <p>The mailbox 1INITIAL need not be assigned to any user or library.</p> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="nsc_mail.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Components_of_a_Mailbox_Profile"></a></div> 
+         
+      <h2> 
+             <a name="x58"></a>Components of a Mailbox Profile
+      </h2> 
+          
+          
+      <p>The following screen shows an example of a mailbox security profile:</p>
+          
+          
+      <table border="1" cellpadding="5" class="screen">
+         <tr>
+            <td><pre>
+13:00:00                   *** NATURAL SECURITY ***                   2008-10-31
+                              - Modify Mailbox -                              
+                                                                              
+ Mailbox ID: MAIL2112                           Created: 2002-09-14 by: SAG    
+ Mailb.Name: MAILBOX YYZ_____________________  Modified: 2008-10-12 by: SAG    
+ Last mailed on .. 2008-06-11 at: 12:00:58 by: IW                              
+ Valid from ...... 1999-12-31 to  2699-12-31                                   
+                                                                              
+ ------------- Mailbox Security Notes -------------  Mailers-    -- Owners --  
+ __________________________________________________  AD______    ________   _  
+ __________________________________________________  HW______    ________   _  
+ __________________________________________________  IW______    ________   _  
+ __________________________________________________  ________    ________   _  
+ __________________________________________________  ________    ________   _  
+ __________________________________________________  ________    ________   _  
+ __________________________________________________  ________    ________   _  
+ __________________________________________________  ________    ________   _  
+ __________________________________________________  ________                  
+ __________________________________________________  ________                  
+ -------------------------------------------------- ---------   -------------  
+                                                                              
+                                                                              
+ Enter-PF1---PF2---PF3---PF4---PF5---PF6---PF7---PF8---PF9---PF10--PF11--PF12---
+       Help  PrevM Exit  AddOp       Flip                                Canc  
+</pre></td>
+         </tr>
+      </table> 
+          
+      <p>The individual components of a mailbox security profile are explained
+              below.
+      </p> 
+          
+      <p>The following items of information are entered by Natural Security:</p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th> <a href="nsc_mail.htm#Mailbox_ID">Mailbox
+                     ID</a></th> 
+                       
+               <td>The ID by which you have defined the mailbox to Natural
+                  Security.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> Created/by &nbsp;</th> 
+                       
+               <td>The date when the security profile was created, and the ID of
+                  the ADMINISTRATOR who created the security profile.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> Modified/by &nbsp;</th> 
+                       
+               <td>The date when the security profile was last modified, and the ID
+                  of the ADMINISTRATOR who made the latest modification.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> Last mailed on/at/by &nbsp;</th> 
+                       
+               <td>The date, time and user ID of the latest modification of the
+                  mailbox message screen and/or "Valid from/to" dates.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> Valid from/to &nbsp;</th> 
+                       
+               <td>The period of time in which the mailbox is displayed to users
+                  when they log on. 
+                  
+                  <p>These dates can be set on the mailbox message screen, not on the
+                               security profile screen.
+                  </p>
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>You may specify the following items as part of a mailbox security
+              profile:
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th> Mailbox Name</th> 
+                       
+               <td>In this field, you may specify a name for the mailbox; this name
+                  may be up to 32 characters long.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> Mailbox Security Notes &nbsp;</th> 
+                       
+               <td>In these lines, you may enter your notes on the security
+                  profile.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> Mailers &nbsp;</th> 
+                       
+               <td>You may enter up to 10 IDs of users (of any user type) who may
+                  use the mailbox to broadcast messages, that is, modify the contents of the
+                  mailbox message screen. 
+                  
+                  <p>If no mailers are specified, any user may use the mailbox.</p>
+                           
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> Owners &nbsp;</th> 
+                       
+               <td>You may enter up to 8 IDs of ADMINISTRATORs. Only the
+                  ADMINISTRATORs specified here will be allowed to maintain the mailbox security
+                  profile and assign the mailbox to users/libraries. 
+                  
+                  <p>If no owner is specified, any user of type ADMINISTRATOR may do
+                               so.
+                  </p> 
+                           
+                  <p>For each owner, the number of co-owners whose countersignatures
+                               will be required for maintenance/assignment permission may optionally be
+                               specified in the field after the ID.
+                  </p> 
+                           
+                  <p>For an explanation of owners and co-owners, see the section
+                               <a href="nsc_count.htm#nsc_count">Countersignatures</a>.
+                  </p>
+               </td>
+                       
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>If you press <span class="key">PF4</span> on the Add Mailbox screen, the message
+              screen of the mailbox will be displayed:
+      </p> 
+          
+      <table border="1" cellpadding="5" class="screen">
+         <tr>
+            <td><pre>
+ 13:00:27               *** Mailbox Message Screen ***               2008-10-31
+                                                                                 
+          Mailbox ID ... MAIL2112      Valid from 2008-05-24 to 2699-12-31       
+          Last mailed on 2008-06-11 at 12:00:58 by IW                            
+          +--------------------------------------------------------------+       
+          I THERE IS UNREST IN THE FOREST                                I       
+          I THERE IS TROUBLE WITH THE TREES                              I       
+          I FOR THE MAPLES WANT MORE SUNLIGHT                            I       
+          I AND THE OAKS IGNORE THEIR PLEAS                              I       
+          I                                                              I       
+          I                                                              I       
+          I                                                              I       
+          I                                                              I       
+          I                                                              I       
+          I                                                              I       
+          I                                                              I       
+          I                                                              I       
+          I                                                              I       
+          I                                                              I       
+          I                                                              I       
+          I                                                              I       
+          +--------------------------------------------------------------+      
+</pre></td>
+         </tr>
+      </table> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th> Valid from/to</th> 
+                       
+               <td>These dates may be set if a message in only relevant for a
+                  certain period of time, and the mailbox is therefore only to be displayed to
+                  users at logon within this period of time. 
+                  
+                  <p>If a "from" date is specified, the mailbox will only
+                               be displayed beginning on this day.
+                  </p> 
+                           
+                  <p>If a "to" date is specified, the mailbox will no
+                               longer be displayed after this day.
+                  </p> 
+                           
+                  <p>Any mailer (or owner) may specify these dates.</p> 
+                           
+                  <p>The format in which the dates have to be specified depend on the
+                               setting of the Natural profile parameter <a href="../parms/dtform.htm">DTFORM</a>.
+                  </p>
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="nsc_mail.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="CreaMainMailbox"></a></div> 
+         
+      <h2> 
+             <a name="x59"></a>Creating and Maintaining Mailbox Profiles
+      </h2> 
+          
+          
+      <p>This section describes the functions used to create and maintain mailbox
+              profiles. It covers the following topics:
+      </p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="nsc_mail.htm#How_to_Invoke_Mailbox_Maintenance">Invoking Mailbox Maintenance</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_mail.htm#Adding_a_New_Mailbox">Adding a New Mailbox</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_mail.htm#Selecting_Existing_Mailboxes_for_Processing">Selecting Existing Mailboxes for Processing</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_mail.htm#Copying_a_Mailbox">Copying a Mailbox</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_mail.htm#Modifying_a_Mailbox">Modifying a Mailbox</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_mail.htm#Renaming_a_Mailbox">Renaming a Mailbox</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_mail.htm#Deleting_a_Mailbox">Deleting a Mailbox</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_mail.htm#Displaying_a_Mailbox">Displaying a Mailbox</a></p>
+         </li>
+      </ul> 
+         
+      <div><a name="How_to_Invoke_Mailbox_Maintenance"></a></div> 
+          
+      <h3> Invoking Mailbox Maintenance</h3> 
+           
+           
+      <p>On the Main Menu, enter code "M" for
+               "Maintenance". A window will be displayed.
+      </p> 
+           
+      <p>In the window, mark object type "Mailbox" with a character
+               or with the cursor. The Mailbox Maintenance selection list will be
+               displayed.
+      </p> 
+           
+      <p>From this selection list, you invoke all mailbox maintenance functions
+               as described below.
+      </p> 
+           
+          
+         
+      <div><a name="Adding_a_New_Mailbox"></a></div> 
+          
+      <h3> Adding a New Mailbox</h3> 
+           
+           
+      <p>The Add Mailbox function is used to define new mailboxes to Natural
+               Security, that is, create mailbox security profiles.
+      </p> 
+           
+      <p>To add a new mailbox security profile, enter the command
+               <code>ADD</code> in the command line of the Mailbox Maintenance
+               selection list.
+      </p> 
+           
+      <p>A window will be displayed. In this window, you enter a
+               <a href="nsc_mail.htm#Mailbox_ID">mailbox ID</a>.
+      </p> 
+           
+      <p>The Add Mailbox screen will be displayed. On this screen you may define
+               a security profile for the mailbox. The items you may define or specify are
+               explained under <a href="nsc_mail.htm#Components_of_a_Mailbox_Profile">Components of a Mailbox
+            Profile</a> above.
+      </p> 
+           
+      <p>When you add a new mailbox, the owners specified in your own user
+               security profile will automatically be copied into the mailbox security profile
+               you are creating.
+      </p> 
+           
+          
+         
+      <div><a name="Selecting_Existing_Mailboxes_for_Processing"></a></div> 
+          
+      <h3> Selecting Existing Mailboxes for Processing</h3> 
+           
+           
+      <p>When you invoke Mailbox Maintenance, a list of all mailboxes that have
+               been defined to Natural Security will be displayed.
+      </p> 
+           
+      <p>If you do not wish to get a list of all existing mailboxes but would
+               like only certain mailboxes to be listed, you may use the Start Value option as
+               described in the section <a href="nsc_way.htm#nsc_way">Finding Your Way
+            In Natural Security</a>.
+      </p> 
+           
+      <p>On the Main Menu, enter code "M" for
+               "Maintenance".
+      </p> 
+           
+      <p>A window will be displayed. In the window, mark object type
+               "Mailbox" with a character or with the cursor (and, if desired,
+               enter a start value).
+      </p> 
+           
+      <p>The Mailbox Maintenance selection list will be displayed:</p> 
+           
+      <table border="1" cellpadding="5" class="screen">
+         <tr>
+            <td><pre>
+ 11:35:19                   *** NATURAL SECURITY ***                 2008-10-31
+                              - Mailbox Maintenance -                            
+                                                                                 
+  Co Mailbox ID Mailbox Name                     Message                         
+  __ __________ ________________________________ _____________________           
+  __ MAILAZ     MAILAZ                                                           
+  __ MAILB      MAILBOX B                                                        
+  __ MAILF      MAIL-FINANCE                                                     
+  __ MAILLP     PLEASE MR POSTMAN                                                
+  __ MAILLP1    CHAIN MAIL                                                       
+  __ MAILLP2                                                                     
+  __ MAILSAG    MAILBOX FOR SAG                                                  
+  __ MAILTM                                                                      
+  __ MAIL1                                                                       
+  __ MAIL10     NEWS AT 10                                                       
+  __ MAIL11                                                                      
+  __ MAIL12                                                                      
+  __ MAIL13                                                                      
+  __ MAIL14                                                                      
+  __ MAIL2112   MAILBOX YYZ                                                      
+                                                                                 
+  Command ===&gt;                                                                
+  Enter-PF1---PF2---PF3---PF4---PF5---PF6---PF7---PF8---PF9---PF10--PF11--PF12---
+        Help        Exit              Flip  -     +                       Canc  
+</pre></td>
+         </tr>
+      </table> 
+           
+      <p>For each mailbox, its ID and name are displayed.</p> 
+           
+      <p>The list can be scrolled as described in the section
+               <a href="nsc_way.htm#nsc_way">Finding Your Way In Natural
+            Security</a> .
+      </p> 
+           
+      <p>The following mailbox maintenance functions are available (possible
+               code abbreviations are underlined):
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th align="left">Code</th> 
+                        
+               <th align="left">Function</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> <code><u>C</u>O</code></td> 
+                        
+               <td> <a href="nsc_mail.htm#Copying_a_Mailbox">Copy mailbox</a>
+                            &nbsp;
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code><u>M</u>O</code></td> 
+                        
+               <td> <a href="nsc_mail.htm#Modifying_a_Mailbox">Modify
+                     mailbox</a> &nbsp;
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>RE</code></td> 
+                        
+               <td> <a href="nsc_mail.htm#Renaming_a_Mailbox">Rename
+                     mailbox</a> &nbsp;
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>DE</code></td> 
+                        
+               <td> <a href="nsc_mail.htm#Deleting_a_Mailbox">Delete
+                     mailbox</a> &nbsp;
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code><u>D</u>I</code></td> 
+                        
+               <td> <a href="nsc_mail.htm#Displaying_a_Mailbox">Display
+                     mailbox</a> &nbsp;
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>To invoke a specific function for a mailbox, you mark the mailbox with
+               the appropriate function code in column "Co".
+      </p> 
+           
+      <p>You may select various mailboxes for various functions at the same
+               time; that is, you can mark several mailboxes on the screen with a function
+               code. For each mailbox marked, the appropriate processing screen will be
+               displayed. You may then perform for one mailbox after another the selected
+               functions.
+      </p> 
+           
+          
+         
+      <div><a name="Copying_a_Mailbox"></a></div> 
+          
+      <h3> Copying a Mailbox</h3> 
+           
+           
+      <p>The Copy Mailbox function is used to define a new mailbox to Natural
+               Security by creating a security profile which is identical to an existing
+               mailbox security profile.
+      </p> 
+           
+          
+      <div><a name="What_is_Copied_nsc_mail"></a></div> 
+           
+      <h4> What is Copied?</h4> 
+            
+            
+      <p>All components you defined for the existing security profile will be
+                copied into the new mailbox security profile, except the owners (these will be
+                copied from your own user security profile into the new mailbox security
+                profile you are creating).
+      </p> 
+            
+           
+          
+      <div><a name="How_to_Copy_nsc_mail"></a></div> 
+           
+      <h4> How to Copy</h4> 
+            
+            
+      <p>On the Mailbox Maintenance selection list, mark the mailbox whose
+                security profile you wish to duplicate with function code
+                "CO".
+      </p> 
+            
+      <p>A window will be displayed. In this window, enter the ID of the
+                "new" mailbox.
+      </p> 
+            
+      <p>The Copy Mailbox screen will be displayed showing the new security
+                profile.
+      </p> 
+            
+      <p>The components of the security profile you may define or modify are
+                explained under <a href="nsc_mail.htm#Components_of_a_Mailbox_Profile">Components of a Mailbox
+            Profile</a> above.
+      </p> 
+            
+           
+          
+         
+      <div><a name="Modifying_a_Mailbox"></a></div> 
+          
+      <h3> Modifying a Mailbox</h3> 
+           
+           
+      <p>The Modify Mailbox function is used to change an existing mailbox
+               security profile.
+      </p> 
+           
+      <p>On the Mailbox Maintenance selection list, mark the mailbox whose
+               security profile you wish to change with function code "MO".
+      </p> 
+           
+      <p>The Modify Mailbox screen will be displayed. On this screen you may
+               modify the mailbox's security profile. The items you may define or modify are
+               explained under <a href="nsc_mail.htm#Components_of_a_Mailbox_Profile">Components of a Mailbox
+            Profile</a> above.
+      </p> 
+           
+          
+         
+      <div><a name="Renaming_a_Mailbox"></a></div> 
+          
+      <h3> Renaming a Mailbox</h3> 
+           
+           
+      <p>The Rename Mailbox function allows you to change the mailbox ID of an
+               existing mailbox security profile.
+      </p> 
+           
+      <p>On the Mailbox Maintenance selection list, you mark the mailbox whose
+               ID you wish to change with function code "RE". A window will be
+               displayed in which you can enter a new ID for the mailbox (and, optionally,
+               change its name).
+      </p> 
+           
+          
+         
+      <div><a name="Deleting_a_Mailbox"></a></div> 
+          
+      <h3> Deleting a Mailbox</h3> 
+           
+           
+      <p>The Delete Mailbox function is used to delete an existing mailbox.</p> 
+           
+      <p>On the Mailbox Maintenance selection list, mark the mailbox you wish to
+               delete with function code "DE". A window will be displayed.
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">If you have invoked the Delete Mailbox function and should then
+                       decide against deleting the given mailbox, leave the Delete Mailbox window by
+                       pressing <span class="key">ENTER</span> without having typed in anything.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">If you wish to delete the given mailbox, enter the mailbox ID in the
+                       window to confirm the deletion.
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>When you delete a mailbox, the mailbox ID will simultaneously be
+               deleted from the security profiles of the users and libraries it has been
+               assigned to.
+      </p> 
+           
+      <p>If you mark more than one mailbox with "DE", a window will
+               appear in which you are asked whether you wish to confirm the deletion of each
+               mailbox with entering the mailbox ID, or whether all mailboxes selected for
+               deletion are to be deleted without this individual confirmation. Be careful not
+               to delete a mailbox accidentally.
+      </p> 
+           
+          
+         
+      <div><a name="Displaying_a_Mailbox"></a></div> 
+          
+      <h3> Displaying a Mailbox</h3> 
+           
+           
+      <p>The Display Mailbox function is used to view an existing mailbox
+               security profile.
+      </p> 
+           
+      <p>On the Mailbox Maintenance selection list, mark the mailbox you wish to
+               be displayed with function code "DI".
+      </p> 
+           
+      <p>The Display Mailbox screen will be displayed, showing the security
+               profile of the selected mailbox.
+      </p> 
+           
+      <p>The individual components of the security profile are explained under
+               <a href="nsc_mail.htm#Components_of_a_Mailbox_Profile">Components of a
+            Mailbox Profile</a> above.
+      </p> 
+           
+      <p>To view the message screen of the mailbox, press <span class="key">PF4</span> on the
+               Display Mailbox screen.
+      </p> 
+           
+          
+        
+       
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="nsc_mail.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../nsc/nsc_mail.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/nsc/nsc_mail.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc_extobj.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc_retrie.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

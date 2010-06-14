@@ -1,0 +1,843 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>UPDATE - SQL</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="update_sql" id="16928"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../sm/update_sql.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/sm/update_sql.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="sql-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="select_sql.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="sm_exas.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Statements&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> UPDATE - SQL 
+               <a name="x195"></a></h1>
+      </div> 
+         
+         
+      <p>This document covers the following topics:</p>
+         
+      <ul>
+         <li>
+            <p class="initem"><a href="update_sql.htm#Function_update_sql">Function</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="update_sql.htm#syntax_descr_update_sql">Syntax Description</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="update_sql.htm#Examples_update_sql">Examples</a></p>
+         </li>
+      </ul>
+         
+      <p>For an explanation of the symbols used in the syntax diagram, see
+             <a href="synsym.htm#Syntax_Symbols">Syntax
+            Symbols</a>.
+      </p>
+         
+      <p>Belongs to Function Group:
+             <a href="stmt.htm#Database_Access_and_Update">Database Access and
+            Update</a></p> 
+        
+      <hr> 
+        
+      <div><a name="Function_update_sql"></a></div> 
+         
+      <h2> Function</h2> 
+          
+          
+      <p>The SQL <code>UPDATE</code> statement is used to perform an
+              <code>UPDATE</code> operation on either rows in a table without using a cursor
+              (<a href="update_sql.htm#Syntax_1_update_sql">"searched"
+                 <code>UPDATE</code></a>) or columns in a row to which a cursor is
+              positioned (<a href="update_sql.htm#Syntax_2_update_sql">"positioned"
+                 <code>UPDATE</code></a>).
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="update_sql.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="syntax_descr_update_sql"></a></div> 
+         
+      <h2> Syntax Description</h2> 
+          
+          
+      <p>Two different structures are possible:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="update_sql.htm#Syntax_1_update_sql">Syntax 1 - Searched UPDATE</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="update_sql.htm#Syntax_2_update_sql">Syntax 2 - Positioned UPDATE</a></p>
+         </li>
+      </ul> 
+          
+         
+      <div><a name="Syntax_1_update_sql"></a></div> 
+          
+      <h3>Syntax 1 - Searched UPDATE</h3> 
+           
+           
+      <p>The "searched" <code>UPDATE</code> statement is a
+               stand-alone statement not related to any <a href="select_sql.htm#select_sql"><code>SELECT</code></a> statement. With a single
+               statement you can update zero, one, multiple or all rows of a table. The rows
+               to be updated are determined by a <var>search-condition</var>
+               that is applied to the table. Optionally, view and table names can be assigned
+               a <a href="basic.htm#correlation-name_basic"><var>correlation-name</var></a>.
+      </p>
+           
+           
+      <p class="note"><strong>Note:</strong><br> The number of rows that have actually been updated with a
+               "searched" <code>UPDATE</code> can be ascertained by using the
+               system variable <a href="../vari/appl.htm#ROWCOUNT"><code>*ROWCOUNT</code></a>
+               (see the <cite>System Variables</cite> documentation).
+      </p> 
+            
+            
+      <table border="0" class="syntax" cellpadding="3"> 
+                 
+                
+                 
+                 
+                 
+                 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td rowspan="2" nowrap>
+                  <a href="update_sql.htm#Function_update_sql"> <code class="keyword">UPDATE</code>
+                               </a> 
+               </td> 
+                        
+               <td rowspan="2" nowrap> 
+                  
+                  <p><img src="../graphics/cbo2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                        
+               <td colspan="11" nowrap>
+                  <a href="update_sql.htm#view_name_update_sql">
+                               <var>view-name</var></a> &nbsp;[<a href="update_sql.htm#correlation-name_update_sql"><var>correlation-name</var></a>]&nbsp;
+                            <a href="update_sql.htm#SET_Clause"><code class="keyword">SET *</code></a>
+                            
+               </td> 
+                        
+               <td rowspan="2" nowrap> 
+                  
+                  <p><img src="../graphics/cbc2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td colspan="11" nowrap>
+                  <a href="update_sql.htm#view_name_update_sql">
+                               <var>table-name</var></a> &nbsp;[<a href="update_sql.htm#correlation-name_update_sql"><var>correlation-name</var></a>]&nbsp;
+                            <a href="update_sql.htm#SET_Clause"><code class="keyword">SET</code></a>
+                            <a href="update_sql.htm#assignment-list"><var>assignment-list</var></a>
+                            
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td nowrap> &nbsp;&nbsp;[<a href="update_sql.htm#WHERE_update_sql"><code class="keyword">WHERE</code></a> <a href="update_sql.htm#WHERE_update_sql">
+                               <var>search-condition</var></a>] 
+               </td> 
+                        
+               <td nowrap> 
+                  
+                  <p><img src="../graphics/sbo3.gif" alt="" width="5" height="61"></p> 
+               </td> 
+                        
+               <td align="right" nowrap>
+                  <a href="update_sql.htm#WITH_IL_update_sql"> <code class="keyword"> WITH </code>
+                               </a> 
+               </td> 
+                        
+               <td nowrap> 
+                  
+                  <p><img src="../graphics/cbo3.gif" alt="" width="6" height="59"></p> 
+               </td> 
+                        
+               <td nowrap>RR<br>RS<br>CS
+               </td> 
+                        
+               <td nowrap> 
+                  
+                  <p><img src="../graphics/cbc3.gif" alt="" width="6" height="59"></p> 
+               </td> 
+                        
+               <td nowrap> 
+                  
+                  <p><img src="../graphics/sbc3.gif" alt="" width="5" height="61"></p> 
+               </td> 
+                        
+               <td nowrap> [<a href="update_sql.htm#QUERYNO_update_sql"><code class="keyword">QUERY&nbsp;NO</code> &nbsp; <var>integer</var></a>]
+                            
+               </td> 
+                        
+               <td nowrap>&nbsp;</td> 
+                        
+               <td nowrap>&nbsp;</td> 
+                        
+               <td nowrap>&nbsp;</td> 
+                        
+               <td nowrap>&nbsp;</td> 
+                        
+               <td nowrap>&nbsp;</td> 
+                        
+               <td nowrap>&nbsp;</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>For an explanation of the symbols used in the syntax diagram, see
+               <a href="synsym.htm#Syntax_Symbols">Syntax
+            Symbols</a>.
+      </p> 
+           
+      <p>Syntax Element Description - Syntax 1:</p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th nowrap> <a name="view_name_update_sql"></a><var>view-name</var>
+                            
+               </th> 
+                        
+               <td> 
+                  
+                  <div><strong class="floating-title"> View Name:</strong></div> 
+                            
+                  <p>Refers to the name of a Natural view as defined in the
+                                <code>DEFINE DATA</code> statement. For further information, see
+                                <a href="basic.htm#view-name_basic"><var>view-name</var></a> (in
+                                the section <a href="basic.htm#basic">Basic Syntactical
+                                   Items</a>).
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th nowrap> <a name="SET_Clause"></a>SET 
+               </th> 
+                        
+               <td> 
+                  
+                  <div><strong class="floating-title"> SET Clause:</strong></div> 
+                            
+                  <p><a name="asterisk"></a>If a view has been specified for updating, an
+                     asterisk (*) has to be specified in the <code>SET</code> clause, because all
+                                columns of the view must be updated.
+                  </p> 
+                            
+                  <p>If a table has been specified for updating, the <code>SET</code>
+                                clause must contain either an <var>assignment-list</var> or the
+                                name of the view which contains the columns to be updated.
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th nowrap> <a name="assignment-list"></a>
+                   <var>assignment-list</var> 
+               </th> 
+                        
+               <td>See <a href="update_sql.htm#assignmentlist">Assignment
+                     List</a> below.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th nowrap> <a name="WHERE_update_sql"></a>WHERE
+                   <var>search-condition</var> 
+               </th> 
+                        
+               <td> 
+                  
+                  <div><strong class="floating-title"> WHERE Clause:</strong></div> 
+                            
+                  <p>This clause is used to specify the selection criteria for the rows
+                                to be updated.
+                  </p> 
+                            
+                  <p>If no <code>WHERE</code> clause is specified, the entire table is
+                                updated.
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <div><a name="assignmentlist"></a></div>
+      <h4 class="floating-title">Assignment List</h4> 
+            
+            
+      <table border="0" class="syntax" cellpadding="3"> 
+                 
+                 
+                  
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> 
+                  
+                  <p><img src="../graphics/cbo2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                        
+               <td> <var>column-name</var> = 
+               </td> 
+                        
+               <td> 
+                  
+                  <p><img src="../graphics/cbo2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                        
+               <td> <var>scalar-expression</var>
+                            <code class="keyword">NULL</code> 
+               </td> 
+                        
+               <td> 
+                  
+                  <p><img src="../graphics/cbc2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                        
+               <td> 
+                  
+                  <p><img src="../graphics/cbc2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                        
+               <td> 
+                  
+                  <p><img src="../graphics/dot3.gif" alt="" width="12" height="4"></p> 
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>In an <var>assignment-list</var>, you can assign values
+               to one or more columns. A value can be either a
+               <var>scalar-expression</var> or <code>NULL</code>. For further
+               information, see <a href="scalar.htm#scalar">Scalar
+            Expressions</a>.
+      </p> 
+           
+      <p>If the value <code>NULL</code> has been assigned, it means that the
+               addressed field is to contain no value (not even the value <code>0</code> or
+               "blank").
+      </p> 
+           
+      <h4 class="floating-title">SQL Extended Set</h4> 
+           
+      <p>The following syntax elements belong to the <a href="common.htm#common">SQL Extended Set</a>:
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th nowrap>
+                  <a name="correlation-name_update_sql"></a>
+                            <var>correlation-name</var> 
+               </th> 
+                        
+               <td> The item <var>correlation-name</var>
+                  represents an alias name for a <a href="basic.htm#table-name"><var>table-name</var></a>. For
+                            further information, see <a href="basic.htm#correlation-name_basic"><var>correlation-name</var></a>
+                            (in the section <a href="basic.htm#basic">Basic Syntactical
+                               Items</a>). 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th nowrap> <a name="WITH_IL_update_sql"></a>WITH 
+               </th> 
+                        
+               <td> 
+                  
+                  <div><strong class="floating-title"> WITH Isolation Level Clause:</strong></div> 
+                            
+                  <p>This clause allows the explicit specification of the isolation
+                     level used when locating the row to be updated. It is only valid against DB2
+                     databases. When used against other databases, it will cause runtime
+                                errors.
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th nowrap> <a name="QUERYNO_update_sql"></a>QUERYNO <var>integer</var>
+                            
+               </th> 
+                        
+               <td> 
+                  
+                  <div><strong class="floating-title"> QUERYNO Clause:</strong></div> 
+                             
+                            
+                  <p>This clause is not currently supported and will be
+                                ignored.
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+          
+      <div><a name="Syntax_2_update_sql"></a></div> 
+          
+      <h3> Syntax 2 - Positioned UPDATE</h3> 
+           
+           
+      <p>The "positioned" <code>UPDATE</code> statement always
+               refers to a cursor within a database loop. Thus, the table or view referenced
+               by a positioned <code>UPDATE</code> statement must be the same as the one
+               referenced by the corresponding <a href="select_sql.htm#select_sql"><code>SELECT</code></a> statement; otherwise an
+               error message is returned. A positioned <code>UPDATE</code> cannot be used with
+               a non-cursor selection.
+      </p> 
+           
+      <p>Common Set Syntax</p> 
+            
+            
+      <table border="0" class="syntax" cellpadding="3"> 
+                 
+                  
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td rowspan="2" nowrap>
+                  <a href="update_sql.htm#Function_update_sql"> <code class="keyword">UPDATE</code>
+                               </a> 
+               </td> 
+                        
+               <td rowspan="2" nowrap> 
+                  
+                  <p><img src="../graphics/cbo2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                        
+               <td nowrap> <a href="update_sql.htm#view_name_update_sql">
+                      <var>view-name</var> </a> &nbsp;
+                            <a href="update_sql.htm#SET_Clause"> <code class="keyword">SET *</code> </a>
+                            
+               </td> 
+                        
+               <td rowspan="2" nowrap> 
+                  
+                  <p><img src="../graphics/cbc2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                        
+               <td rowspan="2" nowrap> [<a href="update_sql.htm#r_update_sql"><code class="keyword">WHERE CURRENT OF CURSOR</code>
+                               </a> &nbsp;(<a href="update_sql.htm#r_update_sql"><var>r</var></a>)] 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td nowrap> <a href="update_sql.htm#view_name_update_sql">
+                      <var>view-name</var> </a> &nbsp;
+                            <a href="update_sql.htm#SET_Clause"> <code class="keyword">SET</code> </a>
+                            <a href="update_sql.htm#SET_Clause"> <var>assignment-list</var>
+                               </a> 
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>Extended Set Syntax</p> 
+            
+            
+      <table border="0" class="syntax" cellpadding="3">
+         <colgroup>
+            <col width="7%">
+            <col width="15%">
+            <col width="15%">
+            <col width="15%">
+            <col width="15%">
+            <col width="15%">
+            <col width="15%">
+         </colgroup> 
+                 
+                  
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td rowspan="2" nowrap>
+                  <a href="update_sql.htm#Function_update_sql"> <code class="keyword">UPDATE</code>
+                               </a> 
+               </td> 
+                        
+               <td rowspan="2" nowrap> 
+                  
+                  <p><img src="../graphics/cbo2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                        
+               <td nowrap> <a href="update_sql.htm#view_name_update_sql">
+                      <var>view-name</var> </a> &nbsp;
+                            <a href="update_sql.htm#SET_Clause"> <code class="keyword">SET *</code> </a>
+                            
+               </td> 
+                        
+               <td rowspan="2" nowrap> 
+                  
+                  <p><img src="../graphics/cbc2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                        
+               <td rowspan="2" nowrap> [<a href="update_sql.htm#r_update_sql"><code class="keyword">WHERE CURRENT OF CURSOR</code>
+                               </a> &nbsp;(<a href="update_sql.htm#r_update_sql"><var>r</var></a>) 
+               </td> 
+                        
+               <td rowspan="2" nowrap> 
+                  
+                  <p><img src="../graphics/sbo2b.gif" alt="" width="7" height="42"></p>
+               </td> 
+                        
+               <td rowspan="2" nowrap><code class="keyword">FOR ROW</code></td> 
+                        
+               <td rowspan="2" nowrap> 
+                  
+                  <p><img src="../graphics/cbo2.gif" alt="" width="6" height="38"></p>
+               </td> 
+                        
+               <td nowrap>[:]<var>host-variable</var></td> 
+                        
+               <td rowspan="2" nowrap> 
+                  
+                  <p><img src="../graphics/cbc2.gif" alt="" width="6" height="38"></p>
+               </td> 
+                        
+               <td rowspan="2" nowrap><code class="keyword">OF ROWSET</code></td> 
+                        
+               <td rowspan="2" nowrap> 
+                  
+                  <p><img src="../graphics/sbc2b.gif" alt="" width="6" height="43"></p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td nowrap> <a href="update_sql.htm#view_name_update_sql">
+                      <var>view-name</var> </a> &nbsp;
+                            <a href="update_sql.htm#SET_Clause"> <code class="keyword">SET</code> </a>
+                            <a href="update_sql.htm#SET_Clause"> <var>assignment-list</var>
+                               </a> 
+               </td> 
+                        
+               <td nowrap><var>integer</var></td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>Syntax Element Description - Syntax 2:</p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th nowrap>
+                  <a href="update_sql.htm#view_name_update_sql">
+                               <var>view-name</var></a> 
+               </th> 
+                        
+               <td> 
+                  
+                  <div><strong class="floating-title"> View Name:</strong></div> 
+                            
+                  <p>Refers to the name of a Natural view as defined in the
+                                <code>DEFINE DATA</code> statement. For further information, see
+                                <a href="basic.htm#view-name_basic"><var>view-name</var></a> (in
+                                the section <a href="basic.htm#basic">Basic Syntactical
+                                   Items</a>).
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th nowrap> <a href="update_sql.htm#SET_Clause">SET</a> * 
+                      
+                  <p>SET <var>assignment-list</var></p>
+               </th> 
+                        
+               <td> 
+                  
+                  <div><strong class="floating-title"> SET Clause:</strong></div> 
+                            
+                  <p>If a view has been specified for updating, an asterisk (*) has to
+                                be specified in the <code>SET</code> clause, because all columns of the view
+                                must be updated.
+                  </p> 
+                            
+                  <p>If a table has been specified for updating, the <code>SET</code>
+                                clause must contain either an <a href="update_sql.htm#assignment-list"><var>assignment-list</var></a>
+                                or the name of view which contains the columns to be updated.
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th nowrap>WHERE CURRENT OF CURSOR (<a name="r_update_sql"></a><var>r</var>)
+               </th> 
+                        
+               <td> 
+                  
+                  <div><strong class="floating-title"> Statement Reference:</strong></div> 
+                            
+                  <p>The <code>(<var>r</var>)</code> notation is used
+                     to reference the statement which was used to select the row to be updated. If
+                                no statement reference is specified, the <code>UPDATE</code> statement is
+                                related to the innermost active processing loop in which a database record was
+                                selected.
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th nowrap>FOR ROW &#8230; OF ROWSET</th> 
+                        
+               <td> 
+                  
+                  <div><strong class="floating-title">FOR ROW &#8230; OF ROWSET Clause:</strong></div> 
+                            
+                  <p>This clause belongs to the <a href="common.htm#common">SQL
+                                   Extended Set</a>.
+                  </p> 
+                            
+                  <p>The optional <code>FOR ROW &#8230; OF ROWSET</code> clause for
+                                positioned SQL <code>UPDATE</code> statements specifies which row of the
+                                current rowset has to be updated. It should only be specified if the
+                                <code>UPDATE</code> statement is related to a <code>SELECT</code> statement
+                                which uses rowset positioning and which has column arrays in the
+                                <a href="select_sql.htm#INTO_select_sql">INTO
+                                   Clause</a>.
+                  </p> 
+                            
+                  <p>If this clause is omitted, all rows of the current rowset are
+                                updated by the values in the <a href="update_sql.htm#SET_Clause"><var>assignment-list</var></a>.
+                  </p>
+                            
+                            
+                  <p>This clause cannot be specified if
+                                <a href="update_sql.htm#view_name_update_sql"><var>view-name</var></a>
+                                <code>SET *</code> is specified. 
+                  </p>
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+          
+        
+      <div class="noprint">
+         <p><a href="update_sql.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Examples_update_sql"></a></div> 
+         
+      <h2> Examples</h2> 
+          
+      <ul>
+         <li>
+            <p class="initem"><a href="update_sql.htm#update_sql_exa1">Example 1 - Searched UPDATE</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="update_sql.htm#update_sql_exa2">Example 2 - Searched UPDATE with assignment-list</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="update_sql.htm#update_sql_exa3">Example 3 - Positioned UPDATE</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="update_sql.htm#update_sql_exa4">Example 4 - Positioned UPDATE with assignment-list</a></p>
+         </li>
+      </ul> 
+         
+      <div><a name="update_sql_exa1"></a></div> 
+          
+      <h3> Example 1 - Searched UPDATE</h3> 
+           
+           <pre class="verbatim">DEFINE DATA LOCAL
+1 PERS VIEW OF SQL-PERSONNEL
+2 NAME
+2 AGE
+...
+END-DEFINE
+...
+ASSIGN AGE = 45
+ASSIGN NAME = 'SCHMIDT'
+UPDATE PERS SET * WHERE NAME = 'SCHMIDT' 
+...</pre> 
+          <div><a name="update_sql_exa2"></a></div> 
+          
+      <h3> Example 2 - Searched UPDATE with
+              <var>assignment-list</var></h3> 
+           
+           <pre class="verbatim">DEFINE DATA LOCAL
+1 PERS VIEW OF SQL-PERSONNEL
+2 NAME
+2 AGE
+...
+END-DEFINE
+...
+UPDATE SQL-PERSONNEL SET AGE = AGE + 1 WHERE NAME = 'SCHMIDT' 
+...</pre> 
+          <div><a name="update_sql_exa3"></a></div> 
+          
+      <h3>Example 3 - Positioned UPDATE</h3> 
+           
+           <pre class="verbatim">DEFINE DATA LOCAL
+1 PERS VIEW OF SQL-PERSONNEL
+2 NAME
+2 AGE
+...
+END-DEFINE
+...
+SELECT * INTO PERS FROM SQL_PERSONNEL WHERE NAME = 'SCHMIDT' 
+COMPUTE AGE = AGE + 1
+UPDATE PERS SET * WHERE CURRENT OF CURSOR
+END-SELECT
+...</pre> 
+          <div><a name="update_sql_exa4"></a></div> 
+          
+      <h3> Example 4 - Positioned UPDATE with
+              <var>assignment-list</var></h3> 
+           
+           <pre class="verbatim">
+DEFINE DATA LOCAL
+1 PERS VIEW OF SQL-PERSONNEL
+2 NAME
+2 AGE
+...
+END-DEFINE
+...
+SELECT * INTO PERS FROM SQL-PERSONNEL WHERE NAME = 'SCHMIDT'
+UPDATE SQL-PERSONNEL SET AGE = AGE + 1 WHERE CURRENT OF CURSOR 
+END-SELECT
+...</pre> 
+          
+       <div class="noprint">
+         <div class="nospy">
+            <p><a href="update_sql.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../sm/update_sql.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/sm/update_sql.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="sql-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="select_sql.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="sm_exas.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

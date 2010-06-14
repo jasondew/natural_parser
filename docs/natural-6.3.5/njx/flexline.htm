@@ -1,0 +1,247 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>FLEXLINE - Flexible Columns in Control Grids</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="flexline"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../njx/flexline.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/njx/flexline.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="workingwithgrids.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="rowtablearea2theflexiblecontrolgrid.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="mgdgrid.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Natural for Ajax&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x110"></a>FLEXLINE - Flexible Columns in Control
+               Grids
+         </h1>
+      </div> 
+         
+      <p>In a <a href="rowtablearea2theflexiblecontrolgrid.htm#rowtablearea2-gridlook">previous</a>
+             example, the grid was completely defined as part of the layout definition: the
+             sequence of columns was internally defined by defining the controls that are
+             part of an STR row.
+      </p> 
+          
+         
+      <p>This document covers the following
+             topics:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="flexline.htm#flexline-exa">Example</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="flexline.htm#flexline-njxadapter">Adapter Interface</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="flexline.htm#flexline-prop">FLEXLINE Properties</a></p>
+         </li>
+      </ul> 
+        
+      <hr>
+      <div><a name="flexline-exa"></a></div> 
+         
+      <h2>Example</h2> 
+          
+          
+      <p>Have a look at the following example:</p> 
+          
+      <p><img src="graphics/image132.png" alt="graphics/image132.png"></p> 
+          
+      <p>The grid looks like a normal ROWTABLEAREA2 grid, but it is built in a
+              more dynamic way.
+      </p> 
+          
+      <p>The XML layout definition is:</p> 
+          <pre class="verbatim">
+    &lt;pagebody&gt;
+        &lt;rowarea name="Example"&gt;
+            &lt;vdist height="5"&gt;
+            &lt;/vdist&gt;
+            &lt;rowtablearea2 griddataprop="lines" rowcount="10" width="395" withborder="true"&gt;
+                &lt;tr&gt;
+                    &lt;label name=" " asheadline="true"&gt;
+                    &lt;/label&gt;
+                    &lt;flexline infoprop="headline"&gt;
+                    &lt;/flexline&gt;
+                &lt;/tr&gt;
+                &lt;repeat&gt;
+                    &lt;str valueprop="selected"&gt;
+                        &lt;checkbox valueprop="selected" flush="screen" width="30"&gt;
+                        &lt;/checkbox&gt;
+                        &lt;flexline infoprop="/rowline"&gt;
+                        &lt;/flexline&gt;
+                        &lt;hdist width="100%"&gt;
+                        &lt;/hdist&gt;
+                    &lt;/str&gt;
+                &lt;/repeat&gt;
+            &lt;/rowtablearea2&gt;
+            &lt;vdist height="10"&gt;
+            &lt;/vdist&gt;
+        &lt;/rowarea&gt;
+        &lt;vdist height="5"&gt;
+        &lt;/vdist&gt;
+    &lt;/pagebody&gt;
+</pre> 
+          <p>You see that there are two FLEXLINE control definitions inside the
+              ROWTABLEAREA2 definition:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">One definition represents the headline of the grid.</p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">The other definition is part of each row's content.</p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>Each definition points to a property that passes the configuration at
+              runtime. Within the second definition, you may see something which is new for
+              you: the VALUEPROP references to a property
+              <code>/rowline</code>. The "/"
+              character at the beginning indicates that this property is
+              dynamically
+              controlled by the application through an adapter parameter.
+      </p> 
+           
+         
+      <div class="noprint">
+         <p><a href="flexline.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="flexline-njxadapter"></a></div> 
+         
+      <h2>Adapter Interface</h2> 
+          
+          
+      <p>In the parameter data area of the adapter, the grid data is represented
+              by the following data structure:
+      </p> 
+          <pre class="verbatim">DEFINE DATA PARAMETER
+1 HEADLINE (1:*)
+2 ATTRIBUTES (U) DYNAMIC
+2 CONTROL (U) DYNAMIC
+1 LINES (1:*)
+2 SELECTED (L)
+1 ROWLINE (1:*)
+2 ATTRIBUTES (U) DYNAMIC
+2 CONTROL (U) DYNAMIC
+END-DEFINE</pre> 
+         <div class="noprint">
+         <p><a href="flexline.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="flexline-prop"></a></div> 
+         
+      <h2>FLEXLINE Properties</h2> 
+              
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="14%">
+            <col width="55%">
+            <col width="14%">
+            <col width="14%">
+         </colgroup>      
+         <tbody align="left" valign="top">       
+            <tr>        
+               <td colspan="4">Basic</td>      
+            </tr>
+            <tr>        
+               <td align="left" valign="top">infoprop</td>        
+               <td align="left" valign="top">
+                  <p>Name of the adapter parameter that represents the control in the adapter.</p>
+               </td>        
+               <td align="left" valign="top">Obligatory</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">withborder</td>        
+               <td align="left" valign="top">
+                  <p>Flag that indicates if a border is drawn between the controls that are rendered inside the FLEXLINE control. Default is "false",
+                     i.e. no border is drawn.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>true</p>
+                  <p>false</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">comment</td>        
+               <td align="left" valign="top">
+                  <p>Comment without any effect on rendering and behaviour. The comment is shown in the layout editor's tree view.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>      
+         </tbody>     
+      </table>     
+         
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="flexline.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../njx/flexline.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/njx/flexline.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="workingwithgrids.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="rowtablearea2theflexiblecontrolgrid.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="mgdgrid.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

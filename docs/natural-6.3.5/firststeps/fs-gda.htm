@@ -1,0 +1,463 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Global Data Areas</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="fs-gda"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../firststeps/fs-gda.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/firststeps/fs-gda.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="fs-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="fs-lda.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="fs-extsub.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;First Steps&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x36"></a>Global Data Areas
+         </h1>
+      </div> 
+         
+      <p>Data defined in a global data area (GDA) can be shared by multiple
+             programs, external subroutines and helproutines.
+      </p> 
+         
+      <p>Any modification of a data element value in a global data area affects
+             all Natural objects that reference this global data area. Therefore, if you
+             change the source of a global data area, you have to stow all previously
+             created Natural objects that reference this global data area once more. The
+             sequence in which objects are stowed is important. You must first stow the
+             global data area and then the program. If you stow the program first and then
+             the global data area, the program cannot be stowed because new elements in the
+             global data area cannot be found.
+      </p> 
+         
+      <p>You will now create a global data area which will be shared by your
+             program and an external subroutine that you will create later. As the basis for
+             your global data area, you will use some of the information from the local data
+             area you have just created.
+      </p> 
+         
+      <p>When you have completed the exercises below, your sample application will
+             consist of the following modules:
+      </p> 
+         
+      <p><img src="graphics/fs-gda.png" alt="Application structure" width="600" height="200"></p> 
+         
+      <p>This document contains the following
+             exercises:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="fs-gda.htm#fs-gda-fromlda">Creating a Global Data Area from an Existing Local Data Area</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="fs-gda.htm#fs-gda-adaptlda">Adapting the Local Data Area</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="fs-gda.htm#fs-gda-ref">Referencing the Global Data Area from Your Program</a></p>
+         </li>
+      </ul>
+      <hr>
+      <div><a name="fs-gda-fromlda"></a></div> 
+         
+      <h2>Creating a Global Data Area from an Existing Local Data Area</h2> 
+          
+          
+      <p>You can create a new data area from an existing data area by editing it
+              and saving it under a different name and with a different type. The original
+              data area remains unchanged, and the new data area can be edited. Since the
+              fields <code>#NAME-START</code> and <code>#NAME-END</code> are not required in
+              the global data area, you will remove them.
+      </p> 
+           
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To create the global data area</strong></p>
+      <ol class="steps">
+         <li> 
+                   
+                   
+            <p class="instep">Return to your local data area by entering the
+                       following in the command line of the program editor.
+            </p> <pre class="command-input">E LDA01</pre> 
+                   
+                 </li>
+         <li> 
+                   
+                    
+                   
+            <p class="instep">To save the data area under a new name, enter the
+                       following in the command line of the data area editor.
+            </p> <pre class="command-input">SA GDA01</pre> 
+                   
+                    
+                   <p class="instep">The current data area is saved with the new name
+                       <code>GDA01</code>. The local data area named <code>LDA01</code> is still shown
+                       in the data area editor.
+            </p> 
+                 
+         </li>
+         <li> 
+                   
+                    
+                   
+            <p class="instep">Load <code>GDA01</code> into the data area editor by
+                       entering the following command:
+            </p> <pre class="command-input">E GDA01</pre> 
+                   
+                 </li>
+         <li> 
+                   
+                    
+                   
+            <p class="instep">To change the local data area into a global data area,
+                       enter the following command:
+            </p> <pre class="command-input">SET TYPE G</pre> 
+                   <p class="instep">where "G" denotes global
+                       data area.
+            </p> 
+                   
+                    
+                   
+            <p class="instep">The object type changes to
+                       "Global". This is indicated at the top
+                       of the screen.
+            </p> 
+                 
+         </li>
+         <li> 
+                   
+                    
+                   
+            <p class="instep">Press <span class="key">ESC</span> to enter edit
+                       mode. Use the line command <code>D</code> to delete the
+                       following fields:
+            </p> 
+                   
+            <p class="mini-list"> 
+                       <code>#NAME-START</code><br> 
+                       <code>#NAME-END</code> 
+                      
+            </p> 
+                    
+                   
+                 
+         </li>
+         <li> 
+                   
+                    
+                    
+                   
+                   
+                   
+            <p class="instep">The global data area should now look as follows:</p> 
+                    
+                    
+                   
+            <table border="1" cellpadding="5" class="screen">
+               <tr>
+                  <td><pre>                       Press &lt;ESC&gt; to enter command mode                        
+ Mem: GDA01    Lib: TUTORIAL Type: GLOBAL     Bytes:   351  Line:    1 of:   8  
+C T L  Name of Datafield                F     Length Index/Comment             M
+  *    *** Top of Data Area ***                                                 
+     1 #MARK                            A          1                            
+  V  1 EMPLOYEES-VIEW                                EMPLOYEES                  
+     2 PERSONNEL-ID                     A          8                            
+  G  2 FULL-NAME                                                                
+     3 NAME                             A         20                            
+     2 DEPT                             A          6                            
+  G  2 LEAVE-DATA                                                               
+     3 LEAVE-DUE                        N          2                            
+  *    *** End of Data Area ***                                                 
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+  F 1 HELP     F 2 CHOICE   F 3 QUIT     F 4 SAVE     F 5 STOW     F 6 CHECK    
+  F 7 READ     F 8 CLEAR    F 9 MEM TYPE F10 GEN      F11 FLD TYPE F12</pre></td>
+               </tr>
+            </table> 
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Stow the global data area.</p> 
+                   
+                 
+         </li>
+      </ol> 
+         
+      <div class="noprint">
+         <p><a href="fs-gda.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="fs-gda-adaptlda"></a></div> 
+         
+      <h2>Adapting the Local Data Area</h2> 
+          
+          
+      <p>The fields contained in the global data area are no longer required in
+              the local data area. Therefore, you will now remove all fields except
+              <code>#NAME-START</code> and <code>#NAME-END</code> from the local data
+              area.
+      </p> 
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To remove the fields</strong></p>
+      <ol class="steps">
+         <li> 
+                   
+                    
+                   
+            <p class="instep">Return to your local data area by entering the
+                       following in the command line of the data area editor:
+            </p> <pre class="command-input">E LDA01</pre> 
+                   
+                   
+                 </li>
+         <li> 
+                   
+                   
+            <p class="instep">Use the line command <code>D</code> to
+                       delete all fields except <code>#NAME-START</code> and
+                       <code>#NAME-END</code>.
+            </p> 
+                   
+            <p class="instep">When you delete the top-level entry for the view
+                       (indicated by a "V" in front of the view name), all
+                       fields belonging to this view are automatically deleted.
+            </p>
+                   
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Stow the modified local data area.</p> 
+                   
+                   
+            <p class="instep">The local data area should now look as follows:</p> 
+                    
+                    
+                   
+            <table border="1" cellpadding="5" class="screen">
+               <tr>
+                  <td><pre>Command:                                                                       
+ Mem: LDA01    Lib: TUTORIAL Type: LOCAL      Bytes:    85  Line:      of:   2 
+C T    Comment                                                                 
+  *    *** Top of Data Area ***                                                
+     1 #NAME-START                      A         20                           
+     1 #NAME-END                        A         20                           
+  *    *** End of Data Area ***                                                
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+  F 1 HELP     F 2 CHOICE   F 3 QUIT     F 4 SAVE     F 5 STOW     F 6 CHECK   
+  F 7 READ     F 8 CLEAR    F 9 MEM TYPE F10 GEN      F11 FLD TYPE F12 </pre></td>
+               </tr>
+            </table> 
+                 
+         </li>
+      </ol> 
+         
+      <div class="noprint">
+         <p><a href="fs-gda.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="fs-gda-ref"></a></div> 
+         
+      <h2>Referencing the Global Data Area from Your Program</h2> 
+          
+          
+      <p>Once a global data area has been stowed, it can be referenced by a
+              Natural program.
+      </p> 
+          
+      <p>You will now change the <code>DEFINE DATA</code> statement in your
+              program so that it also uses the global data area that you have just
+              defined.
+      </p> 
+           
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To use the global data area in your program</strong></p>
+      <ol class="steps">
+         <li> 
+                   
+                   
+            <p class="instep">Return to the program editor by entering the
+                       following in the command line of the data area editor.
+            </p> <pre class="command-input">E PGM01</pre> 
+                   
+                 </li>
+         <li> 
+                   
+                   
+            <p class="instep">Insert the following in the line above <code>LOCAL USING
+                  LDA01</code>:
+            </p> 
+                   <pre class="verbatim">GLOBAL USING GDA01</pre> 
+                   <p class="instep">A global data area must always be defined before a local data area.
+                       Otherwise, an error occurs.
+            </p> 
+                   
+                   
+                   
+            <p class="instep">Your program should now look as follows:</p> 
+                   <pre class="verbatim">DEFINE DATA
+  GLOBAL USING GDA01  
+  LOCAL USING LDA01
+END-DEFINE
+*
+RP1. REPEAT
+*
+  INPUT USING MAP 'MAP01'
+*
+  IF #NAME-START = '.' THEN
+    ESCAPE BOTTOM (RP1.)
+  END-IF
+*
+  IF #NAME-END = ' ' THEN
+    MOVE #NAME-START TO #NAME-END
+  END-IF
+*
+  RD1. READ EMPLOYEES-VIEW BY NAME
+    STARTING FROM #NAME-START
+    ENDING AT #NAME-END
+*    
+    IF LEAVE-DUE &gt;= 20 THEN
+      PERFORM MARK-SPECIAL-EMPLOYEES
+    ELSE
+      RESET #MARK
+    END-IF
+*
+    DISPLAY NAME 3X DEPT 3X LEAVE-DUE 3X '&gt;=20' #MARK
+*
+  END-READ
+*
+  IF *COUNTER (RD1.) = 0 THEN
+    REINPUT 'No employees meet your criteria.'
+  END-IF
+*
+END-REPEAT
+*
+DEFINE SUBROUTINE MARK-SPECIAL-EMPLOYEES
+  MOVE '*' TO #MARK
+END-SUBROUTINE
+*
+END</pre> 
+                 </li>
+         <li> 
+                   
+                   
+            <p class="instep">Run the program.</p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">To confirm that the results are the same as before (when the
+                       <code>DEFINE DATA</code> statement did not reference a global data area), enter
+                       "JONES" as the starting name and press
+                       <span class="key">ENTER</span>. 
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                    
+                   
+            <p class="instep">To return to the program editor, enter
+                       <code>EDIT</code> at the <code>MORE</code> prompt.
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Stow the program.</p> 
+                   
+                 
+         </li>
+      </ol> 
+          
+      <p>You can now proceed with the next exercises:
+              <a href="fs-extsub.htm#fs-extsub">External
+            Subroutines</a>.
+      </p> 
+         
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="fs-gda.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../firststeps/fs-gda.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/firststeps/fs-gda.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="fs-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="fs-lda.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="fs-extsub.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

@@ -1,0 +1,232 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Redefining Fields</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="pg_defi_redef"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_defi_redef.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_defi_redef.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_defi-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_defi_init.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_defi_array.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Programming Guide&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> Redefining Fields 
+               <a name="x115"></a> 
+               <a name="x116"></a></h1>
+      </div> 
+         
+         
+      <p>Redefinition is used to change the format of a field, or to divide a
+             single field into segments.
+      </p> 
+         
+      <p>This document covers the following topics:</p>
+         
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_defi_redef.htm#redefine_option">Using the REDEFINE Option of DEFINE DATA</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_redef.htm#redefine_exa">Example Program Illustrating the Use of a Redefinition</a></p>
+         </li>
+      </ul> 
+        
+      <hr> 
+        
+      <div><a name="redefine_option"></a></div> 
+         
+      <h2> 
+             <a name="x117"></a> Using the REDEFINE Option of DEFINE DATA
+      </h2> 
+          
+          
+      <p>The <a href="../sm/defineda_redef.htm"><code>REDEFINE</code></a> option of the
+              <a href="../sm/defineda.htm"><code>DEFINE DATA</code></a>
+              statement can be used to redefine a single field - either a user-defined
+              variable or a database field - as one or more new fields. A group can also be
+              redefined.
+      </p> 
+          
+      <p class="important"><strong>Important:</strong><br>Dynamic variables are not allowed in a redefinition.
+      </p>
+          
+          
+      <p>The <code>REDEFINE</code> option redefines byte positions of a field
+              from left to right, regardless of the format. Byte positions must match between
+              original field and redefined field(s).
+      </p> 
+          
+      <p>The redefinition must be specified immediately after the definition of
+              the original field.
+      </p> 
+          
+      <h4 class="floating-title"> Example 1:</h4> 
+          
+      <p>In the following example, the database field <code>BIRTH</code> is
+              redefined as three new user-defined variables:
+      </p> 
+          <pre class="verbatim">
+DEFINE DATA LOCAL                 
+01 EMPLOY-VIEW VIEW OF STAFFDDM  
+  02 NAME                        
+  02 BIRTH                       
+<strong>  02 REDEFINE BIRTH              
+     03 #BIRTH-YEAR  (N4)          
+     03 #BIRTH-MONTH (N2)         
+     03 #BIRTH-DAY   (N2)</strong>           
+END-DEFINE 
+   ...
+</pre> 
+          <h4 class="floating-title"> Example 2:</h4> 
+          
+      <p>In the following example, the group <code>#VAR2</code>, which consists
+              of two user-defined variables of format N and P respectively, is redefined as a
+              variable of format A:
+      </p> 
+          <pre class="verbatim">
+DEFINE DATA LOCAL                    
+01 #VAR1 (A15)                  
+01 #VAR2                        
+  02 #VAR2A (N4.1)             
+  02 #VAR2B (P6.2)             
+<strong>01 REDEFINE #VAR2 
+  02 #VAR2RD (A10)</strong>
+END-DEFINE 
+   ...
+</pre> 
+          <p>With the notation <a href="../sm/defineda_redef.htm#FILLERnX"><code>FILLER
+               <var>n</var>X</code></a> you can define
+              <var>n</var> filler bytes - that is, segments which are not to
+              be used - in the field that is being redefined. (The definition of trailing
+              filler bytes is optional.)
+      </p> 
+          
+      <h4 class="floating-title">Example 3:</h4> 
+          
+      <p>In the following example, the user-defined variable <code>#FIELD</code>
+              is redefined as three new user-defined variables, each of format/length A2. The
+              <code>FILLER</code> notations indicate that the 3rd and 4th and 7th to 10th
+              bytes of the original field are not be used.
+      </p> 
+          <pre class="verbatim">
+DEFINE DATA LOCAL 
+1 #FIELD (A12)                       
+<strong>1 REDEFINE #FIELD 
+  2 #RFIELD1 (A2) 
+  2 FILLER 2X 
+  2 #RFIELD2 (A2) 
+  2 FILLER 4X 
+  2 #RFIELD3 (A2) </strong>
+END-DEFINE 
+...
+</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_defi_redef.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="redefine_exa"></a></div> 
+         
+      <h2> Example Program Illustrating the Use of a Redefinition</h2> 
+          
+          
+      <p>The following program illustrates the use of a redefinition:</p> 
+          <pre class="verbatim">
+** Example 'DDATAX01': DEFINE DATA
+************************************************************************
+DEFINE DATA LOCAL
+01 VIEWEMP VIEW OF EMPLOYEES
+  02 NAME
+  02 FIRST-NAME
+  02 SALARY   (1:1)
+*
+01 #PAY       (N9)
+<strong>01 REDEFINE #PAY
+  02 FILLER   3X
+  02 #USD     (N3)
+  02 #OOO     (N3)</strong>
+END-DEFINE
+*
+READ (3) VIEWEMP BY NAME STARTING FROM 'JONES'
+  MOVE SALARY (1) TO #PAY
+  DISPLAY NAME FIRST-NAME #PAY #USD #OOO
+END-READ
+END
+</pre> 
+          <p>Output of Program <code>DDATAX01</code>:
+      </p> 
+          
+      <p>Note how <code>#PAY</code> and the fields resulting from its definition
+              are displayed:
+      </p> <pre class="system-output">
+Page      1                                                  04-11-11  14:15:54
+ 
+        NAME              FIRST-NAME         #PAY    #USD #OOO
+-------------------- -------------------- ---------- ---- ----
+ 
+JONES                VIRGINIA                  46000   46    0
+JONES                MARSHA                    50000   50    0
+JONES                ROBERT                    31000   31    0              
+            </pre> 
+          
+        
+       <div class="noprint">
+         <div class="nospy">
+            <p><a href="pg_defi_redef.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_defi_redef.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_defi_redef.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_defi-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_defi_init.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_defi_array.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

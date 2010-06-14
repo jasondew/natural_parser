@@ -1,0 +1,425 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Migrating Existing Applications</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="uni-migrate"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../unicode/uni-migrate.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/unicode/uni-migrate.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="uni-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="uni-diff.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="uni-limit.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Unicode and Code Page Support&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1>Migrating Existing Applications</h1>
+      </div> 
+         
+      <p>This document covers the following
+             topics:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="uni-migrate.htm#uni-migrate-impact">Impact of Unicode on Existing Applications</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="uni-migrate.htm#uni-migrate-objectswinux">Migrating Existing Objects on Windows, UNIX and OpenVMS Platforms</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="uni-migrate.htm#uni-migrate-addunicode">Adding Unicode Support to Existing Applications</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="uni-migrate.htm#uni-migrate-rpc">Migrating Natural Remote Procedure Calls (RPC)</a></p>
+         </li>
+      </ul>
+      <hr>
+      <div><a name="uni-migrate-impact"></a></div> 
+         
+      <h2>Impact of Unicode on Existing Applications</h2> 
+         
+      <div><a name="d0e5074"></a></div> 
+          
+      <h3>Windows, UNIX and OpenVMS Platforms</h3> 
+           
+           
+      <p>On Windows, UNIX and OpenVMS platforms, Natural has internally been
+               Unicode-enabled which means that many structures containing strings have
+               Unicode format now. For example, the Natural source area has now Unicode
+               format. For this reason, data which is only available in code page format is
+               internally converted to Unicode format. This applies, for example, to the
+               Natural sources and to the Natural library names and object names. However, a
+               conversion from code page to Unicode and vice versa can only be performed
+               successfully if the correct code page is used for conversion. Even if an
+               application is not changed but only re-cataloged, the code page information is
+               important because for cataloging an object is loaded into the Natural source
+               area. If all objects are coded in the system code page, no changes are
+               necessary. If the objects are not coded in the system code page, see
+               <a href="uni-migrate.htm#uni-migrate-objectswinux">Migrating Existing
+            Objects on Windows, UNIX and OpenVMS Platforms</a> for further
+               information. 
+      </p> 
+           
+      <p>The internal Unicode structure will most probably need more memory. If
+               you have defined a low value for the profile parameter
+               <a href="../parms/usize.htm"><code>USIZE</code></a>, it may be necessary to
+               increase this value.
+      </p> 
+          
+      <div class="noprint">
+         <p><a href="uni-migrate.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="uni-migrate-objectswinux"></a></div> 
+         
+      <h2>Migrating Existing Objects on Windows, UNIX and OpenVMS
+             Platforms
+      </h2> 
+          
+          
+      <p>Natural has been extended so that the code page information can be
+              defined on several levels:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">The Natural profile parameter <a href="../parms/cp.htm"><code>CP</code></a> defines the default
+                      Natural code page.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">For several objects (Natural sources, Natural batch input/output
+                      files, work files of type ASCII, ASCII compressed, Unformatted and CSV) an
+                      object-specific code page can be defined.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>If neither an object-specific code page nor a default code page is
+              defined, Natural will use the operating system's code page.
+      </p> 
+          
+      <p>Since it is not possible to identify the correct code page
+              automatically, it is important that you define the required code page
+              information yourself. The following scenarios are possible:
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="32%">
+            <col width="22%">
+            <col width="43%">
+         </colgroup> 
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th>Status</th> 
+                       
+               <th>Effort</th> 
+                       
+               <th>Action</th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td>All data is available in the operating system's
+                  code page. 
+               </td> 
+                       
+               <td>No effort </td> 
+                       
+               <td>No action.</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>All data is stored with one code page, but this
+                  code page differs from the operating system's code page. 
+               </td> 
+                       
+               <td>Easy</td> 
+                       
+               <td>The Natural profile parameter
+                  <a href="../parms/cp.htm"><code>CP</code></a> has to be
+                           set to the correct code page. 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>The data is available in different code pages.
+                  
+               </td> 
+                       
+               <td>Depends on the number of sources and code pages
+                  
+               </td> 
+                       
+               <td>The correct code page has to be defined for every
+                  Natural object: 
+                  
+                  <ul> 
+                               
+                     <li> 
+                                    
+                                   
+                        <p class="initem"><strong>Sources</strong><br>If only few objects are affected, change the code page via the
+                                       <span class="selectable_label">Properties</span> dialog box. If several
+                                       objects (for example, an entire library) are affected, use the
+                                       <a href="../utis/ftouch.htm"><code>FTOUCH</code></a> utility for changing the code
+                                       page. 
+                        </p> 
+                                  
+                     </li> 
+                               
+                     <li> 
+                                    
+                                   
+                        <p class="initem"><strong>Batch Files</strong><br>Set the Natural profile parameters
+                                       <a href="../parms/cpobjin.htm"><code>CPOBJIN</code></a>,
+                                       <a href="../parms/cpsynin.htm"><code>CPSYNIN</code></a>
+                                       and <a href="../parms/cpprint.htm"><code>CPPRINT</code></a> to the
+                                       correct code page. 
+                        </p> 
+                                  
+                     </li> 
+                               
+                     <li> 
+                                    
+                                   
+                        <p class="initem"><strong>Work Files</strong><br>Set correct code page for the
+                                       <a href="../config/cfg-profileparm.htm#cfg-prf-exe-workfiles">work files</a> in the Configuration Utility.
+                        </p> 
+                                  
+                     </li> 
+                              
+                  </ul>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>Different code pages are mixed in one object (for
+                  example, in a source) 
+               </td> 
+                       
+               <td>High</td> 
+                       
+               <td>The object has to be rewritten in UTF-8 format.
+                  
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+         
+      <div class="noprint">
+         <p><a href="uni-migrate.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="uni-migrate-addunicode"></a></div> 
+         
+      <h2> 
+             <a name="x32"></a>Adding Unicode Support to Existing Applications
+      </h2> 
+          
+          
+      <p>It is easy to extend existing applications with new source code based on
+              the U format. The following rules have to be regarded for the U format (as
+              compared with the A format):
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">A <a href="../sm/redefine.htm"><code>REDEFINE</code></a>
+                      of U to a format other than U should be avoided because this may result in
+                      split characters.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">U format is endian-dependant. This has to be considered when moving
+                      between the formats B and U.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Align U in <a href="../sm/defineda.htm"><code>DEFINE
+                     DATA</code></a> for performance reasons (better performance on UNIX and
+                      OpenVMS).
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Keep in mind that characters may be lost when moving U to A.</p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>If you want to change existing fields from A format to U format, the
+              following rules have to be regarded: 
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">Code which assumes a specific encoding of strings has to be changed
+                      (for example, comparison with a B field).
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">All <a href="../sm/redefine.htm"><code>REDEFINE</code></a> statements of the
+                      field have to be checked for their validity.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">A <code>REDEFINE</code> to N is not possible (that is: you will not
+                      get the expected result).
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">The database field has to be migrated to Unicode (provided that this
+                      is supported by your database).
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">You may have to change the length of the field: if the A field
+                      contains DBCS characters, half the length is required for the U field. 
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+         
+      <div class="noprint">
+         <p><a href="uni-migrate.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="uni-migrate-rpc"></a></div> 
+         
+      <h2>Migrating Natural Remote Procedure Calls (RPC)</h2> 
+          
+          
+      <p>The profile parameter <code>CP</code> has been renamed to
+              <a href="../parms/cprpc.htm"><code>CPRPC</code></a>. In
+              earlier Natural versions, <code>CP</code> was used to specify the
+              name of the code page used by the Entire Conversion Service (ECS) and applied
+              only to the Natural Remote Procedure Call when the transport protocol ACI (that
+              is EntireX Broker) was used. 
+      </p> 
+          
+      <p>As of version 6.2 (Windows and UNIX), version 6.3 (OpenVMS) and version
+              4.2 (mainframe), a new <a href="../parms/cp.htm"><code>CP</code></a> parameter is
+              available which defines the default code page for Natural data. When you are
+              working with Natural RPC and have previously used the <code>CP</code>
+              parameter dynamically, you have to change this parameter to
+              <code>CPRPC</code>. 
+      </p> 
+         
+      <div><a name="d0e5664"></a></div> 
+          
+      <h3>Windows, UNIX and OpenVMS Platforms</h3> 
+           
+           
+      <p>When you use parameter files from a previous version, you need not
+               change anything; the <a href="../config/cfg-over.htm">Configuration Utility</a> automatically migrates
+               <code>CP</code> to <code>CPRPC</code>. 
+      </p> 
+          
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="uni-migrate.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../unicode/uni-migrate.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/unicode/uni-migrate.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="uni-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="uni-diff.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="uni-limit.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

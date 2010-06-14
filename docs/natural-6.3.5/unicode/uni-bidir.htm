@@ -1,0 +1,309 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Bidirectional Language Support</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="uni-bidir"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../unicode/uni-bidir.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/unicode/uni-bidir.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="uni-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="uni-limit.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="uni-dbcs.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Unicode and Code Page Support&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x33"></a>Bidirectional Language Support
+         </h1>
+      </div> 
+         
+         
+      <p>Some languages, for example Arabic and Hebrew, are written from
+             right-to-left (RTL), whereas the majority of the languages, for example English
+             and German, are written from left-to-right (LTR). Text which contains both
+             left-to-right and right-to-left characters is called bidirectional text. 
+      </p> 
+         
+      <p>Natural provides a basic support for bidirectional languages. On Windows,
+             this support is activated when both the Natural default code page and the
+             Windows system code page are defined as bidirectional code pages. If Natural
+             does not define a specific code page, it is sufficient when a bidirectional
+             Windows system code page has been defined. On UNIX and OpenVMS, the support for
+             bidirectional languages is activated when the Natural default code page is a
+             bidirectional code page. On mainframes, support for bidirectional languages
+             cannot be activated automatically; the user always has to specify all required
+             parameters (for example, <code>PM=I</code>) as described below .
+      </p> 
+         
+      <p>The output of Natural programs can be controlled using the profile
+             parameter <a href="../parms/pm.htm#pm-prof"><code>PM</code></a>, the
+             terminal command <a href="../tcom/pcv.htm"><code>%V</code></a>, and the session
+             parameter <a href="../parms/pm.htm#sp_pm"><code>PM</code></a>. 
+      </p> 
+         
+      <p>On mainframes, UNIX and OpenVMS, the profile parameter
+             <a href="../parms/do.htm"><code>DO</code></a> (Display Order) is
+             additionally used to support applications that have been originally written for
+             terminals which support inverse (right-to-left) print mode, but no
+             bidirectional data. These applications create the display order of
+             bidirectional data in the application code. With the parameter
+             <code>DO</code>, these applications are enabled to run compatibly
+             also with I/O devices that support bidirectional data. This is for instance the
+             case if an application runs in a browser with the Natural Web I/O
+             Interface.
+      </p> 
+         
+      <p>The profile parameter <code>PM</code> defines the default
+             screen direction. When <code>PM</code> is set to
+             "R" (reset), the default screen direction is
+             left-to-right. When <code>PM</code> is set to
+             "I" (inverse), the default screen direction is
+             right-to-left. All non-alphanumeric fields, system variables and (only on
+             mainframes) PF key lines are automatically inverted by Natural so that they are
+             displayed correctly from right-to-left if the screen direction is
+             right-to-left. On UNIX and OpenVMS, PF key lines are not inverted; they are
+             always shown from left-to-right. 
+      </p> 
+         
+      <p>The terminal command <code>%V</code> can be used to change
+             the screen direction. If the screen direction is right-to-left, the layout of
+             the current window is mirrored, which means that the origin of all window
+             components or fields is the upper right corner. The screen direction is changed
+             to right-to-left using <code>%VON</code> and is reverted to
+             left-to-right using <code>%VOFF</code>. 
+      </p> 
+         
+      <p>The session parameter <code>PM</code> reverses the direction of
+             a field. The effect of "reversing the direction of a field"
+             depends on the statement in which the <code>PM</code> parameter is
+             used and the platform. If the <code>PM</code> parameter is used in a
+             <code>MOVE</code> statement, the content of the field is simply reversed (that
+             is, the first character will become the last character, and so on); the result
+             does not depend on the characters of the field. Trailing blanks are removed
+             before the field is reversed. 
+      </p> 
+         
+      <p>For example, the following program</p> 
+         <pre class="verbatim">DEFINE DATA LOCAL
+1  TEST1  (A10)
+1  TEST2  (A10)
+END-DEFINE
+TEST1 := 'program'
+
+MOVE TEST1 (PM=I) TO TEST2
+INPUT TEST1 (AD=O) TEST2 (AD=O)
+
+END</pre> 
+         <p>produces the following output:</p><pre class="system-output">TEST1 program    TEST2 margorp</pre> 
+         <p>where "margorp" is the reversed version of
+             "program".
+      </p> 
+         
+      <p>When the <code>PM</code> parameter is used for IO statements
+             such as <code>INPUT</code> or <code>DISPLAY</code>, its effect is even more
+             complex. In this case, the field direction is based on the screen direction:
+             
+      </p> 
+         
+      <ul> 
+             
+         <li> 
+                 
+            <p class="initem">If the screen direction is left-to-right and <code>PM=I</code> is
+                     applied to a field, the field direction changes to right-to-left.
+            </p> 
+                
+         </li> 
+             
+         <li> 
+                 
+            <p class="initem">If the screen direction is right-to-left and <code>PM=I</code> is
+                     applied to a field, the field direction changes to left-to-right.
+            </p> 
+                
+         </li> 
+            
+      </ul> 
+         
+      <p>On Windows and browser terminals (Natural Web I/O Interface),
+             "reversing the field direction" does not mean that the characters
+             of the field are simply reversed. Instead, the complex bidirectional algorithm
+             is applied (for more information, see the Microsoft Windows documentation). On
+             other terminals (character-oriented), however, the characters of a field are
+             not resorted; they are simply reversed.
+      </p> 
+         
+      <p>In the following example, the characters assigned to the variable
+             <code>TEST</code> have been entered in the following sequence:
+      </p> 
+         
+      <p><img src="graphics/uni-testvariable-definedsequence.png" alt="Test variable" width="163" height="12"></p> 
+         
+      <p>The following is an example program for Windows. The characters of the
+             constant are already resorted when entering them in the program editor.
+      </p> 
+         <pre class="verbatim">DEFINE DATA LOCAL
+1  TEST  (A20)
+END-DEFINE
+TEST := 'abc 123 <img src="graphics/uni-testvariable-reversed.png" alt="graphics/uni-testvariable-reversed.png" width="21" height="6">'
+
+SET CONTROL 'voff'
+
+INPUT TEST (AD=O)  /
+      TEST (AD=O PM=I) 
+
+SET CONTROL 'von'
+
+INPUT TEST (AD=O)  /
+      TEST (AD=O PM=I) 
+END</pre> 
+         <p>This program produces the following two screens on Windows:</p> 
+         <pre class="verbatim">TEST abc 123 <img src="graphics/uni-testvariable-reversed.png" alt="graphics/uni-testvariable-reversed.png" width="21" height="6"> 
+TEST          123 <img src="graphics/uni-testvariable-reversed.png" alt="graphics/uni-testvariable-reversed.png" width="21" height="6">  abc</pre> 
+         <p>and</p> 
+         <pre class="verbatim">                                           123 <img src="graphics/uni-testvariable-reversed.png" alt="graphics/uni-testvariable-reversed.png" width="21" height="6">  abc TEST
+                                  abc 123 <img src="graphics/uni-testvariable-reversed.png" alt="graphics/uni-testvariable-reversed.png" width="21" height="6">           TEST</pre> 
+         <p>The following is an example program for UNIX, OpenVMS and mainframes. If
+             the characters are entered in the same sequence, the program is displayed in
+             the following way, because the characters are simply displayed in the keying
+             sequence.
+      </p> 
+         <pre class="verbatim">DEFINE DATA LOCAL
+1  TEST  (A20)
+END-DEFINE
+TEST := 'abc <img src="graphics/uni-testvariable.png" alt="graphics/uni-testvariable.png" width="21" height="6"> 123'
+ 
+SET CONTROL 'voff'
+ 
+INPUT TEST (AD=O)  /
+      TEST (AD=O PM=I) 
+ 
+SET CONTROL 'von'
+ 
+INPUT TEST (AD=O)  /
+      TEST (AD=O PM=I) 
+END</pre> 
+         <p> On UNIX and OpenVMS, this program produces the following two
+             screens:
+      </p> 
+         <pre class="verbatim">TEST abc <img src="graphics/uni-testvariable.png" alt="graphics/uni-testvariable.png" width="21" height="6"> 123 
+TEST          321 <img src="graphics/uni-testvariable-reversed.png" alt="graphics/uni-testvariable-reversed.png" width="21" height="6">  cba</pre> 
+         <p>and</p> 
+         <pre class="verbatim">                                           321 <img src="graphics/uni-testvariable-reversed.png" alt="graphics/uni-testvariable-reversed.png" width="21" height="6">  cba TSET
+                                  abc <img src="graphics/uni-testvariable.png" alt="graphics/uni-testvariable.png" width="21" height="6"> 123           TSET</pre> 
+         <p> On mainframes, this program produces two identical screens (on
+             mainframes, the statements <code>SET CONTROL 'voff'</code> and <code>SET
+            CONTROL 'von'</code> do not apply to alphanumeric fields). Both screens look as
+             follows:
+      </p> 
+         <pre class="verbatim">TEST abc <img src="graphics/uni-testvariable.png" alt="graphics/uni-testvariable.png" width="21" height="6"> 123 
+TEST          321 <img src="graphics/uni-testvariable-reversed.png" alt="graphics/uni-testvariable-reversed.png" width="21" height="6">  cba</pre>
+         <p>On Windows, UNIX and OpenVMS, the <a href="../edis/edis_ux_map.htm">map
+                editor</a> simplifies the
+             handling of maps with bidirectional fields by offering the <a href="../edis/edis_ux_map.htm#edis_ux_map_Ops_Map"><span class="guimenuitem">Reverse
+               Map</span></a> command. This command changes the display direction
+             of the current map. The position of the fields is not changed; only the view is
+             changed. On Windows, this command applies only to the current map. On UNIX and
+             OpenVMS, a flag is set so that all following maps are displayed reversed; a
+             following <span class="guimenuitem">Reverse Map</span> command will restore the
+             original situation. 
+      </p> 
+         
+      <p>On Windows, the output of
+             dialogs can be
+             controlled in a similar way: both the dialog itself and most of the dialog
+             controls offer an <code>RTL</code> attribute. If the
+             <code>RTL</code> attribute of the dialog is checked, the
+             screen direction of the dialog is right-to-left. If the
+             <code>RTL</code> attribute of other controls is checked, the
+             direction of these controls is right-to-left. 
+      </p> 
+         
+      <p>The profile parameter <code>PM</code> defines the default
+             setting of the <code>RTL</code> attribute for new dialogs.
+             When <code>PM</code> is set to "R"
+             (reset), the <code>RTL</code> attribute is unchecked by
+             default. When <code>PM</code> is set to
+             "I" (inverse), the
+             <code>RTL</code> attribute is checked by default. The default
+             setting of the <code>RTL</code> attribute for newly created
+             controls of a dialog is derived from the <code>RTL</code>
+             attribute setting of the dialog. 
+      </p> 
+         
+      <p>If the <code>RTL</code> attribute of a dialog is
+             changed when the dialog already contains controls, a dialog appears asking
+             whether the <code>RTL</code> attributes of the controls
+             should also be changed. 
+      </p> 
+         
+      <p>When working with bidirectional languages on Windows,
+             "GUI" is the preferred
+             print method. With the print method
+             "GUI", the printed page will show the same layout as
+             the window displayed on the screen. The sorting of the field characters is
+             identical. If the print method "TTY" is used, the
+             printed layout will most probably differ from the layout of the screen window
+             because the field characters are printed in logical sequence. For fields with
+             right-to-left direction, all characters are simply reversed (that is, the first
+             character will become the last character, and so on). 
+      </p> 
+        
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="uni-bidir.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../unicode/uni-bidir.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/unicode/uni-bidir.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="uni-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="uni-limit.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="uni-dbcs.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

@@ -1,0 +1,858 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Control Breaks</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="pg_furth_break"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_furth_break.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_furth_break.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_furth-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_furth_loop.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_furth_compu.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Programming Guide&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x321"></a> Control Breaks
+         </h1>
+      </div> 
+         
+         
+      <p>This document describes how the execution of a statement can be made
+             dependent on a control break, and how control breaks can be used for the
+             evaluation of Natural system functions.
+      </p> 
+         
+      <p>The following topics are covered:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_furth_break.htm#contr_breaks_use">Use of Control Breaks</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_break.htm#AT_BREAK_Statement">AT BREAK Statement</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_break.htm#Automatic_Break_Processing">Automatic Break Processing</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_break.htm#sysfunc_atbreak_exa">Example of System Functions with AT BREAK Statement</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_break.htm#at_break_further_exa">Further Example of AT BREAK Statement</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_break.htm#BEFORE_BREAK_PROCESSING_Statement">BEFORE BREAK PROCESSING Statement</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_break.htm#before_break_proc_exa">Example of BEFORE BREAK PROCESSING Statement</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_break.htm#User-Initiated_Break_Processing_PERFORM_BREAK">User-Initiated Break Processing - PERFORM BREAK PROCESSING Statement</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_break.htm#perform_break_proc_exa">Example of PERFORM BREAK PROCESSING Statement</a></p>
+         </li>
+      </ul> 
+        
+      <hr> 
+        
+      <div><a name="contr_breaks_use"></a></div> 
+         
+      <h2> Use of Control Breaks </h2> 
+          
+          
+      <p>A control break occurs when the value of a control field changes.</p> 
+          
+      <p>The execution of statements can be made dependent on a control
+              break.
+      </p> 
+          
+      <p>A control break can also be used for the evaluation of Natural system
+              functions.
+      </p> 
+          
+      <p>System functions are discussed in <a href="pg_furth_vari.htm#pg_furth_vari">System Variables and System
+            Functions</a>. For detailed descriptions of the system
+              functions available, refer to the <a href="../func/func-over.htm">System Functions</a>
+              documentation.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_furth_break.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="AT_BREAK_Statement"></a></div> 
+         
+      <h2> 
+             <a name="x322"></a>AT BREAK Statement 
+      </h2> 
+          
+          
+      <p>With the statement <a href="../sm/atbreak.htm"><code>AT
+               BREAK</code></a>, you specify the processing which is to be performed
+              whenever a control break occurs, that is, whenever the value of a control field
+              which you specify with the <code>AT BREAK</code> statement changes. As a
+              control field, you can use a database field or a user-defined variable.
+      </p> 
+          
+      <p>The following topics are covered below:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_furth_break.htm#Control_Break_Based_on_a_Database_Field">Control Break Based on a Database Field</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_break.htm#Control_Break_Based_on_a_User-Defined_Variable">Control Break Based on a User-Defined Variable</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_break.htm#Multiple_Control_Break_Levels">Multiple Control Break Levels</a></p>
+         </li>
+      </ul> 
+          
+         
+      <div><a name="Control_Break_Based_on_a_Database_Field"></a></div> 
+          
+      <h3> 
+              <a name="x323"></a>Control Break Based on a Database Field
+      </h3> 
+           
+           
+      <p>The field specified as control field in an
+               <a href="../sm/atbreak.htm"><code>AT BREAK</code></a> statement is
+               usually a database field.
+      </p> 
+           
+      <p> Example: </p> 
+           <pre class="verbatim">... 
+AT BREAK OF DEPT 
+  <var>statements</var> 
+END-BREAK 
+...</pre> 
+           <p>In this example, the control field is the database field
+               <code>DEPT</code>; if the value of the field changes, for example,
+               <code>FROM</code> <code>SALE01</code> to <code>SALE02</code>, the
+               <var>statements</var> specified in the <code>AT BREAK</code>
+               statement would be executed.
+      </p> 
+           
+      <p>Instead of an entire field, you can also use only part of a field as a
+               control field. With the slash-<var>n</var>-slash notation
+               <code>/<var>n</var>/</code>, you can determine that only the
+               first <var>n</var> positions of a field are to be checked for a
+               change in value.
+      </p> 
+           
+      <p> Example: </p> 
+           <pre class="verbatim">... 
+AT BREAK OF DEPT /4/ 
+  <var>statements</var> 
+END-BREAK 
+...</pre> 
+           <p>In this example, the specified <var>statements</var>
+               would only be executed if the value of the first 4 positions of the field
+               <code>DEPT</code> changes, for example, FROM <code>SALE</code> to
+               <code>TECH</code>; if, however, the field value changes from
+               <code>SALE01</code> to <code>SALE02</code>, this would be ignored and no
+               <code>AT BREAK</code> processing performed.
+      </p> 
+           
+      <h4 class="floating-title"> Example: </h4> 
+           <pre class="verbatim">
+** Example 'ATBREX01': AT BREAK OF (with database field)
+************************************************************************
+DEFINE DATA LOCAL
+1 MYVIEW VIEW OF EMPLOYEES
+  2 NAME
+  2 CITY
+  2 COUNTRY
+  2 JOB-TITLE
+  2 SALARY (1:1)
+END-DEFINE
+*
+READ (5) MYVIEW BY CITY WHERE COUNTRY = 'USA'
+  DISPLAY CITY (AL=9) NAME 'POSITION' JOB-TITLE 'SALARY' SALARY(1)
+  /*
+  <strong>AT BREAK OF CITY
+    WRITE /   OLD(CITY) (EM=X^X^X^X^X^X^X^X^X^X^X^)
+          5X 'AVERAGE:' T*SALARY AVER(SALARY(1)) //
+              COUNT(SALARY(1)) 'RECORDS FOUND' /
+  END-BREAK</strong>
+  /*
+ <strong> AT END OF DATA
+    WRITE 'TOTAL (ALL RECORDS):' T*SALARY(1) TOTAL(SALARY(1))
+  END-ENDDATA</strong>
+END-READ
+END
+</pre> 
+           <p>In the above program, the first <a href="../sm/write.htm"><code>WRITE</code></a> statement is executed
+               whenever the value of the field <code>CITY</code> changes.
+      </p> 
+           
+      <p>In the <a href="../sm/atbreak.htm"><code>AT
+               BREAK</code></a> statement, the Natural system functions
+               <a href="../func/func_sf.htm#OLD"><code>OLD</code></a>,
+               <a href="../func/func_sf.htm#AVER"><code>AVER</code></a> and
+               <a href="../func/func_sf.htm#COUNT"><code>COUNT</code></a> are
+               evaluated (and output in the <code>WRITE</code> statement).
+      </p> 
+           
+      <p>In the <a href="../sm/atenddat.htm"><code>AT END OF
+               DATA</code></a> statement, the Natural system function
+               <a href="../func/func_sf.htm#TOTAL"><code>TOTAL</code></a> is
+               evaluated.
+      </p> 
+           
+      <p>Output of Program ATBREX01:</p> <pre class="system-output">
+Page      1                                                  04-12-14  14:07:26
+                                                                               
+  CITY            NAME                 POSITION            SALARY              
+--------- -------------------- ------------------------- ----------            
+                                                                               
+AIKEN     SENKO                PROGRAMMER                     31500            
+                                                                               
+A I K E N                  AVERAGE:                           31500            
+                                                                               
+       1 RECORDS FOUND                                                         
+                                                                               
+ALBUQUERQ HAMMOND              SECRETARY                      22000            
+ALBUQUERQ ROLLING              MANAGER                        34000            
+ALBUQUERQ FREEMAN              MANAGER                        34000            
+ALBUQUERQ LINCOLN              ANALYST                        41000            
+                                                                               
+A L B U Q U E R Q U E      AVERAGE:                           32750            
+                                                                               
+       4 RECORDS FOUND                                                         
+                                                                               
+TOTAL (ALL RECORDS):                                         162500           
+</pre> 
+           
+          
+         <div><a name="Control_Break_Based_on_a_User-Defined_Variable"></a></div> 
+          
+      <h3> 
+              <a name="x324"></a>Control Break Based on a User-Defined Variable 
+      </h3> 
+           
+           
+      <p>A <a href="pg_defi_dv.htm#pg_defi_dv">user-defined variable</a> can
+               also be used as control field in an <a href="../sm/atbreak.htm"><code>AT
+               BREAK</code></a> statement.
+      </p> 
+           
+      <p>In the following program, the user-defined variable
+               <code>#LOCATION</code> is used as control field.
+      </p> 
+           <pre class="verbatim">
+** Example 'ATBREX02': AT BREAK OF  (with user-defined variable and
+**                     in conjunction with BEFORE BREAK PROCESSING)
+************************************************************************
+DEFINE DATA LOCAL
+1 MYVIEW VIEW OF EMPLOYEES
+  2 CITY
+  2 COUNTRY
+  2 JOB-TITLE
+  2 SALARY (1:1)
+*
+1 #LOCATION (A20)
+END-DEFINE
+*
+READ (5) MYVIEW BY CITY WHERE COUNTRY = 'USA'
+  <strong>BEFORE BREAK PROCESSING
+    COMPRESS CITY 'USA' INTO #LOCATION
+  END-BEFORE</strong>
+  DISPLAY #LOCATION 'POSITION' JOB-TITLE 'SALARY' SALARY (1)
+  /*
+  <strong>AT BREAK OF #LOCATION
+    SKIP 1
+  END-BREAK</strong>
+END-READ
+END
+</pre> 
+           <p>Output of Program ATBREX02:</p> <pre class="system-output">
+Page      1                                                  04-12-14  14:08:36
+                                                                               
+     #LOCATION               POSITION            SALARY                        
+-------------------- ------------------------- ----------                      
+                                                                               
+AIKEN USA            PROGRAMMER                     31500                      
+                                                                               
+ALBUQUERQUE USA      SECRETARY                      22000                      
+ALBUQUERQUE USA      MANAGER                        34000                      
+ALBUQUERQUE USA      MANAGER                        34000                      
+ALBUQUERQUE USA      ANALYST                        41000                     
+</pre> 
+           
+          
+         <div><a name="Multiple_Control_Break_Levels"></a></div> 
+          
+      <h3> Multiple Control Break Levels</h3> 
+           
+           
+      <p>As explained
+               <a href="pg_furth_break.htm#Control_Break_Based_on_a_Database_Field">above</a>,
+               the notation <code>/<var>n</var>/</code> allows some portion of
+               a field to be checked for a control break. It is possible to combine several
+               <a href="../sm/atbreak.htm"><code>AT BREAK</code></a> statements,
+               using an entire field as control field for one break and part of the same field
+               as control field for another break.
+      </p> 
+           
+      <p>In such a case, the break at the lower level (entire field) must be
+               specified before the break at the higher level (part of field); that is, in the
+               first <code>AT BREAK</code> statement the entire field must be specified as
+               control field, and in the second one part of the field.
+      </p> 
+           
+      <p>The following example program illustrates this, using the field
+               <code>DEPT</code> as well as the first 4 positions of that field (<code>DEPT
+            /4/</code>).
+      </p> 
+           <pre class="verbatim">
+** Example 'ATBREX03': AT BREAK OF (two statements in combination)
+************************************************************************
+DEFINE DATA LOCAL
+1 MYVIEW VIEW OF EMPLOYEES
+  2 NAME
+  2 JOB-TITLE
+  2 DEPT
+  2 SALARY    (1:1)
+  2 CURR-CODE (1:1)
+END-DEFINE
+*
+READ MYVIEW BY DEPT STARTING FROM 'SALE40' ENDING AT 'TECH10'
+     WHERE SALARY(1) GT 47000 AND CURR-CODE(1) = 'USD'
+  /*
+  <strong>AT BREAK OF DEPT
+    WRITE '*** LOWEST BREAK LEVEL ***' /
+  END-BREAK
+  AT BREAK OF DEPT /4/
+    WRITE '*** HIGHEST BREAK LEVEL ***'
+  END-BREAK</strong>
+  /*
+  DISPLAY DEPT NAME 'POSITION' JOB-TITLE
+END-READ
+END
+</pre> 
+           <p>Output of Program ATBREX03:</p> <pre class="system-output">
+Page      1                                                  04-12-14  14:09:20
+                                                                               
+DEPARTMENT         NAME                 POSITION                               
+   CODE                                                                        
+---------- -------------------- -------------------------                      
+                                                                               
+TECH05     HERZOG               MANAGER                                        
+TECH05     LAWLER               MANAGER                                        
+TECH05     MEYER                MANAGER                                        
+*** LOWEST BREAK LEVEL ***                                                     
+                                                                               
+TECH10     DEKKER               DBA                                            
+*** LOWEST BREAK LEVEL ***                                                     
+                                                                               
+*** HIGHEST BREAK LEVEL ***                                                   
+</pre> 
+           <p>In the following program, one blank line is output whenever the value
+               of the field <code>DEPT</code> changes; and whenever the value in the first 4
+               positions of <code>DEPT</code> changes, a record count is carried out by
+               evaluating the system function <a href="../func/func_sf.htm#COUNT"><code>COUNT</code></a>.
+      </p> 
+           <pre class="verbatim">
+** Example 'ATBREX04': AT BREAK OF (two statements in combination)
+************************************************************************
+DEFINE DATA LOCAL
+1 MYVIEW VIEW OF EMPLOYEES
+  2 DEPT
+  2 REDEFINE DEPT
+    3 #GENDEP (A4)
+  2 NAME
+  2 SALARY    (1)
+END-DEFINE
+*
+WRITE TITLE '** PERSONS WITH SALARY &gt; 30000, SORTED BY DEPARTMENT **' / 
+LIMIT 9 
+READ MYVIEW BY DEPT FROM 'A' WHERE SALARY(1) &gt; 30000
+  DISPLAY 'DEPT' DEPT NAME 'SALARY' SALARY(1)
+  /*
+ <strong> AT BREAK OF DEPT
+    SKIP 1
+  END-BREAK
+  AT BREAK OF DEPT /4/
+    WRITE COUNT(SALARY(1)) 'RECORDS FOUND IN:' OLD(#GENDEP) /
+  END-BREAK</strong>
+END-READ
+END
+</pre> 
+           <p>Output of Program ATBREX04:</p> <pre class="system-output">
+            ** PERSONS WITH SALARY &gt; 30000, SORTED BY DEPARTMENT **            
+                                                                               
+ DEPT          NAME           SALARY                                           
+------ -------------------- ----------                                         
+                                                                               
+ADMA01 JENSEN                   180000                                         
+ADMA01 PETERSEN                 105000                                         
+ADMA01 MORTENSEN                320000                                         
+ADMA01 MADSEN                   149000                                         
+ADMA01 BUHL                     642000                                         
+                                                                               
+ADMA02 HERMANSEN                391500                                         
+ADMA02 PLOUG                    162900                                         
+ADMA02 HANSEN                   234000                                         
+                                                                               
+       8 RECORDS FOUND IN: ADMA                                                
+                                                                               
+COMP01 HEURTEBISE               168800                                         
+                                                                               
+       1 RECORDS FOUND IN: COMP                                               
+</pre> 
+           
+          
+        
+        <div class="noprint">
+         <p><a href="pg_furth_break.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Automatic_Break_Processing"></a></div> 
+         
+      <h2> 
+             <a name="x325"></a>Automatic Break Processing 
+      </h2> 
+          
+          
+      <p>Automatic break processing is in effect for a processing loop which
+              contains an <a href="../sm/atbreak.htm"><code>AT BREAK</code></a>
+              statement. This applies to the following statements:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../sm/find.htm"><code>FIND</code></a> 
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../sm/read.htm"><code>READ</code></a> 
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../sm/histogra.htm"><code>HISTOGRAM</code></a>
+                      
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../sm/sort.htm"><code>SORT</code></a> 
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../sm/readwork.htm"><code>READ WORK
+                     FILE</code></a> 
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>The value of the control field specified with the
+              <a href="../sm/atbreak.htm"><code>AT BREAK</code></a> statement is
+              checked only for records which satisfy the selection criteria of both the
+              <a href="../sm/find.htm#WITH_Clause"><code>WITH</code></a> clause
+              and the <a href="../sm/find.htm#WHERE-clause"><code>WHERE</code></a> clause.
+      </p> 
+          
+      <p> <a href="../func/func-over.htm">Natural system
+                 functions</a> (<a href="../func/func_sf.htm"><code>AVER</code></a>,
+              <a href="../func/func_sf.htm#MAX_System_Function"><code>MAX</code></a>,
+              <a href="../func/func_sf.htm#MIN_System_Function"><code>MIN</code></a>,
+              etc.) are evaluated for each record after all statements within the processing
+              loop have been executed. System functions are not evaluated for any record
+              which is rejected by <a href="../sm/find.htm#WHERE-clause"><code>WHERE</code></a> criteria.
+      </p> 
+          
+      <p>The figure below illustrates the flow logic of automatic break
+              processing.
+      </p> 
+          
+      <p><img src="graphics/pgflowbi.png" alt="" width="874" height="815"></p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_furth_break.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="sysfunc_atbreak_exa"></a></div> 
+         
+      <h2> Example of System Functions with AT BREAK Statement </h2> 
+          
+          
+      <p>The following example shows the use of the
+              <a href="../func/func-over.htm">Natural system functions</a>
+              <a href="../func/func_sf.htm#OLD"><code>OLD</code></a>,
+              <a href="../func/func_sf.htm#MIN_System_Function"><code>MIN</code></a>,
+              <a href="../func/func_sf.htm"><code>AVER</code></a>,
+              <a href="../func/func_sf.htm#MAX_System_Function"><code>MAX</code></a>,
+              <a href="../func/func_sf.htm#SUM"><code>SUM</code></a> and
+              <a href="../func/func_sf.htm#COUNT"><code>COUNT</code></a> in an
+              <a href="../sm/atbreak.htm"><code>AT BREAK</code></a> statement
+              (and of the system function <a href="../func/func_sf.htm#TOTAL"><code>TOTAL</code></a> in an
+              <a href="../sm/atenddat.htm"><code>AT END OF DATA</code></a>
+              statement).
+      </p> 
+          <pre class="verbatim">
+** Example 'ATBREX05': AT BREAK OF (with system functions)
+************************************************************************
+DEFINE DATA LOCAL
+1 MYVIEW VIEW OF EMPLOYEES
+  2 NAME
+  2 CITY
+  2 SALARY    (1:1)
+  2 CURR-CODE (1:1)
+END-DEFINE
+*
+LIMIT 3
+READ MYVIEW BY CITY = 'SALT LAKE CITY'
+  DISPLAY NOTITLE CITY NAME 'SALARY' SALARY(1) 'CURRENCY' CURR-CODE(1)
+  /*
+  <strong>AT BREAK OF CITY
+    WRITE /  OLD(CITY) (EM=X^X^X^X^X^X^X^X^X^X^X^X^X^X^X)
+      31T ' - MINIMUM:' MIN(SALARY(1))  CURR-CODE(1) /
+      31T ' - AVERAGE:' AVER(SALARY(1)) CURR-CODE(1) /
+      31T ' - MAXIMUM:' MAX(SALARY(1))  CURR-CODE(1) /
+      31T ' -     SUM:' SUM(SALARY(1))  CURR-CODE(1) /
+      33T COUNT(SALARY(1)) 'RECORDS FOUND' /
+  END-BREAK</strong>
+  /*
+  AT END OF DATA
+    WRITE 22T 'TOTAL (ALL RECORDS):'
+               T*SALARY TOTAL(SALARY(1)) CURR-CODE(1)
+  END-ENDDATA
+END-READ
+END
+</pre> 
+          <p>Output of Program ATBREX05:</p> <pre class="system-output">
+        CITY                 NAME           SALARY   CURRENCY
+-------------------- -------------------- ---------- --------
+                                                             
+SALT LAKE CITY       ANDERSON                  50000 USD     
+SALT LAKE CITY       SAMUELSON                 24000 USD     
+                                                             
+S A L T   L A K E   C I T Y    - MINIMUM:      24000 USD     
+                               - AVERAGE:      37000 USD     
+                               - MAXIMUM:      50000 USD     
+                               -     SUM:      74000 USD     
+                                       2 RECORDS FOUND       
+                                                             
+SAN DIEGO            GEE                       60000 USD     
+                                                             
+S A N   D I E G O              - MINIMUM:      60000 USD     
+                               - AVERAGE:      60000 USD     
+                               - MAXIMUM:      60000 USD     
+                               -     SUM:      60000 USD     
+                                       1 RECORDS FOUND       
+                                                             
+                     TOTAL (ALL RECORDS):     134000 USD    
+</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_furth_break.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="at_break_further_exa"></a></div> 
+         
+      <h2> Further Example of AT BREAK Statement </h2> 
+          
+          
+      <p>See the following example program:</p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="pg_exas.htm#ATBREX06_further_exa_at_break">ATBREX06
+                  - AT BREAK OF (comparing NMIN, NAVER, NCOUNT with MIN, AVER,
+                  COUNT)</a></p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_furth_break.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="BEFORE_BREAK_PROCESSING_Statement"></a></div> 
+         
+      <h2> 
+             <a name="x326"></a>BEFORE BREAK PROCESSING Statement 
+      </h2> 
+          
+          
+      <p>With the <a href="../sm/before.htm"><code>BEFORE BREAK
+               PROCESSING</code></a> statement, you can specify statements that are to
+              be executed immediately before a control break; that is, before the value of
+              the control field is checked, before the statements specified in the
+              <a href="../sm/atbreak.htm"><code>AT BREAK</code></a> block are
+              executed, and before any <a href="../func/func-over.htm">Natural system
+                 functions</a> are evaluated.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_furth_break.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="before_break_proc_exa"></a></div> 
+         
+      <h2> Example of BEFORE BREAK PROCESSING Statement </h2> 
+          
+          <pre class="verbatim">
+** Example 'BEFORX01': BEFORE BREAK PROCESSING
+************************************************************************
+DEFINE DATA LOCAL
+1 MYVIEW VIEW OF EMPLOYEES
+  2 NAME
+  2 FIRST-NAME
+  2 SALARY (1:1)
+  2 BONUS  (1:1,1:1)
+*
+1 #INCOME  (P11)
+END-DEFINE
+*
+LIMIT 5
+READ MYVIEW BY NAME FROM 'B' 
+ <strong>BEFORE BREAK PROCESSING
+    COMPUTE #INCOME = SALARY(1) + BONUS(1,1)
+  END-BEFORE</strong>
+  /*
+  DISPLAY NOTITLE NAME FIRST-NAME (AL=10)
+                 'ANNUAL/INCOME' #INCOME 'SALARY' SALARY(1) (LC==) /
+                 '+ BONUS' BONUS(1,1) (IC=+)
+  AT BREAK OF #INCOME
+    WRITE T*#INCOME '-'(24)
+  END-BREAK
+END-READ
+END
+</pre> 
+          <p>Output of Program BEFORX01:</p> <pre class="system-output">
+        NAME         FIRST-NAME    ANNUAL      SALARY   
+                                   INCOME      + BONUS  
+-------------------- ---------- ------------ -----------
+                                                        
+BACHMANN             HANS              56800 =     52800
+                                                   +4000
+                                ------------------------
+BAECKER              JOHANNES          81000 =     74400
+                                                   +6600
+                                ------------------------
+BAECKER              KARL              52650 =     48600
+                                                   +4050
+                                ------------------------
+BAGAZJA              MARJAN           152700 =    129700
+                                                  +23000
+                                ------------------------
+BAILLET              PATRICK          198500 =    188000
+                                                  +10500
+                                ------------------------
+</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_furth_break.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="User-Initiated_Break_Processing_PERFORM_BREAK"></a></div> 
+         
+      <h2> 
+             <a name="x327"></a>User-Initiated Break Processing - PERFORM BREAK PROCESSING
+             Statement 
+      </h2> 
+          
+          
+      <p>With automatic break processing, the statements specified in an
+              <a href="../sm/atbreak.htm"><code>AT BREAK</code></a> block are
+              executed whenever the value of the specified control field changes - regardless
+              of the position of the <code>AT BREAK</code> statement in the processing
+              loop.
+      </p> 
+          
+      <p>With a <a href="../sm/performb.htm"><code>PERFORM BREAK
+               PROCESSING</code></a> statement, you can perform break processing at a
+              specified position in a processing loop: the <code>PERFORM BREAK
+            PROCESSING</code> statement is executed when it is encountered in the
+              processing flow of the program.
+      </p> 
+          
+      <p>Immediately after the <code>PERFORM BREAK PROCESSING</code>, you specify
+              one or more <code>AT BREAK</code> statement blocks:
+      </p> 
+          <pre class="verbatim">... 
+PERFORM BREAK PROCESSING 
+  AT BREAK OF field1 
+    statements 
+  END-BREAK 
+  AT BREAK OF field2 
+    statements 
+  END-BREAK 
+...</pre> 
+          <p>When a <code>PERFORM BREAK PROCESSING</code> is executed, Natural checks
+              if a break has occurred; that is, if the value of the specified control field
+              has changed; and if it has, the specified statements are executed.
+      </p> 
+          
+      <p>With <code>PERFORM BREAK PROCESSING</code>, system functions are
+              evaluated <em>before</em> Natural checks if a break has occurred.
+      </p> 
+          
+      <p>The following figure illustrates the flow logic of user-initiated break
+              processing:
+      </p> 
+          
+      <p><img src="graphics/pgflowbreak.png" alt="graphics/pgflowbreak.png" width="400" height="370"></p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_furth_break.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="perform_break_proc_exa"></a></div> 
+         
+      <h2> 
+             <a name="x328"></a>Example of PERFORM BREAK PROCESSING Statement 
+      </h2> 
+          
+          <pre class="verbatim">
+** Example 'PERFBX01': PERFORM BREAK PROCESSING (with BREAK option
+**                     in IF statement)
+************************************************************************
+DEFINE DATA LOCAL
+1 MYVIEW VIEW OF EMPLOYEES
+  2 NAME
+  2 DEPT
+  2 SALARY (1:1)
+*
+1 #CNTL    (N2)
+END-DEFINE
+*
+LIMIT 7
+READ MYVIEW BY DEPT
+  <strong>AT BREAK OF DEPT              /* &lt;- automatic break processing
+    SKIP 1
+    WRITE 'SUMMARY FOR ALL SALARIES         '
+          'SUM:'   SUM(SALARY(1))
+          'TOTAL:' TOTAL(SALARY(1))
+    ADD 1 TO #CNTL
+  END-BREAK</strong>
+  /*
+  IF SALARY (1) GREATER THAN 100000 OR BREAK #CNTL
+ <strong>   PERFORM BREAK PROCESSING    /* &lt;- user-initiated break processing
+    AT BREAK OF #CNTL
+      WRITE 'SUMMARY FOR SALARY GREATER 100000'
+            'SUM:'   SUM(SALARY(1))
+            'TOTAL:' TOTAL(SALARY(1))
+    END-BREAK
+  END-IF</strong>
+  /*
+  <strong>IF SALARY (1) GREATER THAN 150000 OR BREAK #CNTL
+    PERFORM BREAK PROCESSING    /* &lt;- user-initiated break processing
+    AT BREAK OF #CNTL
+      WRITE 'SUMMARY FOR SALARY GREATER 150000'
+            'SUM:'   SUM(SALARY(1))
+            'TOTAL:' TOTAL(SALARY(1))
+    END-BREAK
+  END-IF</strong>
+  DISPLAY NAME DEPT SALARY(1)
+END-READ
+END
+</pre> 
+          <p>Output of Program PERFBX01:</p> <pre class="system-output">
+Page      1                                                  04-12-14  14:13:35
+                                                                               
+        NAME         DEPARTMENT   ANNUAL                                       
+                        CODE      SALARY                                       
+-------------------- ---------- ----------                                     
+                                                                               
+JENSEN               ADMA01         180000                                     
+PETERSEN             ADMA01         105000                                     
+MORTENSEN            ADMA01         320000                                     
+MADSEN               ADMA01         149000                                     
+BUHL                 ADMA01         642000                                     
+                                                                               
+SUMMARY FOR ALL SALARIES          SUM:    1396000 TOTAL:    1396000            
+SUMMARY FOR SALARY GREATER 100000 SUM:    1396000 TOTAL:    1396000            
+SUMMARY FOR SALARY GREATER 150000 SUM:    1142000 TOTAL:    1142000            
+HERMANSEN            ADMA02         391500                                     
+PLOUG                ADMA02         162900                                     
+                                                                               
+SUMMARY FOR ALL SALARIES          SUM:     554400 TOTAL:    1950400            
+SUMMARY FOR SALARY GREATER 100000 SUM:     554400 TOTAL:    1950400            
+SUMMARY FOR SALARY GREATER 150000 SUM:     554400 TOTAL:    1696400           
+</pre> 
+          
+        
+       <div class="noprint">
+         <div class="nospy">
+            <p><a href="pg_furth_break.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_furth_break.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_furth_break.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_furth-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_furth_loop.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_furth_compu.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

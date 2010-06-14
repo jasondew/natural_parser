@@ -1,0 +1,531 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>CLIENTTREE</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="clienttree"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../njx/clienttree.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/njx/clienttree.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="workingwithtrees.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="treenode3incontrolgridrowtablearea2.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="workingwithmenus.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Natural for Ajax&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x119"></a>CLIENTTREE
+         </h1>
+      </div> 
+         
+         
+      <p>This document covers the following
+             topics:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="clienttree.htm#clienttree-exa">Example</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="clienttree.htm#clienttree-njxadapter">Adapter Interface</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="clienttree.htm#clienttree-njxevents">Built-in Events</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="clienttree.htm#clienttree-props">Properties</a></p>
+         </li>
+      </ul> 
+        
+      <hr> 
+        
+      <div><a name="clienttree-exa"></a></div> 
+         
+      <h2>Example</h2> 
+          
+          
+      <p>The following example shows a simple client tree:</p> 
+          
+      <p><img src="graphics/image148.png" alt="graphics/image148.png"></p> 
+          
+      <p>The XML layout definition is:</p> 
+          <pre class="verbatim">&lt;rowarea name="Clienttree"&gt;
+    &lt;clienttree treecollectionprop="tree" height="200" withplusminus="true"
+                treestyle="background-color:#FEFEEE"&gt;
+    &lt;/clienttree&gt;
+&lt;/rowarea&gt;</pre> 
+          <p>In this example, the client tree is directly put as row into the ROWAREA
+              container. The property <code>treecollectionprop</code>
+              contains a reference to the property <code>tree</code> which
+              contains the net data of the tree. With the property
+              <code>treestyle</code>, an explicit background color is
+              set.
+      </p> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="clienttree.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="clienttree-njxadapter"></a></div> 
+         
+      <h2>Adapter Interface</h2> 
+          
+          
+      <p>In the parameter data area of the adapter, the tree data is represented
+              by the following data structure:
+      </p> 
+          <pre class="verbatim">DEFINE DATA PARAMETER
+1 TREE (1:*)
+2 LEVEL (I4)
+2 OPENED (I4)
+2 SELECTED (L)
+2 TEXT (U) DYNAMIC
+END-DEFINE</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="clienttree.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="clienttree-njxevents"></a></div> 
+         
+      <h2>Built-in Events</h2> 
+          
+          
+      <p class="mini-list"> 
+              <var>value-of-treecollectionprop</var>.reactOnContextMenuRequest<br>
+              
+              <var>value-of-treecollectionprop</var>.reactOnSelect<br>
+              
+              <var>value-of-treecollectionprop</var>.reactOnToggle
+              
+             
+      </p> 
+         
+        
+      <div class="noprint">
+         <p><a href="clienttree.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="clienttree-props"></a></div> 
+         
+      <h2> Properties</h2> 
+               
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="14%">
+            <col width="55%">
+            <col width="14%">
+            <col width="14%">
+         </colgroup>      
+         <tbody align="left" valign="top">       
+            <tr>        
+               <td colspan="4">Basic</td>      
+            </tr>
+            <tr>        
+               <td align="left" valign="top">treecollectionprop</td>        
+               <td align="left" valign="top">
+                  <p>Name of the adapter parameter that represents the control in the adapter.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">height</td>        
+               <td align="left" valign="top">
+                  <p>Height of the control.</p>
+                  <p></p>
+                  <p>There are three possibilities to define the height:</p>
+                  <p></p>
+                  <p>(A) You do not define a height at all. As consequence the control will be rendered with its default height. If the control
+                     is a container control (containing) other controls then the height of the control will follow the height of its content.
+                  </p>
+                  <p>(B) Pixel sizing: just input a number value (e.g. "20").</p>
+                  <p>(C) Percentage sizing: input a percantage value (e.g. "50%"). Pay attention: percentage sizing will only bring up correct
+                     results if the parent element of the control properly defines a height this control can reference. If you specify this control
+                     to have a height of 50% then the parent element (e.g. an ITR-row) may itself define a height of "100%". If the parent element
+                     does not specify a width then the rendering result may not represent what you expect.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>100</p>
+                  <p>150</p>
+                  <p>200</p>
+                  <p>250</p>
+                  <p>300</p>
+                  <p>250</p>
+                  <p>400</p>
+                  <p>50%</p>
+                  <p>100%</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">comment</td>        
+               <td align="left" valign="top">
+                  <p>Comment without any effect on rendering and behaviour. The comment is shown in the layout editor's tree view.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td colspan="4">Appearance</td>      
+            </tr>
+            <tr>        
+               <td align="left" valign="top">withplusminus</td>        
+               <td align="left" valign="top">
+                  <p>If set to "true" then +/- Icons will be rendered in front of the tree items.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>true</p>
+                  <p>false</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">withtooltip</td>        
+               <td align="left" valign="top">
+                  <p>If set to "true" then the text of an item is also available as tool tip. Use this option in case you expect that the horizontal
+                     space of the item will not be sufficient to display the whole text of the item.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>true</p>
+                  <p>false</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">selectionvisible</td>        
+               <td align="left" valign="top">
+                  <p>If set to "true" then the clicked item will also marked with a certain background color. The background color is defined by
+                     the style sheet settings.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>true</p>
+                  <p>false</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">singleselect</td>        
+               <td align="left" valign="top">
+                  <p>If set to "true" then only one item can be selected. If set to "false" then multiple icons can be selected.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>true</p>
+                  <p>false</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">imageopened</td>        
+               <td align="left" valign="top">
+                  <p>Image of a tree node that has subnodes and that is currently showing its nodes. The image either is defined statically by
+                     this property or also may be defined dynamically - see the corresponding properties defined with this control.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">imageclosed</td>        
+               <td align="left" valign="top">
+                  <p>Image of a tree node that has subnodes and that is currently not showing its nodes. The image either is defined statically
+                     by this property or also may be defined dynamically - see the corresponding properties defined with this control.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">imageendnode</td>        
+               <td align="left" valign="top">
+                  <p>Image of a tree node that is an end node (leaf node). The image either is defined statically by this property or also may
+                     be defined dynamically - see the corresponding properties defined with this control.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">treestyle</td>        
+               <td align="left" valign="top">
+                  <p>Style (following cascading style sheet definitions) that is directly passed to the background area of the client tree. You
+                     can manipulate e.g. the colour of the tree's background.
+                  </p>
+                  <p></p>
+                  <p>The style can also be set dynamically by specifying the property TREESTYLEPROP.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">hscroll</td>        
+               <td align="left" valign="top">
+                  <p>Definition of the horizontal scrollbar's appearance.</p>
+                  <p></p>
+                  <p>You can define that the scrollbars only are shown if the content is exceeding the control's area ("auto"). Or scrollbars can
+                     be shown always ("scroll"). Or scrollbars are never shown - and the content is cut ("hidden").
+                  </p>
+                  <p></p>
+                  <p>Default is "auto".</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>auto</p>
+                  <p>scroll</p>
+                  <p>hidden</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">pixelshift</td>        
+               <td align="left" valign="top">
+                  <p>Number of pixels that each hierarchy level is indented. If not defined then a standard is used.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>1</p>
+                  <p>2</p>
+                  <p>3</p>
+                  <p>int-value</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">pixelshiftendnode</td>        
+               <td align="left" valign="top">
+                  <p>Number of pixels that end nodes are indented. If not defined then a standard is used.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>1</p>
+                  <p>2</p>
+                  <p>3</p>
+                  <p>int-value</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">tabindex</td>        
+               <td align="left" valign="top">
+                  <p>Index that defines the tab order of the control. Controls are selected in increasing index order and in source order to resolve
+                     duplicates. 
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>-1</p>
+                  <p>0</p>
+                  <p>1</p>
+                  <p>2</p>
+                  <p>5</p>
+                  <p>10</p>
+                  <p>32767</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">withleftpadding</td>        
+               <td align="left" valign="top">
+                  <p>Flag that indicates if the control has a 10 pixel padding on left side. Default is true.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>true</p>
+                  <p>false</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td colspan="4">Binding</td>      
+            </tr>
+            <tr>        
+               <td align="left" valign="top">treecollectionprop</td>        
+               <td align="left" valign="top">(already explained above)</td>        
+               <td align="left" valign="top">&nbsp;</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">dynamicloading</td>        
+               <td align="left" valign="top">
+                  <p>If set to "true" then you indicate to the tree control that not all tree information may be loaded when initializing the tree
+                     (i.e. the tree collection on server side). As consequence the tree control will pass the "toggle-event" to the server - in
+                     case the subnodes of a certain nodes are not yet loaded.
+                  </p>
+                  <p></p>
+                  <p>In the case the toggle event is passed to the server, the method onToggle() is called inside the tree item.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>true</p>
+                  <p>false</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">imageopenedprop</td>        
+               <td align="left" valign="top">
+                  <p>Name of the adapter parameter that provides the image URL which is shown for opened tree nodes or end tree nodes. The value
+                     may be different from tree node to tree node. Each tree node may have an own image.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">imageclosedprop</td>        
+               <td align="left" valign="top">
+                  <p>Name of the adapter parameter that provides for the image URL which is shown for closed tree nodes. The value may be different
+                     from tree node to tree node. Each tree node may have an own image.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">treestyleprop</td>        
+               <td align="left" valign="top">
+                  <p>name of the adapter parameter that dynamically provides for a style value that is passed to the control's area (background
+                     of the client tree). You can as consequence e.g. define the background-colour of the tree dependent on your server side logic.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">treeclassprop</td>        
+               <td align="left" valign="top">
+                  <p>Name of the adapter parameter that passes back the name of a style sheet class that is taken to render the client tree's background
+                     area. - Similar to the property TREESTYLEPROP, but now a style class is passed, not the style itself.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">tooltipprop</td>        
+               <td align="left" valign="top">
+                  <p>Name of the adapter parameter that provides for a text that is shown if the user moves the mouse over the tree item (tooltip).</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">oncontextmenumethod</td>        
+               <td align="left" valign="top">
+                  <p>Name of the event that is sent to the adapter when the user presses the right mouse button in an empty area of the client
+                     tree.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">directselectevent</td>        
+               <td align="left" valign="top">
+                  <p>Event that represents a tree node selection. A tree node selection is done when the user clicks/doubleclicks on the tree node
+                     text. In this case the select() method is called in the corresponding node object on server side.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>ondblclick</p>
+                  <p>onclick</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">focusedprop</td>        
+               <td align="left" valign="top">
+                  <p>Name of the adapter parameter that indicates if the row receives the keyboard focus.</p>
+                  <p></p>
+                  <p>If more than one lines are returning "true", the first of them is receiving the focus.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td colspan="4">Drag and Drop</td>      
+            </tr>
+            <tr>        
+               <td align="left" valign="top">enabledrag</td>        
+               <td align="left" valign="top">
+                  <p>If set to true then drag and drop is enabled within the tree.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>true</p>
+                  <p>false</p>
+                  <p></p>
+               </td>       
+            </tr>      
+         </tbody>     
+      </table>     
+          
+        
+       
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="clienttree.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../njx/clienttree.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/njx/clienttree.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="workingwithtrees.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="treenode3incontrolgridrowtablearea2.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="workingwithmenus.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

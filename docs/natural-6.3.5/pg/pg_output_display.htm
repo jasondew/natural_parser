@@ -1,0 +1,675 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Statements DISPLAY and WRITE</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="pg_output_display"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_output_display.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_output_display.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_output-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_output_layout.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_output_index.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Programming Guide&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> Statements DISPLAY and WRITE </h1>
+      </div> 
+         
+         
+      <p>This document describes how to use the statements
+             <a href="../sm/display.htm"><code>DISPLAY</code></a> and
+             <a href="../sm/write.htm"><code>WRITE</code></a> to output data
+             and control the format in which information is output.
+      </p> 
+         
+      <p>The following topics are covered:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_output_display.htm#DISPLAY_Statement">DISPLAY Statement</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_display.htm#WRITE_Statement">WRITE Statement</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_display.htm#display_exa">Example of DISPLAY Statement</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_display.htm#write_exa">Example of WRITE Statement</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_display.htm#col_spacing">Column Spacing - SF Parameter and nX Notation</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_display.htm#tab_setting">Tab Setting - nT Notation</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_display.htm#line_advance">Line Advance - Slash Notation</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_display.htm#further_exa">Further Examples of DISPLAY and WRITE Statements</a></p>
+         </li>
+      </ul> 
+        
+      <hr> 
+        
+      <div><a name="DISPLAY_Statement"></a></div> 
+         
+      <h2> 
+             <a name="x218"></a>DISPLAY Statement 
+      </h2> 
+          
+          
+      <p>The <a href="../sm/display.htm"><code>DISPLAY</code></a>
+              statement produces output in column format; that is, the values for one field
+              are output in a column underneath one another. If multiple fields are output,
+              that is, if multiple columns are produced, these columns are output next to one
+              another horizontally.
+      </p> 
+          
+      <p>The order in which fields are displayed is determined by the sequence in
+              which you specify the field names in the <code>DISPLAY</code> statement.
+      </p> 
+          
+      <p>The <code>DISPLAY</code> statement in the following program displays for
+              each person first the personnel number, then the name and then the job
+              title:
+      </p> 
+          <pre class="verbatim">
+** Example 'DISPLX01': DISPLAY
+************************************************************************
+DEFINE DATA LOCAL
+1 VIEWEMP VIEW OF EMPLOYEES
+  2 PERSONNEL-ID
+  2 NAME
+  2 BIRTH
+  2 JOB-TITLE
+END-DEFINE
+*
+READ (3) VIEWEMP BY BIRTH
+  <strong>DISPLAY PERSONNEL-ID NAME JOB-TITLE</strong>
+END-READ
+END
+</pre> 
+          <p>Output of Program DISPLX01:</p> <pre class="system-output">
+Page      1                                                  04-11-11  14:15:54
+ 
+PERSONNEL         NAME                  CURRENT
+   ID                                  POSITION
+--------- -------------------- -------------------------
+ 
+30020013  GARRET               TYPIST
+30016112  TAILOR               WAREHOUSEMAN
+20017600  PIETSCH              SECRETARY
+</pre> 
+          <p>To change the order of the columns that appear in the output report,
+              simply reorder the field names in the <a href="../sm/display.htm"><code>DISPLAY</code></a> statement. For example,
+              if you prefer to list employee names first, then job titles followed by
+              personnel numbers, the appropriate <code>DISPLAY</code> statement would be:
+      </p>
+          
+          <pre class="verbatim">
+** Example 'DISPLX02': DISPLAY
+************************************************************************
+DEFINE DATA LOCAL
+1 VIEWEMP VIEW OF EMPLOYEES
+  2 PERSONNEL-ID
+  2 NAME
+  2 BIRTH
+  2 JOB-TITLE
+END-DEFINE
+*
+READ (3) VIEWEMP BY BIRTH
+  <strong>DISPLAY NAME JOB-TITLE PERSONNEL-ID</strong>
+END-READ
+END
+</pre> 
+          <p>Output of Program DISPLX02:</p> <pre class="system-output">
+Page      1                                                  04-11-11  14:15:54
+ 
+        NAME                  CURRENT          PERSONNEL
+                             POSITION             ID
+-------------------- ------------------------- ---------
+ 
+GARRET               TYPIST                    30020013
+TAILOR               WAREHOUSEMAN              30016112
+PIETSCH              SECRETARY                 20017600
+</pre> 
+          <p>A header is output above each column. Various ways to influence this
+              header are described in the document <a href="pg_output_headers.htm#pg_output_headers">Column Headers</a>.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_output_display.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="WRITE_Statement"></a></div> 
+         
+      <h2> 
+             <a name="x219"></a>WRITE Statement 
+      </h2> 
+          
+          
+      <p>The <a href="../sm/write.htm"><code>WRITE</code></a>
+              statement is used to produce output in free format (that is, not in columns).
+              In contrast to the <a href="../sm/display.htm"><code>DISPLAY</code></a> statement, the
+              following applies to the <code>WRITE</code> statement:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">If necessary, it automatically creates a line advance; that is, a
+                      field or text element that does not fit onto the current output line, is
+                      automatically output in the next line.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">It does not produce any headers.</p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">The values of a multiple-value field are output next to one another
+                      horizontally, and not underneath one another.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>The two example programs shown below illustrate the basic differences
+              between the <a href="../sm/display.htm"><code>DISPLAY</code></a>
+              statement and the <a href="../sm/write.htm"><code>WRITE</code></a>
+              statement.
+      </p> 
+          
+      <p>You can also use the two statements in combination with one another, as
+              described later in the document <cite>Vertical Displays</cite>,
+              <a href="pg_output_vdispl.htm#Combining_DISPLAY_and_WRITE">Combining DISPLAY and
+            WRITE</a> .
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_output_display.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="display_exa"></a></div> 
+         
+      <h2> Example of DISPLAY Statement </h2> 
+          
+          <pre class="verbatim">
+** Example 'DISPLX03': DISPLAY
+************************************************************************
+DEFINE DATA LOCAL
+1 VIEWEMP VIEW OF EMPLOYEES
+  2 NAME
+  2 FIRST-NAME
+  2 SALARY (1:3)
+END-DEFINE
+*
+READ (2) VIEWEMP BY NAME STARTING FROM 'JONES'
+  DISPLAY NAME FIRST-NAME SALARY (1:3)
+END-READ
+END
+</pre> 
+          <p>Output of Program DISPLX03:</p> <pre class="system-output">
+Page      1                                                  04-11-11  14:15:54
+ 
+        NAME              FIRST-NAME        ANNUAL
+                                            SALARY
+-------------------- -------------------- ----------
+ 
+JONES                VIRGINIA                  46000
+                                               42300
+                                               39300
+JONES                MARSHA                    50000
+                                               46000
+                                               42700                          
+ 
+</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_output_display.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="write_exa"></a></div> 
+         
+      <h2> Example of WRITE Statement </h2> 
+          
+          <pre class="verbatim">
+** Example 'WRITEX01': WRITE
+************************************************************************
+DEFINE DATA LOCAL
+1 VIEWEMP VIEW OF EMPLOYEES
+  2 NAME
+  2 FIRST-NAME
+  2 SALARY (1:3)
+END-DEFINE
+*
+READ (2) VIEWEMP BY NAME STARTING FROM 'JONES'
+  <strong>WRITE NAME FIRST-NAME SALARY (1:3)</strong>
+END-READ
+END
+</pre> 
+          <p>Output of Program WRITEX01:</p> <pre class="system-output">
+Page      1                                                  04-11-11  14:15:55
+ 
+JONES                VIRGINIA                  46000      42300      39300
+JONES                MARSHA                    50000      46000      42700
+</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_output_display.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="col_spacing"></a></div> 
+         
+      <h2> 
+             <a name="x220"></a> 
+             <a name="x221"></a>Column Spacing - SF Parameter and <var>n</var>X
+             Notation 
+      </h2> 
+         
+          
+          
+      <p>By default, the columns output with a <a href="../sm/display.htm"><code>DISPLAY</code></a> statement are separated
+              from one another by <em>one</em> space.
+      </p> 
+          
+      <p>With the session parameter <a href="../parms/sf.htm"><code>SF</code></a>, you can specify the
+              default number of spaces to be inserted between columns output with a
+              <code>DISPLAY</code> statement. You can set the number of spaces to any value
+              from 1 to 30.
+      </p> 
+          
+      <p>The parameter can be specified with a <a href="../sm/format.htm"><code>FORMAT</code></a> statement to apply to the
+              whole report, or with a <a href="../sm/display.htm"><code>DISPLAY</code></a> statement at statement
+              level, but not at element level.
+      </p> 
+          
+      <p>With the <a href="../sm/display.htm#nX_display"><code><var>n</var>X</code></a>
+              notation in the <code>DISPLAY</code> statement, you can specify the number of
+              spaces (<var>n</var>) to be inserted between two columns. An
+              <code><var>n</var>X</code> notation overrides the specification
+              made with the <a href="../parms/sf.htm"><code>SF</code></a> parameter.
+      </p> 
+          <pre class="verbatim">
+** Example 'DISPLX04': DISPLAY (with nX)
+************************************************************************
+DEFINE DATA LOCAL
+1 VIEWEMP VIEW OF EMPLOYEES
+  2 PERSONNEL-ID
+  2 NAME
+  2 BIRTH
+  2 JOB-TITLE
+END-DEFINE
+*
+FORMAT SF=3
+READ (3) VIEWEMP BY BIRTH
+  <strong>DISPLAY PERSONNEL-ID NAME 5X JOB-TITLE</strong>
+END-READ
+END
+</pre> 
+          <p>Output of Program DISPLX04:</p> 
+          
+      <p>The above example program produces the following output, where the first
+              two columns are separated by 3 spaces due to the
+              <a href="../parms/sf.htm"><code>SF</code></a> parameter
+              in the <code>FORMAT</code> statement, while the second and third columns are
+              separated by 5 spaces due to the notation <code>5X</code> in the
+              <code>DISPLAY</code> statement:
+      </p> <pre class="system-output">
+Page      1                                                  04-11-11  14:15:54
+ 
+PERSONNEL           NAME                      CURRENT
+   ID                                        POSITION
+---------   --------------------     -------------------------
+ 
+30020013    GARRET                   TYPIST
+30016112    TAILOR                   WAREHOUSEMAN
+20017600    PIETSCH                  SECRETARY
+</pre> 
+          <p>The <code><var>n</var>X</code> notation is also
+              available with the <a href="../sm/write.htm"><code>WRITE</code></a> statement to insert spaces
+              between individual output elements:
+      </p> 
+          <pre class="verbatim">WRITE PERSONNEL-ID 5X NAME 3X JOB-TITLE</pre> 
+          <p>With the above statement, 5 spaces will be inserted between the fields
+              <code>PERSONNEL-ID</code> and <code>NAME</code>, and 3 spaces between
+              <code>NAME</code> and <code>JOB-TITLE</code>.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_output_display.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="tab_setting"></a></div> 
+         
+      <h2> 
+             <a name="x222"></a> 
+             <a name="x223"></a>Tab Setting - <var>n</var>T Notation 
+      </h2> 
+         
+          
+          
+      <p>With the <a href="../sm/display.htm#nT_display"><code><var>n</var>T</code></a>
+              notation, which is available with the <a href="../sm/display.htm"><code>DISPLAY</code></a> and the
+              <a href="../sm/write.htm"><code>WRITE</code></a> statement, you
+              can specify the position where an output element is to be output.
+      </p> 
+          <pre class="verbatim">
+** Example 'DISPLX05': DISPLAY (with nT)
+************************************************************************
+DEFINE DATA LOCAL
+1 VIEWEMP VIEW OF EMPLOYEES
+  2 NAME
+  2 FIRST-NAME
+END-DEFINE
+*
+READ (3) VIEWEMP BY NAME STARTING FROM 'JONES'
+  <strong>DISPLAY 5T NAME 30T FIRST-NAME</strong>
+END-READ
+END
+</pre> 
+          <p>Output of Program DISPLX05:</p> 
+          
+      <p>The above program produces the following output, where the field
+              <code>NAME</code> is output starting in the 5th position (counted from the left
+              margin of the page), and the field <code>FIRST-NAME</code> starting in the 30th
+              position:
+      </p> <pre class="system-output">
+Page      1                                                  04-11-11  14:15:54
+ 
+            NAME                  FIRST-NAME
+    --------------------     --------------------
+ 
+    JONES                    VIRGINIA
+    JONES                    MARSHA
+    JONES                    ROBERT
+</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_output_display.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="line_advance"></a></div> 
+         
+      <h2> 
+             <a name="x224"></a> 
+             <a name="x225"></a> 
+             <a name="x226"></a>Line Advance - Slash Notation 
+      </h2> 
+          
+          
+      <p>With a slash (/) in a <a href="../sm/display.htm"><code>DISPLAY</code></a> or
+              <a href="../sm/write.htm"><code>WRITE</code></a> statement, you
+              cause a line advance.
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">In a <code>DISPLAY</code> statement, a slash causes a line advance
+                      <em>between fields</em> and <em>within text</em>.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">In a <code>WRITE</code> statement, a slash causes a line advance only
+                      when placed <em>between fields</em>; within text, it is treated like an
+                      ordinary text character.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>When placed between fields, the slash must have a blank on either
+              side.
+      </p> 
+          
+      <p>For multiple line advances, you specify multiple slashes.</p> 
+          
+      <div><a name="line_adv_display_exa"></a></div>
+      <h4 class="floating-title"> Example 1 - Line Advance in
+              DISPLAY Statement:
+      </h4> 
+          <pre class="verbatim">
+** Example 'DISPLX06': DISPLAY (with slash '/')
+************************************************************************
+DEFINE DATA LOCAL
+1 VIEWEMP VIEW OF EMPLOYEES
+  2 NAME
+  2 FIRST-NAME
+  2 DEPARTMENT
+END-DEFINE
+*
+READ (3) VIEWEMP BY NAME STARTING FROM 'JONES'
+  <strong>DISPLAY NAME / FIRST-NAME 'DEPART-/MENT' DEPARTMENT</strong>
+END-READ
+END
+</pre> 
+          <p>Output of Program DISPLX06:</p> 
+          
+      <p>The above <code>DISPLAY</code> statement produces a line advance after
+              each value of the field <code>NAME</code> and within the text
+              <code>DEPART-MENT</code>:
+      </p> <pre class="system-output">
+Page      1                                                  04-11-11  14:15:54
+ 
+        NAME         DEPART-
+     FIRST-NAME       MENT
+-------------------- -------
+ 
+JONES                SALE
+VIRGINIA
+JONES                MGMT
+MARSHA
+JONES                TECH
+ROBERT
+</pre> 
+          <div><a name="line_adv_write_exa"></a></div>
+      <h4 class="floating-title"> Example 2 - Line Advance in WRITE
+              Statement:
+      </h4> 
+          <pre class="verbatim">
+** Example 'WRITEX02': WRITE (with line advance)
+************************************************************************
+DEFINE DATA LOCAL
+1 VIEWEMP VIEW OF EMPLOYEES
+  2 NAME
+  2 FIRST-NAME
+  2 DEPARTMENT
+END-DEFINE
+*
+READ (3) VIEWEMP BY NAME STARTING FROM 'JONES'
+  <strong>WRITE NAME / FIRST-NAME 'DEPART-/MENT' DEPARTMENT //</strong>
+END-READ
+END
+</pre> 
+          <p>Output of Program WRITEX02:</p> 
+          
+      <p>The above <code>WRITE</code> statement produces a line advance after
+              each value of the field <code>NAME</code>, and a double line advance after each
+              value of the field <code>DEPARTMENT</code>, but none within the text
+              <code>DEPART-/MENT</code>:
+      </p> <pre class="system-output">
+Page      1                                                  04-11-11  14:15:55
+ 
+JONES
+VIRGINIA             DEPART-/MENT SALE
+ 
+ 
+JONES
+MARSHA               DEPART-/MENT MGMT
+ 
+ 
+JONES
+ROBERT               DEPART-/MENT TECH
+</pre> 
+          <h4 class="floating-title"> Example 3 - Line Advance in DISPLAY and
+              WRITE:
+      </h4> 
+          <pre class="verbatim">
+** Example 'DISPLX21': DISPLAY (usage of slash '/' in DISPLAY and WRITE)
+************************************************************************
+DEFINE DATA LOCAL
+1 EMPLOY-VIEW VIEW OF EMPLOYEES
+  2 CITY
+  2 NAME
+  2 FIRST-NAME
+  2 ADDRESS-LINE (1)
+END-DEFINE
+*
+<strong>WRITE TITLE LEFT JUSTIFIED UNDERLINED
+       *TIME
+   5X  'PEOPLE LIVING IN SALT LAKE CITY'
+   21X 'PAGE:' *PAGE-NUMBER /
+   15X 'AS OF' *DAT4E //</strong>
+*
+<strong>WRITE TRAILER UNDERLINED 'REGISTER OF' / 'SALT LAKE CITY'</strong>
+*
+READ (2) EMPLOY-VIEW WITH CITY = 'SALT LAKE CITY'
+  <strong>DISPLAY  NAME /
+           FIRST-NAME
+           'HOME/CITY' CITY
+           'STREET/OR BOX NO.' ADDRESS-LINE (1)</strong>
+  SKIP 1
+END-READ
+END
+</pre> 
+          <p>Output of Program DISPLX21:</p> <pre class="system-output">
+14:15:54.6     PEOPLE LIVING IN SALT LAKE CITY                     PAGE:      1
+               AS OF 11/11/2004
+
+
+-------------------------------------------------------------------------------
+        NAME                 HOME                STREET
+     FIRST-NAME              CITY              OR BOX NO.
+-------------------- -------------------- --------------------
+
+ANDERSON             SALT LAKE CITY       3701 S. GEORGE MASON
+JENNY
+
+SAMUELSON            SALT LAKE CITY       7610 W. 86TH STREET
+MARTIN
+
+                                  REGISTER OF
+                                SALT LAKE CITY
+-------------------------------------------------------------------------------
+</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_output_display.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="further_exa"></a></div> 
+         
+      <h2> Further Examples of DISPLAY and WRITE Statements </h2> 
+          
+          
+      <p>See the following example programs:</p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="pg_exas.htm#DISPLX13">DISPLX13 - DISPLAY (compare
+                  with WRITEX08 using WRITE)</a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="pg_exas.htm#WRITEX08">WRITEX08 - WRITE (compare with
+                  DISPLX13 using DISPLAY)</a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="pg_exas.htm#DISPLX14">DISPLX14 - DISPLAY (with AL,
+                  SF and <var>n</var>X)</a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="pg_exas.htm#WRITEX09_further_exa_atstartdat">WRITEX09 - WRITE (in
+                  combination with AT END OF DATA)</a></p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+        
+       
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="pg_output_display.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_output_display.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_output_display.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_output-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_output_layout.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_output_index.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

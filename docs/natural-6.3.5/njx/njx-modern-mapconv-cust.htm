@@ -1,0 +1,1222 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Customizing the Map Conversion Process</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="njx-modern-mapconv-cust"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../njx/njx-modern-mapconv-cust.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/njx/njx-modern-mapconv-cust.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="njx-modern-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="njx-modern-mapconv.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="njx-modern-code.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Natural for Ajax&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+         
+      <div class="nospytext">
+         <h1>Customizing the Map Conversion Process</h1>
+      </div> 
+          
+      <p>This document covers the following
+              topics:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="njx-modern-mapconv-cust.htm#njx-modern-custmap-process">Map Converter Processing</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="njx-modern-mapconv-cust.htm#njx-modern-custmap-rules">Conversion Rules</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="njx-modern-mapconv-cust.htm#njx-modern-custmap-templates">Templates</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="njx-modern-mapconv-cust.htm#njx-modern-custmap-tagconv">Tag Converters</a></p>
+         </li>
+      </ul>
+      <hr>
+      <div><a name="njx-modern-custmap-process"></a></div> 
+          
+      <h2>Map Converter Processing</h2> 
+           
+      <p>The map conversion process reads a map extract file created by the Map
+               Extractor or the <code>INPUT</code> Extractor and transforms it into a
+               corresponding Application Designer page layout file. The conversion process is controlled by
+               rules and templates.
+      </p> 
+           
+      <p><img src="graphics/njx-mapconv-processing.png" alt="Map Converter processing" width="500" height="420"></p> 
+           
+      <p>The Map Converter ships with a default set of conversion rules and
+               corresponding template files. This set allows for default map conversions
+               without changing rules or templates. In most cases, you will add or modify some
+               conversion rules and/or templates to customize the conversion according to the
+               requirements of your application. 
+      </p> 
+           
+      <p>For advanced customizations, there is also the possibility to plug own
+               Java-written conversion classes (the so-called "tag converters")
+               into the conversion processing. But you should only do this in very rare cases.
+               
+      </p> 
+           
+      <p>The following topics are covered below:</p>
+           
+      <ul>
+         <li>
+            <p class="initem"><a href="njx-modern-mapconv-cust.htm#njx-modern-custmap-process-rowcol">Processing of Rows and Columns</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="njx-modern-mapconv-cust.htm#njx-modern-custmap-process-seq">Processing of Sequence and Grid Areas</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="njx-modern-mapconv-cust.htm#njx-modern-custmap-process-sum">Summary: Processing Steps of the Map Converter</a></p>
+         </li>
+      </ul>
+      <div><a name="njx-modern-custmap-process-rowcol"></a></div> 
+           
+      <h3>Processing of Rows and Columns</h3> 
+            
+      <p>By default, for each row and column in a map, a corresponding row and
+                column is generated in the layout. By default, the Map Converter inserts the
+                converted rows and columns at a defined position within a corresponding page
+                template. Template and insert position can be defined by the user. Skipping or
+                different handling of specific rows and columns can be defined via
+                corresponding conversion rules. 
+      </p> 
+            
+      <p>The following sections describe the default processing for rows and
+                columns in case no specific rules for different insert positions are
+                specified:
+      </p>
+      <ul>
+         <li><a href="njx-modern-mapconv-cust.htm#njx-modern-custmap-process-rowcol-row">Rows</a></li>
+         <li><a href="njx-modern-mapconv-cust.htm#njx-modern-custmap-process-rowcol-col">Columns</a></li>
+      </ul>
+      <div><a name="njx-modern-custmap-process-rowcol-row"></a></div> 
+            
+      <h4>Rows</h4> 
+             
+             
+      <p>For each row in a map, the Map Converter generates an ITR
+                 (independent table row) control with the default settings. For empty rows, an
+                 ITR control containing the control defined in the
+                 <cite>EMPTYROW_TEMPLATE</cite> is generated.
+      </p> 
+            
+      <div><a name="njx-modern-custmap-process-rowcol-col"></a></div>
+            
+            
+      <h4>Columns</h4> 
+             
+             
+      <p>The fields and literals within a row are aligned to columns according
+                 to the following rules: 
+      </p> 
+             
+      <ul> 
+                 
+         <li> 
+                      
+                     
+            <p class="initem"><strong>Column Start Position</strong><br>If an absolute column start position is defined for a field or
+                         literal in the map, the corresponding control in the page layout is aligned so
+                         that it starts exactly with the specified column. This is done by inserting a
+                         HDIST (horizontal distance) control with a corresponding width as a filler.
+            </p>
+                     
+                    
+         </li> 
+                 
+         <li> 
+                      
+                     
+            <p class="initem"><strong>Conversion Rules</strong><br>If no absolute column start position is defined for a field or
+                         literal in the map, a HDIST control is not added as a filler by default. In
+                         this case, the field or literal is simply appended as the last subnode of the
+                         current ITR control. In many cases, this would result in a layout that requires
+                         additional manual adding of fillers. This is because appending two field
+                         controls without adding any HDIST control often does not look as intended.
+                         Therefore, the Map Converter includes default conversion rules for filler
+                         settings. You can modify the default conversion rules or add your own
+                         conversion rules to fine-tune this behavior. For more information, see
+                         <a href="njx-modern-mapconv-cust.htm#njx-modern-custmap-rules">Conversion
+                  Rules</a>.
+            </p> 
+                    
+         </li> 
+                 
+         <li> 
+                      
+                     
+            <p class="initem"><strong>Column Width</strong><br>A character map has a fixed number of rows and columns. For the
+                         literal "ABCD", this means that it uses exactly 4
+                         columns. Calculating the correct width and height of field on a web page is
+                         more complex. The width of "ABCD" will most likely
+                         be greater than the width of "llll". Very short
+                         fields (with a length of one or two characters) should have a minimum width so
+                         that the content is fully visible. You can fine-tune the width by adapting the
+                         predefined conversion rule variable
+                         <code>$$widthfactor$$</code> or by adding your own conversion
+                         rules. For more information, see <a href="njx-modern-mapconv-cust.htm#njx-modern-custmap-rules">Conversion
+                  Rules</a>.
+            </p> 
+                    
+         </li> 
+                
+      </ul> 
+            
+      <div><a name="njx-modern-custmap-process-seq"></a></div>
+           
+           
+      <h3>Processing of Sequence and Grid Areas</h3> 
+            
+            
+      <p>The map extract file also contains information about arrays. With
+                Application Designer, arrays are usually rendered as grid controls. Application Designer provides a couple of
+                grid controls: 
+      </p> 
+            
+      <ul> 
+                
+         <li> 
+                    
+            <p class="initem"><a href="textgrid2.htm#textgrid2">TEXTGRID2</a> - a grid
+                        containing text.
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem"><a href="textgridsss2textgrid2withserversidescrolling.htm#textgridsss2textgrid2withserversidescrolling">TEXTGRIDSSS2</a>
+                        - a text grid with server-side scrolling.
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem"><a href="rowtablearea2theflexiblecontrolgrid.htm#rowtablearea2theflexiblecontrolgrid">ROWTABLEAREA2</a> - a
+                        grid containing other controls.
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem"><a href="mgdgrid.htm#mgdgrid">MGDGRID</a> - a managed grid.
+                        
+            </p> 
+                   
+         </li> 
+               
+      </ul> 
+            
+      <p>The Map Converter tries to convert arrays into suitable grid controls.
+                Before the real conversion of arrays to grid controls can be done, the Map
+                Converter must first identify the sequence and grid areas on the map. During
+                this process of area identification, the Map Converter groups literals and
+                fields together into sequences and areas. Whether the corresponding fields or
+                literals are actually converted into a grid depends on the conversion rules
+                that are executed after this area identification step. 
+      </p> 
+            
+      <p>This process of area identification is simply a kind of marking. The
+                corresponding sequence and area objects can be used as source in the conversion
+                rules to define the actual controls.
+      </p> 
+            
+      <p><img src="graphics/njx-mapconv-seqgrid.png" alt="Identification of grid area" width="600" height="560"></p> 
+           
+      <div><a name="njx-modern-custmap-process-sum"></a></div> 
+           
+      <h3>Summary: Processing Steps of the Map Converter</h3> 
+            
+            
+      <p>The conversion is done in several steps: </p> 
+            
+      <ol> 
+                
+         <li> 
+                    
+            <p class="initem">The map extract file is loaded and the corresponding rows and
+                        columns are collected. 
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">The sequence and grid areas are identified. </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">For each row, the list of items in this row is processed, according
+                        to the column order. An item can be one of the following: a simple literal, a
+                        field or an area. For each found item, the corresponding conversion rules are
+                        executed.
+            </p> 
+                   
+         </li> 
+               
+      </ol> 
+           
+      <div class="noprint">
+         <p><a href="njx-modern-mapconv-cust.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="njx-modern-custmap-rules"></a></div> 
+          
+      <h2>Conversion Rules</h2> 
+           
+      <p>Different conversion projects have different requirements to the
+               conversion process. The Map Converter is driven by conversion rules and thus
+               allows for flexible control of the conversion process. Conversion rules define
+               how source items (items from a given map extract file) are mapped to target
+               items (items in the page layout to be created) and under which conditions a
+               certain source item shall be converted to a certain target item. The Map
+               Converter is delivered with a default set of conversion rules contained in the
+               file <cite>convrulesDefault.xml</cite> in the subdirectory
+               <cite>convrules</cite> in the Application Designer project
+               <cite>njxmapconverter</cite>. A more application-specific conversion
+               can be achieved by copying and modifying the default set of rules or by adding
+               own rules. 
+      </p> 
+           
+      <p>Each set of conversion rules is defined in an XML file according to the
+               XML schema <cite>convrules.xsd</cite> in the subdirectory
+               <cite>convrules</cite> in the Application Designer project
+               <cite>njxmapconverter</cite>. Each individual conversion rule consists
+               of a name, a description, a source and a target. The source identifies an
+               element in the map extract file. The target identifies controls and attributes
+               to be generated in the page layout. 
+      </p> 
+           
+      <p>The conversion rules make often use of regular expressions and
+               so-called capture groups. For more information about regular expressions, see
+               for instance the web site
+               <a href="http://www.regular-expressions.info" target="_blank">http://www.regular-expressions.info</a>.
+               
+      </p> 
+           
+      <p>The following topics are covered below:</p>
+           
+      <ul>
+         <li>
+            <p class="initem"><a href="njx-modern-mapconv-cust.htm#njx-modern-custmap-rules-exa">Conversion Rules Examples</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="njx-modern-mapconv-cust.htm#njx-modern-custmap-rules-default">Default Conversion Rules File</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="njx-modern-mapconv-cust.htm#njx-modern-custmap-rules-adapt">Conversion Rules that Often Need to be Adapted</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="njx-modern-mapconv-cust.htm#njx-modern-custmap-rules-own">Writing Your Own Conversion Rules</a></p>
+         </li>
+      </ul>
+      <div><a name="njx-modern-custmap-rules-exa"></a></div> 
+           
+      <h3>Conversion Rules Examples</h3> 
+            
+      <p>The following examples are
+                provided:
+      </p>
+      <ul>
+         <li><a href="njx-modern-mapconv-cust.htm#njx-modern-custmap-rules-exa1">Example 1</a></li>
+         <li><a href="njx-modern-mapconv-cust.htm#njx-modern-custmap-rules-exa2">Example 2</a></li>
+         <li><a href="njx-modern-mapconv-cust.htm#njx-modern-custmap-rules-exa3">Example 3</a></li>
+      </ul>
+      <div><a name="njx-modern-custmap-rules-exa1"></a></div> 
+            
+      <h4>Example 1</h4> 
+             
+             
+      <p>The following example rule (contained in the default conversion rules
+                 file) defines that fields in the map extract file with the qualification
+                 <code>AD=O</code> shall be converted to field controls with the property
+                 <code>displayonly="true"</code>. 
+      </p> 
+             <pre class="verbatim">&lt;convrule rulename="Ofield_rule"&gt;
+  &lt;description&gt;Defines the control template to be used for input fields
+  which are specified as output only.&lt;/description&gt;
+  &lt;source&gt;
+    &lt;sourceitem&gt;ifField&lt;/sourceitem&gt;
+    &lt;sourcecond&gt;
+      &lt;condattr&gt;//ifAD&lt;/condattr&gt;
+      &lt;condvalue&gt;.*O.*&lt;/condvalue&gt;
+    &lt;/sourcecond&gt;
+  &lt;/source&gt;
+  &lt;target&gt;
+    &lt;targetitem&gt;$OFIELD_TEMPLATE&lt;/targetitem&gt;
+  &lt;/target&gt;
+&lt;/convrule&gt;
+</pre> 
+             <p>The source element specifies that this rule applies to fields
+                 (element <code>ifField</code>) that have an <code>AD</code> parameter
+                 (element <code>ifAD</code>) that contains a letter
+                 "O" (matching the regular expression
+                 <code>.*O.*</code>). The target element specifies that these fields are to be
+                 converted to whatever is contained in the template file
+                 <cite>OFIELD_TEMPLATE.xml</cite>. This template file must be contained
+                 in the same directory as the conversion rules file. 
+      </p> 
+             
+      <p>The template file contains the detailed specification of the field to
+                 be generated. The file <cite>OFIELD_TEMPLATE.xml</cite> delivered with
+                 the map converter contains, for instance, the following:
+      </p> 
+             <pre class="verbatim">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;field valueprop="$$" width="$$" noborder="true" displayonly="true"/&gt;</pre> 
+             <p>That is, the resulting field is generated without a border
+                 (<code>noborder="true"</code>) and as a display-only field
+                 (<code>displayonly="true"</code>). The <code>valueprop</code> and
+                 <code>width</code> to be assigned (<code>$$</code>) are not determined by this
+                 rule, but are left under the control of other rules. 
+      </p> 
+            
+      <div><a name="njx-modern-custmap-rules-exa2"></a></div> 
+            
+      <h4>Example 2</h4> 
+             
+             
+      <p>The following example rule (contained in the default conversion rules
+                 file) defines that for all fields that are defined with the format
+                 A<var>n</var> in the map extract file, an attribute
+                 <code>datatype="string n"</code> shall be added to the element that is
+                 generated into the page layout. 
+      </p> 
+             <pre class="verbatim">&lt;convrule rulename="AfixType_rule"&gt;
+  &lt;description&gt;All Natural "An" dfFields are converted to the
+  Application Designer datatype "string n". Example: "A10" is
+  converted to "string n".&lt;/description&gt;
+  &lt;source&gt;
+    &lt;sourceitem&gt;dfField&lt;/sourceitem&gt;
+      &lt;selection&gt;
+        &lt;selectattr&gt;dfFormat&lt;/selectattr&gt;
+        &lt;selectval&gt;A([0-9]+)&lt;/selectval&gt;
+      &lt;/selection&gt;
+    &lt;/source&gt;
+    &lt;target&gt;
+      &lt;targetitem&gt;$$&lt;/targetitem&gt;
+      &lt;targetattr&gt;
+        &lt;attrname&gt;datatype&lt;/attrname&gt;
+        &lt;attrvalue&gt;string $1&lt;/attrvalue&gt;
+      &lt;/targetattr&gt;
+    &lt;/target&gt;
+&lt;/convrule&gt;</pre> 
+             <p>The source element specifies that this rule applies to fields that
+                 have in the field definition (element <code>dfField</code>) a format (element
+                 <code>dfFormat</code>) of A<var>n</var> (matching the regular
+                 expression <code>A([0-9]+)</code>). The target element specifies that for
+                 whatever element is generated into the page layout for this kind of fields, an
+                 attribute <code>datatype="string $1"</code> shall be added. In terms of regular
+                 expressions, <code>$1</code> refers to the contents of the first "capture
+                 group" of the regular expression <code>A([0-9]+)</code>. In case of a
+                 format A20, <code>$1</code> will evaluate to 20 and thus an attribute
+                 <code>datatype="string 20"</code> will be generated. 
+      </p> 
+             
+      <p>The control to be generated into the page layout
+                 (<code>&lt;targetitem&gt;$$&lt;/targetitem&gt;</code>) is not determined by
+                 this rule, but is left under the control of other rules. 
+      </p> 
+             
+      <p>Summary: The combination of the two rules in example 1 and 2 makes
+                 sure that output fields, for example, of format A20 are converted to field
+                 controls with <code>displayonly="true"</code> and <code>datatype="string
+            20"</code>.
+      </p> 
+            
+      <div><a name="njx-modern-custmap-rules-exa3"></a></div> 
+            
+      <h4>Example 3</h4> 
+             
+             
+      <p>The following more advanced rule was created for the use of a
+                 specific conversion project. The following task had to be achieved: A literal
+                 of the format "F10 Change" shall be converted to a
+                 button that is named "F10", is labeled
+                 "Change" and raises an event named
+                 "PF10". With the explanations from the examples
+                 above, the rule should be nearly self-explanatory. 
+      </p> 
+             
+      <p>Note that according to the rules of regular expressions, the variable
+                 <code>$1</code> refers to the string matched by the expression part in the
+                 first pair of parentheses (the first "capture group"), that is for
+                 instance "F10", and the variable <code>$3</code>
+                 refers to the string matched by the expression part in the third pair of
+                 parentheses (the third "capture group"), that is for instance
+                 "Change". 
+      </p> 
+             <pre class="verbatim">&lt;convrule rulename="Function_rule" lone="true"&gt;
+&lt;description&gt;Generates a button from specific literals.&lt;/description&gt;
+  &lt;source&gt;
+    &lt;sourceitem&gt;ltLiteral&lt;/sourceitem&gt;
+    &lt;selection&gt;
+      &lt;selectattr&gt;ltName&lt;/selectattr&gt;
+      &lt;selectval&gt;<strong>(F[0-9]+)</strong>(\p{Space})<strong>(.*)</strong>&lt;/selectval&gt;
+    &lt;/selection&gt;
+  &lt;/source&gt;
+  &lt;target&gt;
+    &lt;targetitem&gt;$BUTTON_TEMPLATE&lt;/targetitem&gt;
+    &lt;targetattr&gt;
+      &lt;attrname&gt;name&lt;/attrname&gt;
+      &lt;attrvalue&gt;$1&lt;/attrvalue&gt;
+    &lt;/targetattr&gt;
+    &lt;targetattr&gt;
+      &lt;attrname&gt;method&lt;/attrname&gt;
+      &lt;attrvalue&gt;P$1&lt;/attrvalue&gt;
+    &lt;/targetattr&gt;
+  &lt;/target&gt;
+  &lt;target&gt;
+    &lt;targetitem&gt;hdist&lt;/targetitem&gt;
+    &lt;targetattr&gt;
+      &lt;attrname&gt;width&lt;/attrname&gt;
+      &lt;attrvalue&gt;4&lt;/attrvalue&gt;
+    &lt;/targetattr&gt;
+  &lt;/target&gt;
+  &lt;target&gt;
+    &lt;targetitem&gt;label&lt;/targetitem&gt;
+    &lt;targetattr&gt;
+      &lt;attrname&gt;name&lt;/attrname&gt;
+      &lt;attrvalue&gt;$3&lt;/attrvalue&gt;
+    &lt;/targetattr&gt;
+  &lt;/target&gt;
+&lt;/convrule&gt;</pre> 
+            <div><a name="njx-modern-custmap-rules-default"></a></div> 
+           
+      <h3>Default Conversion Rules File</h3> 
+            
+      <p>The Map Converter is delivered with a default set of conversion rules
+                contained in the file <cite>convrulesDefault.xml</cite> in the
+                subdirectory <cite>convrules</cite> in the Application Designer project
+                <cite>njxmapconverter</cite>. A more application-specific conversion
+                can be achieved by copying and modifying the default set of rules or by adding
+                own rules.
+      </p> 
+            
+      <p>The following topics are covered
+                below:
+      </p>
+      <ul>
+         <li><a href="njx-modern-mapconv-cust.htm#njx-modern-custmap-rules-default-root">Root Rule</a></li>
+         <li><a href="njx-modern-mapconv-cust.htm#njx-modern-custmap-rules-default-datatype">Data Type Conversion Rules</a></li>
+         <li><a href="njx-modern-mapconv-cust.htm#njx-modern-custmap-rules-default-other">Other Default Conversion Rules</a></li>
+      </ul>
+      <div><a name="njx-modern-custmap-rules-default-root"></a></div> 
+            
+      <h4>Root Rule</h4> 
+             
+             
+      <p>Like every conversion rules file, the file contains exactly one
+                 "Root_rule". The root rule specifies the template
+                 file to be used for the overall page layout. In this template file, the
+                 application-specific page layout can be defined, using company logos, colors,
+                 fonts, etc. The root rule must always have "map" as
+                 the source item and must refer to some variable defined in the page template
+                 file as the target item. The place of that variable specifies where in the page
+                 template the converted map items are placed. See for instance the root rule
+                 from the default conversion rules:
+      </p> 
+             <pre class="verbatim">&lt;convrule rulename="Root_rule"&gt;
+  &lt;description&gt;Exactly one rule with the sourceitem "map" is required.
+  This rule must define the natpage template and insert position of
+  the conversion result.&lt;/description&gt;
+  &lt;source&gt;
+    &lt;sourceitem&gt;<strong>map</strong>&lt;/sourceitem&gt;
+  &lt;/source&gt;
+  &lt;target&gt;
+    &lt;targetitem&gt;<strong>$NATPAGE_TEMPLATE.$MAPROOT</strong>&lt;/targetitem&gt;
+  &lt;/target&gt;
+&lt;/convrule&gt;</pre> 
+             <p>The rule refers to a page layout template
+                 <cite>NATPAGE_TEMPLATE.xml</cite> and refers to a variable defined in
+                 that template where the converted map elements shall be placed. Here is the
+                 corresponding content of the page layout template
+                 <cite>NATPAGE_TEMPLATE.xml</cite>:
+      </p> 
+             <pre class="verbatim">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;natpage xmlns:njx=http://www.softwareag.com/njx/njxMapConverter
+  <strong>natsource="$$NATSOURCE$$" natsinglebyte="true"</strong>&gt;
+  &lt;titlebar <strong>name="$$TITLEVAR$$"</strong> align="center"&gt;
+  &lt;/titlebar&gt;
+  &lt;pagebody&gt;
+    <strong>&lt;njx:njxvariable name="MAPROOT"/&gt;</strong>	
+  &lt;/pagebody&gt;
+  &lt;statusbar withdistance="false"/&gt;
+&lt;/natpage&gt;</pre> 
+             <p>This template specifies the following: </p> 
+             
+      <ul> 
+                 
+         <li> 
+                     
+            <p class="initem">The overall page layout shall consist of the elements
+                         <code>titlebar</code>, <code>pagebody</code> and <code>statusbar</code>. 
+            </p> 
+                    
+         </li> 
+                 
+         <li> 
+                     
+            <p class="initem">The converted map elements shall be placed into the
+                         <code>pagebody</code>. 
+            </p> 
+                    
+         </li> 
+                 
+         <li> 
+                     
+            <p class="initem">The name of the Natural adapter to be generated from that page
+                         layout shall be determined by a rule (<code>natsource="$$NATSOURCE$$"</code>).
+                         There must be a corresponding rule that yields a value for the variable
+                         <code>$$NATSOURCE$$</code>, for instance derived from the map
+                         name. We shall see later how to define such a rule. 
+            </p> 
+                    
+         </li> 
+                 
+         <li> 
+                     
+            <p class="initem">All strings in the page layout shall be mapped to Natural variables
+                         of type A in the adapter interface (<code>natsinglebyte="true"</code>). 
+            </p> 
+                    
+         </li> 
+                 
+         <li> 
+                     
+            <p class="initem">The text displayed in the title bar shall be determined by a rule
+                         (<code>name="$$TITLEVAR$$"</code>). There must be a corresponding rule that
+                         yields a value for the variable <code>$$TITLEVAR$$</code>, for
+                         instance derived from a literal in the first row in the map. We shall see later
+                         how to define such a rule. 
+            </p> 
+                    
+         </li> 
+                
+      </ul> 
+            
+      <div><a name="njx-modern-custmap-rules-default-datatype"></a></div> 
+            
+      <h4>Data Type Conversion Rules</h4> 
+             
+             
+      <p>The default conversion rules file contains a set of rules that
+                 control the conversion of data types: from Natural data types in the map to
+                 corresponding Application Designer data types in the page layout. An example was given above
+                 in <a href="njx-modern-mapconv-cust.htm#njx-modern-custmap-rules-exa2">Example
+            2</a>. Usually, these rules need not be adapted. They have
+                 been chosen in such a way that the process of extracting maps, converting them
+                 to layouts and generating Natural adapters for these usually yields the same
+                 data types in the adapter interface as in the map interface.
+      </p> 
+            
+      <div><a name="njx-modern-custmap-rules-default-other"></a></div> 
+            
+      <h4>Other Default Conversion Rules</h4> 
+             
+             
+      <p>Other default conversion rules define a default mapping for literals,
+                 modifiable fields, output fields, modifiable grids, output grids, system
+                 variables and fields with special characters like
+                 "#" in their names. These rules need only be adapted
+                 in special cases. 
+      </p> 
+            
+      <div><a name="njx-modern-custmap-rules-adapt"></a></div>
+           
+           
+      <h3>Conversion Rules that Often Need to be
+               Adapted
+      </h3> 
+            
+      <p>Some conversion rules need to be adapted in nearly all conversion
+                projects. These rules are contained in the section "APPLICATION
+                SPECIFIC RULES" in the default conversion rules file.
+      </p> 
+            
+      <p>The following topics are covered
+                below:
+      </p>
+      <ul>
+         <li><a href="njx-modern-mapconv-cust.htm#njx-modern-custmap-rules-adapt-name">Naming of Adapters</a></li>
+         <li><a href="njx-modern-mapconv-cust.htm#njx-modern-custmap-rules-adapt-title">Setting the Title of a Map</a></li>
+      </ul>
+      <div><a name="njx-modern-custmap-rules-adapt-name"></a></div> 
+            
+      <h4>Naming of Adapters</h4> 
+             
+             
+      <p>Each application has a different naming convention for Natural
+                 objects. There is a rule (it is named
+                 "Natsource_rule" in the default conversion rules
+                 file) that controls how adapter names are derived from map names. The rule
+                 replaces the first letter "M" in the map name with
+                 an "A" and places the resulting string into the
+                 variable <code>NATSOURCE</code>. Remember that in the default
+                 page template, the <code>natsource</code> property of NATPAGE
+                 (which defines the adapter name to generated) is preset with the variable
+                 reference <code>$$NATSOURCE$$</code>. Thus, a map with the name
+                 <code>TESTM1</code> results in an adapter named <code>TESTA1</code>. Other
+                 naming conventions for maps will require a more sophisticated adapter naming
+                 rule.
+      </p> 
+            
+      <div><a name="njx-modern-custmap-rules-adapt-title"></a></div> 
+            
+      <h4>Setting the Title of a Map</h4> 
+             
+             
+      <p>Each application has a different way of showing titles in a map.
+                 Often, the title string shall be placed into the title bar of the resulting
+                 page layout during conversion. There is a rule (in the default conversion rules
+                 file, it is named "Titlevar_rule") that controls how
+                 the title string in a map is recognized. The rule searches in the first row of
+                 a map for a literal enclosed in "***" and places the
+                 resulting string into the variable <code>TITLEVAR</code>.
+                 Remember that in the default page template, the
+                 <code>name</code> property of the
+                 <code>titlebar</code> element (which defines the string to be
+                 shown in the title bar) is preset with the variable reference
+                 <code>$$TITLEBAR$$</code>. So this rule takes care that the found literal is
+                 placed into the <code>titlebar</code> element of the page. Other
+                 conventions for map titles will require a more sophisticated rule. 
+      </p> 
+            
+      <div><a name="njx-modern-custmap-rules-own"></a></div> 
+           
+      <h3>Writing Your Own Conversion Rules</h3> 
+            
+            
+      <p>When writing your own conversion rules, you can use the default rules
+                as examples. In order to write rules from scratch, you need to know the
+                elements of the map that can be referred to as source items and the full syntax
+                of the rule definition.
+      </p> 
+            
+      <ul> 
+                
+         <li> 
+                    
+            <p class="initem"> The XML schema of the map extract files is contained in the file
+                        <cite>naturalmap.xsd</cite> in the subdirectory
+                        <cite>convrules</cite> in the Application Designer project
+                        <cite>njxmapconverter</cite>. 
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">As described in <a href="njx-modern-mapconv-cust.htm#njx-modern-custmap-process-seq">Processing of Sequence and
+                  Grid Areas</a>, one step in the map conversion is the
+                        detection of sequence and grid areas in the map. Conversion rules can also
+                        refer to the detected sequence and grid areas. The XML schema of the map
+                        extract files after the detection of sequence and grid areas is described in
+                        the extended XML schema <cite>naturalmapxml_extended.xsd</cite> in the
+                        same directory.
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">The syntax of the conversion rules is described by the XML schema
+                        <cite>convrules.xsd</cite> in the same directory.
+            </p> 
+                   
+         </li> 
+               
+      </ul> 
+            
+      <p>The basic structure of a conversion rule is as follows:</p> 
+            <pre class="verbatim">&lt;convrule rulename="..."&gt;
+  &lt;description&gt;...&lt;/description&gt;
+  &lt;source&gt;...&lt;/source&gt;
+  &lt;target&gt;...&lt;/target&gt;
+  &lt;target&gt;...&lt;/target&gt;
+  ...
+&lt;/convrule&gt;</pre> 
+            <p>This means, a conversion rule consists of one
+                <code>source</code> element and (optionally) one or several
+                <code>target</code> elements. The
+                <code>source</code> element identifies an item from the map. The
+                <code>target</code> elements specify the conversion output. If no
+                <code>target</code> elements are specified, nothing is generated
+                from the identified <code>source</code> element. 
+      </p> 
+            
+      <p>The basic structure of a <code>source</code> element is
+                as follows (example): 
+      </p> 
+            <pre class="verbatim">&lt;source&gt;
+  &lt;sourceitem&gt;ltLiteral&lt;/sourceitem&gt;
+    &lt;selection&gt;
+      &lt;selectattr&gt;ltName&lt;/selectattr&gt;
+      &lt;selectval&gt;\*\*\*(.*)\*\*\*&lt;/selectval&gt;
+    &lt;/selection&gt;
+    &lt;sourcecond&gt;
+      &lt;condattr&gt;ltRow&lt;/condattr&gt;
+      &lt;condvalue&gt;1&lt;/condvalue&gt;
+    &lt;/sourcecond&gt;
+&lt;/source&gt;</pre> 
+            <p>The <code>sourceitem</code> element refers to a specific
+                kind of item on a map, such as a literal (<code>ltLiteral</code>), a defined
+                field (<code>dfField</code>), an input field (<code>ifField</code>) or the
+                identifier of the map (<code>identity</code>). The elements that can be used
+                here are specified by the XML schema that describes the map extract after the
+                detection of sequence and grid areas
+                (<cite>naturalmapxml_extended.xsd</cite>). Therefore, the elements
+                <code>sequenceArea</code> and
+                <code>gridArea</code>, which are only known after this
+                processing, can also be used here. 
+      </p> 
+            
+      <p>The <code>selectattr</code> and
+                <code>selectval</code> elements are used to match an element of a
+                specific kind by its attribute values. The <code>selectval</code>
+                element uses regular expressions to perform a match. Capturing groups such as
+                <code>(.*)</code> can be used here, so that the target part of the conversion
+                rule can later refer to parts of the matched value.
+      </p> 
+            
+      <p> Finally, there can be zero, one or several
+                <code>sourcecond</code> elements, which allow to define further
+                to which map items the rule applies. If several
+                <code>sourcecond</code> elements are specified, the rule is
+                triggered only if all conditions match (logical AND). 
+      </p> 
+            
+      <p>The basic structure of a <code>target</code> element is
+                as follows: 
+      </p> 
+            <pre class="verbatim">&lt;target&gt;
+  &lt;targetitem&gt;...&lt;/targetitem&gt;
+  &lt;targetattr&gt;
+    &lt;attrname&gt;...&lt;/attrname&gt;
+    &lt;attrvalue&gt;...&lt;/attrvalue&gt;
+  &lt;/targetattr&gt;
+  &lt;targetattr&gt;
+    ...
+  &lt;/targetattr&gt;
+  ...
+&lt;/target&gt;</pre> 
+            <p>In detail, there are several different options to specify a target
+                item: 
+      </p> 
+            
+      <ul> 
+                
+         <li> 
+                    
+            <p class="initem">Specify the root element name of an Application Designer control, along with its
+                        attributes and attribute values. The attribute value can be a constant, a
+                        variable or a reference to a capturing group from a regular expression in a
+                        <code>sourcecond</code> element of the same rule. In this case,
+                        the corresponding control is generated during conversion. 
+            </p> 
+                    <pre class="verbatim">&lt;target&gt;
+  &lt;targetitem&gt;label&lt;/targetitem&gt;
+  &lt;targetattr&gt;
+    &lt;attrname&gt;height&lt;/attrname&gt;
+    &lt;attrvalue&gt;10&lt;/attrvalue&gt;
+  &lt;/targetattr&gt;
+  &lt;targetattr&gt;
+    &lt;attrname&gt;width&lt;/attrname&gt;
+    &lt;attrvalue&gt;$$width$$&lt;/attrvalue&gt;
+  &lt;/targetattr&gt;
+  &lt;targetattr&gt;
+    &lt;attrname&gt;name&lt;/attrname&gt;
+    &lt;attrvalue&gt;$1&lt;/attrvalue&gt;
+  &lt;/targetattr&gt;
+&lt;/target&gt;</pre> 
+                   </li> 
+                
+         <li> 
+                    
+            <p class="initem">Specify the name of a variable that is defined in the conversion
+                        rules file in a <code>convvariable</code> element. 
+            </p> 
+                    <pre class="verbatim">&lt;target&gt;
+  &lt;targetitem&gt;$$name$$&lt;/targetitem&gt;
+&lt;/target&gt;</pre> 
+                   </li> 
+                
+         <li> 
+                    
+            <p class="initem">Refer to the name of a template file, optionally along with
+                        attribute names and values. In this case, whatever is contained in the template
+                        file will be generated. Attribute definitions in the template file are
+                        replaced. 
+            </p> 
+                    <pre class="verbatim">&lt;target&gt;
+  &lt;targetitem&gt;$BUTTON_TEMPLATE&lt;/targetitem&gt;
+  &lt;targetattr&gt;
+    &lt;attrname&gt;name&lt;/attrname&gt;
+    &lt;attrvalue&gt;$1&lt;/attrvalue&gt;
+  &lt;/targetattr&gt;
+  &lt;targetattr&gt;
+    &lt;attrname&gt;method&lt;/attrname&gt;
+    &lt;attrvalue&gt;P$1&lt;/attrvalue&gt;
+  &lt;/targetattr&gt;
+&lt;/target&gt;</pre> 
+                   </li> 
+                
+         <li> 
+                    
+            <p class="initem">Refer to the name of a template variable and the name of a template
+                        file, separated by a dot. In this case, the template variable is replaced with
+                        whatever is contained in the template file. 
+            </p> 
+                    <pre class="verbatim">&lt;target&gt;
+  &lt;targetitem&gt;$GRIDITEM.$GRIDITEM_TEMPLATE&lt;/targetitem&gt;
+&lt;/target&gt;</pre> 
+                   </li> 
+                
+         <li> 
+                    
+            <p class="initem">Only in the root rule: Specify the name of a template file and the
+                        name of a template variable that is contained in this file, separated by a dot.
+                        In this case, the template variable is replaced with the entire result of the
+                        map conversion. 
+            </p> 
+                    <pre class="verbatim">&lt;target&gt;
+  &lt;targetitem&gt;$NATPAGE_TEMPLATE.$MAPROOT&lt;/targetitem&gt;
+&lt;/target&gt;</pre> 
+                   </li> 
+                
+         <li> 
+                    
+            <p class="initem">Specify "$$" as the target item. This is
+                        useful when writing a more general rule that is to apply after another more
+                        specific rule has already created a target item. The attributes specified along
+                        with the target item "$$" are applied to the already
+                        created target item, whatever this target item was.
+            </p> 
+                    <pre class="verbatim">&lt;target&gt;
+  &lt;targetitem&gt;$$&lt;/targetitem&gt;
+  &lt;targetattr&gt;
+    &lt;attrname&gt;datatype&lt;/attrname&gt;
+    &lt;attrvalue&gt;xs:double&lt;/attrvalue&gt;
+  &lt;/targetattr&gt;
+&lt;/target&gt;</pre> 
+                   </li> 
+                
+         <li> 
+                    
+            <p class="initem">Specify "$." as the target item. This
+                        refers to the template that is currently being processed. The attributes
+                        specified along with the target item "$." are
+                        applied to the current template. 
+            </p> 
+                    <pre class="verbatim">&lt;target&gt;
+  &lt;targetitem&gt;$.&lt;/targetitem&gt;
+  &lt;targetattr&gt;
+    &lt;attrname&gt;$$NATSOURCE$$&lt;/attrname&gt;
+    &lt;attrvalue&gt;$1-A&lt;/attrvalue&gt;
+  &lt;/targetattr&gt;
+&lt;/target&gt;</pre> 
+                   </li> 
+               
+      </ul> 
+           
+      <div class="noprint">
+         <p><a href="njx-modern-mapconv-cust.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="njx-modern-custmap-templates"></a></div> 
+          
+      <h2>Templates</h2> 
+           
+      <p>The Map Converter assembles page layouts from templates. Which
+               templates are used, how they are assembled and how variables in templates are
+               filled is controlled by the conversion rules.
+      </p> 
+           
+      <p>A template file describes the general layout of an entire Application Designer page
+               layout or of an individual Application Designer control. A template can contain variables and
+               references to other templates. During conversion, the Map Converter resolves
+               the structure of the templates and fills the variables with specific values,
+               depending on the contents of the map.
+      </p> 
+           
+      <p>A template file can describe a simple control such as a FIELD control
+               or a more complex control such as a TEXTGRIDSSS2 control. For the same control,
+               multiple templates may exist. For example, an
+               <cite>ofield_TEMPLATE</cite> and an
+               <cite>ifield_TEMPLATE</cite> may both be templates for the FIELD
+               control. The <cite>ofield_TEMPLATE</cite> would be used for output
+               fields, the <cite>ifield_TEMPLATE</cite> for modifiable fields. Which
+               template is used for which subset of fields of the map is specified in the
+               conversion rules. 
+      </p> 
+           
+      <p>Template files are well-formed XML files which contain control
+               definitions. They are placed in the folder <cite>convrules</cite> of
+               your Application Designer project directory. The file name must end with
+               "_TEMPLATE.xml". The Map Converter ships with a set
+               of default template files. 
+      </p> 
+           
+      <p>The following topics are covered
+               below:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="njx-modern-mapconv-cust.htm#njx-modern-custmap-templates-var">Variables in Templates</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="njx-modern-mapconv-cust.htm#njx-modern-custmap-templates-temp">Templates in Templates</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="njx-modern-mapconv-cust.htm#njx-modern-custmap-templates-edit">Editing Templates</a></p>
+         </li>
+      </ul>
+      <div><a name="njx-modern-custmap-templates-var"></a></div> 
+           
+      <h3>Variables in Templates</h3> 
+            
+            
+      <p>As already seen in the examples above, templates can contain
+                variables. Variables can be freely defined by the user. Example:
+      </p> 
+            <pre class="verbatim">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;natpage xmlns:njx=http://www.softwareag.com/njx/njxMapConverter
+  natsource="$$NATSOURCE$$" natsinglebyte="true"&gt;
+  &lt;titlebar <strong>name="$$TITLEVAR$$"</strong> align="center"&gt;
+  &lt;/titlebar&gt;
+  &lt;pagebody&gt;
+    <strong>&lt;njx:njxvariable name="MAPROOT"/&gt;</strong>		
+  &lt;/pagebody&gt;
+  &lt;statusbar withdistance="false"/&gt;
+&lt;/natpage&gt;</pre> 
+            <ul> 
+                
+         <li> 
+                     
+                    
+            <p class="initem"><strong>Variables as placeholders for the property values of
+                           controls</strong><br> An example is the variable
+                        <code>$$TITLEVAR$$</code> in the template above. If a template
+                        contains a variable such as <code>name="$$TITLEVAR$$"</code>, there must be a
+                        corresponding rule that yields a value for the variable
+                        <code>$$TITLEVAR$$</code>. The Map Converter replaces the
+                        variable with this value. 
+            </p> 
+                    
+            <p class="initem">The built-in variable <code>$$</code> has a specific
+                        meaning. If it occurs as a property value, there is no specific rule needed to
+                        produce the value. Instead, the Map Converter receives the value from a
+                        so-called tag converter. Tag converters are Java classes that are delivered
+                        with the Map Converter. Exchanging or writing your own tag converters is an
+                        advanced way of extending the Map Converter and is usually not required. See
+                        <a href="njx-modern-mapconv-cust.htm#njx-modern-custmap-tagconv">Tag
+                  Converters</a> for further information.
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                     
+                    
+            <p class="initem"><strong>Variables as placeholders for controls and containers</strong><br>An example is the variable <code>MAPROOT</code> in
+                        the template above. Such a variable is defined by inserting an NJX:NJXVARIABLE
+                        control (from the controls palette of the Layout Painter) into a template. As long as
+                        the XML of the template is well-formed, an NJX:NJXVARIABLE control can be
+                        inserted at any place in the template. Conversion rules refer to this variable
+                        as <code>$MAPROOT</code>. Notice that the value in the
+                        <code>name</code> property of an NJX:NJXVARIABLE control does
+                        not start with $. Instead, the NJX:NJXVARIABLE control itself defines that it
+                        is a variable. The NJX:NJXVARIABLE control is a special control in the
+                        <span class="selectable_label">Natural Extensions</span> section of the Layout Painter's controls
+                        palette. 
+            </p> 
+                   
+         </li> 
+               
+      </ul> 
+           
+      <div><a name="njx-modern-custmap-templates-temp"></a></div> 
+           
+      <h3>Templates in Templates</h3> 
+            
+            
+      <p>Templates can refer to other templates. This can be done via adding
+                variables. The variable can serve as a placeholder for another template. The
+                template name is defined via a corresponding rule.
+      </p> 
+            
+      <p>Example (<cite>GRID_TEMPLATE.xml</cite>):
+      </p> 
+            <pre class="verbatim">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;rowtablearea2 withborder="false" griddataprop="$$gridname$$" rowcount="$$" &gt;
+  &lt;tr&gt;
+    &lt;hdist&gt;&lt;/hdist&gt;
+    &lt;njx:njxvariable name="GRIDHEADER" /&gt;
+  &lt;/tr&gt;
+  &lt;repeat&gt;
+    &lt;tr&gt;
+      &lt;hdist&gt;&lt;/hdist&gt;
+      &lt;njx:njxvariable name="GRIDITEM" /&gt;
+    &lt;/tr&gt;
+  &lt;/repeat&gt;
+&lt;/rowtablearea2&gt;</pre> 
+            <p>This means: A conversion rule like the following maps a grid area
+                detected in the map to a ROWTABLEAREA2 control and formats the header and rows
+                as specified in the templates <cite>GRIDHEADER_TEMPLATE.xml</cite> and
+                <cite>GRIDITEM_TEMPLATE.xml</cite>.
+      </p> 
+            <pre class="verbatim">&lt;convrule rulename="Griditem_rule"&gt;
+    &lt;description&gt;Mapping rule for the items of grid.&lt;/description&gt;
+    &lt;source&gt;
+      &lt;sourceitem&gt;gridArea//ifField&lt;/sourceitem&gt;
+    &lt;/source&gt;
+    &lt;target&gt;
+      &lt;targetitem&gt;$GRIDITEM.$GRIDITEM_TEMPLATE&lt;/targetitem&gt;
+    &lt;/target&gt;
+    &lt;target&gt;
+      &lt;targetitem&gt;$GRIDHEADER.$GRIDHEADER_TEMPLATE&lt;/targetitem&gt;
+    &lt;/target&gt;
+&lt;/convrule&gt;</pre> 
+           <div><a name="njx-modern-custmap-templates-edit"></a></div> 
+           
+      <h3>Editing Templates</h3> 
+            
+            
+      <p>Only NATPAGE templates (like the default NATPAGE template
+                <cite>NATPAGE_TEMPLATE.xml</cite>) can be edited with the Layout Painter.
+                Templates for individual controls must currently be edited using a text
+                editor.
+      </p> 
+           
+      <div class="noprint">
+         <p><a href="njx-modern-mapconv-cust.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="njx-modern-custmap-tagconv"></a></div> 
+          
+      <h2>Tag Converters</h2> 
+           
+           
+      <p>A template must be a valid XML document. The root element must
+               correspond to the root element of a valid Application Designer control. Templates can contain
+               variables. A special variable is the variable <code>$$</code>.
+               
+      </p> 
+           
+      <p>Example: </p> 
+           <pre class="verbatim">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;button name="$$" method="$$"&gt;&lt;/button&gt;</pre> 
+           <p>Each template is processed by a so-called tag converter. Tag converters
+               are in charge of resolving the variable <code>$$</code>. A tag
+               converter is a Java class that must support a specific interface and be
+               available in the class path of the Map Converter. Which tag converter is used
+               depends on the root element of the template. 
+      </p> 
+           
+      <p>In the above example, the root element is the BUTTON control. The
+               following rule applies: 
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">If a Java class with the name
+                       <code>com.softwareag.natural.mapconverter.converters.BUTTONConverter</code>
+                       is found in the Java class path, this Java class is used as the tag converter.
+                       
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Otherwise, the class
+                       <code>com.softwareag.natural.mapconverter.converters.DEFAULTConverter</code>
+                       is used as the tag converter. 
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>In the above example, the Map Converter tries to find the class
+               <code>BUTTONConverter</code> first. Since a specific tag converter
+               for the BUTTON control is not delivered with the Map Converter, the class
+               <code>DEFAULTConverter</code> is used as the tag converter. 
+      </p> 
+           
+      <p>In order to supply a custom tag converter for the BUTTON control, for
+               instance, you would have to create a Java class <code>BUTTONConverter</code>
+               that belongs to the package
+               <code>com.softwareag.natural.mapconverter.converters</code> and make
+               it available in the Java class path of the Map Converter. 
+      </p> 
+           
+      <p>Detailed information on how to write your own tag converters is
+               provided in the Application Designer development workplace as Javadoc; see <span class="guilistitem">Map
+            Converter Extension API</span> in the <span class="guilistitem">Natural
+            Tools</span> node of the navigation frame (under <span class="guibutton">Tools &amp;
+            Documentation</span>).
+      </p> 
+          
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="njx-modern-mapconv-cust.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../njx/njx-modern-mapconv-cust.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/njx/njx-modern-mapconv-cust.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="njx-modern-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="njx-modern-mapconv.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="njx-modern-code.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

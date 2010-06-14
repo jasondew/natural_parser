@@ -1,0 +1,457 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Initial Values (and the RESET Statement)</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="pg_defi_init"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_defi_init.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_defi_init.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_defi-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_defi_udc.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_defi_redef.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Programming Guide&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x110"></a> Initial Values (and the RESET Statement) 
+         </h1>
+      </div> 
+         
+         
+      <p>This document describes the default initial values of
+             user-defined variables, explains how you can assign an initial value to a
+             user-defined variable and how you can use the <a href="../sm/reset.htm"><code>RESET</code></a> statement to reset the
+             field value to its default initial value or the initial value defined for that
+             variable in the <a href="../sm/defineda.htm"><code>DEFINE
+               DATA</code></a> statement.
+      </p> 
+         
+      <p>This document covers the following topics:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_defi_init.htm#Default_Initial_Values">Default Initial Value of a User-Defined Variable/Array</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_init.htm#init_val">Assigning an Initial Value to a User-Defined Variable/Array</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_init.htm#The_RESET_Statement">Resetting a User-Defined Variable to its Initial Value</a></p>
+         </li>
+      </ul> 
+        
+      <hr> 
+        
+      <div><a name="Default_Initial_Values"></a></div> 
+         
+      <h2> 
+             <a name="x111"></a> 
+             <a name="x112"></a> Default Initial Value of a User-Defined Variable/Array
+             
+      </h2> 
+          
+          
+      <p>If you specify no initial value for a field, the field will be
+              initialized with a default initial value depending on its format:
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th align="left"> Format </th> 
+                       
+               <th align="left"> Default Initial Value </th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> B, F, I, N, P </td> 
+                       
+               <td><code>0</code></td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> A, U </td> 
+                       
+               <td><var>blank</var></td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> L </td> 
+                       
+               <td><code>F(ALSE)</code></td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> D </td> 
+                       
+               <td><code>D' '</code></td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> T </td> 
+                       
+               <td><code>T'00:00:00'</code></td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> C </td> 
+                       
+               <td>(<a href="../parms/sp_ad.htm#sp_ad_Field_Representation"><code>AD=D</code></a>)
+               </td>
+                       
+                      
+            </tr> 
+                    
+                   
+            <tr> 
+                       
+               <td>Object Handle</td> 
+                       
+               <td><code>NULL-HANDLE</code></td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_defi_init.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="init_val"></a></div> 
+         
+      <h2> Assigning an Initial Value to a User-Defined Variable/Array</h2> 
+          
+          
+      <p>In the <a href="../sm/defineda.htm"><code>DEFINE
+               DATA</code></a> statement, you can assign an initial value to a
+              user-defined variable. If the initial value is alphanumeric, it must be
+              enclosed in apostrophes.
+      </p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_defi_init.htm#mod_init_value">Assigning a Modifiable Initial Value</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_init.htm#const_init_value">Assigning a Constant Initial Value</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_init.htm#sysvar_init_value">Assigning a Natural System Variable as Initial Value</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_init.htm#char_init_value">Assigning Characters as Initial Value for Alphanumeric Variables</a></p>
+         </li>
+      </ul> 
+          
+         
+      <div><a name="mod_init_value"></a></div> 
+          
+      <h3> Assigning a Modifiable Initial Value </h3> 
+           
+           
+      <p>If the variable/array is to be assigned a modifiable initial value, you
+               specify the initial value in angle brackets with the keyword
+               <a href="../sm/defineda_vari.htm#vari_INIT"><code>INIT</code></a>
+               after the variable definition in the <a href="../sm/defineda.htm"><code>DEFINE DATA</code></a> statement. The
+               value(s) assigned will be used each time the variable/array is referenced. The
+               value(s) assigned can be modified during program execution.
+      </p> 
+           
+      <p> Example: </p> 
+           <pre class="verbatim">
+DEFINE DATA LOCAL 
+1 #FIELDA (N3) INIT &lt;100&gt; 
+1 #FIELDB (A20) INIT &lt;'ABC'&gt; 
+END-DEFINE 
+...
+</pre> 
+           
+          
+         <div><a name="const_init_value"></a></div> 
+          
+      <h3> Assigning a Constant Initial Value </h3> 
+           
+           
+      <p>If the variable/array is to be treated as a named constant, you specify
+               the initial value in angle brackets with the keyword
+               <a href="../sm/defineda_vari.htm#vari_CONST"><code>CONSTANT</code></a> after
+               the variable definition in the <a href="../sm/defineda.htm"><code>DEFINE
+               DATA</code></a> statement. The constant value(s) assigned will be used
+               each time the variable/array is referenced. The value(s) assigned cannot be
+               modified during program execution.
+      </p> 
+           
+      <p> Example: </p> 
+           <pre class="verbatim">
+DEFINE DATA LOCAL 
+1 #FIELDA (N3) CONST &lt;100&gt; 
+1 #FIELDB (A20) CONST &lt;'ABC'&gt; 
+END-DEFINE 
+...
+</pre> 
+           
+          
+         <div><a name="sysvar_init_value"></a></div> 
+          
+      <h3> Assigning a Natural System Variable as Initial Value </h3> 
+           
+           
+      <p>The initial value for a field may also be the value of a
+               <a href="pg_furth_vari.htm#pg_furth_vari">Natural system variable</a>.
+      </p> 
+           
+      <p> Example: </p> 
+           
+      <p>In this example, the system variable
+               <a href="../vari/dtime.htm#DATX_System_Variable"><code>*DATX</code></a>
+               is used to provide the initial value.
+      </p> 
+           <pre class="verbatim">
+DEFINE DATA LOCAL 
+1 #MYDATE (D) INIT &lt;*DATX&gt; 
+END-DEFINE 
+...
+</pre> 
+           
+          
+         <div><a name="char_init_value"></a></div> 
+          
+      <h3> Assigning Characters as Initial Value for Alphanumeric Variables
+              
+      </h3> 
+           
+           
+      <p>As initial value, a variable can also be filled, entirely or partially,
+               with a specific single character or string of characters (only possible for
+               alphanumeric variables).
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                    
+                   
+            <p class="initem"><strong>Filling an entire field:</strong><br> With the option
+                       <a href="../sm/defineda_iniv.htm#example_of_FULLLENGTH"><code>FULL LENGTH
+                     &lt;<var>character(s)</var>&gt;</code></a> the entire
+                       field is filled with the specified character(s).
+            </p> 
+                   
+            <p class="initem"> In this example, the entire field will be filled with asterisks.</p>
+                   
+                   <pre class="verbatim">
+DEFINE DATA LOCAL 
+1 #FIELD (A25) INIT FULL LENGTH &lt;'*'&gt; 
+END-DEFINE 
+...
+</pre> 
+                  </li> 
+               
+         <li> 
+                    
+                   
+            <p class="initem"><strong> Filling the first <var>n</var> positions of a
+                          field:</strong><br> With the option
+                       <a href="../sm/defineda_iniv.htm#example_of_LENGTHn"><code>LENGTH
+                     <var>n</var>
+                             &lt;<var>character(s)</var>&gt;</code></a> the first
+                       <var>n</var> positions of the field are filled with the
+                       specified character(s).
+            </p> 
+                   
+            <p class="initem"> In this example, the first 4 positions of the field will be filled
+                       with exclamation marks. 
+            </p> 
+                   <pre class="verbatim">
+DEFINE DATA LOCAL 
+1 #FIELD (A25) INIT LENGTH 4 &lt;'!'&gt; 
+END-DEFINE 
+...
+</pre> 
+                  </li> 
+              
+      </ul> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_defi_init.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="The_RESET_Statement"></a></div> 
+         
+      <h2> 
+             <a name="x113"></a> 
+             <a name="x114"></a>Resetting a User-Defined Variable to its Initial Value 
+      </h2>
+         
+          
+          
+      <p>The <a href="../sm/reset.htm"><code>RESET</code></a>
+              statement is used to reset the value of a field. Two options are available:
+      </p>
+          
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_defi_init.htm#reset_wo_initial">Reset to Default Initial Value</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_init.htm#reset_initial">Reset to Initial Value Defined in DEFINE DATA</a></p>
+         </li>
+      </ul> 
+          
+      <p class="notes"><strong>Notes:</strong></p>
+      <ol class="note-list"> 
+              
+         <li>A field declared with a
+                  <a href="../sm/defineda_vari.htm#vari_CONST"><code>CONSTANT</code></a>
+                  clause in the <code>DEFINE DATA</code> statement may not be referenced in a
+                  <code>RESET</code> statement, since its content cannot be changed.
+         </li> 
+              
+         <li>In reporting mode, the <code>RESET</code> statement may also be
+                  used to define a variable, provided that the program contains no
+                  <a href="../sm/defineda_lda.htm"><code>DEFINE DATA
+                  LOCAL</code></a> statement.
+         </li> 
+             
+      </ol> 
+          
+         
+      <div><a name="reset_wo_initial"></a></div> 
+          
+      <h3> Reset to Default Initial Value </h3> 
+           
+           
+      <p> <a href="../sm/reset.htm"><code>RESET</code></a> (without
+               <code>INITIAL</code>) sets the content of each specified field to its
+               <a href="pg_defi_init.htm#Default_Initial_Values">default initial value</a>
+               depending on its format.
+      </p> 
+           
+      <p> Example: </p> 
+           <pre class="verbatim">
+DEFINE DATA LOCAL 
+1 #FIELDA (N3)  INIT &lt;100&gt; 
+1 #FIELDB (A20) INIT &lt;'ABC'&gt; 
+1 #FIELDC (I4)  INIT &lt;5&gt; 
+END-DEFINE 
+... 
+... 
+RESET #FIELDA                    /* resets field value to default initial value 
+... 
+</pre> 
+           
+          
+         <div><a name="reset_initial"></a></div> 
+          
+      <h3> Reset to Initial Value Defined in DEFINE DATA </h3> 
+           
+           
+      <p> <a href="../sm/reset.htm#INITIAL"><code>RESET
+               INITIAL</code></a> sets each specified field to the initial value as
+               defined for the field in the <a href="../sm/defineda.htm"><code>DEFINE
+               DATA</code></a> statement.
+      </p> 
+           
+      <p>For a field declared without
+               <a href="../sm/defineda_vari.htm#vari_INIT"><code>INIT</code></a>
+               clause in the <code>DEFINE DATA</code> statement, <code>RESET INITIAL</code>
+               has the same effect as <code>RESET</code> (without <code>INITIAL</code>).
+      </p> 
+           
+      <p> Example: </p> 
+           <pre class="verbatim">
+DEFINE DATA LOCAL 
+1 #FIELDA (N3)  INIT &lt;100&gt; 
+1 #FIELDB (A20) INIT &lt;'ABC'&gt; 
+1 #FIELDC (I4)  INIT &lt;5&gt; 
+END-DEFINE 
+... 
+RESET INITIAL #FIELDA #FIELDB #FIELDC /* resets field values to initial values as defined in DEFINE DATA
+...
+</pre> 
+           
+          
+        
+       <div class="noprint">
+         <div class="nospy">
+            <p><a href="pg_defi_init.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_defi_init.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_defi_init.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_defi-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_defi_udc.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_defi_redef.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

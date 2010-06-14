@@ -1,0 +1,873 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Data Conversion for Tamino</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="ddm_winux_conv_tam"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../edis/ddm_winux_conv_tam.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/edis/ddm_winux_conv_tam.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="ddm-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="ddm_winux_conv.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="edis-over.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Editors&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x469"></a> 
+               <a name="x470"></a>Data Conversion for Tamino
+         </h1>
+      </div> 
+         
+      <p>The generation of Natural DDMs from Tamino is based on the Tamino XML
+             schema language. The basic concepts of the Tamino XML schema language and how
+             it interacts with Natural for Tamino is described in
+             <a href="../pg/pg_dbms_xml.htm">Accessing Data in a Tamino
+            Database</a> in the <cite>Programming
+                Guide</cite>.
+      </p> 
+         
+      <p>This section describes the mapping of Tamino data types to Natural data
+             formats.
+      </p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="ddm_winux_conv_tam.htm#ddm_winux_conv_tam_BuiltMIn">Built-In Tamino XML Schema Language Data Types</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="ddm_winux_conv_tam.htm#ddm_winux_conv_tam_Constructors">Tamino XML Schema Constructors</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="ddm_winux_conv_tam.htm#ddm_winux_conv_tam_Multiplicity">Multiplicity in Tamino XML Schema Language</a></p>
+         </li>
+      </ul>
+      <hr>
+      <div><a name="ddm_winux_conv_tam_BuiltMIn"></a></div> 
+         
+      <h2>Built-In Tamino XML Schema Language Data Types</h2> 
+          
+      <p>The Tamino XML schema language provides a large number of built-in data
+              types that are mapped to the corresponding Natural data format, if possible. In
+              some cases no adequate Natural data format is available. Then these Tamino data
+              types are mapped to the most general Natural data format: <code>U
+            (DYNAMIC)</code>. The data format <code>U (DYNAMIC)</code> can hold any Tamino
+              XML schema built-in data type as the schema language is based on strings of
+              unlimited length.
+      </p> 
+          
+      <p>The following tables show the built-in Tamino primitive and derived data
+              types supported by Natural for Tamino and the corresponding Natural data
+              formats to which they are mapped.
+      </p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="ddm_winux_conv_tam.htm#ddm_winux_conv_tam_Primitive">Tamino Primitive Data Type</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="ddm_winux_conv_tam.htm#ddm_winux_conv_tam_Derived">Tamino Derived Data Type</a></p>
+         </li>
+      </ul>
+      <div><a name="ddm_winux_conv_tam_Primitive"></a></div> 
+          
+      <h3>Tamino Primitive Data Type</h3> 
+           
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>Tamino Primitive Data Type</th> 
+                        
+               <th>Natural Data Format/Length</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td>xs:string</td> 
+                        
+               <td>U (DYNAMIC)</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>xs:boolean</td> 
+                        
+               <td>L</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>xs:decimal</td> 
+                        
+               <td>P22.7</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>xs:float</td> 
+                        
+               <td>F4</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>xs:double</td> 
+                        
+               <td>F8</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>xs:duration</td> 
+                        
+               <td>U (DYNAMIC)</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>xs:dateTime</td> 
+                        
+               <td>U (DYNAMIC)</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>xs:time</td> 
+                        
+               <td>T</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>xs:date</td> 
+                        
+               <td>D</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>xs:gYearMonth</td> 
+                        
+               <td>U (DYNAMIC)</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>xs:gYear</td> 
+                        
+               <td>U (DYNAMIC)</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>xs:gMonthDay</td> 
+                        
+               <td>U (DYNAMIC)</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>xs:gDay</td> 
+                        
+               <td>U (DYNAMIC)</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>xs:gMonth</td> 
+                        
+               <td>U (DYNAMIC)</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>xs:hexBinary</td> 
+                        
+               <td>U (DYNAMIC)</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>xs:base64Binary</td> 
+                        
+               <td>U (DYNAMIC)</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>xs:anyURI</td> 
+                        
+               <td>U (DYNAMIC)</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>xs:QName</td> 
+                        
+               <td>U (DYNAMIC)</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>xs:NOTATION</td> 
+                        
+               <td>U (DYNAMIC)</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+          
+      <div><a name="ddm_winux_conv_tam_Derived"></a></div> 
+          
+      <h3>Tamino Derived Data Type</h3> 
+           
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>Tamino Derived Data Type</th> 
+                        
+               <th>Natural Data Format/Length</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td>xs:normalizedString</td> 
+                        
+               <td>U (DYNAMIC)</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>xs:token</td> 
+                        
+               <td>U (DYNAMIC)</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>xs:language</td> 
+                        
+               <td>U (DYNAMIC)</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>xs:NMTOKEN</td> 
+                        
+               <td>U (DYNAMIC)</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>xs:NMTOKENS</td> 
+                        
+               <td>U (DYNAMIC)</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>xs:Name</td> 
+                        
+               <td>U (DYNAMIC)</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>xs:NCName</td> 
+                        
+               <td>U (DYNAMIC)</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>xs:ID</td> 
+                        
+               <td>U (DYNAMIC)</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>xs:IDREF</td> 
+                        
+               <td>U (DYNAMIC)</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>xs:IDREFS</td> 
+                        
+               <td>U (DYNAMIC)</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>xs:ENTITY</td> 
+                        
+               <td>U (DYNAMIC)</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>xs:ENTITIES</td> 
+                        
+               <td>U (DYNAMIC)</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>xs:Integer</td> 
+                        
+               <td>P29</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>xs:nonPositiveInteger</td> 
+                        
+               <td>P29</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>xs:negativeInteger</td> 
+                        
+               <td>P29</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>xs:long</td> 
+                        
+               <td>P19</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>xs:int</td> 
+                        
+               <td>I4</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>xs:short</td> 
+                        
+               <td>I2</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>xs:byte</td> 
+                        
+               <td>I2</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>xs:nonNegativeInteger</td> 
+                        
+               <td>P29</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>xs:unsignedLong</td> 
+                        
+               <td>P19</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>xs:unsignedShort</td> 
+                        
+               <td>I2</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>xs:unsignedByte</td> 
+                        
+               <td>I2</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>xs:unsignedInt</td> 
+                        
+               <td>I4</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>xs:positiveInteger</td> 
+                        
+               <td>P29</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+          
+      <div class="noprint">
+         <p><a href="ddm_winux_conv_tam.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="ddm_winux_conv_tam_Constructors"></a></div> 
+         
+      <h2> 
+             <a name="x471"></a> 
+             <a name="x472"></a>Tamino XML Schema Constructors
+      </h2> 
+          
+          
+      <p>Tamino XML Schema constructors are used to define the structure of a
+              document. Constructors can also be used to derive new data types from existing
+              ones and to describe the nested structure of a document.
+      </p> 
+          
+      <p>New Tamino XML Schema data types can be created by using a set of
+              derivation methods from existing data types. If the derivation cannot be mapped
+              to a Natural data format, Natural uses the most general data format <code>U
+            (DYNAMIC)</code> instead.
+      </p> 
+          
+      <p>The following table shows the Tamino XML schema constructors Natural
+              supports and the attributes for each constructor. The Comment column describes
+              the mapping, which is performed when a DDM is generated.
+      </p> 
+          
+      <p>For restrictions concerning the use of XML schema constructors refer to
+              the section <a href="../pg/pg_dbms_xml.htm">Accessing Data in a
+            Tamino Database</a> in the <cite>Programming
+                 Guide</cite>.
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th>Constructor</th> 
+                       
+               <th>Attribute</th> 
+                       
+               <th>Comment</th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td>xs:all</td> 
+                       
+               <td> 
+                  
+                  <p class="mini-list"> 
+                       minOccurs<br> 
+                               maxOccurs 
+                              
+                  </p>
+               </td> 
+                       
+               <td>Is mapped to a Natural group structure.</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>xs:attribute</td> 
+                       
+               <td> 
+                  
+                  <p class="mini-list"> 
+                            name<br> 
+                               ref<br> 
+                               type<br> 
+                               form<br> 
+                               use 
+                              
+                  </p>
+               </td> 
+                       
+               <td>Is mapped to a Natural group structure.</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>xs:choice</td> 
+                       
+               <td> 
+                  
+                  <p class="mini-list"> 
+                       minOccurs<br> 
+                               maxOccurs 
+                              
+                  </p>
+               </td> 
+                       
+               <td>Is mapped to a Natural group structure.</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>xs:complexType</td> 
+                       
+               <td> 
+                  
+                  <p class="mini-list"> 
+                            name<br> 
+                          mixed=false 
+                              
+                  </p> 
+                           
+                  <p>(only mixed=false supported)</p> 
+               </td> 
+                       
+               <td>Is a meta constructor and therefore does not result in a Natural
+                  data type immediately.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>xs:element</td> 
+                       
+               <td> 
+                  
+                  <p class="mini-list"> 
+                            name<br> 
+                               ref<br> 
+                               type<br> 
+                               form<br> 
+                               minOccurs<br> 
+                               maxOccurs 
+                              
+                  </p>
+               </td> 
+                       
+               <td>Mapped to a Natural data type or to a Natural group, depending
+                  on the <code>xs:element</code> sub-structures (simple or complex type
+                           definition).
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>xs:enumeration</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>Is mapped to type <code>U (DYNAMIC)</code>.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>xs:extension</td> 
+                       
+               <td>base</td> 
+                       
+               <td>Is a meta constructor and therefore does not result in a Natural
+                  data type immediately.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>xs:fractionDigits</td> 
+                       
+               <td>value</td> 
+                       
+               <td>Influences the precision of the Natural data type.</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>xs:length</td> 
+                       
+               <td>value</td> 
+                       
+               <td>Influences the length of a Natural data type; a length of
+                  <code>unbounded</code> is mapped to type <code>U (DYNAMIC)</code>.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> 
+                  
+                  <p class="mini-list"> 
+                     xs:maxInclusive<br> 
+                               xs:maxExclusive<br> 
+                               xs:minInclusive<br> 
+                               xs:minExclusive<br> 
+                               xs:minLength<br> 
+                               xs:pattern 
+                              
+                  </p>
+               </td> 
+                       
+               <td>value</td> 
+                       
+               <td>Does not influence the mapping (that is, the base type will not
+                  be restricted in any way).
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>xs:maxLength</td> 
+                       
+               <td>value</td> 
+                       
+               <td>Influences the length of a Natural data type; a length of
+                  <code>unbounded</code> is mapped to type <code>U (DYNAMIC)</code>.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>xs:restriction</td> 
+                       
+               <td>base</td> 
+                       
+               <td>Is a meta constructor and therefore does not result in a Natural
+                  data type immediately.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>xs:schema</td> 
+                       
+               <td> 
+                  
+                  <p class="mini-list"> 
+                     attributeFormDefault<br> 
+                               elementFormDefault<br> 
+                               targetNamespace 
+                              
+                  </p>
+               </td> 
+                       
+               <td>Is a meta constructor and therefore does not result in a Natural
+                  data type immediately.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>xs:sequence</td> 
+                       
+               <td> 
+                  
+                  <p class="mini-list"> 
+                       minOccurs<br> 
+                               maxOccurs 
+                              
+                  </p>
+               </td> 
+                       
+               <td>Is mapped to a Natural group structure.</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>xs:simpleContent</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>Is a meta constructor and therefore does not result in a Natural
+                  data type immediately.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>xs:simpleType</td> 
+                       
+               <td>name</td> 
+                       
+               <td>Is a meta constructor and therefore does not result in a Natural
+                  data type immediately.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>xs:totalDigits</td> 
+                       
+               <td>value</td> 
+                       
+               <td>Influences the length of a numeric Natural data type.</td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+         
+      <div class="noprint">
+         <p><a href="ddm_winux_conv_tam.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="ddm_winux_conv_tam_Multiplicity"></a></div> 
+         
+      <h2> 
+             <a name="x473"></a> 
+             <a name="x474"></a>Multiplicity in Tamino XML Schema Language
+      </h2> 
+          
+          
+      <p>The multiplicity feature in the Tamino XML schema language is expressed
+              by the attribute <code>maxOccurs</code> of the appropriate
+              constructor. A <code>maxOccurs</code> value greater than
+              <code>1</code> will result in an array definition in the Natural DDM from
+              Tamino. Depending on the value of <code>maxOccurs</code>, a
+              static array (if <code>maxOccurs</code> is set to a number)
+              or an X-Array (if <code>maxOccurs</code> is set to
+              <code>unbounded</code>) will be generated in the DDM. As usual, the array
+              definition can be overwritten when defining a view from a DDM.
+      </p> 
+         
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="ddm_winux_conv_tam.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../edis/ddm_winux_conv_tam.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/edis/ddm_winux_conv_tam.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="ddm-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="ddm_winux_conv.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="edis-over.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

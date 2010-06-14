@@ -1,0 +1,240 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>End and Initialize Document</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="t33_1070"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../webtech/t33_1070.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/webtech/t33_1070.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="webtech-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="t33_1060.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="t33_1080.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Web Technology&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> End and Initialize Document 
+               <a name="x353"></a> 
+               <a name="x354"></a> 
+               <a name="x355"></a> 
+               <a name="x356"></a></h1>
+      </div> 
+         
+          
+          
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+              
+         <thead align="left" valign="top"> 
+                  
+            <tr> 
+                      
+               <th align="center"> Subroutine Name </th> 
+                      
+               <th align="center"> Executable Example </th> 
+                      
+               <th align="center"> Viewable Example </th> 
+                     
+            </tr> 
+                 
+         </thead> 
+              
+         <tbody align="left" valign="top"> 
+                  
+            <tr> 
+                      
+               <td align="center"> 
+                  
+                  <p class="mini-list"> 
+                         W3INIT<br> 
+                               W3END  
+                             
+                  </p> 
+               </td> 
+                      
+               <td align="center"> 
+                  
+                  <p> E3END </p> 
+               </td> 
+                      
+               <td align="center"> 
+                  
+                  <p>
+                         E3END 
+                  </p>
+                          
+               </td> 
+                     
+            </tr> 
+                 
+         </tbody> 
+             
+      </table> 
+          
+         
+      <dl> 
+              
+              
+         <dt><a name="d0e32307"><strong> Description </strong></a></dt> 
+              
+         <dd> 
+                  
+            <p class="definition">Each Program needs to initialize and end the web interface by special
+                      programs. The initialisation is done by <code>W3INIT</code>. The PDA
+                      <code>W3PARM</code> must be passed to initialize passed parameters for further
+                      use. <code>W3END</code> ends the document and prepares the return to the
+                      HTTPserver. The PDA <code>W3PARM</code> defined at the initial program has to
+                      be passed to <code>W3END</code>. If <code>W3*</code> calls are performed after
+                      <code>W3END</code>, the written output will not be transferred to the HTTP
+                      server.
+            </p> 
+                  
+            <p class="definition">With SYSWEB3, <code>W3PARM</code> has been changed to provide an
+                      improved interface to the HTTP server. The new interface is capable of
+                      transferring binary or alpha data, using other mime-types such as
+                      'application/x-www-form-urlencoded' for incoming data and allows the usage of
+                      HTTP PUT requests.
+            </p> 
+                  
+            <p class="definition"> For compatibility reasons, the new features HTTP PUT and other
+                      mime-types for data input can only be used, if <code>W3INIT</code> is called
+                      with an additional parameter:
+            </p> 
+                  
+            <p class="mini-list"> 
+                      2nd Parameter := TRUE - activates other mime-types then
+                       'application/x-www-form-urlencoded' for incoming data<br> 
+                      3rd Parameter := TRUE - activates HTTP PUT requests. 
+                     
+            </p>
+         </dd> 
+              
+              
+              
+         <dt><a name="d0e32360"><strong> Changes from previous version </strong></a></dt> 
+              
+         <dd> 
+                  
+            <p class="definition">New optional parameters added.</p>
+         </dd> 
+              
+              
+              
+         <dt><a name="d0e32371"><strong> Parameters </strong></a></dt> 
+              
+         <dd> 
+                  
+            <ol> 
+                      
+               <li> 
+                          
+                  <p class="initem"> W3INIT </p> 
+                          <pre class="verbatim">
+##RPC /* i /m : Parameter of Subprogram
+TRUE  /* io/  : TRUE to activate mime-types
+TRUE  /* io/  : TRUE to activate HTTP PUT
+</pre> 
+                         </li> 
+                      
+               <li> 
+                          
+                  <p class="initem"> W3END </p> 
+                          <pre class="verbatim">
+##RPC /* o/m : Parameter of Subprogram
+</pre> 
+                         </li> 
+                      
+               <li> 
+                          
+                  <p class="initem"> W3PARM </p> 
+                          <pre class="verbatim">
+1 ##RPC           /* use only with SYSWEB3
+  2 LOG-TIME      (A30)       /* i /m : Timestamp
+  2 VERSION       (A) DYNAMIC /* i /m : Interface version 
+  2 HTTP_HEADER   (A) DYNAMIC /* io/m : HTTP header
+  2 C_HTTP_HEADER (I4)        /* io/m : Bytes sent
+  2 HTTP_BODY     (A) DYNAMIC /* io/m : HTTP body alphanumeric
+  2 HTTP_BINARY   (B) DYNAMIC /* io/m : HTTP body binary 
+  2 C_HTTP_DATA   (I4)        /* io/m : Bytes sent
+  2 MIME-TYPE     (A) DYNAMIC /* io/m : Mime-type sent
+  2 ERROR-NR      (I4)        /* io/m : Generation result
+</pre> 
+                         </li> 
+                     
+            </ol> 
+                 
+         </dd> 
+              
+              
+              
+         <dt><a name="d0e32410"><strong> How To Invoke </strong></a></dt> 
+              
+         <dd> 
+                  <pre class="verbatim">
+PERFORM W3INIT ##RPC
+PERFORM W3INIT ##RPC TRUE /* activate mime-types ne 'application/x-www-form-urlencoded'
+PERFORM W3INIT ##RPC TRUE TRUE /* activate mime-types and HTTP PUT
+PERFORM W3END ##RPC
+</pre></dd> 
+              
+            
+      </dl> 
+         
+       
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="t33_1070.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../webtech/t33_1070.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/webtech/t33_1070.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="webtech-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="t33_1060.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="t33_1080.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

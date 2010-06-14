@@ -1,0 +1,1867 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>User-Defined Variables</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="pg_defi_dv"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_defi_dv.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_defi_dv.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_defi-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_defi.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_defi_funcall.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Programming Guide&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x53"></a> 
+               <a name="x54"></a> User-Defined Variables 
+         </h1>
+      </div> 
+         
+         
+      <p>User-defined variables are fields which you define yourself in a program.
+             They are used to store values or intermediate results obtained at some point in
+             program processing for additional processing or display.
+      </p> 
+         
+      <p>This document covers the following topics:</p>
+         
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_defi_dv.htm#Variable_Definition">Definition of Variables</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_dv.htm#SR_Notation_r">Referencing of Database Fields Using (r) Notation</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_dv.htm#Renumbering_of_sc_line_no_ref">Renumbering of Source-Code Line Number References</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_dv.htm#Format_Length_Def">Format and Length of User-Defined Variables</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_dv.htm#Special_Formats">Special Formats</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_dv.htm#Index_Notation">Index Notation</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_dv.htm#DB_Array_Ref">Referencing a Database Array</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_dv.htm#DB_IC_Reference">Referencing the Internal Count for a Database Array (C* Notation)</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_dv.htm#Data_Struct_Qual">Qualifying Data Structures</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_dv.htm#udv_exa">Examples of User-Defined Variables</a></p>
+         </li>
+      </ul> 
+         
+      <p>See also <a href="../using/use_rules.htm#use_rules-Variable_Names"> Naming
+            Conventions for User-Defined Variables</a> in <cite>Using
+                Natural</cite>.
+      </p>
+      <hr> 
+        
+      <div><a name="Variable_Definition"></a></div> 
+         
+      <h2> Definition of Variables </h2> 
+          
+          
+      <p>You define a user-defined variable by specifying its name and its
+              format/length in the <code>DEFINE DATA</code> statement.
+      </p> 
+          
+      <p>You define the characteristics of a variable with the following
+              notation:
+      </p> 
+           
+           
+      <table border="0" class="syntax" cellpadding="3">  
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> (<a href="pg_defi_dv.htm#SR_Notation_r"><var>r</var></a>,<a href="pg_defi_dv.htm#Format_Length_Def"><var>format-length</var></a>/<a href="pg_defi_dv.htm#Index_Notation"><var>index</var></a>) 
+               </td>
+                       
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>This notation follows the variable name, optionally separated by one or
+              more blanks.
+      </p> 
+          
+      <p>No blanks are allowed between the individual elements of the
+              notation.
+      </p> 
+          
+      <p>The individual elements may be specified selectively as required, but
+              when used together, they must be separated by the characters as indicated
+              above.
+      </p> 
+          
+      <p> Example: </p> 
+          
+      <p>In this example, a user-defined variable of alphanumeric format and a
+              length of 10 positions is defined with the name <code>#FIELD1</code>.
+      </p> 
+          <pre class="verbatim">
+DEFINE DATA LOCAL 
+1 #FIELD1 (A10)      
+... 
+END-DEFINE
+</pre> 
+          <p class="notes"><strong>Notes:</strong></p>
+      <ol class="note-list"> 
+              
+         <li>If operating in structured mode or if a program contains a
+                  <a href="../sm/defineda_lda.htm"><code>DEFINE DATA
+                  LOCAL</code></a> clause, variables cannot be defined dynamically in a
+                  statement.
+         </li> 
+              
+         <li>This does not apply to application-independent variables (AIVs);
+                  see also <a href="../sm/defineda_aiv.htm">Defining
+               Application-Independent Variables</a></li> 
+             
+      </ol> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_defi_dv.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="SR_Notation_r"></a></div> 
+         
+      <h2> 
+             <a name="x55"></a> Referencing of Database Fields Using
+             (<var>r</var>) Notation
+      </h2> 
+         
+          
+          
+      <p>A statement label or the source-code line number can be used to refer to
+              a previous Natural statement. This can be used to override Natural's default
+              referencing (as described for each statement, where applicable), or for
+              documentation purposes. See also <a href="pg_furth_loop.htm#pg_furth_loop">Loop Processing</a>,
+              <a href="pg_furth_loop.htm#Referencing_Statements_within_a_Program">Referencing
+            Statements within a Program</a>.
+      </p> 
+          
+      <p>The following topics are covered below:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_defi_dv.htm#default_ref_db_fields">Default Referencing of Database Fields</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_dv.htm#ref_w_statement_labels">Referencing with Statement Labels</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_dv.htm#ref_w_line_numbers">Referencing with Source-Code Line Numbers</a></p>
+         </li>
+      </ul> 
+          
+         
+      <div><a name="default_ref_db_fields"></a></div> 
+          
+      <h3> Default Referencing of Database Fields</h3> 
+           
+           
+      <p>Generally, the following applies if you specify no statement reference
+               notation:
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">By default, the innermost active database loop (<a href="../sm/find.htm"><code>FIND</code></a>,
+                       <a href="../sm/read.htm"><code>READ</code></a> or
+                       <a href="../sm/histogra.htm"><code>HISTOGRAM</code></a>) in which
+                       the database field in question has been read is referenced.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">If the field is not read in any active database loop, the last
+                       previous <a href="../sm/get.htm"><code>GET</code></a> statement
+                       (in reporting mode also <a href="../sm/find.htm#FIND_FIRST_NUMBER_UNIQUE"><code>FIND
+                     FIRST</code></a> or
+                       <a href="../sm/find.htm#FIND_FIRST_NUMBER_UNIQUE"><code>FIND
+                     UNIQUE</code></a> statement) is referenced which is not contained in an
+                       already closed loop and which has read the field.
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+          
+         
+      <div><a name="ref_w_statement_labels"></a></div> 
+          
+      <h3> Referencing with Statement Labels </h3> 
+           
+           
+      <p>Any Natural statement which causes a processing loop to be initiated
+               and/or causes data elements to be accessed in the database may be marked with a
+               symbolic label for subsequent referencing.
+      </p> 
+           
+      <p>A label may be specified either in the form
+               <code><var>label.</var></code> before the referencing object or
+               in parentheses <code>(<var>label.</var>)</code> after the
+               referencing object (but not both simultaneously).
+      </p> 
+           
+      <p>The naming conventions for labels are identical to those for variables.
+               The period after the label name serves to identify the entry as a label.
+      </p> 
+           
+      <p> Example:</p> 
+           <pre class="verbatim">
+...
+ <strong>RD.</strong> READ PERSON-VIEW BY NAME STARTING FROM 'JONES'
+   <strong>FD.</strong> FIND AUTO-VIEW WITH PERSONNEL-ID = PERSONNEL-ID <strong>(FD.)</strong>  
+         DISPLAY NAME <strong>(RD.)</strong> FIRST-NAME <strong>(RD.)</strong> MAKE <strong>(FD.)</strong>
+    END-FIND
+ END-READ
+ ...
+</pre> 
+           
+          
+         <div><a name="ref_w_line_numbers"></a></div> 
+          
+      <h3> Referencing with Source-Code Line Numbers </h3> 
+           
+           
+      <p>A statement may also be referenced by using the number of the
+               source-code line in which the statement is located.
+      </p> 
+           
+      <p>All four digits of the line number must be specified (leading zeros
+               must not be omitted).
+      </p> 
+           
+      <p> Example: </p> 
+           <pre class="verbatim">
+...
+<strong>0110</strong> FIND EMPLOYEES-VIEW WITH NAME = 'SMITH'
+<strong>0120</strong>   FIND VEHICLES-VIEW WITH MODEL = 'FORD'
+0130     DISPLAY NAME (<strong>0110</strong>) MODEL (<strong>0120</strong>)
+0140   END-FIND
+0150 END-FIND
+...
+</pre> 
+            
+            <p class="note"><strong>Note:</strong><br>Due to technical reasons, the line numbers shown on the program
+                editor screen consist of six digits, but actually only the last four digits are
+                processed internally.
+      </p> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_defi_dv.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Renumbering_of_sc_line_no_ref"></a></div> 
+         
+      <h2> 
+             <a name="x56"></a> 
+             <a name="x57"></a> 
+             <a name="x58"></a>Renumbering of Source-Code Line Number References 
+      </h2> 
+          
+          
+      <p>Numeric four-digit source-code line numbers that reference a statement
+              (see <a href="pg_defi_dv.htm#SR_Notation_r">Referencing of Database Fields
+            Using (<var>r</var>) Notation</a>) are also
+              renumbered if the Natural source program is renumbered. For the user's
+              convenience and to aid in readability and debugging, all source code line
+              number references that occur in a statement, an alphanumeric constant or a
+              comment are renumbered. The position of the source code line number reference
+              in the statement or alphanumeric constant (start, middle, end) does not
+              matter.
+      </p> 
+          
+      <p>The following patterns are recognized as being a valid source code line
+              number reference and are renumbered (<var>nnnn</var> is a
+              four-digit number):
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th align="left">Pattern</th> 
+                       
+               <th align="left">Sample Statement</th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td><code>(<var>nnnn</var>)</code></td> 
+                       
+               <td><code>ESCAPE BOTTOM (0150)</code></td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>(<var>nnnn</var>
+                         /</code></td> 
+                       
+               <td><code>DISPLAY
+                     ADDRESS-LINE(0010/1:5)</code></td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>(<var>nnnn</var>, </code></td> 
+                       
+               <td> <code>DISPLAY NAME(0010,A10/1:5)</code> 
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>If the left parenthesis or the four-digit number
+              <code><var>nnnn</var></code> is followed by a blank, or the
+              four-digit number <code><var>nnnn</var></code> is followed by a
+              period, the pattern is not considered to be a valid source code line number
+              reference.
+      </p> 
+          
+      <p>To avoid that a four-digit number that is contained in an alphanumeric
+              constant is unintentionally renumbered, the constant should be split up and the
+              different parts should be concatenated to form a single value by use of a
+              hyphen.
+      </p> 
+          
+      <p>Example:</p> 
+          <pre class="verbatim">Z := 'XXXX (1234,00) YYYY'</pre> 
+          <p> should be replaced by</p> 
+          <pre class="verbatim">Z := 'XXXX (1234' - ',00) YYYY'</pre> 
+           
+           <p class="note"><strong>Note:</strong><br>Due to technical reasons, the line numbers shown on the program
+               editor screen consist of six digits, but actually only the last four digits are
+               processed internally.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_defi_dv.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Format_Length_Def"></a></div> 
+         
+      <h2> 
+             <a name="x59"></a> Format and Length of User-Defined Variables 
+      </h2> 
+          
+          
+      <p>Format and length of a user-defined variable are specified in
+              parentheses after the variable name.
+      </p> 
+          
+      <p>Fixed-length variables can be defined with the following formats and
+              corresponding lengths.
+      </p> 
+          
+      <p>For the definition of Format and Length in dynamic variables, see
+              <a href="pg_defi_ldvfin.htm#Definition_of_Dynamic_Variables">Definition of
+            Dynamic Variables</a>.
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+                
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th align="left"> Format </th> 
+                       
+               <th align="left">Explanation</th> 
+                       
+               <th align="left"> Definable Length </th> 
+                       
+               <th> Internal Length (in Bytes) </th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th> A </th> 
+                       
+               <td>Alphanumeric</td> 
+                       
+               <td> 1 - 1073741824 (1GB) </td> 
+                       
+               <td>1 - 1073741824</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> B </th> 
+                       
+               <td>Binary</td> 
+                       
+               <td> 1 - 1073741824 (1GB) </td> 
+                       
+               <td>1 - 1073741824</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> C </th> 
+                       
+               <td>Attribute Control</td> 
+                       
+               <td>-</td> 
+                       
+               <td>2</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> D </th> 
+                       
+               <td>Date</td> 
+                       
+               <td>-</td> 
+                       
+               <td>4</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> F </th> 
+                       
+               <td>Floating Point</td> 
+                       
+               <td> 4 or 8 </td> 
+                       
+               <td>4 or 8</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> I </th> 
+                       
+               <td>Integer</td> 
+                       
+               <td> 1 , 2 or 4 </td> 
+                       
+               <td>1, 2 or 4</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> L </th> 
+                       
+               <td>Logical</td> 
+                       
+               <td>-</td> 
+                       
+               <td>1</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> N </th> 
+                       
+               <td>Numeric (unpacked)</td> 
+                       
+               <td> 1 - 29 </td> 
+                       
+               <td>1 - 29</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> P </th> 
+                       
+               <td>Packed numeric</td> 
+                       
+               <td> 1 - 29 </td> 
+                       
+               <td>1 - 15</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> T </th> 
+                       
+               <td>Time</td> 
+                       
+               <td>-</td> 
+                       
+               <td>7</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th>U</th> 
+                       
+               <td>Unicode (UTF-16)</td> 
+                       
+               <td>1 - 536870912 (0.5 GB)</td> 
+                       
+               <td>2 - 1073741824</td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>Length can only be specified if format is specified. With some formats,
+              the length need not be explicitly specified (as shown in the table above).
+      </p> 
+          
+      <p>For fields defined with format N or P, you can use decimal position
+              notation in the form <code><var>nn.m</var></code>.
+              <var>nn</var> represents the number of positions before the
+              decimal point, and <code><var>m</var></code> represents the
+              number of positions after the decimal point. The sum of the values of
+              <code><var>nn</var></code> and <var>m</var>
+              must not exceed 29 and the value of <var>m</var> must not
+              exceed 7.
+      </p> 
+          
+          
+          
+      <p class="notes"><strong>Notes:</strong></p>
+      <ol class="note-list"> 
+              
+         <li>When a user-defined variable of format P is output with a
+                  <code>DISPLAY</code>, <code>WRITE</code>, or <code>INPUT</code> statement,
+                  Natural internally converts the format to N for the output.
+         </li> 
+              
+         <li>In reporting mode, if format and length are not specified for a
+                  user-defined variable, the default format/length N7 will be used, unless this
+                  default assignment has been disabled by the profile/session parameter
+                  <a href="../parms/fs.htm"><code>FS</code></a>.
+         </li> 
+             
+      </ol> 
+          
+      <p>For a database field, the format/length as defined for the field in the
+              DDM apply. (In reporting mode, it is also possible to define in a program a
+              different format/length for a database field.)
+      </p> 
+          
+      <p>In structured mode, format and length may only be specified in a data
+              area definition or with a <code>DEFINE DATA</code> statement.
+      </p> 
+          
+      <h4 class="floating-title"> Example of Format/Length Definition - Structured
+              Mode:
+      </h4> 
+          <pre class="verbatim">
+DEFINE DATA LOCAL
+1 EMPLOY-VIEW VIEW OF EMPLOYEES
+  2 NAME
+  2 FIRST-NAME
+1 #NEW-SALARY <strong>(N6.2)</strong>
+END-DEFINE
+...
+FIND EMPLOY-VIEW ...
+...
+COMPUTE #NEW-SALARY = ...
+...
+</pre> 
+          <p>In reporting mode, format/length may be defined within the body of the
+              program, if no <code>DEFINE DATA</code> statement is used.
+      </p> 
+          
+      <h4 class="floating-title"> Example of Format/Length Definition - Reporting Mode:
+              
+      </h4> 
+          <pre class="verbatim">
+... 
+... 
+ FIND EMPLOYEES
+... ... COMPUTE #NEW-SALARY<strong>(N6.2)</strong> = ...
+...
+</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_defi_dv.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Special_Formats"></a></div> 
+         
+      <h2> Special Formats </h2> 
+          
+          
+      <p>In addition to the standard alphanumeric (A) and numeric (B, F, I, N, P)
+              formats, Natural supports the following special formats:
+      </p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_defi_dv.htm#format_c">Format C - Attribute Control</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_dv.htm#format_d">Formats D - Date, and T - Time</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_dv.htm#format_l">Format L - Logical</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_dv.htm#format_hdl">Format: Handle</a></p>
+         </li>
+      </ul> 
+          
+         
+      <div><a name="format_c"></a></div> 
+          
+      <h3> 
+              <a name="x60"></a> 
+              <a name="x61"></a> Format C - Attribute Control
+      </h3> 
+           
+           
+      <p>A variable defined with format C may be used to assign attributes
+               dynamically to a field used in a <code>DISPLAY</code>, <code>INPUT</code> or
+               <code>WRITE</code> statement.
+      </p> 
+           
+      <p>For a variable of format C, no length can be specified. The variable is
+               always assigned a length of 2 bytes by Natural.
+      </p> 
+           
+      <p> Example:</p> 
+           <pre class="verbatim">
+DEFINE DATA LOCAL
+1 #ATTR (C)
+1 #A (N5)
+END-DEFINE
+...
+MOVE (AD=I CD=RE) TO #ATTR
+INPUT #A (CV=#ATTR)
+...
+</pre> 
+           <p>For further information, see the session parameter
+               <a href="../parms/sp_cv.htm"><code>CV</code></a>.
+      </p> 
+           
+          
+         
+      <div><a name="format_d"></a></div> 
+          
+      <h3> 
+              <a name="x62"></a> 
+              <a name="x63"></a> 
+              <a name="x64"></a> 
+              <a name="x65"></a> Formats D - Date, and T - Time
+      </h3> 
+           
+           
+      <p>Variables defined with formats D and T can be used for date and time
+               arithmetic and display. Format D can contain date information only. Format T
+               can contain date and time information; in other words, date information is a
+               subset of time information. Time is counted in tenths of seconds.
+      </p> 
+           
+      <p>For variables of formats D and T, no length can be specified. A
+               variable with format D is always assigned a length of 4 bytes (P6) and a
+               variable with format T is always assigned a length of 7 bytes (P12) by Natural.
+               If the profile parameter <a href="../parms/maxyear.htm"><code>MAXYEAR</code></a> is set to
+               <code>9999</code>, a variable with format D is always assigned a length of 4
+               bytes (P7) and a variable with format T is always assigned a length of 7 bytes
+               (P13) by Natural.
+      </p> 
+           
+      <p> Example:</p> 
+           <pre class="verbatim">
+DEFINE DATA LOCAL
+1 #DAT1 (D)
+END-DEFINE
+*
+MOVE *DATX TO #DAT1  
+ADD 7 TO #DAT1
+WRITE '=' #DAT1
+END
+</pre> 
+           <p>For further information, see the session parameter
+               <a href="../parms/sp_em.htm"><code>EM</code></a> and the
+               system variables <a href="../vari/dtime.htm"><code>*DATX</code> and
+                  <code>*TIMX</code></a>.
+      </p> 
+           
+      <p>The value in a date field must be in the range from 1st January 1582 to
+               31st December 2699.
+      </p> 
+           
+          
+         
+      <div><a name="format_l"></a></div> 
+          
+      <h3> 
+              <a name="x66"></a> 
+              <a name="x67"></a> Format L - Logical 
+      </h3> 
+           
+           
+      <p>A variable defined with format L may be used as a logical condition
+               criterion. It can take the value <code>TRUE</code> or <code>FALSE</code>.
+      </p> 
+           
+      <p>For a variable of format L, no length can be specified. A variable of
+               format L is always assigned a length of 1 byte by Natural.
+      </p> 
+           
+      <p> Example: </p> 
+           <pre class="verbatim">
+DEFINE DATA LOCAL
+1 #SWITCH(L)
+END-DEFINE
+MOVE TRUE TO #SWITCH
+...
+IF #SWITCH
+   ...
+   MOVE FALSE TO #SWITCH  
+ELSE
+   ...
+   MOVE TRUE TO #SWITCH
+END-IF
+</pre> 
+           <p>For further information on logical value presentation, see the session
+               parameter <a href="../parms/sp_em.htm"><code>EM</code></a>.
+      </p> 
+           
+          
+         
+      <div><a name="format_hdl"></a></div> 
+          
+      <h3> 
+              <a name="x68"></a> Format: Handle
+      </h3> 
+           
+           
+      <p>A variable defined as <code>HANDLE OF OBJECT</code> can be used as an
+               object handle.
+      </p> 
+           
+      <p>For further information on object handles, see the section
+               <a href="pg_natx_dev.htm#pg_natx_dev">NaturalX</a>.
+      </p> 
+            
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_defi_dv.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Index_Notation"></a></div> 
+         
+      <h2> 
+             <a name="x69"></a> Index Notation 
+      </h2> 
+          
+          
+      <p>An index notation is used for fields that represent an array.</p> 
+          
+      <p>An integer numeric constant or user-defined variable may be used in
+              index notations. A user-defined variable can be specified using one of the
+              following formats: N (numeric), P (packed), I (integer) or B (binary), where
+              format B may be used only with a length of less than or equal to 4.
+      </p> 
+          
+      <p>A system variable, system function or qualified variable cannot be used
+              in index notations.
+      </p> 
+          
+      <h4 class="floating-title"> Array Definition - Examples:</h4> 
+          
+      <ol> 
+              
+         <li> 
+                   
+                  
+            <p class="initem"><strong>#ARRAY (3)</strong><br> Defines a one-dimensional array with three occurrences.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                   
+                  
+            <p class="initem"><strong>FIELD (<var>label</var>.,A20/5) or
+                        <var>label</var>.FIELD(A20/5)</strong><br> Defines an array from a database field referencing the statement
+                      marked by <code><var>label</var>.</code> with format
+                      alphanumeric, length 20 and 5 occurrences.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                   
+                  
+            <p class="initem"><strong>#ARRAY (N7.2/1:5,10:12,1:4)</strong><br> Defines an array with format/length N7.2 and three array dimensions
+                      with 5 occurrences in the first, 3 occurrences in the second and 4 occurrences
+                      in the third dimension.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                   
+                  
+            <p class="initem"><strong>FIELD (<var>label</var>./i:i + 5) or
+                        <var>label</var>.FIELD(i:i + 5)</strong><br> Defines an array from a database field referencing the statement
+                      marked by <code><var>label</var>.</code>. 
+            </p> 
+                  
+            <p class="initem"><code>FIELD</code> represents a multiple-value field or a field from a
+                      periodic group where <code><var>i</var></code> specifies the
+                      offset index within the database occurrence. The size of the array within the
+                      program is defined as 6 occurrences (<code>i:i + 5</code>). The database offset
+                      index is specified as a variable to allow for the positioning of the program
+                      array within the occurrences of the multiple-value field or periodic group. For
+                      any repositioning of <code><var>i</var></code> a new access
+                      must be made to the database via a <code>GET</code> or <code>GET SAME</code>
+                      statement.
+            </p> 
+                 
+         </li> 
+             
+      </ol> 
+          
+      <p>Natural allows for the definition of arrays where the index does not
+              have to begin with <code>1</code>. At runtime, Natural checks that index values
+              specified in the reference do not exceed the maximum size of dimensions as
+              specified in the definition.
+      </p> 
+          
+      <p class="notes"><strong>Notes:</strong></p>
+      <ol class="note-list"> 
+              
+         <li>For compatibility with earlier Natural versions, an array range may
+                  be specified using a hyphen (-) instead of a colon (:).
+         </li> 
+              
+         <li>A mix of both notations, however, is <em>not</em>
+                  permitted.
+         </li> 
+              
+         <li>The hyphen notation is only allowed in reporting mode (but
+                  <em>not</em> in a <code>DEFINE DATA</code> statement).
+         </li> 
+             
+      </ol> 
+          
+      <p>The maximum index value is 1,073,741,824. The maximum size of a data
+              area per programming object is 1,073,741,824 bytes (1 GB).
+      </p> 
+           
+          
+      <p>Simple arithmetic expressions using the plus (+) and minus (-) operators
+              may be used in index references. When arithmetic expressions are used as
+              indices, these operators must be preceded and followed by a blank.
+      </p> 
+          
+      <p>Arrays in group structures are resolved by Natural field by field, not
+              group occurrence by group occurrence.
+      </p> 
+          
+      <h4 class="floating-title"> Example of Group Array Resolution: </h4> 
+          <pre class="verbatim">
+DEFINE DATA LOCAL
+ 1 #GROUP (1:2)
+   2 #FIELDA (A5/1:2)
+   2 #FIELDB (A5)
+ END-DEFINE
+ ...
+</pre> 
+          <p>If the group defined above were output in a <code>WRITE</code>
+              statement:
+      </p> 
+          <pre class="verbatim">WRITE #GROUP (*)</pre> 
+          <p>the occurrences would be output in the following order:</p> 
+          <pre class="verbatim">#FIELDA(1,1) #FIELDA(1,2) #FIELDA(2,1) #FIELDA(2,2) #FIELDB(1) #FIELDB(2)</pre> 
+          <p>and <em>not</em>:
+      </p> 
+          <pre class="verbatim">#FIELDA(1,1) #FIELDA(1,2) #FIELDB(1) #FIELDA(2,1) #FIELDA(2,2) #FIELDB(2)</pre> 
+          <h4 class="floating-title"> Array Referencing - Examples:</h4> 
+          
+      <ol> 
+              
+         <li> 
+                   
+                  
+            <p class="initem"><strong>#ARRAY (1)</strong><br> References the first occurrence of a one-dimensional array.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                   
+                  
+            <p class="initem"><strong>#ARRAY (7:12)</strong><br> References the seventh to twelfth occurrence of a one-dimensional
+                      array.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                   
+                  
+            <p class="initem"><strong>#ARRAY (i + 5)</strong><br> References the i+fifth occurrence of a one-dimensional array.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                   
+                  
+            <p class="initem"><strong>#ARRAY (5,3:7,1:4)</strong><br> Reference is made within a three dimensional array to occurrence 5 in
+                      the first dimension, occurrences 3 to 7 (5 occurrences) in the second dimension
+                      and 1 to 4 (4 occurrences) in the third dimension.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">An asterisk may be used to reference all occurrences within a
+                      dimension: 
+            </p> 
+                  <pre class="verbatim">DEFINE DATA LOCAL 
+1 #ARRAY1 (N5/1:4,1:4) 
+1 #ARRAY2 (N5/1:4,1:4) 
+END-DEFINE 
+... 
+ADD #ARRAY1 (2,*) TO #ARRAY2 (4,*) 
+... </pre> 
+                 </li> 
+             
+      </ol> 
+          
+         
+      <div><a name="d0e6544"></a></div> 
+          
+      <h3>Using a Slash before an Array Occurrence</h3> 
+           
+           
+      <p>If a variable name is followed by a 4-digit number enclosed in
+               parentheses, Natural interprets this number as a line-number reference to a
+               statement. Therefore a 4-digit array occurrence must be preceded by a slash (/)
+               to indicate that it is an array occurrence; for example:
+      </p> 
+           <pre class="verbatim">#ARRAY(/1000)</pre> 
+           <p>not: </p> 
+           <pre class="verbatim">#ARRAY(1000)</pre> 
+           <p>because the latter would be interpreted as a reference to source code
+               line 1000.
+      </p> 
+           
+      <p>If an index variable name could be misinterpreted as a format/length
+               specification, a slash (/) must be used to indicate that an index is being
+               specified. If, for example, the occurrence of an array is defined by the value
+               of the variable <code>N7</code>, the occurrence must be specified as:
+      </p> 
+           <pre class="verbatim">#ARRAY (/N7)</pre> 
+           <p>not: </p> 
+           <pre class="verbatim">#ARRAY (N7)</pre> 
+           <p>because the latter would be misinterpreted as the definition of a
+               7-byte numeric field.
+      </p> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_defi_dv.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="DB_Array_Ref"></a></div> 
+         
+      <h2> 
+             <a name="x70"></a>Referencing a Database Array 
+      </h2> 
+          
+          
+      <p>The following topics are covered below:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_defi_dv.htm#ref_mv_fields">Referencing Multiple-Value Fields and Periodic-Group Fields</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_dv.htm#ref_arrays_w_const">Referencing Arrays Defined with Constants</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_dv.htm#ref_arrays_w_vari">Referencing Arrays Defined with Variables</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_dv.htm#ref_md_arrays">Referencing Multiple-Defined Arrays</a></p>
+         </li>
+      </ul> 
+          
+      <p class="note"><strong>Note:</strong><br> Before executing the following example programs, please run the
+              program <code>INDEXTST</code> in the library <code>SYSEXPG</code> to create an
+              example record that uses 10 different language codes.
+      </p> 
+          
+         
+      <div><a name="ref_mv_fields"></a></div> 
+          
+      <h3> Referencing Multiple-Value Fields and Periodic-Group Fields
+              
+      </h3> 
+           
+           
+      <p>A multiple-value field or periodic-group field within a view/DDM may be
+               defined and referenced using various index notations.
+      </p> 
+           
+      <p>For example, the first to tenth values and the Ith to Ith+10 values of
+               the same multiple-value field/periodic-group field of a database record:
+      </p> 
+           <pre class="verbatim">
+DEFINE DATA LOCAL
+1 I (I2)
+1 EMPLOY-VIEW VIEW OF EMPLOYEES
+  2 LANG (1:10)
+  2 LANG (I:I+10)
+END-DEFINE
+</pre> 
+           <p>or:</p> 
+           <pre class="verbatim">
+RESET I (I2)
+...
+READ EMPLOYEES
+OBTAIN LANG(1:10) LANG(I:I+10)
+</pre> 
+           <p class="notes"><strong>Notes:</strong></p>
+      <ol class="note-list"> 
+               
+         <li>The same lower bound index may only be used once per array, (this
+                   applies to constant indexes as well as variable indexes).
+         </li> 
+               
+         <li>For an array definition using a variable index, the lower bound
+                   must be specified using the variable by itself, and the upper bound must be
+                   specified using the same variable plus a constant.
+         </li> 
+              
+      </ol> 
+           
+          
+         
+      <div><a name="ref_arrays_w_const"></a></div> 
+          
+      <h3> Referencing Arrays Defined with Constants </h3> 
+           
+           
+      <p>An array defined with constants may be referenced using either
+               constants or variables. The upper bound of the array cannot be exceeded. The
+               upper bound will be checked by Natural at compilation time if a constant is
+               used.
+      </p> 
+           
+      <h4 class="floating-title"> Reporting Mode Example: </h4> 
+           <pre class="verbatim">
+** Example 'INDEX1R': Array definition with constants  (reporting mode)
+***********************************************************************
+*                                                                      
+READ (1) EMPLOYEES WITH NAME = 'WINTER' WHERE CITY = 'LONDON'          
+  OBTAIN LANG (1:10)                                                   
+  /*                                                                   
+  WRITE 'LANG(1:10):' LANG (1:10) //                                   
+  WRITE 'LANG(1)   :' LANG (1)    /  'LANG(5:9) :' LANG (5:9)          
+LOOP                                                                   
+*                                                                      
+END
+</pre> 
+           <h4 class="floating-title"> Structured Mode Example: </h4> 
+           <pre class="verbatim">
+** Example 'INDEX1S': Array definition with constants (structured mode)
+***********************************************************************
+DEFINE DATA LOCAL                                                      
+1 EMPLOY-VIEW VIEW OF EMPLOYEES                                        
+  2 NAME                                                               
+  2 FIRST-NAME                                                         
+  2 CITY                                                               
+  2 LANG (1:10)                                                        
+END-DEFINE                                                             
+*                                                                      
+READ (1) EMPLOY-VIEW WITH NAME = 'WINTER' WHERE CITY = 'LONDON'        
+  WRITE 'LANG(1:10):' LANG (1:10) //                                   
+  WRITE 'LANG(1)   :' LANG (1)    /  'LANG(5:9) :' LANG (5:9)          
+END-READ                                                               
+END
+</pre> 
+           <p>If a multiple-value field or periodic-group field is defined several
+               times using constants and is to be referenced using variables, the following
+               syntax is used.
+      </p> 
+           
+      <h4 class="floating-title"> Reporting Mode Example: </h4> 
+           <pre class="verbatim">
+** Example 'INDEX2R': Array definition with constants (reporting mode) 
+**                   (multiple definition of same database field)      
+***********************************************************************
+DEFINE DATA LOCAL                                                      
+1 EMPLOY-VIEW VIEW OF EMPLOYEES                                        
+  2 NAME                                                               
+  2 CITY                                                               
+  2 LANG (1:5)                                                         
+  2 LANG (4:8)                                                         
+END-DEFINE                                                             
+*                                                                      
+READ (1) EMPLOY-VIEW WITH NAME = 'WINTER' WHERE CITY = 'LONDON'        
+  DISPLAY 'NAME'         NAME                                          
+          'LANGUAGE/1:3' LANG (1.1:3)                                  
+          'LANGUAGE/6:8' LANG (4.3:5)                                  
+LOOP                                                                   
+*                                                                      
+END
+</pre> 
+           <h4 class="floating-title"> Structured Mode Example: </h4> 
+           <pre class="verbatim">
+** Example 'INDEX2S': Array definition with constants (structured mode)
+**                   (multiple definition of same database field)      
+***********************************************************************
+DEFINE DATA LOCAL                                                      
+1 EMPLOY-VIEW VIEW OF EMPLOYEES                                        
+  2 NAME                                                               
+  2 CITY                                                               
+  2 LANG (1:5)                                                         
+  2 LANG (4:8)                                                         
+END-DEFINE                                                             
+*                                                                      
+READ (1) EMPLOY-VIEW WITH NAME = 'WINTER' WHERE CITY = 'LONDON'        
+  DISPLAY 'NAME'         NAME                                          
+          'LANGUAGE/1:3' LANG (1.1:3)                                  
+          'LANGUAGE/6:8' LANG (4.3:5)                                  
+END-READ                                                               
+*                                                                      
+END
+</pre> 
+           
+          
+         <div><a name="ref_arrays_w_vari"></a></div> 
+          
+      <h3> Referencing Arrays Defined with Variables </h3> 
+           
+           
+      <p>Multiple-value fields or periodic-group fields in arrays defined with
+               variables must be referenced using the same variable.
+      </p> 
+           
+      <h4 class="floating-title"> Reporting Mode Example: </h4> 
+           <pre class="verbatim">
+** Example 'INDEX3R': Array definition with variables (reporting mode) 
+***********************************************************************
+RESET I (I2)                                                           
+*                                                                      
+I := 1                                                                 
+READ (1) EMPLOYEES WITH NAME = 'WINTER' WHERE CITY = 'LONDON'          
+  OBTAIN LANG (I:I+10)                                                 
+  /*                                                                   
+  WRITE 'LANG(I)      :' LANG (I) /                                    
+        'LANG(I+5:I+7):' LANG (I+5:I+7)                                
+LOOP                                                                   
+*                                                                      
+END
+</pre> 
+           <h4 class="floating-title"> Structured Mode Example: </h4> 
+           <pre class="verbatim"> 
+** Example 'INDEX3S': Array definition with variables (structured mode)
+***********************************************************************
+DEFINE DATA LOCAL                                                      
+1 I (I2)                                                               
+*                                                                      
+1 EMPLOY-VIEW VIEW OF EMPLOYEES                                        
+  2 NAME                                                               
+  2 CITY                                                               
+  2 LANG (I:I+10)                                                      
+END-DEFINE                                                             
+*                                                                      
+I := 1                                                                 
+READ (1) EMPLOY-VIEW WITH NAME = 'WINTER' WHERE CITY = 'LONDON'        
+  WRITE 'LANG(I)      :' LANG (I) /                                    
+        'LANG(I+5:I+7):' LANG (I+5:I+7)                                
+END-READ                                                               
+END
+</pre> 
+           <p>If a different index is to be used, an unambiguous reference to the
+               first encountered definition of the array with variable index must be made.
+               This is done by qualifying the index expression as shown below.
+      </p> 
+           
+      <h4 class="floating-title"> Reporting Mode Example: </h4> 
+           <pre class="verbatim">
+** Example 'INDEX4R': Array definition with variables (reporting mode) 
+***********************************************************************
+RESET I (I2) J (I2)                                                    
+*                                                                      
+I := 2                                                                 
+J := 3                                                                 
+*                                                                      
+READ (1) EMPLOYEES WITH NAME = 'WINTER' WHERE CITY = 'LONDON'          
+  OBTAIN LANG (I:I+10)                                                 
+  /*                                                                   
+  WRITE 'LANG(I.J)  :' LANG (I.J) /                                    
+        'LANG(I.1:5):' LANG (I.1:5)                                    
+LOOP                                                                   
+*                                                                      
+END
+</pre> 
+           <h4 class="floating-title"> Structured Mode Example: </h4> 
+           <pre class="verbatim">
+** Example 'INDEX4S': Array definition with variables (structured mode)
+***********************************************************************
+DEFINE DATA LOCAL                                                      
+1 I (I2)                                                               
+1 J (I2)                                                               
+1 EMPLOY-VIEW VIEW OF EMPLOYEES                                        
+  2 NAME                                                               
+  2 CITY                                                               
+  2 LANG (I:I+10)                                                      
+END-DEFINE                                                             
+*                                                                      
+I := 2                                                                 
+J := 3                                                                 
+READ (1) EMPLOY-VIEW WITH NAME = 'WINTER' WHERE CITY = 'LONDON'        
+  WRITE 'LANG(I.J)  :' LANG (I.J) /                                    
+        'LANG(I.1:5):' LANG (I.1:5)                                    
+END-READ                                                               
+END
+</pre> 
+           <p>The expression <code>I.</code> is used to create an unambiguous
+               reference to the array definition and "positions" to the first
+               value within the read array range (<code>LANG(I.1:5)</code>).
+      </p> 
+           
+      <p>The current content of <code>I</code> at the time of the database
+               access determines the starting occurrence of the database array.
+      </p> 
+           
+          
+         
+      <div><a name="ref_md_arrays"></a></div> 
+          
+      <h3> Referencing Multiple-Defined Arrays </h3> 
+           
+           
+      <p>For multiple-defined arrays, a reference with qualification of the
+               index expression is usually necessary to ensure an unambiguous reference to the
+               desired array range.
+      </p> 
+           
+      <h4 class="floating-title"> Reporting Mode Example: </h4> 
+           <pre class="verbatim">
+** Example 'INDEX5R': Array definition with constants (reporting mode) 
+**                   (multiple definition of same database field)      
+***********************************************************************
+DEFINE DATA LOCAL                  /* For reporting mode programs      
+1 EMPLOY-VIEW VIEW OF EMPLOYEES    /* DEFINE DATA is recommended       
+  2 NAME                           /* to use multiple definitions      
+  2 CITY                           /* of same database field           
+  2 LANG (1:10)                                                        
+  2 LANG (5:10)                                                        
+*                                                                      
+1 I (I2)                                                               
+1 J (I2)                                                               
+END-DEFINE                                                             
+*                                                                      
+I := 1                                                                 
+J := 2                                                                 
+*                                                                      
+READ (1) EMPLOY-VIEW WITH NAME = 'WINTER' WHERE CITY = 'LONDON'        
+  WRITE 'LANG(1.1:10) :' LANG (1.1:10) / 
+        'LANG(1.I:I+2):' LANG (1.I:I+2) //
+  WRITE 'LANG(5.1:5)  :' LANG (5.1:5)  /  
+        'LANG(5.J)    :' LANG (5.J)       
+LOOP                                      
+END
+</pre> 
+           <h4 class="floating-title"> Structured Mode Example: </h4> 
+           <pre class="verbatim">
+** Example 'INDEX5S': Array definition with constants (structured mode)
+**                   (multiple definition of same database field)      
+***********************************************************************
+DEFINE DATA LOCAL                                                      
+1 EMPLOY-VIEW VIEW OF EMPLOYEES                                        
+  2 NAME                                                               
+  2 CITY                                                               
+  2 LANG (1:10)                                                        
+  2 LANG (5:10)                                                        
+*                                                                      
+1 I (I2)                                                               
+1 J (I2)                                                               
+END-DEFINE                                                             
+*                                                                      
+*                                                                      
+I := 1                                                                 
+J := 2                                                                 
+*                                                                      
+READ (1) EMPLOY-VIEW WITH NAME = 'WINTER' WHERE CITY = 'LONDON'
+  WRITE 'LANG(1.1:10) :' LANG (1.1:10) /  
+        'LANG(1.I:I+2):' LANG (1.I:I+2) //
+  WRITE 'LANG(5.1:5)  :' LANG (5.1:5)  /  
+        'LANG(5.J)    :' LANG (5.J)       
+END-READ                                  
+END
+</pre> 
+           <p>A similar syntax is also used if multiple-value fields or
+               periodic-group fields are defined using index variables.
+      </p> 
+           
+      <h4 class="floating-title"> Reporting Mode Example: </h4> 
+           <pre class="verbatim">
+** Example 'INDEX6R': Array definition with variables (reporting mode) 
+**                   (multiple definition of same database field)      
+***********************************************************************
+DEFINE DATA LOCAL                                                      
+1 I (I2) INIT &lt;1&gt;                                                      
+1 J (I2) INIT &lt;2&gt;                                                      
+1 N (I2) INIT &lt;1&gt;                                                      
+1 EMPLOY-VIEW VIEW OF EMPLOYEES    /* For reporting mode programs      
+  2 NAME                           /* DEFINE DATA is recommended       
+  2 CITY                           /* to use multiple definitions      
+  2 LANG (I:I+10)                  /* of same database field           
+  2 LANG (J:J+5)                                                       
+  2 LANG (4:5)                                                         
+*                                                                      
+END-DEFINE                                                             
+*                                                                      
+READ (1) EMPLOY-VIEW WITH NAME = 'WINTER' WHERE CITY = 'LONDON'        
+*                                                                      
+  WRITE 'LANG(I.I)    :' LANG (I.I) /
+        'LANG(1.I:I+2):' LANG (I.I:I+10) //
+*                                          
+  WRITE 'LANG(J.N)    :' LANG (J.N) /      
+        'LANG(J.2:4)  :' LANG (J.2:4) //   
+*                                          
+  WRITE 'LANG(4.N)    :' LANG (4.N) /      
+        'LANG(4.N:N+1):' LANG (4.N:N+1) /  
+LOOP                                       
+END
+</pre> 
+           <h4 class="floating-title"> Structured Mode Example: </h4> 
+           <pre class="verbatim">
+** Example 'INDEX6S': Array definition with variables (structured mode)
+**                   (multiple definition of same database field)      
+***********************************************************************
+DEFINE DATA LOCAL                                                      
+1 I (I2) INIT &lt;1&gt;                                                      
+1 J (I2) INIT &lt;2&gt;                                                      
+1 N (I2) INIT &lt;1&gt;                                                      
+1 EMPLOY-VIEW VIEW OF EMPLOYEES                                        
+  2 NAME                                                               
+  2 CITY                                                               
+  2 LANG (I:I+10)                                                      
+  2 LANG (J:J+5)                                                       
+  2 LANG (4:5)                                                         
+*                                                                      
+END-DEFINE                                                             
+*                                                                      
+READ (1) EMPLOY-VIEW WITH NAME = 'WINTER' WHERE CITY = 'LONDON'        
+*                                                                      
+  WRITE 'LANG(I.I)    :' LANG (I.I) / 
+        'LANG(1.I:I+2):' LANG (I.I:I+10) //
+*                                          
+  WRITE 'LANG(J.N)    :' LANG (J.N) /      
+        'LANG(J.2:4)  :' LANG (J.2:4) //   
+*                                          
+  WRITE 'LANG(4.N)    :' LANG (4.N) /      
+        'LANG(4.N:N+1):' LANG (4.N:N+1) /  
+END-READ                                   
+END
+</pre> 
+           
+          
+        
+        <div class="noprint">
+         <p><a href="pg_defi_dv.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="DB_IC_Reference"></a></div> 
+         
+      <h2> 
+             <a name="x71"></a> 
+             <a name="x72"></a>Referencing the Internal Count for a Database Array (C*
+             Notation)
+      </h2> 
+          
+          
+      <p>It is sometimes necessary to reference a multiple-value field and/or a
+              periodic group without knowing how many values/occurrences exist in a given
+              record. Adabas maintains an internal count of the number of values of each
+              multiple-value field and the number of occurrences of each periodic group. This
+              count may be referenced by specifying <code>C*</code> immediately before the
+              field name.
+      </p> 
+          
+      <h4 class="floating-title"> Note concerning databases other than
+              Adabas:
+      </h4> 
+           
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="13%">
+            <col width="84%">
+         </colgroup> 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>Tamino</th> 
+                        
+               <td>With XML databases, the <code>C*</code> notation cannot be
+                            used.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th>SQL</th> 
+                        
+               <td>With SQL databases, the <code>C*</code> notation cannot be
+                            used.
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+           
+           
+      <p>See also the data-area-editor line command <code>*</code> (in
+               the <a href="../edis/edis-over.htm">Editors</a>
+               documentation).
+      </p> 
+          
+      <p>The explicit format and length permitted to declare a <code>C*</code>
+              field is either
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">integer (I) with a length of 2 bytes (I2) or 4 bytes (I4), </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">numeric (N) or packed (P) with only integer (but no precision) digits;
+                      for example (N3). 
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>If no explicit format and length is supplied, format/length (N3) is
+              assumed as default.
+      </p> 
+          
+      <h4 class="floating-title"> Examples: </h4> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="13%">
+            <col width="84%">
+         </colgroup> 
+                
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> <code>C*LANG </code></td> 
+                       
+               <td>Returns the count of the number of values for the multiple-value
+                  field <code>LANG</code>.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <code>C*INCOME </code></td> 
+                       
+               <td>Returns the count of the number of occurrences for the periodic
+                  group <code>INCOME</code>.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <code>C*BONUS(1)</code> 
+               </td> 
+                       
+               <td>Returns the count of the number of values for the multiple-value
+                  field <code>BONUS</code> in periodic group occurrence 1 (assuming that
+                           <code>BONUS</code> is a multiple-value field within a periodic group.)
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <h4 class="floating-title"> Example Program Using the C* Variable: </h4> 
+          <pre class="verbatim">
+** Example 'CNOTX01': C* Notation                                        
+************************************************************************
+DEFINE DATA LOCAL                                                       
+1 EMPL-VIEW VIEW OF EMPLOYEES                                           
+  2 NAME                                                                
+  2 CITY                                                                
+  2 C*INCOME                                                            
+  2 INCOME                                                              
+    3 SALARY  (1:5)                                                     
+    3 C*BONUS (1:2)                                                     
+    3 BONUS   (1:2,1:2)                                                 
+  2 C*LANG                                                              
+  2 LANG      (1:2)                                                     
+*                                                                       
+1 #I (N1)                                                               
+END-DEFINE                                                              
+*                                                                       
+LIMIT 2                                                                 
+READ EMPL-VIEW BY CITY  
+  /*                                                          
+  WRITE NOTITLE 'NAME:' NAME /                                
+       'NUMBER OF LANGUAGES SPOKEN:' C*LANG 5X                
+       'LANGUAGE 1:' LANG (1) 5X                              
+       'LANGUAGE 2:' LANG (2)                                 
+  /*                                                          
+  WRITE 'SALARY DATA:'                                        
+  FOR #I FROM 1 TO C*INCOME                                   
+    WRITE 'SALARY' #I SALARY (1.#I)                           
+  END-FOR                                                     
+  /*                                                          
+  WRITE 'THIS YEAR BONUS:' C*BONUS(1)  BONUS (1,1) BONUS (1,2)
+      / 'LAST YEAR BONUS:' C*BONUS(2)  BONUS (2,1) BONUS (2,2)
+  SKIP 1                                                      
+END-READ                                                      
+END
+</pre> 
+          <p>Output of Program <code>CNOTX01</code>:
+      </p> <pre class="system-output">
+NAME: SENKO                                                             
+NUMBER OF LANGUAGES SPOKEN:    1     LANGUAGE 1: ENG     LANGUAGE 2:    
+SALARY DATA:                                                            
+SALARY  1      36225                                                    
+SALARY  2      29900                                                    
+SALARY  3      28100                                                    
+SALARY  4      26600                                                    
+SALARY  5      25200                                                    
+THIS YEAR BONUS:    0          0          0                             
+LAST YEAR BONUS:    0          0          0                             
+                                                                        
+NAME: CANALE                                                            
+NUMBER OF LANGUAGES SPOKEN:    2     LANGUAGE 1: FRE     LANGUAGE 2: ENG
+SALARY DATA:                                                            
+SALARY  1     202285                                                    
+THIS YEAR BONUS:    1      23000          0                             
+LAST YEAR BONUS:    0          0          0
+</pre> 
+          
+         <div><a name="d0e7017"></a></div> 
+          
+      <h3>C* for Multiple-Value Fields Within Periodic Groups</h3> 
+           
+           
+      <p>For a multiple-value field within a periodic group, you can also define
+               a <code>C*</code> variable with an index range specification.
+      </p> 
+           
+      <p>The following examples use the multiple-value field <code>BONUS</code>,
+               which is part of the periodic group <code>INCOME</code>. All three examples
+               yield the same result.
+      </p> 
+           
+      <h4 class="floating-title"> Example 1 - Reporting Mode:</h4> 
+           <pre class="verbatim">
+** Example 'CNOTX02': C* Notation (multiple-value fields)                
+************************************************************************
+*                                                                       
+LIMIT 2                                                                 
+READ EMPLOYEES BY CITY                                                  
+  OBTAIN C*BONUS (1:3)                                                  
+         BONUS   (1:3,1:3)                                              
+  /*                                                                    
+  DISPLAY NAME C*BONUS (1:3) BONUS (1:3,1:3)                            
+LOOP                                                                    
+*                                                                       
+END
+</pre> 
+           <h4 class="floating-title"> Example 2 - Structured Mode:</h4> 
+           <pre class="verbatim">
+** Example 'CNOTX03': C* Notation (multiple-value fields)                
+************************************************************************
+DEFINE DATA LOCAL                                                       
+1 EMPL-VIEW VIEW OF EMPLOYEES                                           
+  2 NAME                                                                
+  2 CITY                                                                
+  2 INCOME    (1:3)                                                     
+    3 C*BONUS                                                           
+    3 BONUS   (1:3)                                                     
+END-DEFINE                                                              
+*                                                                       
+LIMIT 2                                                                 
+READ EMPL-VIEW BY CITY                                                  
+  /*                                                                    
+  DISPLAY NAME C*BONUS (1:3) BONUS (1:3,1:3)                            
+END-READ                                                                
+*                                                                       
+END
+</pre> 
+           <h4 class="floating-title"> Example 3 - Structured Mode:</h4> 
+           <pre class="verbatim">
+** Example 'CNOTX04': C* Notation (multiple-value fields)                
+************************************************************************
+DEFINE DATA LOCAL                                                       
+1 EMPL-VIEW VIEW OF EMPLOYEES                                           
+  2 NAME                                                                
+  2 CITY                                                                
+  2 C*BONUS  (1:3)                                                      
+  2 INCOME   (1:3)                                                      
+    3 BONUS  (1:3)                                                      
+END-DEFINE                                                              
+*                                                                       
+LIMIT 2                                                                 
+READ EMPL-VIEW BY CITY                                                  
+  /*                                                                    
+  DISPLAY NAME C*BONUS (*) BONUS (*,*)                                  
+END-READ                                                                
+*                                                                       
+END
+</pre> 
+           <table border="0" cellspacing="0" width="80%" class="warning">
+         <tr>
+            <td valign="top" width="36"><img src="../graphics/warning.png" alt="" width="28" height="28"></td>
+            <td valign="top"><strong>Warning:<br>As the Adabas format buffer does not permit ranges for count
+                        fields, they are generated as individual fields; therefore a C* index range for
+                        a large array may cause an Adabas format buffer overflow.</strong></td>
+         </tr>
+      </table> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_defi_dv.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Data_Struct_Qual"></a></div> 
+         
+      <h2> 
+             <a name="x73"></a> Qualifying Data Structures 
+      </h2> 
+          
+          
+      <p>To identify a field when referencing it, you may qualify the field; that
+              is, before the field name, you specify the name of the level-1 data element in
+              which the field is located and a period.
+      </p> 
+          
+      <p>If a field cannot be identified uniquely by its name (for example, if
+              the same field name is used in multiple groups/views), you must qualify the
+              field when you reference it.
+      </p> 
+          
+      <p>The combination of level-1 data element and field name must be
+              unique.
+      </p> 
+          
+      <h4 class="floating-title"> Example: </h4> 
+          <pre class="verbatim">
+DEFINE DATA LOCAL
+<strong>1 FULL-NAME
+  2 LAST-NAME</strong> (A20)
+  2 FIRST-NAME (A15)
+<strong>1 OUTPUT-NAME
+  2 LAST-NAME</strong> (A20)
+  2 FIRST-NAME (A15)
+END-DEFINE
+...
+<strong>MOVE FULL-NAME.LAST-NAME TO OUTPUT-NAME.LAST-NAME</strong>
+...
+</pre> 
+          <p>The qualifier must be a level-1 data element.</p> 
+          
+      <h4 class="floating-title"> Example: </h4> 
+          <pre class="verbatim">
+DEFINE DATA LOCAL
+1 GROUP1
+  2 SUB-GROUP
+    3 FIELD1 (A15)
+    3 FIELD2 (A15)
+END-DEFINE
+...
+MOVE 'ABC' TO <strong>GROUP1.</strong>FIELD1
+...
+</pre> 
+          <h4 class="floating-title"> Qualifying a Database Field: </h4> 
+          
+      <p>If you use the same name for a user-defined variable and a database
+              field (which you should not do anyway), you must qualify the database field
+              when you want to reference it
+      </p> 
+          
+      <table border="0" cellspacing="0" width="80%" class="warning">
+         <tr>
+            <td valign="top" width="36"><img src="../graphics/warning.png" alt="" width="28" height="28"></td>
+            <td valign="top"><strong>Warning:<br> If you do not qualify the database field when you want to
+                       reference it, the user-defined variable will be referenced instead.</strong></td>
+         </tr>
+      </table> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_defi_dv.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="udv_exa"></a></div> 
+         
+      <h2> Examples of User-Defined Variables </h2> 
+          
+          <pre class="verbatim">
+DEFINE DATA LOCAL 
+1 #A1 (A10)       /* Alphanumeric, 10 positions. 
+1 #A2 (B4)        /* Binary, 4 positions. 
+1 #A3 (P4)        /* Packed numeric, 4 positions and 1 sign position. 
+1 #A4 (N7.2)      /* Unpacked numeric,  
+                  /* 7 positions before and 2 after decimal point. 
+1 #A5 (N7.)       /* Invalid definition!!! 
+1 #A6 (P7.2)      /* Packed numeric, 7 positions before and 2 after decimal point  
+                  /* and 1 sign position. 
+1 #INT1 (I1)      /* Integer, 1 byte. 
+1 #INT2 (I2)      /* Integer, 2 bytes. 
+1 #INT3 (I3)      /* Invalid definition!!! 
+1 #INT4 (I4)      /* Integer, 4 bytes. 
+1 #INT5 (I5)      /* Invalid definition!!! 
+1 #FLT4 (F4)      /* Floating point, 4 bytes. 
+1 #FLT8 (F8)      /* Floating point, 8 bytes. 
+1 #FLT2 (F2)      /* Invalid definition!!! 
+1 #DATE (D)       /* Date (internal format/length P6). 
+1 #TIME (T)       /* Time (internal format/length P12). 
+1 #SWITCH (L)     /* Logical, 1 byte (TRUE or FALSE). 
+                  /*
+END-DEFINE 
+</pre> 
+          
+        
+       <div class="noprint">
+         <div class="nospy">
+            <p><a href="pg_defi_dv.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_defi_dv.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_defi_dv.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_defi-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_defi.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_defi_funcall.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

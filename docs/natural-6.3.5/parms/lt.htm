@@ -1,0 +1,253 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>LT - Limit for Processing Loops</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="lt" id="1048"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../parms/lt.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/parms/lt.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="parms-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="ls.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="madio.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Parameter Reference&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x184"></a>LT - Limit for Processing Loops
+         </h1>
+      </div> 
+         
+         
+      <p>This Natural profile and session parameter is used to limit the number of
+             database records which can be retrieved within Natural applications. This limit
+             applies to all statements retrieving records from the database, that is:
+      </p> 
+         
+      <ul> 
+             
+         <li> 
+                 
+            <p class="initem">statements that initiate processing loops, such as
+                     <a href="../sm/read.htm"><code>READ</code></a>,
+                     <a href="../sm/find.htm"><code>FIND</code></a>,
+                     <a href="../sm/histogra.htm"><code>HISTOGRAM</code></a> or
+                     <a href="../sm/select_sql.htm"><code>SELECT</code></a> and
+            </p> 
+                
+         </li> 
+             
+         <li> 
+                 
+            <p class="initem">statements that retrieve only a single record, such as
+                     <a href="../sm/find.htm#FIND_FIRST_NUMBER_UNIQUE"><code>FIND
+                     UNIQUE</code></a>,
+                     <a href="../sm/find.htm#FIND_FIRST_NUMBER_UNIQUE"><code>FIND
+                     NUMBER</code></a>,
+                     <a href="../sm/find.htm#FIND_FIRST_NUMBER_UNIQUE"><code>FIND
+                     FIRST</code></a>, <a href="../sm/get.htm"><code>GET</code></a> (<a href="../sm/getsame.htm"><code>SAME</code></a>) and
+                     <a href="../sm/select_sql.htm#select_single"><code>SELECT
+                     SINGLE</code></a>.
+            </p> 
+                
+         </li> 
+            
+      </ul> 
+         
+      <p>All retrieved records are counted and the result of the count is compared
+             with the <code>LT</code> limit. The count also includes those records
+             which were rejected by a <code>WHERE</code> clause of a <code>FIND</code>,
+             <code>READ</code> or <code>HISTOGRAM</code> statement. The
+             <code>LT</code> limit does not affect the statements
+             <code>STORE</code>, <code>UPDATE</code>, <code>DELETE</code>, <code>END
+            TRANSACTION</code> and <code>BACKOUT TRANSACTION</code>.
+      </p> 
+         
+      <p>Within a Natural session, the profile parameter <code>LT</code>
+             can be overridden by using the session parameter <code>LT</code>.
+      </p>
+         
+         
+      <p>When a record is retrieved from the database, the count of retrieved
+             records is incremented before it is compared with the current value of the
+             <code>LT</code> parameter. If the incremented count exceeds the
+             current <code>LT</code> value, Natural error NAT1003 (&#8220;Global limit
+             for database calls reached&#8221;) is raised. The count of retrieved records is reset
+             to zero whenever a Natural program is started on Level 1. The count is not
+             reset if the program on Level 1 invokes another Natural object (for further
+             information, see
+             <a href="../pg/pg_obj_prog.htm#Multiple_Levels_of_Invoked_Objects">Multiple
+            Levels of Invoked Objects</a> in the <cite>Programming
+                Guide</cite>). Therefore the <code>LT</code> parameter limits the
+             number of records retrieved from the database by a Level 1 program and objects
+             invoked by that program on a level other than 1. 
+      </p> 
+         
+      <p>If the value of the <code>LT</code> parameter is dynamically
+             changed within a program by using a <code>SET GLOBALS
+            LT=<var>n</var></code> statement, the new limit value becomes
+             effective for the next statement that retrieves a record from the database.
+             
+      </p> 
+          
+          
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+              
+         <tbody align="left" valign="top"> 
+                  
+            <tr> 
+                      
+               <th>Possible settings</th> 
+                      
+               <td nowrap> <code>0 - 2147483647</code> 
+                          
+                  <p>Within a session: <code>0</code> to
+                              <code><var>n</var></code></p> 
+                          
+                  <p>(<code><var>n</var></code> = value of profile
+                              parameter <code>LT</code> at session start)
+                  </p> 
+               </td> 
+                      
+               <td colspan="2"> 
+                  
+                  <p>Maximum number of records that can be retrieved. All retrieved
+                     records (including records rejected by means of a <code>WHERE</code> clause)
+                              are counted and compaired with this limit.
+                  </p> 
+                          
+                  <p><code>LT=0</code> defines that no limit is in effect for the number
+                              of retrieved records.
+                  </p> 
+               </td> 
+                     
+            </tr> 
+                  
+            <tr> 
+                      
+               <th>Default setting</th> 
+                      
+               <td><code>99999999</code></td> 
+                      
+               <td colspan="2">&nbsp;</td> 
+                     
+            </tr> 
+                  
+            <tr> 
+                      
+               <th>Dynamic specification</th> 
+                      
+               <td>yes</td> 
+                      
+               <td colspan="2">&nbsp;</td> 
+                     
+            </tr> 
+                  
+            <tr> 
+                      
+               <th rowspan="2">Specification within session</th> 
+                      
+               <td rowspan="2">yes</td> 
+                      
+               <td>Applicable Statements:</td> 
+                      
+               <td><a href="../sm/setgloba.htm"><code>SET
+                        GLOBALS</code></a>, see Note.
+               </td> 
+                     
+            </tr> 
+                  
+            <tr> 
+                      
+               <td>Applicable Command:</td> 
+                      
+               <td><a href="../syscom/globals.htm"><code>GLOBALS</code></a>, see
+                    Note.
+               </td> 
+                     
+            </tr> 
+                  
+            <tr> 
+                      
+               <th>Application Programming Interface</th> 
+                      
+               <td><code>USR1005N</code></td> 
+                      
+               <td colspan="2">See
+                  <a href="../utis/sysext.htm">SYSEXT - Natural Application
+                     Programming Interfaces</a> in the
+                          <cite>Utilities</cite> documentation.
+               </td> 
+                     
+            </tr> 
+                 
+         </tbody> 
+             
+      </table> 
+          
+         
+      <p class="note"><strong>Note:</strong><br>When the <code>LT</code> parameter is used in conjunction
+             with the statement <code>SET GLOBALS</code> or the system command
+             <code>GLOBALS</code>, the limit value that can be set may not
+             exceed the <code>LT</code> value defined in the Natural parameter
+             file
+             <code>NATPARM</code>.
+      </p> 
+        
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="lt.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../parms/lt.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/parms/lt.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="parms-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="ls.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="madio.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

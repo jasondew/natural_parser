@@ -1,0 +1,761 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Local Data Areas</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="fs-lda"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../firststeps/fs-lda.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/firststeps/fs-lda.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="fs-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="fs-proc.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="fs-gda.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;First Steps&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x35"></a>Local Data Areas
+         </h1>
+      </div> 
+         
+      <p>Currently, the fields used by your program are defined within the
+             <code>DEFINE DATA</code> statement in the program itself. It is also possible,
+             however, to place the field definitions in a local data area (LDA) outside the
+             program, with the program's <code>DEFINE DATA</code> statement referencing this
+             local data area by name. For reusability and for a clear application structure,
+             it is usually better to define fields in data areas outside the programs. 
+      </p> 
+         
+      <p>You will now relocate the information from the <code>DEFINE DATA</code>
+             statement to a local data area. When you have completed the exercises below,
+             your sample application will consist of the following modules:
+      </p> 
+         
+      <p><img src="graphics/fs-lda.png" alt="Application structure" width="600" height="200"></p> 
+         
+      <p>This document contains the following
+             exercises:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="fs-lda.htm#fs-lda-new">Creating a Local Data Area</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="fs-lda.htm#fs-lda-datafield">Defining Data Fields</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="fs-lda.htm#fs-lda-import">Importing the Required Data Fields from a DDM</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="fs-lda.htm#fs-lda-ref">Referencing the Local Data Area from Your Program</a></p>
+         </li>
+      </ul>
+      <hr>
+      <div><a name="fs-lda-new"></a></div> 
+         
+      <h2>Creating a Local Data Area</h2> 
+          
+          
+      <p>You will now invoke the data area editor in which you will specify the
+              required fields.
+      </p> 
+           
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To invoke the data area editor</strong></p>
+      <ul>
+         <li> 
+                   
+                    
+                    
+                    
+                   
+            <p class="instep">In the <span class="selectable_label">Direct Command</span> window, enter
+                       one of the following:
+            </p> <pre class="command-input">EDIT LOCAL</pre> <pre class="command-input">E L</pre> 
+                   
+                   <p class="instep">The data area editor appears. The object type has been set to
+                       "Local". This is indicated at the top of the screen.
+            </p> 
+                    
+                   
+            <table border="1" cellpadding="5" class="screen">
+               <tr>
+                  <td><pre>                       Press &lt;ESC&gt; to enter command mode                      
+ Mem: empty    Lib: TUTORIAL Type: <strong>LOCAL</strong>      Bytes:     0  Line:    0 of:   0
+C T    Comment                                                                
+  *    *** Top of Data Area ***                                               
+  *    *** End of Data Area ***                                               
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+  F 1 HELP     F 2 CHOICE   F 3 QUIT     F 4 SAVE     F 5 STOW     F 6 CHECK  
+  F 7 READ     F 8 CLEAR    F 9 MEM TYPE F10 GEN      F11 FLD TYPE F12</pre></td>
+               </tr>
+            </table> 
+                   
+            <p class="instep">By default, the data area editor is in edit mode when you
+                       invoke it. To toggle from edit mode to command mode (and vice versa), you press
+                       <span class="key">ESC</span>. When you leave the editor, the current mode will be resumed
+                       when you open the editor the next time.
+            </p> 
+                 
+         </li>
+      </ul> 
+         
+      <div class="noprint">
+         <p><a href="fs-lda.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="fs-lda-datafield"></a></div> 
+         
+      <h2>Defining Data Fields</h2> 
+          
+          
+      <p>You will now define the following fields:</p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th>Level </th> 
+                       
+               <th>Name</th> 
+                       
+               <th>Format </th> 
+                       
+               <th>Length</th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td>1</td> 
+                       
+               <td><code>#NAME-START</code></td> 
+                       
+               <td>A</td> 
+                       
+               <td>20</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>1</td> 
+                       
+               <td><code>#NAME-END</code></td> 
+                       
+               <td>A</td> 
+                       
+               <td>20</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>1</td> 
+                       
+               <td><code>#MARK</code></td> 
+                       
+               <td>A</td> 
+                       
+               <td>1</td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>These are the user-defined variables which you have previously defined
+              in the <code>DEFINE DATA</code> statement.
+      </p> 
+           
+           
+           
+           
+           
+           
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To define the data fields</strong></p>
+      <ol class="steps">
+         <li> 
+                   
+                   
+            <p class="instep">Make sure that the first entry, which indicates the top of the data
+                       area, is selected in the editor.
+            </p> 
+                   
+            <p class="tip"><strong>Tip:</strong><br>If it is not possible to move the cursor and thus to highlight a
+                       line, you are in command mode. In this mode, the command line is shown at the
+                       top of the screen. Press <span class="key">ESC</span> to switch to edit mode.
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Enter the following line command in the first column of
+                       the selected line:
+            </p> <pre class="command-input">I</pre> 
+                   <p class="instep">You need not press <span class="key">ENTER</span>.
+            </p> 
+                  
+                   
+                   
+            <p class="instep">The following window appears.</p> 
+                   
+            <table border="1" cellpadding="5" class="screen">
+               <tr>
+                  <td><pre>+-----------------------+
+&brvbar; D Data Field          &brvbar;
+&brvbar; B Block               &brvbar;
+&brvbar; C Constant            &brvbar;
+&brvbar; H Handle              &brvbar;
+&brvbar; S Structure           &brvbar;
+&brvbar; * Comment             &brvbar;
++-----------------------+</pre></td>
+               </tr>
+            </table> 
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Choose <span class="guilistitem">Data Field</span>. 
+            </p> 
+                   
+                   
+            <p class="instep">The <span class="selectable_label">Data Field Definition</span> window appears.
+            </p> 
+                   
+            <table border="1" cellpadding="5" class="screen">
+               <tr>
+                  <td><pre>+-------------------- Data Field Definition ---------------------+
+&brvbar; Level:           1                                             &brvbar;
+&brvbar; Field Name:                                                    &brvbar;
+&brvbar; Field Format:                                                  &brvbar;
+&brvbar; Field Length:                                                  &brvbar;
+&brvbar; Arraydefinition:                                               &brvbar;
+&brvbar; Edit Mask:                                                     &brvbar;
+&brvbar;                                                                &brvbar;
+&brvbar; Header Definition:                                             &brvbar;
+&brvbar;                                                                &brvbar;
+&brvbar; Initialization:                                                &brvbar;
+&brvbar; Value Clause:                                                  &brvbar;
+&brvbar; Optional Param:  N                                             &brvbar;
+&brvbar; Comment:                                                       &brvbar;
++----------------------------------------------------------------+</pre></td>
+               </tr>
+            </table> 
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Specify all required information for the first field
+                       (<code>#NAME-START</code>) as listed in the above table. Use the arrow keys to
+                       move from one field to the next.
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">When all information for this field has been specified, press
+                       <span class="key">ENTER</span> to save this information.
+            </p> 
+                   
+                   
+            <p class="instep">The <span class="selectable_label">Data Field Definition</span> window remains open.
+                       The input fields are empty again and you can define a new data
+                       field.
+            </p> 
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Specify all required information for the remaining fields
+                       (<code>#NAME-END</code> and <code>#MARK</code>) as described above.
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">When all fields have been added, press <span class="key">ESC</span>.
+            </p> 
+                   
+                   
+            <p class="instep">The fields you have defined are now shown in the editor.</p> 
+                   
+            <table border="1" cellpadding="5" class="screen">
+               <tr>
+                  <td><pre>                       Press &lt;ESC&gt; to enter command mode                        
+ Mem:          Lib: TUTORIAL Type: LOCAL      Bytes:   291  Line:    3 of:   3  
+C T L  Name of Datafield                F     Length Index/Comment             M
+  *    *** Top of Data Area ***                                                 
+<strong>     1 #NAME-START                      A         20                            
+     1 #NAME-END                        A         20                            
+     1 #MARK                            A          1</strong>                            
+  *    *** End of Data Area ***                                                 
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+  F 1 HELP     F 2 CHOICE   F 3 QUIT     F 4 SAVE     F 5 STOW     F 6 CHECK    
+  F 7 READ     F 8 CLEAR    F 9 MEM TYPE F10 GEN      F11 FLD TYPE F12</pre></td>
+               </tr>
+            </table> 
+                   
+            <p class="tip"><strong>Tip:</strong><br>If you notice that you have made a mistake in a field definition,
+                       you can use the line command <code>E</code> to edit the selected
+                       field or the line command <code>D</code> to delete the selected
+                       field.
+            </p> 
+                 
+         </li>
+      </ol> 
+         
+      <div class="noprint">
+         <p><a href="fs-lda.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="fs-lda-import"></a></div> 
+         
+      <h2>Importing the Required Data Fields from a DDM</h2> 
+          
+          
+      <p>You will now import the same data fields which you have previously
+              defined in the program's <code>DEFINE DATA</code> statement. The fields are
+              read directly from a Natural data view into the data area editor. A data view
+              references database fields defined in a data definition module (DDM). 
+      </p> 
+          
+      <p>In the data area editor, the imported data fields will be
+              inserted below the currently selected data field.
+      </p> 
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To import data fields from a DDM</strong></p>
+      <ol class="steps">
+         <li> 
+                   
+                    
+                     
+                    
+                    
+                   
+            <p class="instep">Enter the following line command in the first column of
+                       the <code>#MARK</code> line.
+            </p> <pre class="command-input">V</pre> 
+                   
+                   
+                   <p class="instep">The <span class="selectable_label">View Definition</span> window appears.
+            </p> 
+                   
+            <table border="1" cellpadding="5" class="screen">
+               <tr>
+                  <td><pre>                       Press &lt;ESC&gt; to enter command mode                        
+ Mem:          Lib: TUTORIAL Type: LOCAL      Bytes:   291  Line:    3 of:   3  
+C T L  Name of Datafield                F     Length Index/Comment             M
+  *    *** Top of Data Area ***                                                 
+     1 #NAME-START                      A         20                            
+     1 #NAME-END                        A         20                            
+<strong>V </strong>   1 #MARK                            A          1                            
+  *    *** End of Data Area ***                                                 
+                                                                                
+           +------------------- View Definition -------------------+            
+           &brvbar;Name of View:                                          &brvbar;            
+           &brvbar;Name of DDM:                                           &brvbar;            
+           &brvbar;Comment:                                               &brvbar;            
+           +-------------------------------------------------------+            
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+  F 1 HELP     F 2 CHOICE   F 3 QUIT     F 4 SAVE     F 5 STOW     F 6 CHECK    
+  F 7 READ     F 8 CLEAR    F 9 MEM TYPE F10 GEN      F11 FLD TYPE F12</pre></td>
+               </tr>
+            </table> 
+                 
+         </li>
+         <li> 
+                   
+                    
+                    
+                   
+            <p class="instep">Enter the following information and press
+                       <span class="key">ENTER</span>:
+            </p> 
+                   
+            <table border="1" cellpadding="5" class="screen">
+               <tr>
+                  <td><pre>+------------------- View Definition -------------------+
+&brvbar;Name of View:          <strong>EMPLOYEES-VIEW</strong>                  &brvbar;
+&brvbar;Name of DDM:           <strong>EMPLOYEES</strong>                       &brvbar;
+&brvbar;Comment:                                               &brvbar;
++-------------------------------------------------------+</pre></td>
+               </tr>
+            </table> 
+                   
+                    
+                    
+                    
+                   
+            <p class="instep">A window appears showing the fields of the specified
+                       DDM.
+            </p> 
+                   
+            <table border="1" cellpadding="5" class="screen">
+               <tr>
+                  <td><pre>                       Press &lt;ESC&gt; to enter command mode                        
+ Mem:          Lib: TUTORIAL Type: LOCAL      Bytes:   291  Line:    3 of:   3  
+C T L  Name of Datafield                F     Length Index/Comment             M
+  *    *** Top of Data Area ***                                                 
+     1 #NAME-START                      A         20                            
+     1 #NAME-END                        A         20                            
+V    1 #MARK                            A          1                            
+  *    *** End of Data Area ***                                                 
+                                                                                
+                                                                                
+                                                                                
++------------------------------- DDM: EMPLOYEES -------------------------------+
+&brvbar;    1  AA  PERSONNEL-ID                      A          8    D                &brvbar;
+&brvbar;  G 1  AB  FULL-NAME                                                          &brvbar;
+&brvbar;    2  AC  FIRST-NAME                        A         20  N                  &brvbar;
+&brvbar;    2  AD  MIDDLE-I                          A          1  N                  &brvbar;
+&brvbar;    2  AE  NAME                              A         20    D                &brvbar;
+&brvbar;    1  AD  MIDDLE-NAME                       A         20  N                  &brvbar;
++------------------------------------------------------------------------------+
+     HD=PERSONNEL/ID                                                            
+                                                                                
+                                                                                
+  F 1 HELP     F 2 CHOICE   F 3 QUIT     F 4 SAVE     F 5 STOW     F 6 CHECK    
+  F 7 READ     F 8 CLEAR    F 9 MEM TYPE F10 GEN      F11 FLD TYPE F12</pre></td>
+               </tr>
+            </table> 
+                 
+         </li>
+         <li> 
+                   
+                    
+                   
+                   
+            <p class="instep">Mark the following fields by entering 
+                       an "X" in the first
+                       column:
+            </p> 
+                   
+            <p class="mini-list"> 
+                       <code>PERSONNEL-ID</code><br> 
+                       <code>FULL-NAME</code><br> 
+                       <code>NAME</code><br> 
+                       <code>DEPT</code><br> 
+                       <code>LEAVE-DATA</code><br> 
+                       <code>LEAVE-DUE</code> 
+                      
+            </p> 
+                    
+                   
+            <p class="instep">Use the arrow keys to scroll through the DDM.</p> 
+                   
+            <p class="note"><strong>Note:</strong><br>The field <code>PERSONNEL-ID</code> will be used later when you
+                       create the subprogram.
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                    
+                   
+            <p class="instep">After you have marked all required fields,
+                       press <span class="key">ENTER</span>. 
+            </p> 
+                   
+                   
+            <p class="instep">The local data area should now look as follows
+                       (use the arrow keys to scroll to the top of the data area):
+            </p> 
+                    
+                    
+                    
+                   
+            <table border="1" cellpadding="5" class="screen">
+               <tr>
+                  <td><pre>                       Press &lt;ESC&gt; to enter command mode                      
+ Mem:          Lib: TUTORIAL Type: LOCAL      Bytes:   970  Line:    0 of:  10
+C T    Comment                                                                
+  *    *** Top of Data Area ***                                               
+     1 #NAME-START                      A         20                          
+     1 #NAME-END                        A         20                          
+     1 #MARK                            A          1                          
+  V  1 EMPLOYEES-VIEW                                EMPLOYEES                
+     2 PERSONNEL-ID                     A          8                          
+  G  2 FULL-NAME                                                              
+     3 NAME                             A         20                          
+     2 DEPT                             A          6                          
+  G  2 LEAVE-DATA                                                             
+     3 LEAVE-DUE                        N          2                          
+  *    *** End of Data Area ***                                               
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+  F 1 HELP     F 2 CHOICE   F 3 QUIT     F 4 SAVE     F 5 STOW     F 6 CHECK  
+  F 7 READ     F 8 CLEAR    F 9 MEM TYPE F10 GEN      F11 FLD TYPE F12</pre></td>
+               </tr>
+            </table> 
+                   
+            <p class="instep">The <span class="selectable_label">T</span> column indicates the type of the variable. The view is
+                       indicated by a "V" and each group is indicated by a
+                       "G".
+            </p> 
+                    
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Press <span class="key">ESC</span> to enter command mode.
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Stow the local data area and name it
+                       "LDA01".
+            </p> <pre class="command-input">STOW LDA01</pre> 
+                   
+                 </li>
+      </ol> 
+         
+      <div class="noprint">
+         <p><a href="fs-lda.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="fs-lda-ref"></a></div> 
+         
+      <h2>Referencing the Local Data Area from Your Program</h2> 
+          
+          
+      <p>Once a local data area has been stowed, it can be referenced by a
+              Natural program.
+      </p> 
+          
+      <p>You will now change the <code>DEFINE DATA</code> statement your program
+              so that it uses the local data area that you have just defined.
+      </p> 
+           
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To use the local data area in your program</strong></p>
+      <ol class="steps">
+         <li> 
+                   
+                   
+            <p class="instep">Return to the program editor by entering the
+                       following in the command line of the data area editor.
+            </p> <pre class="command-input">E PGM01</pre> 
+                   
+                 </li>
+         <li> 
+                   
+                   
+            <p class="instep">In the <code>DEFINE DATA</code> statement, delete all variables
+                       between <code>LOCAL</code> and <code>END-DEFINE</code>
+                       (use the line command <code>D</code>). 
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Add a reference to your local data area by modifying the
+                       <code>LOCAL</code> line as follows:
+            </p> 
+                   <pre class="verbatim">LOCAL USING LDA01</pre> 
+                   
+                   
+                   <p class="instep">Your program should now look as follows:</p> 
+                   <pre class="verbatim">DEFINE DATA
+  LOCAL USING LDA01
+END-DEFINE
+*
+RP1. REPEAT
+*
+  INPUT USING MAP 'MAP01'
+*
+  IF #NAME-START = '.' THEN
+    ESCAPE BOTTOM (RP1.)
+  END-IF
+*
+  IF #NAME-END = ' ' THEN
+    MOVE #NAME-START TO #NAME-END
+  END-IF
+*
+  RD1. READ EMPLOYEES-VIEW BY NAME
+    STARTING FROM #NAME-START
+    ENDING AT #NAME-END
+*    
+    IF LEAVE-DUE &gt;= 20 THEN
+      PERFORM MARK-SPECIAL-EMPLOYEES
+    ELSE
+      RESET #MARK
+    END-IF
+*
+    DISPLAY NAME 3X DEPT 3X LEAVE-DUE 3X '&gt;=20' #MARK
+*
+  END-READ
+*
+  IF *COUNTER (RD1.) = 0 THEN
+    REINPUT 'No employees meet your criteria.'
+  END-IF
+*
+END-REPEAT
+*
+DEFINE SUBROUTINE MARK-SPECIAL-EMPLOYEES
+  MOVE '*' TO #MARK
+END-SUBROUTINE
+*
+END</pre> 
+                 </li>
+         <li> 
+                   
+                   
+            <p class="instep">Run the program.</p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">To confirm that the results are the same as before (when the
+                       <code>DEFINE DATA</code> statement did not reference a local data area), enter
+                       "JONES" as the starting name and press
+                       <span class="key">ENTER</span>. 
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                    
+                   
+            <p class="instep">To return to the program editor, enter
+                       <code>EDIT</code> at the <code>MORE</code> prompt.
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Stow the program.</p> 
+                   
+                 
+         </li>
+      </ol> 
+          
+      <p>You can now proceed with the next exercises: <a href="fs-gda.htm#fs-gda">Global Data Areas</a>.
+      </p> 
+         
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="fs-lda.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../firststeps/fs-lda.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/firststeps/fs-lda.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="fs-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="fs-proc.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="fs-gda.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

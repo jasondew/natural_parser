@@ -1,0 +1,1134 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Developing the Application Code</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="njx-devcode"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../njx/njx-devcode.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/njx/njx-devcode.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="njx-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="njx-devui.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="njx-deploy.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Natural for Ajax&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+         
+      <div class="nospytext">
+         <h1> 
+                <a name="x34"></a> 
+                <a name="x35"></a>Developing the Application Code
+         </h1>
+      </div> 
+          
+      <p>This document covers the following topics:</p>
+          
+      <ul>
+         <li>
+            <p class="initem"><a href="njx-devcode.htm#njx-devcode-import">Importing the Adapter</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="njx-devcode.htm#njx-devcode-createmain">Creating the Main Program</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="njx-devcode.htm#njx-devcode-structmain">Structure of the Main Program</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="njx-devcode.htm#njx-devcode-eventhandle">Handling Page Events</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="njx-devcode.htm#njx-devcode-eventtype">Built-in Events and User-defined Events</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="njx-devcode.htm#njx-devcode-eventsend">Sending Events to the User Interface</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="njx-devcode.htm#njx-devcode-popup">Using Pop-Up Windows</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="njx-devcode.htm#njx-devcode-map">Using Natural Maps</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="njx-devcode.htm#njx-devcode-navigate">Navigating between Pages and Maps</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="njx-devcode.htm#njx-devcode-alternative">Using Pages and Maps Alternatively</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="njx-devcode.htm#njx-devcode-logon">Starting a Natural Application from the Logon Page</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="njx-devcode.htm#njx-devcode-url">Starting a Natural Application with a URL</a></p>
+         </li>
+      </ul> 
+          
+      <p>Natural for Ajax Tools, which is an optional plug-in for Natural Studio,
+              allows you to use some of the Natural for Ajax functionality which is described
+              in this document directly from within Natural Studio. For further
+              information, see <cite>Natural
+                 for Ajax Tools</cite> in the <cite>Natural Studio
+                 Extensions</cite> documentation which is provided for Natural for
+              Windows.
+      </p>
+      <hr>
+      <div><a name="njx-devcode-import"></a></div> 
+          
+      <h2> 
+              <a name="x36"></a> 
+              <a name="x37"></a>Importing the Adapter
+      </h2> 
+           
+           
+      <p>After having generated the adapter, the next step is making it
+               available to your Natural development project.
+      </p> 
+           
+      <p>As described previously, the adapter code is generated into a directory
+               in your application server environment. The way you access the adapter depends
+               on the Natural development tool you use. 
+      </p> 
+           
+      <p>The following topics are covered below:</p>
+           
+      <ul>
+         <li>
+            <p class="initem"><a href="njx-devcode.htm#njx-devcode-import-studio">Importing the Adapter Using Natural Studio</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="njx-devcode.htm#njx-devcode-import-nfe">Importing the Adapter Using Natural for Eclipse</a></p>
+         </li>
+      </ul>
+      <div><a name="njx-devcode-import-studio"></a></div> 
+           
+      <h3>Importing the Adapter Using Natural Studio</h3> 
+            
+            
+      <p>It is assumed that your development library is located on a Natural
+                development server and that you have
+                mapped
+                this development server in Natural Studio.
+      </p> 
+            
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To import the adapter from a remote environment</strong></p>
+      <ul>
+         <li> 
+                     
+                     
+            <p class="instep">Use drag-and-drop.</p> 
+                     
+                     
+                     
+            <p class="instep">Or:<br>Remote UNIX environment only: Use the
+                         import function of <code>SYSMAIN</code>.
+            </p> 
+                     
+                   
+         </li>
+      </ul> 
+           
+      <div><a name="njx-devcode-import-nfe"></a></div> 
+           
+      <h3>Importing the Adapter Using Natural for Eclipse</h3> 
+            
+            
+      <p>It is assumed that you have</p> 
+            
+      <ul> 
+                
+         <li> 
+                    
+            <p class="initem">installed Natural for Eclipse,</p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">installed Application Designer's Eclipse plug-in,</p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">created a Natural project in Eclipse,</p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">established a target for the Natural project (a Natural development
+                        server). 
+            </p> 
+                   
+         </li> 
+               
+      </ul> 
+            
+      <p>The Navigator view will then look similar to the following:</p> 
+            
+      <p><img src="graphics/njx-eclipse-project.png" alt="Project" width="261" height="431"></p> 
+            
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To import the adapter from a remote environment</strong></p>
+      <ol class="steps">
+         <li> 
+                     
+                     
+            <p class="instep">Proceed as described below to create the <span class="guilistitem">Page
+                  Layouts</span> folder in your Natural project. This is the folder where
+                         you edit your page layouts with Application Designer.
+            </p> 
+                     
+            <ol> 
+                         
+               <li> 
+                             
+                  <p class="initem">Invoke the <span class="selectable_label">Properties</span> dialog for your
+                                 Natural project.
+                  </p> 
+                            
+               </li> 
+                         
+               <li> 
+                             
+                  <p class="initem">Set the Application Designer properties as follows:</p> 
+                              
+                              
+                  <table border="1" class="color" cellpadding="3" width="80%"> 
+                                  
+                     <thead align="left" valign="top"> 
+                                      
+                        <tr> 
+                                          
+                           <th>Option</th> 
+                                          
+                           <th>Description</th> 
+                                         
+                        </tr> 
+                                     
+                     </thead> 
+                                  
+                     <tbody align="left" valign="top"> 
+                                      
+                        <tr> 
+                                          
+                           <td><span class="selectable_label">Layout Folder</span></td>
+                                          
+                                          
+                           <td>Specify the application server directory
+                              in which the page layouts of your project are stored.
+                           </td> 
+                                         
+                        </tr> 
+                                      
+                        <tr> 
+                                          
+                           <td><span class="selectable_label">Web Server
+                                 Connection</span></td> 
+                                          
+                           <td>Specify host name and port number of your
+                              application server.
+                           </td> 
+                                         
+                        </tr> 
+                                      
+                        <tr> 
+                                          
+                           <td><span class="selectable_label">Web
+                                 Application</span></td> 
+                                          
+                           <td>Specify
+                              "cisnatural".
+                           </td> 
+                                         
+                        </tr> 
+                                     
+                     </tbody> 
+                                 
+                  </table> 
+                              
+                            
+               </li> 
+                        
+            </ol> 
+                     
+            <p><img src="graphics/njx-eclipse-citprops.png" alt="Properties" width="580" height="545"></p> 
+                     
+                   
+         </li>
+         <li> 
+                     
+                     
+            <p class="instep">Proceed as described below to create an additional folder in your
+                         Natural project. This is the folder in which the generated adapters are
+                         located.
+            </p> 
+                     
+            <ol> 
+                         
+               <li> 
+                             
+                  <p class="initem">Select your Natural project, invoke the context menu and choose
+                                 <span class="guimenuitem">New &gt; Natural Folder</span>.
+                  </p> 
+                            
+               </li> 
+                         
+               <li> 
+                             
+                  <p class="initem">Expand the resulting dialog by choosing the
+                                 <span class="guibutton">Advanced</span> button.
+                  </p> 
+                            
+               </li> 
+                         
+               <li> 
+                             
+                  <p class="initem">Specify a folder name of your choice (for example,
+                                 "Adapters").
+                  </p> 
+                            
+               </li> 
+                         
+               <li> 
+                             
+                  <p class="initem">Enable the <span class="selectable_label">Link to folder in the file system</span>
+                                 check box and specify the application server directory in which the generated
+                                 adapters of your project are stored.
+                  </p> 
+                            
+               </li> 
+                        
+            </ol> 
+                     
+                     
+            <p class="instep">Now you have access to your page layouts and adapters in your
+                         Natural project.
+            </p> 
+                   
+         </li>
+         <li> 
+                     
+                     
+            <p class="instep">Copy or move the generated adapter from the new folder you have
+                         just created into your Natural source folder.
+            </p> 
+                     
+                     
+            <p class="instep">The Navigator view should now look similar to the following (with
+                         the new folders for the page layouts and adapters, and with your adapter in the
+                         Natural source folder).
+            </p> 
+                     
+            <p><img src="graphics/njx-eclipse-adaptercopied.png" alt="Navigator" width="296" height="425"></p> 
+                   
+         </li>
+         <li> 
+                     
+                     
+            <p class="instep">Catalog or stow the adapter in the Natural source folder. To do so,
+                         you have to upload and compile the adapter with Natural for Eclipse.
+            </p> 
+                     
+                   
+         </li>
+      </ol> 
+           
+      <div class="noprint">
+         <p><a href="njx-devcode.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="njx-devcode-createmain"></a></div> 
+          
+      <h2> 
+              <a name="x38"></a>Creating the Main Program
+      </h2> 
+           
+           
+      <p>After you have imported the adapter, you create a program that calls
+               the adapter to display the page and handles the events that the user raises on
+               the page. This program can be a Natural program, subprogram, subroutine or
+               function. We use a Natural program as example. 
+      </p> 
+           
+      <p>The adapter already contains the data structure that is required to
+               fill the page. It contains also a skeleton with the necessary event handlers.
+               You can therefore create a program with event handlers from an adapter in a few
+               steps. 
+      </p> 
+           
+      <p>Open or list the adapter in the development tool of your choice
+               (Natural Studio or Natural for Eclipse). 
+      </p> 
+           <pre class="verbatim">* PAGE1: PROTOTYPE       --- CREATED BY Application Designer --- 
+* PROCESS PAGE USING 'XXXXXXXX' WITH
+* FIELD1 FIELD2
+DEFINE DATA PARAMETER
+1 FIELD1 (U) DYNAMIC
+1 FIELD2 (U) DYNAMIC
+END-DEFINE
+*
+PROCESS PAGE U'/MyProject/mypage' WITH
+PARAMETERS
+ NAME U'field1'
+  VALUE FIELD1
+ NAME U'field2'
+  VALUE FIELD2
+END-PARAMETERS
+*
+*  TODO: Copy to your calling program and implement.
+/*/*( DEFINE EVENT HANDLER
+* DECIDE ON FIRST *PAGE-EVENT
+*  VALUE U'nat:page.end'
+*   /* Page closed.
+*   IGNORE
+*  VALUE U'onExit'
+*   /* TODO: Implement event code.
+*   PROCESS PAGE UPDATE FULL
+*  NONE VALUE
+*   /* Unhandled events.
+*   PROCESS PAGE UPDATE
+* END-DECIDE
+/*/*) END-HANDLER
+*
+END</pre> 
+           <p>Create a new program, copy the adapter source into the program and then
+               proceed as follows:
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">Remove the comment lines in the header.</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Change <code>DEFINE DATA PARAMETER</code> into <code>DEFINE DATA
+                  LOCAL</code>.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Replace the <code>PROCESS PAGE</code> statement with a
+                       <a href="../sm/processpage.htm#syntax_descr_process_page_using"><code>PROCESS PAGE USING
+                     <var>operand4</var></code></a> statement, where
+                       <var>operand4</var> stands for the name of your adapter.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Remove the comment lines that surround the <code>DECIDE</code> block.
+                       
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Uncomment the <code>DECIDE</code> block. 
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>Your program should now look as follows:</p> 
+           <pre class="verbatim">DEFINE DATA LOCAL
+1 FIELD1 (U) DYNAMIC
+1 FIELD2 (U) DYNAMIC
+END-DEFINE
+*
+PROCESS PAGE USING 'MYPAGE'
+*
+DECIDE ON FIRST *PAGE-EVENT
+ VALUE U'nat:page.end'
+  /* Page closed.
+  IGNORE
+ VALUE U'onExit'
+  /* TODO: Implement event code.
+  PROCESS PAGE UPDATE FULL
+ NONE VALUE
+  /* Unhandled events.
+  PROCESS PAGE UPDATE
+END-DECIDE
+*
+END</pre> 
+           <p>Stow the program with a name of your choice. The resulting program can
+               be executed in a browser where it displays the page. However, it does not yet
+               do anything useful, because it handles the incoming events only in a default
+               way and contains no real application logic.
+      </p> 
+          
+      <div class="noprint">
+         <p><a href="njx-devcode.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="njx-devcode-structmain"></a></div> 
+          
+      <h2>Structure of the Main Program</h2> 
+           
+           
+      <p>The main program that displays the page and handles its events has the
+               following general structure: 
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">A <code>PROCESS PAGE USING</code> statement with the page adapter.
+                       The <code>PROCESS PAGE</code> statement displays the page in the user's web
+                       browser and fills it with data. Then, it waits for the user to modify the data
+                       and to raise an event.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">A <code>DECIDE</code> block with a <code>VALUE</code> clause for each
+                       event that shall be explictly handled. 
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">A default event handler for all events that shall not be explicitly
+                       handled. 
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>Each event handler does the following:</p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">It processes the data the has been returned from the page in the
+                       user's web browser. 
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">It performs a <code>PROCESS PAGE UPDATE FULL</code> statement to
+                       re-execute the previous <code>PROCESS PAGE USING</code> statement with the
+                       modified data and to wait for the next event. 
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>The default event handler does not modify the data. It does the
+               following:
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">It performs a <code>PROCESS PAGE UPDATE</code> statement to
+                       re-execute the previous <code>PROCESS PAGE USING</code> statement and to wait
+                       for the next event. 
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+          
+      <div class="noprint">
+         <p><a href="njx-devcode.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="njx-devcode-eventhandle"></a></div> 
+          
+      <h2> 
+              <a name="x39"></a>Handling Page Events
+      </h2> 
+           
+           
+      <p>When the <code>PROCESS PAGE</code> statement receives an event, the
+               data structure that was passed to the adapter is filled with the modified data
+               from the page and the system variable
+               <a href="../vari/appl.htm#PAGE-EVENT"><code>*PAGE-EVENT</code></a> is filled
+               with the name of the event. Now, the corresponding <code>VALUE</code> clause in
+               the <code>DECIDE</code> statement is met and the code in the clause is
+               executed. 
+      </p> 
+           
+      <p>The application handles the event by processing and modifying the data
+               and resending it to the page with a <code>PROCESS PAGE UPDATE FULL</code>
+               statement. Alternatively, it uses the <code>PROCESS PAGE UPDATE</code>
+               statement without the <code>FULL</code> clause in order to resend the original
+               (not modified) data. 
+      </p> 
+          
+      <div class="noprint">
+         <p><a href="njx-devcode.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="njx-devcode-eventtype"></a></div> 
+          
+      <h2>Built-in Events and User-defined Events</h2> 
+           
+           
+      <p>There are built-in events and user-defined events. </p> 
+           
+      <h4 class="floating-title">Built-in Events</h4> 
+           
+      <p>The following built-in events can be received from the page: </p> 
+           
+      <dl> 
+                
+                
+         <dt><a name="d0e8465"><strong>nat:page.end</strong></a></dt>
+         <dd> 
+                    
+            <p class="definition">This event is raised when the user closes the page with the Close
+                        button in the upper right corner of the page, opens another page or closes the
+                        web browser.
+            </p>
+         </dd> 
+                
+                
+                
+         <dt><a name="d0e8475"><strong>nat:page.default</strong></a></dt>
+         <dd> 
+                    
+            <p class="definition">This event is sent if the Natural for Ajax client needs to
+                        synchronize the data displayed on the page with the data held in the
+                        application. It is usually handled in the default event handler and just
+                        responded with a <code>PROCESS PAGE UPDATE</code>.
+            </p>
+         </dd> 
+                
+              
+      </dl> 
+           
+      <p>Other built-in events can be sent by specific controls. These events
+               are described in the control reference. 
+      </p> 
+           
+      <h4 class="floating-title">User-defined Events</h4> 
+           
+      <p>User-defined events are those events that the user has assigned to
+               controls while designing the page layout with the Layout Painter. The names of these
+               events are freely chosen by the user. The meaning of the events is described in
+               the control reference.
+      </p> 
+          
+      <div class="noprint">
+         <p><a href="njx-devcode.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="njx-devcode-eventsend"></a></div> 
+          
+      <h2>Sending Events to the User Interface</h2> 
+           
+           
+      <p>The <code>PROCESS PAGE UPDATE</code> statement can be accompanied by a
+               <code>SEND EVENT</code> clause. With the <code>SEND EVENT</code> clause, the
+               application can trigger certain events on the page when resending the modified
+               data. 
+      </p> 
+           
+      <p>The following events can be sent to the page:</p> 
+           
+      <dl> 
+                
+                
+         <dt><a name="d0e8522"><strong>nat:page.message</strong></a></dt>
+         <dd> 
+                    
+            <p class="definition">This event is sent to display a text in the status bar of the page.
+                        It has the following parameters:
+            </p> 
+                     
+                     
+            <table border="1" class="color" cellpadding="3" width="80%">
+               <colgroup>
+                  <col width="17%">
+                  <col width="7%">
+                  <col width="56%">
+               </colgroup> 
+                         
+               <thead align="left" valign="top"> 
+                             
+                  <tr> 
+                                 
+                     <th>Name</th> 
+                                 
+                     <th>Format</th> 
+                                 
+                     <th>Value</th> 
+                                
+                  </tr> 
+                            
+               </thead> 
+                         
+               <tbody align="left" valign="top"> 
+                             
+                  <tr> 
+                                 
+                     <td><code>type</code></td> 
+                                 
+                     <td>A or U</td> 
+                                 
+                     <td>Sets the icon in the status bar
+                        ("S"=success icon,
+                        "W"=warning icon,
+                        "E"=error icon).
+                     </td> 
+                                
+                  </tr> 
+                             
+                  <tr> 
+                                 
+                     <td><code>short</code></td> 
+                                 
+                     <td>A or U</td> 
+                                 
+                     <td>Short text.</td> 
+                                
+                  </tr> 
+                             
+                  <tr> 
+                                 
+                     <td><code>long</code></td> 
+                                 
+                     <td>A or U</td> 
+                                 
+                     <td>Long text.</td> 
+                                
+                  </tr> 
+                            
+               </tbody> 
+                        
+            </table> 
+                    
+         </dd> 
+                
+                
+                
+         <dt><a name="d0e8607"><strong>nat:page.valueList</strong></a></dt>
+         <dd> 
+                    
+            <p class="definition">This event is sent to pass values to a FIELD control with value help
+                        on request (see also the description of the <a href="field.htm#field">FIELD</a> control in the control reference). It has the
+                        following parameters:
+            </p> 
+                     
+                     
+            <table border="1" class="color" cellpadding="3" width="80%">
+               <colgroup>
+                  <col width="17%">
+                  <col width="7%">
+                  <col width="56%">
+               </colgroup> 
+                         
+               <thead align="left" valign="top"> 
+                             
+                  <tr> 
+                                 
+                     <th>Name</th> 
+                                 
+                     <th>Format</th> 
+                                 
+                     <th>Value</th> 
+                                
+                  </tr> 
+                            
+               </thead> 
+                         
+               <tbody align="left" valign="top"> 
+                             
+                  <tr> 
+                                 
+                     <td><code>id</code></td> 
+                                 
+                     <td>A or U</td> 
+                                 
+                     <td>A list of unique text identifiers displayed
+                        in the FIELD control with value help. The list must be separated by semicolon
+                        characters.
+                     </td> 
+                                
+                  </tr> 
+                             
+                  <tr> 
+                                 
+                     <td><code>text</code></td> 
+                                 
+                     <td>A or U</td> 
+                                 
+                     <td>A list of texts displayed in the FIELD
+                        control with value help. The list must be separated by semicolon
+                        characters.
+                     </td> 
+                                
+                  </tr> 
+                            
+               </tbody> 
+                        
+            </table> 
+                    
+         </dd> 
+                
+                
+                
+         <dt><a name="d0e8673"><strong>nat:page.xmlDataMode</strong></a></dt>
+         <dd> 
+                    
+            <p class="definition">This event is sent to switch several properties of controls on the
+                        page in one call to a predefined state. The state must be defined in an XML
+                        file that is expected at a specific place. See the information on XML property
+                        binding in the Application Designer documentation for further information.
+            </p> 
+                     
+                     
+            <table border="1" class="color" cellpadding="3" width="80%">
+               <colgroup>
+                  <col width="17%">
+                  <col width="7%">
+                  <col width="56%">
+               </colgroup> 
+                         
+               <thead align="left" valign="top"> 
+                             
+                  <tr> 
+                                 
+                     <th>Name</th> 
+                                 
+                     <th>Format</th> 
+                                 
+                     <th>Value</th> 
+                                
+                  </tr> 
+                            
+               </thead> 
+                         
+               <tbody align="left" valign="top"> 
+                             
+                  <tr> 
+                                 
+                     <td><code>data</code></td> 
+                                 
+                     <td>A or U</td> 
+                                 
+                     <td>Name of the property file to be used.</td>
+                                 
+                                
+                  </tr> 
+                            
+               </tbody> 
+                        
+            </table> 
+                    
+         </dd> 
+                
+              
+      </dl> 
+          
+      <div class="noprint">
+         <p><a href="njx-devcode.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="njx-devcode-popup"></a></div> 
+          
+      <h2> 
+              <a name="x40"></a>Using Pop-Up Windows
+      </h2> 
+           
+           
+      <p>A rich GUI page can be displayed as a modal pop-up in a separate
+               browser window. A modal pop-up window can open another modal pop-up window,
+               thus building a window hierarchy. If a <code>PROCESS PAGE</code> statement and
+               its corresponding event handlers are enclosed within a <code>PROCESS PAGE
+            MODAL</code> block, the corresponding page is opened as a modal pop-up
+               window.
+      </p> 
+           
+      <p>The application can check the current modal pop-up window level with
+               the system variable
+               <a href="../vari/appl.htm#PAGE_LEVEL"><code>*PAGE-LEVEL</code></a>.
+               <code>*PAGE-LEVEL = 0</code> indicates that the application code is currently
+               dealing with the main browser window. <code>*PAGE-LEVEL &gt; 0</code> indicates
+               that the application code is dealing with a modal pop-up window and indicates
+               the number of currently stacked pop-up windows.
+      </p> 
+           
+      <p>In order to modularize the application code, it makes sense to place
+               the code for the handling of a modal pop-up window and the enclosing
+               <code>PROCESS PAGE MODAL</code> block in a separate Natural module, for
+               instance, a subprogram. Then the pop-up window can be opened with a
+               <a href="../sm/callnat.htm"><code>CALLNAT</code></a> statement and can thus be
+               reused in several places in the application.
+      </p> 
+           
+      <p>Example program <code>MYPAGE-P</code>:
+      </p> 
+           <pre class="verbatim">DEFINE DATA LOCAL
+1 FIELD1 (U) DYNAMIC
+1 FIELD2 (U) DYNAMIC
+END-DEFINE
+*
+PROCESS PAGE USING 'MYPAGE-A'
+*
+DECIDE ON FIRST *PAGE-EVENT
+ VALUE U'nat:page.end'
+  /* Page closed.
+  IGNORE
+ VALUE U'onPopup'
+  /* Open a pop-up window with the same fields.
+  CALLNAT 'MYPOP-N' FIELD1 FIELD2
+  PROCESS PAGE UPDATE FULL
+ NONE VALUE
+  /* Unhandled events.
+  PROCESS PAGE UPDATE
+END-DECIDE
+*
+END</pre> 
+           <p>Example subprogram <code>MYPOP-N</code>:
+      </p> 
+           <pre class="verbatim">DEFINE DATA PARAMETER
+1 FIELD1 (U) DYNAMIC
+1 FIELD2 (U) DYNAMIC
+END-DEFINE
+*
+/* The following page will be opened as pop-up. 
+PROCESS PAGE MODAL
+*
+ PROCESS PAGE USING 'MYPOP-A'
+*
+ DECIDE ON FIRST *PAGE-EVENT
+  VALUE U'nat:page.end'
+   /* Page closed.
+   IGNORE
+  NONE VALUE
+   /* Unhandled events.
+   PROCESS PAGE UPDATE
+ END-DECIDE
+*
+END-PROCESS
+*
+END</pre> 
+          <div class="noprint">
+         <p><a href="njx-devcode.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="njx-devcode-map"></a></div> 
+          
+      <h2> 
+              <a name="x41"></a>Using Natural Maps
+      </h2> 
+           
+           
+      <p>Rich internet applications written with Natural for Ajax need not only
+               consist of rich GUI pages, but may also use classical maps. This is especially
+               useful when an application that was originally written with maps shall only be
+               partly changed to provide a rich GUI. In this case the application can run
+               under Natural for Ajax from the very beginning and can then be
+               "GUIfied" step by step. 
+      </p> 
+          
+      <div class="noprint">
+         <p><a href="njx-devcode.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="njx-devcode-navigate"></a></div> 
+          
+      <h2>Navigating between Pages and Maps</h2> 
+           
+           
+      <p>Due to the similar structure of programs that use maps and programs
+               that use adapters, it is easy for an application to leave a page and open a
+               map, and vice versa. For each rich GUI page, you write a program that displays
+               the page and handles its events. For each map, you write a program that
+               displays the map and handles its events. In an event handler of the page, you
+               call the program that handles the map. In an "event handler" of
+               the map, you call the program that handles the page. 
+      </p> 
+           
+      <p>Example for program <code>MYPAGE-P</code>:
+      </p> 
+           <pre class="verbatim">DEFINE DATA LOCAL
+1 FIELD1 (U20)
+1 FIELD2 (U20)
+END-DEFINE
+*
+PROCESS PAGE USING 'MYPAGE'
+*
+DECIDE ON FIRST *PAGE-EVENT
+ VALUE U'nat:page.end'
+  /* Page closed.
+  IGNORE
+ VALUE U'onDisplayMap'
+  /* Display a Map.
+  FETCH 'MYMAP-P'
+ NONE VALUE
+  /* Unhandled events.
+  PROCESS PAGE UPDATE
+END-DECIDE
+*
+END</pre> 
+           <p>Example for program <code>MYMAP-P</code>:
+      </p> 
+           <pre class="verbatim">DEFINE DATA LOCAL
+1 FIELD1 (U20)
+1 FIELD2 (U20)
+END-DEFINE
+*
+SET KEY ALL
+INPUT USING MAP 'MYMAP'
+*
+DECIDE ON FIRST *PF-KEY
+ VALUE 'PF1'
+  /* Display a rich GUI page.
+  FETCH 'MYPAGE-P'
+ NONE VALUE
+  REINPUT WITH TEXT 
+  'Press PF1 to display rich GUI page.'
+END-DECIDE
+*
+END</pre> 
+          <div class="noprint">
+         <p><a href="njx-devcode.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="njx-devcode-alternative"></a></div> 
+          
+      <h2>Using Pages and Maps Alternatively</h2> 
+           
+           
+      <p>An application can also decide at runtime whether to use maps or rich
+               GUI pages, depending on the capabilities of the user interface. The system
+               variable <a href="../vari/natenv.htm#BROWSER_IO"><code>*BROWSER-IO</code></a> lets the
+               application decide if it is running in a web browser at all. If this is the
+               case, the system variable tells whether the application has been started under
+               Natural for Ajax and may thus use both maps and pages, or whether it has been
+               started under the Natural Web I/O Interface and may thus use only maps.
+      </p> 
+           
+      <p>Example:</p> 
+           <pre class="verbatim">DEFINE DATA LOCAL
+1 FIELD1 (U20)
+1 FIELD2 (U20)
+END-DEFINE
+*
+IF *BROWSER-IO = 'RICHGUI'
+  /* If we are running under Natural for Ajax,
+  /* we display a rich GUI page.
+  PROCESS PAGE USING 'MYPAGE'
+  DECIDE ON FIRST *PAGE-EVENT
+    VALUE U'nat:page.end'
+      /* Page closed.
+      IGNORE
+    NONE VALUE
+      /* Unhandled events.
+      PROCESS PAGE UPDATE
+  END-DECIDE
+ELSE
+  /* Otherwise we display a map.
+  SET KEY ALL
+  INPUT USING MAP 'MYMAP'
+  DECIDE ON FIRST *PF-KEY
+    VALUE 'PF1'
+      /* Map closed.
+      IGNORE
+    NONE VALUE
+      REINPUT WITH TEXT
+      'Press PF1 to terminate.'
+END-DECIDE
+END-IF
+*
+END</pre> 
+          <div class="noprint">
+         <p><a href="njx-devcode.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="njx-devcode-logon"></a></div> 
+          
+      <h2> 
+              <a name="x42"></a>Starting a Natural Application from the Logon Page
+      </h2> 
+           
+           
+      <p>In order to start a Natural application from the logon page, you
+               proceed as described in
+               <a href="../webio/clientcfg-over.htm">Configuring the Client</a> which is
+               part of the <cite>Natural Web I/O Interface</cite> documentation.
+      </p> 
+          
+      <div class="noprint">
+         <p><a href="njx-devcode.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="njx-devcode-url"></a></div> 
+          
+      <h2> 
+              <a name="x43"></a> 
+              <a name="x44"></a>Starting a Natural Application with a URL
+      </h2> 
+           
+           
+      <p>See <a href="../webio/clientcfg-url.htm">Starting a Natural Application with a
+            URL</a> in the section <cite>Configuring the
+                  Client</cite> which is part of the <cite>Natural Web I/O
+                  Interface</cite> documentation.
+      </p> 
+          
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="njx-devcode.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../njx/njx-devcode.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/njx/njx-devcode.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="njx-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="njx-devui.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="njx-deploy.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

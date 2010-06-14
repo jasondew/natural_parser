@@ -1,0 +1,608 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Column Headers</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="pg_output_headers"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_output_headers.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_output_headers.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_output-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_output_titles.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_output_parms.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Programming Guide&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> Column Headers 
+               <a name="x248"></a></h1>
+      </div> 
+         
+         
+      <p>This document describes various ways of controlling the
+             display of column headers produced by a <a href="../sm/display.htm"><code>DISPLAY</code></a> statement.
+      </p> 
+         
+      <p>The following topics are covered:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_output_headers.htm#Default_Column_Headers">Default Column Headers</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_headers.htm#col_haeder_suppr">Suppress Default Column Headers - NOHDR Option</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_headers.htm#col_headers_define">Define Your Own Column Headers</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_headers.htm#notitle_nohdr_combine">Combining NOTITLE and NOHDR</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_headers.htm#col_header_cent">Centering of Column Headers - HC Parameter</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_headers.htm#col_header_width">Width of Column Headers - HW Parameter</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_headers.htm#header_fill_char">Filler Characters for Headers - Parameters FC and GC</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_headers.htm#title_header_underline">Underlining Character for Titles and Headers - UC Parameter</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_headers.htm#col_header_suppr">Suppressing Column Headers - Slash Notation</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_headers.htm#col_headers_exa">Further Examples of Column Headers</a></p>
+         </li>
+      </ul> 
+        
+      <hr> 
+        
+      <div><a name="Default_Column_Headers"></a></div> 
+         
+      <h2> Default Column Headers </h2> 
+          
+          
+      <p>By default, each database field output with a
+              <a href="../sm/display.htm"><code>DISPLAY</code></a> statement is
+              displayed with a default column header (which is defined for the field in the
+              DDM).
+      </p> 
+          <pre class="verbatim">
+** Example 'DISPLX01': DISPLAY
+************************************************************************
+DEFINE DATA LOCAL
+1 VIEWEMP VIEW OF EMPLOYEES
+  2 PERSONNEL-ID
+  2 NAME
+  2 BIRTH
+  2 JOB-TITLE
+END-DEFINE
+*
+READ (3) VIEWEMP BY BIRTH
+  <strong>DISPLAY PERSONNEL-ID NAME JOB-TITLE</strong>
+END-READ
+END
+</pre> 
+          <p>Output of Program DISPLX01:</p> 
+          
+      <p>The above example program uses default headers and produces the
+              following output.
+      </p> <pre class="system-output">
+Page      1                                                  04-11-11  14:15:54
+ 
+PERSONNEL         NAME                  CURRENT
+   ID                                  POSITION
+--------- -------------------- -------------------------
+ 
+30020013  GARRET               TYPIST
+30016112  TAILOR               WAREHOUSEMAN
+20017600  PIETSCH              SECRETARY
+</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_output_headers.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="col_haeder_suppr"></a></div> 
+         
+      <h2> 
+             <a name="x249"></a>Suppress Default Column Headers - NOHDR Option 
+      </h2> 
+          
+          
+      <p>If you wish your report to be output without column headers, add the
+              keyword <a href="../sm/display.htm#NOHDR_display"><code>NOHDR</code></a> to the
+              <a href="../sm/display.htm"><code>DISPLAY</code></a>
+              statement.
+      </p> 
+          <pre class="verbatim">DISPLAY NOHDR PERSONNEL-ID NAME JOB-TITLE</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_output_headers.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="col_headers_define"></a></div> 
+         
+      <h2> Define Your Own Column Headers </h2> 
+          
+          
+      <p>If you wish column headers of your own to be output instead of the
+              default headers, you specify <code>'<var>text</var>'</code> (in
+              apostrophes) immediately before a field, <var>text</var> being
+              the header to be used for the field.
+      </p> 
+          <pre class="verbatim">
+** Example 'DISPLX08': DISPLAY  (with column title in 'text')
+************************************************************************
+DEFINE DATA LOCAL
+1 VIEWEMP VIEW OF EMPLOYEES
+  2 PERSONNEL-ID
+  2 NAME
+  2 BIRTH
+  2 JOB-TITLE
+END-DEFINE
+*
+READ (3) VIEWEMP BY BIRTH
+  <strong>DISPLAY PERSONNEL-ID
+         'EMPLOYEE' NAME
+         'POSITION' JOB-TITLE</strong>
+END-READ
+END
+</pre> 
+          <p>Output of Program DISPLX08:</p> 
+          
+      <p>The above program contains the header <code>EMPLOYEE</code> for the
+              field <code>NAME</code>, and the header <code>POSITION</code> for the field
+              <code>JOB-TITLE</code>; for the field <code>PERSONNEL-ID</code>, the default
+              header is used. The program produces the following output:
+      </p> <pre class="system-output">
+Page      1                                                  04-11-11  14:15:54
+ 
+PERSONNEL       EMPLOYEE               POSITION
+   ID
+--------- -------------------- -------------------------
+ 
+30020013  GARRET               TYPIST
+30016112  TAILOR               WAREHOUSEMAN
+20017600  PIETSCH              SECRETARY
+</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_output_headers.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="notitle_nohdr_combine"></a></div> 
+         
+      <h2> 
+             <a name="x250"></a> 
+             <a name="x251"></a>Combining NOTITLE and NOHDR 
+      </h2> 
+          
+          
+      <p>To create a report that has neither page title nor column headers, you
+              specify the <a href="../sm/display.htm#NOTITLE_display"><code>NOTITLE</code></a> and
+              <a href="../sm/display.htm#NOHDR_display"><code>NOHDR</code></a>
+              options together in the following order:
+      </p> 
+          <pre class="verbatim">DISPLAY NOTITLE NOHDR PERSONNEL-ID NAME JOB-TITLE</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_output_headers.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="col_header_cent"></a></div> 
+         
+      <h2> 
+             <a name="x252"></a>Centering of Column Headers - HC Parameter
+      </h2> 
+          
+          
+      <p>By default, column headers are centered above the columns. With the
+              <a href="../parms/sp_hc.htm"><code>HC</code></a>
+              parameter, you can influence the placement of column headers.
+      </p> 
+          
+      <p>If you specify</p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="12%">
+            <col width="85%">
+         </colgroup> 
+                
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th> HC=L </th> 
+                       
+               <td>headers will be left-justified.</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> HC=R </th> 
+                       
+               <td>headers will be right-justified.</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> HC=C </th> 
+                       
+               <td>headers will be centered.</td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>The <code>HC</code> parameter can be used in a
+              <a href="../sm/format.htm"><code>FORMAT</code></a> statement to
+              apply to the whole report, or it can be used in a
+              <a href="../sm/display.htm"><code>DISPLAY</code></a> statement at
+              both statement level and element level.
+      </p> 
+          <pre class="verbatim">DISPLAY (HC=L) PERSONNEL-ID NAME JOB-TITLE</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_output_headers.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="col_header_width"></a></div> 
+         
+      <h2> 
+             <a name="x253"></a>Width of Column Headers - HW Parameter 
+      </h2> 
+          
+          
+      <p>With the <a href="../parms/sp_hw.htm"><code>HW</code></a> parameter, you
+              determine the width of a column output with a <a href="../sm/display.htm"><code>DISPLAY</code></a> statement.
+      </p> 
+          
+      <p>If you specify</p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="12%">
+            <col width="85%">
+         </colgroup> 
+                
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th> HW=ON </th> 
+                       
+               <td>the width of a <code>DISPLAY</code> column is determined by
+                  either the length of the header text or the length of the field, whichever is
+                  longer. This also applies by default.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> HW=OFF </th> 
+                       
+               <td>the width of a <code>DISPLAY</code> column is determined only by
+                  the length of the field. However, <code>HW=OFF</code> only applies to
+                           <code>DISPLAY</code> statements which do <em>not</em> create headers; that is,
+                           either a first <code>DISPLAY</code> statement with
+                           <a href="../sm/display.htm#NOHDR_display"><code>NOHDR</code></a>
+                           option or a subsequent <code>DISPLAY</code> statement.
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>The <code>HW</code> parameter can be used in a
+              <a href="../sm/format.htm"><code>FORMAT</code></a> statement to
+              apply to the entire report, or it can be used in a
+              <a href="../sm/display.htm"><code>DISPLAY</code></a> statement at
+              both statement level and element (field) level.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_output_headers.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="header_fill_char"></a></div> 
+         
+      <h2> 
+             <a name="x254"></a>Filler Characters for Headers - Parameters FC and GC 
+      </h2> 
+          
+          
+      <p>With the <a href="../parms/sp_fc.htm"><code>FC</code></a> parameter, you
+              specify the <em>filler character</em> which will appear on either side of a
+              <em>header</em> produced by a <a href="../sm/display.htm"><code>DISPLAY</code></a> statement across the
+              full column width if the column width is determined by the field length and not
+              by the header (see <a href="../parms/sp_hw.htm"><code>HW</code></a> parameter
+              <a href="pg_output_headers.htm#col_header_width">above</a>); otherwise
+              <code>FC</code> will be ignored.
+      </p> 
+          
+      <p>When a group of fields or a periodic group is output via a
+              <a href="../sm/display.htm"><code>DISPLAY</code></a> statement, a
+              <em>group header</em> is displayed across all field columns that belong to that
+              group above the headers for the individual fields within the group. With the
+              <a href="../parms/sp_gc.htm"><code>GC</code></a>
+              parameter, you can specify the <em>filler character</em> which will appear on
+              either side of such a group header.
+      </p> 
+          
+      <p>While the <a href="../parms/sp_fc.htm"><code>FC</code></a> parameter applies
+              to the headers of individual fields, the <a href="../parms/sp_gc.htm"><code>GC</code></a> parameter applies
+              to the headers for groups of fields.
+      </p> 
+          
+      <p>The parameters <code>FC</code> and <code>GC</code>
+              can be specified in a <a href="../sm/format.htm"><code>FORMAT</code></a> statement to apply to the
+              whole report, or they can be specified in a <a href="../sm/display.htm"><code>DISPLAY</code></a> statement at both
+              statement level and element (field) level.
+      </p> 
+          <pre class="verbatim">
+** Example 'FORMAX01': FORMAT (with parameters FC, GC)
+************************************************************************
+DEFINE DATA LOCAL
+1 VIEWEMP VIEW OF EMPLOYEES
+  2 NAME
+  2 INCOME (1:1)
+    3 CURR-CODE
+    3 SALARY
+    3 BONUS (1:1)
+END-DEFINE
+*
+FORMAT FC=* GC=$
+*
+READ (3) VIEWEMP BY NAME
+  DISPLAY NAME (FC==) INCOME (1)
+END-READ
+END
+</pre> 
+          <p>Output of Program FORMAX01:</p> <pre class="system-output">
+Page      1                                                  04-11-11  14:15:54
+                                                                               
+========NAME======== $$$$$$$$$$$$INCOME$$$$$$$$$$$$                            
+                                                                               
+                     CURRENCY **ANNUAL** **BONUS***                            
+                         CODE     SALARY                                       
+-------------------- -------- ---------- ----------                            
+                                                                               
+ABELLAN              PTA         1450000          0                            
+ACHIESON             UKL           10500          0                            
+ADAM                 FRA          159980      23000
+</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_output_headers.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="title_header_underline"></a></div> 
+         
+      <h2> 
+             <a name="x255"></a>Underlining Character for Titles and Headers - UC Parameter
+             
+      </h2> 
+          
+          
+      <p>By default, titles and headers are underlined with a hyphen (-).</p> 
+          
+      <p>With the <a href="../parms/sp_uc.htm"><code>UC</code></a> parameter, you
+              can specify another character to be used as underlining character.
+      </p> 
+          
+      <p>The <code>UC</code> parameter can be specified in a
+              <a href="../sm/format.htm"><code>FORMAT</code></a> statement to
+              apply to the whole report, or it can be specified in a
+              <a href="../sm/display.htm"><code>DISPLAY</code></a> statement at
+              both statement level and element (field) level.
+      </p> 
+          <pre class="verbatim">
+** Example 'FORMAX02': FORMAT (with parameter UC)
+************************************************************************
+DEFINE DATA LOCAL
+1 VIEWEMP VIEW OF EMPLOYEES
+  2 PERSONNEL-ID
+  2 NAME
+  2 BIRTH
+  2 JOB-TITLE
+END-DEFINE
+*
+<strong>FORMAT UC==</strong>
+*
+WRITE TITLE LEFT JUSTIFIED UNDERLINED 'EMPLOYEES REPORT' 
+SKIP 1 
+READ (3) VIEWEMP BY BIRTH
+  <strong>DISPLAY PERSONNEL-ID (UC=*) NAME JOB-TITLE</strong>
+END-READ
+END
+</pre> 
+          <p>In the above program, the <a href="../parms/sp_uc.htm"><code>UC</code></a> parameter is
+              specified at program level and at element (field) level: the underlining
+              character specified with the <a href="../sm/format.htm"><code>FORMAT</code></a> statement (=) applies for
+              the whole report - except for the field <code>PERSONNEL-ID</code>, for which a
+              different underlining character (*) is specified.
+      </p> 
+          
+      <p>Output of Program FORMAX02:</p> <pre class="system-output">
+EMPLOYEES REPORT 
+===============================================================================
+ 
+PERSONNEL         NAME                  CURRENT
+   ID                                  POSITION
+********* ==================== =========================
+
+30020013  GARRET               TYPIST
+30016112  TAILOR               WAREHOUSEMAN
+20017600  PIETSCH              SECRETARY
+</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_output_headers.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="col_header_suppr"></a></div> 
+         
+      <h2> 
+             <a name="x256"></a>Suppressing Column Headers - Slash Notation 
+      </h2> 
+          
+          
+      <p>With the notation apostrophe-slash-apostrophe ('/'), you can suppress
+              default column headers for individual fields displayed with a
+              <a href="../sm/display.htm"><code>DISPLAY</code></a> statement.
+              While the <a href="../sm/display.htm#NOHDR_display"><code>NOHDR</code></a> option
+              suppresses the headers of all columns, the notation <code>'/'</code> can be
+              used to suppress the header for an individual column.
+      </p> 
+          
+      <p>The apostrophe-slash-apostrophe ('/') notation is specified in the
+              <code>DISPLAY</code> statement immediately before the name of the field for
+              which the column header is to be suppressed.
+      </p> 
+          
+      <p>Compare the following two examples:</p> 
+          
+      <h4 class="floating-title"> Example 1: </h4> 
+          <pre class="verbatim">DISPLAY NAME PERSONNEL-ID JOB-TITLE</pre> 
+          <p>In this case, the default column headers of all three fields will be
+              displayed:
+      </p> <pre class="system-output">
+Page      1                                                  04-11-11  14:15:54
+                                                                               
+        NAME         PERSONNEL          CURRENT                                
+                          ID             POSITION                          
+-------------------- --------- -------------------------                 
+                                                                               
+ABELLAN              60008339  MAQUINISTA               
+ACHIESON             30000231  DATA BASE ADMINISTRATOR                   
+ADAM                 50005800  CHEF DE SERVICE                           
+ADKINSON             20008800  PROGRAMMER                                
+ADKINSON             20009800  DBA                                       
+ADKINSON             20011000  SALES PERSON          
+</pre> 
+          <h4 class="floating-title"> Example 2: </h4> 
+          <pre class="verbatim">DISPLAY '/' NAME PERSONNEL-ID JOB-TITLE</pre> 
+          <p>In this case, the notation <code>'/'</code> causes the column header for
+              the field <code>NAME</code> to be suppressed:
+      </p> <pre class="system-output">
+Page      1                                                  04-11-11  14:15:54
+                                                                               
+                     PERSONNEL          CURRENT                          
+                        ID             POSITION                          
+                     --------- -------------------------                 
+                                                                               
+ABELLAN              60008339  MAQUINISTA                                
+ACHIESON             30000231  DATA BASE ADMINISTRATOR                   
+ADAM                 50005800  CHEF DE SERVICE                           
+ADKINSON             20008800  PROGRAMMER                                
+ADKINSON             20009800  DBA                                       
+ADKINSON             20011000  SALES PERSON     
+</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_output_headers.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="col_headers_exa"></a></div> 
+         
+      <h2> Further Examples of Column Headers </h2> 
+          
+          
+      <p>See the following example programs:</p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="pg_exas.htm#DISPLX15">DISPLX15 - DISPLAY (with FC,
+                  UC)</a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="pg_exas.htm#DISPLX16">DISPLX16 - DISPLAY (with '/',
+                  '<var>text</var>',
+                         '<var>text</var>/<var>text</var>')</a></p>
+                  
+                 
+         </li> 
+             
+      </ul> 
+          
+        
+       
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="pg_output_headers.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_output_headers.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_output_headers.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_output-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_output_titles.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_output_parms.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

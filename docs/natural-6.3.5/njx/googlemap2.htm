@@ -1,0 +1,477 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>GOOGLEMAP2</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="googlemap2"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../njx/googlemap2.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/njx/googlemap2.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="workingwithcontrols.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="activex.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="netmeeting.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Natural for Ajax&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x90"></a>GOOGLEMAP2
+         </h1>
+      </div> 
+         
+         
+      <p>The GOOGLEMAP2 control is used to provide for Google Maps support within
+             Application Designer pages. The control internally makes use of the Google Maps API. In order
+             to use the control on your site, you need to sign up for a Google Maps API key
+             at
+             <a href="http://code.google.com/apis/maps/signup.html" target="_blank">http://code.google.com/apis/maps/signup.html</a>.
+             Make sure that you agree with the Google Maps API Terms of Use (<a href="http://code.google.com/apis/maps/terms.html" target="_blank">http://code.google.com/apis/maps/terms.html</a>).
+      </p>
+         
+         
+      <p>The following topics are covered
+             below:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="googlemap2.htm#googlemap2-before">Before You Start</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="googlemap2.htm#googlemap2-exa">Example</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="googlemap2.htm#googlemap2-problem">Typical Problems</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="googlemap2.htm#googlemap2-props">Properties</a></p>
+         </li>
+      </ul>
+      <hr> 
+        
+      <div><a name="googlemap2-before"></a></div> 
+         
+      <h2>Before You Start</h2> 
+          
+          
+      <p>In order to use the GOOGLEMAP2 control, you need to sign up for a Google
+              Maps API key. A key is valid for a single "directory" on your web
+              server only, i.e. you sign up for a URL like
+              <cite>http://www.mysite.com/mywebapp/myproject</cite>. With a standard
+              installation of Application Designer on localhost, you may sign up for the URL
+              <cite>http://localhost:8080/mywebapp/myproject</cite>. Typically, you develop
+              your Application Designer web application not on the site on which you run it later in
+              productive mode. Therefore, you may sign up for two different sites
+              (development and production site).
+      </p> 
+          
+      <h4 class="floating-title">Required Steps</h4> 
+          
+      <ol> 
+              
+         <li> 
+                  
+            <p class="initem">Choose the project directory that keeps the layouts using the
+                      GOOGLEMAP2 control.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Sign up for a Google Maps API key at
+                      <a href="http://code.google.com/apis/maps/signup.html" target="_blank">http://code.google.com/apis/maps/signup.html</a>
+                      for this project directory (e.g.
+                      <cite>http://localhost:8080/mywebapp/myproject</cite>).
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Create the API key page. Store the key page in the registered project
+                      directory. You are free in naming the file (the file extension must be
+                      "html"). The GOOGLEMAP2 control embeds your API key
+                      as a subpage. The subpage must have the following minimum structure:
+            </p> 
+                  <pre class="verbatim">&lt;html&gt;
+  &lt;head&gt;
+    &lt;script src=" http://maps.google.com/maps?file=api&amp;amp;v=2.x&amp;amp;key=YOUR_API_KEY"&gt;&lt;/script&gt;
+   	&lt;script src="../HTMLBasedGUI/general/googlemapsscript.js"&gt;&lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div id="map" style="position:absolute; top0; left:0;"&gt;&lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</pre> 
+                  <p class="initem">You see that the page includes two JavaScript libraries. The first
+                      line refers to the Google Maps API. Replace the placeholder
+                      "YOUR_API_KEY" with your Google Maps API key. With
+                      the second line, the page includes the control's scripting (calls from Application Designer to
+                      the Google Maps). The page body is quite simple: it contains a single
+                      <code>div</code> tag with the ID
+                      "map". This <code>div</code> is used
+                      as an anchor to insert Google Maps controls dynamically.
+            </p> 
+                 
+         </li> 
+             
+      </ol> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="googlemap2.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="googlemap2-exa"></a></div> 
+         
+      <h2>Example</h2> 
+          
+          
+      <p>The following topics are covered
+              below:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="googlemap2.htm#googlemap2-exa-usage">General Usage</a></p>
+         </li>
+      </ul> 
+          
+         
+      <div><a name="googlemap2-exa-usage"></a></div> 
+          
+      <h3>General Usage</h3> 
+           
+           
+      <p>The map options are taken from the property
+               <code>infoprop</code>. On this object, you may set the address
+               (or latitude and longitude), the zoom level and the map size as well as the map
+               type.
+      </p> 
+           
+      <p class="note"><strong>Note:</strong><br>The usage of address or longitude/latitude is mutually
+               exclusive.
+      </p> 
+           
+      <p><img src="graphics/googlemap1.png" alt="Google Map" width="407" height="371"></p> 
+          
+        
+      <div class="noprint">
+         <p><a href="googlemap2.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="googlemap2-problem"></a></div> 
+         
+      <h2>Typical Problems</h2> 
+          
+          
+      <p>The following topics are covered
+              below:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="googlemap2.htm#googlemap2-problem-apikey">Google Map API Key</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="googlemap2.htm#googlemap2-problem-gray">Map Remains Gray</a></p>
+         </li>
+      </ul> 
+         
+      <div><a name="googlemap2-problem-apikey"></a></div> 
+          
+      <h3>Google Map API Key</h3> 
+           
+           
+      <p>Your Google Maps API key is bound to a directory on a certain web
+               server (i.e. you sign up for the URL
+               <cite>http://mycomputer.mydomain.com:8080/mywebapp/myproject</cite>). If you use
+               your key for another URL, Google shows an error message:
+      </p> 
+           
+      <p><img src="graphics/googlemap2.png" alt="Error message" width="560" height="98"></p> 
+           
+      <p>Reasons that cause the error:</p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">You have registered your computer using the computer's name (e.g.
+                       <cite>http://mycomputer...</cite>). But the Application Designer development workplace is
+                       started using the URL <cite>http://localhost...</cite>.
+            </p> 
+                   
+            <p class="initem">Solution: start the Application Designer workplace with
+                       <cite>http://mycomputer...</cite>.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">The registered directory (e.g.
+                       <cite>.../mywebapp/myproject</cite>) does not match your installation
+                       (either a mistake in writing when signing up for the key or you have renamed
+                       the web application or project after registration).
+            </p> 
+                   
+            <p class="initem">Solution: rename your web application or project to match the
+                       registered names. Or sign up for a new key and insert the new key into the API
+                       key page. In the latter case, delete the content of the browser's cache.
+                       Otherwise, the browser will use the former API key page (and thus the old
+                       key).
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+          
+      <div><a name="googlemap2-problem-gray"></a></div> 
+          
+      <h3>Map Remains Gray</h3> 
+           
+           
+      <p>If you use longitude and latitude for placing the marker on the map,
+               their values may exceed the map top (or bottom) border. If you are able to find
+               the map by scrolling down (or up), then this is the case. Check the values for
+               longitude and latitude in this case.
+      </p> 
+          
+        
+      <div class="noprint">
+         <p><a href="googlemap2.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="googlemap2-props"></a></div> 
+         
+      <h2>Properties</h2> 
+               
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="14%">
+            <col width="55%">
+            <col width="14%">
+            <col width="14%">
+         </colgroup>      
+         <tbody align="left" valign="top">       
+            <tr>        
+               <td colspan="4">Basic</td>      
+            </tr>
+            <tr>        
+               <td align="left" valign="top">infoprop</td>        
+               <td align="left" valign="top">
+                  <p>Name of adapter parameter that represents the control in the adapter.</p>
+               </td>        
+               <td align="left" valign="top">Obligatory</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">apikeypagename</td>        
+               <td align="left" valign="top">
+                  <p>Name of the Maps API Key page. Example: mygooglemapsapikey.html. Keep this file within the project directory (directory within
+                     the CIS HTML pages are kept). The GOOGLEMAP-control expects this file within certain Javascript includes and content. Have
+                     look into chapter "Google Map - Before You Start" within the Developers Guide 
+                  </p>
+               </td>        
+               <td align="left" valign="top">Obligatory</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">width</td>        
+               <td align="left" valign="top">
+                  <p>Width of the control.</p>
+                  <p></p>
+                  <p>There are three possibilities to define the width:</p>
+                  <p></p>
+                  <p>(A) You do not define a width at all. In this case the width of the control will either be a default width or - in case of
+                     container controls - it will follow the width that is occupied by its content.
+                  </p>
+                  <p>(B) Pixel sizing: just input a number value (e.g. "100").</p>
+                  <p>(C) Percentage sizing: input a percantage value (e.g. "50%"). Pay attention: percentage sizing will only bring up correct
+                     results if the parent element of the control properly defines a width this control can reference. If you specify this control
+                     to have a width of 50% then the parent element (e.g. an ITR-row) may itself define a width of "100%". If the parent element
+                     does not specify a width then the rendering result may not represent what you expect.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>100</p>
+                  <p>120</p>
+                  <p>140</p>
+                  <p>160</p>
+                  <p>180</p>
+                  <p>200</p>
+                  <p>50%</p>
+                  <p>100%</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">height</td>        
+               <td align="left" valign="top">
+                  <p>Height of the control.</p>
+                  <p></p>
+                  <p>There are three possibilities to define the height:</p>
+                  <p></p>
+                  <p>(A) You do not define a height at all. As consequence the control will be rendered with its default height. If the control
+                     is a container control (containing) other controls then the height of the control will follow the height of its content.
+                  </p>
+                  <p>(B) Pixel sizing: just input a number value (e.g. "20").</p>
+                  <p>(C) Percentage sizing: input a percantage value (e.g. "50%"). Pay attention: percentage sizing will only bring up correct
+                     results if the parent element of the control properly defines a height this control can reference. If you specify this control
+                     to have a height of 50% then the parent element (e.g. an ITR-row) may itself define a height of "100%". If the parent element
+                     does not specify a width then the rendering result may not represent what you expect.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>100</p>
+                  <p>150</p>
+                  <p>200</p>
+                  <p>250</p>
+                  <p>300</p>
+                  <p>250</p>
+                  <p>400</p>
+                  <p>50%</p>
+                  <p>100%</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">comment</td>        
+               <td align="left" valign="top">
+                  <p>Comment without any effect on rendering and behaviour. The comment is shown in the layout editor's tree view.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td colspan="4">Appearance</td>      
+            </tr>
+            <tr>        
+               <td align="left" valign="top">pagestyle</td>        
+               <td align="left" valign="top">
+                  <p>CSS style definition that is directly passed into this control.</p>
+                  <p></p>
+                  <p>With the style you can individually influence the rendering of the control. You can specify any style sheet expressions. Examples
+                     are:
+                  </p>
+                  <p></p>
+                  <p>border: 1px solid #FF0000</p>
+                  <p>background-color: #808080</p>
+                  <p></p>
+                  <p>You can combine expressions by appending and separating them with a semicolon.</p>
+                  <p></p>
+                  <p>Sometimes it is useful to have a look into the generated HTML code in order to know where direct style definitions are applied.
+                     Press right mouse-button in your browser and select the "View source" or "View frame's source" function.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">rowspan</td>        
+               <td align="left" valign="top">
+                  <p>Row spanning of control.</p>
+                  <p></p>
+                  <p>If you use TR table rows then you may sometimes want to control the number of rows your control occupies. By default it is
+                     "1" - but you may want to define the control two span over more than one columns.
+                  </p>
+                  <p></p>
+                  <p>The property only makes sense in table rows that are snychronized within one container (i.e. TR, STR table rows). It does
+                     not make sense in ITR rows, because these rows are explicitly not synched.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>1</p>
+                  <p>2</p>
+                  <p>3</p>
+                  <p>4</p>
+                  <p>5</p>
+                  <p>50</p>
+                  <p>int-value</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">colspan</td>        
+               <td align="left" valign="top">
+                  <p>Column spanning of control.</p>
+                  <p></p>
+                  <p>If you use TR table rows then you may sometimes want to control the number of columns your control occupies. By default it
+                     is "1" - but you may want to define the control to span over more than one columns.
+                  </p>
+                  <p></p>
+                  <p>The property only makes sense in table rows that are snychronized within one container (i.e. TR, STR table rows). It does
+                     not make sense in ITR rows, because these rows are explicitly not synched.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>1</p>
+                  <p>2</p>
+                  <p>3</p>
+                  <p>4</p>
+                  <p>5</p>
+                  <p>50</p>
+                  <p>int-value</p>
+                  <p></p>
+               </td>       
+            </tr>      
+         </tbody>     
+      </table>     
+          
+        
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="googlemap2.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../njx/googlemap2.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/njx/googlemap2.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="workingwithcontrols.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="activex.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="netmeeting.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

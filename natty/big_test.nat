@@ -1,0 +1,500 @@
+0001 ************************************************************************ 
+0002 ** SUBPROGRAM: HIS350N1  PGMERS: Johnson 
+0003 ** DATE: June 10, 2004 
+0004 ** 
+0005 ** AES Enrollment Driver 
+0006 ** 
+0007 ************************************************************************ 
+0008 ** Latest Modifications - Scheduled For Production 
+0009 ** =============================================== 
+0010 ** MM/DD/YY    NAME      SCAN FOR    PURPOSE 
+0011 ** --------  --------  ------------  ----------------------------------- 
+0012 ** 05/26/08  SAMS      mws20080526   corrected end date bug track 1062 
+0013 ** 05/16/08  SAMS      20080516      corrected ols age calc for spouse 
+0014 ** 03/20/08  sams      mws20080320   bug tracker 797 
+0015 ** 03/05/08  nolff     ron20080305 
+0016 ** 02/28/08  sams      MWS20080228   bug tracker  721 
+0017 ** 02/27/08  sams      MWS20080227   ALLOW PREV DEPENDENT OF ACTIVE EMP 
+0018 **                     TO BE ADDED AS A SUBSCRIBER 
+0019 ** 02/26/08  sams      MWS20080226   ALLOW NEW ENROLL OF PT TO FT AND 
+0020 **                                   FT TO PT TO WORK TO ALLOW ENTRY 
+0021 **                                   OF COVERAGES FOR DEPENDENTS. 
+0022 ** 02/26/08  sams      MWS20080226A  EIP bug tracker 723 
+0023 ** 02/25/08  SAMS      MWS20080225   Commented out lines 712 thru 
+0024 **                     736 to prevent requirements for student certs 
+0025 **                     for all break in coverage situations. 
+0026 ** 02/13/08  SAMS      mws20080213   bug tracker 705 
+0027 ** 02/12/08  SAMS      mws20080212   bug tracker 704 
+0028 ** 01/29/08  SAMS      mws20080129   bug tracker 671 
+0029 ** 11/06/07  Dinsmore  gsd20071106c  Bug Tracker 656 
+0030 ** 11/06/07  Dinsmore  gsd20071106b  Bug Tracker 655 
+0031 ** 11/06/07  Dinsmore  gsd20071106a  Bug Tracker 654 
+0032 ** 09/25/07  Dinsmore  gsd20070925b  Bug Tracker 617 
+0033 ** 09/25/07  Dinsmore  gsd20070925a  Require SSN if over 1 year, not 2 
+0034 ** 09/24/07  Dinsmore  gsd20070924a  Bug Tracker 601 
+0035 ** 09/21/07  Dinsmore  gsd20070915   Bug Tracker 578 
+0036 ***** MIGRATED TO PRODUCTION SEPTEMBER 17, 2007 ***** 
+0037 ** 09/15/07  Dinsmore  gsd20070915   Improve performance 
+0038 ** 09/13/07  Dinsmore  60020070913a  Bug tracker 511 
+0039 ** 09/12/07  Dinsmore  gsd20070912a  Bug tracker 465 
+0040 ** 09/11/07  Dinsmore  gsd20070911b  Bug tracker 506 
+0041 ** 09/11/07  Dinsmore  gsd20070911a  Req Student Cert when changing from 
+0042 **                                   Under 19 to Full-time Student 
+0043 ** 09/10/07  Dinsmore  gsd20070910a  Bug Tracker 170 
+0044 ** 09/07/07  Dinsmore  gsd20070907a  Req Creditable Coverage supp doc 
+0045 ** 09/05/07  Dinsmore  gsd20070905a  If module(5) = 'SUBSCR', change 
+0046 **                                   suspense-code to 'S' 
+0047 ** 08/31/07  Dinsmore  gsd20070831b  Bug Tracker 170 
+0048 ** 08/31/07  Dinsmore  gsd20070831a  Fix covered deps notification 
+0049 ** 08/30/07  Dinsmore  gsd20070830b  Change Plan-Cat to Plan 
+0050 ** 08/30/07  Dinsmore  gsd20070830a  Stop state emp dep from hlth & dntl 
+0051 ** 08/20/07  Dinsmore  gsd20070820a  Increase OL from 30 to 50 
+0052 ** 08/16/07  Dinsmore  gsd20070816a  Require supp doc for former spouses 
+0053 ** 08/14/07  Dinsmore  gsd20070814a  No pre-ex for adopted children 
+0054 ** 08/06/07  Dinsmore  gsd20070806   Remove periods from suffix 
+0055 ** 07/31/07  Dinsmore  gsd20070731   Allow GET by BIN 
+0056 ** 05/16/07  Dinsmore  gsd20070516a  EIP Bug Tracker Issue 20 
+0057 **                                   1 mo break requires Student Cert 
+0058 ** 03/21/07  Dinsmore  gsd20070321a  Allow for BEN-SEQ-NUM(*) 
+0059 ** 02/13/07  Dinsmore  gsd20070213b  EIP Bug Tracker Issue 19 
+0060 **         **commented out**         SLTD Waiver should not cancel 
+0061 ** 02/09/07  Dinsmore  gsd20070209a  EIP Bug Tracker Issue 32 
+0062 **                                   Add Stdnt Cert Supp Doc CE-HH/US 
+0063 ** 02/02/07  Dinsmore  gsd20070202b  EIP Bug Tracker Issue 50 
+0064 **                                   Remove Custody form 
+0065 ** 02/02/07  Dinsmore  gsd20070202a  EIP Bug Tracker Issue 34 
+0066 **                                   Remove Diff Last Name form 
+0067 ** 12/01/06  Dinsmore  gsd20061201a  On Bene Chg, only do enrollee and 
+0068 **                                   bene edits 
+0069 ************************************************************************ 
+0070 DEFINE DATA 
+0071 PARAMETER USING his650A1  
+0072 LOCAL USING HIS001L3 /* GENERAL-WORK-FIELDS 
+0073 lOCAL USING HTB100L0 /* TABLE-MAST VIEW OF HIS-TABLE 
+0074 LOCAL USING HIS100L0 /* SUBSCR-MAST VIEW OF HIS-SUBSCR-MASTER 
+0075 LOCAL USING HIS120L0 /* DEPEND-MAST VIEW OF HIS-DEPEND-MASTER 
+0076 LOCAL USING mws355a1 /* subscriber module  
+0077 LOCAL USING HIS356A1 /* coverage module 
+0078 LOCAL USING HIS357A1 /* dependent module 
+0079 LOCAL USING HIS358A1 /* beneficiary module 
+0080 LOCAL USING mws369A1 /* suspense object pda  
+0081 LOCAL USING HTB808A1 /* RETREIVE PLAN BEG AND END DATES 
+0082 LOCAL USING HIS369A2 /* suspense object pda-r 
+0083 LOCAL USING HIS390a1 /* subscr-master hold 
+0084 LOCAL USING mws350A2 /* enrollment date conversion  
+0085 LOCAL USING HIS808A1 /* CALCULATE PRE-EX-DATE for Subscriber 
+0086 LOCAL USING HIS808A2 /* NOE ENTRY DEPENDENT END DATE 
+0087 LOCAL USING CDAOBJ2 
+0088 LOCAL USING CDPDA-M 
+0089 LOCAL 
+0090 1 ACT-DEPEND-MAST VIEW OF HIS-DEPEND-MASTER 
+0091   2 DEP-SEQ-NUM 
+0092   2 DEP-SUBSCRIBER-SSN 
+0093   2 DEP-HLTH-STATUS 
+0094   2 DEP-HLTH-EFF-DATE 
+0095   2 DEP-HLTH-END-DATE 
+0096   2 DEP-DNTL-STATUS 
+0097   2 DEP-DNTL-EFF-DATE 
+0098   2 DEP-DNTL-END-DATE 
+0099   2 DEP-DL-STATUS 
+0100   2 DEP-DL-EFF-DATE 
+0101   2 DEP-DL-END-DATE 
+0102   2 DEP-OLS-STATUS 
+0103   2 DEP-OLS-EFF-DATE 
+0104   2 DEP-OLS-END-DATE 
+0105 1 SUBSCR VIEW OF HIS-SUBSCR-MASTER 
+0106   2 hlth-status                                 /* gsd20070907a 
+0107   2 ol-status                                   /* gsd20070927a 
+0108 1 SUBSCR-PLAN-CAT VIEW OF HIS-SUBSCR-MASTER 
+0109   2 HLTH-PLAN-CATEGORY 
+0110 1 ACT-SUBSCR-MAST  VIEW OF HIS-SUBSCR-MASTER 
+0111   2 SUBSCRIBER-TYPE 
+0112   2 EMPLOYER-GROUP-ID 
+0113   2 HLTH-STATUS 
+0114   2 DNTL-STATUS 
+0115   2 DL-STATUS 
+0116   2 SL-STATUS 
+0117   2 LTD-STATUS 
+0118   2 OL-STATUS 
+0119   2 OL-END-DATE 
+0120   2 OLS-STATUS 
+0121   2 SLTD-STATUS 
+0122 1 DEP VIEW OF HIS-DEPEND-MASTER 
+0123   2 DEP-SUBSCRIBER-SSN 
+0124   2 DEP-SSN 
+0125   2 DEP-LAST-NAME 
+0126   2 DEP-FIRST-NAME 
+0127   2 DEP-DATE-OF-BIRTH 
+0128   2 DEP-ELIGIBILITY 
+0129   2 dep-hlth-status 
+0130   2 dep-dntl-status 
+0131   2 dep-dl-status 
+0132   2 dep-ols-status 
+0133   2 dep-hlth-eff-date 
+0134   2 dep-dntl-eff-date 
+0135   2 dep-dl-eff-date 
+0136   2 dep-ols-eff-date 
+0137 1 DEPEND VIEW OF HIS-DEPEND-MASTER 
+0138   2 DEP-SUBSCRIBER-SSN 
+0139   2 DEP-RELATION 
+0140   2 DEP-DL-STATUS 
+0141 1 dep-supp-doc VIEW OF HIS-DEPEND-MASTER 
+0142   2 dep-subscriber-ssn 
+0143   2 dep-relation 
+0144 1 EBS-INTERNET-SECURITY VIEW OF EBS-INTERNET-SECURITY 
+0145   2 ACC-GROUPS     (99) 
+0146   2 ALL-SSN-ACCESS 
+0147 1 HIS-SUSPENSE-TRANS VIEW OF HIS-SUSPENSE-TRANS-TEMP 
+0148   2 SSN 
+0149   2 TRANSACTION-CODE 
+0150   2 SUSPENSE-CODE 
+0151   2 trxn-type 
+0152   2 employer-group-id 
+0153 1 RET-ACC-VIEW  VIEW OF HIS-RET-ACC-MSTR 
+0154   2 BEG-BALANCE           (N6.2/12) 
+0155   2 PAYMENTS-RECVD        (N6.2/12) 
+0156   2 DISBURSEMENTS         (N6.2/12) 
+0157   2 ACCTING-ADJUST        (N6.2/12) 
+0158   2 TOTAL-PREMIUMS-BILLED (N6.2/12) 
+0159 1 SUBSCR-ADDR VIEW OF HIS-SUBSCR-MASTER /* for Address Changes 
+0160   2 LAST-NAME 
+0161   2 FIRST-NAME 
+0162   2 MIDDLE-INITIAL 
+0163   2 SUFFIX 
+0164   2 STREET-1 
+0165   2 STREET-2 
+0166   2 CITY 
+0167   2 STATE 
+0168   2 ZIP 
+0169   2 ZIP-PLUS-4 
+0170   2 COUNTY-CODE 
+0171   2 COUNTRY-NAME 
+0172   2 TELEPHONE-NUMBER 
+0173 1 SUBSCR-SP VIEW OF HIS-SUBSCR-MASTER /* for LTC Spouse 
+0174   2 HLTH-STATUS 
+0175   2 DNTL-STATUS 
+0176   2 DL-STATUS 
+0177   2 OL-STATUS 
+0178   2 OLS-STATUS 
+0179 1 subscr-bin view of his-subscr-master 
+0180   2 ssn 
+0181 * 
+0182 1 #ON-FILE-INDICATORS 
+0183   2 #NOT-ACTIVELY-EMPLOYED (L) 
+0184   2 #ACT-ON-SUBSCR-HLTH    (L) 
+0185   2 #ACT-ON-SUBSCR-DNTL    (L) 
+0186   2 #ACT-ON-SUBSCR-DL      (L) 
+0187   2 #ACT-ON-SUBSCR-OLS     (L) 
+0188   2 #ACT-ON-SUBSCR-LTC     (L) 
+0189   2 #DEP-ON-LTD            (L) 
+0190   2 #ON-OL-WAIVER          (L) 
+0191 1 #16TH-YR                 (A4) 
+0192 1 REDEFINE #16TH-YR 
+0193   2 #16TH-YRN              (N4) 
+0194 1 #16TH-BD                 (A8) 
+0195 1 #NUM1                    (N2) 
+0196 1 #NUM2                    (N2) 
+0197 1 #NUM3                    (N2) 
+0198 1 #TABLE-KEY               (A11) 
+0199 1 #J                       (I4) 
+0200 1 #x                       (I4) 
+0201 1 #w                       (I2) 
+0202 1 #GRP-FOUND               (L) 
+0203 1 #NOT-ON-FILE             (L)   INIT <FALSE> 
+0204 1 #ON-SLTD-WAIVER          (L) 
+0205 1 #ON-LTC-WAIVER           (L) 
+0206 1 #ON-LTC-SP-WAIVER        (L) 
+0207 1 #RET-BILL-DTE            (D) 
+0208 1 #BILL-YEAR               (A4) 
+0209 1 REDEFINE #BILL-YEAR 
+0210   2 #BILL-YEAR-N           (N4) 
+0211 1 #BILL-DATE               (D) 
+0212 1 #1231-DATE               (A8) /* Dec 31 of Bill Year 
+0213 1 #1231-LAST-YEAR          (A8) /* Dec 31 of Year Previous to Eff Date 
+0214 1 REDEFINE #1231-LAST-YEAR 
+0215   2 #1231-LAST-YEAR-N      (N8) 
+0216   2 REDEFINE #1231-LAST-YEAR-N 
+0217     3 #1231-LAST-YEAR-YYYY (N4) 
+0218     3 #1231-LAST-YEAR-MMDD (N4) 
+0219 1 #BILL-MO                 (A2) 
+0220 1 #MO                      (N2) 
+0221 1 #MO-NAME                 (A9) 
+0222 1 #FISCAL-YEAR             (A9) 
+0223 1 #RET-KEY                 (A13) 
+0224 1 #ACC-AMT                 (N7.2) 
+0225 1 #PLAN-CAT                (A3) 
+0226 1 REDEFINE #PLAN-CAT 
+0227   2 #PLAN                  (A2) 
+0228   2 REDEFINE #PLAN 
+0229     3 #PLAN-1              (A1) 
+0230     3 #PLAN-2              (A1) 
+0231   2 #CAT                   (A1) 
+0232 1 #DNTL-CAT                (A1) 
+0233 1 #DATE-CHECK              (N8) 
+0234 1 REDEFINE #DATE-CHECK 
+0235   2 #YYYY                  (N4) 
+0236   2 #MM                    (N2) 
+0237   2 #DD                    (N2) 
+0238 1 REDEFINE #DATE-CHECK                          /* gsd20070806a 
+0239   2 #DATE-CHECK-A          (A8) 
+0240 1 #date-check-d            (d)                  /* gsd20070806a 
+0241 1 #DEPEND-STATUS 
+0242   2 #SP-AGE                (P8) 
+0243   2 #SAME-SEX              (L)   INIT<FALSE> 
+0244   2 #SPOUSE-EXISTS         (L)   INIT<FALSE> 
+0245   2 #FOUND-SPOUSE-H        (L)   INIT<FALSE> 
+0246   2 #FOUND-SPOUSE-D        (L)   INIT<FALSE> 
+0247   2 #FOUND-SPOUSE-OLS      (L)   INIT<FALSE> 
+0248   2 #FOUND-SPOUSE-LTC      (L)   INIT<FALSE> 
+0249   2 #FOUND-DEP-H           (L)   INIT<FALSE> 
+0250   2 #FOUND-DEP-D           (L)   INIT<FALSE> 
+0251   2 #FOUND-DEP-DL          (L)   INIT<FALSE> 
+0252   2 #SPOUSE-MEDICARE       (A11) 
+0253 1 #COMP-AGE                (N8) 
+0254 1 #OL-AGE-GRP              (A2) 
+0255 1 #MAX-OL-COVER            (N6) 
+0256 1 #MAX-OLS-COVER           (N6) 
+0257 1 #SPOUSE-DOB-N            (N8) 
+0258 1 #DEP-SUBSCR-TYPE         (A7) 
+0259 1 #DEP-REC-FOUND           (A1) 
+0260 1 #DEP-FOUND-ARRAY (L/15) 
+0261 1 #DEP-HLTH-EFF-DATE-N     (N8) 
+0262 1 REDEFINE #DEP-HLTH-EFF-DATE-N 
+0263   2 #DEP-HLTH-EFF-DATE     (A8) 
+0264 1 #DEP-HLTH-END-DATE-N     (N8) 
+0265 1 REDEFINE #DEP-HLTH-END-DATE-N 
+0266   2 #DEP-HLTH-END-DATE     (A8) 
+0267 1 #DEP-DNTL-EFF-DATE-N     (N8) 
+0268 1 REDEFINE #DEP-DNTL-EFF-DATE-N 
+0269   2 #DEP-DNTL-EFF-DATE     (A8) 
+0270 1 #DEP-DNTL-END-DATE-N     (N8) 
+0271 1 REDEFINE #DEP-DNTL-END-DATE-N 
+0272   2 #DEP-DNTL-END-DATE     (A8) 
+0273 1 #DEP-DL-EFF-DATE-N       (N8) 
+0274 1 REDEFINE #DEP-DL-EFF-DATE-N 
+0275   2 #DEP-DL-EFF-DATE       (A8) 
+0276 1 #DEP-DL-END-DATE-N       (N8) 
+0277 1 REDEFINE #DEP-DL-END-DATE-N 
+0278   2 #DEP-DL-END-DATE       (A8) 
+0279 1 #DEP-OLS-EFF-DATE-N      (N8) 
+0280 1 REDEFINE #DEP-OLS-EFF-DATE-N 
+0281   2 #DEP-OLS-EFF-DATE      (A8) 
+0282 1 #DEP-OLS-END-DATE-N      (N8) 
+0283 1 REDEFINE #DEP-OLS-END-DATE-N 
+0284   2 #DEP-OLS-END-DATE      (A8) 
+0285 1 #BEN-IDX                 (N2) INIT <1> 
+0286 1 #WORKING-FIELDS 
+0287   2 #BEN-BL-PRIM-COUNT     (N4) 
+0288   2 #BEN-BL-PRIM-PERCENT   (N4) 
+0289   2 #BEN-OL-PRIM-COUNT     (N4) 
+0290   2 #BEN-OL-PRIM-PERCENT   (N4) 
+0291   2 #COMPUTE-BL-PRIM       (L)  INIT<FALSE> 
+0292   2 #COMPUTE-OL-PRIM       (L) 
+0293   2 #COMPUTE-LTC-PRIM      (L) 
+0294   2 #COMP-BL-PRIM-COUNT    (N4) 
+0295   2 #COMP-BL-PRIM-PERCENT  (N3) 
+0296   2 #COMP-OL-PRIM-COUNT    (N4) 
+0297   2 #COMP-OL-PRIM-PERCENT  (N3) 
+0298   2 #COMP-LTC-PRIM-COUNT   (N4) 
+0299   2 #COMP-LTC-PRIM-PERCENT (N3) 
+0300   2 #BEN-BL-CON-COUNT      (N4) 
+0301   2 #BEN-BL-CON-PERCENT    (N4) 
+0302   2 #BEN-OL-CON-COUNT      (N4) 
+0303   2 #BEN-OL-CON-PERCENT    (N4) 
+0304   2 #COMPUTE-BL-CON        (L) 
+0305   2 #COMPUTE-OL-CON        (L) 
+0306   2 #COMPUTE-LTC-CON       (L) 
+0307   2 #COMP-BL-CON-COUNT     (N4) 
+0308   2 #COMP-BL-CON-PERCENT   (N3) 
+0309   2 #COMP-OL-CON-COUNT     (N4) 
+0310   2 #COMP-OL-CON-PERCENT   (N3) 
+0311   2 #COMP-LTC-CON-COUNT    (N4) 
+0312   2 #COMP-LTC-CON-PERCENT  (N3) 
+0313   2 #BEN-BL-PRIM-ENTERED   (L) 
+0314   2 #BEN-BL-CON-ENTERED    (L) 
+0315   2 #BEN-OL-PRIM-ENTERED   (L) 
+0316   2 #BEN-OL-CON-ENTERED    (L) 
+0317 1 #DATE-TRANSFER-A         (A8) 
+0318 1 REDEFINE #DATE-TRANSFER-A 
+0319   2 #DATE-TRANSFER-N       (N8) 
+0320 1 #LAST-SEQ-NUM            (N2) 
+0321 * 
+0322 /* enrollment suspense fields 
+0323 1 #NEW-SUSP-CODE           (A1) 
+0324 1 #NEW-TRXN-CODE           (A2) 
+0325 * 
+0326 1 ERROR-HANDLING-FIELDS 
+0327   2 #E-MSG                 (A100)  
+0328   2 #E-FLD                 (A50) 
+0329   2 #E-NDX                 (I4) 
+0330 1 #W-MSG                   (A250) 
+0331 * 
+0332 /* New fields 
+0333 1 #DT (D) 
+0334 1 #6-MO-BRK        (L)  INIT <FALSE> /* 6 month for subscriber 
+0335 1 #6-MO-BRK-DEP    (L)  INIT <FALSE> /* 6 month break 0or dependent 
+0336 1 #ACADEMIC        (L)  INIT <FALSE> /* 
+0337 1 #ALL-TERM        (L)  INIT <FALSE> 
+0338 1 #ALPHA-CHECK     (A1) /* check first character of transaction-code 
+0339 1 #BEG-D           (D)  /* prior-service-beg-date D format 
+0340 1 #BREAK-IN-COV    (L)  INIT <FALSE> /* 
+0341 1 #BREAK-IN-LTC    (L)  INIT <FALSE> /* 
+0342 1 #CALC-DATE-N     (N8) /* 
+0343 1 #CODE            (A10) 
+0344 1 #COMP-D          (D)  /* compare-date for age checking 
+0345 1 #COMP-DATE       (N8) 
+0346 1 REDEFINE #COMP-DATE 
+0347   2 #COMP-YYYY     (N4) 
+0348   2 #COMP-MM       (N2) 
+0349   2 #COMP-DD       (N2) 
+0350 1 #COMP-LTC-SP-TOTAL-UNITS (N4) /* compare total ltc spouse units 
+0351 1 #ORIG-LTC-SP-TOTAL-UNITS (N4) /* original total ltc spouse units 
+0352 1 #COMP-LTC-TOTAL-UNITS    (N4) /* compare total ltc units 
+0353 1 #ORIG-LTC-TOTAL-UNITS    (N4) /* original total ltc units 
+0354 1 #DATES-MATCH     (L)  INIT <FALSE> /* 
+0355 1 #DENY-DEP-DL     (L)  INIT<FALSE> 
+0356 1 #DENY-DEP-LTC    (L)  INIT<FALSE> 
+0357 1 #DENY-DEP-OLS    (L)  INIT<FALSE> 
+0358 1 #DEP-AGE         (N3) /* age of dependent 
+0359 1 #DEP-DOB-D       (D)  /* dependent date of birth 
+0360 1 #DEP-DATE-OF-BIRTH-N (N8) 
+0361 1 #DEP-ELIGIBILITY     (A2) 
+0362 1 #DEP-NEW-ADD-PENDING (L) 
+0363 1 #DEP-RELATION        (A4) 
+0364 1 #orig-DEP-ELIGIBILITY     (A2)                /* gsd20070913a 
+0365 1 #student-cert-req      (l)                    /* gsd20070913a 
+0366 1 #DISPLAY-DATE1   (A10) 
+0367 1 #DISPLAY-DATE2   (A10) 
+0368 1 #DPH-DOB-A       (A8) 
+0369 1 #DPH-DOB-D       (D) 
+0370 1 #DPH-DOB-MMDD-A  (A4) 
+0371 1 REDEFINE #DPH-DOB-MMDD-A 
+0372   2 #DPH-DOB-MMDD-N(N4) 
+0373 1 #SUB-DOB-A       (A8) 
+0374 1 #SUB-DOB-D       (D) 
+0375 1 #SUB-DOB-MMDD-A  (A4) 
+0376 1 REDEFINE #SUB-DOB-MMDD-A 
+0377   2 #SUB-DOB-MMDD-N(N4) 
+0378 1 #DOC             (N2) 
+0379 1 #DOC-COUNT       (N2) 
+0380 1 #DOC-TYPE        (A2) 
+0381 1 #EFF-A           (A8) /* effective date 
+0382 1 REDEFINE #EFF-A 
+0383   2 #EFF-YYYY-A    (A4) 
+0384   2 REDEFINE #EFF-YYYY-A 
+0385     3 #EFF-YYYY-N  (N4) 
+0386   2 #EFF-MMDD-A    (A4) 
+0387   2 REDEFINE #EFF-MMDD-A 
+0388     3 #EFF-MM-N    (N2) 
+0389     3 #EFF-DD-A    (A2) 
+0390 1 REDEFINE #EFF-A 
+0391   2 #EFF-N         (N8) /* effective date 
+0392 1 #EFF-D           (D)  /* effective date 
+0393 1 #EFF-DATES-MATCH (L)  INIT <FALSE> /* effective dates match 
+0394 1 #END-D           (D)  /* prior-service-end-date D format 
+0395 1 #ESCAPE          (L)  INIT <FALSE> 
+0396 1 #G               (N2) /* index for date format changes 
+0397 1 #GENDER          (A6) /* gender 
+0398 1 #HIRE-DATE       (N8) 
+0399 1 REDEFINE #HIRE-DATE 
+0400   2 #HIRE-YYYY     (N4) 
+0401   2 #HIRE-MM       (N2) 
+0402   2 #HIRE-DD       (N2) 
+0403 1 #HIRE-SPAN       (I2) /* # of days since hire 
+0404 1 #HOLD-EFF-DATE-N (N8) /* hold effective date so it doesn't get lost 
+0405 1 #HOLD-EMP-GROUP  (A7) /* hold employer-group-id so it doesn't get lost 
+0406 1 #MAX-SEQ-NUM1             (N2) 
+0407 1 #MAX-SEQ-NUM2             (N2) 
+0408 1 #MAX-USED                 (N2) 
+0409 1 #MATCH                    (L) INIT <FALSE> 
+0410 1 #LAST-DEP-EFF-DATE-D      (D)  /* most recent dep effective date 
+0411 1 #LAST-DEP-EFF-DATE        (N8) /* most recent dep effective date 
+0412 1 REDEFINE #LAST-DEP-EFF-DATE 
+0413   2 #LAST-DEP-EFF-DATE-A    (A8) 
+0414 1 #LAST-EFF-DATE            (D)  /* most recent subscr effective date 
+0415 1 #LAST-EFF-DATE-A          (A8) /* most recent subscr effective date 
+0416 1 REDEFINE #LAST-EFF-DATE-A 
+0417   2 #LAST-EFF-DATE-YYYY     (A4) 
+0418   2 REDEFINE #LAST-EFF-DATE-YYYY 
+0419     3 #LAST-EFF-DATE-YYYY-N (N4) 
+0420   2 #LAST-EFF-DATE-MMDD     (A4) 
+0421   2 REDEFINE #LAST-EFF-DATE-MMDD 
+0422     3 #LAST-EFF-DATE-MM     (N2) 
+0423     3 #LAST-EFF-DATE-DD     (A2) 
+0424 1 REDEFINE #LAST-EFF-DATE-A 
+0425   2 #LAST-EFF-DATE-N        (N8) 
+0426 1 #LEN                      (N2) 
+0427 1 #HLTH-SELECTED            (L)  INIT<FALSE> 
+0428 1 #OL-SELECTED              (L)  INIT<FALSE> 
+0429 1 #NEW-PLAN-CAT             (A3) 
+0430 1 REDEFINE #NEW-PLAN-CAT 
+0431   2 #NEW-PLAN               (A2) 
+0432   2 REDEFINE #NEW-PLAN 
+0433     3 #NEW-PLAN-1           (A1) 
+0434     3 #NEW-PLAN-2           (A1) 
+0435   2 #NEW-CAT                (A1) 
+0436 1 #DECEASED                 (L)  /* dependent is deceased 
+0437 1 #NOT-YET-BORN             (L)  /* dependent was not born before today 
+0438 1 #PHONE                    (A10) 
+0439 1 #PHONE-TYPE               (A5) 
+0440 1 #SKIP                     (L)  INIT <FALSE> 
+0441 1 #SPOUSE-SSN               (A9) 
+0442 1 #TERMINATED               (L)  INIT <FALSE> /* 
+0443 1 #SAME                     (L)  INIT <FALSE> 
+0444 1 #TYPE                     (A23) 
+0445 1 #WORK-A                   (A8) /* work area for a-format dates 
+0446 1 REDEFINE #WORK-A 
+0447   2 #WORK-N                 (N8) /* work area for n-format dates 
+0448 1 #WORK-D                   (D)  /* work area for d-format dates 
+0449 1 #NEW-DATE                 (A8) 
+0450 1 REDEFINE #NEW-DATE 
+0451   2 #NEW-YYYY               (A4) 
+0452   2 #NEW-MMDD               (A4) 
+0453 1 #ORIG-MMDD                (A4) 
+0454 1 #HOLD-VAL                 (N6) 
+0455 1 #COVER-TYPE               (A24) 
+0456 1 #DISPLAY-NUM              (A7) 
+0457 1 #DISPLAY-VALUE            (A34) 
+0458 1 #Q                        (N2) 
+0459 1 #NON-QUAL                 (L) INIT <FALSE> /* Non-qualifying event 
+0460 1 #QUAL                     (L) INIT <FALSE> /* Qualifying event 
+0461 1 #SPEC-ELIG                (L) INIT <FALSE> /* Special Eligibility 
+0462 1 #OL-INCREASE              (N2) /* Maximum increase to Opt Life 
+0463 1 #CURR-DATE                (N8) 
+0464 1 REDEFINE #CURR-DATE 
+0465   2 #CURR-YYYY              (N4) 
+0466   2 #CURR-MMDD              (A4) 
+0467 1 #VALIDATE-EFF-DATE-N      (N8) 
+0468 1 REDEFINE #VALIDATE-EFF-DATE-N 
+0469   2 #VALIDATE-EFF-YYYY      (N4) 
+0470   2 #VALIDATE-EFF-MM        (N2) 
+0471   2 #VALIDATE-EFF-DD        (N2) 
+0472 1 #HOLD-DEP-SSN             (A9) 
+0473 1 #HOLD-SUSPENSE-INFO 
+0474   2 SUSPENSE-TIMESTMP       (B8) 
+0475   2 SUSPENSE-HELD-ID        (A12) 
+0476   2 DATA-FROM-SUSPENSE      (L) 
+0477   2 SUSPENSE-MESSAGE        (A100) 
+0478   2 SUSPENSE-REASON         (A2/1:75) 
+0479   2 SUSPENSE-OTHER-DESC     (A40/1:10) 
+0480 *                        /* Fields associated with HIS380N3 
+0481 1 #DATE-FLD-N               (N8) CONST <0> 
+0482 1 #DATE-FLD-A               (A8) CONST <' '> 
+0483 1 #DATE-FLD-D               (D)   /* 
+0484 1 #DATE-FLD-NM              (A45) /* Date field name for messaging 
+0485 1 #BLANK-INDEX              (N2) 
+0486 1 #SEQ-MATCH                (L)   INIT<FALSE> 
+0487 * 
+0488 1 #edit-for-update          (l)  init<FALSE> 
+0489 1 #PT1 (N2) 
+0490 1 #PT2 (A80) 
+0491 1 #age1 (n2)                                    /* gsd20070207a 
+0492 1 #age2 (n2)                                    /* gsd20070207a 
+0493 1 #SUFFIX(A3)                                   /* gsd20070806 
+0494 1 REDEFINE #SUFFIX 
+0495   2 #SUFF-NAME (A1/3) 
+0496 1 #p           (n1) 
+0497 1 #no-transfer (l)                              /* gsd20070910a 
+0498 1 #sp-med-num (a11) 
+0499 1 #dep-med-num (a11) 
+0500 END-DEFINE 

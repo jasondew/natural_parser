@@ -1,0 +1,240 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Index Notation for Multiple-Value Fields and Periodic Groups</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="pg_output_index"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_output_index.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_output_index.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_output-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_output_display.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_output_titles.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Programming Guide&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x227"></a> 
+               <a name="x228"></a> 
+               <a name="x229"></a> Index Notation for Multiple-Value Fields and Periodic Groups
+               
+         </h1>
+      </div> 
+         
+         
+      <p>This document describes how you can use the index
+             notation
+             <code>(<var>n</var>:<var>n</var>)</code> to
+             specify how many values of a multiple-value field or how many occurrences of a
+             periodic group are to be output.
+      </p> 
+         
+      <p>The following topics are covered:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_output_index.htm#index_notation">Use of Index Notation</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_index.htm#index_notation_exa_displ">Example of Index Notation in DISPLAY Statement</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_index.htm#index_notation_exa_wri">Example of Index Notation in WRITE Statement</a></p>
+         </li>
+      </ul> 
+        
+      <hr> 
+        
+      <div><a name="index_notation"></a></div> 
+         
+      <h2> Use of Index Notation </h2> 
+          
+          
+      <p>With the index notation
+              <code>(<var>n</var>:<var>n</var>)</code> you
+              can specify how many values of a multiple-value field or how many occurrences
+              of a periodic group are to be output.
+      </p> 
+          
+      <p>For example, the field <code>INCOME</code> in the
+              <a href="../glossary/glossary.htm#DDM">DDM</a>
+              EMPLOYEES is a periodic group which
+              keeps a record of the annual incomes of an employee for each year he/she has
+              been with the company.
+      </p> 
+          
+      <p>These annual incomes are maintained in chronological order. The income
+              of the most recent year is in occurrence <code>1</code>.
+      </p> 
+          
+      <p>If you wanted to have the annual incomes of an employee for the last
+              three years displayed - that is, occurrences <code>1</code> to <code>3</code> -
+              you would specify the notation <code>(1:3)</code> after the field name in a
+              <a href="../sm/display.htm"><code>DISPLAY</code></a> or
+              <a href="../sm/write.htm"><code>WRITE</code></a> statement (as
+              shown in the following example program).
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_output_index.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="index_notation_exa_displ"></a></div> 
+         
+      <h2> Example of Index Notation in DISPLAY Statement </h2> 
+          
+          <pre class="verbatim">
+** Example 'DISPLX07': DISPLAY (with index notation)
+************************************************************************
+DEFINE DATA LOCAL
+1 VIEWEMP VIEW OF EMPLOYEES
+  2 PERSONNEL-ID
+  2 NAME
+  2 BIRTH
+  2 INCOME  (1:3)
+    3 CURR-CODE
+    3 SALARY
+    3 BONUS (1:1)
+END-DEFINE
+*
+READ (3) VIEWEMP BY BIRTH
+  <strong>DISPLAY PERSONNEL-ID NAME INCOME (1:3)</strong>
+  SKIP 1
+END-READ
+END
+</pre> 
+          <p>Output of Program DISPLX07:</p> 
+          
+      <p>Note that a <a href="../sm/display.htm"><code>DISPLAY</code></a> statement outputs
+              multiple values of a multiple-value field underneath one another:
+      </p> <pre class="system-output">
+Page      1                                                  04-11-11  14:15:54
+ 
+PERSONNEL         NAME                     INCOME
+   ID
+                               CURRENCY   ANNUAL     BONUS
+                                 CODE     SALARY
+--------- -------------------- -------- ---------- ----------
+ 
+30020013  GARRET               UKL            4200          0
+                               UKL            4150          0
+                                                 0          0
+ 
+30016112  TAILOR               UKL            7450          0
+                               UKL            7350          0
+                               UKL            6700          0
+ 
+20017600  PIETSCH              USD           22000          0
+                               USD           20200          0
+                               USD           18700          0
+</pre> 
+          <p>As a <a href="../sm/write.htm"><code>WRITE</code></a>
+              statement displays multiple values horizontally instead of vertically, this may
+              cause a line overflow and a - possibly undesired - line advance.
+      </p> 
+          
+      <p>If you use only a single field within a periodic group (for example,
+              <code>SALARY</code>) instead of the entire periodic group, and if you also
+              insert a slash (/) to cause a line advance (as shown in the following example
+              between <code>NAME</code> and <code>JOB-TITLE</code>), the report format
+              becomes manageable.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_output_index.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="index_notation_exa_wri"></a></div> 
+         
+      <h2> Example of Index Notation in WRITE Statement </h2> 
+          
+          <pre class="verbatim">
+** Example 'WRITEX03': WRITE (with index notation)
+************************************************************************
+DEFINE DATA LOCAL
+1 VIEWEMP VIEW OF EMPLOYEES
+  2 PERSONNEL-ID
+  2 NAME
+  2 BIRTH
+  2 JOB-TITLE
+  2 SALARY (1:3)
+END-DEFINE
+*
+READ (3) VIEWEMP BY BIRTH
+  <strong>WRITE PERSONNEL-ID NAME / JOB-TITLE SALARY (1:3)</strong>
+  SKIP 1
+END-READ
+END
+</pre> 
+          <p>Output of Program WRITEX03:</p> <pre class="system-output">
+Page      1                                                  04-11-11  14:15:55
+ 
+30020013 GARRET
+TYPIST                          4200       4150          0
+ 
+30016112 TAILOR
+WAREHOUSEMAN                    7450       7350       6700
+ 
+20017600 PIETSCH
+SECRETARY                      22000      20200      18700
+</pre> 
+          
+        
+       <div class="noprint">
+         <div class="nospy">
+            <p><a href="pg_output_index.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_output_index.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_output_index.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_output-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_output_display.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_output_titles.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

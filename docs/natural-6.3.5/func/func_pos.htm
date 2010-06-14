@@ -1,0 +1,186 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>POS - Field Identification Function</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="func_pos" id="12773"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../func/func_pos.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/func/func_pos.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="func_string.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="func_string.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="func_ret.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;System Functions&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+         
+      <div class="nospytext">
+         <h1> 
+                <a name="x25"></a>POS - Field Identification Function
+         </h1>
+      </div> 
+          
+           
+           
+      <table class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="10%">
+            <col width="87%">
+         </colgroup> 
+                
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td>Format/length:</td> 
+                       
+               <td>I4</td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>The system function
+              <code>POS(<var>field-name</var>)</code> contains the internal
+              identification of the field whose name is specified with the system
+              function.
+      </p> 
+          
+      <p><code>POS(<var>field-name</var>)</code> may be used to
+              identify a specific field, regardless of its position in a map. This means that
+              the sequence and number of fields in a map may be changed, but
+              <code>POS(<var>field-name</var>)</code> will still uniquely
+              identify the same field. With this, for example, you need only a single
+              <code>REINPUT</code> statement to make the field to be <code>MARK</code>ed
+              dependent on the program logic.
+      </p> 
+          
+      <p> Example: </p> 
+          <pre class="verbatim">DECIDE ON FIRST VALUE OF ... 
+   VALUE ... 
+      COMPUTE #FIELDX = POS(FIELD1) 
+   VALUE ... 
+      COMPUTE #FIELDX = POS(FIELD2) 
+   ... 
+END-DECIDE 
+... 
+REINPUT ... MARK #FIELDX</pre> 
+          <p>If the field specified with <code>POS</code> is an array, a specific
+              occurrence must be specified; for example, <code>POS(FIELDX(5))</code>.
+              <code>POS</code> cannot be applied to an array range.
+      </p> 
+          
+      <div><a name="POS_CURS_FIELD"></a></div>
+      <h4 class="floating-title"> POS and *CURS-FIELD </h4> 
+          
+      <p>The system function
+              <code>POS(<var>field-name</var>)</code> may be used in
+              conjunction with the Natural system variable
+              <a href="../vari/inout.htm#CURS_FIELD"><code>*CURS-FIELD</code></a>
+              to make the execution of certain functions dependent on which field the cursor
+              is currently positioned in.
+      </p> 
+          
+      <p><code>*CURS-FIELD</code> contains the internal
+              identification of the field in which the cursor is currently positioned; it
+              cannot be used by itself, but only in conjunction with
+              <code>POS(<var>field-name</var>)</code>. You may use them to
+              check if the cursor is currently positioned in a specific field and have
+              processing performed depending on that condition.
+      </p> 
+          
+      <p> Example: </p> 
+          <pre class="verbatim">IF *CURS-FIELD = POS(FIELDX) 
+   MOVE *CURS-FIELD TO #FIELDY 
+END-IF 
+... 
+REINPUT ... MARK #FIELDY</pre> 
+          <p class="notes"><strong>Notes:</strong></p>
+      <ol class="note-list"> 
+              
+         <li>The values of <code>*CURS-FIELD</code> and
+                  <code>POS(<var>field-name</var>)</code> serve only as internal
+                  identifications of the fields and cannot be used for arithmetic operations.
+                  
+         </li> 
+              
+         <li>The value returned by
+                  <code>POS(<var>field-name</var>)</code> for an occurrence of an
+                  <a href="../pg/pg_defi_xarry.htm">X-array</a> (an array for which
+                  at least one bound in at least one dimension is specified as expansible) may
+                  change after the number of occurrences for a dimension of the array has been
+                  changed using the <a href="../sm/expand.htm"><code>EXPAND</code></a>,
+                  <a href="../sm/resize.htm"><code>RESIZE</code></a> or
+                  <a href="../sm/reduce.htm"><code>REDUCE</code></a>
+                  statements.
+         </li> 
+              
+         <li>Natural RPC: If <code>*CURS-FIELD</code> and
+                  <code>POS(<var>field-name</var>)</code> refer to a context
+                  variable, the resulting information can only be used within the same
+                  conversation. 
+         </li> 
+             
+      </ol> 
+           
+          
+        
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="func_pos.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../func/func_pos.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/func/func_pos.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="func_string.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="func_string.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="func_ret.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

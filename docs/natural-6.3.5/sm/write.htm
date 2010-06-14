@@ -1,0 +1,2364 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>WRITE</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="write" id="16885"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../sm/write.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/sm/write.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="sm-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="upload.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="writeti.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Statements&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> WRITE 
+               <a name="x171"></a></h1>
+      </div> 
+         
+         
+      <p>This document covers the following topics:</p>
+         
+      <ul>
+         <li>
+            <p class="initem"><a href="write.htm#Function_write">Function</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="write.htm#Syntax_1_write">Syntax 1 - Dynamic Formatting</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="write.htm#syntax_decsr_write_1">Syntax 1 - Description</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="write.htm#USING_write">Syntax 2 - Using Predefined Form/Map</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="write.htm#syntax_descr_write_2">Syntax 2 - Description</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="write.htm#write_exa">Examples</a></p>
+         </li>
+      </ul> 
+         
+      <p>For an explanation of the symbols used in the syntax diagram, see
+             <a href="synsym.htm#Syntax_Symbols">Syntax
+            Symbols</a>.
+      </p> 
+         
+      <p>Related Statements: <a href="atendpag.htm#atendpag">AT END OF
+                PAGE</a> | <a href="attoppag.htm#attoppag">AT TOP OF PAGE</a> |
+             <a href="closepri.htm#closepri">CLOSE PRINTER</a> | <a href="definepr_uw.htm#definepr_uw">DEFINE PRINTER</a> |
+             <a href="display.htm#display">DISPLAY</a> | <a href="eject.htm#eject">EJECT</a> | <a href="format.htm#format">FORMAT</a> | <a href="newpage.htm#newpage">NEWPAGE</a> | <a href="printsm.htm#printsm">PRINT</a> | <a href="skip.htm#skip">SKIP</a>
+             | <a href="suspend.htm#suspend">SUSPEND IDENTICAL SUPPRESS</a> |
+             <a href="writeti.htm#writeti">WRITE TITLE</a> |
+             <a href="writetra.htm#writetra">WRITE TRAILER</a> 
+      </p> 
+         
+      <p>Belongs to Function Group:
+             <a href="stmt.htm#Creation_of_Output_Reports">Creation of Output
+            Reports</a></p> 
+        
+      <hr> 
+        
+      <div><a name="Function_write"></a></div> 
+         
+      <h2> Function </h2> 
+          
+          
+      <p>The <code>WRITE</code> statement is used to produce output in free
+              format.
+      </p> 
+          
+      <p>The <code>WRITE</code> statement differs from the
+              <a href="display.htm#display"><code>DISPLAY</code></a> statement in the
+              following respects:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">Line overflow is supported. If the line width is exceeded for a line,
+                      the next field (or text) is written on the next line. Fields or text elements
+                      are not split between lines.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">No default column headers are created. The length of the data
+                      determines the number of positions printed for each field.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">A range of values/occurrences for an array is output horizontally
+                      rather than vertically.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>See also the following topics (in the <cite>Programming
+                 Guide</cite>):
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../pg/pg_output_display.htm">Controlling Data
+                  Output</a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../pg/pg_output_display.htm">Statements
+                  DISPLAY and WRITE</a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../pg/pg_output_index.htm">Index Notation for
+                  Multiple-Value Fields and Periodic Groups</a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../pg/pg_output_vdispl.htm#further_exa_displ_wri">Example of
+                  DISPLAY VERT with WRITE Statement</a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../pg/pg_output_layout.htm">Layout of an
+                  Output Page</a></p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="write.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Syntax_1_write"></a></div> 
+         
+      <h2> Syntax 1 - Dynamic Formatting </h2> 
+          
+           
+           
+      <table border="0" class="syntax" cellpadding="3"> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td colspan="9"><a href="write.htm#Function_write"> <code class="keyword">WRITE</code></a>
+                     &nbsp;[(<a href="write.htm#rep_write"><var>rep</var></a>)]&nbsp;[<a href="write.htm#NOTITLE_write"><code class="keyword">NOTITLE</code></a>]&nbsp;[<a href="write.htm#NOHDR_write"><code class="keyword">NOHDR</code></a>] 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td colspan="2">[(<a href="write.htm#statement-parameters_write"><var>statement-parameters</var></a>)]
+               </td>
+                       
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td rowspan="6">&nbsp;</td> 
+                       
+               <td rowspan="6"><img src="../graphics/cbo5b.gif" alt="" width="6" height="137"></td> 
+                       
+               <td rowspan="6"><img src="../graphics/sbo5.gif" alt="" width="4" height="138"> 
+               </td> 
+                       
+               <td><a href="write.htm#nX_write">
+                     <var>n</var><code class="keyword">X</code> </a> 
+               </td> 
+                       
+               <td rowspan="6"><img src="../graphics/sbc5.gif" alt="" width="4" height="138">
+                  <img src="../graphics/dot3.gif" alt="" width="12" height="4">
+                           
+               </td> 
+                       
+               <td rowspan="3"> 
+                  
+                  <p><img src="../graphics/cbo3.gif" alt="" width="6" height="59"></p>
+               </td> 
+                       
+               <td><a href="write.htm#text_write">'<var>text</var>'</a>
+                        <a href="write.htm#attributes_write">[(<var>attributes</var>)]</a></td>
+                       
+                       
+               <td rowspan="3"> 
+                  
+                  <p><img src="../graphics/cbc3.gif" alt="" width="6" height="59"></p>
+               </td> 
+                       
+               <td rowspan="6"><img src="../graphics/cbc5b.gif" alt="" width="6" height="137">
+                  <img src="../graphics/dot3.gif" alt="" width="12" height="4">
+                           
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><a href="write.htm#nT_write">
+                     <var>n</var><code class="keyword">T</code> </a> 
+               </td> 
+                       
+               <td><a href="write.htm#c_n_write">'<var>c</var>'(<var>n</var></a>)
+                     [(<a href="write.htm#attributes_write"><var>attributes</var></a>)]
+               </td>
+                       
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><a href="write.htm#x_y_write">
+                     <var>x/y</var> </a> 
+               </td> 
+                       
+               <td>['='] <a href="write.htm#operand1_write"><var>operand1</var> </a>
+                           [(<a href="write.htm#parameters_write"><var>parameters</var></a>)]
+               </td>
+                       
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code class="keyword">T*</code><var>field-name</var> 
+               </td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code class="keyword">P*</code><var>field-name</var> 
+               </td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>/ </td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>For an explanation of the symbols used in the syntax diagram, see
+              <a href="synsym.htm#Syntax_Symbols">Syntax
+            Symbols</a>.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="write.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="syntax_decsr_write_1"></a></div> 
+         
+      <h2> Syntax 1 - Description </h2> 
+          
+          
+      <p>Operand Definition Table:</p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                 
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th>Operand</th> 
+                       
+               <th colspan="5" align="center">
+                  <a href="synsym.htm#statem_poss_struct">Possible Structure</a> 
+               </th> 
+                       
+               <th colspan="13" align="center">
+                  <a href="synsym.htm#statem_poss_form">Possible Formats</a> 
+               </th> 
+                       
+               <th align="center"> <a href="synsym.htm#statem_ref_perm">Referencing
+                     Permitted</a> 
+               </th> 
+                       
+               <th align="center"> <a href="synsym.htm#statem_dyn_def">Dynamic
+                     Definition</a> 
+               </th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> <var>operand1</var> 
+               </td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>S</td> 
+                       
+               <td>A</td> 
+                       
+               <td>G</td> 
+                       
+               <td>N</td> 
+                       
+               <td>A</td> 
+                       
+               <td>U</td> 
+                       
+               <td>N</td> 
+                       
+               <td>P</td> 
+                       
+               <td>I</td> 
+                       
+               <td>F</td> 
+                       
+               <td>B</td> 
+                       
+               <td>D</td> 
+                       
+               <td>T</td> 
+                       
+               <td>L</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>G</td> 
+                       
+               <td>O</td> 
+                       
+               <td align="center">yes</td> 
+                       
+               <td align="center">no</td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>Syntax Element Description:</p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th nowrap>(<a name="rep_write"></a><var>rep</var>)
+               </th> 
+                       
+               <td> 
+                  
+                  <div><strong class="floating-title"> Report Specification:</strong></div> 
+                           
+                  <p>The <a href="../pg/pg_output_rep.htm">notation
+                                  <code>(<var>rep</var>)</code></a> is used to specify the
+                     identification of the report if multiple reports are to be produced by the
+                               program.
+                  </p> 
+                           
+                  <p>As report identification, a value in the range 0 - 31 or a logical
+                               name which has been assigned using the <a href="definepr_uw.htm#definepr_uw"><code>DEFINE PRINTER</code></a>
+                               statement may be specified.
+                  </p> 
+                           
+                  <p>If <code>(<var>rep</var>)</code> is not specified,
+                               the statement will apply to the first report (Report 0).
+                  </p> 
+                           
+                  <p>If this printer file is defined to Natural as PC, the report will
+                               be downloaded to the PC, see <a href="write.htm#Example_5_write">Example 5</a>.
+                  </p> 
+                           
+                  <p>For information on how to control the format of an output report
+                               created with Natural, see <a href="../pg/pg_output-over.htm">Controlling Data
+                                  Output</a> (in the <cite>Programming
+                                  Guide</cite>).
+                  </p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th nowrap> <a name="NOTITLE_write"></a>NOTITLE 
+               </th> 
+                       
+               <td> 
+                  
+                  <div><strong class="floating-title"> Default Page Title Suppression:</strong></div> 
+                           
+                  <p>Natural generates a single title line for each page resulting from
+                               a <code>WRITE</code> statement. This title contains the page number, the time
+                     of day, and the date. Time of day is set at the beginning of program execution.
+                               This default title line may be overridden by using a
+                               <a href="writeti.htm#writeti"><code>WRITE TITLE</code></a> statement, or
+                               it may be suppressed by using the <code>NOTITLE</code> option in the
+                               <code>WRITE</code> statement.
+                  </p> 
+                           
+                  <p> Examples:</p> 
+                           
+                  <ul> 
+                               
+                     <li> 
+                                   
+                        <p class="initem">Default title will be produced:</p> 
+                                   <pre class="verbatim">WRITE NAME</pre> 
+                                  </li> 
+                               
+                     <li> 
+                                   
+                        <p class="initem">User title will be produced:</p> 
+                                   <pre class="verbatim">WRITE NAME WRITE TITLE '<var>user-title</var>'</pre> 
+                                  </li> 
+                               
+                     <li> 
+                                   
+                        <p class="initem">No title will be produced:</p> 
+                                   <pre class="verbatim">WRITE NOTITLE NAME</pre> 
+                                  </li> 
+                              
+                  </ul> 
+                           
+                  <p class="notes"><strong>Notes:</strong></p>
+                  <ol class="note-list"> 
+                               
+                     <li>If the <code>NOTITLE</code> option is used, it applies to all
+                                   <a href="display.htm#display"><code>DISPLAY</code></a>,
+                                   <a href="printsm.htm#printsm"><code>PRINT</code></a> and
+                                   <code>WRITE</code> statements within the same object which write data to the
+                                   same report.
+                     </li> 
+                               
+                     <li>Page overflow is checked <em>before</em> execution of a
+                                   <code>WRITE</code> statement. No new page with title or trailer information is
+                                   generated <em>during</em> the execution of a <code>WRITE</code>
+                                   statement.
+                     </li> 
+                              
+                  </ol> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th nowrap> <a name="NOHDR_write"></a>NOHDR 
+               </th> 
+                       
+               <td> 
+                  
+                  <div><strong class="floating-title"> Column Header Suppression:</strong></div> 
+                           
+                  <p>The <code>WRITE</code> statement itself does not produce any column
+                               headers. However, if you use the <code>WRITE</code> statement in conjunction
+                               with a <a href="display.htm#display"><code>DISPLAY</code></a> statement,
+                               you can use the <code>NOHDR</code> option of the <code>WRITE</code> statement
+                               to suppress the column headers generated by the <code>DISPLAY</code> statement.
+                               The <code>NOHDR</code> option only takes effect if the execution of the
+                               <code>WRITE</code> statement causes a new page to be output. 
+                  </p> 
+                           
+                  <p>Without the <code>NOHDR</code> option, the column headers (if any)
+                               of the <code>DISPLAY</code> statement would be output on this new page; with
+                               <code>NOHDR</code> they will not.
+                  </p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th nowrap>
+                  <a name="statement-parameters_write"></a>
+                           <var>statement-parameters</var> 
+               </th> 
+                       
+               <td> 
+                  
+                  <div><strong class="floating-title"> Parameter Definition at Statement
+                             Level:</strong></div> 
+                           
+                  <p>One or more parameters, enclosed within parentheses, may be
+                               specified at statement level, that is, immediately after the <code>WRITE</code>
+                               statement.
+                  </p> 
+                           
+                  <p>Each parameter specified will override the corresponding parameter
+                               previously specified in a <a href="../syscom/globals.htm"><code>GLOBALS</code></a>
+                               command, <a href="setgloba.htm#setgloba"><code>SET GLOBALS</code></a> (in
+                               Reporting Mode only) or <a href="format.htm#format"><code>FORMAT</code></a> statement.
+                  </p> 
+                           
+                  <p>If more than one parameter is specified, they must be separated by
+                               one or more blanks from one another. Each parameter specification must not be
+                               split between two statement lines.
+                  </p> 
+                           
+                  <p class="note"><strong>Note:</strong><br> The parameter settings applied here will only be regarded for
+                               variable fields, but they have no effect on text-constants. If you would like
+                               to set field attributes for a text-constant, they have to be set explicitly for
+                               this element, see <a href="write.htm#parameters_write">Parameter
+                                  Definition at Element (Field) Level</a>.
+                  </p> 
+                           
+                  <p>See also:</p> 
+                           
+                  <ul> 
+                               
+                     <li> 
+                                   
+                        <p class="initem"> <a href="write.htm#statement_parms_write">List of
+                                          Parameters</a></p> 
+                                  
+                     </li> 
+                               
+                     <li> 
+                                   
+                        <p class="initem"> <a href="write.htm#statement_parms_exa_write">Example
+                                          of Parameter Usage at Statement and Element (Field)
+                                          Level</a></p> 
+                                  
+                     </li> 
+                               
+                     <li> 
+                                   
+                        <p class="initem"> <a href="write.htm#Example_5_write">Example 5 - WRITE
+                                          Statement Using '=' and Parameters on Statement/Element (Field)
+                                          Level</a></p> 
+                                  
+                     </li> 
+                              
+                  </ul> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> <var>n</var>X,
+                    <var>n</var>T, <var>x/y</var>,
+                           T*<var>field-name</var>,
+                           P*<var>field-name</var>, '=', /,
+               </th> 
+                       
+               <td> 
+                  
+                  <div><strong class="floating-title"> Field Positioning Notation: </strong></div> 
+                           
+                  <p>See <a href="write.htm#field_pos_notations">Field
+                                  Positioning Notations</a> in the section
+                               <a href="write.htm#Output_Format">Output Format
+                                  Definitions</a>.
+                  </p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th>'<var>text</var>',
+                      '<var>c</var>'(<var>n</var>),
+                           <var>attributes</var>, <var>operand1</var>,
+                           <var>parameters</var> 
+               </th> 
+                       
+               <td> 
+                  
+                  <div><strong class="floating-title"> Text/Attribute Assignment:</strong></div> 
+                           
+                  <p>See <a href="write.htm#text_attr_assignment">Text/Attribute
+                                  Assignment</a> in the section
+                               <a href="write.htm#Output_Format">Output Format
+                                  Definitions</a>.
+                  </p> 
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+         
+      <div><a name="statement_parms_write"></a></div> 
+          
+      <h3> List of Parameters </h3> 
+           
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                  
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th colspan="2"> Parameters that can be specified
+                  with the WRITE statement 
+               </th> 
+                        
+               <th> Specification (S = at
+                  <a href="write.htm#statement-parameters_write">statement level</a>, E =
+                            at <a href="write.htm#parameters_write">element level</a>)
+               </th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> <a href="../parms/sp_ad.htm">AD</a> 
+               </td> 
+                        
+               <td>Attribute Definition</td> 
+                        
+               <td align="center">SE</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a href="../parms/sp_al.htm">AL</a> 
+               </td> 
+                        
+               <td>Alphanumeric Length for Output</td> 
+                        
+               <td align="center">SE</td> 
+                       
+            </tr> 
+                     
+                    
+            <tr> 
+                        
+               <td> <a href="../parms/sp_cd.htm">CD</a> 
+               </td> 
+                        
+               <td>Color Definition</td> 
+                        
+               <td align="center">SE</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a href="../parms/sp_cv.htm">CV</a> 
+               </td> 
+                        
+               <td>Control Variable</td> 
+                        
+               <td align="center">SE</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a href="../parms/sp_df.htm">DF</a> 
+               </td> 
+                        
+               <td>Date Format</td> 
+                        
+               <td align="center">SE</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><a href="../parms/sp_dl.htm">DL</a></td> 
+                        
+               <td>Display Length for Output</td> 
+                        
+               <td align="center">SE</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a href="../parms/sp_dy.htm">DY</a> 
+               </td> 
+                        
+               <td>Dynamic Attributes</td> 
+                        
+               <td align="center">SE</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a href="../parms/sp_em.htm">EM</a> 
+               </td> 
+                        
+               <td>Edit Mask</td> 
+                        
+               <td align="center">SE</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><a href="../parms/sp_emu.htm">EMU</a></td> 
+                        
+               <td>Unicode Edit Mask</td> 
+                        
+               <td align="center">E</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a href="../parms/sp_fl.htm">FL</a> 
+               </td> 
+                        
+               <td>Floating Point Mantissa Length</td> 
+                        
+               <td align="center">SE</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a href="../parms/sp_is.htm">IS</a> 
+               </td> 
+                        
+               <td>Identical Suppress</td> 
+                        
+               <td align="center">SE</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a href="../parms/ls.htm">LS</a> 
+               </td> 
+                        
+               <td>Line Size</td> 
+                        
+               <td align="center">S</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a href="../parms/sp_mc.htm">MC</a> 
+               </td> 
+                        
+               <td>Multiple-Value Field Count</td> 
+                        
+               <td align="center">S</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a href="../parms/mp.htm">MP</a> 
+               </td> 
+                        
+               <td>Maximum Number of Pages of a Report</td> 
+                        
+               <td align="center">S</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a href="../parms/sp_nl.htm">NL</a> 
+               </td> 
+                        
+               <td>Numeric Length for Output</td> 
+                        
+               <td align="center">SE</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a href="../parms/sp_pc.htm">PC</a> 
+               </td> 
+                        
+               <td>Periodic Group Count</td> 
+                        
+               <td align="center">S</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a href="../parms/pm.htm">PM</a> 
+               </td> 
+                        
+               <td>Print Mode</td> 
+                        
+               <td align="center">SE</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a href="../parms/ps.htm">PS</a> 
+               </td> 
+                        
+               <td>Page Size <sup>*</sup></td> 
+                        
+               <td align="center">S</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a href="../parms/sp_sg.htm">SG</a> 
+               </td> 
+                        
+               <td>Sign Position</td> 
+                        
+               <td align="center">SE</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>UC</td> 
+                        
+               <td>Underlining Character</td> 
+                        
+               <td align="center">S</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a href="../parms/zp.htm">ZP</a> 
+               </td> 
+                        
+               <td>Zero Printing</td> 
+                        
+               <td align="center">SE</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p><sup>*</sup> The <code>PS</code> session
+               parameter setting is not considered if the number of occurrences of an array
+               exceeds the PS value.
+      </p> 
+            
+           
+      <p>The individual session parameters are described in the
+               <cite>Parameter Reference</cite>.
+      </p> 
+           
+      <p>See also the following topics in the <cite>Programming
+                  Guide</cite>:
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem"> <a href="../pg/pg_output_headers.htm#col_header_cent">Centering of Column
+                  Headers - HC Parameter</a> 
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"> <a href="../pg/pg_output_headers.htm#col_header_width">Width of Column
+                  Headers - HW Parameter</a> 
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"> <a href="../pg/pg_output_headers.htm#header_fill_char">Filler Characters
+                  for Headers - Parameters FC and GC</a> 
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"> <a href="../pg/pg_output_headers.htm#title_header_underline">Underlining
+                  Character for Titles and Headers - UC Parameter</a> 
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+          
+         
+      <div><a name="statement_parms_exa_write"></a></div> 
+          
+      <h3> Example of Parameter Usage at Statement and Element (Field) Level
+              
+      </h3> 
+           
+            
+            
+            <pre class="verbatim">
+DEFINE DATA LOCAL
+1 VARI (A4)     INIT &lt;'1234'&gt;                  /*     Output 
+END-DEFINE                                     /*    Produced
+*                                              /*    ---------
+WRITE           'Text'           VARI          /*    Text 1234
+WRITE (AD=U)    'Text'           VARI          /*    Text <u>1234</u>
+WRITE           'Text' (AD=U)    VARI (AD=U)   /*    <u>Text</u> <u>1234</u>
+WRITE           'Text' (AD=U)    VARI          /*    <u>Text</u> 1234
+END</pre> 
+           <p>See also <a href="write.htm#Example_5_write">Example 5 -
+            WRITE Statement Using '=' and Parameters on Statement/Element (Field)
+            Level</a>.
+      </p> 
+           
+          
+         
+      <div><a name="Output_Format"></a></div> 
+          
+      <h3> Output Format Definitions </h3> 
+           
+            
+            
+      <table border="0" class="syntax" cellpadding="3"> 
+                 
+                 
+                 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td rowspan="6">
+                  <img src="../graphics/cbo5b.gif" alt="" width="6" height="137">
+                            <img src="../graphics/sbo5.gif" alt="" width="4" height="138">
+                            
+               </td> 
+                        
+               <td align="left"> <a href="write.htm#nX_write">
+                      <var>n</var><code class="keyword">X</code> </a> 
+               </td> 
+                        
+               <td rowspan="6">
+                  <img src="../graphics/sbc5.gif" alt="" width="4" height="138">
+                            <img src="../graphics/dot3.gif" alt="" width="12" height="4">
+                            
+               </td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td rowspan="6">
+                  <img src="../graphics/cbc5b.gif" alt="" width="6" height="137">
+                            <img src="../graphics/dot3.gif" alt="" width="12" height="4">
+                            
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td align="left"> <a href="write.htm#nT_write">
+                      <var>n</var><code class="keyword">T</code> </a> 
+               </td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td align="left"> <a href="write.htm#x_y_write">
+                      <var>x/y</var> </a> 
+               </td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td rowspan="3"> 
+                  
+                  <p><img src="../graphics/cbo3.gif" alt="" width="6" height="59"></p> 
+               </td> 
+                        
+               <td align="left"> <a href="write.htm#text_write">
+                     '<var>text</var>' </a><a href="write.htm#attributes_write">[(<var>attributes</var>)]
+                               </a> 
+               </td> 
+                        
+               <td rowspan="3"> 
+                  
+                  <p><img src="../graphics/cbc3.gif" alt="" width="6" height="59"></p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td align="left"> <a href="write.htm#T_field-name_write">
+                      <code class="keyword">T*</code><var>field-name</var> </a>
+                            
+               </td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td align="left"> <a href="write.htm#c_n_write">
+                      <var>'c'</var> (<var>n</var>)</a> &nbsp;
+                            <a href="write.htm#attributes_write">[(<var>attributes</var>)]
+                               </a> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td align="left"> <a href="write.htm#P_field-name_write">
+                      <code class="keyword">P*</code><var>field-name</var> </a>
+                            
+               </td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td align="left"> [<a href="write.htm#equal_sign_write"><code class="keyword">'='</code></a>]
+                       <a href="write.htm#operand1_write"><var>operand1</var>
+                               </a>[(<a href="write.htm#parameters_write"><var>parameters</var> </a>)]
+                            
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td align="left"> / </td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>For an explanation of the symbols used in the syntax diagram, see
+               <a href="synsym.htm#Syntax_Symbols">Syntax
+            Symbols</a>.
+      </p> 
+           
+      <div><a name="field_pos_notations"></a></div>
+      <h4 class="floating-title"> Field Positioning Notations
+               
+      </h4> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th nowrap> <a name="nX_write"></a>
+                   <var>n</var>X 
+               </th> 
+                        
+               <td> 
+                  
+                  <div><strong class="floating-title"> Column Spacing: </strong></div> 
+                            
+                  <p>This notation inserts <var>n</var> spaces between
+                                columns. 
+                  </p> 
+                            
+                  <p> Example: </p> 
+                            <pre class="verbatim">WRITE NAME <strong>5X</strong> SALARY</pre> 
+                            <p>See also:</p> 
+                            
+                  <ul> 
+                                
+                     <li> 
+                                    
+                        <p class="initem"> <a href="write.htm#Example_2_write">Example 2 - WRITE
+                                           Statement Using <var>n</var>X, <var>n</var>T
+                                           Notation</a> (below)
+                        </p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem"> <a href="../pg/pg_output_display.htm#col_spacing">Column Spacing - SF
+                                           Parameter and <var>n</var>X Notation</a> (in
+                                        the <cite>Programming Guide</cite>)
+                        </p> 
+                                   
+                     </li> 
+                               
+                  </ul> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th nowrap> <a name="nT_write"></a>
+                   <var>n</var>T 
+               </th> 
+                        
+               <td> 
+                  
+                  <div><strong class="floating-title"> Tab Setting: </strong></div> 
+                            
+                  <p>The <code><var>n</var>T</code> notation causes
+                      positioning (tabulation) to print position <var>n</var>.
+                                Backward positioning is not permitted.
+                  </p> 
+                            
+                  <p>In the following example, <code>NAME</code> is printed beginning
+                                in position 25, and <code>SALARY</code> is printed beginning in position
+                                50:
+                  </p> 
+                            <pre class="verbatim">WRITE <strong>25T</strong> NAME <strong>50T</strong> SALARY</pre> 
+                            <p>See also:</p> 
+                            
+                  <ul> 
+                                
+                     <li> 
+                                    
+                        <p class="initem"> <a href="write.htm#Example_2_write">Example 2 - WRITE
+                                           Statement Using <var>n</var>X, <var>n</var>T
+                                           Notation</a> (below)
+                        </p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem"> <a href="../pg/pg_output_display.htm#tab_setting">Tab Setting -
+                                           <var>n</var>T Notation</a> (in the
+                                        <cite>Programming Guide</cite>)
+                        </p> 
+                                   
+                     </li> 
+                               
+                  </ul> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th nowrap> <a name="x_y_write"></a><var>x/y</var> 
+               </th> 
+                        
+               <td> 
+                  
+                  <div><strong class="floating-title"><var> x/y</var> Positioning:
+                                   </strong></div> 
+                            
+                  <p>The <code><var>x/y</var></code> notation causes
+                                the next element to be placed <var>x</var> lines below the
+                                output of the last statement, beginning in column <var>y</var>.
+                                <var>y</var> must not be zero. Backward positioning in the same
+                                line is not permitted.
+                  </p> 
+                            
+                  <p>See also
+                                <a href="../pg/pg_output_vdispl.htm#Positioning_Notation_x_y">Positioning
+                                   Notation <var>x/y</var></a> (in the
+                                <cite>Programming Guide</cite>).
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th nowrap> <a name="T_field-name_write"></a>T*<var>field-name</var>
+                            
+               </th> 
+                        
+               <td> 
+                  
+                  <div><strong class="floating-title"> Field Related Positioning: </strong></div> 
+                            
+                  <p>The notation <code>T*</code> is used to position to a <em>specific
+                                   print position of a field</em> used in a previous <a href="display.htm#display"><code>DISPLAY</code></a> statement. Backward
+                                positioning is not permitted.
+                  </p> 
+                            
+                  <p>See also:</p> 
+                            
+                  <ul> 
+                                
+                     <li> 
+                                    
+                        <p class="initem"> <a href="write.htm#Example_3_write">Example 3 - WRITE
+                                           Statement Using T* Notation</a> (below)
+                        </p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem"> <a href="../pg/pg_output_vdispl.htm#Tab_Notation_T_field">Tab Notation -
+                                           T*<var>field</var></a> (in the
+                                        <cite>Programming Guide</cite>)
+                        </p> 
+                                   
+                     </li> 
+                               
+                  </ul> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th nowrap> <a name="P_field-name_write"></a>P*<var>field-name</var>
+                            
+               </th> 
+                        
+               <td> 
+                  
+                  <div><strong class="floating-title"> Field and Line Related Positioning:
+                                   </strong></div> 
+                            
+                  <p>The notation <code>P*</code> is used to position to a <em>specific
+                                   print position and line of a field</em> used in a previous
+                                <a href="display.htm#display"><code>DISPLAY</code></a> statement. It is
+                                most often used in conjunction with vertical printing mode. Backward
+                                positioning is not permitted.
+                  </p> 
+                            
+                  <p>See also:</p> 
+                            
+                  <ul> 
+                                
+                     <li> 
+                                    
+                        <p class="initem"> <a href="write.htm#Example_4_write">Example 4 - WRITE
+                                           Statement Using P* Notation</a> (below)
+                        </p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem"> <a href="../pg/pg_output_vdispl.htm#Tab_Notation_P_field">Tab Notation
+                                           P*<var>field</var></a> (in the
+                                        <cite>Programming Guide</cite>)
+                        </p> 
+                                   
+                     </li> 
+                               
+                  </ul> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th nowrap> <a name="equal_sign_write"></a>'=' 
+               </th> 
+                        
+               <td> 
+                  
+                  <div><strong class="floating-title"> Field Content Positioned behind Field Heading:
+                                   </strong></div> 
+                            
+                  <p>When placed before a field, the equal sign <code>'='</code>
+                                results in the display of the field heading (as defined in the
+                                <a href="defineda.htm#defineda"><code>DEFINE DATA</code></a> statement or
+                                in the <a href="../pg/pg_dbms_ada.htm#pg_dbms_ddm">DDM</a>)
+                                followed by the field contents.
+                  </p> 
+                            
+                  <p>See also:</p> 
+                            
+                  <ul> 
+                                
+                     <li> 
+                                    
+                        <p class="initem"> <a href="write.htm#Example_1_write">Example 1 - WRITE
+                                           Statement Using '=', '<var>text</var>',
+                                           '/'</a></p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem"> <a href="write.htm#Example_5_write">Example 5 - WRITE
+                                           Statement Using '=' and Statement/Element Parameters</a></p> 
+                                   
+                     </li> 
+                               
+                  </ul> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th nowrap> <a name="slash"></a>/
+                   
+               </th> 
+                        
+               <td> 
+                  
+                  <div><strong class="floating-title"> Line Advance - Slash Notation: </strong></div> 
+                            
+                  <p>When placed between fields or text elements, a slash (/) causes
+                         positioning to the beginning of the next print line.
+                  </p> 
+                            
+                  <p> Example:</p> 
+                            <pre class="verbatim">WRITE NAME / SALARY</pre> 
+                            <p>Multiple slash (/) notations may be used to cause multiple line
+                                advances.
+                  </p> 
+                            
+                  <p>See also:</p> 
+                            
+                  <ul> 
+                                
+                     <li> 
+                                    
+                        <p class="initem"> <a href="write.htm#Example_1_write">Example 1 - WRITE
+                                           Statement Using '=', '<var>text</var>',
+                                           '/'</a> (below)
+                        </p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem"> <a href="../pg/pg_output_display.htm#line_advance">Line Advance - Slash
+                                           Notation</a> (in the <cite>Programming
+                                           Guide</cite>)
+                        </p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem"> <a href="../pg/pg_output_display.htm#line_adv_write_exa"> Example 2 - Line
+                                           Advance in WRITE Statement</a> (in the <cite>Programming
+                                           Guide</cite>)
+                        </p> 
+                                   
+                     </li> 
+                               
+                  </ul> 
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <div><a name="text_attr_assignment"></a></div>
+      <h4 class="floating-title"> Text/Attribute Assignment
+               
+      </h4> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th nowrap> <a name="text_write"></a>'<var>text</var>' 
+               </th> 
+                        
+               <td> 
+                  
+                  <div><strong class="floating-title"> Text Assignment: </strong></div> 
+                            
+                  <p>The character string enclosed by single quotes is displayed.</p> 
+                            
+                  <p> Example: </p> 
+                            <pre class="verbatim">WRITE 'EMPLOYEE' NAME 'MARITAL/STATUS' MAR-STAT</pre> 
+                            <p>See also:</p> 
+                            
+                  <ul> 
+                                
+                     <li> 
+                                    
+                        <p class="initem"> <a href="write.htm#Example_1_write">Example 1 - WRITE
+                                           Statement Using '=', '<var>text</var>',
+                                           '/'</a> (below)
+                        </p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem"> <a href="../pg/pg_furth_txtnot.htm">Text
+                                           Notation</a>,
+                                        <a href="../pg/pg_furth_txtnot.htm#text_notation">Defining a
+                                           Text to Be Used with a Statement</a> (in the
+                                        <cite>Programming Guide</cite>)
+                        </p> 
+                                   
+                     </li> 
+                               
+                  </ul> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th nowrap> <a name="c_n_write"></a>'<var>c</var>'(<var>n</var>)
+                        
+               </th> 
+                        
+               <td> 
+                  
+                  <div><strong class="floating-title"> Character Repetition: </strong></div> 
+                            
+                  <p>The character enclosed by single quotes is displayed
+                                <var>n</var> times immediately before the field value. 
+                  </p> 
+                            
+                  <p>For example: </p> 
+                            <pre class="verbatim">WRITE '*' (5) '=' NAME</pre> 
+                            <p>results in</p> 
+                            <pre class="verbatim">***** SMITH</pre> 
+                            <p>See also <a href="../pg/pg_furth_txtnot.htm">Text
+                                   Notation</a>,
+                                <a href="../pg/pg_furth_txtnot.htm#c_n_notation">Defining a
+                                   Character to Be Displayed <var>n</var> Times before a Field
+                                   Value</a> (in the <cite>Programming Guide</cite>).
+                  </p>
+                            
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th nowrap>
+                  <a href="write.htm#attributes_write">
+                               <var>attributes</var></a> 
+               </th> 
+                        
+               <td> 
+                  
+                  <div><strong class="floating-title"> Field Representation and Color Attributes:
+                                   </strong></div> 
+                            
+                  <p>It is possible to assign various attributes for text/field
+                     display. These attributes and the syntax that may be used are described in the
+                                section <cite>Output Attributes</cite> below.
+                  </p> 
+                            
+                  <p> Examples:</p> 
+                            <pre class="verbatim">WRITE 'TEXT' (BGR)
+WRITE 'TEXT' (B)
+WRITE 'TEXT' (BBLC)</pre> </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th nowrap> <a name="operand1_write"></a>
+                   <var>operand1</var> 
+               </th> 
+                        
+               <td> 
+                  
+                  <div><strong class="floating-title"> Field to be Written: </strong></div> 
+                            
+                  <p> <var>operand1</var> specifies the field whose
+                                content is to be written in this place.
+                  </p> 
+                             
+                             
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th nowrap> <a name="parameters_write"></a>
+                   <var>parameters</var> 
+               </th> 
+                        
+               <td> 
+                  
+                  <div><strong class="floating-title"> Parameter Definition at Element (Field) Level:
+                                   </strong></div> 
+                            
+                  <p>One or more parameters, enclosed within parentheses, may be
+                              specified at element (field) level, that is, immediately after
+                                <var>operand1</var>. Each parameter specified in this manner
+                                will override the corresponding parameter previously specified
+                                <a href="write.htm#statement-parameters_write">at statement level</a>
+                                or in a <a href="../syscom/globals.htm"><code>GLOBALS</code></a>
+                                command, <a href="setgloba.htm#setgloba"><code>SET GLOBALS</code></a> (in
+                                Reporting Mode only) or <a href="format.htm#format"><code>FORMAT</code></a> statement.
+                  </p> 
+                            
+                  <p>If more than one parameter is specified, one or more blanks must
+                                be placed between each entry. An entry may not be split between two statement
+                                lines.
+                  </p> 
+                            
+                  <p>See also:</p> 
+                            
+                  <ul> 
+                                
+                     <li> 
+                                    
+                        <p class="initem"> <a href="write.htm#statement_parms_write">List of
+                                           Parameters</a> 
+                        </p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem"> <a href="write.htm#statement_parms_exa_write">Example
+                                           of Parameter Usage at Statement and Element (Field) Level</a>
+                                        
+                        </p> 
+                                   
+                     </li> 
+                               
+                  </ul> 
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+            
+      <div><a name="attributes_write"></a></div>
+      <h4 class="floating-title"> Output Attributes
+                
+      </h4> 
+            
+      <p> <var>attributes</var> indicates the output attributes
+                to be used for text display. Attributes may be:
+      </p> 
+             
+             
+      <table border="0" class="syntax" cellpadding="3"> 
+                  
+                   
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <td rowspan="2" nowrap> 
+                  
+                  <p><img src="../graphics/cbo6.gif" alt="" width="8" height="115"></p> 
+               </td> 
+                         
+               <td nowrap> 
+                  
+                  <p><img src="../graphics/cbo3b.gif" alt="" width="6" height="80"></p> 
+               </td> 
+                         
+               <td nowrap> 
+                  
+                  <p class="mini-list"> 
+                                 <code class="keyword">AD</code>=<var>AD-value</var>
+                                  <img src="../graphics/dot3.gif" alt="" width="12" height="4"><br> 
+                                  
+                                 <code class="keyword">CD</code>=<var>CD-value</var>
+                                  <img src="../graphics/dot3.gif" alt="" width="12" height="4"><br> 
+                                 <code class="keyword">PM</code>=<var>PM-value</var>
+                                  <img src="../graphics/dot3.gif" alt="" width="12" height="4"> 
+                                
+                  </p>
+               </td> 
+                         
+               <td nowrap>
+                  <img src="../graphics/cbc3b.gif" alt="" width="6" height="80">
+                             <img src="../graphics/dot3.gif" alt="" width="12" height="4">
+                             
+               </td> 
+                         
+               <td rowspan="2" nowrap> 
+                  
+                  <p><img src="../graphics/cbc6a.gif" alt="" width="5" height="115"></p> 
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td nowrap> 
+                  
+                  <p><img src="../graphics/cbo2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                         
+               <td nowrap> 
+                  
+                  <p class="mini-list"> 
+                                 <var>AD-value</var>
+                                  <img src="../graphics/dot3.gif" alt="" width="12" height="4"><br> 
+                                 <var>CD-value</var>
+                                  <img src="../graphics/dot3.gif" alt="" width="12" height="4">
+                                   
+                                
+                  </p> 
+               </td> 
+                         
+               <td nowrap>
+                  <img src="../graphics/cbc2.gif" alt="" width="6" height="38">
+                             <img src="../graphics/dot3.gif" alt="" width="12" height="4">
+                             
+               </td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+      <p>For the possible session parameter values, refer to the corresponding
+                sections in the <cite>Parameter Reference</cite> documentation:
+      </p> 
+            
+      <ul> 
+                
+         <li> 
+                    
+            <p class="initem"><a href="../parms/sp_ad.htm">AD - Attribute
+                  Definition</a>, section
+                        <a href="../parms/sp_ad.htm#sp_ad_Field_Representation">Field
+                  Representation</a></p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem"><a href="../parms/sp_cd.htm"> CD - Color
+                  Definition</a></p> 
+                   
+         </li> 
+                 
+                
+         <li> 
+                    
+            <p class="initem"><a href="../parms/pm.htm">PM - Print
+                  Mode</a></p> 
+                   
+         </li> 
+               
+      </ul> 
+            
+      <p class="note"><strong>Note:</strong><br> The compiler actually accepts more than one attribute value for an
+                output field. For example, you may specify: <code>AD=BDI</code>. In such a
+                case, however, only the last value applies. In the given example, only the
+                value <code>I</code> will become effective and the output field will be
+                displayed intensified.
+      </p> 
+            
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="write.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="USING_write"></a></div> 
+         
+      <h2> Syntax 2 - Using Predefined Form/Map </h2> 
+          
+           
+           
+      <table border="0" class="syntax" cellpadding="3"> 
+                
+                 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td rowspan="2"> <a href="write.htm#Function_write">
+                      <code class="keyword">WRITE</code> </a> &nbsp;[(<a href="write.htm#rep_write"><var>rep</var></a>)]&nbsp;[<a href="write.htm#NOTITLE_write"><code class="keyword">NOTITLE</code></a>]&nbsp;[<a href="write.htm#NOHDR_write"><code class="keyword">NOHDR</code></a>] [<code class="keyword">USING</code> ] 
+               </td> 
+                       
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/cbo2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                       
+               <td align="center"> <a href="write.htm#USING_FORM">
+                      <code class="keyword">FORM</code> </a> 
+               </td> 
+                       
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/cbc2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                       
+               <td rowspan="2" nowrap> <a href="write.htm#operand1_form">
+                      <var>operand1</var> </a> [<a href="write.htm#operand2_write"><var>operand2</var>
+                              </a><img src="../graphics/dot3.gif" alt="" width="12" height="4">] 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td align="center"> <a href="write.htm#USING_MAP_WRITE">
+                      <code class="keyword">MAP</code> </a> 
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>For an explanation of the symbols used in the syntax diagram, see
+              <a href="synsym.htm#Syntax_Symbols">Syntax
+            Symbols</a>.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="write.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="syntax_descr_write_2"></a></div> 
+         
+      <h2> Syntax 2 - Description </h2> 
+          
+          
+      <p>Operand Definition Table:</p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                 
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th>Operand</th> 
+                       
+               <th colspan="5" align="center">
+                  <a href="synsym.htm#statem_poss_struct">Possible Structure</a> 
+               </th> 
+                       
+               <th colspan="13" align="center">
+                  <a href="synsym.htm#statem_poss_form">Possible Formats</a> 
+               </th> 
+                       
+               <th align="center"> <a href="synsym.htm#statem_ref_perm">Referencing
+                     Permitted</a> 
+               </th> 
+                       
+               <th align="center"> <a href="synsym.htm#statem_dyn_def">Dynamic
+                     Definition</a> 
+               </th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> <var>operand1</var> 
+               </td> 
+                       
+               <td>C</td> 
+                       
+               <td>S</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>A</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td align="center">no</td> 
+                       
+               <td align="center">no</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <var>operand2</var> 
+               </td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>S</td> 
+                       
+               <td>A</td> 
+                       
+               <td>G</td> 
+                       
+               <td>N</td> 
+                       
+               <td>A</td> 
+                       
+               <td>U</td> 
+                       
+               <td>N</td> 
+                       
+               <td>P</td> 
+                       
+               <td>I</td> 
+                       
+               <td>F</td> 
+                       
+               <td>B</td> 
+                       
+               <td>D</td> 
+                       
+               <td>T</td> 
+                       
+               <td>L</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td align="center">yes</td> 
+                       
+               <td align="center">no</td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>Syntax Element Description:</p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th nowrap> <a name="USING_FORM"></a>[USING]
+                  FORM <a name="USING_MAP_WRITE"></a>[USING] MAP
+               </th> 
+                       
+               <td> 
+                  
+                  <div><strong class="floating-title"> Use of Predefined Form/Map Layout: </strong></div> 
+                           
+                  <p>This option may be used to indicate that a form/map layout
+                               previously defined using the <a href="../edis/edis_ux_map.htm">Natural map
+                                  editor</a>  is to be
+                               used.
+                  </p> 
+                           
+                  <p>A map layout used in a <code>WRITE</code> statement does not
+                               automatically create a new page each time the map is output.
+                  </p> 
+                           
+                  <p>For the line spacing, the <a href="../parms/ls.htm"><code>LS</code></a> parameter setting
+                               must be 1 byte greater than the <code>LS</code> setting defined in
+                               the map.
+                  </p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th nowrap> <a name="operand1_form"></a>
+                   <var>operand1</var> 
+               </th> 
+                       
+               <td> 
+                  
+                  <div><strong class="floating-title"> Form/Map Name: </strong></div> 
+                           
+                  <p> <var>operand1</var> is the name of the form/map to
+                               be used.
+                  </p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th nowrap> <a name="operand2_write"></a>
+                   <var>operand2</var> 
+               </th> 
+                       
+               <td> 
+                  
+                  <div><strong class="floating-title"> Field to be Written: </strong></div> 
+                           
+                  <p> <var>operand2</var> is the name(s) of the field(s)
+                               to be written.
+                  </p> 
+                           
+                  <p>If <var>operand1</var> is a constant and
+                               <var>operand2</var> is omitted, the fields are taken from the
+                               map source at compilation time.
+                  </p> 
+                           
+                  <p>The fields must agree in number, sequence, format, length and (for
+                               arrays) number of occurrences with the fields in the referenced form/map;
+                               otherwise, an error occurs.
+                  </p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th nowrap> <a name="NOTITLE_NOHDR"></a>NOTITLE/NOHDR 
+               </th> 
+                       
+               <td> 
+                  
+                  <div><strong class="floating-title"> Title Line/Column Header Suppression:
+                                  </strong></div> 
+                           
+                  <p> <a href="write.htm#NOTITLE_write"><code>NOTITLE</code></a>
+                               and <a href="write.htm#NOHDR_write"><code>NOHDR</code></a> are
+                               described under <a href="write.htm#syntax_decsr_write_1">Syntax
+                                  1</a> of the <code>WRITE</code> statement.
+                  </p> 
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="write.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="write_exa"></a></div> 
+         
+      <h2> Examples </h2>
+      <ul>
+         <li>
+            <p class="initem"><a href="write.htm#Example_1_write">Example 1 - WRITE Statement Using '=', 'text', '/'</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="write.htm#Example_2_write">Example 2 - WRITE Statement Using nX, nT Notation</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="write.htm#Example_3_write">Example 3 - WRITE Statement Using T* Notation</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="write.htm#Example_4_write">Example 4 - WRITE Statement Using P* Notation</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="write.htm#Example_5_write">Example 5 - WRITE Statement Using '=' and Parameters on Statement/Element (Field) Level</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="write.htm#Example_6_write">Example 6 - Report Specification with Output File Defined to Natural as PC</a></p>
+         </li>
+      </ul>
+      <div><a name="Example_1_write"></a></div> 
+          
+      <h3>Example 1 - WRITE Statement Using '=',
+              '<var>text</var>', '/'
+      </h3> 
+           
+           <pre class="verbatim">** Example 'WRTEX1': WRITE (with '=', 'text', '/')                      
+************************************************************************
+DEFINE DATA LOCAL                                                       
+1 EMPL-VIEW VIEW OF EMPLOYEES                                           
+  2 FULL-NAME                                                           
+    3 FIRST-NAME                                                        
+    3 MIDDLE-I                                                          
+    3 NAME                                                              
+  2 CITY                                                                
+  2 COUNTRY                                                             
+END-DEFINE                                                              
+*                                                                       
+LIMIT 1                                                                 
+READ EMPL-VIEW BY NAME                                                  
+  /*                                                                     
+  <strong>WRITE NOTITLE                                                         
+        '=' NAME '=' FIRST-NAME '=' MIDDLE-I //                         
+        'L O C A T I O N' /                                             
+        'CITY:   ' CITY    /                                            
+        'COUNTRY:' COUNTRY //</strong>
+  /*                         
+END-READ                     
+END                         </pre> 
+           <h4 class="floating-title">Output of Program WRTEX1:</h4> <pre class="system-output">NAME: ABELLAN              FIRST-NAME: KEPA                 MIDDLE-I:       
+                                                                            
+L O C A T I O N                                                             
+CITY:    MADRID                                                             
+COUNTRY: E     </pre> 
+          <div><a name="Example_2_write"></a></div> 
+          
+      <h3>Example 2 - WRITE Statement Using <var>n</var>X,
+              <var>n</var>T Notation
+      </h3> 
+           
+           <pre class="verbatim">** Example 'WRTEX2': WRITE (with nX, nT notation)                       
+************************************************************************
+DEFINE DATA LOCAL                                                       
+1 EMPL-VIEW VIEW OF EMPLOYEES                                           
+  2 NAME                                                                
+  2 JOB-TITLE                                                           
+END-DEFINE                                                              
+*                                                                       
+LIMIT 4                                                                 
+READ EMPL-VIEW BY NAME                                                  
+  <strong>WRITE NOTITLE 5X NAME 50T JOB-TITLE</strong>                               
+END-READ                                                                
+END   </pre> 
+           <h4 class="floating-title">Output of WRTEX2:</h4> <pre class="system-output">
+ABELLAN                                     MAQUINISTA             
+ACHIESON                                    DATA BASE ADMINISTRATOR
+ADAM                                        CHEF DE SERVICE        
+ADKINSON                                    PROGRAMMER  </pre> 
+          <div><a name="Example_3_write"></a></div> 
+          
+      <h3>Example 3 - WRITE Statement Using T* Notation</h3> 
+           
+           <pre class="verbatim">** Example 'WRTEX3': WRITE (with T* notation)                           
+************************************************************************
+DEFINE DATA LOCAL                                                       
+1 EMPL-VIEW VIEW OF EMPLOYEES                                           
+  2 NAME                                                                
+  2 CITY                                                                
+  2 SALARY (1)                                                          
+END-DEFINE                                                              
+*                                                                       
+LIMIT 5                                                                 
+READ EMPL-VIEW BY CITY STARTING FROM 'ALBU'                             
+  DISPLAY NOTITLE CITY NAME SALARY (1)                                  
+  AT BREAK CITY                                                         
+    /*                                                                  
+    <strong>WRITE / 'CITY AVERAGE:' T*SALARY (1) AVER(SALARY(1)) //</strong>       
+    /*                                                                  
+  END-BREAK                                                             
+END-READ                                                                
+END       </pre> 
+           <h4 class="floating-title">Output of Program WRTEX3:</h4> <pre class="system-output">        CITY                 NAME           ANNUAL  
+                                            SALARY  
+-------------------- -------------------- ----------
+                                                    
+ALBUQUERQUE          HAMMOND                   22000
+ALBUQUERQUE          ROLLING                   34000
+ALBUQUERQUE          FREEMAN                   34000
+ALBUQUERQUE          LINCOLN                   41000
+                                                    
+CITY AVERAGE:                                  32750
+                                                    
+                                                    
+ALFRETON             GOLDBERG                   4800
+                                                    
+CITY AVERAGE:                                   4800</pre> 
+          <div><a name="Example_4_write"></a></div> 
+          
+      <h3>Example 4 - WRITE Statement Using P* Notation</h3> 
+           
+           <pre class="verbatim">** Example 'WRTEX4': WRITE (with P* notation)                           
+************************************************************************
+DEFINE DATA LOCAL                                                       
+1 EMPL-VIEW VIEW OF EMPLOYEES                                           
+  2 NAME                                                                
+  2 CITY                                                                
+  2 BIRTH                                                               
+  2 SALARY (1)                                                          
+END-DEFINE                                                              
+*                                                                       
+LIMIT 3                                                                 
+READ EMPL-VIEW BY CITY FROM 'N'                                         
+  DISPLAY NOTITLE NAME CITY                                             
+          VERT AS 'BIRTH/SALARY' BIRTH (EM=YYYY-MM-DD) SALARY (1)       
+  SKIP 1                                                                
+  AT BREAK CITY                                                          
+    <strong>WRITE  / 'CITY AVERAGE' P*SALARY (1) AVER(SALARY (1)) //</strong>       
+  END-BREAK                                                             
+END-READ                                                                
+END</pre> 
+           <h4 class="floating-title">Output of Program WRTEX4:</h4> <pre class="system-output">        NAME                 CITY           BIRTH   
+                                            SALARY  
+-------------------- -------------------- ----------
+                                                    
+WILCOX               NASHVILLE            1970-01-01
+                                               38000
+                                                    
+MORRISON             NASHVILLE            1949-07-10
+                                               36000
+                                                    
+                                                    
+CITY AVERAGE                                   37000
+                                                    
+                                                    
+BOYER                NEMOURS              1955-11-23
+                                              195900
+                                                    
+                                                    
+CITY AVERAGE                                  195900</pre> 
+          <div><a name="Example_5_write"></a></div> 
+          
+      <h3>Example 5 - WRITE Statement Using '=' and Parameters on
+              Statement/Element (Field) Level
+      </h3> 
+           
+           <pre class="verbatim">** Example 'WRTEX5': WRITE (using '=', statement/element parameters)    
+************************************************************************
+DEFINE DATA LOCAL                                                       
+1 EMPL-VIEW VIEW OF EMPLOYEES                                           
+  2 NAME                                                                
+  2 PERSONNEL-ID                                                        
+  2 PHONE                                                               
+END-DEFINE                                                              
+*                                                                       
+LIMIT 2                                                                 
+READ EMPL-VIEW BY NAME                                                  
+  <strong>WRITE NOTITLE (AL=16 NL=8)                                            
+        '=' PERSONNEL-ID '=' NAME '=' PHONE (AL=10 EM=XXX-XXXXXXX)</strong> 
+END-READ                                                                
+END   </pre> 
+           <h4 class="floating-title">Output of Program WRTEX5:</h4> <pre class="system-output">PERSONNEL ID: 60008339         NAME: ABELLAN          TELEPHONE: 435-6726
+PERSONNEL ID: 30000231         NAME: ACHIESON         TELEPHONE: 523-341</pre> 
+          <div><a name="Example_6_write"></a></div> 
+          
+      <h3>Example 6 - Report Specification with Output File Defined to Natural
+              as PC
+      </h3> 
+           
+           <pre class="verbatim">** Example 'PCDIEX1': DISPLAY and WRITE to PC                           
+**                                                                      
+** NOTE: Example requires that Natural Connection is installed.         
+************************************************************************
+DEFINE DATA LOCAL                                                       
+01 PERS VIEW OF EMPLOYEES                                               
+  02 PERSONNEL-ID                                                       
+  02 NAME                                                               
+  02 CITY                                                               
+END-DEFINE                                                              
+*                                                                       
+FIND PERS WITH CITY = 'NEW YORK'               /* Data selection        
+  <strong>WRITE (7) TITLE LEFT 'List of employees in New York' /                
+  DISPLAY (7)          /* (7) designates the output file (here the PC).</strong>
+    'Location'  CITY                                                    
+    'Surname'   NAME                                                    
+    'ID'        PERSONNEL-ID                                            
+END-FIND                                                                
+END  </pre> 
+           
+        
+       <div class="noprint">
+         <div class="nospy">
+            <p><a href="write.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../sm/write.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/sm/write.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="sm-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="upload.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="writeti.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

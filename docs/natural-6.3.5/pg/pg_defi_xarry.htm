@@ -1,0 +1,864 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>X-Arrays</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="pg_defi_xarry"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_defi_xarry.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_defi_xarry.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_defi-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_defi_array.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_udf.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Programming Guide&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x122"></a>X-Arrays
+         </h1>
+      </div> 
+         
+         
+      <p>When an ordinary array field is defined, you have to specify the index
+             bounds exactly, hence the number of occurrences for each dimension. At runtime,
+             the complete array field is existent by default; each of its defined
+             occurrences can be accessed without performing additional allocation
+             operations. The size layout cannot be changed anymore; you may neither add nor
+             remove field occurrences. 
+      </p> 
+         
+      <p>However, if the number of occurrences needed is unknown at development
+             time, but you want to flexibly increase or decrease the number of the array
+             fields at runtime, you should use what is called an X-array (eXtensible
+             array).
+      </p> 
+         
+      <p>An X-array can be resized at runtime and can help you manage memory more
+             efficiently. For example, you can use a large number of array occurrences for a
+             short time and then reduce memory when the application is no longer using the
+             array.
+      </p> 
+         
+      <p>This document covers the following topics:</p>
+         
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_defi_xarry.htm#def">Definition</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_xarry.htm#sto_xarray">Storage Management of X-Arrays</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_xarry.htm#sto_group">Storage Management of X-Group Arrays</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_xarry.htm#ref_xarray">Referencing an X-Array</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_xarry.htm#param_trans">Parameter Transfer with X-Arrays</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_xarry.htm#param_trans_xgroup">Parameter Transfer with X-Group Arrays</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_xarry.htm#dynam_xarray_pg_defi_xarry">X-Array of Dynamic Variables</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_xarry.htm#lbound_ubound">Lower and Upper Bound of an Array</a></p>
+         </li>
+      </ul> 
+        
+      <hr> 
+        
+      <div><a name="def"></a></div> 
+         
+      <h2> Definition </h2> 
+          
+          
+      <p>An X-array is an array of which the number of occurrences is undefined
+              at compile time. It is defined in a <a href="../sm/defineda.htm"><code>DEFINE DATA</code></a> statement by
+              specifying an asterisk (*) for at least one index bound of at least one array
+              dimension. An asterisk (*) character in the index definition represents a
+              variable index bound which can be assigned to a definite value during program
+              execution. Only one bound - either upper or lower - may be defined as variable,
+              but not both.
+      </p> 
+          
+      <p>An X-array can be defined whenever a (fixed) array can be defined, i.e.
+              at any level or even as an indexed group. It cannot be used to access
+              MU-/PE-fields of a database view. A multidimensional array may have a mixture
+              of constant and variable bounds.
+      </p> 
+          
+      <p> Example:</p> 
+          <pre class="verbatim">
+DEFINE DATA LOCAL
+1 #X-ARR1 (A5/1:*)          /* lower bound is fixed at 1, upper bound is variable
+1 #X-ARR2 (A5/*)            /* shortcut for (A5/1:*)
+1 #X-ARR3 (A5/*:100)        /* lower bound is variable, upper bound is fixed at 100
+1 #X-ARR4 (A5/1:10,1:*)     /* 1st dimension has a fixed index range with (1:10)
+END-DEFINE                  /* 2nd dimension has fixed lower bound 1 and variable upper bound
+</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_defi_xarry.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="sto_xarray"></a></div> 
+         
+      <h2> Storage Management of X-Arrays </h2> 
+          
+          
+      <p>Occurrences of an X-array must be allocated explicitly before they can
+              be accessed. To increase or decrease the number of occurrences of a dimension,
+              the <a href="../sm/expand.htm"><code>EXPAND</code></a>,
+              <a href="../sm/resize.htm"><code>RESIZE</code></a> and
+              <a href="../sm/reduce.htm"><code>REDUCE</code></a> statements may
+              be used.
+      </p> 
+          
+      <p>However, the number of dimensions of the X-array (1, 2 or 3 dimensions)
+              cannot be changed.
+      </p> 
+          
+      <p> Example: </p> 
+          <pre class="verbatim">
+DEFINE DATA LOCAL
+1 #X-ARR(I4/10:*)
+END-DEFINE
+<strong>EXPAND ARRAY #X-ARR TO (10:10000)</strong> 
+/* #X-ARR(10) to #X-ARR(10000) are accessible
+WRITE *LBOUND(#X-ARR)                  /* is 10
+   *UBOUND(#X-ARR)                     /* is 10000
+   *OCCURRENCE(#X-ARR)                 /* is 9991
+#X-ARR(*) := 4711                      /* same as #X-ARR(10:10000) := 4711
+/* resize array from current lower bound=10 to upper bound =1000 
+<strong>RESIZE ARRAY #X-ARR TO (*:1000)</strong>
+/* #X-ARR(10) to #X-ARR(1000) are accessible
+/* #X-ARR(1001) to #X-ARR(10000) are released
+WRITE *LBOUND(#X-ARR)                  /* is 10
+   *UBOUND(#X-ARR)                     /* is 1000
+   *OCCURRENCE(#X-ARR)                 /* is 991
+/* release all occurrences
+<strong>REDUCE ARRAY #X-ARR TO  0</strong>
+WRITE *OCCURRENCE(#X-ARR)              /* is 0
+</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_defi_xarry.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="sto_group"></a></div> 
+         
+      <h2> Storage Management of X-Group Arrays </h2> 
+          
+          
+      <p>If you want to increase or decrease occurrences of X-group arrays, you
+              must distinguish between independent and dependent dimensions.
+      </p> 
+          
+      <p>A dimension which is specified directly (not inherited) for an X-(group)
+              array is <em>independent</em>.
+      </p> 
+          
+      <p>A dimension which is <em>not</em> specified directly, but inherited for
+              an array is <em>dependent</em>.
+      </p> 
+          
+      <p>Only independent dimensions of an X-array can be changed in the
+              <a href="../sm/expand.htm"><code>EXPAND</code></a>,
+              <a href="../sm/resize.htm"><code>RESIZE</code></a> and
+              <a href="../sm/reduce.htm"><code>REDUCE</code></a> statements,
+              dimensions must be changed by using the name of the corresponding X-group array
+              which owns this dimension as independent dimension.
+      </p> 
+          
+      <div><a name="ex_dim"></a></div>
+      <h4 class="floating-title"> Example - Independent/Dependent Dimensions:
+              
+      </h4> 
+          <pre class="verbatim">
+DEFINE  DATA LOCAL                                    
+1 #X-GROUP-ARR1(1:*)                  /* (1:*)        
+  2 #X-ARR1    (I4)                   /* (1:*)        
+  2 #X-ARR2    (I4/2:*)               /* (1:*,2:*)    
+  2 #X-GROUP-ARR2                     /* (1:*)        
+    3 #X-ARR3  (I4)                   /* (1:*)        
+    3 #X-ARR4  (I4/3:*)               /* (1:*,3:*)    
+    3 #X-ARR5  (I4/4:*, 5:*)          /* (1:*,4:*,5:*)
+END-DEFINE
+</pre> 
+          <p>The following table shows whether the dimensions in the above program
+              are independent or dependent.
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th>Name</th> 
+                       
+               <th>Dependent Dimension</th> 
+                       
+               <th>Independent Dimension</th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td><code>#X-GROUP-ARR1</code></td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td><code>(1:*)</code></td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>#X-ARR1</code></td> 
+                       
+               <td><code>(1:*)</code></td> 
+                       
+               <td>&nbsp;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>#X-ARR2</code></td> 
+                       
+               <td><code>(1:*)</code></td> 
+                       
+               <td><code>(2:*)</code></td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>#X-GROUP-ARR2</code></td> 
+                       
+               <td><code>(1:*)</code></td> 
+                       
+               <td>&nbsp;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>#X-ARR3</code></td> 
+                       
+               <td><code>(1:*)</code></td> 
+                       
+               <td>&nbsp;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>#X-ARR4</code></td> 
+                       
+               <td><code>(1:*)</code></td> 
+                       
+               <td><code>(3:*)</code></td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>#X-ARR5</code></td> 
+                       
+               <td><code>(1:*)</code></td> 
+                       
+               <td><code>(4:*,5:*)</code></td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>The only index notation permitted for a dependent dimension is either a
+              single asterisk (*), a range defined with asterisks (*:*) or the index bounds
+              defined.
+      </p> 
+          
+      <p>This is to indicate that the bounds of the dependent dimension must be
+              kept as they are and cannot be changed.
+      </p> 
+          
+      <p>The occurrences of the dependent dimensions can only be changed by
+              manipulating the corresponding array groups.
+      </p> 
+          <pre class="verbatim">
+EXPAND ARRAY #X-GROUP-ARR1 TO (1:11)       /* #X-ARR1(1:11) are allocated
+                                           /* #X-ARR3(1:11) are allocated
+EXPAND ARRAY #X-ARR2 TO (*:*, 2:12)        /* #X-ARR2(1:11, 2:12) are allocated
+EXPAND ARRAY #X-ARR2 TO (1:*, 2:12)        /* same as before
+EXPAND ARRAY #X-ARR2 TO (*  , 2:12)        /* same as before
+EXPAND ARRAY #X-ARR4 TO (*:*, 3:13)        /* #X-ARR4(1:11, 3:13) are allocated
+EXPAND ARRAY #X-ARR5 TO (*:*, 4:14, 5:15)  /* #X-ARR5(1:11, 4:14, 5:15) are allocated
+</pre> 
+          <p>The <code>EXPAND</code> statements may be coded in an arbitrary
+              order.
+      </p> 
+          
+      <p>The following use of the <code>EXPAND</code> statement is not allowed,
+              since the arrays only have dependent dimensions.
+      </p> 
+          <pre class="verbatim">
+EXPAND ARRAY #X-ARR1 TO ...
+EXPAND ARRAY #X-GROUP-ARR2 TO ...
+EXPAND ARRAY #X-ARR3 TO ...
+</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_defi_xarry.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="ref_xarray"></a></div> 
+         
+      <h2> Referencing an X-Array </h2> 
+          
+          
+      <p>The occurrences of an X-array must be allocated by an
+              <a href="../sm/expand.htm"><code>EXPAND</code></a> or
+              <a href="../sm/resize.htm"><code>RESIZE</code></a> statement
+              before they can be accessed. The statements
+              <a href="../sm/read.htm"><code>READ</code></a>,
+              <a href="../sm/find.htm"><code>FIND</code></a> and
+              <a href="../sm/get.htm"><code>GET</code></a> allocate occurrences
+              implicitly if values are obtained from Tamino.
+      </p> 
+          
+      <p>As a general rule, an attempt to address a non existent X-array
+              occurrence leads to a runtime error. In some statements however, the access to
+              a non materialized X-array field does not cause an error situation if all
+              occurrences of an X-array are referenced by using the complete range notation,
+              for example: <code>#X-ARR(*)</code>. This applies to 
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">parameters, used in <a href="../sm/call.htm"><code>CALL</code></a> statement,
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">parameters used in <a href="../sm/callnat.htm"><code>CALLNAT</code></a>,
+                      <a href="../sm/perform.htm"><code>PERFORM</code></a> or <code>OPEN DIALOG</code>, if defined as optional
+                      parameters,
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">source fields used in <a href="../sm/compress.htm"><code>COMPRESS</code></a> statement,
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">output fields supplied in a <a href="../sm/printsm.htm"><code>PRINT</code></a> statement,
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">fields referenced in a <a href="../sm/reset.htm"><code>RESET</code></a> statement.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>If individual occurrences of a non materialized X-array are referenced
+              in one of these statements, a corresponding error message is issued.
+      </p> 
+          
+      <p>Example:</p> 
+          <pre class="verbatim">
+DEFINE DATA LOCAL 
+1 #X-ARR (A10/1:*) /* X-array only defined, but not allocated
+END-DEFINE        
+RESET #X-ARR(*)    /* no error, because complete field referenced with (*)   
+RESET #X-ARR(1:3)  /* runtime error, because individual occurrences (1:3) are referenced
+END  
+</pre> 
+          <p>The asterisk (*) notation in an array reference stands for the complete
+              range of a dimension. If the array is an X-array, the asterisk is the index
+              range of the current allocated lower and upper bound values which are
+              determined by <a href="../vari/appl.htm#LBOUND"><code>*LBOUND</code></a>
+              and <a href="../vari/appl.htm#UBOUND"><code>*UBOUND</code></a>.
+      </p>
+          
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_defi_xarry.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="param_trans"></a></div> 
+         
+      <h2> Parameter Transfer with X-Arrays </h2> 
+          
+          
+      <p>X-arrays that are used as parameters are treated like constant arrays
+              with regard to the verification of the following:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">format,</p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">length,</p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">dimension or</p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">number of occurrences.</p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>In addition, X-array parameters can also change the number of
+              occurrences by using the statement <a href="../sm/resize.htm"><code>RESIZE</code></a>,
+              <a href="../sm/reduce.htm"><code>REDUCE</code></a> or
+              <a href="../sm/expand.htm"><code>EXPAND</code></a>. The question
+              if a resize of an X-array parameter is permitted depends on three factors:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">the type of parameter transfer used, that is by reference or by
+                      value,
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">the definition of the caller or parameter X-array and</p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">the type of X-array range being passed on (complete range or
+                      subrange).
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>The following tables demonstrate when an
+              <a href="../sm/expand.htm"><code>EXPAND</code></a>,
+              <a href="../sm/resize.htm"><code>RESIZE</code></a> or
+              <a href="../sm/reduce.htm"><code>REDUCE</code></a> statement can
+              be applied to an X-array parameter.
+      </p> 
+          
+         
+      <div><a name="d0e15038"></a></div> 
+          
+      <h3>Example with CALL By Value</h3> 
+           
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th rowspan="2">CALLER</th> 
+                        
+               <th colspan="3">PARAMETER</th> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>Static</td> 
+                        
+               <td>Variable (1:V)</td> 
+                        
+               <td>X-Array</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>Static</td> 
+                        
+               <td>NO</td> 
+                        
+               <td>NO</td> 
+                        
+               <td>YES</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>X-Array subrange, e.g. <code>CALLNAT...#XA(1:5)</code> 
+               </td>
+                        
+                        
+               <td>NO</td> 
+                        
+               <td>NO</td> 
+                        
+               <td>YES</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>X-Array complete range, e.g. <code>CALLNAT...#XA(*)</code>
+                            
+               </td> 
+                        
+               <td>NO</td> 
+                        
+               <td>NO</td> 
+                        
+               <td>YES</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+          
+         
+      <div><a name="d0e15136"></a></div> 
+          
+      <h3>CALL By Reference/CALL By Value Result</h3> 
+           
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                  
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th rowspan="2">CALLER</th> 
+                        
+               <th colspan="4">PARAMETER</th> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>Static</td> 
+                        
+               <td>Variable (1:V)</td> 
+                        
+               <td>X-Array with a fixed lower bound, e.g. 
+                  <pre class="verbatim">
+DEFINE DATA PARAMETER
+1 #PX (A10/1:*)
+</pre> </td> 
+                        
+               <td>X-Array with a fixed upper bound, e.g. 
+                  <pre class="verbatim">
+DEFINE DATA PARAMETER
+1 #PX (A10/*:1)
+</pre></td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>Static</td> 
+                        
+               <td>NO</td> 
+                        
+               <td>NO</td> 
+                        
+               <td>NO</td> 
+                        
+               <td>NO</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>X-Array subrange, e.g. 
+                  <pre class="verbatim">CALLNAT...#XA(1:5)</pre> </td> 
+                        
+               <td>NO</td> 
+                        
+               <td>NO</td> 
+                        
+               <td>NO</td> 
+                        
+               <td>NO</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>X-Array with a fixed lower bound, complete range, e.g. 
+                  <pre class="verbatim">
+DEFINE DATA LOCAL
+1 #XA(A10/1:*) 
+... 
+CALLNAT...#XA(*)
+</pre></td> 
+                        
+               <td>NO</td> 
+                        
+               <td>NO</td> 
+                        
+               <td>YES</td> 
+                        
+               <td>NO</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>X-Array with a fixed upper bound, complete range, e.g. 
+                  <pre class="verbatim">
+DEFINE DATA LOCAL
+1 #XA(A10/*:1)
+... 
+CALLNAT...#XA(*)
+</pre></td> 
+                        
+               <td>NO</td> 
+                        
+               <td>NO</td> 
+                        
+               <td>NO</td> 
+                        
+               <td>YES</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_defi_xarry.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="param_trans_xgroup"></a></div> 
+         
+      <h2>Parameter Transfer with X-Group Arrays</h2> 
+          
+          
+      <p>The declaration of an X-group array implies that each element of the
+              group will have the same values for upper boundary and lower boundary.
+              Therefore, the number of occurrences of dependent dimensions of fields of an
+              X-group array can only be changed when the group name of the X-group array is
+              given with the <a href="../sm/resize.htm"><code>RESIZE</code></a>,
+              <a href="../sm/reduce.htm"><code>REDUCE</code></a> and
+              <a href="../sm/expand.htm"><code>EXPAND</code></a> statement (see
+              <a href="pg_defi_xarry.htm#sto_group">Storage Management of X-Group
+            Arrays</a> above). 
+      </p> 
+          
+      <p>Members of X-group arrays may be transferred as parameters to X-group
+              arrays defined in a parameter data area. The group structures of the caller and
+              the callee need not necessarily be identical. A <code>RESIZE</code>,
+              <code>REDUCE</code> and <code>EXPAND</code> done by the callee is only possible
+              as far as the X-group array of the caller stays consistent.
+      </p> 
+          
+      <h4 class="floating-title">Example - Elements of X-Group Array Passed as
+              Parameters:
+      </h4> 
+          
+      <p>Program:</p> 
+          <pre class="verbatim">DEFINE DATA LOCAL
+1 #X-GROUP-ARR1(1:*)                    /* (1:*)
+   2 #X-ARR1 (I4)                       /* (1:*)
+   2 #X-ARR2 (I4)                       /* (1:*)
+1 #X-GROUP-ARR2(1:*)                    /* (1:*)
+   2 #X-ARR3 (I4)                       /* (1:*)
+   2 #X-ARR4 (I4)                       /* (1:*)
+END-DEFINE
+...
+CALLNAT ... #X-ARR1(*) #X-ARR4(*)
+...
+END</pre> 
+          <p>Subprogram:</p> 
+          <pre class="verbatim">DEFINE DATA PARAMETER
+1 #X-GROUP-ARR(1:*)                     /* (1:*)
+   2 #X-PAR1 (I4)                       /* (1:*)
+   2 #X-PAR2 (I4)                       /* (1:*)
+END-DEFINE
+...
+RESIZE ARRAY #X-GROUP-ARR to (1:5)
+...
+END
+</pre> 
+          <p>The <code>RESIZE</code> statement in the subprogram is not possible. It
+              would result in an inconsistent number of occurrences of the fields defined in
+              the X-group arrays of the program. 
+      </p> 
+         
+      <div class="noprint">
+         <p><a href="pg_defi_xarry.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="dynam_xarray_pg_defi_xarry"></a></div> 
+         
+      <h2>X-Array of Dynamic Variables</h2> 
+          
+          
+      <p>An X-array of dynamic variables may be allocated by first specifying the
+              number of occurrences using the <a href="../sm/expand.htm"><code>EXPAND</code></a> statement and then
+              assigning a value to the previously allocated array occurrences.
+      </p> 
+          
+      <h4 class="floating-title"> Example: </h4> 
+          <pre class="verbatim">
+DEFINE DATA LOCAL
+ 1 #X-ARRAY(A/1:*)  DYNAMIC
+END-DEFINE
+EXPAND  ARRAY   #X-ARRAY TO (1:10)
+  /* allocate #X-ARRAY(1) to #X-ARRAY(10) with zero length.
+  /* *LENGTH(#X-ARRAY(1:10)) is zero 
+#X-ARRAY(*) := 'abc'
+  /* #X-ARRAY(1:10) contains 'abc',
+  /* *LENGTH(#X-ARRAY(1:10)) is 3
+EXPAND  ARRAY   #X-ARRAY TO (1:20)
+  /* allocate #X-ARRAY(11) to #X-ARRAY(20) with zero length
+  /* *LENGTH(#X-ARRAY(11:20)) is zero
+#X-ARRAY(11:20) := 'def'
+  /* #X-ARRAY(11:20) contains 'def'
+  /* *LENGTH(#X-ARRAY(11:20)) is 3
+</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_defi_xarry.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="lbound_ubound"></a></div> 
+         
+      <h2> Lower and Upper Bound of an Array </h2> 
+          
+          
+      <p>The system variables <a href="../vari/appl.htm#LBOUND"><code>*LBOUND</code></a>
+              and <a href="../vari/appl.htm#UBOUND"><code>*UBOUND</code></a>
+              contain the current lower and upper bound of an array for the specified
+              dimension(s) (1,2 or 3).
+      </p> 
+          
+      <p>If no occurrences of an X-array have been allocated, the access to
+              <code>*LBOUND</code> or <code>*UBOUND</code> is
+              undefined and leads to a runtime error. In order to avoid a runtime error,
+              <a href="../vari/appl.htm#OCCURRENCE"><code>*OCCURRENCE</code></a>
+              may be used to check against zero occurrences before
+              <code>*LBOUND</code> or <code>*UBOUND</code> is
+              evaluated:
+      </p> 
+          
+      <p> Example: </p> 
+          <pre class="verbatim">IF *OCCURRENCE (#A) NE 0  AND  *UBOUND(#A) &lt; 100 THEN ...</pre> 
+          
+        
+       <div class="noprint">
+         <div class="nospy">
+            <p><a href="pg_defi_xarry.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_defi_xarry.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_defi_xarry.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_defi-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_defi_array.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_udf.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

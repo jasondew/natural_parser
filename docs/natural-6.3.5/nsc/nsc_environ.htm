@@ -1,0 +1,1343 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Protecting Environments</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="nsc_environ"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../nsc/nsc_environ.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/nsc/nsc_environ.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc_prolib.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc_ddmmf.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Natural Security&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x27"></a> Protecting Environments
+         </h1>
+      </div> 
+         
+         
+      <p>This section covers the following topics:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="nsc_environ.htm#ConceptEnvProt">Concept of Environment Protection</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_environ.htm#ActivateEnvProt">Activation of Environment Protection</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_environ.htm#DefineEnvProfiles">Defining Environment Profiles</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_environ.htm#ComponentsEnvProfile">Components of an Environment Profile</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_environ.htm#AccessLibEnv">Disallowing/Allowing Access to Libraries in Environments</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_environ.htm#LinkUsersEnvs">Disallowing/Allowing Users Access to Environments</a></p>
+         </li>
+      </ul> 
+        
+      <hr> 
+        
+      <div><a name="ConceptEnvProt"></a></div> 
+         
+      <h2> Concept of Environment Protection</h2> 
+          
+          
+      <p>Natural Security allows you to make users' access to a library
+              environment-specific. A Natural <em>environment</em> is determined by the
+              combination of the system files FNAT, FUSER, FSEC and FDIC. You define a
+              security profile for each environment (that is, for each system-file
+              combination) you wish to protect, and control users' access to it. You can also
+              make a library accessible in some environments, but not in others.
+      </p> 
+          
+      <p>A logon to another environment occurs when a users logs onto a library
+              located on another FUSER system file (as specified by the
+              <a href="nsc_lib.htm#Library_File">"Library File"</a>
+              DBID/FNR in the library profile).
+      </p> 
+          
+      <p>Whenever a user logs on to a library in another environment, Natural
+              Security will check whether:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">access to the library is allowed in that environment, and</p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">the user is authorized to access that environment.</p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>Such a check is performed not only when a user explicitly logs on to a
+              library, but also when the user invokes a function which implicitly accesses
+              another library or processes the contents of another library.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="nsc_environ.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="ActivateEnvProt"></a></div> 
+         
+      <h2> Activation of Environment Protection</h2> 
+          
+          
+      <p>Environment protection is activated by setting the general option
+              <a href="nsc_admin.htm#SysFileProtection">"Environment
+                 Protection"</a> to "Y".
+      </p> 
+          
+      <p>If environment protection is active, the following applies:</p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">Access to undefined environments is not possible.</p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">For every environment to be accessed, an environment security profile
+                      has to be defined.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">By default, access to a library is allowed in any defined
+                      environment.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">By default, access to a defined environment is allowed for all
+                      users.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">For individual defined environments, you can disallow access to a
+                      library.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">For individual users, you can disallow access to a defined
+                      environment.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>To deactivate environment protection, you set the general option
+              "Environment Protection" option to "N".
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="nsc_environ.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="DefineEnvProfiles"></a></div> 
+         
+      <h2> 
+             <a name="x28"></a> Defining Environment Profiles
+      </h2> 
+          
+          
+      <p>The Administrator Services function "Environment Profiles"
+              is used to define environment profiles, that is, security profiles for the
+              individual system-file combinations.
+      </p> 
+          
+      <p>To invoke this function, you select "Administrator
+              Services" on the Main Menu. The Administrator Services Menu will be
+              displayed.
+      </p> 
+          
+      <p class="note"><strong>Note:</strong><br> <a href="nsc_admin.htm#Access_to_Administrator_Services">Access to
+                 Administrator Services</a> may be restricted (as explained in the
+              section <cite>Administrator Services</cite>).
+      </p> 
+          
+      <p>On the Administrator Services Menu 2, you select "Environment
+              profiles". The Environment Maintenance selection list will be
+              invoked.
+      </p> 
+          
+         
+      <div><a name="d0e20344"></a></div> 
+          
+      <h3>Environment Maintenance Selection List</h3> 
+           
+           
+      <p>The Environment Maintenance selection list displays a list of all
+               environment profiles which have been defined.
+      </p> 
+           
+      <p>The list can be scrolled as described in the section
+               <a href="nsc_way.htm#nsc_way">Finding Your Way In Natural
+            Security</a>.
+      </p> 
+           
+      <p>For each environment profile, either its system-file combination
+               (database IDs and file numbers of system files FUSER, FDIC, FSEC and FNAT) or
+               its ID is displayed; with <span class="key">PF4</span> you can switch between the two
+               displays. In addition, each environment profile's alias (AL) and protection
+               status (P) are displayed.
+      </p> 
+           
+          
+         
+      <div><a name="d0e20369"></a></div> 
+          
+      <h3>Protection Status</h3> 
+           
+           
+      <p>The protection status can be:</p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th> I</th> 
+                        
+               <td>The environment profile is inactive <br>(both NSC
+                  Protection = N and NSF Protection = N in the environment profile).
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th> N</th> 
+                        
+               <td>Access to the environment is evaluated by Natural Security <br>(NSC
+                            Protection = Y in the environment profile).
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th> S</th> 
+                        
+               <td>Access to the environment is evaluated by the SAF server <br>(NSF
+                            Protection = Y in the environment profile).
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+          
+         
+      <div><a name="d0e20427"></a></div> 
+          
+      <h3>Available Functions</h3> 
+           
+           
+      <p>The following functions are available:</p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th align="left">Code</th> 
+                        
+               <th align="left">Function</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> <code>AD</code></td> 
+                        
+               <td>Add a new environment profile. <br>
+                  (You can also invoke this function by entering "AD" in
+                            the Command line.)
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><code>CO</code></td> 
+                        
+               <td>Copy environment profile.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>MO</code></td> 
+                        
+               <td>Modify environment profile.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><code>RE</code></td> 
+                        
+               <td>Rename environment profile.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>DE</code></td> 
+                        
+               <td> Delete environment profile.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>DI</code></td> 
+                        
+               <td> Display environment profile.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>EP</code></td> 
+                        
+               <td> Protect environment.</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>To invoke a function for an environment, you mark the environment with
+               the appropriate function code in column "Co".
+      </p> 
+           
+      <p>You may select various environments for various functions at the same
+               time; that is, you can mark several environments on the screen with a function
+               code. For each environment marked, the selected functions will then be executed
+               one after another.
+      </p> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="nsc_environ.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="ComponentsEnvProfile"></a></div> 
+         
+      <h2> 
+             <a name="x29"></a> Components of an Environment Profile
+      </h2> 
+          
+          
+      <p>When you add a new environment or modify an existing one, the Define
+              Environment Profile screen will be displayed. The items you can define as part
+              of an environment profile on this screen and any subsequent screens/windows
+              are:
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th align="left">Field</th> 
+                       
+               <th align="left">Explanation</th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> Environment ID</td> 
+                       
+               <td> 
+                  
+                  <p>You specify a descriptive name for the environment
+                        profile.
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> Alias</td> 
+                       
+               <td> 
+                  
+                  <p>You can specify a one-character alias for the environment profile.
+                     An alias can be shared by multiple environment profiles. By specifying the same
+                     alias in several environment profiles, you can form groups of environments.
+                  </p>
+                           
+                           
+                  <p>For example, you can use aliases like: D - for all development
+                               environments, T - for all test environments, P - for all production
+                               environments.
+                  </p> 
+                           
+                  <p>This will make the maintenance of environment profiles easier,
+                               because you can use the alias as selection criterion on the Environment
+                               Maintenance selection list to list all profiles which have the same alias.
+                  </p> 
+                           
+                  <p>For Natural SAF Security the following applies: The alias is used
+                               in the external security system to define the resources related to the
+                               system-file combination of this environment. The rules defined for an alias in
+                               the external security system apply to all system-file combinations in whose
+                               environment profiles this alias is specified.
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> General Options</td> 
+                       
+               <td> 
+                  
+                  <p>You specify by which system the environment is to be protected:</p>
+                           
+                           
+                  <ul> 
+                               
+                     <li> 
+                                    
+                                   
+                        <p class="initem"><strong>NSC Protection:</strong><br> If set to "Y", this activates the environment for
+                                       validation by Natural Security, as described in this documentation.
+                        </p> 
+                                  
+                     </li> 
+                               
+                     <li> 
+                                    
+                                   
+                        <p class="initem"><strong>NSF Protection:</strong><br> If set to "Y", this activates the environment for
+                                       validation by the SAF server, as described in the <cite>Natural SAF
+                                          Security</cite> documentation. This validation requires that the option
+                                       "Protect Environment" in the General NSF Options is set to
+                                       "Y" (see <cite>Natural SAF Security</cite>
+                                       documentation).
+                        </p> 
+                                  
+                     </li> 
+                              
+                  </ul> 
+                           
+                  <p>If both are set to "N", the environment profile is not
+                               active, that is, it is treated as if it were not defined.
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> System Files</td> 
+                       
+               <td> 
+                  
+                  <p>You define the environment by specifying the database IDs and file
+                     number of each system file (FUSER, FDIC, FSEC, FNAT). This combination of
+                     system files identifies the environment, and must be unique.
+                  </p> 
+                           
+                  <p>Once entered, the values of these fields cannot be changed.</p> 
+                           
+                  <p>If you press <span class="key">PF9</span> on the main environment profile screen,
+                               a window will be displayed showing the system-file combination of your current
+                               Natural session. In the window, you can mark with any character the system
+                               files you wish to be part of the environment whose profile you are
+                               creating.
+                  </p>
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+         
+      <div><a name="d0e20706"></a></div> 
+          
+      <h3>Additional Options</h3> 
+           
+           
+      <p>If you either mark the field "Additional Options" with
+               "Y" or press <span class="key">PF4</span>, a window will be
+               displayed from which you can select the following options:
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">Maintenance Information</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Security Notes</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Owners</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Session Options</p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>The options for which something has already been specified or defined
+               are marked with a plus sign (+).
+      </p> 
+           
+      <p>You can select one or more items from the window by marking them with
+               any character. For each item selected, an additional window will be
+               displayed:
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>Additional Option</th> 
+                        
+               <th>Explanation</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> Maintenance Information (display only)</td> 
+                        
+               <td>In this window, the following information is displayed: 
+                  
+                  <ul> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">the date and time when the security profile was created, the ID
+                           of the ADMINISTRATOR who created it, and (if applicable) the IDs of the
+                                        co-owners who countersigned for the creation;
+                        </p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">the date and time when the security profile was last modified,
+                                        the ID of the ADMINISTRATOR who made the last modification, and (if applicable)
+                                        the IDs of the co-owners who countersigned for the modification.
+                        </p> 
+                                   
+                     </li> 
+                               
+                  </ul>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Security Notes &nbsp;</td> 
+                        
+               <td>In this window, you may enter your notes on the security
+                  profile.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Owners &nbsp;</td> 
+                        
+               <td>In this window, you may enter up to eight IDs of
+                  ADMINISTRATORs. Only the ADMINISTRATORs specified here will be allowed to
+                  maintain this environment security profile or allow/disallow users' access to
+                  it. If no owner is specified, any user of type ADMINISTRATOR may do so. 
+                  
+                  <p>For each owner, the number of co-owners whose countersignatures
+                                will be required for maintenance/link permission may optionally be specified in
+                                the field after the ID.
+                  </p> 
+                            
+                  <p>For an explanation of owners and co-owners, see the section
+                                <a href="nsc_count.htm#nsc_count">Countersignatures</a>.
+                  </p>
+               </td>
+                        
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>Session Options</td> 
+                        
+               <td>See below.</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <h4 class="floating-title">Session Options</h4> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>Option</th> 
+                        
+               <th>Explanation</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> TEST Command</td> 
+                        
+               <td>With this option, you can control the use of the Natural system
+                  command TEST in the environment. Possible values are: 
+                  
+                  <ul> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">Y = The TEST command can be used without any restrictions.</p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">P = The TEST command can be used with the following
+                                        restrictions: the debugger commands <code>MODIFY VARIABLE</code>,
+                                        <code>ESCAPE ROUTINE</code>, <code>ESCAPE
+                                           BOTTOM</code> and <code>STOP</code> cannot be used.
+                        </p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">N = The use of the TEST command is disallowed altogether.</p> 
+                                   
+                     </li> 
+                               
+                  </ul> 
+                            
+                  <p>This option only applies to environments on mainframe
+                                computers.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="nsc_environ.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="AccessLibEnv"></a></div> 
+         
+      <h2> Disallowing/Allowing Access to Libraries in Environments</h2> 
+          
+          
+      <p>By default, when environment protection is active, access to a library
+              is allowed in any environment. For individual environments, you can disallow
+              access to a library.
+      </p> 
+          
+      <p>When access to a library is disallowed in at least one environment, the
+              fact that the library is "environment-protected" will be indicated
+              in the library's security profile.
+      </p> 
+          
+      <p>Two functions are available to disallow/allow environment-specific
+              access to libraries:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">To disallow/allow access to various libraries for one environment, you
+                      use the function <a href="nsc_environ.htm#LinkLibsEnv">"Protect
+                         environment"</a> (which is invoked from the Environment
+                      Maintenance selection list).
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">To disallow/allow access to one library for various environments, you
+                      use the function <a href="nsc_environ.htm#LinkLibEnvs">"Protect
+                         environments"</a> (which is invoked from the Library Maintenance
+                      selection list).
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>Both functions are described below.</p> 
+          
+         
+      <div><a name="LinkLibsEnv"></a></div> 
+          
+      <h3> Protecting a Single Environment for Multiple Libraries</h3> 
+           
+           
+      <p>On the Environment Maintenance selection list, you mark the environment
+               you wish to protect with "EP".
+      </p> 
+           
+      <p>A window will be displayed. Here you enter an
+               "L" in the field "Protect for users/libraries". You
+               can also enter a Start Value (as described in the section
+               <a href="nsc_way.htm#nsc_way">Finding Your Way in Natural
+            Security</a>) for the list of libraries to be displayed. In
+               addition, you can select the option "Select only disallowed ones"
+               - in which case the list of libraries to be displayed will only include those
+               libraries for which access in the environment is currently disallowed.
+      </p> 
+           
+      <p>Then, the Disallow/Allow Libraries screen will be displayed, showing
+               the list of libraries. The list can be scrolled as described in the section
+               <a href="nsc_way.htm#nsc_way">Finding Your Way In Natural
+            Security</a>.
+      </p> 
+           
+      <p>On the list, you mark the libraries for which you wish to
+               disallow/allow access in the environment.
+      </p> 
+           
+      <p>In the "Co" column, you may mark each library with one of
+               the following function codes:
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th align="left">Code</th> 
+                        
+               <th align="left">Function</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> <code>ED</code></td> 
+                        
+               <td> Disallow - The library cannot be accessed in that
+                  environment.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>EA</code> &nbsp;
+               </td> 
+                        
+               <td> Allow - The library can be accessed in that
+                  environment.
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>You can mark one or more libraries on the screen with a function code.
+               For each library marked, the selected functions will then be executed one after
+               another. When processing is completed, a message will indicate the access
+               situation now in effect for each library.
+      </p> 
+           
+          
+         
+      <div><a name="LinkLibEnvs"></a></div> 
+          
+      <h3> Protecting Multiple Environments for a Single Library</h3> 
+           
+           
+      <p>On the Library Maintenance selection list, you mark the library for
+               which you wish to with function code "EP".
+      </p> 
+           
+      <p>A window will be displayed, in which you have the following
+               options:
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="80%">
+         <colgroup>
+            <col width="27%">
+            <col width="6%">
+            <col width="48%">
+         </colgroup> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th align="left">Option</th> 
+                        
+               <th colspan="2" align="left">Explanation</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td rowspan="3"> Disallow/allow</td> 
+                        
+               <td> D</td> 
+                        
+               <td> 
+                  
+                  <p> Access to the library is initially allowed for all environments,
+                     and you can disallow it for individual ones.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>A</td> 
+                        
+               <td> 
+                  
+                  <p> Access to the library is initially disallowed for all
+                     environments, and you can allow it for individual ones.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td colspan="2"> 
+                  
+                  <p>When you later invoke this function and change the value of this
+                     option, the "allowed/disallowed" status of all environments will
+                     be changed for this library.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Sorted by environment ID / Sorted by alias</td> 
+                        
+               <td colspan="2"> 
+                  
+                  <p>By marking one of these two fields with a character, you can
+                     choose to have the list of environments to be displayed sorted by environment
+                     IDs or by aliases. The latter allows you to simultaneously allow/disallow
+                     access for all environments which have the same alias (see below).
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Start value</td> 
+                        
+               <td colspan="2"> 
+                  
+                  <p>In one of these two fields, you can enter a start value (as
+                     described in the section <a href="nsc_way.htm#nsc_way">Finding Your Way
+                                   in Natural Security</a>) for the list of environments to be
+                     displayed. Depending on how the list is to be sorted, you can specify either
+                                the database ID / file number of the environments' FNAT system file or a
+                                one-character alias as start value.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Select only disallowed/allowed ones</td> 
+                        
+               <td colspan="2">If you select this option, the
+                  list of environments to be displayed will only include - depending on the above
+                  option "Disallow/allow" - either those for which access is allowed
+                  or those for which it is disallowed.
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>Then, the Disallow/Allow Environments screen will be displayed, showing
+               the list of environments. For each environment, either its system-file
+               combination (database IDs and file numbers of system files FUSER, FDIC, FSEC
+               and FNAT) or its ID is displayed; with <span class="key">PF4</span> you can switch between
+               the two displays. It addition, each environment profile's alias (AL) and
+               protection status (P) are displayed. The list can be scrolled as described in
+               the section <a href="nsc_way.htm#nsc_way">Finding Your Way In Natural
+            Security</a>.
+      </p> 
+           
+      <p>On the list, you mark the environments for which you wish
+               disallow/allow access to the library.
+      </p> 
+           
+      <p>In the "Co" column, you may mark each environment with one
+               of the following function codes:
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th align="left">Code</th> 
+                        
+               <th align="left">Function</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> <code>ED</code></td> 
+                        
+               <td> Disallow - The library cannot be accessed in that
+                  environment.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>EA</code> &nbsp;
+               </td> 
+                        
+               <td> Allow - The library can be accessed in that
+                  environment.
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>You can mark one or more environments with a function code. For each
+               environment marked, the selected functions will then be executed one after
+               another. When processing is completed, a message will indicate the access
+               situation now in effect for each environment.
+      </p> 
+           
+      <p>If the list is sorted by alias, you do not mark individual
+               environments. Instead, you mark an alias, and the selected function will be
+               applied to all environments which have that alias.
+      </p> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="nsc_environ.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="LinkUsersEnvs"></a></div> 
+         
+      <h2> Disallowing/Allowing Users Access to Environments</h2> 
+          
+          
+      <p>By default, when environment protection is active, access to an
+              environment is allowed for all users. For individual users you can disallow
+              access to an environment.
+      </p> 
+          
+      <p>Access to an environment can only be allowed/disallowed for users of
+              types GROUP, ADMINISTRATOR and PERSON. For users of types ADMINISTRATOR and
+              PERSON it can be allowed/disallowed either directly or via a GROUP. For users
+              of types MEMBER and TERMINAL, it can only be allowed/disallowed for the GROUP
+              to which they are assigned.
+      </p> 
+          
+      <p>When access to at least one environment is disallowed for a user, the
+              session option <a href="nsc_user.htm#SessionOptions">"Environment
+                 Protection"</a> in the user's security profile is automatically
+              to "Y".
+      </p> 
+          
+      <p>Two functions are available to disallow/allow users' access to
+              environments:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">To disallow/allow access of various users to one environment, you use
+                      the function <a href="nsc_environ.htm#LinkUsersEnv">"Protect
+                         environment"</a> (which is invoked from the Environment
+                      Maintenance selection list).
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">To disallow/allow access of one user to various environments, you use
+                      the function <a href="nsc_environ.htm#LinkUserEnvs">"Protect
+                         environments"</a> (which is invoked from the User Maintenance
+                      selection list).
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>Both functions are described below.</p> 
+          
+         
+      <div><a name="LinkUsersEnv"></a></div> 
+          
+      <h3> Protecting a Single Environment for Multiple Users</h3> 
+           
+           
+      <p>On the Environment Maintenance selection list, you mark the environment
+               you wish to protect with "EP".
+      </p> 
+           
+      <p>A window will be displayed. Here you enter a "U" in the
+               field "Protect for users/libraries". You can also enter a Start
+               Value (as described in the section <a href="nsc_way.htm#nsc_way">Finding Your Way in Natural
+            Security</a>) for the list of users to be displayed. In
+               addition, you can select the option "Select only disallowed ones"
+               - in which case the list of users to be displayed will only include those users
+               for whom access to the environment is currently disallowed.
+      </p> 
+           
+      <p>Then, the Disallow/Allow Users screen will be displayed, showing the
+               list of users. By default, the list contains only users of type GROUP. To
+               switch between a list of GROUPs and a list of all three user types, you press
+               <span class="key">PF5</span>. The list can be scrolled as described in the section
+               <a href="nsc_way.htm#nsc_way">Finding Your Way In Natural
+            Security</a>.
+      </p> 
+           
+      <p>On the list, you mark the users for whom you wish to disallow/allow
+               access to the environment.
+      </p> 
+           
+      <p>In the "Co" column, you may mark each user with one of the
+               following function codes:
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th align="left">Code</th> 
+                        
+               <th align="left">Function</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> <code>ED</code></td> 
+                        
+               <td> Disallow - The user cannot access the environment.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>EA</code> &nbsp;
+               </td> 
+                        
+               <td> Allow - The user may access the environment.</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>You can mark one or more users on the screen with a function code. For
+               each user marked, the selected functions will then be executed one after
+               another. When processing is completed, a message will indicate the access
+               situation now in effect for each user.
+      </p> 
+           
+          
+         
+      <div><a name="LinkUserEnvs"></a></div> 
+          
+      <h3> Protecting Multiple Environments for a Single User</h3> 
+           
+           
+      <p>On the User Maintenance selection list, you mark the user for whom you
+               wish to protect environments with function code "EP".
+      </p> 
+           
+      <p>A window will be displayed. Here you can enter a Start Value (as
+               described in the section <a href="nsc_way.htm#nsc_way">Finding Your Way
+            in Natural Security</a>) for the list of environments to be
+               displayed; as start value, you use the database ID / file number of the
+               environments' FNAT system file. You can also select the option "Select
+               only disallowed environments" - in which case the list of environments
+               to be displayed will only include those environments to which access is
+               currently disallowed for the user.
+      </p> 
+           
+      <p>Then, the Disallow/Allow Environments screen will be displayed, showing
+               the list of environments. For each environment, either its system-file
+               combination (database IDs and file numbers of system files FUSER, FDIC, FSEC
+               and FNAT) or its ID is displayed; with <span class="key">PF4</span> you can switch between
+               the two displays. It addition, each environment profile's alias (AL) and
+               protection status (P) are displayed. The list can be scrolled as described in
+               the section <a href="nsc_way.htm#nsc_way">Finding Your Way In Natural
+            Security</a>.
+      </p> 
+           
+      <p>On the list, you mark the environments the access to which you wish to
+               disallow/allow for the user.
+      </p> 
+           
+      <p>In the "Co" column, you may mark each environment with one
+               of the following function codes:
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th align="left">Code</th> 
+                        
+               <th align="left">Function</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> <code>ED</code></td> 
+                        
+               <td> Disallow - The user cannot access the environment.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>EA</code></td> 
+                        
+               <td> Allow - The user may access the environment.</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>You can mark one or more environments on the screen with a function
+               code. For each environment marked, the selected functions will then be executed
+               one after another. When processing is completed, a message will indicate the
+               access situation now in effect for each environment.
+      </p> 
+           
+          
+        
+       
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="nsc_environ.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../nsc/nsc_environ.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/nsc/nsc_environ.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc_prolib.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc_ddmmf.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

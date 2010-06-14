@@ -1,0 +1,227 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>TIMER</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="timer"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../njx/timer.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/njx/timer.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="nonvisualcontrolsandhotkeys.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="nonvisualcontrolsandhotkeys.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="extendedhotkeymanagement.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Natural for Ajax&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+       
+      <div class="nospytext">
+         <h1>TIMER</h1>
+      </div> 
+        
+        
+      <p>With a timer, you can regularly trigger a defined
+            event
+            sent by the client. For example, you can use a timer to regularly
+            update information to be displayed inside your page.
+      </p> 
+        
+      <p>The timer tag is accessible as a valid subnode inside the page tag. </p> 
+        
+      <p>Specify either the <code>interval</code> or the
+            <code>intervalprop</code> property in order to set the
+            interval. In case of using a property for dynamically setting the interval,
+            note the following:
+      </p> 
+        
+      <ul> 
+            
+         <li> 
+                
+            <p class="initem"> You can change the interval time at any time.</p> 
+               
+         </li> 
+            
+         <li> 
+                
+            <p class="initem"> You can stop the timer by setting the interval time to 0.</p> 
+               
+         </li> 
+           
+      </ul> 
+        
+      <p>The following topics are covered
+            below:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="timer.htm#timer-exa">Example</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="timer.htm#timer-props">Properties</a></p>
+         </li>
+      </ul>
+      <hr> 
+       
+      <div><a name="timer-exa"></a></div> 
+        
+      <h2>Example</h2> 
+         
+         
+      <p>The following screen displays a time stamp of the server. It is refreshed
+             depending on the interval field. Increase/decrease the interval time by
+             choosing the corresponding buttons.
+      </p> 
+         
+      <p><img src="graphics/image205.png" alt="graphics/image205.png" width="488" height="219"></p> 
+         
+      <p>The XML layout definition is:</p> 
+         <pre class="verbatim">&lt;page model="DemoTimerAdapter"&gt;
+    &lt;titlebar name="Demo Timer"&gt;
+    &lt;/titlebar&gt;
+    &lt;header withdistance="false"&gt;
+        &lt;button name="~~Increment" method="incrementTimer"&gt;
+        &lt;/button&gt;
+        &lt;button name="~~Decrement" method="decrementTimer"&gt;
+        &lt;/button&gt;
+        &lt;button name="~~Stop" method="stopTimer"&gt;
+        &lt;/button&gt;
+    &lt;/header&gt;
+    &lt;pagebody&gt;
+        &lt;rowarea name="Time"&gt;
+            &lt;itr&gt;
+                &lt;label name="Interval (ms)" width="100" asplaintext="true"&gt;
+                &lt;/label&gt;
+                &lt;field valueprop="interval" length="5" displayonly="true" datatype="int"&gt;
+                &lt;/field&gt;
+            &lt;/itr&gt;
+            &lt;itr&gt;
+                &lt;label name="Server time" width="100" asplaintext="true"&gt;
+                &lt;/label&gt;
+                &lt;field valueprop="serverTime" length="50" displayonly="true"&gt;
+                &lt;/field&gt;
+            &lt;/itr&gt;
+        &lt;/rowarea&gt;
+    &lt;/pagebody&gt;
+    &lt;statusbar withdistance="false"&gt;
+    &lt;/statusbar&gt;
+    <strong>&lt;timer intervalprop="interval"&gt;
+    &lt;/timer&gt;</strong>
+&lt;/page&gt;</pre> 
+         <p>In this example, the timer tag does not send a defined event but
+             refreshes the screen. The timer interval is retrieved by the property
+             <code>interval</code> of the adapter object.
+      </p> 
+          
+         
+       
+       
+      <div class="noprint">
+         <p><a href="timer.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="timer-props"></a></div> 
+        
+      <h2>Properties</h2> 
+             
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="14%">
+            <col width="55%">
+            <col width="14%">
+            <col width="14%">
+         </colgroup>      
+         <tbody align="left" valign="top">       
+            <tr>        
+               <td colspan="4">Basic</td>      
+            </tr>
+            <tr>        
+               <td align="left" valign="top">interval</td>        
+               <td align="left" valign="top">
+                  <p>Duration in milliseconds the timer waits between calling the adapter method defined in the METHOD property.</p>
+                  <p></p>
+                  <p>Use this property to "hard code" the duration - or use INTERVALPROP to define the duration by an adapter property.</p>
+               </td>        
+               <td align="left" valign="top">Sometimes obligatory</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">intervalprop</td>        
+               <td align="left" valign="top">
+                  <p>Name of the adapter parameter that defines the timer interval duration. If 0 is passed then the timer is stopped.</p>
+               </td>        
+               <td align="left" valign="top">Sometimes obligatory</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">method</td>        
+               <td align="left" valign="top">
+                  <p>Name of the event that is sent to the adapter by the timer.</p>
+               </td>        
+               <td align="left" valign="top">Obligatory</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">comment</td>        
+               <td align="left" valign="top">
+                  <p>Comment without any effect on rendering and behaviour. The comment is shown in the layout editor's tree view.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>      
+         </tbody>     
+      </table>     
+        
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="timer.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../njx/timer.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/njx/timer.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="nonvisualcontrolsandhotkeys.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="nonvisualcontrolsandhotkeys.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="extendedhotkeymanagement.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

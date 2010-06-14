@@ -1,0 +1,642 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Programs, Functions, Subprograms and Subroutines</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="pg_obj_prog"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_obj_prog.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_obj_prog.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_obj-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_obj_darea.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_obj_adapter.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Programming Guide&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> Programs, Functions, Subprograms and
+               Subroutines
+         </h1>
+      </div> 
+         
+         
+      <p>This document discusses those object types which can be invoked as
+             routines; that is, as subordinate programs.
+      </p> 
+         
+      <p>Helproutines and maps, although they are also invoked from other objects,
+             are strictly speaking not routines as such, and are therefore discussed in
+             separate documents; see <a href="pg_obj_help.htm#pg_obj_help">Helproutines</a> and
+             <a href="pg_obj_maps.htm#pg_obj_maps">Maps</a>.
+      </p> 
+         
+      <p>This document covers the following topics:</p>
+         
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_obj_prog.htm#A_Modular_Application_Structure">A Modular Application Structure</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_obj_prog.htm#Multiple_Levels_of_Invoked_Objects">Multiple Levels of Invoked Objects</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_obj_prog.htm#Program">Program</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_obj_prog.htm#Function">Function</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_obj_prog.htm#Subroutine">Subroutine</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_obj_prog.htm#Subprogram">Subprogram</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_obj_prog.htm#Processing_Flow_when_Invoking_a_Routine">Processing Flow when Invoking a Routine</a></p>
+         </li>
+      </ul> 
+        
+      <hr> 
+        
+      <div><a name="A_Modular_Application_Structure"></a></div> 
+         
+      <h2> A Modular Application Structure</h2> 
+          
+          
+      <p>Typically, a Natural application does not consist of a single huge
+              program, but is split into several modules. Each of these modules will be a
+              functional unit of manageable size, and each module is connected to the other
+              modules of the application in a clearly defined way. This provides for a well
+              structured application, which makes its development and subsequent maintenance
+              a lot easier and faster.
+      </p> 
+          
+      <p>During the execution of a main program, other programs, subprograms,
+              subroutines, helproutines and maps can be invoked. These objects can in turn
+              invoke other objects (for example, a subroutine can itself invoke another
+              subroutine). Thus, the modular structure of an application can become quite
+              complex and extend over several levels.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_obj_prog.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Multiple_Levels_of_Invoked_Objects"></a></div> 
+         
+      <h2> Multiple Levels of Invoked Objects</h2> 
+          
+          
+      <p>Each invoked object is one level below the level of the object from
+              which it was invoked; that is, with each invocation of a subordinate object,
+              the level number is incremented by 1.
+      </p> 
+          
+      <p>Any program that is directly executed is at Level 1; any subprogram,
+              subroutine, map or helproutine directly invoked by the main program is at Level
+              2; when such a subroutine in turn invokes another subroutine, the latter is at
+              Level 3.
+      </p> 
+          
+      <p>A program invoked with a <code>FETCH</code> statement from within
+              another object is classified as a main program, operating from Level 1. A
+              program that is invoked with <code>FETCH RETURN</code>, however, is classified
+              as a subordinate program and is assigned a level one below that of the invoking
+              object.
+      </p> 
+          
+      <p>The following illustration is an example of multiple levels of invoked
+              objects and also shows how these levels are counted: 
+      </p> 
+          
+      <p><img src="graphics/pglevels.png" alt="" width="624" height="425"></p> 
+          
+      <p>If you wish to ascertain the level number of the object that is
+              currently being executed, you can use the system variable
+              <a href="../vari/appl.htm#LEVEL"><code>*LEVEL</code></a>
+              (which is described in the <a href="../vari/vari-over.htm">System Variables</a>
+              documentation).
+      </p> 
+          
+      <p>This document discusses the following Natural object types, which can be
+              invoked as routines (that is, subordinate programs):
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">program</p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">function</p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">subroutine</p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">subprogram</p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>Helproutines and maps, although they are also invoked from other
+              objects, are strictly speaking not routines as such, and are therefore
+              discussed in separate documents; see <a href="pg_obj_help.htm#pg_obj_help">Helproutines</a> and
+              <a href="pg_obj_maps.htm#pg_obj_maps">Maps</a>.
+      </p> 
+          
+      <p>Basically, programs, subprograms and subroutines differ from one another
+              in the way data can be passed between them and in their possibilities of
+              sharing each other's data areas. Therefore the decision which object type to
+              use for which purpose depends very much on the data structure of your
+              application.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_obj_prog.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Program"></a></div> 
+         
+      <h2> Program 
+             <a name="x22"></a> 
+             <a name="x23"></a></h2> 
+          
+          
+      <p>A program can be executed - and thus tested - by itself.</p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">To compile and execute a source program, you use the system command
+                      <a href="../syscom/run.htm"><code>RUN</code></a>.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">To execute a program that already exists in compiled form, you use the
+                      system command <a href="../syscom/execute.htm"><code>EXECUTE</code></a>.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>A program can also be invoked from another object with a
+              <a href="../sm/fetch.htm"><code>FETCH</code></a> or
+              <a href="../sm/fetch.htm#RETURN"><code>FETCH RETURN</code></a>
+              statement. The invoking object can be another program, a
+              <a href="pg_obj_prog.htm#Subprogram">subprogram</a>, <a href="pg_obj_prog.htm#Function">function</a>,
+              <a href="pg_obj_prog.htm#Subroutine">subroutine</a> or
+              <a href="pg_obj_help.htm#pg_obj_help">helproutine</a>.
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">When a program is invoked with <code>FETCH RETURN</code>, the
+                      execution of the invoking object will be suspended - not terminated - and the
+                      <code>FETCH</code>ed program will be activated as a <em>subordinate
+                  program</em>. When the execution of the <code>FETCH</code>ed program is
+                      terminated, the invoking object will be re-activated and its execution
+                      continued with the statement following the <code>FETCH RETURN</code>
+                      statement.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">When a program is invoked with <code>FETCH</code>, the execution of
+                      the invoking object will be terminated and the <code>FETCH</code>ed program
+                      will be activated as a <em>main program</em>. The invoking object will not be
+                      re-activated upon termination of the <code>FETCH</code>ed program.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>The following topics are covered
+              below:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_obj_prog.htm#d0e2603">Program Invoked with FETCH RETURN</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_obj_prog.htm#d0e2630">Program Invoked with FETCH</a></p>
+         </li>
+      </ul> 
+         
+      <div><a name="d0e2603"></a></div> 
+          
+      <h3>Program Invoked with FETCH RETURN</h3> 
+           
+           
+      <p><img src="graphics/pglda3.png" alt="" width="548" height="590"></p> 
+           
+      <p>A program invoked with <a href="../sm/fetch.htm#RETURN"><code>FETCH RETURN</code></a> can access
+               the global data area used by the invoking object.
+      </p> 
+           
+      <p>In addition, every program can have its own local data area, in which
+               the fields that are to be used only within the program are defined.
+      </p> 
+           
+      <p>However, a program invoked with <code>FETCH RETURN</code> cannot have
+               its own global data area.
+      </p> 
+           
+          
+         
+      <div><a name="d0e2630"></a></div> 
+          
+      <h3>Program Invoked with FETCH</h3> 
+           
+           
+      <p><img src="graphics/pglda4.png" alt="" width="549" height="550"></p> 
+           
+      <p>A program invoked with <code>FETCH</code> as a main program usually
+               establishes its own global data area (as shown in the illustration above).
+               However, it could also use the same global data area as established by the
+               invoking object.
+      </p> 
+           
+      <p class="note"><strong>Note:</strong><br> A source program can also be invoked with a <code>RUN</code>
+               statement; see the <a href="../sm/run.htm"><code>RUN</code></a>
+               statement in the <cite>Statements</cite> documentation.
+      </p> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_obj_prog.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Function"></a></div> 
+         
+      <h2> Function </h2> 
+          
+          
+      <p>An object of type "function" contains the definitions of a
+              single function and may be structured as shown in the following code
+              example:
+      </p> 
+          <pre class="verbatim">DEFINE FUNCTION
+   ...
+   DEFINE SUBROUTINE
+   ...
+   END-SUBROUTINE
+   ...
+END-FUNCTION</pre> 
+          <p>The block of statements between <a href="../sm/definefu.htm"><code>DEFINE FUNCTION</code></a> and
+              <code>END-FUNCTION</code> must contain all those statements which are to be
+              executed when the function is called.
+      </p> 
+          
+      <p>Internal subroutines are allowed to be defined inside a function
+              definition.
+      </p> 
+          
+      <p>A function is invoked using the <a href="pg_defi_funcall.htm#pg_defi_funcall">Function Call</a> syntax.
+      </p> 
+          
+      <p>If you have a block of code which is to be executed several times within
+              the object, it is useful to use an inline subroutine. You then only have to
+              code this block once within a <a href="../sm/definesu.htm"><code>DEFINE
+               SUBROUTINE</code></a> statement block and invoke it with several
+              <a href="../sm/perform.htm"><code>PERFORM</code></a>
+              statements.
+      </p> 
+          
+      <p>The <a href="pg_obj_darea.htm#Global_Data_Area">global data area</a> of
+              the invoking object (for example, <code>GDA1</code>) cannot be referenced
+              inside the function definition. Also, objects which will be invoked by a
+              function cannot reference the global data area (GDA) of the object
+              (<code>GDA1</code>) invoking the function, because entering a function causes a
+              new global data area to be created by the runtime environment.
+      </p> 
+          
+      <p> <a href="pg_obj_darea.htm#Parameter_Data_Area">Parameter data
+                 areas</a> (for example, <code>PDA1</code>) may be used to access
+              parameters for function calls and function definitions in order to minimize the
+              maintainance effort when changing parameters.
+      </p> 
+          
+      <p>The <a href="pg_obj_copy.htm#pg_obj_copy">copycode</a> object
+              containing the prototype definition is used at compilation time only in order
+              to determine the type of the return variable for function call reference and to
+              check the parameters, if this is desired.
+      </p> 
+          
+      <p><img src="graphics/pgfunction.png" alt="" width="550" height="746"></p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_obj_prog.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Subroutine"></a></div> 
+         
+      <h2> Subroutine 
+             <a name="x24"></a> 
+             <a name="x25"></a></h2> 
+          
+          
+      <p>The statements that make up a subroutine must be defined within a
+              <a href="../sm/definesu.htm"><code>DEFINE SUBROUTINE</code></a>
+              <code>... END-SUBROUTINE</code> statement block.
+      </p> 
+          
+      <p>A subroutine is invoked with a <a href="../sm/perform.htm"><code>PERFORM</code></a> statement.
+      </p> 
+          
+      <p>A subroutine may be an <em>inline subroutine</em> or an <em>external
+            subroutine</em>:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                   
+                  
+            <p class="initem"><strong>Inline Subroutine</strong><br>An inline subroutine is defined within the object which contains the
+                      <code>PERFORM</code> statement that invokes it.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                   
+                  
+            <p class="initem"><strong>External Subroutine</strong><br>An external subroutine is defined in a separate object - of type
+                      subroutine - outside the object which invokes it.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>If you have a block of code which is to be executed several times within
+              an object, it is useful to use an inline subroutine. You then only have to code
+              this block once within a <code>DEFINE SUBROUTINE</code> statement block and
+              invoke it with several <code>PERFORM</code> statements.
+      </p> 
+          
+      <p>The following topics are covered
+              below:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_obj_prog.htm#d0e2823">Inline Subroutine</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_obj_prog.htm#Data_Available_to_an_Inline_Subroutine">Data Available to an Inline Subroutine</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_obj_prog.htm#d0e2856">External Subroutine</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_obj_prog.htm#Data_Available_to_an_External_Subroutine">Data Available to an External Subroutine</a></p>
+         </li>
+      </ul> 
+         
+      <div><a name="d0e2823"></a></div> 
+          
+      <h3>Inline Subroutine</h3> 
+           
+           
+      <p><img src="graphics/pglda5.png" alt="" width="350" height="625"></p> 
+           
+      <p>An inline subroutine can be contained within a programming object of
+               type program, <a href="pg_obj_prog.htm#Function">function</a>, subprogram, subroutine or
+               helproutine.
+      </p> 
+           
+      <p>If an inline subroutine is so large that it impairs the readability of
+               the object in which it is contained, you may consider putting it into an
+               external subroutine, so as to enhance the readability of your application.
+      </p> 
+           
+          
+         
+      <div><a name="Data_Available_to_an_Inline_Subroutine"></a></div> 
+          
+      <h3> Data Available to an Inline Subroutine </h3> 
+           
+           
+      <p>An inline subroutine has access to the local data area and the global
+               data area used by the object in which it is contained.
+      </p> 
+           
+         
+      <div><a name="d0e2856"></a></div> 
+          
+      <h3>External Subroutine</h3> 
+           
+           
+      <p><img src="graphics/pglda6.png" alt="" width="550" height="550"></p> 
+           
+      <p>An external subroutine - that is, an object of type subroutine - cannot
+               be executed by itself. It must be invoked from another object. The invoking
+               object can be a program, <a href="pg_obj_prog.htm#Function">function</a>, subprogram, subroutine or
+               helproutine.
+      </p> 
+           
+          
+         
+      <div><a name="Data_Available_to_an_External_Subroutine"></a></div> 
+          
+      <h3> Data Available to an External Subroutine </h3> 
+           
+           
+      <p>An external subroutine can access the global data area used by the
+               invoking object.
+      </p> 
+           
+      <p>Moreover, parameters can be passed with the
+               <a href="../sm/perform.htm"><code>PERFORM</code></a> statement
+               from the invoking object to the external subroutine. These parameters must be
+               defined either in the <a href="../sm/defineda.htm"><code>DEFINE DATA
+               PARAMETER</code></a> statement of the subroutine, or in a
+               <a href="pg_obj_darea.htm#Parameter_Data_Area">parameter data area</a> used by
+               the subroutine.
+      </p> 
+           
+      <p>In addition, an external subroutine can have its
+               <a href="pg_obj_darea.htm#Local_Data_Area">local data area</a>, in which the
+               fields that are to be used only within the subroutine are defined.
+      </p> 
+           
+      <p>However, an external subroutine cannot have its own
+               <a href="pg_obj_darea.htm#Global_Data_Area">global data area</a>.
+      </p> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_obj_prog.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Subprogram"></a></div> 
+         
+      <h2> Subprogram 
+             <a name="x26"></a> 
+             <a name="x27"></a></h2> 
+          
+          
+      <p>Typically, a subprogram would contain a generally available standard
+              function that is used by various objects in an application.
+      </p> 
+          
+      <p>A subprogram cannot be executed by itself. It must be invoked from
+              another object. The invoking object can be a program, <a href="pg_obj_prog.htm#Function">function</a>,
+              subprogram, subroutine or helproutine.
+      </p> 
+          
+      <p>A subprogram is invoked with a <a href="../sm/callnat.htm"><code>CALLNAT</code></a> statement.
+      </p> 
+          
+      <p>When the <code>CALLNAT</code> statement is executed, the execution of
+              the invoking object will be suspended and the subprogram executed. After the
+              subprogram has been executed, the execution of the invoking object will be
+              continued with the statement following the <code>CALLNAT</code> statement.
+      </p> 
+          
+         
+      <div><a name="Data_Available_to_a_Subprogram"></a></div> 
+          
+      <h3> Data Available to a Subprogram</h3> 
+           
+           
+      <p>With the <a href="../sm/callnat.htm"><code>CALLNAT</code></a> statement, parameters
+               can be passed from the invoking object to the subprogram. These parameters are
+               the only data available to the subprogram from the invoking object. They must
+               be defined either in the <a href="../sm/defineda.htm"><code>DEFINE DATA
+               PARAMETER</code></a> statement of the subprogram, or in a
+               <a href="pg_obj_darea.htm#Parameter_Data_Area">parameter data area</a> used by
+               the subprogram. 
+      </p> 
+           
+      <p><img src="graphics/pglda7.png" alt="" width="549" height="550"></p> 
+           
+      <p>In addition, a subprogram can have its own local data area, in which
+               the fields to be used within the subprogram are defined.
+      </p> 
+           
+      <p>If a subprogram in turn invokes a subroutine or helproutine, it can
+               also establish its own global data area to be shared with the
+               subroutine/helproutine.
+      </p> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_obj_prog.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Processing_Flow_when_Invoking_a_Routine"></a></div> 
+         
+      <h2> Processing Flow when Invoking a Routine </h2> 
+          
+          
+      <p>When the <a href="../sm/callnat.htm"><code>CALLNAT</code></a>,
+              <a href="../sm/perform.htm"><code>PERFORM</code></a> or
+              <a href="../sm/fetch.htm#RETURN"><code>FETCH RETURN</code></a>
+              statement that invokes a routine - a subprogram, an external subroutine, or a
+              program respectively - is executed, the execution of the invoking object is
+              suspended and the execution of the routine begins.
+      </p> 
+          
+      <p>The execution of the routine continues until either its
+              <a href="../sm/end.htm"><code>END</code></a> statement is reached
+              or processing of the routine is stopped by an
+              <a href="../sm/escape.htm#ESCAPE_ROUTINE"><code>ESCAPE
+               ROUTINE</code></a> statement being executed.
+      </p> 
+          
+      <p>In either case, processing of the invoking object will then continue
+              with the statement following the <code>CALLNAT</code>, <code>PERFORM</code> or
+              <code>FETCH RETURN</code> statement used to invoke the routine.
+      </p> 
+          
+      <h4 class="floating-title"> Example:</h4> 
+          
+      <p><img src="graphics/pginvoke.png" alt="" width="550" height="300"></p> 
+          
+        
+       
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="pg_obj_prog.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_obj_prog.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_obj_prog.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_obj-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_obj_darea.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_obj_adapter.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

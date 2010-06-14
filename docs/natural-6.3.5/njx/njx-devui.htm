@@ -1,0 +1,891 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Developing the User Interface</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="njx-devui"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../njx/njx-devui.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/njx/njx-devui.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="njx-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="fs-background.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="njx-devcode.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Natural for Ajax&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+         
+      <div class="nospytext">
+         <h1> 
+                <a name="x11"></a>Developing the User Interface
+         </h1>
+      </div> 
+          
+          
+      <p>In the <a href="fs-over.htm#fs-over">First
+            Steps</a> tutorial, you have developed a small rich internet
+              program step by step. In this tutorial, you have already performed most of the
+              steps required to develop a rich internet application. 
+      </p> 
+          
+      <p>The general procedure to develop a rich internet application with
+              Natural for Ajax is as follows: 
+      </p> 
+          
+      <ol> 
+              
+         <li> 
+                  
+            <p class="initem">Use Application Designer to design the web pages that form the user interface of your
+                      application.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Generate a Natural adapter for each page (by saving the page). The
+                      adapter is a Natural object that forms the interface between the application
+                      code and the web page.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Use one of the Natural tools (Natural Studio or Natural for Eclipse)
+                      to write the Natural application programs that contain the business logic and
+                      use adapters to exchange data with the web pages.
+            </p> 
+                 
+         </li> 
+             
+      </ol> 
+          
+      <p>In this document, the first two steps (design and adapter) are
+              explained in more detail. Step 3 (business logic) is described in the section
+              <a href="njx-devcode.htm#njx-devcode">Developing the Application
+            Code</a> which also addresses advanced topics that are not
+              covered in the tutorial. 
+      </p> 
+          
+      <p>This document covers the following topics:</p>
+          
+      <ul>
+         <li>
+            <p class="initem"><a href="njx-devui.htm#njx-devui-startwp">Starting the Development Workplace</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="njx-devui.htm#njx-devui-project">Creating an Application Designer Project</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="njx-devui.htm#njx-devui-page">Creating a Natural Page</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="njx-devui.htm#njx-devui-props">Specifying Properties for the Natural Page</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="njx-devui.htm#njx-devui-design">Designing the Page</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="njx-devui.htm#njx-devui-bind">Binding Properties and Methods</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="njx-devui.htm#njx-devui-preview">Previewing the Layout</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="njx-devui.htm#njx-devui-protocol">Viewing the Protocol</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="njx-devui.htm#njx-devui-save">Saving the Layout</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="njx-devui.htm#njx-devui-adapter">Generating the Adapter</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="njx-devui.htm#njx-devui-datatype">Data Type Mapping</a></p>
+         </li>
+      </ul> 
+          
+      <p>For detailed information on how to use the Application Designer development workplace,
+              see <cite>Development Tools</cite> in the Application Designer documentation. The
+              latest version of the Application Designer documentation is available at
+              <a href="../../../webmethods/cit_reroute.htm" target="_blank">http://documentation.softwareag.com/webmethods/cit_reroute.htm</a>.
+              The information which is provided below describes the most important
+              differences which pertain to Natural for Ajax.
+      </p>
+      <hr>
+      <div><a name="njx-devui-startwp"></a></div> 
+          
+      <h2>Starting the Development Workplace</h2> 
+           
+           
+      <p>The Application Designer development workplace is the central point for starting tools
+               for layout development.
+      </p> 
+           
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To start the development workplace</strong></p>
+      <ol class="steps">
+         <li> 
+                    
+                    
+            <p class="instep">Make sure that your application server is running.</p> 
+                    
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">Invoke your browser and start the development workplace with the
+                        following URL:
+            </p><pre class="command-input">http://<var>&lt;host&gt;</var>:<var>&lt;port&gt;</var>/cisnatural</pre> 
+                    <p class="instep">where <var>&lt;host&gt;</var> is the name of the
+                        machine on which your application server is installed and
+                        <var>&lt;port&gt;</var> is the port number of your application
+                        server.
+            </p> 
+                    
+            <p class="note"><strong>Note:</strong><br>If you have not defined another port number during installation,
+                        the default port number is "8080".
+            </p> 
+                    
+                  
+         </li>
+      </ol> 
+          
+      <div class="noprint">
+         <p><a href="njx-devui.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="njx-devui-project"></a></div> 
+          
+      <h2> 
+              <a name="x12"></a> 
+              <a name="x13"></a>Creating an Application Designer Project
+      </h2> 
+           
+           
+      <p>First you create an Application Designer project using the Project Manager. The
+               project contains the layouts of the web pages you design, the files that are
+               generated from the layouts and are required to run your application and
+               additional files that make your application multi language capable and supply
+               help information. See also <a href="fs-project.htm#fs-project">Creating a
+            Project</a> in the tutorial.
+      </p> 
+           
+      <p class="note"><strong>Note:</strong><br>Detailed information on the Project Manager is provided in the Application Designer
+               documentation at
+               <a href="../../../webmethods/cit_reroute.htm" target="_blank">http://documentation.softwareag.com/webmethods/cit_reroute.htm</a>.
+      </p>
+           
+           
+      <p>All files in your Application Designer project are stored in one directory on the
+               application server where Natural for Ajax is installed. The name of the
+               directory corresponds to the project name you have chosen. The location of the
+               directory depends on the application server:
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                    
+                   
+            <p class="initem"><strong>JBoss Application Server</strong><br><cite><var>&lt;installdir&gt;</var>/server/default/deploy/njx<var>&lt;nnn&gt;</var>.ear/cisnatural.war</cite></p>
+                   
+                  
+         </li> 
+               
+         <li> 
+                    
+                   
+            <p class="initem"><strong>Sun Java System Application Server </strong><br><cite><var>&lt;installdir&gt;</var>/domains/domain1/applications/j2ee-apps/njx<var>&lt;nnn&gt;</var>.ear/cisnatural_war</cite></p>
+                   
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>where <var>&lt;installdir&gt;</var> is the directory in
+               which your application server is installed and
+               <var>&lt;nnn&gt;</var> is the current Natural for Ajax
+               version.
+      </p> 
+          
+      <div class="noprint">
+         <p><a href="njx-devui.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="njx-devui-page"></a></div> 
+          
+      <h2> 
+              <a name="x14"></a> 
+              <a name="x15"></a> 
+              <a name="x16"></a>Creating a Natural Page
+      </h2> 
+           
+           
+      <p>In order to create the layout of your web pages, you use Application Designer's
+               Layout Painter. 
+      </p> 
+           
+      <p class="note"><strong>Note:</strong><br>Detailed information on the Layout Painter is provided in the Application Designer
+               documentation at
+               <a href="../../../webmethods/cit_reroute.htm" target="_blank">http://documentation.softwareag.com/webmethods/cit_reroute.htm</a>.
+      </p>
+           
+           
+      <p>Add a page layout to your project as described in
+               <a href="fs-getstart.htm#fs-getstart-createlayout">Creating a New
+            Layout</a> in the tutorial (select the template for the
+               Natural page).
+      </p> 
+           
+      <p><img src="graphics/njx-dev-nattemplate.png" alt="Natural template" width="500" height="290"></p> 
+           
+      <p class="note"><strong>Note:</strong><br>More detailed information on creating a layout is provided in the
+               Application Designer documentation at
+               <a href="../../../webmethods/cit_reroute.htm" target="_blank">http://documentation.softwareag.com/webmethods/cit_reroute.htm</a>.
+      </p>
+           
+          
+      <div class="noprint">
+         <p><a href="njx-devui.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="njx-devui-props"></a></div> 
+          
+      <h2> 
+              <a name="x17"></a> 
+              <a name="x18"></a> 
+              <a name="x19"></a> 
+              <a name="x20"></a> 
+              <a name="x21"></a>Specifying Properties for the Natural Page
+      </h2> 
+           
+           
+      <p>In order to specify generation options for the new page, you specify
+               values for certain properties that are specific for Natural pages.
+      </p> 
+           
+      <p>To define properties, you select the node
+               <span class="guilistitem">natpage</span> in the layout tree of the Layout Painter. The
+               properties for this control are then shown in the properties area at the
+               bottom. When you select the <span class="selectable_label">Natural</span> tab in the properties
+               area, you can see the Natural-specific properties.
+      </p> 
+           
+      <p><img src="graphics/njx-dev-natprops.png" alt="Properties" width="261" height="387"></p> 
+           
+      <p>The following properties are available for the Natural page:</p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>Property</th> 
+                        
+               <th>Description</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td><code>natsource</code></td> 
+                        
+               <td>Specifies a name for the Natural adapter object
+                  that will later be generated from your page layout. During adapter generation,
+                  this name is checked to match the
+                  <a href="../using/use_rules.htm#use_rules-Object_Names">Natural naming conventions for objects</a>. If you do
+                            not specify a name here, the adapter name is taken from the layout name. This
+                            might result in names that are not valid for Natural objects. These adapters
+                            can only be used in Natural for Eclipse.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><code>natsinglebyte</code></td> 
+                        
+               <td>Specifies whether string properties of the page
+                  are to be mapped to Unicode strings (U) or code page strings (A) in Natural.
+                  The value "true" means code page strings. The value
+                  "false" means Unicode strings (default).
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><code>natrecursion</code></td> 
+                        
+               <td>Properties of controls used in the page might
+                  have a recursive structure. These structures are mapped to multi-dimensional
+                  arrays in the Natural adapter. Natural arrays are limited to three dimensions.
+                  Therefore, the recursion depth of these structures can be limited using this
+                  property.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><code>natdc</code></td> 
+                        
+               <td>Specifies the character that is to
+                  be used as the decimal character in the format specifications of variables with
+                  decimal format in the parameter data area of the Natural adapter. For example,
+                  if a comma (,) is specified, "(N7,2)" is generated.
+                  If a period (.) is specified, "(N7.2)" is generated.
+                  The default is the period (.).
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><code>natsss</code></td> 
+                        
+               <td>The controls
+                  <a href="rowtablearea2theflexiblecontrolgrid.htm#rowtablearea2theflexiblecontrolgrid">ROWTABLEAREA2</a> and
+                            <a href="mgdgrid.htm#mgdgrid">MGDGRID</a> support server-side scrolling
+                  and sorting. The corresponding data structures are generated into the parameter
+                  data area of the Natural adapter only if this attribute has been set to true.
+                  The default is false. This is for compatibility with earlier versions. 
+                            
+                  <p>For the control
+                                <a href="textgridsss2textgrid2withserversidescrolling.htm#textgridsss2textgrid2withserversidescrolling">TEXTGRIDSSS2</a>,
+                                the server-side scrolling data structures are always generated.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><code>xmlns:njx</code></td> 
+                        
+               <td>Internal use only. Do not modify
+                  this.
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+          
+      <div class="noprint">
+         <p><a href="njx-devui.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="njx-devui-design"></a></div> 
+          
+      <h2> 
+              <a name="x22"></a>Designing the Page
+      </h2> 
+           
+           
+      <p>Design your Natural page by dragging controls and containers from the
+               controls palette onto the corresponding node in the layout tree or to the HTML
+               preview. This has already been explained in the section
+               <a href="fs-gui.htm#fs-gui">Writing the GUI Layout
+            </a> of the tutorial.
+      </p> 
+           
+      <p class="note"><strong>Note:</strong><br>More detailed information on defining the layout is provided in the
+               Application Designer documentation at
+               <a href="../../../webmethods/cit_reroute.htm" target="_blank">http://documentation.softwareag.com/webmethods/cit_reroute.htm</a>.
+      </p>
+           
+          
+      <div class="noprint">
+         <p><a href="njx-devui.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="njx-devui-bind"></a></div> 
+          
+      <h2> 
+              <a name="x23"></a> 
+              <a name="x24"></a> 
+              <a name="x25"></a> 
+              <a name="x26"></a>Binding Properties and Methods
+      </h2> 
+           
+           
+      <p>Many of the controls you use on your page have properties that can be
+               controlled by the application. Also the controls can raise events that your
+               application may wish to handle. The next step is therefore assigning
+               identifiers to each of these properties and events under which your application
+               can later address them. This procedure is called "binding".
+      </p> 
+           
+      <p>To get an overview which properties and events are bindable to
+               application variables and events, it is a good idea to select a control in the
+               layout tree and open the Event Editor as described in the Application Designer documentation
+               at
+               <a href="../../../webmethods/cit_reroute.htm" target="_blank">http://documentation.softwareag.com/webmethods/cit_reroute.htm</a>.
+      </p>
+           
+           
+      <p>The Event Editor displays only those properties of controls that can be
+               bound to application variables and events. It indicates also which properties
+               must be bound mandatorily. The usage and meaning of each of the properties and
+               events is described for each control in the following sections of this Natural
+               for Ajax documentation:
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem"><a href="workingwithcontrols.htm#workingwithcontrols">Working with
+                  Controls</a></p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"><a href="workingwithgrids.htm#workingwithgrids">Working with
+                  Grids</a></p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"><a href="workingwithtrees.htm#workingwithtrees">Working with
+                  Trees</a></p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"><a href="workingwithmenus.htm#workingwithmenus">Working with
+                  Menus</a></p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"><a href="nonvisualcontrolsandhotkeys.htm#nonvisualcontrolsandhotkeys">Non-Visual
+                  Controls and Hot Keys</a></p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>As an example for property and event binding, see the following
+               sections in the <cite>First Steps</cite> tutorial:
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem"><a href="fs-gui.htm#fs-gui-propedi">Using the Property
+                  Editor</a> 
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"> <a href="fs-gui.htm#fs-gui-button">Specifying a Name and
+                  Method for the Button</a></p> 
+                  
+         </li> 
+              
+      </ul> 
+          
+      <div class="noprint">
+         <p><a href="njx-devui.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="njx-devui-preview"></a></div> 
+          
+      <h2> 
+              <a name="x27"></a>Previewing the Layout
+      </h2> 
+           
+           
+      <p>To find out how the current layout definitions are rendered on the
+               page, preview the layout as described in the Application Designer documentation at
+               <a href="../../../webmethods/cit_reroute.htm" target="_blank">http://documentation.softwareag.com/webmethods/cit_reroute.htm</a>.
+      </p>
+           
+          
+      <div class="noprint">
+         <p><a href="njx-devui.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="njx-devui-protocol"></a></div> 
+          
+      <h2> 
+              <a name="x28"></a>Viewing the Protocol
+      </h2> 
+           
+           
+      <p>The protocol contains warnings and error messages that might occur
+               while you design and preview your page. For further information, see the Application Designer
+               documentation at
+               <a href="../../../webmethods/cit_reroute.htm" target="_blank">http://documentation.softwareag.com/webmethods/cit_reroute.htm</a>.
+      </p>
+           
+          
+      <div class="noprint">
+         <p><a href="njx-devui.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="njx-devui-save"></a></div> 
+          
+      <h2> 
+              <a name="x29"></a>Saving the Layout
+      </h2> 
+           
+           
+      <p>Save the page layout as described in <a href="fs-gui.htm#fs-gui-save">Saving Your Layout</a> in the
+               tutorial.
+      </p> 
+           
+      <p>Other than with Java adapters (which are described in the Application Designer
+               documentation), you do not use the Code Assistant (which is part of the
+               Layout Painter) to generate adapter code interactively. For Natural pages the adapter
+               code is generated completely from the page properties and the property and
+               event bindings that you specified previously. An adapter is generated
+               automatically when you save the layout for the first time. It is updated each
+               time you save the layout.
+      </p> 
+          
+      <div class="noprint">
+         <p><a href="njx-devui.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="njx-devui-adapter"></a></div> 
+          
+      <h2> 
+              <a name="x30"></a> 
+              <a name="x31"></a>Generating the Adapter
+      </h2> 
+           
+           
+      <p>When you save the layout, a Natural adapter is generated according to
+               the following rules:
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>Location</th> 
+                        
+               <td> 
+                  
+                  <p>The adapter is generated into the subdirectory
+                                <cite>nat</cite> of your project directory. 
+                  </p> 
+                            
+                  <p>The name of the project directory corresponds to the project name.
+                                The location of the directory depends on the application server. See
+                                <a href="njx-devui.htm#njx-devui-project">Creating an Application Designer
+                                   Project</a>.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th>Name</th> 
+                        
+               <td> 
+                  
+                  <p>The name of the adapter is determined by the properties you have
+                        set. See <a href="njx-devui.htm#njx-devui-props">Specifying Properties
+                                   for the Natural Page</a>.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th>Property identifiers</th> 
+                        
+               <td> 
+                  
+                  <p>For each control property that has been bound to an identifier (as
+                     described in <a href="njx-devui.htm#njx-devui-bind">Binding Properties
+                                   and Methods</a>) a parameter in the parameter data area of the
+                                adapter is generated.The identifier is therefore validated against the
+                                <a href="../using/use_rules.htm#use_rules-Variable_Names">Natural naming conventions for user-defined
+                                   variables</a> and translated to upper-case. If an identifier does not
+                                comply to these rules, a warning is generated into the protocol and as a
+                                comment into the adapter code. Additionally, the name must comply to the naming
+                                conventions for XML entities. This means especially that the name must start
+                                with a character. 
+                  </p> 
+                            
+                  <p>To achieve uniqueness within 32 characters, the last four
+                                characters are (if necessary) replaced by an underscore, followed by a
+                                three-digit number. 
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th>Event identifiers</th> 
+                        
+               <td> 
+                  
+                  <p>For each event that can be raised by a control on the page, an
+                     event handler skeleton is generated as a comment into the adapter. 
+                  </p> 
+                            
+                  <p class="caution"><strong>Caution:</strong><br>Some controls raise events whose names are dynamically
+                     constructed at runtime. For these events, no handler skeleton can be generated.
+                                The control reference contains information about these additional events.
+                                
+                  </p> 
+                            
+                  <p>The event identifiers are not validated. </p>
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+          
+      <div class="noprint">
+         <p><a href="njx-devui.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="njx-devui-datatype"></a></div> 
+          
+      <h2> 
+              <a name="x32"></a> 
+              <a name="x33"></a>Data Type Mapping
+      </h2> 
+           
+           
+      <p>Several Application Designer controls have properties for which a data type can be
+               specified. An example is the FIELD control. It has a
+               <code>valueprop</code> property which can be restricted to a
+               certain data type. The data type is used at runtime to validate user input. At
+               generation time (that is, when a Natural adapter is generated for the page),
+               the data type determines the Natural data format of the corresponding adapter
+               parameter. 
+      </p> 
+           
+      <p>The following table lists the data types used in Application Designer and the
+               corresponding Natural data formats.
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>Application Designer</th> 
+                        
+               <th>Natural</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td><code>color</code></td> 
+                        
+               <td><code>A</code> or <code>U</code> (depending on
+                  the NATPAGE property <code>natsinglebyte</code>). The string
+                  must contain an RGB value, for instance "#FF0000"
+                            for the color red.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><code>date</code></td> 
+                        
+               <td><code>D (YYYYMMDD)</code></td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><code>float</code></td> 
+                        
+               <td><code>F4</code></td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><code>int</code></td> 
+                        
+               <td><code>I4</code></td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><code>long</code></td> 
+                        
+               <td><code>P19</code></td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><code>time</code></td> 
+                        
+               <td><code>T (HHIISS)</code></td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><code>timestamp</code></td> 
+                        
+               <td><code>T (YYYYMMDDHHIISST)</code></td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><code>N
+                     <var>n</var>.<var>n</var></code></td> 
+                        
+               <td><code>N<var>n</var>.<var>n</var></code></td>
+                        
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><code>P
+                     <var>n</var>.<var>n</var></code></td> 
+                        
+               <td><code>P<var>n</var>.<var>n</var></code></td>
+                        
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><code>string</code> (default)
+               </td> 
+                        
+               <td><code>A</code> or <code>U</code> dynamic
+                  (depending on the NATPAGE property
+                        <code>natsinglebyte</code>).
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><code>string
+                     <var>n</var></code></td> 
+                        
+               <td><code>A<var>n</var></code> or
+                    <code>U<var>n</var></code> (depending on the NATPAGE property
+                            <code>natsinglebyte</code>).
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><code>xs:double</code></td> 
+                        
+               <td><code>F8</code></td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><code>xs:byte</code></td> 
+                        
+               <td><code>I1</code></td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><code>xs:short</code></td> 
+                        
+               <td><code>I2</code></td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+          
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="njx-devui.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../njx/njx-devui.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/njx/njx-devui.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="njx-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="fs-background.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="njx-devcode.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

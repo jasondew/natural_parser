@@ -1,0 +1,3136 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Operating a Natural RPC Environment</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="oper"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../rpc/oper.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/rpc/oper.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="rpc-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="terminate_exx_broker_service.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="using.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Natural Remote Procedure Call (RPC)&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1>Operating a Natural RPC Environment</h1>
+      </div> 
+         
+      <p>This section mainly describes the tasks required to operate a Natural RPC
+             environment. 
+      </p> 
+         
+      <p>Some of these tasks are performed with the SYSRPC utility. For
+             information about the functions the <code>SYSRPC</code> utility provides, refer
+             to the Natural <a href="../utis/sysrpc-over.htm">SYSRPC
+            Utility</a> documentation.
+      </p> 
+         
+      <p>This section covers the following topics:</p>
+         
+      <ul>
+         <li>
+            <p class="initem"><a href="oper.htm#oper_Spec_RPC_Address">Specifying RPC Server Addresses</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="oper.htm#oper_Stubs_and_Auto_RPC">Stubs and Automatic RPC Execution</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="oper.htm#oper_Modify_RPC_PP_Dyn">Modifying RPC Profile Parameters during a Natural Session</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="oper.htm#oper_Executing_Serv_Com">Executing Server Commands</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="oper.htm#oper_rpc_logon2server_lib">Logon to a Server Library</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="oper.htm#oper_Using_LOGON">Using the Logon Option</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="oper.htm#oper_Using_Compression">Using Compression</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="oper.htm#oper_using_ssl">Using Secure Socket Layer</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="oper.htm#oper_Monitoring_the_Status_of_an_RPC_Session">Monitoring the Status of an RPC Session</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="oper.htm#oper_usr4010n">Retrieving Runtime Settings of a Server</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="oper.htm#oper_usr4009n">Setting/Getting Parameters for EntireX</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="oper.htm#oper_Handling_Errors">Handling Errors</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="oper.htm#oper_usr_4_srv_exec">User Exits before and after Service Execution</a></p>
+         </li>
+      </ul>
+      <hr>
+      <div><a name="oper_Spec_RPC_Address"></a></div> 
+         
+      <h2>Specifying RPC Server Addresses</h2> 
+          
+      <p>To each remote <code>CALLNAT</code> request, a server must be assigned
+              (identified by <code><var>servername</var></code> and
+              <code><var>nodename</var></code>) on which the
+              <code>CALLNAT</code> is to be executed. Therefore, all subprograms to be
+              accessed remotely must be defined
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">in a local service directory on the client side,</p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">or in a remote directory accessed via a remote directory server,</p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">or by way of default server addressing with the profile parameter <a href="../parms/dfs.htm"><code>DFS</code></a>,
+            </p>
+                  
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">or within the client application itself by way of default server
+                      addressing.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>In addition to the methods mentioned above, you can specify alternative
+              servers.
+      </p> 
+          
+      <p>If EntireX Broker is used, it is also possible to define servers using
+              the EntireX Location Transparency, see
+              <a href="oper.htm#oper_use_location_transparency">Using EntireX
+            Location Transparency</a>.
+      </p> 
+          
+      <p>Below is information on:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="oper.htm#oper_Use_Local_Entries">Using Local Directory Entries</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="oper.htm#oper_Use_Remote_Entries">Using Remote Directory Entries</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="oper.htm#oper_Spec_Def_Serv_Stat">Specifying a Default Server Address at Natural Startup</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="oper.htm#oper_Spec_Default_Server_Dynamic">Specifying a Default Server Address within a Natural Session</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="oper.htm#oper_Use_Alter_Server">Using an Alternative Server</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="oper.htm#oper_use_location_transparency">Using EntireX Location Transparency</a></p>
+         </li>
+      </ul>
+      <div><a name="oper_Use_Local_Entries"></a></div> 
+          
+      <h3>Using Local Directory Entries</h3> 
+           
+           
+      <p>All data of a client's local service directory is stored in the
+               subprogram <code>NATCLTGS</code>. At execution time, this subprogram is used to
+               retrieve the target server. As a consequence, <code>NATCLTGS</code> must be
+               available in the client application or in one of the Natural steplibs defined
+               for the application.
+      </p> 
+           
+      <p>If <code>NATCLTGS</code> has not been generated into a steplib or
+               resides on another machine, use the appropriate Natural utility (
+               <a href="../utis/sysmain_ux-over.htm"><code>SYSMAIN</code></a>
+                or
+               the <a href="../utis/sysobjh.htm">Natural Object Handler</a>) to
+               move <code>NATCLTGS</code> into one of the steplibs defined for the
+               application.
+      </p> 
+           
+      <p>If you are using a <code>NATCLTGS</code> for joint usage, you must make
+               it available to all client environments, for example by copying it to the
+               library <code>SYSTEM</code>, or, if an individual copy is used for a client, it
+               must be maintained for this client using the
+               <a href="../utis/sysrpc_sm.htm">Service Directory Maintenance</a>
+               function of the <code>SYSRPC</code> utility.
+      </p> 
+           
+      <p>To define and edit RPC service entries, see the section
+               <a href="../utis/sysrpc_sm.htm">Service Directory
+            Maintenance</a> in the <a href="../utis/sysrpc-over.htm">SYSRPC Utility</a>
+               documentation.
+      </p> 
+          
+      <div><a name="oper_Use_Remote_Entries"></a></div> 
+          
+      <h3>Using Remote Directory Entries</h3> 
+           
+           
+      <p>A remote directory contains service entries that can be made available
+               to several Natural clients. The Natural clients can retrieve these service
+               entries from remote directory servers. For information on the purpose and on
+               the installation of remote directory servers, see <a href="rds.htm#rds">Using a Remote Directory
+            Server</a>.
+      </p> 
+           
+      <p>For information on the <code>SYSRPC</code>
+               <a href="../utis/sysrpc_rm_cui.htm">Remote Directory
+                  Maintenance</a> function, see the relevant section in the
+               <cite>SYSRPC Utility</cite> documentation.
+      </p> 
+          
+      <div><a name="oper_Spec_Def_Serv_Stat"></a></div> 
+          
+      <h3>Specifying a Default Server Address at Natural Startup</h3> 
+           
+           
+      <p>Instead of addressing a server by using a local or remote service
+               directory, you can preset a default server with the profile parameter  <a href="../parms/dfs.htm"><code>DFS</code></a>,
+               as described in your Natural <cite>Operations</cite> documentation.
+               This server address is used if the subprogram can be found in neither the local
+               nor the remote service directory.
+      </p> 
+           
+      <p>The <code>DFS</code> setting determines the default server
+               for the whole session or until it is overwritten dynamically.
+      </p> 
+           
+      <p>If no <code>DFS</code> setting exists and the server address
+               of a given remote procedure call could not be found in the service directory, a
+               Natural error message is returned.
+      </p> 
+           
+      <p>A default server address defined within a client application remains
+               active even if you log on to another library or if a Natural error occurs.
+      </p> 
+          
+      <div><a name="oper_Spec_Default_Server_Dynamic"></a></div> 
+          
+      <h3>Specifying a Default Server Address within a Natural Session</h3>
+          
+           
+           
+      <p><a name="oper_usr2007n"></a>The client application itself may dynamically
+               specify a default server address at runtime. For this purpose, Natural provides
+               the application programming interface
+               <a href="oper.htm#oper_Spec_Default_Server_Dynamic"><code>USR2007N</code></a>.
+               This interface enables you to determine a default server address that is to be
+               used each time a remote program cannot be addressed via the service
+               directory.
+      </p> 
+           
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To make use of <code>USR2007N</code></strong></p>
+      <ol class="steps">
+         <li> 
+                    
+                    
+            <p class="instep">Copy the subprogram <code>USR2007N</code> from the library
+                        <code>SYSEXT</code> to the library <code>SYSTEM</code> or to the steplib
+                        library, or to any application in the server environment.
+            </p> 
+                    
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">Using the <a href="../sm/defineda_pda.htm"><code>DEFINE DATA
+                     PARAMETER</code></a> statement in structured mode or the
+                        <a href="../sm/reset.htm"><code>RESET</code></a> statement in
+                        reporting mode, specify the following parameters: 
+            </p> 
+                     
+                     
+            <table border="1" class="color" cellpadding="3" width="97%"> 
+                         
+               <thead align="left" valign="top"> 
+                             
+                  <tr> 
+                                 
+                     <th>Parameter</th> 
+                                 
+                     <th>Format</th> 
+                                 
+                     <th colspan="2">Description</th> 
+                                
+                  </tr> 
+                            
+               </thead> 
+                         
+               <tbody align="left" valign="top"> 
+                             
+                  <tr> 
+                                 
+                     <td rowspan="3"><code><var>function</var></code></td>
+                                 
+                                 
+                     <td rowspan="3">A1</td> 
+                                 
+                     <td colspan="2">Function; possible values
+                        are:
+                     </td> 
+                                
+                  </tr> 
+                             
+                  <tr> 
+                                 
+                     <td><code>P</code> (Put)
+                     </td> 
+                                 
+                     <td>Determines that the server address (composed of the
+                        parameters <code><var>nodename</var></code> and
+                                     <code><var>servername</var></code>, see below) is the
+                            default address for all subsequent remote procedure calls not defined in the
+                                     service directory.<br>
+                                     
+                        <p>To remove a default server address, specify a blank for
+                                         <code><var>nodename</var></code> and
+                                         <code><var>servername</var></code>.
+                        </p> 
+                     </td> 
+                                
+                  </tr> 
+                             
+                  <tr> 
+                                 
+                     <td><code>G</code> (Get)
+                     </td> 
+                                 
+                     <td>Retrieves the current default server address as set by the
+                        function P.
+                     </td> 
+                                
+                  </tr> 
+                             
+                  <tr> 
+                                 
+                     <td><code><var>nodename</var></code></td>
+                                 
+                                 
+                     <td>A192</td> 
+                                 
+                     <td colspan="2"> 
+                        
+                        <p>Specifies/returns the name of the server node to be
+                                addressed.
+                        </p> 
+                                     
+                        <p> The node name may have up to 32 characters for physical node
+                                         names and up to 192 characters for logical node names. See
+                                         <a href="oper.htm#oper_use_location_transparency">Using EntireX
+                                            Location Transparency</a>.
+                        </p> 
+                                     
+                        <p class="note"><strong>Note:</strong><br> For compatibility reasons,
+                                         <code><var>servername</var></code> is defined with
+                                         the option <a href="../sm/defineda_pda.htm#BY_VALUE"><code>BY
+                                               VALUE</code></a> or
+                                         <a href="../sm/defineda_pda.htm#BY_VALUE_RESULT"><code>BY VALUE
+                                               RESULT</code></a> (see the section
+                                         <a href="../sm/defineda_pda.htm#param_data_def">parameter-data-definition</a>
+                                         in the description of the <a href="../sm/defineda.htm"><code>DEFINE
+                                               DATA</code></a> statement) to support existing callers which pass an A8
+                                         field for the
+                                         <code><var>servername</var></code>.
+                        </p> 
+                                     
+                        <p>The sample <code>USR2007P</code> provided in library
+                                         <code>SYSEXT</code> supports up to 32 characters.
+                        </p> 
+                     </td> 
+                                
+                  </tr> 
+                             
+                  <tr> 
+                                 
+                     <td nowrap><code><var>servername</var></code></td>
+                                 
+                                 
+                     <td>A192</td> 
+                                 
+                     <td colspan="2"> 
+                        
+                        <p>Specifies/returns the server name to be addressed.</p> 
+                                     
+                        <p> The server name may have up to 32 characters for physical
+                           server names and up to 192 characters for logical service names. See
+                                         <a href="oper.htm#oper_use_location_transparency">Using EntireX
+                                            Location Transparency</a>.
+                        </p> 
+                                     
+                        <p class="note"><strong>Note:</strong><br> For compatibility reasons,
+                                         <code><var>nodename</var></code> is defined with the
+                                         option <a href="../sm/defineda_pda.htm#BY_VALUE"><code>BY
+                                               VALUE</code></a> or
+                                         <a href="../sm/defineda_pda.htm#BY_VALUE_RESULT"><code>BY VALUE
+                                               RESULT</code></a> (see the section
+                                         <a href="../sm/defineda_pda.htm#param_data_def">parameter-data-definition</a>
+                                         in the description of the <a href="../sm/defineda.htm"><code>DEFINE
+                                               DATA</code></a> statement) to support existing callers which pass an A8
+                                         field for the <code><var>nodename</var></code>.
+                        </p> 
+                                     
+                        <p>The sample <code>USR2007P</code> provided in library
+                                         <code>SYSEXT</code> supports up to 32 characters.
+                        </p> 
+                     </td> 
+                                
+                  </tr> 
+                             
+                  <tr> 
+                                 
+                     <td nowrap><code><var>logon</var></code></td> 
+                                 
+                     <td>A1</td> 
+                                 
+                     <td colspan="2">Specifies/returns the Logon
+                        option, see <a href="oper.htm#oper_Using_LOGON">Using the Logon
+                                        Option</a>.
+                     </td> 
+                                
+                  </tr> 
+                             
+                  <tr> 
+                                 
+                     <td nowrap><code><var>protocol</var></code></td>
+                                 
+                                 
+                     <td>A1</td> 
+                                 
+                     <td colspan="2">Specifies/returns the transport
+                        protocol.<br>
+                                     Valid value: <code>B</code> (=EntireX Broker).
+                     </td> 
+                                
+                  </tr> 
+                             
+                  <tr> 
+                                 
+                     <td rowspan="3" nowrap><code><var>noservdir</var></code></td>
+                                 
+                                 
+                     <td rowspan="3">A1</td> 
+                                 
+                     <td colspan="2">Specifies/returns the service
+                        directory option, see profile parameter <a href="../parms/dfs.htm"><code>DFS</code></a>.
+                     </td>
+                                 
+                                
+                  </tr> 
+                             
+                  <tr> 
+                                 
+                     <td><code>Y</code></td> 
+                                 
+                     <td>Service directory must not be present</td> 
+                                
+                  </tr> 
+                             
+                  <tr> 
+                                 
+                     <td><code>N</code></td> 
+                                 
+                     <td>Service directory must be present</td> 
+                                
+                  </tr> 
+                            
+               </tbody> 
+                        
+            </table> 
+                     
+                    
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">In the calling program on the client side, specify the following
+                        statement: 
+            </p> 
+                    <pre class="verbatim">
+CALLNAT 'USR2007N' <var>function nodename servername logon protocol</var> [<var>noservdir</var>]
+</pre> 
+                    
+                  </li>
+      </ol> 
+           
+      <p class="note"><strong>Note:</strong><br> The Natural subprogram <code>NATCLTPS</code> in the library
+               <code>SYSRPC</code> is only maintained for compatibility reasons.
+      </p> 
+          
+      <div><a name="oper_Use_Alter_Server"></a></div> 
+          
+      <h3>Using an Alternative Server</h3> 
+           
+           
+      <p>To avoid connection failures, you may want to define several
+               alternative servers for a remote <code>CALLNAT</code>. If you specify such
+               alternative servers, Natural proceeds as follows:
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">The client makes a first attempt to establish the connection.</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">If this attempt fails, instead of providing an error message, a
+                       second attempt is made, however, this time not on the same server. Instead, the
+                       service directory is searched again starting at the current entry to find out
+                       whether or not another server is available which offers the desired
+                       service.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">If a second entry is found, Natural tries to establish the connection
+                       to this server. If the remote procedure call is performed successfully, the
+                       client application keeps on running. The user does not notice whether the
+                       connection to the first server or to the alternative server produced the
+                       result.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">If no further entry is found or if the connection to alternative
+                       servers fail, Natural issues a corresponding error message.
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To enable the use of an alternative server</strong></p>
+      <ol class="steps">
+         <li> 
+                    
+                    
+            <p class="instep">Define more than one server in the service directory for the same
+                        service.
+            </p> 
+                    
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">Set the profile parameter <a href="../parms/tryalt.htm"><code>TRYALT</code></a>
+                        to <code>ON</code> to give permission to use an alternative server.
+            </p> 
+                    
+                  
+         </li>
+      </ol> 
+           
+      <p>This parameter can also be set dynamically for the current session
+               
+               with the <a href="../utis/sysrpc_parm_cui.htm">Parameter Maintenance</a> function
+               (described in the <cite>SYSRPC Utility</cite>
+               documentation).
+      </p> 
+          
+      <div><a name="oper_use_location_transparency"></a></div> 
+          
+      <h3>Using EntireX Location Transparency</h3> 
+           
+           
+      <p>Using EntireX Location Transparency, you can change physical node and
+               server names without having to configure anything or to change client and/or
+               server programs. Now, instead of using a physical node and physical server
+               name, a server can be addressed by a logical name. The logical name is mapped
+               to the physical node and server names using directory services.
+      </p> 
+           
+      <p>To take advantage of Location Transparency, the Natural RPC has been
+               enabled to accept a logical name wherever only a node and server name could be
+               specified before. The logical name is passed to the EntireX Broker before it is
+               used the first time.
+      </p> 
+           
+      <p>The maximum length of a logical name is 192 characters. To avoid new
+               Natural profile parameters, a logical name is specified in the server name part
+               of the already existing parameters. There are two kinds of logical names:
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem"><strong>Logical node names</strong><br>
+                       With a logical node name you specify a logical name for the node only
+                       in conjunction with a real server name. A logical node name can be used in all
+                       places where you can also use a real node name. To define a logical node name
+                       the keyword <code>LOGBROKER</code> must be used.
+            </p> 
+                   
+            <p class="initem"> <strong>Example:</strong></p> 
+                   
+            <p class="initem">
+                       <code>SRVNVODE='LOGBROKER=<var>logical_node_name,my_set</var>'</code></p>
+                   
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"><strong>Logical services</strong><br>
+                       With a logical service, you specify a logical name for both the node
+                       and the server. A logical service can be used in all places where you can also
+                       use a real node and server name. To define a logical service, an asterisk (*)
+                       must be specified as node name (intentionally left empty), and the server name
+                       contains the logical service name.
+            </p> 
+                   
+            <p class="initem"> <strong>Example:</strong></p> 
+                   
+            <p class="initem"> <code>SRVNVODE='*'
+                  SRVNAME='<var>logical_service_name,my_set</var>'</code></p> 
+                   
+            <p class="initem"> If the Natural Application Programming Interface
+                       <a href="securi.htm#securi_Interface_USR2071N"><code>USR2071N</code></a>
+                       is used, you can <code>LOGON</code> to a logical service name by using the
+                       keyword <code>LOGSERVICE</code> together with the logical service name in the
+                       field <code><var>broker-id</var></code>.
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>For further information about <cite>EntireX Location
+                  Transparency</cite>, refer to the EntireX documentation.
+      </p> 
+           
+      <p>The following components refer to node and server names:</p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">Natural profile parameters <a href="../parms/tryalt.htm"></a><a href="../parms/srvnode.htm"><code>SRVNODE</code></a>,
+                       <a href="../parms/srvname.htm"><code>SRVNAME</code></a>,
+                       <a href="../parms/dfs.htm"><code>DFS</code></a> and
+                       <a href="../parms/rds.htm"><code>RDS</code></a></p>
+                   
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"><a href="../utis/sysrpc_sm.htm">Service Directory
+                          Maintenance</a> function of the <a href="../utis/sysrpc-over.htm"><code>SYSRPC</code></a> utility
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"><a href="../glossary/glossary.htm#glossary_service_directory">Service
+                          directory</a> (<code>NATCLTGS</code>)
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Natural Application Programming Interfaces
+                       <a href="oper.htm#oper_usr2007n"><code>USR2007N</code></a>,
+                       <a href="securi.htm#securi_Interface_USR2071N"><code>USR2071N</code></a></p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Service programs <a href="oper.htm#oper_Using_RPCERR"><code>RPCERR</code></a>,
+                       <a href="oper.htm#oper_Using_the_RPCINFO_Subprogram"><code>RPCINFO</code></a></p>
+                   
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>See also <a href="../utis/sysrpc_sm.htm#sysrpc_sm_Loc_Trans">Location
+            Transparency</a> in <a href="../utis/sysrpc_sm.htm">Service Directory
+            Maintenance</a> function of the
+               <a href="../utis/sysrpc-over.htm">SYSRPC
+            Utility</a> documentation.
+      </p> 
+          
+      <div class="noprint">
+         <p><a href="oper.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="oper_Stubs_and_Auto_RPC"></a></div> 
+         
+      <h2>Stubs and Automatic RPC Execution</h2> 
+          
+      <p>Stubs are no longer required if automatic Natural RPC execution is used,
+              as described in
+              <a href="oper.htm#oper_Working_with_Automatic_Natural_RPC_Execution">Working
+            with Automatic Natural RPC Execution</a> below.
+      </p> 
+          
+      <p>However, generating stubs provides the advantage of controlling the
+              <code>CALLNAT</code>(s) executed remotely and facilitates error diagnoses.
+              Should a remote call fail due to an incorrect <code>CALLNAT</code> name, the
+              Natural error message issued then helps to immediately identify the problem
+              cause. Without a stub, for an incorrect <code>CALLNAT</code> you may receive
+              follow-up errors returned from the transport layer or the Natural server.
+      </p> 
+          
+      <p>If you want to call an EntireX RPC server with a remote
+              <code>CALLNAT</code> execution, it is strongly recommended to use a stub
+              subprogram (<a href="intro_rpc.htm#interface-object">interface object</a>).
+              A stub subprogram is required if the IDL (Interface Definition Language)
+              definition of the subprogram you want to call on an EntireX RPC server contains
+              a group structure. In this case, you must define the same group structure
+              during the stub generation on the
+              <a href="../utis/sysrpc_stub_single.htm">Stub
+                 Generation</a> screen or generate the stub subprogram from the
+              EntireX IDL
+              file (Windows only).
+      </p> 
+          
+      <p>Below is information on:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="oper.htm#oper_Creating_Stub_Subprograms">Creating Stub Subprograms</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="oper.htm#oper_Working_with_Automatic_Natural_RPC_Execution">Working with Automatic Natural RPC Execution</a></p>
+         </li>
+      </ul> 
+         
+      <div><a name="oper_Creating_Stub_Subprograms"></a></div> 
+          
+      <h3>Creating Stub Subprograms</h3> 
+           
+           
+      <p>With the Stub Generation function of the <code>SYSRPC</code> utility,
+               you can generate the Natural stub subprograms used to connect the client's
+               calling program to a subprogram on a server. The stub consists of a parameter
+               data area (<a href="../pg/pg_obj_darea.htm#Parameter_Data_Area">PDA</a>) and of the
+               server call logic; see
+               <a href="../utis/sysrpc_stub-over.htm#sysrpc_stub-over">Stub
+            Generation</a> in the <a href="../utis/sysrpc-over.htm">SYSRPC Utility</a>
+               documentation.
+      </p> 
+           
+      <p>The PDA contains the same parameters as used in the
+               <a href="../sm/callnat.htm"><code>CALLNAT</code></a> statement of
+               the calling program and must be defined in the Stub Generation screen of the
+               Stub Generation function. If a compiled Natural subprogram with the same name
+               already exists, the PDA used by this subprogram is used to preset the screen.
+               The server call logic is generated automatically by the Stub Generation
+               function after the PDA has been defined.
+      </p> 
+           
+      <p>At execution time, the Natural application program containing the
+               <code>CALLNAT</code> statement and the stub subprogram must exist on the client
+               side. The Natural application subprogram must exist on the server side. Both
+               the stub and server subprograms must have the same name.
+      </p> 
+          
+      <div><a name="oper_Working_with_Automatic_Natural_RPC_Execution"></a></div> 
+          
+      <h3>Working with Automatic Natural RPC Execution</h3> 
+           
+           
+      <p>You are not required to generate Natural RPC stubs, but you can work
+               with automatic Natural RPC execution (that is, without using Natural stubs). To
+               work with automatic Natural RPC execution, set the profile parameter <a href="../parms/autorpc.htm"><code>AUTORPC</code></a>
+               as follows:
+      </p> 
+           <pre class="verbatim">AUTORPC=ON</pre> 
+           <p>In that case, you can omit the generation of the client stub during
+               your preparations for RPC usage. When the automatic Natural RPC execution is
+               enabled (<code>AUTORPC=ON</code>), Natural behaves as follows:
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">if a subprogram cannot be found locally, Natural tries to execute it
+                       remotely (a stub subprogram is not needed),
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">the parameter data area will then be generated dynamically during
+                       runtime.
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>As stubs only exist for client programs, this feature has no effect on
+               the <code>CALLNAT</code> program on the server.
+      </p> 
+           
+      <p>If profile parameter <a href="../parms/autorpc.htm"><code>AUTORPC</code></a>
+               is set to <code>ON</code>, and a Natural stub exists, it will still be
+               used.
+      </p> 
+          
+      <div class="noprint">
+         <p><a href="oper.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="oper_Modify_RPC_PP_Dyn"></a></div> 
+         
+      <h2>Modifying RPC Profile Parameters during a Natural Session</h2> 
+          
+          
+      <p>With the <a href="../utis/sysrpc_parm_cui.htm">Parameter Maintenance</a>
+              function,
+              you can dynamically modify some of the RPC profile parameters set in the
+              Natural profile parameter module for the current session.
+      </p> 
+          
+      <p class="caution"><strong>Caution:</strong><br>These modifications are retained as long as the user session is
+              active; they are lost when the session is terminated. Static settings are only
+              made using Natural profile parameters.
+      </p> 
+         
+      <div class="noprint">
+         <p><a href="oper.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="oper_Executing_Serv_Com"></a></div> 
+         
+      <h2>Executing Server Commands</h2> 
+          
+          
+      <p>Active servers that have been defined in the service directory (see
+              <a href="oper.htm#oper_Spec_RPC_Address">Specifying RPC Server
+            Addresses</a>) can be controlled with the <code>SYSRPC</code>
+              <a href="../utis/sysrpc_com_exec.htm">server command execution
+                 function</a> as described in the relevant section in the
+              <cite>SYSRPC Utility</cite> documentation.
+      </p> 
+         
+      <div class="noprint">
+         <p><a href="oper.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="oper_rpc_logon2server_lib"></a></div> 
+         
+      <h2>Logon to a Server Library</h2> 
+          
+          
+      <p>The server library on which the <a href="../sm/callnat.htm"><code>CALLNAT</code></a> is executed depends on
+              the RPC <a href="oper.htm#oper_Using_LOGON">Logon
+            Option</a> on the client side and a couple of parameters on
+              the server side.
+      </p> 
+          
+      <p>The following table shows which the relevant parameters are and how they
+              influence the library setting:
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td rowspan="3">&nbsp;</td> 
+                       
+               <td colspan="2"><strong>Client</strong></td> 
+                       
+               <td colspan="5"><strong>Server</strong></td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>1</td> 
+                       
+               <td>2</td> 
+                       
+               <td>3</td> 
+                       
+               <td>4</td> 
+                       
+               <td>5</td> 
+                       
+               <td>6</td> 
+                       
+               <td>7</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>*library-id</td> 
+                       
+               <td>RPC<br>
+                     <code>LOGON</code><br>
+                           flag for<br>
+                           server entry<br>
+                           set?
+               </td> 
+                       
+               <td><code>LOGONRQ</code><br>
+                     set?
+               </td> 
+                       
+               <td>Server<br>
+                  started with<br>
+                           <code>STACK=</code></td> 
+                       
+               <td>NSC<br>
+                   or<br>
+                           native<br>
+                           Natural?
+               </td> 
+                       
+               <td>NSC:<br>
+                  RPC Logon<br>
+                           option in<br>
+                           library<br>
+                           profile
+               </td> 
+                       
+               <td>Server<br>
+                  *library-id
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>1</td> 
+                       
+               <td>Lib1</td> 
+                       
+               <td>no</td> 
+                       
+               <td>no</td> 
+                       
+               <td>logon lib1</td> 
+                       
+               <td>No influence</td> 
+                       
+               <td>N/--</td> 
+                       
+               <td>Lib1</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>2</td> 
+                       
+               <td>Lib1</td> 
+                       
+               <td>no</td> 
+                       
+               <td>no</td> 
+                       
+               <td>logon lib2</td> 
+                       
+               <td>No influence</td> 
+                       
+               <td>N/--</td> 
+                       
+               <td>Lib2</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>3</td> 
+                       
+               <td nowrap>Lib1</td> 
+                       
+               <td nowrap>no</td> 
+                       
+               <td nowrap>yes</td> 
+                       
+               <td colspan="4">(Client <code>LOGON</code> flag
+                           <code>= NO</code>) <em>and</em> ( <code>LOGONRQ=YES</code>)<br>
+                           is not possible.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>4</td> 
+                       
+               <td nowrap>Lib1</td> 
+                       
+               <td nowrap>yes</td> 
+                       
+               <td nowrap>No influence</td> 
+                       
+               <td nowrap>No influence</td> 
+                       
+               <td nowrap>NSC</td> 
+                       
+               <td nowrap><code>AUTO</code></td> 
+                       
+               <td>Lib1</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>5</td> 
+                       
+               <td>Lib1</td> 
+                       
+               <td>yes</td> 
+                       
+               <td>No influence</td> 
+                       
+               <td>No influence</td> 
+                       
+               <td>NSC</td> 
+                       
+               <td>N</td> 
+                       
+               <td>Lib1</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>6</td> 
+                       
+               <td>Lib1</td> 
+                       
+               <td>yes</td> 
+                       
+               <td>No influence</td> 
+                       
+               <td>No influence</td> 
+                       
+               <td>Native Natural</td> 
+                       
+               <td>--</td> 
+                       
+               <td>Lib1</td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>Explanation of the table columns:</p> 
+          
+      <ol> 
+              
+         <li> 
+                  
+            <p class="initem">The library ID of the client application where the
+                      <a href="../sm/callnat.htm"><code>CALLNAT</code></a> is
+                      initiated.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">The value of the RPC <code>LOGON</code> flag. Can be set for a whole
+                      node or a server.
+            </p> 
+                  
+            <p class="initem"> The flag can be set by using</p> 
+                  
+            <p class="initem"> the <a href="../utis/sysrpc_sm.htm">Service Directory
+                         Maintenance</a> function of the <code>SYSRPC</code> utility,
+            </p> 
+                  
+            <p class="initem"> or the profile parameter <a href="../parms/dfs.htm"><code>DFS</code></a>,
+            </p>
+                  
+                  
+            <p class="initem"> or the application programming interface
+                      <a href="oper.htm#oper_Spec_Default_Server_Dynamic"><code>USR2007N</code></a>.
+            </p>
+                  
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">The <a href="../parms/logonrq.htm"><code>LOGONRQ</code></a>
+                      profile parameter
+                      can be set at server startup.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">The library ID to which the server is positioned at its startup.</p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Does the server run under Natural Security (NSC) (see
+                      <a href="securi.htm#securi_Using_Natural_RPC_with_Natural_Security">Using
+                  Natural RPC with Natural Security</a>) or not?
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">The setting of the Logon option in the NSC
+                      <a href="../nsc/nsc_admin.htm#Library_Defaults">Library Profile
+                  Items</a> (<cite>Session options</cite> &gt;
+                      <a href="../nsc/nsc_lib.htm#nat_rpc_restr">Natural RPC
+                  Restrictions</a>) of the NSC server application. If the NSC
+                      <a href="../nsc/nsc_lib.htm#RPCLogonOption">Logon
+                  Option</a> is set to <code>A</code> (<code>AUTO</code>), only
+                      library and user ID are taken. If set to <code>N</code> (default), the library,
+                      user ID and password parameters are evaluated.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">The library on the server where the <code>CALLNAT</code> program is
+                      finally executed.
+            </p> 
+                 
+         </li> 
+             
+      </ol> 
+         
+      <div class="noprint">
+         <p><a href="oper.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="oper_Using_LOGON"></a></div> 
+         
+      <h2>Using the Logon Option</h2> 
+          
+      <p>The Logon option defines on which library the remote subprogram is to be
+              executed. See also <a href="oper.htm#oper_rpc_logon2server_lib">Logon to a Server
+            Library</a>.
+      </p> 
+          
+      <p class="note"><strong>Note:</strong><br> When you do not use the Logon option, the
+              <a href="../sm/callnat.htm"><code>CALLNAT</code></a> is executed
+              on the library to which the server is currently logged on. This server logon is
+              defined with the Natural profile parameter <a href="../parms/stack.htm"><code>STACK</code></a><code>=(LOGON
+            <var>library</var>)</code>. The server will search for the
+              <code>CALLNAT</code>s to be executed in
+              <code><var>library</var></code> (and all associated steplibs
+              defined for <code><var>library</var></code>).
+      </p> 
+          
+      <p>A client application can be enabled to execute a subprogram on a
+              different library by setting the Logonoption for this subprogram. This causes
+              the client to pass the name of its current library to the server, together with
+              this Logon option. The server will then logon to this library, searching it for
+              the desired subprogram and, if the latter is found, it will execute it. After
+              that, it will logoff from the previous library.
+      </p>
+      <div><a name="d0e9961"></a></div> 
+          
+      <h3>Logging on to a Different Library</h3> 
+           
+           
+      <p><a name="oper_usr4008n"></a>If the server should logon to a library other than
+               the client's current libray, the client has to call the application programming
+               interface <a href="oper.htm#oper_usr4008n"><code>USR4008N</code></a>
+               before the remote <a href="../sm/callnat.htm"><code>CALLNAT</code></a> is executed. With
+               <code>USR4008N</code> the client specifies an alternate name of a library to
+               which the server will logon. The name of this library will be used for all
+               subsequent calls to remote subprograms for which the Logon option applies. If
+               blank is specified for the library name, the name of the current client library
+               will be used again.
+      </p> 
+           
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To make use of <code>USR4008N</code></strong></p>
+      <ol class="steps">
+         <li> 
+                    
+                    
+            <p class="instep">Copy the subprogram <code>USR4008N</code> from the library
+                        <code>SYSEXT</code> to the library <code>SYSTEM</code> or to the steplib
+                        library, or to any application in the server environment.
+            </p> 
+                    
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">Using the <a href="../sm/defineda_pda.htm"><code>DEFINE DATA
+                     PARAMETER</code></a> statement, specify the following parameters: 
+            </p> 
+                     
+                     
+            <table border="1" class="color" cellpadding="3" width="97%"> 
+                         
+               <thead align="left" valign="top"> 
+                             
+                  <tr> 
+                                 
+                     <th>Parameter</th> 
+                                 
+                     <th>I/O</th> 
+                                 
+                     <th>Format</th> 
+                                 
+                     <th colspan="2">Description</th> 
+                                
+                  </tr> 
+                            
+               </thead> 
+                         
+               <tbody align="left" valign="top"> 
+                             
+                  <tr> 
+                                 
+                     <td rowspan="3"><code>P-FUNC</code></td> 
+                                 
+                     <td rowspan="3">I</td> 
+                                 
+                     <td rowspan="3">A01</td> 
+                                 
+                     <td colspan="2"> 
+                        
+                        <p>Function code; possible values are:</p> 
+                     </td> 
+                                
+                  </tr> 
+                             
+                  <tr> 
+                                 
+                     <td><code>P</code> (Put) 
+                     </td> 
+                                 
+                     <td>Specify a new library for remote <code>CALLNAT</code>
+                                     execution.
+                     </td> 
+                                
+                  </tr> 
+                             
+                  <tr> 
+                                 
+                     <td><code>G</code> (Get)
+                     </td> 
+                                 
+                     <td>Retrieve previously specified library for remote
+                        <code>CALLNAT</code> execution.
+                     </td> 
+                                
+                  </tr> 
+                             
+                  <tr> 
+                                 
+                     <td><code>P-LIB</code></td> 
+                                 
+                     <td>I</td> 
+                                 
+                     <td>A8</td> 
+                                 
+                     <td colspan="2">Library on server for remote
+                        <code>CALLNAT</code> execution.
+                     </td> 
+                                
+                  </tr> 
+                            
+               </tbody> 
+                        
+            </table> 
+                     
+                    
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">In the calling program on the client side, specify the following
+                        statement: 
+            </p> 
+                    <pre class="verbatim">CALLNAT 'USR4008N' <var>P-FUNC</var> <var>P-LIB</var></pre> 
+                    <p class="note"><strong>Note:</strong><br> The calling program must be executed before the Natural RPC
+                        client invokes a remote <code>CALLNAT</code>.
+            </p> 
+                    
+                  
+         </li>
+      </ol> 
+          
+      <div><a name="d0e10142"></a></div> 
+          
+      <h3>Settings Required on the Client Side</h3> 
+           
+           
+      <p>To set the Logon option, you can use either the <code>SYSRPC</code>
+               <a href="../utis/sysrpc_sm.htm">Service Directory maintenance</a>
+               function (see the relevant section in the <code>SYSRPC</code> Utility
+               documentation) or - when using a default server - the profile parameter <a href="../parms/dfs.htm"><code>DFS</code></a>
+               or the application programming interface
+               <a href="oper.htm#oper_Spec_Default_Server_Dynamic"><code>USR2007N</code></a>.
+      </p>
+           
+          
+      <div><a name="d0e10183"></a></div> 
+          
+      <h3>Settings Required on the Server Side</h3> 
+           
+           
+      <p>No setting is required on the server side.</p> 
+          
+      <div class="noprint">
+         <p><a href="oper.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="oper_Using_Compression"></a></div> 
+         
+      <h2>Using Compression</h2> 
+          
+          
+      <p>Compression types may be: <code>0</code>, <code>1</code> or
+              <code>2</code>. Stubs generated with <a href="../parms/compr.htm"><code>COMPR</code></a><code>=1</code> or
+              <code>2</code> can help reduce the data transfer rate.
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th>Compression Type</th> 
+                       
+               <th>Description</th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td><code>COMPR=0</code></td> 
+                       
+               <td>All <code>CALLNAT</code> parameter values are sent to and
+                  returned from the server, i.e. no compression is performed.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td nowrap><code>COMPR=1</code></td> 
+                       
+               <td> 
+                  
+                  <p>M-type parameters are sent to and returned from the server, whereas
+                     O-type parameters are only transferred in the send buffer. A-type parameters
+                     are only included in the reply buffer. The reply buffer does not contain the
+                     Format description.
+                  </p> 
+                           
+                  <p>This is the default setting.</p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>COMPR=2</code></td> 
+                       
+               <td>Same as for <code>COMP=1</code>, except that the server reply
+                  message still contains the format description of the <code>CALLNAT</code>
+                  parameters. This might be useful if you want to use certain options for data
+                  conversion by EntireX Broker (for more information, see the description of
+                           Translation Services in the EntireX Broker documentation).
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+         
+      <div class="noprint">
+         <p><a href="oper.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="oper_using_ssl"></a></div> 
+         
+      <h2>Using Secure Socket Layer</h2> 
+          
+          
+      <p>The Natural RPC supports Secure Socket Layer (SSL) for the TCP/IP
+              communication to the EntireX Broker.
+      </p> 
+          
+      <p>To enable the EntireX Broker to recognize that the TCP/IP communication
+              should use SSL, you must use one of the following methods:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">Append the string <code>:SSL</code> to the node name. If the node name
+                      has already been postfixed by the string <code>:TCP</code>, <code>:TCP</code>
+                      must be replaced by <code>:SSL</code>.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Prefix the node name with the string <code>//SSL:</code></p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p><strong>Example:</strong> 
+      </p> 
+          
+      <p><code>SRVNODE='157.189.160.95:1971:SSL'</code></p> 
+          
+      <p><a name="oper_usr2035n"></a>Before you access an EntireX Broker using SSL, you
+              must first invoke the application programming interface
+              <a href="oper.htm#oper_usr2035n"><code>USR2035N</code></a> to set the
+              required SSL parameter string.
+      </p> 
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To make use of <code>USR2035N</code></strong></p>
+      <ol class="steps">
+         <li> 
+                   
+                   
+            <p class="instep">Copy the subprogram <code>USR2035N</code> from the library
+                       <code>SYSEXT</code> to the library <code>SYSTEM</code> or to the steplib
+                       library, or to any application in the server environment.
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Using the <a href="../sm/defineda_parms.htm"><code>DEFINE DATA
+                     PARAMETER</code></a> statement, specify the following parameters: 
+            </p> 
+                    
+                    
+            <table border="1" class="color" cellpadding="3" width="97%"> 
+                        
+               <thead align="left" valign="top"> 
+                            
+                  <tr> 
+                                
+                     <th>Parameter</th> 
+                                
+                     <th>I/O</th> 
+                                
+                     <th>Format</th> 
+                                
+                     <th colspan="2">Description</th> 
+                               
+                  </tr> 
+                           
+               </thead> 
+                        
+               <tbody align="left" valign="top"> 
+                            
+                  <tr> 
+                                
+                     <td rowspan="3"><code><var>FUNCTION</var></code><br></td>
+                                
+                                
+                     <td rowspan="3">I</td> 
+                                
+                     <td rowspan="3">A01</td> 
+                                
+                     <td colspan="2">Function code; possible values
+                        are:
+                     </td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td><code>P</code> (Put)
+                     </td> 
+                                
+                     <td>Specify a new SSL parameter string. 
+                        
+                        <p>The SSL parameter string is internally saved and passed to
+                           EntireX each time an EntireX Broker using SSL communication is referenced the
+                           first time. You may use different SSL parameter strings for several EntireX
+                           Broker connections by calling application programming interface
+                                        <code>USR2035N</code> each time before you access the EntireX Broker the first
+                                        time.
+                        </p> 
+                                    
+                        <div><strong class="floating-title">Example:</strong></div> 
+                                    <pre class="verbatim">FUNCTION := 'P'
+SSLPARMS := 'TRUST_STORE=FILE://DDN:CACERT&amp;VERIFY_SERVER=N' 
+CALLNAT 'USR2035N' USING FUNCTION SSLPARMS </pre> 
+                                    <p>To set SSL parameters in case of a Natural RPC server, put the
+                                        name of the calling program onto the Natural stack when starting the
+                                        server.
+                        </p> 
+                                    
+                        <div><strong class="floating-title">Example:</strong></div> 
+                                    <pre class="verbatim">STACK=(LOGON <var>server-library</var>;<var>set-SSL-parms</var>)</pre> 
+                                    <p>Where <var>set-SSL-parms</var> is a Natural
+                                        program that invokes the application programming interface
+                                        <code>USR2035N</code> to set the SSL parameter string.
+                        </p> 
+                     </td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td><code>G</code> (Get)
+                     </td> 
+                                
+                     <td>Retrieve previously specified SSL parameter string. 
+                        
+                        <p>The previously put SSL parameter string is returned to the
+                                        caller.
+                        </p> 
+                                    
+                        <p>For more information about the SSL parameter string, refer to
+                                        the EntireX documentation.
+                        </p> 
+                     </td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td><code><var>SSLPARMS</var></code><br></td>
+                                
+                                
+                     <td>I</td> 
+                                
+                     <td>A128</td> 
+                                
+                     <td colspan="2">SSL parameter string as required
+                        by the EntireX Broker
+                     </td> 
+                               
+                  </tr> 
+                           
+               </tbody> 
+                       
+            </table> 
+                    
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">In the calling program on the client side, specify the following
+                       statement: 
+            </p> 
+                   <pre class="verbatim">CALLNAT 'USR2035N' <var>FUNCTION SSLPARMS</var></pre> 
+                   
+                 </li>
+      </ol> 
+         
+      <div class="noprint">
+         <p><a href="oper.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="oper_Monitoring_the_Status_of_an_RPC_Session"></a></div> 
+         
+      <h2>Monitoring the Status of an RPC Session</h2> 
+          
+      <p>This part is organized in the following sections:</p>
+          
+      <ul>
+         <li>
+            <p class="initem"><a href="oper.htm#oper_Using_RPCERR">Using the RPCERR Program</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="oper.htm#oper_Using_the_RPCINFO_Subprogram">Using the RPCINFO Subprogram</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="oper.htm#oper_Using_the_Server_Trace_Facility">Using the Server Trace Facility</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="oper.htm#oper_Defining_the_Trace_File">Defining the Trace File</a></p>
+         </li>
+      </ul>
+      <div><a name="oper_Using_RPCERR"></a></div> 
+          
+      <h3>Using the RPCERR Program</h3> 
+           
+           
+      <p>You can run the <code>RPCERR</code> program from the Command line or
+               invoke it by using a <a href="../sm/fetch.htm"><code>FETCH</code></a> statement from within a
+               Natural program. <code>RPCERR</code> displays the following information:
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">the last Natural error number and message if it was RPC related,</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">the last EntireX Broker message associated with this error.</p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>In addition, the node and server name from the last EntireX Broker call
+               can be retrieved.
+      </p> 
+           
+      <h4 class="floating-title">Example of an RPC Error Display: RPCERROR</h4>
+           
+           <pre class="verbatim">Natural error number: NAT6972 
+Natural error text  : 
+Directory error on Client, reason 3.
+
+RPC error information: 
+No additional information available. 
+
+Server Node:                                       Library: SYSTEM 
+Server Name:                                       Program: NATCLT3 
+                                                   Line No: 1010         </pre> 
+          <div><a name="oper_Using_the_RPCINFO_Subprogram"></a></div> 
+          
+      <h3>Using the RPCINFO Subprogram</h3> 
+           
+           
+      <p>You can use the subprogram <code>RPCINFO</code> in your application
+               program to retrieve information on the state of the current RPC session. This
+               also enables you to handle errors more appropriately by reacting to a specific
+               error class.
+      </p> 
+           
+      <p>The subprogram <code>RPCINFO</code> is included in the library
+               <code>SYSRPC</code> together with the sample program <code>TESTINFO</code> for
+               calling <code>RPCINFO</code>.
+      </p> 
+           
+      <h4 class="floating-title">Example:</h4> 
+           <pre class="verbatim">DEFINE DATA LOCAL USING RPCINFOL              
+  LOCAL                                       
+  1 PARM   (A1)                               
+  1 TEXT   (A80)                              
+  1 REDEFINE TEXT                             
+    2 CLASS  (A4)                             
+    2 REASON (A4)                             
+END-DEFINE                                    
+...                                           
+OPEN CONVERSATION USING SUBPROGRAM 'APPLSUB1' 
+  CALLNAT 'APPLSUB1' PARM                    
+CLOSE CONVERSATION *CONVID                    
+...                                           
+ON ERROR                                      
+   CALLNAT 'RPCINFO' SERVER-PARMS CLIENT-PARMS  
+   ASSIGN TEXT=C-ERROR-TEXT                   
+   DISPLAY CLASS REASON                       
+END-ERROR                                     
+...                                           
+END</pre> 
+           <h4 class="floating-title">Parameters of RPC Info</h4> 
+           
+      <p><code>RPCINFO</code> has the following parameters which are provided in
+               the parameter data area <code>RPCINFOL</code>:
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>Parameter</th> 
+                        
+               <th>Format</th> 
+                        
+               <th colspan="2">Description</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td nowrap><code>SERVER-PARMS</code></td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td colspan="2">Contains information about the
+                  Natural session when acting as a server. 
+                  
+                  <p>The <code>SERVER-PARMS</code> only apply if you execute
+                                <code>RPCINFO</code> remotely on an RPC server.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td rowspan="2"><code>S-BIKE</code></td> 
+                        
+               <td rowspan="2">A1</td> 
+                        
+               <td colspan="2"> 
+                  
+                  <p>Transport protocol used; possible value:</p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><code>B</code></td> 
+                        
+               <td>EntireX Broker</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><code>S-NODE</code></td> 
+                        
+               <td>A8</td> 
+                        
+               <td colspan="2">The node name of the
+                  server.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><code>S-NAME</code></td> 
+                        
+               <td>A8</td> 
+                        
+               <td colspan="2">The name of the server.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><code>S-ERROR-TEXT</code></td> 
+                        
+               <td>A80</td> 
+                        
+               <td colspan="2">Contains the message text returned
+                  from the transport layer.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><code>S-CON-ID</code></td> 
+                        
+               <td>I4</td> 
+                        
+               <td colspan="2">Current conversation ID. Note that
+                  this is the physical ID from EntireX Broker, not the logical Natural ID. 
+                  
+                  <p>This parameter always contains a value as EntireX Broker generates
+                                IDs for both conversational and non-conversational calls. 
+                  </p> 
+                            
+                  <p>If the physical conversation ID is either non-numeric or greater
+                                than I4, a <code>-1</code> is returned.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><code>S-CON-OPEN</code></td> 
+                        
+               <td>L</td> 
+                        
+               <td colspan="2">Indicates whether there is an open
+                  conversation. 
+                  
+                  <p>This parameter contains the value <code>TRUE</code> if a
+                                conversation is open, otherwise it contains <code>FALSE</code>.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><code>CLIENT-PARMS</code></td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td colspan="2">Contain information about the
+                  Natural session when acting as a client. 
+                  
+                  <p>The <code>CLIENT-PARMS</code> only apply if you execute
+                                <code>RPCINFO</code> remotely on an RPC client.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td rowspan="2"><code>C-BIKE</code></td> 
+                        
+               <td rowspan="2">A1</td> 
+                        
+               <td colspan="2"> 
+                  
+                  <p>Transport protocol used; possible value:</p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><code>B</code></td> 
+                        
+               <td>EntireX Broker</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><code>C-NODE</code></td> 
+                        
+               <td>A8</td> 
+                        
+               <td colspan="2">The node name of the previously
+                  addressed server.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><code>C-NAME</code></td> 
+                        
+               <td>A8</td> 
+                        
+               <td colspan="2">The name of the previously
+                  addressed server.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td nowrap><code>C-ERROR-TEXT</code></td> 
+                        
+               <td>A80</td> 
+                        
+               <td colspan="2">Contains the message text returned
+                  from the transport layer.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><code>C-CON-ID</code></td> 
+                        
+               <td>I4</td> 
+                        
+               <td colspan="2">Conversation ID of the last server
+                  call. Note that this is the physical ID from EntireX Broker, not the logical
+                  Natural ID. 
+                  
+                  <p>If no conversation is open, the value of this parameter is less
+                                than or equal to 0. If the physical conversation ID is either non-numeric or
+                                greater than I4, a <code>-1</code> is returned.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><code>C-CON-OPEN</code></td> 
+                        
+               <td>L</td> 
+                        
+               <td colspan="2">Indicates whether there is an open
+                  conversation. 
+                  
+                  <p>This parameter contains the value <code>TRUE</code> if a
+                                conversation is open, otherwise it contains <code>FALSE</code>.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+          
+      <div><a name="oper_Using_the_Server_Trace_Facility"></a></div> 
+          
+      <h3>Using the Server Trace Facility</h3> 
+           
+      <p>Natural RPC includes a trace facility that enables you to monitor
+               server activities and trace possible error situations.
+      </p>
+      <div><a name="d0e10920"></a></div>
+           
+           
+      <h4>Activating/Deactivating the Server Trace Facility</h4> 
+            
+            
+      <p>To activate/deactivate the server trace facility, start the server
+                with the option
+      </p> 
+            <pre class="verbatim">TRACE=<var>n</var></pre> 
+            <p>The integer value <code><var>n</var></code>"
+                represents the desired trace level; that is, the level of detail in which you
+                want your server to be traced. The following values are possible:
+      </p> 
+             
+             
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+         <thead align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <th>Value</th> 
+                         
+               <th>Trace Level</th> 
+                        
+            </tr> 
+                    
+         </thead> 
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <td align="center"><code>0</code></td> 
+                         
+               <td>No trace is performed (default).</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td align="center"><code>1</code></td> 
+                         
+               <td>All client requests and corresponding server responses are
+                  traced and documented.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td align="center"><code>2</code></td> 
+                         
+               <td>All client requests and corresponding server responses are
+                  traced and documented; in addition, all RPC data are written to the trace
+                  file.
+               </td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+      <p>The RPC trace facility writes the trace data to the Natural Report
+                Number 10.
+      </p> 
+            
+      <p>In case of a conversion error which is reported with Natural error
+                number NAT6974 and reason codes 2 and 3, the position of the erroneous data in
+                the buffer is indicated. 
+      </p> 
+            
+      <h4 class="floating-title">Support of TS=ON for RPC Server Trace</h4> 
+            
+      <p>The following information applies to Mainframe environments only:</p> 
+            
+      <p>All messages in the Natural RPC server trace are translated into upper
+                case if <code>TS=ON</code> is specified in the Natural RPC
+                server session. The trace of the data from/to the client is not affected by
+                <code>TS=ON</code> and remains unchanged.
+      </p> 
+           
+      <div><a name="oper_Defining_the_Trace_File"></a></div> 
+          
+      <h3>Defining the Trace File</h3> 
+           
+      <p>The trace file definition depends on the environment:</p>
+           
+      <ul>
+         <li><a href="oper.htm#oper_rpc_trace_file_mf">Trace File Handling for Mainframe Environments - General Information</a></li>
+         <li><a href="oper.htm#oper_rpc_trace_file_os390batch">Trace File Handling in z/OS Batch Mode</a></li>
+         <li><a href="oper.htm#oper_rpc_trace_file_cics">Trace File Handling under CICS</a></li>
+         <li><a href="oper.htm#oper_rpc_trace_file_vsebatch">Trace File Handling in z/VSE Batch Mode</a></li>
+         <li><a href="oper.htm#oper_rpc_trace_file_bs2kbatch">Trace File Handling in BS2000/OSD Batch Mode</a></li>
+         <li><a href="oper.htm#oper_rpc_trace_file_ov_ux">Trace File Handling for UNIX and OpenVMS Environments</a></li>
+         <li><a href="oper.htm#oper_rpc_trace_file_win">Trace File Handling for Windows</a></li>
+      </ul>
+      <div><a name="oper_rpc_trace_file_mf"></a></div> 
+           
+      <h4>Trace File Handling for Mainframe Environments - General
+               Information
+      </h4> 
+            
+            
+      <p>On the mainframe, define the trace file appropriate to your
+                environment, see also the
+                <code>NTPRINT</code>
+                macro (in the <cite>Parameter Reference</cite> documentation).
+      </p> 
+           
+      <div><a name="oper_rpc_trace_file_os390batch"></a></div> 
+           
+      <h4>Trace File Handling in z/OS Batch Mode</h4> 
+            
+            
+      <h4 class="floating-title">a) Running A Server As Single Task</h4> 
+            
+      <p>In the server start job, assign a z/OS dataset to the Natural
+                additional Report <code>CMPRT10</code>.
+      </p> 
+            
+      <h4 class="floating-title">Example:</h4> 
+            <pre class="verbatim">//NATRPC   JOB  CLASS=K,MSGCLASS=X
+//NATSTEP  EXEC PGM=NATOS
+//STEPLIB  DD   DISP=SHR,DSN=SAG.NAT.LOAD
+//         DD   DISP=SHR,DSN=SAG.EXX.LOAD 
+//CMPRMIN  DD   * 
+IM=D,MADIO=0,MT=0,OBJIN=R,AUTO=OFF,MAXCL=0,ID=',',INTENS=1,  
+PRINT=((10),AM=STD)
+/* 
+//SYSUDUMP DD   SYSOUT=X
+//CMPRT10  DD   SYSOUT=X
+//CMPRINT  DD   SYSOUT=X
+/*</pre> 
+            <h4 class="floating-title">b) Running a Server With Replicas</h4> 
+            
+      <ol> 
+                
+         <li> 
+                    
+            <p class="initem">Set the RPC parameter <code>NTASKS</code> to a value
+                        greater than 1.
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">Assign
+                        <code>CMPRMIN</code>
+                        to a dataset with <code>DISP=SHR</code> or to <code>*</code>.
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">As each task writes on a separate
+                        <code>CMPRINT</code>
+                        dataset, define the following DD card names:
+            </p> 
+                    
+            <p class="initem"> <code>CMPRINT</code> for the main task;
+            </p> 
+                    
+            <p class="initem"> <code>CMPRINT1</code> to <code>CMPRINT9</code> for the first nine
+                        subtasks;
+            </p> 
+                    
+            <p class="initem"> <code>CMPRIN10</code> to
+                        <code>CMPRIN<var>nn</var></code> for the next two-digit numbers
+                        of subtask, <code><var>nn=</var>NTASKS-1</code>.
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">If the keyword subparameter
+                        <code>TRACE</code> of profile parameter
+                        <code>RPC</code> or parameter macro
+                        <code>NTRPC</code> is set, the trace facility
+                        writes to Printer 10.
+            </p> 
+                    
+            <p class="initem"> You must define the following DD card names:</p> 
+                    
+            <p class="initem"> <code>CMPRT10</code> for the main task;
+            </p> 
+                    
+            <p class="initem"> <code>CMPRT101</code> to
+                        <code>CMPRT1<var>nn</var></code> for all subtasks,
+                        <code><var>nn=</var>NTASKS-1</code>;
+            </p> 
+                   
+         </li> 
+               
+      </ol> 
+            
+      <h4 class="floating-title">Example:</h4> 
+            <pre class="verbatim">//NATRPC   JOB  CLASS=K,MSGCLASS=X                                   
+//NATSTEP  EXEC PGM=NATOS,REGION=8M                                  
+//steplib  DD   DISP=SHR,DSN=SAG.NAT.LOAD                            
+//         DD   DISP=SHR,DSN=SAG.EXX.LOAD                            
+//CMPRMIN  DD   *                                                        
+IM=D,MADIO=0,MT=0,OBJIN=R,AUTO=OFF,MAXCL=0,ID=',',INTENS=1,
+PRINT=((10),AM=STD)                                           
+/*                                                                       
+//SYSUDUMP DD   SYSOUT=X                                               
+//CMPRT10  DD   SYSOUT=X                                            
+//CMPRT101 DD   SYSOUT=X                                               
+//CMPRT102 DD   SYSOUT=X                                               
+//CMPRT103 DD   SYSOUT=X                                           
+//CMPRINT  DD   SYSOUT=X                                               
+//CMPRINT1 DD   SYSOUT=X                                               
+//CMPRINT2 DD   SYSOUT=X                                               
+//CMPRINT3 DD   SYSOUT=X                                               
+/*</pre> 
+           <div><a name="oper_rpc_trace_file_cics"></a></div> 
+           
+      <h4>Trace File Handling under CICS</h4> 
+            
+            
+      <p>Under CICS, the trace file is written to the Print File 10, provided
+                that this file exists. If Print File 10 has not been defined, the trace file is
+                written to Work File 10, provided that this file exists. If neither Print File
+                10 nor Work File 10 is defined, the trace is disabled.
+      </p> 
+            
+      <p>The Natural print file should be assigned to an extra-partitioned
+                transient data queue.
+      </p> 
+            
+      <h4 class="floating-title">Examples:</h4> 
+            
+      <p>Natural definition:</p> 
+            <pre class="verbatim">NTPRINT ((10),AM=CICS,DEST=RPCT,TYPE=TD)</pre> 
+            <p>CICS definition:</p> 
+            <pre class="verbatim">RPCTRAC DFHDCT TYPE=SDSCI,                       X
+               BLKSIZE=136,                      X
+               BUFNO=1,                          X
+               DSCNAME=RPCTRACE,                 X
+               RECFORM=VARUNB,                   X
+               RECSIZE=132,                      X
+               TYPEFLE=OUTPUT
+        SPACE
+RPCT    DFHDCT TYPE=EXTRA,                       X
+               DSCNAME=RPCTRACE,                 X
+               DESTID=RPCT,                      X     
+               OPEN=INITIAL</pre> 
+            <p>CICS Startup JCL:</p> 
+            <pre class="verbatim">RPCTRACE DD    SYSOUT=*</pre> 
+           <div><a name="oper_rpc_trace_file_vsebatch"></a></div> 
+           
+      <h4>Trace File Handling in z/VSE Batch Mode</h4> 
+            
+            
+      <p>In z/VSE batch mode, assign a trace file to the Printer Number 10.</p>
+            
+            
+      <h4 class="floating-title">Example:</h4> 
+            <pre class="verbatim">// LIBDEF PHASE,SEARCH=(SAGLIB.NAT<var>vrs</var>,SAGLIB.ETB<var>vrs</var>),TEMP 
+// ASSGN SYS000,READER
+// ASSGN SYSLST,FEE
+// ASSGN SYS050,FEF
+// EXEC NATVSE,SIZE=AUTO,PARM='SYSRDR'
+IM=D,MADIO=0,MT=0,OBJIN=R,AUTO=OFF,MAXCL=0,ID=',',INTENS=1,
+PRINT=((10),AM=STD,SYSNR=50)
+/*</pre> 
+            <p>where <code><var>vrs</var></code> stands for version,
+                release, system maintenance level.
+      </p> 
+           
+      <div><a name="oper_rpc_trace_file_bs2kbatch"></a></div> 
+           
+      <h4>Trace File Handling in BS2000/OSD Batch Mode</h4> 
+            
+            
+      <p>In BS2000/OSD batch mode, assign a trace file to Printer Number
+                10.
+      </p> 
+            
+      <h4 class="floating-title">Example:</h4> 
+            <pre class="verbatim">/.NATRPC      LOGON
+/             SYSFILE   SYSOUT=<var>output-file</var>
+/             SYSFILE   SYSDTA=(SYSCMD)
+/             SYSFILE   SYSIPT=(SYSCMD)
+/             FILE <var>trace-file</var>,LINK=P10,OPEN=EXTEND       */server trace file  
+/             STEP
+/             SETSW      ON=2
+/             EXEC NATBS2
+MADIO=O,IM=D,ID=',',PRINT=((10),AM=STD)</pre> 
+           <div><a name="oper_rpc_trace_file_ov_ux"></a></div> 
+           
+      <h4>Trace File Handling for UNIX and OpenVMS Environments</h4> 
+            
+            
+      <p>It is recommended that you use a different file name (that is, a
+                different <code>NATPARM</code> parameter file) for each server so that you can
+                trace them individually. The trace file is defined in the <code>NATPARM</code>
+                parameter file of the Natural server:
+      </p> 
+            
+      <ol> 
+                
+         <li> 
+                     
+                    
+            <p class="initem"><strong>Report Assignments</strong><br>Assign the logical device LPT10 to your Report Number 10.
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                     
+                    
+            <p class="initem"><strong>Device Parameter Assignments</strong><br>Instead of selecting a physical printer specification for LPT10,
+                        specify a file name that represents the name of your trace file.
+            </p> 
+                   
+         </li> 
+               
+      </ol> 
+            
+      <h4 class="floating-title">Example for UNIX:</h4> 
+            <pre class="verbatim">/bin/sh -c cat&gt;&gt;/<var>filename</var></pre> 
+            <p>where <var>filename</var> represents the name of the
+                trace file.
+      </p> 
+            
+      <h4 class="floating-title">Example for OpenVMS:</h4> 
+            <pre class="verbatim">nattmp:<var>filename</var></pre> 
+            <p>where <var>filename</var> represents the name of the
+                trace file.
+      </p> 
+           
+      <div><a name="oper_rpc_trace_file_win"></a></div> 
+           
+      <h4>Trace File Handling for Windows</h4> 
+            
+            
+      <p>It is recommended that you use a different file name (that is, a
+                different <code>NATPARM</code> parameter file) for each server so that you can
+                trace them individually. The trace file is defined in the <code>NATPARM</code>
+                parameter file of the Natural server (see
+                <a href="../config/cfg-profileparm.htm#cfg-prf-exe-devrep">Device/Report
+                   Assignments</a> in the Configuration Utility):
+      </p> 
+            
+      <ol> 
+                
+         <li> 
+                    
+            <h4 class="floating-title">Reports</h4> 
+                    
+            <p class="initem">Assign the logical device LPT10 to your Report Number 10.</p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <h4 class="floating-title">Devices</h4> 
+                    
+            <p class="initem">Instead of selecting a physical printer specification for LPT10,
+                        specify a file name that represents the name of your trace file. As default,
+                        old trace files are deleted when a new file with the same name is created.
+            </p> 
+                    
+            <p class="initem"> If you wish to append the new log to the existing one, specify:
+                        
+            </p> 
+                    
+            <p class="initem">&gt;&gt;<var>filename</var></p> 
+                   
+         </li> 
+               
+      </ol> 
+           
+      <div class="noprint">
+         <p><a href="oper.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="oper_usr4010n"></a></div> 
+         
+      <h2>Retrieving Runtime Settings of a Server</h2> 
+          
+          
+      <p><strong></strong>The Natural application programming interface
+              (API) <a href="oper.htm#oper_usr4010n"><code>USR4010N</code></a>
+              enables you to retrieve the runtime settings of a server:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">the system file assignments for <code>FUSER</code>, <code>FNAT</code>,
+                      and <code>FSEC</code>,
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">the steplib chain.</p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To make use of <code>USR4010N</code></strong></p>
+      <ol class="steps">
+         <li> 
+                   
+                   
+            <p class="instep">Copy the subprogram <code>USR4010N</code> from libray
+                       <code>SYSEXT</code> to the library <code>SYSTEM</code> or to the steplib
+                       library or to any application in the server environment.
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Using a <a href="../sm/defineda_parms.htm"><code>DEFINE DATA
+                     PARAMETER</code></a> statement, specify the following parameters: 
+            </p> 
+                    
+                    
+            <table border="1" class="color" cellpadding="3" width="97%"> 
+                        
+               <thead align="left" valign="top"> 
+                            
+                  <tr> 
+                                
+                     <th align="left">Parameter</th> 
+                                
+                     <th>Format</th> 
+                                
+                     <th>Description</th> 
+                               
+                  </tr> 
+                           
+               </thead> 
+                        
+               <tbody align="left" valign="top"> 
+                            
+                  <tr> 
+                                
+                     <td align="left" nowrap><code>FUSER-DBID</code></td> 
+                                
+                     <td>N5</td> 
+                                
+                     <td>Database ID of system file <code>FUSER</code>.
+                     </td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td align="left"><code>FUSER-FNR</code></td> 
+                                
+                     <td>N5</td> 
+                                
+                     <td>File number of system file <code>FUSER</code>.
+                     </td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td align="left"><code>FNAT-DBID</code></td> 
+                                
+                     <td>N5</td> 
+                                
+                     <td>Database ID of system file <code>FNAT</code>.
+                     </td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td align="left"><code>FNAT-FNR</code></td> 
+                                
+                     <td>N5</td> 
+                                
+                     <td>File number of system file <code>FNAT</code>.
+                     </td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td align="left"><code>FSEC-DBID</code></td> 
+                                
+                     <td>N5</td> 
+                                
+                     <td>Database ID of system file <code>FSEC</code>.
+                     </td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td align="left"><code>FSEC-FNR</code></td> 
+                                
+                     <td>N5</td> 
+                                
+                     <td>File number of system file <code>FSEC</code>.
+                     </td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td align="left"><code>STEP-NAME</code></td> 
+                                
+                     <td>A8/15</td> 
+                                
+                     <td>Name of steplib.</td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td align="left"><code>STEP-DBID</code></td> 
+                                
+                     <td>N5/15</td> 
+                                
+                     <td>Database ID of steplib.</td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td align="left"><code>STEP-FNR</code></td> 
+                                
+                     <td>N5/15</td> 
+                                
+                     <td>File number of steplib.</td> 
+                               
+                  </tr> 
+                           
+               </tbody> 
+                       
+            </table> 
+                    
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">In the calling program on the client side, specify the following
+                       statement: 
+            </p> 
+                   <pre class="verbatim">CALLNAT 'USR4010' USR4010-PARM</pre> 
+                   <p class="instep">See also the <a href="../sm/callnat.htm#syntax_descr_callnat">Syntax Description</a> of
+                       the <code>CALLNAT</code> statement.
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">If RPC parameter <code>AUTORPC=OFF</code>, copy the stub
+                       <code>USR4010<strong>X</strong></code> to the client
+                       environment.
+            </p> 
+                   
+            <p class="instep"> If RPC parameter <code>AUTORPC=ON</code>, the API must not be
+                       available to the client environment, otherwise the API would be called
+                       locally.
+            </p> 
+                   
+                 
+         </li>
+      </ol> 
+          
+      <p>When <code>USR4010N</code> is called, the values of the parameter
+              specified above are output in the group of fields
+              <code>USR4010-PARM</code>.
+      </p> 
+         
+      <div class="noprint">
+         <p><a href="oper.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="oper_usr4009n"></a></div> 
+         
+      <h2>Setting/Getting Parameters for EntireX</h2> 
+          
+          
+      <p><strong></strong>The Application Programming Interface (API)
+              <code>USR4009N</code> enables you to set or to get the EntireX parameters that
+              are currently supported by the Natural RPC. These are:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">Compression level</p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Encryption level</p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To make use of <code>USR4009N</code></strong></p>
+      <ol class="steps">
+         <li> 
+                   
+                   
+            <p class="instep">Copy the subprogram <code>USR4009N</code> from libray
+                       <code>SYSEXT</code> to the library <code>SYSTEM</code> or to the steplib
+                       library or to any application in the server environment.
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Using a <a href="../sm/defineda_parms.htm"><code>DEFINE DATA
+                     PARAMETER</code></a> statement, specify the following parameters: 
+            </p> 
+                    
+                    
+            <table border="1" class="color" cellpadding="3" width="97%"> 
+                        
+               <thead align="left" valign="top"> 
+                            
+                  <tr> 
+                                
+                     <th align="left">Parameter</th> 
+                                
+                     <th>Format</th> 
+                                
+                     <th>I/O</th> 
+                                
+                     <th colspan="2">Description</th> 
+                               
+                  </tr> 
+                           
+               </thead> 
+                        
+               <tbody align="left" valign="top"> 
+                            
+                  <tr> 
+                                
+                     <td rowspan="3" align="left" nowrap><code>FUNCTION</code></td> 
+                                
+                     <td rowspan="3">A01</td> 
+                                
+                     <td rowspan="3">I</td> 
+                                
+                     <td colspan="2">Function; possible values
+                        are:
+                     </td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td><code>G</code> (Get)
+                     </td> 
+                                
+                     <td>The values already set for the EntireX parameters are
+                        returned. 
+                        
+                        <p>If no <code>PUT</code> has been called before in the Natural
+                                        session, all values are zero or blank.
+                        </p>
+                     </td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td><code>P</code> (Put)
+                     </td> 
+                                
+                     <td>The values specified for the EntireX parameters are saved and
+                        used in all subsequent calls to EntireX.
+                     </td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td rowspan="4" align="left"><code>ENVIRONMENT</code></td> 
+                                
+                     <td rowspan="4">A01</td> 
+                                
+                     <td rowspan="4">I</td> 
+                                
+                     <td colspan="2">Environment; possible values
+                        are:
+                     </td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td><code>S</code></td> 
+                                
+                     <td>Server</td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td><code>C</code></td> 
+                                
+                     <td>Client</td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td><code>B</code></td> 
+                                
+                     <td>Both</td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td align="left"><code>COMPRESSLEVEL</code></td> 
+                                
+                     <td>A01</td> 
+                                
+                     <td>I/O</td> 
+                                
+                     <td colspan="2">Compression level.</td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td align="left"><code>ENCRYPTION-LEVEL</code></td> 
+                                
+                     <td>I01</td> 
+                                
+                     <td>I/O</td> 
+                                
+                     <td colspan="2">Encryption level.</td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td align="left"><code>ACIVERS</code></td> 
+                                
+                     <td>B02</td> 
+                                
+                     <td>O</td> 
+                                
+                     <td colspan="2">ACI version used.</td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td rowspan="4" align="left"><code>RC</code></td> 
+                                
+                     <td rowspan="4">B01</td> 
+                                
+                     <td rowspan="4">O</td> 
+                                
+                     <td colspan="2">Return code, unless equal to
+                        zero. Contains the ACI version required to set the requested parameter:
+                     </td>
+                                
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td><code>0</code></td> 
+                                
+                     <td>Function successful.</td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td><code>6</code></td> 
+                                
+                     <td>Encryption level requires ACI version 6.</td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td><code>7</code></td> 
+                                
+                     <td>Compression level requires ACI version 7.</td> 
+                               
+                  </tr> 
+                           
+               </tbody> 
+                       
+            </table> 
+                    
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">The interface can be called in two ways: </p> 
+                   
+            <ol> 
+                       
+               <li> 
+                           
+                  <p class="initem">From within a program: </p> 
+                           <pre class="verbatim">CALLNAT 'USR4009N' <var>FUNCTION ENVIRONMENT</var>                                        
+                   COMPRESSLEVEL                                               
+                   ENCRYPTION-LEVEL                                            
+                   ACIVERS RC</pre> 
+                          </li> 
+                       
+               <li> 
+                           
+                  <p class="initem">From the command prompt or by using the statement
+                               <a href="../sm/stack.htm"><code>STACK</code></a> with values for
+                               the above parameters.
+                  </p> 
+                           
+                  <p class="initem">Examples: </p> 
+                           <pre class="verbatim">USR4009P P,C,ENCRYPTION-LEVEL=1                                      
+USR4009P P,C,,2                                                      
+USR4009P P,C,ENCRYPTION-LEVEL=1,COMPRESSLEVEL=6</pre> 
+                          </li> 
+                      
+            </ol> 
+                   
+                 
+         </li>
+      </ol> 
+          
+      <p>In command mode, you may use the
+              <code><var>keyword=value</var></code> notation to set only a
+              subset of the EntireX parameters. The values for parameters that are not
+              referenced remain unchanged.
+      </p> 
+          
+      <h4 class="floating-title">Notes:</h4> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">The request is rejected and no values are saved if the ACI version
+                      used by the current Natural session is not high enough to support the requested
+                      EntireX parameter. In this case the RC contains the required ACI version.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">The EntireX parameters are only honored by the Natural RPC.</p> 
+                 
+         </li> 
+             
+      </ul> 
+         
+      <div class="noprint">
+         <p><a href="oper.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="oper_Handling_Errors"></a></div> 
+         
+      <h2>Handling Errors</h2>
+          
+      <ul>
+         <li>
+            <p class="initem"><a href="oper.htm#oper_rpc_rem_err_handl">Remote Error Handling</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="oper.htm#oper_rpc_err_msg_3009">Avoiding Error Message NAT3009 from Server Program</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="oper.htm#oper_usr_exit_natrpc01">User Exit NATRPC01</a></p>
+         </li>
+      </ul>
+      <div><a name="oper_rpc_rem_err_handl"></a></div> 
+          
+      <h3>Remote Error Handling</h3> 
+           
+           
+      <p>Any Natural error on the server side is returned to the client as
+               follows:
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">Natural RPC moves the appropriate error number to the
+                       <a href="../vari/appl.htm#ERROR_NR"><code>*ERROR-NR</code></a>
+                       system variable.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Natural reacts as if the error had occurred locally.</p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p class="note"><strong>Note:</strong><br> If profile parameter <a href="../parms/autorpc.htm"><code>AUTORPC</code></a>
+               is set to <code>ON</code> and a subprogram cannot be found in the local
+               environment, Natural will interpret this as a remote procedure call. It will
+               then try to find this subprogram in the service directory. If it is not found
+               there, a NAT6972 error will be issued. As a consequence, no NAT0082 error will
+               be issued if a subprogram cannot be found.
+      </p> 
+           
+      <p>See also <a href="oper.htm#oper_Using_RPCERR">Using the
+            RPCERR Program</a>.
+      </p> 
+          
+      <div><a name="oper_rpc_err_msg_3009"></a></div> 
+          
+      <h3>Avoiding Error Message NAT3009 from Server Program</h3> 
+           
+           
+      <p>If a server application program does not issue a database call during a
+               longer period of time, the next database call might return a NAT3009 error
+               message.
+      </p> 
+           
+      <p>To avoid this problem, proceed as follows:</p> 
+           
+      <ol> 
+               
+         <li> 
+                   
+            <p class="initem">Add a <a href="../sm/find.htm#FIND_FIRST"><code>FIND
+                     FIRST</code></a> or <a href="../sm/histogra.htm"><code>HISTOGRAM</code></a> statement in program
+                       <code>NATRPC39</code>, library <code>SYSRPC</code>.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Copy the updated program to library <code>SYSTEM</code> on
+                       <code>FUSER</code>.
+            </p> 
+                   
+            <p class="initem"> The steplib concatenation of the library to which the server
+                       currently is logged on is not evaluated.
+            </p> 
+                  
+         </li> 
+              
+      </ol> 
+          
+      <div><a name="oper_usr_exit_natrpc01"></a></div> 
+          
+      <h3>User Exit NATRPC01</h3> 
+           
+           
+      <p>The user exit <code>NATRPC01</code> is called when a Natural error has
+               occurred, actually after the error has been handled by the Natural RPC runtime
+               and immediately before the response is sent back to the client. This means, the
+               exit is called at the same logical point as an error transaction, that is, at
+               the end of the Natural error handling, after all <code>ON ERROR</code> blocks
+               have been processed.
+      </p> 
+           
+      <p>In contrast to an error transaction, this exit is called with a
+               <code>CALLNAT</code> statement and must therefore be a subprogram which must
+               return to its caller.
+      </p> 
+           
+      <p>The interface to this exit is similar to the interface of an error
+               transaction. In addition, the exit can pass back up to 10 lines of information
+               which will be traced by the Natural RPC runtime. Only lines which begin with a
+               non-blank character will be traced.
+      </p> 
+           
+      <h4 class="floating-title">Important Notes:</h4> 
+           
+      <ol> 
+               
+         <li> 
+                   
+            <p class="initem"><code>NATRPC01</code> must be located in library <code>SYSTEM</code>
+                       on <code>FUSER</code>. The steplib concatenation of the library to which the
+                       server currently is logged on is <em>not</em> evaluated.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">The <a href="../sm/defineda_parms.htm"><code>DEFINE DATA
+                     PARAMETER</code></a> statement block must not be changed.
+            </p> 
+                  
+         </li> 
+              
+      </ol> 
+          
+      <div class="noprint">
+         <p><a href="oper.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="oper_usr_4_srv_exec"></a></div> 
+         
+      <h2>User Exits before and after Service Execution</h2> 
+          
+          
+      <p>To give administrators more control over the execution of services
+              (remote CALLNATs), two optional user exits are called on the Natural RPC server
+              side.
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th>User Exit</th> 
+                       
+               <th>Purpose</th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td><a name="oper_usr_NTRPC02"></a><code>NATRPC02</code></td> 
+                       
+               <td>The optional before-service-execution exit <code>NATRPC02</code>
+                  is called immediately before the service is executed. At this point in time,
+                  the request has already passed all security checks and the data is
+                           unmarshalled.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><a name="oper_usr_NTRPC03"></a><code>NATRPC03</code></td> 
+                       
+               <td>The optional after-service-execution exit <code>NATRPC03</code>
+                  is called immediately after successful return from the service. At this point
+                  in time, the data is not yet marshalled. The exit is not called if an unhandled
+                           error has occurred.
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>These exits are independent of each other and can be used
+              separately.
+      </p> 
+          
+      <p>For both exits, the following rules apply:</p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">The exit must be located in library <code>SYSTEM</code> on the
+                      <code>FUSER</code> system file.
+            </p> 
+                  
+            <p class="initem"> If the exit is found during startup of the Natural RPC server, a
+                      message is written to the Natural RPC server trace to indicate the activation
+                      of the exit. The exit is afterwards called unconditionally. If the exit is
+                      removed during the lifetime of the server session, a permanent NAT0082 error
+                      will occur.
+            </p> 
+                  
+            <p class="initem"> If the exit is not found during startup of the Natural RPC server,
+                      the exit is never called during the lifetime of the server session. The exit
+                      cannot be enabled dynamically.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">The exit must be implemented by the user as a subprogram. The exit is
+                      called with a single dynamic variable as parameter. The content of the dynamic
+                      variable is the eight character long name of the remote subprogram.
+            </p> 
+                  
+            <p class="initem"> The use of the dynamic variable allows us to implement future
+                      extensions of the passed information without causing problems with existing
+                      user written exits.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">The exit is also called inside a conversation.</p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">The Natural RPC server does not intercept unhandled errors in the
+                      exit. If an unhandled error occurs in the exit, the error is propagated to the
+                      client.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>The exits may be used for auditing or tracing purposes.
+              <code>NATRPC02</code> may also be used for addional security checks.
+      </p> 
+          
+      <h4 class="floating-title">Example for <code>NATRPC02</code>:
+      </h4> 
+          <pre class="verbatim">DEFINE DATA PARAMETER
+1 SUBPROGRAM (A8) BY VALUE
+END-DEFINE
+IF *USER &lt;&gt; 'DBA' AND SUBPROGRAM = 'PRIVATE' 
+  *ERROR-NR := 999
+END-IF
+END</pre> 
+         <div class="noprint">
+         <div class="nospy">
+            <p><a href="oper.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../rpc/oper.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/rpc/oper.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="rpc-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="terminate_exx_broker_service.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="using.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

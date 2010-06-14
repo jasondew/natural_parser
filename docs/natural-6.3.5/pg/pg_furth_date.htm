@@ -1,0 +1,1114 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Processing of Date Information</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="pg_furth_date"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_furth_date.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_furth_date.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_furth-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_furth_stack.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_furth_txtnot.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Programming Guide&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x344"></a> Processing of Date Information 
+         </h1>
+      </div> 
+         
+         
+      <p>This document covers various aspects concerning the handling of date
+             information in Natural applications.
+      </p> 
+         
+      <p>The following topics are covered:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_furth_date.htm#Edit_Masks_for_Date_Fields_and_Date_System_Variables">Edit Masks for Date Fields and Date System Variables</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_date.htm#DTFORM_Parameter">Default Edit Mask for Date - DTFORM Parameter</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_date.htm#Date_Format">Date Format for Alphanumeric Representation - DF Parameter</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_date.htm#DFOUT_Parameter">Date Format for Output - DFOUT Parameter</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_date.htm#DFSTACK_Parameter">Date Format for Stack - DFSTACK Parameter</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_date.htm#YSLW_Parameter">Year Sliding Window - YSLW Parameter</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_date.htm#Combinations_of_DFSTACK_and_YSLW">Combinations of DFSTACK and YSLW</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_date.htm#year_fixed_window">Year Fixed Window</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_date.htm#DFTITLE_Parameter">Date Format for Default Page Title - DFTITLE Parameter</a></p>
+         </li>
+      </ul> 
+        
+      <hr> 
+        
+      <div><a name="Edit_Masks_for_Date_Fields_and_Date_System_Variables"></a></div> 
+         
+      <h2> Edit Masks for Date Fields and Date System Variables </h2> 
+          
+          
+      <p>If you wish the value of a date field to be output in a specific
+              representation, you usually specify an <a href="pg_output_masks.htm#pg_output_masks">edit mask</a> for the field. With an edit
+              mask, you determine character by character what the output is to look like.
+      </p>
+          
+          
+      <p>If you wish to use the current date in a specific representation, you
+              need not define a date field and specify an edit mask for it; instead you can
+              simply use a <em>date system variable</em>. Natural provides various date
+              system variables, which contain the current date in different representations.
+              Some of these representations contain a 2-digit year component, some a 4-digit
+              year component.
+      </p> 
+          
+      <p>For more information and a list of all <a href="../vari/dtime.htm">date system variables</a>, see the
+              <a href="../vari/vari-over.htm">System
+            Variables</a> documentation.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_furth_date.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="DTFORM_Parameter"></a></div> 
+         
+      <h2> 
+             <a name="x345"></a> Default Edit Mask for Date - DTFORM Parameter 
+      </h2> 
+          
+          
+      <p>The profile parameter <a href="../parms/dtform.htm"><code>DTFORM</code></a> determines
+              the default format used for dates as part of the default title on Natural
+              reports, for date constants and for date input.
+      </p> 
+          
+      <p>This date format determines the sequence of the day, month and year
+              components of a date, as well as the delimiter characters to be used between
+              these components.
+      </p> 
+          
+      <p>Possible <code>DTFORM</code> settings are:
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th align="left"> Setting </th> 
+                       
+               <th align="left"> Date Format<sup>*</sup> 
+               </th> 
+                       
+               <th align="left"> Example </th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> <a name="dtform_i"></a>DTFORM=I 
+               </td> 
+                       
+               <td> <var>yyyy-mm-dd</var> 
+               </td> 
+                       
+               <td>2005-12-31</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a name="dtform_g"></a>DTFORM=G 
+               </td> 
+                       
+               <td> <var>dd.mm.yyyy</var> 
+               </td> 
+                       
+               <td>31.12.2005</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a name="dtform_e"></a>DTFORM=E 
+               </td> 
+                       
+               <td> <var>dd/mm/yyyy</var> 
+               </td> 
+                       
+               <td>31/12/2005</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a name="dtform_u"></a>DTFORM=U 
+               </td> 
+                       
+               <td> <var>mm/dd/yyyy</var> 
+               </td> 
+                       
+               <td>12/31/2005</td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p><sup>*</sup> <var>dd</var> = day,
+              <var>mm</var> = month, <var>yyyy</var> =
+              year.
+      </p> 
+          
+      <p>The <code>DTFORM</code> parameter can be set in the Natural
+              parameter module/file or dynamically when Natural is invoked. By default,
+              <code>DTFORM=I</code> applies.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_furth_date.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Date_Format"></a></div> 
+         
+      <h2> 
+             <a name="x346"></a>Date Format for Alphanumeric Representation - DF
+             Parameter
+      </h2> 
+          
+          
+      <p>If an edit mask is specified, the representation of the field value is
+              determined by the edit mask. If no edit mask is specified, the representation
+              of the field value is determined by the session parameter
+              <a href="../parms/sp_df.htm"><code>DF</code></a> in
+              combination with the profile parameter <a href="../parms/dtform.htm"><code>DTFORM</code></a>.
+      </p> 
+          
+      <p>With the <code>DF</code> parameter, you can choose one of the
+              following date representations:
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th align="left"> <a name="df_s"></a>DF=S
+                   
+               </th> 
+                       
+               <td>8-byte representation with 2-digit year component and delimiters
+                  (<var>yy-mm-dd</var>).
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th align="left"> <a name="df_i"></a>DF=I
+                   
+               </th> 
+                       
+               <td>8-byte representation with 4-digit year component without
+                  delimiters (<var>yyyymmdd</var>).
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th align="left"> <a name="df_l"></a>DF=L
+                   
+               </th> 
+                       
+               <td>10-byte representation with 4-digit year component and
+                  delimiters (<var>yyyy-mm-dd</var>).
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>For each representation, the sequence of the day, month and year
+              components, and the delimiter characters used, are determined by the
+              <a href="../parms/dtform.htm"><code>DTFORM</code></a>
+              parameter.
+      </p> 
+          
+      <p>By default, <code>DF=S</code> applies (except for
+              <code>INPUT</code> statements; see below).
+      </p> 
+          
+      <p>The session parameter <a href="../parms/sp_df.htm"><code>DF</code></a> is evaluated at
+              compilation.
+      </p> 
+          
+      <p>It can be specified with the following statements:</p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../sm/format.htm"><code>FORMAT</code></a>,
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../sm/input.htm"><code>INPUT</code></a>,
+                      <a href="../sm/display.htm"><code>DISPLAY</code></a>,
+                      <a href="../sm/write.htm"><code>WRITE</code></a> and
+                      <a href="../sm/printsm.htm"><code>PRINT</code></a> at statement
+                      and element (field) level,
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../sm/move.htm"><code>MOVE</code></a>,
+                      <a href="../sm/compress.htm"><code>COMPRESS</code></a>,
+                      <a href="../sm/stack.htm"><code>STACK</code></a>,
+                      <a href="../sm/run.htm"><code>RUN</code></a> and
+                      <a href="../sm/fetch.htm"><code>FETCH</code></a> at element
+                      (field) level.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>When specified in one of these statements, the
+              <a href="../parms/sp_df.htm"><code>DF</code></a>
+              parameter applies to the following:
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="27%">
+            <col width="70%">
+         </colgroup> 
+                
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th>Statement</th> 
+                       
+               <th>Effect of DF parameter</th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> <a href="../sm/display.htm">DISPLAY</a>,
+                          <a href="../sm/write.htm">WRITE</a>,
+                           <a href="../sm/printsm.htm">PRINT</a> 
+               </td> 
+                       
+               <td>When the value of a date variable is output with one of these
+                  statements, the value is converted to an alphanumeric representation before it
+                  is output. The <code>DF</code> parameter determines which
+                           representation is used.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a href="../sm/move.htm">MOVE</a>,
+                       <a href="../sm/compress.htm">COMPRESS</a> 
+               </td> 
+                       
+               <td>When the value of a date variable is transferred to an
+                  alphanumeric field with a <code>MOVE</code> or <code>COMPRESS</code> statement,
+                           the value is converted to an alphanumeric representation before it is
+                           transferred. The <code>DF</code> parameter determines which
+                           representation is used.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a href="../sm/stack.htm">STACK</a>,
+                        <a href="../sm/run.htm">RUN</a>, <a href="../sm/fetch.htm">FETCH</a> 
+               </td> 
+                       
+               <td>When the value of a date variable is placed on the stack, it is
+                  converted to alphanumeric representation before it is placed on the stack. The
+                  <code>DF</code> parameter determines which representation is used. 
+                           
+                  <p>The same applies when a date variable is specified as a parameter
+                               in a <code>FETCH</code> or <code>RUN</code> statement (as these parameters are
+                               also passed via the stack).
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a href="../sm/input.htm">INPUT</a> 
+               </td> 
+                       
+               <td>When a data variable is used in an <code>INPUT</code> statement,
+                           the <code>DF</code> parameter determines how a value must be entered
+                           in the field. 
+                           
+                  <p> However, when a date variable for which <em>no</em>
+                               <code>DF</code> parameter is specified is used in an
+                               <code>INPUT</code> statement, the date can be entered either with a 2-digit
+                               year component and delimiters or with a 4-digit year component and no
+                               delimiters. In this case, too, the sequence of the day, month and year
+                               components, and the delimiter characters to be used, are determined by the
+                               <a href="../parms/dtform.htm"><code>DTFORM</code></a>
+                               parameter.
+                  </p>
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p class="note"><strong>Note:</strong><br> With <code>DF=S</code>, only 2 digits are provided for the
+              year information; this means that if a date value contained the century, this
+              information would be lost during the conversion. To retain the century
+              information, you set <code>DF=I</code> or
+              <code>DF=L</code>.
+      </p> 
+          
+         
+      <div><a name="d0e37565"></a></div> 
+          
+      <h3>Examples of DF Parameter with WRITE Statements</h3> 
+           
+           
+      <p>These examples assume that <a href="pg_furth_date.htm#dtform_g"><code>DTFORM=G</code></a> applies.
+      </p> 
+           <pre class="verbatim">
+/* DF=S (default) 
+WRITE *DATX   /* Output has this format: dd.mm.yy 
+END
+</pre> 
+           <pre class="verbatim">
+FORMAT DF=I  
+WRITE *DATX   /* Output has this format: ddmmyyyy 
+END
+</pre> 
+           <pre class="verbatim">
+FORMAT DF=L 
+WRITE *DATX   /* Output has this format: dd.mm.yyyy 
+END
+</pre> 
+           
+          
+         <div><a name="d0e37590"></a></div> 
+          
+      <h3>Example of DF Parameter with MOVE Statement</h3> 
+           
+           
+      <p>This example assumes that <a href="pg_furth_date.htm#dtform_e"><code>DTFORM=E</code></a> applies.
+      </p> 
+           <pre class="verbatim">
+DEFINE DATA LOCAL 
+  1 #DATE  (D) INIT &lt;D'31/12/2005'&gt; 
+  1 #ALPHA (A10) 
+END-DEFINE 
+... 
+MOVE #DATE        TO #ALPHA /* Result: #ALPHA contains 31/12/05   
+MOVE #DATE (DF=I) TO #ALPHA /* Result: #ALPHA contains 31122005   
+MOVE #DATE (DF=L) TO #ALPHA /* Result: #ALPHA contains 31/12/2005 
+...
+</pre> 
+           
+          
+         <div><a name="d0e37609"></a></div> 
+          
+      <h3>Example of DF Parameter with STACK Statement</h3> 
+           
+           
+      <p>This example assumes that <a href="pg_furth_date.htm#dtform_i"><code>DTFORM=I</code></a> applies.
+      </p> 
+           <pre class="verbatim">
+DEFINE DATA LOCAL 
+  1 #DATE  (D) INIT &lt;D'2005-12-31'&gt; 
+  1 #ALPHA1(A10) 
+  1 #ALPHA2(A10) 
+  1 #ALPHA3(A10) 
+END-DEFINE 
+... 
+STACK TOP DATA #DATE (DF=S) #DATE (DF=I) #DATE (DF=L) 
+... 
+INPUT #ALPHA1 #ALPHA2 #ALPHA3 
+... 
+/* Result: #ALPHA1 contains 05-12-31   
+/*         #ALPHA2 contains 20051231   
+/*         #ALPHA3 contains 2005-12-31 
+...
+</pre> 
+           
+          
+         <div><a name="d0e37628"></a></div> 
+          
+      <h3>Example of DF Parameter with INPUT Statement</h3> 
+           
+           
+      <p>This example assumes that <a href="pg_furth_date.htm#dtform_i"><code>DTFORM=I</code></a> applies.
+      </p> 
+           <pre class="verbatim">
+DEFINE DATA LOCAL 
+  1 #DATE1 (D) 
+  1 #DATE2 (D) 
+  1 #DATE3 (D) 
+  1 #DATE4 (D) 
+END-DEFINE 
+... 
+INPUT #DATE1 (DF=S) /* Input must have this format: yy-mm-dd 
+      #DATE2 (DF=I) /* Input must have this format: yyyymmdd 
+      #DATE3 (DF=L) /* Input must have this format: yyyy-mm-dd 
+      #DATE4        /* Input must have this format: yy-mm-dd or yyyymmdd 
+...
+</pre> 
+           
+          
+        
+        <div class="noprint">
+         <p><a href="pg_furth_date.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="DFOUT_Parameter"></a></div> 
+         
+      <h2> 
+             <a name="x347"></a> 
+             <a name="x348"></a> Date Format for Output - DFOUT Parameter 
+      </h2> 
+          
+          
+      <p>The session/profile parameter <a href="../parms/dfout.htm"><code>DFOUT</code></a> only applies
+              to date fields in <a href="../sm/input.htm"><code>INPUT</code></a>,
+              <a href="../sm/display.htm"><code>DISPLAY</code></a>,
+              <a href="../sm/write.htm"><code>WRITE</code></a> and
+              <a href="../sm/printsm.htm"><code>PRINT</code></a> statements for
+              which no edit mask is specified, and for which no
+              <a href="../parms/sp_df.htm"><code>DF</code></a>
+              parameter applies.
+      </p> 
+          
+      <p>For date fields which are displayed by <code>INPUT</code>,
+              <code>DISPLAY</code>, <code>PRINT</code> and <code>WRITE</code> statements and
+              for which neither an edit mask is specified nor a <code>DF</code>
+              parameter applies, the profile/session parameter <code>DFOUT</code>
+              determines the format in which the field values are displayed.
+      </p> 
+          
+      <p>Possible <code>DFOUT</code> settings are:
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th align="left"> DFOUT=S </th> 
+                       
+               <td>Date variables are displayed with a 2-digit year component, and
+                  delimiters as determined by the <code>DTFORM</code> parameter
+                           (<var>yy-mm-dd</var>).
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th align="left"> DFOUT=I </th> 
+                       
+               <td>Date variables are displayed with a 4-digit year component and
+                  no delimiters (<var>yyyymmdd</var>).
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>By default, <code>DFOUT=S</code> applies. For either
+              <code>DFOUT</code> setting, the sequence of the day, month and year
+              components in the date values is determined by the
+              <code>DTFORM</code> parameter.
+      </p> 
+          
+      <p>The lengths of the date fields are not affected by the
+              <code>DFOUT</code> setting, as either date value representation fits
+              into an 8-byte field.
+      </p> 
+          
+      <p>The <code>DFOUT</code> parameter can be set in the Natural
+              parameter module/file, dynamically when Natural is invoked, or with the system
+              command <code>GLOBALS</code>. It is evaluated at runtime.
+      </p> 
+          
+      <h4 class="floating-title"> Example: </h4> 
+          
+      <p>This example assumes that <a href="pg_furth_date.htm#dtform_i"><code>DTFORM=I</code></a> applies.
+      </p> 
+          <pre class="verbatim">
+DEFINE DATA LOCAL 
+1 #DATE  (D) INIT &lt;D'2005-12-31'&gt; 
+END-DEFINE 
+... 
+WRITE #DATE        /* Output if DFOUT=S is set ...: 05-12-31 
+                   /* Output if DFOUT=I is set ...: 20051231 
+WRITE #DATE (DF=L) /* Output (regardless of DFOUT): 2005-12-31 
+...
+</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_furth_date.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="DFSTACK_Parameter"></a></div> 
+         
+      <h2> 
+             <a name="x349"></a> 
+             <a name="x350"></a> Date Format for Stack - DFSTACK Parameter 
+      </h2> 
+          
+          
+      <p>The session/profile parameter <a href="../parms/dfstack.htm"><code>DFSTACK</code></a> only
+              applies to date fields used in <a href="../sm/stack.htm"><code>STACK</code></a>,
+              <a href="../sm/fetch.htm"><code>FETCH</code></a> and
+              <a href="../sm/run.htm"><code>RUN</code></a> statements for which
+              no <a href="../parms/sp_df.htm"><code>DF</code></a>
+              parameter has been specified.
+      </p> 
+          
+      <p>The <code>DFSTACK</code> parameter determines the format in
+              which the values of date variables are placed on the stack via a
+              <code>STACK</code>, <code>RUN</code> or <code>FETCH</code> statement.
+      </p> 
+          
+      <p>Possible <code>DFSTACK</code> settings are:
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th align="left"> <a name="dfstack_s"></a>DFSTACK=S 
+               </th> 
+                       
+               <td>Date variables are placed on the stack with a 2-digit year
+                  component, and delimiters as determined by the profile parameter
+                  <code>DTFORM</code> (<var>yy-mm-dd</var>).
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th align="left"> <a name="dfstack_c"></a>DFSTACK=C 
+               </th> 
+                       
+               <td>Same as <code>DFSTACK=S</code>. However, a change in
+                  the century will be intercepted at runtime.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th align="left"> <a name="dfstack_i"></a>DFSTACK=I 
+               </th> 
+                       
+               <td>Date variables are placed on the stack with a 4-digit year
+                  component and no delimiters (<var>yyyymmdd</var>).
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>By default, <code>DFSTACK=S</code> applies.
+              <code>DFSTACK=S</code> means that when a date value is placed on the
+              stack, it is placed there without the century information (which is lost). When
+              the value is then read from the stack and placed into another date variable,
+              the century is either assumed to be the current one or determined by the
+              setting of the <a href="../parms/yslw.htm"><code>YSLW</code></a> parameter (see
+              <a href="pg_furth_date.htm#YSLW_Parameter">below</a>). This might lead to the
+              century being different from that of the original date value; however, Natural
+              would not issue any error in this case.
+      </p> 
+          
+      <p><code>DFSTACK=C</code> works the same as
+              <code>DFSTACK=S</code> in that a date value is placed on the stack
+              without the century information. However, if the value is read from the stack
+              and the resulting century is different from that of the original date value
+              (either because of the <code>YSLW</code> parameter, or the original
+              century not being the current one), Natural issues a runtime error.
+      </p> 
+          
+      <p class="note"><strong>Note:</strong><br> This runtime error is already issued at the time when the value is
+              placed on the stack.
+      </p> 
+          
+      <p><code>DFSTACK=I</code> allows you to place a date value on the
+              stack in a length of 8 bytes without losing the century information.
+      </p> 
+          
+      <p>The <code>DFSTACK</code> parameter can be set in the Natural
+              parameter module/file, dynamically when Natural is invoked, or with the system
+              command <code>GLOBALS</code>. It is evaluated at runtime.
+      </p> 
+          
+      <h4 class="floating-title"> Example: </h4> 
+          
+      <p>This example assumes that <a href="pg_furth_date.htm#dtform_i"><code>DTFORM=I</code></a> and
+              <a href="pg_furth_date.htm#YSLW_Parameter"><code>YSLW=0</code></a>
+              apply.
+      </p> 
+          <pre class="verbatim">
+DEFINE DATA LOCAL 
+  1 #DATE  (D) INIT &lt;D'2005-12-31'&gt; 
+  1 #ALPHA1(A8) 
+  1 #ALPHA2(A10) 
+END-DEFINE 
+... 
+STACK TOP DATA #DATE #DATE (DF=L) 
+... 
+INPUT #ALPHA1 #ALPHA2 
+... 
+/* Result if DFSTACK=S or =C is set: #ALPHA1 contains 05-12-31   
+/* Result if DFSTACK=I is set .....: #ALPHA1 contains 20051231   
+/* Result (regardless of DFSTACK) .: #ALPHA2 contains 2005-12-31 
+...
+</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_furth_date.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="YSLW_Parameter"></a></div> 
+         
+      <h2> 
+             <a name="x351"></a> 
+             <a name="x352"></a>Year Sliding Window - YSLW Parameter 
+      </h2> 
+          
+          
+      <p>The profile parameter <a href="../parms/yslw.htm"><code>YSLW</code></a> allows you
+              determine the century of a 2-digit year value.
+      </p> 
+          
+      <p>The <code>YSLW</code> parameter can be set in the Natural
+              parameter module/file or dynamically when Natural is invoked. It is evaluated
+              at runtime when an alphanumeric date value with a 2-digit year component is
+              moved into a date variable. This applies to data values which are:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">used with the <a href="pg_furth_compu.htm#Mathematical_Functions">mathematical
+                         function</a> <a href="../func/func_math.htm#VAL_System_Function"><code>VAL<var>(field)</var></code></a>,
+            </p>
+                  
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">used with the <code>IS(D)</code> option in a logical condition,
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">read from the <a href="pg_furth_stack.htm#pg_furth_stack">stack</a> as
+                      input data, or
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">entered in an input field as input data.</p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>The <code>YSLW</code> parameter determines the range of years
+              covered by a so-called "year sliding window". The sliding-window
+              mechanism assumes a date with a 2-digit year to be within a
+              "window" of 100 years. Within these 100 years, every 2-digit year
+              value can be uniquely related to a specific century.
+      </p> 
+          
+      <p>With the <code>YSLW</code> parameter, you determine how many
+              years in the past that 100-year range is to begin: The
+              <code>YSLW</code> value is subtracted from the current year to
+              determine the first year of the window range.
+      </p> 
+          
+      <p>Possible values of the <code>YSLW</code> parameter are 0 to
+              99. The default value is <code>YSLW=0</code>, which means that no
+              sliding-window mechanism is used; that is, a date with a 2-digit year is
+              assumed to be in the current century.
+      </p> 
+          
+      <h4 class="floating-title"> Example 1: </h4> 
+          
+      <p>If the current year is 2005 and you specify
+              <code>YSLW=40</code>, the sliding window will cover the years 1965 to
+              2064. A 2-digit year value <var>nn</var> from 65 to 99 is
+              interpreted accordingly as 19<var>nn</var>, while a 2-digit
+              year value <var>nn</var> from 00 to 64 is interpreted as
+              20<var>nn</var>.
+      </p> 
+          
+      <p><img src="graphics/pgdtfor1.png" alt="" width="549" height="400"></p> 
+          
+      <h4 class="floating-title"> Example 2: </h4> 
+          
+      <p>If the current year is 2005 and you specify
+              <code>YSLW=20</code>, the sliding window will cover the years 1985 to
+              2084. A 2-digit year value <var>nn</var> from 85 to 99 is
+              interpreted accordingly as 19<var>nn</var>, while a 2-digit
+              year value <var>nn</var> from 00 to 84 is interpreted as
+              20<var>nn</var>.
+      </p> 
+          
+      <p><img src="graphics/pgdtfor.png" alt="" width="549" height="400"></p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_furth_date.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Combinations_of_DFSTACK_and_YSLW"></a></div> 
+         
+      <h2> Combinations of DFSTACK and YSLW </h2> 
+          
+          
+      <p>The following examples illustrate the effects of using various
+              combinations of the parameters <a href="../parms/dfstack.htm"><code>DFSTACK</code></a> and
+              <a href="../parms/yslw.htm"><code>YSLW</code></a>.
+      </p> 
+          
+      <p class="note"><strong>Note:</strong><br> All these examples assume that <a href="pg_furth_date.htm#dtform_i"><code>DTFORM=I</code></a> applies.
+      </p> 
+          
+      <h4 class="floating-title"> Example 1: </h4> 
+          
+      <p>This example assumes the current year to be 2005, and that the parameter
+              settings <a href="pg_furth_date.htm#dfstack_s"><code>DFSTACK=S</code></a> (default) and
+              <code>YSLW=20</code> apply.
+      </p> 
+          <pre class="verbatim">
+DEFINE DATA LOCAL 
+  1 #DATE1 (D) INIT &lt;D'1956-12-31'&gt; 
+  1 #DATE2 (D) 
+END-DEFINE 
+... 
+STACK TOP DATA #DATE1 /* century information is lost (year 56 is stacked) 
+... 
+INPUT #DATE2          /* year sliding window determines 56 to be 2056 
+... 
+/* Result: #DATE2 contains 2056-12-31
+           even if #DATE1 is set to &lt;D'2156-12-31'&gt;
+</pre> 
+          <p>In this case, the year sliding window is not set appropriately, so that
+              the century information is (inadvertently) changed.
+      </p> 
+          
+      <h4 class="floating-title"> Example 2: </h4> 
+          
+      <p>This example assumes the current year to be 2005, and that the parameter
+              settings <a href="pg_furth_date.htm#dfstack_s"><code>DFSTACK=S</code></a> (default) and
+              <code>YSLW=60</code> apply.
+      </p> 
+          <pre class="verbatim">
+DEFINE DATA LOCAL 
+  1 #DATE1 (D) INIT &lt;D'1956-12-31'&gt; 
+  1 #DATE2 (D) 
+END-DEFINE 
+... 
+STACK TOP DATA #DATE1 /* century information is lost (year 56 is stacked) 
+... 
+INPUT #DATE2          /* year sliding window determines 56 to be 1956 
+... 
+/* Result: #DATE2 contains 1956-12-31
+           even if #DATE1 is set to &lt;D'2056-12-31'&gt;
+</pre> 
+          <p>In this case, the year sliding window is set appropriately, so that the
+              original century information is correctly restored.
+      </p> 
+          
+      <h4 class="floating-title"> Example 3: </h4> 
+          
+      <p>This example assumes the current year to be 2005, and that the parameter
+              settings <a href="pg_furth_date.htm#dfstack_c"><code>DFSTACK=C</code></a> and
+              <code>YSLW=0</code> (default) apply.
+      </p> 
+          <pre class="verbatim">
+DEFINE DATA LOCAL 
+  1 #DATE1 (D) INIT &lt;D'1956-12-31'&gt; 
+  1 #DATE2 (D) 
+END-DEFINE 
+... 
+STACK TOP DATA #DATE1 /* century information is lost (year 56 is stacked) 
+... 
+INPUT #DATE2          /* 56 is assumed to be in current century -&gt; 1956 
+... 
+/* Result: RUNTIME ERROR (UNINTENDED CENTURY CHANGE)
+</pre> 
+          <p>In this case, the century information is (inadvertently) changed.
+              However, this change is intercepted by the <code>DFSTACK=C</code>
+              setting.
+      </p> 
+          
+      <h4 class="floating-title"> Example 4: </h4> 
+          
+      <p>This example assumes the current year to be 2005, and that the parameter
+              settings <a href="pg_furth_date.htm#dfstack_c"><code>DFSTACK=C</code></a> and
+              <code>YSLW=60</code> (default) apply.
+      </p> 
+          <pre class="verbatim">
+DEFINE DATA LOCAL 
+  1 #DATE1 (D) INIT &lt;D'2056-12-31'&gt; 
+  1 #DATE2 (D) 
+END-DEFINE 
+... 
+STACK TOP DATA #DATE1 /* century information is lost (year 56 is stacked) 
+... 
+INPUT #DATE2          /* year sliding window determines 56 to be 1956 
+... 
+/* Result: RUNTIME ERROR (UNINTENDED CENTURY CHANGE)
+</pre> 
+          <p>In this case, the century information is changed due to the year sliding
+              window. However, this change is intercepted by the
+              <code>DFSTACK=C</code> setting.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_furth_date.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="year_fixed_window"></a></div> 
+         
+      <h2> Year Fixed Window </h2> 
+          
+          
+      <p>For information on this topic, see the description of the profile
+              parameter <a href="../parms/yslw.htm"><code>YSLW</code></a>.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_furth_date.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="DFTITLE_Parameter"></a></div> 
+         
+      <h2> 
+             <a name="x353"></a> 
+             <a name="x354"></a> Date Format for Default Page Title - DFTITLE Parameter
+             
+      </h2> 
+          
+          
+      <p>The session/profile parameter <a href="../parms/dftitle.htm"><code>DFTITLE</code></a> determines
+              the format of the date in a default <a href="pg_output_titles.htm#pg_output_titles">page
+                 title</a> (as output with a <a href="../sm/display.htm"><code>DISPLAY</code></a>,
+              <a href="../sm/write.htm"><code>WRITE</code></a> or
+              <a href="../sm/printsm.htm"><code>PRINT</code></a> statement).
+      </p>
+          
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th align="left"> DFTITLE=S </th> 
+                       
+               <td>The date is output with a 2-digit year component and delimiters
+                  (<var>yy-mm-dd</var>).
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th align="left"> DFTITLE=L </th> 
+                       
+               <td>The date is output with a 4-digit year component and delimiters
+                  (<var>yyyy-mm-dd</var>).
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th align="left"> DFTITLE=I </th> 
+                       
+               <td>The date is output with a 4-digit year component and no
+                  delimiters (<var>yyyymmdd</var>).
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>For each of these output formats, the sequence of the day, month and
+              year components, and the delimiter characters used, are determined by the
+              <a href="../parms/dtform.htm"><code>DTFORM</code></a>
+              parameter.
+      </p> 
+          
+      <p>The <code>DFTITLE</code> parameter can be set in the Natural
+              parameter module/file, dynamically when Natural is invoked, or with the system
+              command <a href="../syscom/globals.htm"><code>GLOBALS</code></a>. It
+              is evaluated at runtime.
+      </p> 
+          
+      <h4 class="floating-title"> Example: </h4> 
+          
+      <p>This example assumes that <a href="../parms/dtform.htm"><code>DTFORM=I</code></a>
+              applies.
+      </p> 
+          <pre class="verbatim">
+WRITE 'HELLO' 
+END
+/* 
+/* Date in page title if DFTITLE=S is set ...: 05-10-31 
+/* Date in page title if DFTITLE=L is set ...: 2005-10-31
+/* Date in page title if DFTITLE=I is set ...: 20051031
+</pre> 
+          <p class="note"><strong>Note:</strong><br> The <a href="../parms/dftitle.htm"><code>DFTITLE</code></a> parameter
+              has no effect on a user-defined page title as specified with a
+              <a href="pg_output_titles.htm#Define_Your_Own_Page_Title_-_The_WRITE_TITLE_Statement"><code>WRITE
+               TITLE</code></a> statement.
+      </p> 
+          
+        
+       
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="pg_furth_date.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_furth_date.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_furth_date.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_furth-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_furth_stack.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_furth_txtnot.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

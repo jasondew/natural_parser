@@ -1,0 +1,632 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>WRITE WORK FILE</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="writewor" id="16888"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../sm/writewor.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/sm/writewor.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="sm-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="writetra.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="sql-over.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Statements&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> WRITE WORK FILE 
+               <a name="x174"></a></h1>
+      </div> 
+         
+          
+          
+      <table border="0" class="syntax" cellpadding="3">  
+              
+         <tbody align="left" valign="top"> 
+                  
+            <tr> 
+                      
+               <td nowrap> <code class="keyword">WRITE WORK</code>&nbsp;[<code class="keyword">FILE</code>] &nbsp;<a href="writewor.htm#work-file-number_writewor"><var>work-file-number</var></a>
+                          &nbsp; [<a href="writewor.htm#VARIABLE"><code class="keyword">VARIABLE</code></a>] &nbsp;
+                          <a href="writewor.htm#operand1_writewor"><var>operand1</var>
+                             </a> &nbsp;
+                          <img src="../graphics/dot3.gif" alt="" width="12" height="4">
+                          
+               </td> 
+                     
+            </tr> 
+                 
+         </tbody> 
+             
+      </table> 
+          
+         
+      <p>This document covers the following topics:</p>
+         
+      <ul>
+         <li>
+            <p class="initem"><a href="writewor.htm#Function_writewor">Function</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="writewor.htm#syntax_descr_write_work_file">Syntax Description</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="writewor.htm#External">External Representation of Fields</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="writewor.htm#Handling">Handling of Large and Dynamic Variables</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="writewor.htm#Example_writewor">Example</a></p>
+         </li>
+      </ul> 
+         
+      <p>For an explanation of the symbols used in the syntax diagram, see
+             <a href="synsym.htm#Syntax_Symbols">Syntax
+            Symbols</a>.
+      </p> 
+         
+      <p>Related Statements: <a href="definewo.htm#definewo">DEFINE WORK
+                FILE</a> | <a href="readwork.htm#readwork">READ WORK FILE</a> |
+             <a href="closewf.htm#closewf">CLOSE WORK FILE</a> |
+             <a href="download.htm#download">DOWNLOAD PC FILE</a></p> 
+         
+      <p>Belongs to Function Group: <a href="stmt.htm#Control_of_Work_Files">Control of Work Files / PC
+            Files</a></p> 
+        
+      <hr> 
+        
+      <div><a name="Function_writewor"></a></div> 
+         
+      <h2> Function </h2> 
+          
+          
+      <p>The <code>WRITE WORK FILE</code> statement is used to write records to a
+              physical sequential work file.
+      </p> 
+          
+      <p>This statement can only be used in batch mode.</p> 
+           
+          
+      <p>It is possible to create a work file in one program or processing loop
+              and to read the same file in a subsequent independent processing loop or in a
+              subsequent program using the <a href="readwork.htm#readwork"><code>READ WORK
+               FILE</code></a> statement.
+      </p> 
+          
+      <p class="note"><strong>Note:</strong><br>For Unicode and code page support, see <a href="../unicode/uni-data.htm#uni-data-workprintfiles">Work Files and
+            Print Files on Windows, UNIX and OpenVMS
+            Platforms</a> in the
+              <cite>Unicode and Code Page Support</cite> documentation. 
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="writewor.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="syntax_descr_write_work_file"></a></div> 
+         
+      <h2> Syntax Description </h2> 
+          
+          
+      <p>Operand Definition Table:</p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                 
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th>Operand</th> 
+                       
+               <th colspan="5" align="center">
+                  <a href="synsym.htm#statem_poss_struct">Possible Structure</a> 
+               </th> 
+                       
+               <th colspan="13" align="center">
+                  <a href="synsym.htm#statem_poss_form">Possible Formats</a> 
+               </th> 
+                       
+               <th align="center"> <a href="synsym.htm#statem_ref_perm">Referencing
+                     Permitted</a> 
+               </th> 
+                       
+               <th align="center"> <a href="synsym.htm#statem_dyn_def">Dynamic
+                     Definition</a> 
+               </th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> <var>operand1</var> 
+               </td> 
+                       
+               <td>C</td> 
+                       
+               <td>S</td> 
+                       
+               <td>A</td> 
+                       
+               <td>G</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>A</td> 
+                       
+               <td>U</td> 
+                       
+               <td>N</td> 
+                       
+               <td>P</td> 
+                       
+               <td>I</td> 
+                       
+               <td>F</td> 
+                       
+               <td>B</td> 
+                       
+               <td>D</td> 
+                       
+               <td>T</td> 
+                       
+               <td>L</td> 
+                       
+               <td>C</td> 
+                       
+               <td>G</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td align="center">yes</td> 
+                       
+               <td align="center">no</td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p class="note"><strong>Note:</strong><br> When using the work file types ENTIRECONNECTION or
+              TRANSFER, <var>operand1</var> may neither be of format C, nor
+              G.
+      </p> 
+           
+          
+      <p>Syntax Element Description:</p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th nowrap>
+                  <a name="work-file-number_writewor"></a>
+                           <var>work-file-number</var> 
+               </th> 
+                       
+               <td> 
+                  
+                  <div><strong class="floating-title"> Work File Number: </strong></div> 
+                           
+                  <p>The work file number (as defined to Natural) to be used.</p>
+                           
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th nowrap> <a name="VARIABLE"></a>VARIABLE 
+               </th> 
+                       
+               <td> 
+                  
+                  <div><strong class="floating-title"> Variable Entry: </strong></div> 
+                           
+                  <p>It is possible to write records with different fields to the same
+                               work file with different <code>WRITE WORK FILE</code> statements. In this case,
+                               the <code>VARIABLE</code> entry must be specified in all <code>WRITE WORK
+                                  FILE</code> statements. The records on the external file will be written in
+                               variable format. 
+                  </p> 
+                           
+                  <p>When the operand list includes a dynamic variable (that could
+                               change in size for different executions of the <code>WRITE WORK FILE</code>
+                               statement), the <code>VARIABLE</code> entry must be specified in all
+                               <code>WRITE WORK FILE</code> statements.
+                  </p> 
+                           
+                  <div><a name="Variable_Index_Range_writewor"></a></div>
+                  <div><strong class="floating-title"> Variable Index
+                                  Range: </strong></div> 
+                           
+                  <p>When writing an array to a work file, you can specify a variable
+                               index range for the array. For example:
+                  </p> 
+                           <pre class="verbatim">WRITE WORK FILE <var>work-file-number</var> VARIABLE #ARRAY (I:J)</pre> </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th nowrap> <a name="operand1_writewor"></a>
+                   <var>operand1</var> 
+               </th> 
+                       
+               <td> 
+                  
+                  <div><strong class="floating-title"> Fields: </strong></div> 
+                           
+                  <p>With <var>operand1</var> you specify the fields to
+                     be written to the work file. These fields may be database fields, user-defined
+                     variables, and/or fields read from another work file using the <code>READ WORK
+                                  FILE</code> statement.
+                  </p> 
+                           
+                  <p>A database array may be referenced with one single range of indices
+                               which indicates the occurrences that are to be written to the work file. Groups
+                               from database files may be referenced using the group name. All fields
+                               belonging to that group will be written to the work file individually.
+                  </p>
+                           
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="writewor.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="External"></a></div> 
+         
+      <h2> External Representation of Fields </h2> 
+          
+          
+      <p>Fields written with a <code>WRITE WORK FILE</code> statement are
+              represented in the external file according to their internal definition. No
+              editing is performed on the field values.
+      </p> 
+          
+      <p>For fields of format A and B, the number of bytes in the external file
+              is the same as the internal length definition as defined in the Natural
+              program. No editing is performed and a decimal point is not represented in the
+              value.
+      </p> 
+          
+      <p>For fields of format N, the number of bytes on the external file is the
+              sum of internal positions before and after the decimal point. The decimal point
+              is not represented on the external file.
+      </p> 
+          
+      <p>For fields of format P, the number of bytes on the external file is the
+              sum of positions before and after the decimal point, plus 1 for the sign,
+              divided by 2, rounded upward to a full byte.
+      </p> 
+          
+      <p class="note"><strong>Note:</strong><br> No format conversion is performed for fields that are written to a
+              work file.
+      </p> 
+          
+      <p> Examples of Field Representation: </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th> Field Definition </th> 
+                       
+               <th> Output Record </th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td>#FIELD1 (A10)</td> 
+                       
+               <td>10 bytes</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>#FIELD2 (B15)</td> 
+                       
+               <td>15 bytes</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>#FIELD3 (N1.3)</td> 
+                       
+               <td>4 bytes</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>#FIELD4 (N0.7)</td> 
+                       
+               <td>7 bytes</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>#FIELD5 (P1.2)</td> 
+                       
+               <td>2 bytes</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>#FIELD6 (P6.0)</td> 
+                       
+               <td>4 bytes</td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p class="note"><strong>Note:</strong><br> When the Natural system functions
+              <a href="../func/func_sf.htm#AVER"><code>AVER</code></a>,
+              <a href="../func/func_sf.htm#NAVER"><code>NAVER</code></a>,
+              <a href="../func/func_sf.htm#SUM"><code>SUM</code></a> or
+              <a href="../func/func_sf.htm#TOTAL"><code>TOTAL</code></a> for
+              numeric fields (format N or P) are written to a work file, the internal length
+              of these fields is increased by one digit (for example, <code>SUM</code> of a
+              field of format P3 is increased to P4). This has to be taken into consideration
+              when reading the work file.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="writewor.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Handling"></a></div> 
+         
+      <h2> Handling of Large and Dynamic Variables </h2> 
+          
+           
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th>Work File Type </th> 
+                       
+               <th>Handling</th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> 
+                  
+                  <p class="mini-list"> 
+                               <a href="definewo.htm#ascii">ASCII</a><br> 
+                               <a href="definewo.htm#ascii_comp">ASCII-COMPRESSED</a><br> 
+                               <a href="definewo.htm#sag">SAG</a> (binary)  
+                              
+                  </p> 
+               </td> 
+                       
+               <td>The work file types ASCII, ASCII-COMPRESSED and
+                  SAG (binary) cannot handle dynamic variables and will produce an error. They
+                  can, however, handle large variables with a maximum field/record length of
+                  32766 bytes.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> 
+                  
+                  <p class="mini-list"> 
+                               <a href="definewo.htm#transfer">TRANSFER</a><br> 
+                               <a href="definewo.htm#entire">ENTIRECONNECTION</a> 
+                              
+                  </p>
+               </td> 
+                       
+               <td>The work file type TRANSFER
+                  can handle dynamic variables with a maximum field/record length of 32766 bytes.
+                  The work file type ENTIRE CONNECTION cannot handle dynamic variables.
+                  They can both,
+                  however, handle large variables with a maximum field/record length of
+                  1073741824 bytes.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> 
+                  
+                  <p class="mini-list"> 
+                               <a href="definewo.htm#portable">PORTABLE</a><br> 
+                               <a href="definewo.htm#unformatted_winux">UNFORMATTED</a> 
+                              
+                  </p> 
+               </td> 
+                       
+               <td> 
+                  
+                  <p>Large and dynamic variables can be written into work files or read
+                     from work files using the two work file types PORTABLE and UNFORMATTED. For
+                     these types, there is no size restriction for dynamic variables. However, large
+                     variables may not exceed a maximum field/record length of 32766 bytes.
+                  </p> 
+                           
+                  <p>For the work file type PORTABLE, the field information is stored
+                               within the work file. The dynamic variables are resized during
+                               <code>READ</code> if the field size in the record is different from the current
+                               size.
+                  </p> 
+                           
+                  <p>In the <code>WRITE WORK FILE</code> statement, fields are written
+                               to the file specified with their byte length. All data types (DYNAMIC or not)
+                               are treated the same. No structural information is inserted. Note that Natural
+                               uses a buffering mechanism, so you can expect the data to be completely written
+                               only after a <code>CLOSE WORK</code>. This is especially important if the file
+                               is to be&nbsp;processed with another utility while Natural is running.
+                  </p> 
+                           
+                  <p>With the <a href="readwork.htm#readwork"><code>READ WORK
+                                     FILE</code></a> statement, fields of fixed length are read with their
+                               whole length. If the end-of-file is reached, the remainder of the current field
+                               is filled with blanks. The following fields are unchanged. In the case of
+                               DYNAMIC data types, all the remainder of the file is read unless it exceeds
+                               1073741824 bytes. If the end of file is reached, the remaining fields
+                               (variables) are kept unchanged (normal Natural behavior).
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><a href="definewo.htm#csv">CSV</a></td> 
+                       
+               <td>The maximum field/record length is 32766 bytes
+                  for dynamic and large variables. Dynamic variables are supported. X-arrays are
+                  not allowed and will result in an error message. 
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="writewor.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Example_writewor"></a></div> 
+         
+      <h2> Example</h2> 
+          
+          <pre class="verbatim">** Example 'WWFEX1': WRITE WORK FILE                                    
+************************************************************************
+DEFINE DATA LOCAL                                                       
+1 EMPLOY-VIEW VIEW OF EMPLOYEES                                         
+  2 PERSONNEL-ID                                                        
+  2 NAME                                                                
+END-DEFINE                                                              
+*                                                                       
+FIND EMPLOY-VIEW WITH CITY = 'LONDON'                                   
+  <strong>WRITE WORK FILE 1                                                     
+        PERSONNEL-ID NAME</strong>                                              
+END-FIND                                                                
+*                                                                       
+END </pre> 
+          
+        
+       <div class="noprint">
+         <div class="nospy">
+            <p><a href="writewor.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../sm/writewor.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/sm/writewor.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="sm-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="writetra.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="sql-over.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

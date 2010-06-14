@@ -1,0 +1,857 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Functional Security</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="nsc_func"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../nsc/nsc_func.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/nsc/nsc_func.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc_count.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc_batch.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Natural Security&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x64"></a> 
+               <a name="x65"></a>Functional Security
+         </h1>
+      </div> 
+         
+         
+      <p>This section covers the following topics:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="nsc_func.htm#Command_Processors">Command Processors</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_func.htm#Functional_Security_for_a_Command_Processor">Functional Security for a Command Processor</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_func.htm#AllowingDisallowing_Keywords">Allowing/Disallowing Keywords</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_func.htm#How_to_Define_Functional_Security_for_a_Library">Defining Functional Security for a Library</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_func.htm#How_to_Define_Functional_Security_for_a_User">Defining Functional Security for a User</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_func.htm#Functional_Security_for_Library_SYSSEC">Functional Security for Library SYSSEC</a></p>
+         </li>
+      </ul> 
+        
+      <hr> 
+        
+      <div><a name="Command_Processors"></a></div> 
+         
+      <h2> 
+             <a name="x66"></a>Command Processors
+      </h2> 
+          
+          
+      <p>Command processors are used to control the way in which
+              commands/functions are executed in a library. They are created with the Natural
+              utility <a href="../utis/sysncp.htm#sysncp">SYSNCP</a> . In a
+              command processor, you define commands - that is, keywords and combinations of
+              keywords - and the actions to be performed in response to these commands being
+              entered by the users.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="nsc_func.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Functional_Security_for_a_Command_Processor"></a></div> 
+         
+      <h2> Functional Security for a Command Processor</h2> 
+          
+          
+      <p>Natural Security allows you to define <em>functional security</em> for
+              each command processor in a library: you can determine which of the keywords
+              and keyword combinations defined in the processor are to be allowed or not
+              allowed in the library, thus restricting the availability of certain functions
+              within the library. Moreover, you can define user-specific functional security;
+              that is, you can make different functions available for different users of the
+              same command processor in a library.
+      </p> 
+          
+      <p>This is done via the "Functional Security" options in the
+              security profiles of libraries and users, as described in detail in this
+              section. The functional security defined for a command processor in a library
+              profile applies to all users of the command processor in that library. In
+              addition, in a user profile you can define different functional security for an
+              individual user of a command processor in a library, which then takes
+              precedence over the specifications in the library profile.
+      </p> 
+          
+         
+      <div><a name="Status_of_a_Command_Processor"></a></div> 
+          
+      <h3> Status of a Command Processor</h3> 
+           
+           
+      <p>In Natural Security, a command processor can have the following
+               status:
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th> Undefined</th> 
+                        
+               <td>The command processor has been created with SYSNCP, but no
+                  functional security is defined for it.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th> Defined &nbsp;</th> 
+                        
+               <td>The command processor has been created with SYSNCP and
+                  functional security is defined for it.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th> Modified &nbsp;</th> 
+                        
+               <td>The command processor has been modified with SYSNCP after
+                  functional security was defined for it. 
+                  
+                  <p>In this case, you may have to update the functional security for
+                     the command processor; this is done by marking the field "Functional
+                     Security Defined" with "UP" and then adjusting the security
+                                specifications. To update the functional security for
+                                <var>all</var> "modified" command processors in
+                                the library, you can use the application programming interface
+                                <a href="nsc_iface.htm#Subprogram_NSCLI">NSCLI</a> (function code
+                                "UC").
+                  </p> 
+                            
+                  <p class="note"><strong>Note:</strong><br> If a command processor is modified with SYSNCP, it has to be
+                                recataloged in order for the modifications to be reflected in Natural
+                                Security.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th> Unresolved &nbsp;</th> 
+                        
+               <td>The command processor has been deleted with SYSNCP, but
+                  functional security is still defined for it. 
+                  
+                  <p>In this case, you should also delete the functional security for
+                                the command processor (by marking the field "Functional Security Defined" with
+                                "DE").
+                  </p>
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="nsc_func.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="AllowingDisallowing_Keywords"></a></div> 
+         
+      <h2> Allowing/Disallowing Keywords</h2> 
+          
+          
+      <p>By default, all keywords defined in a command processor are disallowed,
+              which means that none of the commands defined in the processor can be
+              executed.
+      </p> 
+          
+      <p>If you wish to make only relatively few functions available, you can
+              leave this default unchanged so that generally all keywords are disallowed, and
+              you can then allow the use of individual keywords and keyword combinations
+              (commands). If you wish to make most functions available and only restrict the
+              use of relatively few functions, you can change the default so that generally
+              all keywords are allowed and you can then disallow the use of individual
+              keywords and keyword combinations.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="nsc_func.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="How_to_Define_Functional_Security_for_a_Library"></a></div> 
+         
+      <h2> Defining Functional Security for a Library</h2> 
+          
+          
+      <p>If you mark the option "Functional Security" in the
+              <a href="nsc_lib.htm#Additional_Options_nsc_lib">Additional Options</a>
+              window of a library security profile (see "Components of a Library
+              Profile" in the section <cite>Library Maintenance</cite>), the
+              Functional Security window will be displayed:
+      </p> 
+          
+      <table border="1" cellpadding="5" class="screen">
+         <tr>
+            <td><pre>
+    Library ID ................... XYZLIB__                   
+    Command Processor ............ ________                   
+                                                              
+ __ Functional security defined ..                            
+ __ Keyword default ..............                            
+ __ Keyword exceptions ...........                            
+ __ Command exceptions ...........                            
+    Type of command exceptions ...                           
+</pre></td>
+         </tr>
+      </table> 
+          
+      <p>In this window, you can define functional security for any command
+              processor that has been created in that library.
+      </p> 
+          
+      <p>In the Command Processor field of the window, you enter the name of the
+              processor you wish to define for the library.
+      </p> 
+          
+      <p>If you do not know the name of the processor you want, enter an asterisk
+              (*) in the Command Processor field: a list of all processors that are contained
+              in that library will be displayed; from the list, you select a processor by
+              marking it with any character or the cursor.
+      </p> 
+          
+      <p>By default, no functional security is defined for a command processor:
+              the Keyword Default is set to "Disallowed", and no Keyword
+              Exceptions or Command Exceptions are defined; which means that none of the
+              commands defined in the processor can be executed.
+      </p> 
+          
+         
+      <div><a name="Functional_Security_allowing"></a></div> 
+          
+      <h3> Functional Security Defined</h3> 
+           
+           
+      <p>This field may take the following values:</p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th> No &nbsp;</th> 
+                        
+               <td>This indicates that the default settings for Keyword Default
+                  and Keyword/Command Exceptions apply.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th> Yes &nbsp;</th> 
+                        
+               <td>This indicates that some of the default settings have been
+                  changed.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th> ??? &nbsp;</th> 
+                        
+               <td>This indicates that the status of the command processor is
+                  either "modified" or "unresolved" (see
+                  <a href="nsc_func.htm#Status_of_a_Command_Processor">Status of a Command
+                               Processor</a> above).
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+          
+         
+      <div><a name="Keyword_Default"></a></div> 
+          
+      <h3> Keyword Default</h3> 
+           
+           
+      <p>This field may take the following values:</p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th> Disallowed &nbsp;</th> 
+                        
+               <td>By default, all keywords specified in the processor are
+                  disallowed (and you may allow individual keywords and keyword combinations via
+                  Keyword Exceptions and Command Exceptions).
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th> Allowed &nbsp;</th> 
+                        
+               <td>By default, all keywords specified in the processor are allowed
+                  (and you may disallow individual keywords and keyword combinations via Keyword
+                  Exceptions and Command Exceptions).
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>To change the value from "Disallowed" to
+               "Allowed", or vice versa, mark the Keyword Default input field
+               with any character.
+      </p> 
+           
+      <p>You can only change the Keyword Default if neither Keyword Exceptions
+               nor Command Exceptions are defined; so, if necessary, you must reset the
+               allowed/disallowed status of all Command Exceptions and Keyword Exceptions to
+               their default settings (as explained below) before you can change the Keyword
+               Default.
+      </p> 
+           
+          
+         
+      <div><a name="Keyword_Exceptions"></a></div> 
+          
+      <h3> Keyword Exceptions</h3> 
+           
+           
+      <p>This field may take the following values:</p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th> No &nbsp;</th> 
+                        
+               <td>This indicates that the Keyword Default applies to all
+                  keywords; that is, all keywords are either allowed or disallowed.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th> Yes &nbsp;</th> 
+                        
+               <td>If the Keyword Default is set to "Disallowed",
+                  this indicates that individual keywords are allowed; if the Keyword Default is
+                  set to "Allowed", this indicates that individual keywords are
+                  disallowed.
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>By default, all keywords are either allowed or disallowed, depending on
+               the setting of the Keyword Default.
+      </p> 
+           
+      <p>To change this default status for individual keywords, mark the Keyword
+               Exceptions input field with any character(s) - except "DE".
+               Depending on the Keyword Default, either the Allow Keywords screen or the
+               Disallow Keywords screen will be displayed, listing all keywords that have been
+               defined in the processor:
+      </p> 
+           
+      <table border="1" cellpadding="5" class="screen">
+         <tr>
+            <td><pre>
+14:18:03                    *** NATURAL SECURITY ***                 2008-10-31
+                             - Disallow Keywords -                             
+                                                                               
+Library .. SYRINX      Command Processor .. PROC2112                           
+                                                                               
+Keyword          Type   A/D                                                    
+________________ ______  _                                                     
+ACCESS           Action  A                                                     
+ADD              Action  A                                                     
+ADDMULTIPLE      Action  A                                                     
+ADMIN            Action  A                                                     
+CONVERT          Action  A                                                     
+COPY             Action  D                                                     
+DELETE           Action  D                                                     
+DISPLAY          Action  A                                                     
+DUMMY1           Action  A                                                     
+DUMMY2           Action  A                                                     
+DUMMY3           Action  A                                                     
+DUMMY4           Action  A                                                     
+EDIT             Action  A                                                     
+                                                                               
+                                                                               
+Enter-PF1---PF2---PF3---PF4---PF5---PF6---PF7---PF8---PF9---PF10--PF11--PF12---
+      Help  PrevM Exit  AddOp       Flip                                Canc  
+</pre></td>
+         </tr>
+      </table> 
+           
+      <p>The list can be scrolled as described in the section
+               <a href="nsc_way.htm#nsc_way">Finding Your Way In Natural
+            Security</a>.
+      </p> 
+           
+      <p>In the "A/D" column, mark the keywords to be disallowed
+               with "D" and those to be allowed with "A".
+      </p> 
+           
+      <p>Any status that is different from the Keyword Default status will be
+               displayed intensified.
+      </p> 
+           
+      <p>To reset the disallowed/allow status of all keywords to the Keyword
+               Default setting, mark the Keyword Exceptions input field with "DE"
+               (delete). A window will be displayed, in which you enter "Y" to
+               confirm the deletion.
+      </p> 
+           
+          
+         
+      <div><a name="Command_Exceptions"></a></div> 
+          
+      <h3> Command Exceptions</h3> 
+           
+           
+      <p>This field may take the following values:</p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th> No &nbsp;</th> 
+                        
+               <td>This indicates that all initial default settings apply.</td>
+                        
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th> Yes &nbsp;</th> 
+                        
+               <td>This indicates that individual default settings have been
+                  changed.
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>If any of the keywords that make up a command is disallowed, the
+               command will, by default, be disallowed. If all of the keywords that make up a
+               command are allowed, the command will, by default, be allowed.
+      </p> 
+           
+      <p>To change this default status for individual commands, mark the Command
+               Exceptions input field with any character(s) - except "DE". The
+               Allow/Disallow Commands screen will be displayed, listing all commands that
+               have been defined in the processor:
+      </p> 
+           
+      <table border="1" cellpadding="5" class="screen">
+         <tr>
+            <td><pre>
+14:19:13                    *** NATURAL SECURITY ***                 2008-10-31
+                          - Allow/Disallow Commands -                          
+                                                                               
+Library .. SYRINX      Command Processor .. PROC2112                           
+                                                                               
+Action           Object           (unused)         A/D                         
+________________ ________________ ________________  _                          
+ACCESS           DATASET                            A                          
+ACCESS           JOB                                A                          
+ACCESS           NODE                               A                          
+ACCESS           OPERATIONS                         A                          
+ACCESS           PRINTER                            A                          
+ACCESS           VOLUME_SERIAL                      A                          
+ACCESS           VTAM_APPLICATION                   A                          
+ADD              DATASET                            A                          
+ADD              FILE                               A                          
+ADD              JOB                                A                          
+ADD              LIBRARY                            A                          
+ADD              MAILBOX                            A                          
+ADD              NODE                               A                          
+                                                                               
+                                                                               
+Enter-PF1---PF2---PF3---PF4---PF5---PF6---PF7---PF8---PF9---PF10--PF11--PF12---
+      Help  PrevM Exit  AddOp       Flip                                Canc  
+</pre></td>
+         </tr>
+      </table> 
+           
+      <p>The list can be scrolled as described in the section
+               <a href="nsc_way.htm#nsc_way">Finding Your Way In Natural
+            Security</a>.
+      </p> 
+           
+      <p>In the "A/D" column, mark the commands to be disallowed
+               with "D" and those to be allowed with "A".
+      </p> 
+           
+      <p>Any status that is different from the default status will be displayed
+               intensified.
+      </p> 
+           
+      <p>To reset the status of all commands to their default allowed/disallowed
+               settings, mark the Command Exceptions input field with "DE"
+               (delete). A window will be displayed, in which you enter "Y" to
+               confirm the deletion.
+      </p> 
+           
+          
+         
+      <div><a name="Type_of_Command_Exceptions"></a></div> 
+          
+      <h3> Type of Command Exceptions</h3> 
+           
+           
+      <p>If any Command Exceptions are defined, this field may take the
+               following values:
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th> Allowed &nbsp;</th> 
+                        
+               <td>This indicates that one or more of the commands that were
+                  initially disallowed have been allowed.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th> Disallowed &nbsp;</th> 
+                        
+               <td>This indicates that one or more of the commands that were
+                  initially allowed have been disallowed.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th> Allowed/ Disallowed</th> 
+                        
+               <td>This indicates that one or more of the initially disallowed
+                  commands have been allowed and also one or more of the initially allowed
+                  commands have been disallowed.
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="nsc_func.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="How_to_Define_Functional_Security_for_a_User"></a></div> 
+         
+      <h2> Defining Functional Security for a User</h2> 
+          
+          
+      <p>Generally, the functional security defined for a command processor in a
+              library security profile applies to all users of the processor in that library.
+              If you wish to define different functional security for an individual user, you
+              may do so in the user's security profile. The specifications in the user
+              profile will then take precedence over the specifications in the library
+              profile.
+      </p> 
+          
+      <p>By default, the functional security specifications as defined for the
+              processor in the library security profile apply.
+      </p> 
+          
+      <p>To change any of these specifications for an individual user, mark the
+              option "Functional Security" in the
+              <a href="nsc_user.htm#Additional_Options_nsc_user">Additional Options</a>
+              window of the user's security profile (see "Components of a User
+              Profile" in the section <cite>User Maintenance</cite>); the
+              Functional Security window will be displayed:
+      </p> 
+          
+      <table border="1" cellpadding="5" class="screen">
+         <tr>
+            <td><pre>
+    User ID ...................... ABC                        
+    Library ID ................... ________                   
+    Command Processor ............ ________                   
+                                                              
+ __ Functional security defined ..                            
+ __ Keyword default ..............                            
+ __ Keyword exceptions ...........                            
+ __ Command exceptions ...........                            
+    Type of command exceptions ...                          
+</pre></td>
+         </tr>
+      </table> 
+          
+      <p>In this window, you can define user-specific functional security for a
+              command processor in a library.
+      </p> 
+          
+      <p>In the Library ID field of the window, enter the ID of the library in
+              which the processor is contained, and in the Command Processor field, enter the
+              name of the command processor you wish to define for the user.
+      </p> 
+          
+         
+      <div><a name="Functional_Security_how"></a></div> 
+          
+      <h3> Functional Security Defined</h3> 
+           
+           
+      <p>This field may contain the following values:</p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th> No &nbsp;</th> 
+                        
+               <td>This indicates that for this user the functional security as
+                  defined for the processor in the library security profile applies.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th> Yes &nbsp;</th> 
+                        
+               <td>This indicates that for this user functional security different
+                  from that defined for the processor in the library security profile has been
+                  defined.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th> ??? &nbsp;</th> 
+                        
+               <td>This indicates that the status of the command processor is
+                  either "modified" or "unresolved" (see
+                  <a href="nsc_func.htm#Status_of_a_Command_Processor">Status of a Command
+                               Processor</a> above).
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>To reset the user-specific specifications to those as defined for the
+               processor in the library profile, mark the Functional Security Defined input
+               field with "DE" (delete). A window will be
+               displayed, in which you enter "Y" to confirm the
+               deletion.
+      </p> 
+           
+          
+         
+      <div><a name="KeywDefExcComExc"></a></div> 
+          
+      <h3> Keyword Default/Keyword Exceptions/Command Exceptions/Type of
+              Command Exceptions
+      </h3> 
+           
+           
+      <p>For these fields, the same applies as described under
+               <a href="nsc_func.htm#How_to_Define_Functional_Security_for_a_Library">Defining
+            Functional Security for a Library</a> above.
+      </p> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="nsc_func.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Functional_Security_for_Library_SYSSEC"></a></div> 
+         
+      <h2> Functional Security for Library SYSSEC</h2> 
+          
+          
+      <p>The command processor NSCCMD01 is provided for the Natural Security
+              library SYSSEC. 
+      </p> 
+          
+      <p>Natural Security <em>always</em> uses this command processor for the
+              handling of functions within SYSSEC. As SYSSEC would ignore any command
+              processor other than NSCCMD01, it would be useless to create any other command
+              processor for it. 
+      </p> 
+          
+      <p>By default, NSCCMD01 is defined with Keyword Default set to
+              "Allowed" and no Keyword Exceptions or Command Exceptions; that
+              is, all Natural Security functions are allowed.
+      </p> 
+          
+      <p>You cannot modify command processor NSCCMD01 itself (as it is only
+              provided in object form). However, if desired, you can control the use of
+              functions within SYSSEC by modifying the functional security aspects of
+              NSCCMD01 in the library profile of SYSSEC and in the user profiles of Natural
+              Security administrators.
+      </p> 
+          
+      <p>For example, if you wish an administrator to only look at security
+              profiles but not modify them, you would disallow for that administrator all
+              action keywords but "DISPLAY"; or, if you wish an administrator to
+              only deal with security profiles of users, but not security profiles of any
+              other type of object, you would disallow for that administrator all object
+              keywords but "USER".
+      </p> 
+          
+      <p>The keywords in NSCCDM01 correspond to the Natural Security commands as
+              listed under <a href="nsc_way.htm#Direct_Commands">Direct
+            Commands</a> in the section <cite>Finding Your Way In
+                 Natural Security</cite>.
+      </p> 
+          
+      <table border="0" cellspacing="0" width="80%" class="warning">
+         <tr>
+            <td valign="top" width="36"><img src="../graphics/warning.png" alt="" width="28" height="28"></td>
+            <td valign="top"><strong>Warning:<br>Do not set the Keyword Default for command processor NSCCMD01 to
+                       "Disallowed" - unless you define <em>immediately</em> afterwards
+                       Keyword Exceptions that allow you to use all the Natural Security functions you
+                       need. If you set the Keyword Default for NSCCMD01 to "Disallowed"
+                       and then leave the Functional Security window, all Natural Security functions
+                       would be disallowed; that is, no one would be able to use Natural Security
+                       anymore. To make Natural Security accessible again, it would then be necessary
+                       to execute an INPL with the RECOVER option.</strong></td>
+         </tr>
+      </table> 
+          
+        
+       
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="nsc_func.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../nsc/nsc_func.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/nsc/nsc_func.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc_count.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc_batch.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

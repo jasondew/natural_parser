@@ -1,0 +1,1800 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Installing and Configuring the Natural Web I/O Interface Server</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="nwoserver-over"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../webio/nwoserver-over.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/webio/nwoserver-over.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="webio-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="webio-intro.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="nwoclient-over.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Natural Web I/O Interface&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> Installing and Configuring the Natural Web I/O Interface
+               Server
+         </h1>
+      </div> 
+         
+      <p>On UNIX, the server part of the Natural Web I/O Interface is
+             implemented as a daemon. 
+      </p> 
+         
+      <p>This document covers the following
+             topics:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="nwoserver-over.htm#nwoserver-install">Installing the Natural Web I/O Interface Daemon</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nwoserver-over.htm#nwoserver-before">Before You Start</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nwoserver-over.htm#nwoserver-setup">Setting Up the Natural Web I/O Interface Components</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nwoserver-over.htm#nwoserver-dir">Directories</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nwoserver-over.htm#nwoserver-config">Configuring the Natural Web I/O Interface Daemon on UNIX</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nwoserver-over.htm#nwoserver-log">Logging Information</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nwoserver-over.htm#nwoserver-ssl">SSL Support</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nwoserver-over.htm#nwoserver-work">Working with the UNIX Components of the Natural Web I/O Interface</a></p>
+         </li>
+      </ul> 
+        
+      <hr>
+      <div><a name="nwoserver-install"></a></div> 
+         
+      <h2>Installing the Natural Web I/O Interface Daemon</h2> 
+          
+          
+      <p>The installation of the Natural Web I/O Interface daemon is
+              part of the Natural for UNIX installation. 
+      </p> 
+           
+         
+      <div class="noprint">
+         <p><a href="nwoserver-over.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="nwoserver-before"></a></div> 
+         
+      <h2>Before You Start</h2> 
+          
+          
+      <p>This section contains important information on the necessary activities
+              before installing Natural Web I/O Interface daemon.
+      </p> 
+          
+      <p>The Natural Web I/O Interface daemon
+              <cite>$SAG/nat/$NATVERS/nwo/bin/nwosrvd</cite></p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">needs a Tcl shared library which is delivered in the directory
+                      <cite>$SAG/nat/$NATVERS/lib</cite>,
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">is linked with the runpath
+                      <cite>/opt/softwareag/nat/$NATVERS/lib</cite>,
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">will be installed with permissions 6755 (s-bit).</p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>Since the s-bit is used, <cite>$LD_LIBRARY_PATH</cite> will not
+              be searched. Therefore, ensure that the Natural Web I/O Interface daemon will
+              find the Tcl shared library by
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">installing Natural into <cite>/opt/softwareag</cite>,
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">setting a symbolic link from <cite>opt/softwareag</cite> to
+                      your current <cite>$SAG</cite> directory, or 
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">making the Tcl shared library available from a system directory.</p> 
+                 
+         </li> 
+             
+      </ul> 
+         
+      <div class="noprint">
+         <p><a href="nwoserver-over.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="nwoserver-setup"></a></div> 
+         
+      <h2>Setting Up the Natural Web I/O Interface
+             Components
+      </h2> 
+          
+      <p>Setting up the Natural Web I/O Interface on UNIX consists of the
+              following steps: 
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="nwoserver-over.htm#nwoserver-setup-stop">Step 1: Stop the Natural Web I/O Interface Daemons</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nwoserver-over.htm#nwoserver-setup-env">Step 2: Establish the Environment</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nwoserver-over.htm#nwoserver-setup-install">Step 3: Install Natural and the Natural Web I/O Interface</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nwoserver-over.htm#nwoserver-setup-check">Step 4: Check the Environment Variables for the Natural Web I/O Interface</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nwoserver-over.htm#nwoserver-setup-read">Step 5: Read the READ_NWO Files</a></p>
+         </li>
+      </ul>
+      <div><a name="nwoserver-setup-stop"></a></div> 
+          
+      <h3>Step 1: Stop the Natural Web I/O Interface Daemons</h3> 
+           
+           
+      <p>This step is only required for an upgrade installation. It is not
+               required when you install the Natural Web I/O Interface for the first time.
+               
+      </p> 
+           
+      <ol> 
+               
+         <li> 
+                   
+            <p class="initem">Stop the <cite>nwosrvd</cite> process using the following
+                       command:
+            </p><pre class="command-input">nwosrvd.sh <var>portnumber</var> stop</pre> 
+                   <p class="initem">Or use the script
+                       <cite>$NATDIR/$NATVERS/INSTALL/nwosrvd.bsh</cite> which will be
+                       generated during the Natural Web I/O Interface installation for a specified
+                       port.
+            </p><pre class="command-input">nwosrvd.bsh stop</pre> 
+                  </li> 
+               
+         <li> 
+                   
+            <p class="initem">Repeat the above command (with an adapted port in script
+                       <cite>nwosrvd.bsh</cite>, if applicable) for each Natural Web I/O
+                       Interface service that is needed.
+            </p> 
+                  
+         </li> 
+              
+      </ol> 
+          
+      <div><a name="nwoserver-setup-env"></a></div> 
+          
+      <h3>Step 2: Establish the Environment</h3> 
+           
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">Ensure that the environment settings in the file
+                       <cite>sagenv.new</cite> are correct and set. Note that the
+                       <cite>nwoenv</cite> environment script will be called by the
+                       <cite>natenv</cite> environment script.
+            </p> 
+                   
+            <p class="initem">Or use the shell script <cite>nwoenv.csh</cite> by entering
+                       the following command:
+            </p><pre class="command-input">source nwoenv.csh</pre> 
+                   <p class="initem">This script can be found after the installation in
+                       <cite>$NATDIR/$NATVERS/INSTALL</cite>.
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+          
+      <div><a name="nwoserver-setup-install"></a></div> 
+          
+      <h3>Step 3: Install Natural and the Natural Web I/O Interface </h3> 
+           
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">The Natural Web I/O Interface can be selected in the <span class="selectable_label">Choose
+                  Packages</span> screen during the Natural installation.
+            </p> 
+                   
+            <p class="initem">Optionally, you may install a runlevel script to start/stop a Natural
+                       Web I/O Interface daemon and start the Natural Web I/O Interface daemon on a
+                       specified port. After the Natural installation has finished, the Natural Web
+                       I/O Interface must be activated by starting Natural through a Natural Web I/O
+                       Interface client on Windows. 
+            </p> 
+                   
+            <p class="initem">When a runlevel script is used, the Natural Web I/O Interface daemon
+                       can only be administered by the user "root".
+            </p> 
+                   
+            <p class="initem">When you install Natural with the Natural Web I/O Interface, the
+                       directory <cite>$NATDIR/nwo/$NWONODE</cite> is created. The template
+                       files located in <cite>$NATDIR/$NATVERS/nwo/node-name</cite> are then
+                       copied to this new directory. 
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+          
+      <div><a name="nwoserver-setup-check"></a></div> 
+          
+      <h3>Step 4: Check the Environment Variables for the Natural Web I/O
+              Interface
+      </h3> 
+           
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">The Natural Web I/O Interface-specific settings are shown below:</p> 
+                    
+                    
+            <table border="1" class="color" cellpadding="3" width="80%"> 
+                        
+               <thead align="left" valign="top"> 
+                            
+                  <tr> 
+                                
+                     <th>Environment Variable</th> 
+                                
+                     <th>Description</th> 
+                               
+                  </tr> 
+                           
+               </thead> 
+                        
+               <tbody align="left" valign="top"> 
+                            
+                  <tr> 
+                                
+                     <td><code>NWODIR</code></td> 
+                                
+                     <td>The home directory for the product located at
+                        <cite>$NATDIR/$NATVERS/nwo</cite>.
+                     </td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td><code>NWONODE</code></td> 
+                                
+                     <td>The name of the node on which the Natural Web
+                        I/O Interface is installed. 
+                     </td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td><code>NWO_SRVDCONF</code></td> 
+                                
+                     <td>The configuration file
+                        <cite>$NATDIR/nwo/$NWONODE/nwosrvd.conf</cite> for the Natural Web I/O
+                                    Interface daemon. 
+                     </td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td><code>NWO_TIMEOUT</code></td> 
+                                
+                     <td>The maximum time, in seconds, that the Natural
+                        Web I/O Interface daemon will wait for a response.
+                        "0" means no timeout. The Natural Web I/O Interface
+                        daemon will terminate when it receives the timeout.
+                     </td> 
+                               
+                  </tr> 
+                           
+               </tbody> 
+                       
+            </table> 
+                    
+                  
+         </li> 
+              
+      </ul> 
+          
+      <div><a name="nwoserver-setup-read"></a></div> 
+          
+      <h3>Step 5: Read the READ_NWO Files</h3> 
+           
+           
+      <ol> 
+               
+         <li> 
+                   
+            <p class="initem">Access the directory <cite>$NATDIR/$NATVERS</cite> and check
+                       the files <cite>READ_NWO.TXT</cite> and
+                       <cite>READ_NWO.FIX</cite> for any version-specific installation
+                       considerations concerning the particular platform.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Add the services as described in the file
+                       <cite>READ_NWO.TXT</cite>.
+            </p> 
+                  
+         </li> 
+              
+      </ol> 
+          
+      <div class="noprint">
+         <p><a href="nwoserver-over.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="nwoserver-dir"></a></div> 
+         
+      <h2>Directories</h2> 
+          
+          
+          
+      <p>The following directories are created when Natural is installed together
+              with the Natural Web I/O Interface on a UNIX system: 
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th>Directory</th> 
+                       
+               <th>Description</th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td><cite>$NATDIR</cite></td> 
+                       
+               <td> Top-level Natural directory.</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><cite>$NATDIR/$NATVERS</cite></td> 
+                       
+               <td>Directory with all components for the current
+                  Natural version. 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><cite>$NWODIR</cite></td> 
+                       
+               <td>Directory with the Natural Web I/O Interface
+                  components for the current version.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><cite>$NWONODE</cite></td> 
+                       
+               <td>Contains the name of the machine
+                  (<code>uname -n</code>).
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><cite>$NATDIR/$NATVERS/INSTALL
+                     </cite></td> 
+                       
+               <td>Shell scripts and environment files for the
+                  Natural Web I/O Interface (<cite>nwoenv</cite>,
+                           <cite>nwoenv.csh</cite>).
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><cite>$NWODIR/bin </cite></td> 
+                       
+               <td>Natural Web I/O Interface executable files
+                  (<cite>nwosrvd</cite>, <cite>nwosrvd.tr</cite>).
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><cite>$NWODIR/node-name </cite></td> 
+                       
+               <td>Contains the template files
+                  (<cite>nwosrvd.sh</cite>, <cite>nwo.sh</cite>,
+                           <cite>nwosrvd.conf</cite>). 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><cite>$NWODIR/nwoexuex/userexit1</cite></td> 
+                       
+               <td>Contains the files for building the
+                  <cite>libnwouserexit1</cite>. 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><cite>$NWODIR/nwoexuex/userexit2</cite></td> 
+                       
+               <td>Contains the files for building the
+                  <cite>libnwouserexit2</cite>.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><cite>$NATDIR/nwo/$NWONODE</cite></td>
+                       
+                       
+               <td>Work directory, contains the configuration files
+                  (<cite>nwosrvd.sh</cite>, <cite>nwo.sh</cite>,
+                           <cite>nwosrvd.conf)</cite>. 
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+           
+          
+      <p class="note"><strong>Note:</strong><br>The above table lists the most important directories and files.
+              
+      </p> 
+           
+         
+      <div class="noprint">
+         <p><a href="nwoserver-over.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="nwoserver-config"></a></div> 
+         
+      <h2>Configuring the Natural Web I/O Interface Daemon on UNIX</h2> 
+          
+      <p>When the Natural installation has finished, the directory
+              <cite>$NATDIR/nwo/$NWONODE</cite> contains the files
+              <cite>nwosrvd.conf</cite>, <cite>nwosrvd.sh</cite> and
+              <cite>nwo.sh</cite>.
+      </p> 
+           
+          
+      <p>The configuration of the Natural Web I/O Interface daemon can
+              be done using the Natural Web I/O Interface daemon commands or by editing the
+              configuration file <cite>nwosrvd.conf</cite>. 
+      </p> 
+           
+          
+      <p>The following topics are covered below:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="nwoserver-over.htm#nwoserver-config-cmds">Natural Web I/O Interface Daemon Commands</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nwoserver-over.htm#nwoserver-config-daemon">nwosrvd.conf - Configuration File for the Natural Web I/O Interface Daemon</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nwoserver-over.htm#nwoserver-config-script">nwosrvd.sh - Shell Script for Starting and Stopping the Natural Web I/O Interface Daemon</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nwoserver-over.htm#nwoserver-config-startnat">nwo.sh - Shell Script for Starting Natural</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nwoserver-over.htm#nwoserver-config-envvar">Environment Variables</a></p>
+         </li>
+      </ul> 
+         
+      <div><a name="nwoserver-config-cmds"></a></div> 
+           
+          
+      <h3> 
+               
+               Natural Web I/O Interface Daemon Commands 
+              <a name="x7"></a> 
+              <a name="x8"></a></h3> 
+           
+            
+           
+      <p>The following commands can be specified at the
+               UNIX command
+               prompt:
+      </p> 
+        
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>Command</th> 
+                        
+               <th>Description</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> 
+                  
+                  <a name="x10"></a><code>nwosrvd &#8211;help</code></td> 
+                        
+               <td> 
+                  
+                  <p>Shows all available Natural Web I/O Interface daemon commands and
+                     subcommands.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> 
+                  <a name="x11"></a><code>nwosrvd &#8211;v</code></td> 
+                        
+               <td> 
+                  
+                  <p>Shows the version of the Natural Web I/O Interface
+                          daemon.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                     
+                     
+                     
+                    
+            <tr> 
+                        
+               <td><code>nwosrvd
+                     <var>nnnn</var></code></td> 
+                        
+               <td> 
+                  
+                  <p>Defines the listening port number. </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> 
+                  
+                  <a name="x16"></a><code>nwosrvd &#8211;show</code></td> 
+                        
+               <td> 
+                  
+                  <p>Shows the configuration of the Natural Web I/O Interface
+                          daemon.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td nowrap> 
+                  
+                  <a name="x18"></a><code>nwosrvd
+                               -config <var>keys</var></code></td> 
+                        
+               <td> 
+                  
+                  <p>Changes the configuration of the Natural Web I/O Interface
+                     daemon. The
+                     following keys can be specified:
+                  </p> 
+                            
+                  <dl> 
+                                 
+                                 
+                                 
+                     <dt><a name="d0e10635"><strong><code>-userexit1=<var>pathname</var></code></strong></a></dt>
+                     <dd>
+                                     
+                                      
+                                      
+                                      
+                        <p>The message defined with this key is saved in the
+                                          <code>UserExit1</code> key of the configuration file <cite>nwosrvd.conf</cite>,
+                                          section <code>[UserExits]</code>. 
+                        </p>
+                     </dd> 
+                                 
+                                 
+                                 
+                     <dt><a name="d0e10694"><strong><code>&#8211;userexit2=<var>pathname</var></code></strong></a></dt>
+                     <dd>
+                                     
+                                      
+                                      
+                                      
+                        <p>The message defined with this key is saved in the
+                                          <code>UserExit2</code> key of the configuration file <cite>nwosrvd.conf</cite>,
+                                          section <code>[UserExits]</code>. 
+                        </p>
+                     </dd> 
+                                 
+                                 
+                                 
+                     <dt><a name="d0e10800"><strong><code>&#8211;passparam=<var>parameters</var></code></strong></a></dt>
+                     <dd>
+                                     
+                                     
+                        <p class="definition">The message defined with this key is saved in the
+                                         <code>Parameters</code> key of the configuration file
+                                         <cite>nwosrvd.conf</cite>, section
+                                         <code>[PasswdArguments]</code>.
+                        </p>
+                     </dd> 
+                                 
+                                 
+                                 
+                     <dt><a name="d0e10822"><strong><code>&#8211;passold=<var>message</var></code></strong></a></dt>
+                     <dd>
+                                     
+                                     
+                        <p class="definition">The message defined with this key is saved in the
+                                         <code>EnterOldPassword</code> key of the configuration file
+                                         <cite>nwosrvd.conf</cite>, section <code>[PasswdMessages]</code>.
+                                         
+                        </p>
+                     </dd> 
+                                 
+                                 
+                                 
+                     <dt><a name="d0e10844"><strong><code>&#8211;passnew=<var>message</var></code></strong></a></dt>
+                     <dd>
+                                     
+                                     
+                        <p class="definition">The message defined with this key is saved in the
+                                         <code>NewPassword</code> key of the configuration file
+                                         <cite>nwosrvd.conf</cite>, section <code>[PasswdMessages]</code>.
+                                         
+                        </p>
+                     </dd> 
+                                 
+                                 
+                                 
+                     <dt><a name="d0e10866"><strong><code>&#8211;passreenter=<var>message</var></code></strong></a></dt>
+                     <dd>
+                                     
+                                     
+                        <p class="definition">The message defined with this key is saved in the
+                                         <code>ReEnterNewPassword</code> key of the configuration file
+                                         <cite>nwosrvd.conf</cite>, section <code>[PasswdMessages]</code>.
+                                         
+                        </p>
+                     </dd> 
+                                 
+                                 
+                                 
+                     <dt><a name="d0e10888"><strong><code>&#8211;passsuccess=<var>message</var></code></strong></a></dt>
+                     <dd>
+                                     
+                                     
+                        <p class="definition">The message defined with this key is saved in the
+                                         <code>PasswordSuccessful</code> key of the configuration file
+                                         <cite>nwosrvd.conf</cite>, section <code>[PasswdMessages]</code>.
+                                         
+                        </p>
+                     </dd> 
+                                 
+                                 
+                                 
+                     <dt><a name="d0e10910"><strong><code>&#8211;logging=<var>option</var></code></strong></a></dt>
+                     <dd>
+                                     
+                                      
+                                     
+                        <p class="definition">The option defined with this key is saved in the
+                                         <code>Logging</code> key of the configuration file
+                                         <cite>nwosrvd.conf</cite>, section <code>[Miscellaneous]</code>. 
+                        </p> 
+                                    
+                     </dd> 
+                                 
+                                 
+                                 
+                     <dt><a name="d0e10963"><strong><code>-ssl=[yes|no]</code></strong></a></dt>
+                     <dd> 
+                                      
+                                     
+                        <p class="definition">The option defined with this key is saved in the
+                                         <code>ssl</code> key of the configuration file
+                                         <cite>nwosrvd.conf</cite>, section <code>[SSL]</code>.
+                                         
+                        </p>
+                     </dd> 
+                                 
+                               
+                  </dl> 
+                            
+                  <p>To remove any user exits from the configuration, enter the
+                                following command:
+                  </p> 
+                             
+                            
+                  <p><code>nwosrvd &#8211;config
+                                   &#8211;userexit1=</code></p> 
+                            
+                  <p>Once the configuration was changed, the Natural Web I/O Interface
+                                daemon must be
+                                restarted. 
+                  </p>
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+            
+          
+      <div><a name="nwoserver-config-daemon"></a></div> 
+       
+          
+      <h3><cite>nwosrvd.conf</cite> - Configuration File for the Natural Web I/O
+              Interface Daemon
+      </h3> 
+       
+           
+           
+      <p>The configuration file <cite>nwosrvd.conf</cite>
+               contains information that the user exits need for the Natural Web I/O Interface
+               daemon. It has the following content:
+      </p> 
+           <pre class="verbatim">[Miscellaneous]
+Logging=I
+
+[UserExits]
+; UserExit1=/FS/sag/nat/nwoexuex/userexit1/libnwouserexit1.so
+; UserExit2=/FS/sag/nat/nwoexuex/userexit2/libnwouserexit2.so
+
+[PasswdArguments]
+Parameters=
+
+[PasswdMessages]
+EnterOldPassword=Enter existing login password:
+NewPassword=New Password:
+ReEnterNewPassword=Re-enter new Password:
+PasswordSuccessful=passwd: password successfully changed for*
+
+[SSL]
+ssl=no</pre> 
+            
+            
+            <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>Section in Configuration File</th> 
+                        
+               <th>Description</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td><code>[Miscellaneous]</code></td> 
+                        
+               <td> 
+                  
+                  <p>The key <code>Logging</code> is used to define the amount of
+                     logging information that is to be reported. One of the following options can be
+                                specified:
+                  </p> 
+                            
+                  <p class="mini-list"> 
+                                <code>E</code> for errors.<br> 
+                                <code>W</code> for warnings.<br> 
+                                <code>I</code> for information. 
+                               
+                  </p> 
+                            
+                  <p>See also <a href="nwoserver-over.htm#nwoserver-log">Logging
+                                   Information</a>.
+                  </p>
+               </td>
+                        
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><code>[UserExits]</code></td> 
+                        
+               <td> 
+                  
+                  <p>Two user exits can be defined: </p> 
+                            
+                  <div><strong class="floating-title"><code>UserExit1</code></strong></div> 
+                            
+                  <p>The library that is defined by <code>UserExit1</code> contains the
+                                following function:
+                  </p> 
+                            
+                  <p><code>int nwo_CheckUsernameAndPassword(const char *pUsername,
+                                   const char *pPassword, const char *pNewPassword, char
+                                   *pErrorMessage)</code></p> 
+                            
+                  <p>If the key <code>UserExit1</code> is defined in the configuration
+                                file, the function <code>nwo_CheckUsernameAndPassword</code> is responsible for
+                                checking the user name and password. If a new password is received, user exit 1
+                                is also responsible for changing the password. 
+                  </p> 
+                            
+                  <p>In the case of an error, the return code of the function must be
+                                "0"; in this case, the <code>pErrorMessage</code> is
+                                returned to the client. When user name and password are correct, the return
+                                code must be a value other than "0". 
+                  </p> 
+                            
+                  <div><strong class="floating-title"><code>UserExit2</code></strong></div> 
+                            
+                  <p>The library that is defined by <code>UserExit2</code> contains the
+                                following functions:
+                  </p> 
+                            
+                  <ul> 
+                                
+                     <li> 
+                                    
+                        <p class="initem"><code>int nwo_Messages(int *iNumberOfMessages, char
+                                           *pMessage[])</code></p> 
+                                    
+                        <p class="initem"><code>iNumberOfMessages</code>: Number of messages returned in
+                                        the array. 
+                        </p> 
+                                    
+                        <p class="initem"><code>pMessage</code>: Array of messages.
+                        </p> 
+                                    
+                        <p class="initem">If the key <code>UserExit2</code> is defined in the
+                                        configuration file, the function <code>nwo_Messages</code> is called when a new
+                                        connection (client) is accepted and the messages returned by this function are
+                                        sent to the client. User exit 2 may be used, for example, to send a message
+                                        such as the following: "For maintenance reasons, the Natural application
+                                        XXXXX will be down next monday, from 18:00 until 19:00".
+                        </p> 
+                                    
+                        <p class="initem">In the case of an error, the return code of the function must be
+                                        "0".
+                        </p> 
+                                    
+                        <p class="initem">After the function <code>nwo_Messages</code> has been called,
+                                        the function <code>nwo_FreeMessages</code> is called.
+                        </p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem"><code>int nwo_FreeMessages(int iNumberOfMessages, char
+                                           *pMessage[])</code></p> 
+                                    
+                        <p class="initem"><code>iNumberOfMessages:</code> Number of messages.
+                        </p> 
+                                    
+                        <p class="initem"><code>pMessage</code>: Array of messages.
+                        </p> 
+                                    
+                        <p class="initem">If the key <code>UserExit2</code> is defined, the function
+                                        <code>nwo_FreeMessages</code> is called to free any resources (normally memory)
+                                        allocated in the function <code>nwo_Messages</code>. 
+                        </p> 
+                                    
+                        <p class="initem">In the case of an error, the return code of the function must be
+                                        "0". 
+                        </p> 
+                                   
+                     </li> 
+                               
+                  </ul>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><code>[PasswdArguments]</code></td> 
+                        
+               <td> 
+                  
+                  <p>The key <code>Parameters</code> is used to define any additional
+                     parameter(s) that have to be passed to the <code>passwd</code>
+                                command. 
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><code>[PasswdMessages]</code></td> 
+                        
+               <td> 
+                  
+                  <p>The keys in this section define the messages that are to be
+                     returned by the system (<code>passwd</code> command) when a user
+                     changes the password. If any of these messages is not identified by the daemon,
+                                an error will be returned to the client. 
+                  </p> 
+                            
+                  <div><strong class="floating-title">Password Mechanism</strong></div> 
+                            
+                  <p>The password and new password are encrypted on the client side and
+                                decrypted on the UNIX side. A maximum of 8 characters is allowed. 
+                  </p> 
+                            
+                  <p>If user exit 1 is active, user name, password and new password are
+                                passed to the user exit. 
+                  </p> 
+                            
+                  <p>If user exit 1 is not active, the daemon checks whether user name
+                                and password are correct for the system. If a new password is sent, the daemon
+                                changes the password by calling the UNIX command
+                                <code>passwd</code>. 
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><code>[SSL]</code></td> 
+                        
+               <td> 
+                  
+                  <p>The key <code>ssl</code> is used to define whether the SSL
+                     protocol is to be used. One of the following values can be specified:
+                              "yes" or "no".
+                  </p> 
+                            
+                  <p>See also <a href="nwoserver-over.htm#nwoserver-ssl">SSL
+                                   Support</a>.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+          
+      <div><a name="nwoserver-config-script"></a></div> 
+          
+      <h3><cite>nwosrvd.sh</cite> - Shell Script for Starting and
+              Stopping the Natural Web I/O Interface Daemon
+      </h3> 
+           
+           
+      <p>The shell script <cite>nwosrvd.sh</cite> is used to start and
+               stop the Natural Web I/O Interface daemon. For further information, see
+               <a href="nwoserver-over.htm#nwoserver-work-daemon">Starting and Stopping the
+            Natural Web I/O Interface Daemon</a>.
+      </p> 
+          
+      <div><a name="nwoserver-config-startnat"></a></div> 
+           
+          
+      <h3> 
+              <a name="x20"></a> 
+              <a name="x21"></a> 
+               
+              <cite>nwo.sh</cite> - Shell
+              Script for Starting
+              Natural
+      </h3> 
+           
+           
+      <p>In order to start a Natural session, the Natural Web I/O Interface
+               service executes a shell script. The shell script prepares the environment for the Natural session and eventually
+               starts Natural.
+      </p> 
+           
+      <p>The shell script receives certain parameters from the Natural Web I/O Interface
+               client. The parameters can either be evaluated by the shell
+               script itself or passed on to
+               Natural. A client who wants to start a Natural session can specify the
+               shell script to be
+               used. 
+      </p>
+           
+            
+            
+      <p>The shell script <cite>nwo.sh</cite> is called from the
+                Natural Web I/O Interface daemon in order to start a Natural session. It has
+                the following content:
+      </p> 
+            <pre class="verbatim">#!/bin/sh
+ 
+echo "Number of arguments $#" &gt; nwo.log
+
+IPAddress=""
+ClientId=""
+CodePage=""
+CustomParameters=""
+NaturalParameters=""
+
+if [ "$1" != "null" ]
+then
+  IPAddress="$1"
+fi
+
+if [ "$2" != "null" ]
+then
+  ClientId="$2"
+fi
+
+if [ "$3" != "null" ]
+then
+  CodePage="$3"
+fi
+
+if [ "$4" != "null" ]
+then
+  CustomParameters="$4"
+fi
+
+if [ "$5" != "null" ]
+then
+  NaturalParameters="$5"
+fi
+
+echo "IP Address="$IPAddress &gt;&gt; nwo.log
+echo "Client Id="$ClientId &gt;&gt; nwo.log
+echo "Code Page="$CodePage &gt;&gt; nwo.log
+echo "Custom Parameters="$CustomParameters &gt;&gt; nwo.log
+echo "Natural Parameters="$NaturalParameters &gt;&gt; nwo.log
+echo "NWO_BROWSER_IO="$NWO_BROWSER_IO &gt;&gt; nwo.log
+
+$NATDIR/$NATVERS/bin/natural $NaturalParameters etid=$$ &gt; /tmp/natural_$$.out 2&gt;&amp;1</pre> 
+            <p>You have to create such a shell script for each Natural application.
+                It can have any name and it must be located in an directory which is defined in
+                the environment variable <code>PATH</code>.
+      </p> 
+            
+      <p>The name of the shell script is taken from the configuration file for
+                the session. It is taken from the configuration file section that is defined
+                for the session that the user has selected in the logon page. For further
+                information, see <a href="clientcfg-over.htm#clientcfg-over">Configuring the
+            Client</a>.
+      </p> 
+            
+           
+      <div><a name="nwoserver-config-arguments"></a></div>
+      <h4 class="floating-title">Arguments</h4>
+           
+           
+      <p>The shell script will receive the following arguments:</p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>Order</th> 
+                        
+               <th>Argument</th> 
+                        
+               <th>Description</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td>1</td> 
+                        
+               <td><code>IPAddress</code></td> 
+                        
+               <td>The client IP address from where the session is
+                  opened. 
+                  
+                  <p class="note"><strong>Note:</strong><br>If there is a proxy, this will not be the IP address of the
+                        client workstation. Instead, it will be the IP address of the
+                                proxy.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>2</td> 
+                        
+               <td><code>ClientId</code></td> 
+                        
+               <td>The user name from the logon page is passed as
+                  the client ID. 
+               </td>
+                        
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>3</td> 
+                        
+               <td><code>CodePage</code></td> 
+                        
+               <td>The encoding that is defined in
+                  the configuration file for the session. This value can be used to set the
+                  Natural system variable <a href="../vari/sysenv.htm#CODEPAGE"><code>*CODEPAGE</code></a>.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>4</td> 
+                        
+               <td><code>CustomParameters</code></td> 
+                        
+               <td>From the logon page, it is
+                  possible to pass any values to the script in order to execute any desired
+                  action.  
+                  
+                  <p>Example: you pass a small text to the script which
+                                describes an error. When the script receives this error text, it sends it as an
+                                e-mail to the administrator.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>5</td> 
+                        
+               <td><code>NaturalParameters</code></td> 
+                        
+               <td>These can be any Natural parameters. The
+                  parameters are either defined in the configuration file for the session, or
+                  they are entered in the logon page. The following is an example of the
+                  corresponding entry in the configuration file: 
+                  
+                  <p><code>&lt;natural_parameter&gt;parm=nwoparm\
+                                   stack=(logon\ mylib;start-program;fin)&lt;natural_parameter&gt;</code></p> 
+                            
+                  <p>The language that is selected in the logon page is added as the
+                                first element to the Natural parameters in the form
+                                "ulang=x".
+                  </p>
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>Arguments 1 to 4 can be used to audit the client, to allow to run an application from
+               a specific PC (identifying the IP address), to build statistics, to do special
+               actions, etc.
+      </p> 
+          
+      <div><a name="nwoserver-config-envvar"></a></div>
+          
+      <h3>Environment Variables</h3> 
+           
+           
+      <p>In the shell
+               script, several environment variables
+               can be set for the Natural session that is started by the daemon:
+      </p> 
+           
+      <dl> 
+                
+                
+         <dt><a name="d0e11792"><strong>NWO_ENABLE_ACK=["YES"|"NO"]</strong></a></dt>
+         <dd> 
+                    
+            <p class="definition">This environment variable is used for asynchronous screens
+                        (<a href="../tcom/pcn.htm"><code>SET CONTROL N</code></a>).
+            </p> 
+                     
+                     
+            <table border="0" cellpadding="3" width="80%">
+               <colgroup>
+                  <col width="9%">
+                  <col width="71%">
+               </colgroup> 
+                         
+               <tbody align="left" valign="top"> 
+                             
+                  <tr> 
+                                 
+                     <td>YES</td> 
+                                 
+                     <td>When asynchronous screens are sent to the
+                        client, Natural will wait to receive an ACK package before the next screen can
+                        be sent. 
+                     </td> 
+                                
+                  </tr> 
+                             
+                  <tr> 
+                                 
+                     <td>NO</td> 
+                                 
+                     <td>No waiting between asynchronous screens.
+                        Default value.
+                     </td> 
+                                
+                  </tr> 
+                            
+               </tbody> 
+                        
+            </table> 
+                    
+         </dd> 
+                
+                
+                
+         <dt><a name="d0e11838"><strong>NWO_TIMEOUT=[<var>number-of-seconds</var>]</strong></a></dt>
+         <dd> 
+                    
+            <p class="definition">The maximum time, in seconds, that Natural waits to receive any
+                        input from the client before it closes the session. If the number of seconds is
+                        "0", Natural waits infinitely (no timeout). The
+                        default value is "0".
+            </p> 
+                    
+            <p class="definition">Error NAT5466 is returned at timeout. In Natural, the application
+                        can handle this error and decide how to continue or terminate.
+                        
+            </p>
+         </dd> 
+                
+              
+      </dl> 
+          
+      <div class="noprint">
+         <p><a href="nwoserver-over.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="nwoserver-log"></a></div>
+       
+       
+         
+      <h2> 
+             <a name="x24"></a> 
+             <a name="x25"></a>Logging Information
+      </h2> 
+          
+          
+      <p>The logging information system reports errors, warnings and/or session
+              information, depending on the option that has been defined with the following
+              <a href="nwoserver-over.htm#nwoserver-config-cmds">Natural Web I/O Interface
+                 daemon
+                 command</a>:
+      </p>
+           <pre class="command-input">nwosrvd -config -logging=<var>option</var></pre> 
+         
+        
+          <p> <var>option</var> can be one of the following: 
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th>Option</th> 
+                       
+               <th>Description</th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td><code>E</code></td> 
+                       
+               <td> 
+                  
+                  <p>Error.</p> 
+                           
+                  <p>When this option is specified, the Natural Web I/O Interface
+                     daemon reports
+                               only errors.
+                  </p> 
+                           
+                  <p>In the case of an error, the daemon usually exits
+                               immediately.
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>W</code></td> 
+                       
+               <td> 
+                  
+                  <p>Warning.</p> 
+                           
+                  <p>When this option is specified, the Natural Web I/O Interface
+                     daemon reports
+                     errors and warnings for uncritical errors.
+                  </p> 
+                           
+                  <p>In the case of a warning, the daemon continues to
+                               run.
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>I</code></td> 
+                       
+               <td> 
+                  
+                  <p>Information.</p> 
+                           
+                  <p>When this option is specified, the Natural Web I/O Interface
+                     daemon reports
+                      errors, warnings and information.
+                  </p> 
+                           
+                  <p>The information messages allow to check the session parameters, IP
+                               address, etc.
+                  </p>
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>Help information, for example, on how to run, configure and install the
+              Natural Web I/O Interface daemon is always provided. The messages which inform you
+              when the daemon
+              has been started or stopped are also part of the help information.
+      </p> 
+          
+      <p>To find out which logging option is currently active, enter the
+              following Natural Web I/O Interface daemon command:
+      </p>  <pre class="command-input">nwosrvd -show</pre> 
+           
+           <p>The logging messages are shown directly for the standard output. The
+               format of the messages is as in the following example:
+      </p> 
+           <pre class="verbatim">%NWOSRVD-E: 18.01.2008 14:55:20 NWO_SRVDCONF is not established.</pre> 
+           <p>The following information is provided:</p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem"><code>%NWOSRVD</code> is the internal name of the Natural Web I/O
+                       Interface daemon.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">The message type is shown directly after <code>%NWOSRVD</code>. It
+                       can be one of the following: <code>-E</code> (error), <code>-W</code>
+                       (warning), <code>-I</code> (information), or <code>-H</code> (help).
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Date and time when the message was reported.</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Any text or message which pertains to the error, warning, information
+                       or help.
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>If you want to save these messages, you have to redirect the standard
+               output to a file.
+      </p> 
+            
+            
+      <p>Example for csh:</p><pre class="command-input">nwosrvd 5454 &gt;&amp; nwosrvd_5454.log</pre> 
+            <p>Example for sh, ksh and bsh:</p><pre class="command-input">nwosrvd 5454 &gt;&amp; nwosrvd_5454.log 2&gt;&amp;1</pre> 
+            
+         <div class="noprint">
+         <p><a href="nwoserver-over.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="nwoserver-ssl"></a></div> 
+         
+      <h2>SSL Support</h2> 
+          
+          
+      <p>SSL is used for a secure connection between the Natural Web I/O
+              Interface server and the Natural Web I/O Interface client or Natural for Ajax.
+              Server authentication cannot be switched off. A certificate and a private key
+              is always required on the server.
+      </p> 
+          
+      <p>To create and use an SSL certificate and a private key on the server,
+              proceed as described below.
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">Adapt the example configuration file <cite>openssl.cnf</cite> to your needs. 
+            </p> 
+                  
+            <p class="note"><strong>Note:</strong><br><cite>openssl.cnf</cite> and <cite>openssl</cite>
+                      are delivered in <cite>$NATDIR/$NATVERS/bin</cite>.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Set the environment variable so that it points to the file
+                      <cite>openssl.cnf</cite>:
+            </p><pre class="command-input">set OPENSSL_CONF=$NATDIR\$NATVERS\bin\openssl.cnf
+export OPENSSL_CONF;</pre> 
+                 </li> 
+              
+         <li> 
+                  
+            <p class="initem">Generate a certificate signing request:</p><pre class="command-input">openssl req &#8211;new &gt; server.cert.csr</pre>  
+                   
+                 </li> 
+              
+         <li> 
+                  
+            <p class="initem">Generate a private RSA key:</p><pre class="command-input">openssl rsa &#8211;in privkey.pem &#8211;out server.cert.key</pre> 
+                 </li> 
+              
+         <li> 
+                  
+            <p class="initem"> Generate a self-signed certificate:</p><pre class="command-input">openssl x509 &#8211;in server.cert.csr &#8211;out server.cert.crt &#8211;req &#8211;signkey server.cert.key &#8211;days 365</pre>  
+                   
+                  <p class="note"><strong>Note:</strong><br>The certificate can be self-signed or it can be signed by a CA
+                      (Certificate Authority) such as VeriSign.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Put the generated files into the same directory as the
+                      scripts which start the Natural Web I/O Interface server.
+            </p> 
+                   
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Import the generated files to a truststore on the client. See also
+                      <a href="clientcfg-trust.htm#clientcfg-trust">Trust Files (J2EE
+                  only)</a>.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+         
+      <div class="noprint">
+         <p><a href="nwoserver-over.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="nwoserver-work"></a></div> 
+         
+      <h2>Working with the UNIX Components of the Natural Web I/O Interface
+             
+      </h2> 
+          
+      <p>The UNIX
+              components of the Natural Web I/O Interface are used to start the Natural
+              applications linked with the Natural Web I/O Interface library.
+      </p> 
+          
+      <p>The following topics are covered
+              below:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="nwoserver-over.htm#nwoserver-work-daemon">Starting and Stopping the Natural Web I/O Interface Daemon</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nwoserver-over.htm#nwoserver-work-appl">Starting a Natural Application</a></p>
+         </li>
+      </ul>
+      <div><a name="nwoserver-work-daemon"></a></div> 
+          
+      <h3>Starting and Stopping the Natural Web I/O Interface Daemon</h3> 
+           
+           
+      <p>The Natural Web I/O Interface daemons are responsible for accepting new
+               sessions.
+      </p> 
+            
+            
+      <p>Since the daemon checks the user name and password, the following
+                permissions must be set as follows (for setting the permissions, you must be
+                super-user):
+      </p><pre class="command-input">chmod 6755 nwosrvd.sh</pre><pre class="command-input">chown root nwosrvd.sh</pre> 
+            <p>The Natural installation attempts to set permissions and owner.
+                However, you have to verify this before you start the Natural Web I/O Interface
+                daemon.
+      </p> 
+            
+      <p>The daemon can be started and stopped using the following command:</p><pre class="command-input">cd $NATDIR/nwo/$NWONODE
+nwosrvd.sh <var>portnumber</var> [start|stop]</pre> 
+            <p>Alternatively:</p><pre class="command-input">cd $NATDIR/$NATVERS/INSTALL
+nwosrvd.bsh  [start|stop]</pre> 
+            <p class="note"><strong>Note:</strong><br>The daemon must be started on a port which is not yet used.
+      </p> 
+            
+      <p>The shell script you have created must be in the same directory as the
+                <cite>nwosrvd.sh</cite> script. It will be used by the Natural Web I/O
+                Interface (configuration file for the session; see
+                <a href="clientcfg-over.htm#clientcfg-over">Configuring the
+            Client</a>). The following is an example of the corresponding
+                entry in the configuration file: 
+      </p> 
+            <pre class="verbatim">&lt;natural_program&gt;<var>your-shell-script</var>.sh&lt;/natural_program&gt;</pre> 
+            
+          <div><a name="nwoserver-work-appl"></a></div> 
+          
+      <h3>Starting a Natural Application</h3> 
+           
+            
+            
+      <p>Almost any Natural application can be used with the Natural Web I/O
+                Interface. See also <a href="webio-intro.htm#webio-intro-diff">Differences
+            between the Natural Web I/O Interface Client and Terminal
+            Emulation</a>.
+      </p> 
+            
+      <p>To start a new Natural application with the Natural Web I/O Interface,
+                proceed as follows:
+      </p> 
+            
+      <ol> 
+                
+         <li> 
+                    
+            <p class="initem">Create a new parameter file from <code>NWOPARM</code> using the
+                        <a href="../config/cfg-over.htm">Configuration Utility</a>.
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">In this new parameter file, modify the
+                        <a href="../parms/stack.htm"><code>STACK</code></a>
+                        command as follows:
+            </p><pre class="command-input">logon <var>library</var>; <var>startprogram</var>; fin</pre> 
+                    <p class="note"><strong>Note:</strong><br>Only "real" Natural applications can be used. The
+                        Natural <span class="selectable_label">Main Menu</span> cannot be used as a Natural
+                        application.
+            </p> 
+                   
+         </li> 
+               
+      </ol> 
+            
+      <p>Add the new service as follows:</p> 
+            
+      <ol> 
+                
+         <li> 
+                    
+            <p class="initem">Look for a port number which is not yet used.</p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">Create a new shell script (similar to <cite>nwo.sh</cite>)
+                        for starting the Natural application:
+            </p><pre class="command-input">cd $NATDIR/nwo/$NWONODE
+copy nwo.sh <var>your-shell-script</var>.sh
+vi <var>your-shell-script</var>.sh</pre> 
+                    <p class="initem"> You have to decide which (last) line you will use in the script.
+                        Use one of the following:
+            </p><pre class="command-input">$NATDIR/$NATVERS/bin/natural parm=<var>parameter-file</var> etid=$$ &gt;<var>output-file</var> 2&gt;&amp;1</pre> <pre class="command-input">$NATDIR/$NATVERS/bin/natural $5 etid=$$ &gt;<var>output-file</var> 2&gt;&amp;1</pre> 
+                    <p class="initem"> When using the line with
+                        <code>parm=<var>parameter-file</var></code>, the above step in
+                        which you modify the <code>STACK</code> command is mandatory.
+                        
+            </p> 
+                    
+            <p class="initem">When using <code>$5</code>, the Natural parameter
+                        (<var>parameter-file</var> and <code>STACK</code>
+                        command) is taken from the configuration file for the session (see
+                        <a href="clientcfg-over.htm#clientcfg-over">Configuring the
+                  Client</a>). The following is an example of the corresponding
+                        entry in the configuration file:
+            </p> 
+                    <pre class="verbatim">&lt;natural_parameter&gt;parm=myparm stack=(logon mylib;menu;fin)&lt;natural_parameter&gt;</pre> 
+                   </li> 
+                
+         <li> 
+                    
+            <p class="initem">If you want to define special settings for the Natural session, you
+                        can set the environment variables in your shell script. See
+                        <a href="nwoserver-over.htm#nwoserver-config-envvar">above</a>.
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">Set the permissions for the shell script which starts the service as
+                        follows:
+            </p><pre class="command-input">chmod 775 <var>script-name</var></pre> 
+                   </li> 
+               
+      </ol> 
+            
+      <p>The service is now available for use with a PC.</p> 
+            
+          
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="nwoserver-over.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../webio/nwoserver-over.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/webio/nwoserver-over.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="webio-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="webio-intro.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="nwoclient-over.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

@@ -1,0 +1,3099 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Data Area Editor</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="edis_ux_data"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../edis/edis_ux_data.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/edis/edis_ux_data.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="edis-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pgm_ux_save_cat.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="edis_ux_map.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Editors&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x252"></a> 
+               <a name="x253"></a>Data Area Editor
+         </h1>
+      </div> 
+         
+      <p>The Natural data area editor is used to create and modify a data area. A
+             data area is a Natural object of the type
+             <a href="../pg/pg_obj_darea.htm#Global_Data_Area">global data
+                area</a> (GDA), <a href="../pg/pg_obj_darea.htm#Local_Data_Area">local data area</a> (LDA)
+             or <a href="../pg/pg_obj_darea.htm#Parameter_Data_Area">parameter data
+                area</a> (PDA). For information on using a data area, see
+             <a href="../pg/pg_obj_darea.htm">Data Areas</a>
+             in the <cite>Programming Guide</cite>.
+      </p> 
+         
+      <p>A data area contains data element definitions, such as user-defined
+             variables, constants and database fields referenced with a data view in a data
+             definition module (DDM), which can be used by one or more Natural objects. You
+             can also create copycode from a data area. Note that data views from a DDM
+             cannot be defined in PDAs.
+      </p> 
+         
+      <p>The <cite>Data Area Editor</cite> documentation
+             covers the following topics:
+      </p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="edis_ux_data.htm#dae_ux_invoke_editor">Invoking the Data Area Editor</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="edis_ux_data.htm#dae_ux_modes">Edit Mode and Command Mode</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="edis_ux_data.htm#dae_ux_editing_area">Editing Area</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="edis_ux_data.htm#dae_ux_line_cmds">Line Commands</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="edis_ux_data.htm#dae_ux_editor_cmds">Editor Commands and Function Keys</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="edis_ux_data.htm#edis_ux_data_save_cat">Saving and Cataloging a Data Area</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="edis_ux_data.htm#edis_ux_data_Help">Help Information and Selection Options</a></p>
+         </li>
+      </ul>
+      <hr>
+      <div><a name="dae_ux_invoke_editor"></a></div> 
+         
+      <h2>Invoking the Data Area Editor</h2> 
+          
+          
+      <p>You invoke the data area editor with the Natural system command
+              <a href="../syscom/edit.htm"><code>EDIT</code></a>
+              described in the <cite>System Commands</cite> documentation.
+      </p> 
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To invoke the data area editor for a new data area</strong></p>
+      <ul>
+         <li> 
+                   
+                   
+            <p class="instep">Issue the <code>EDIT</code> command specifying the
+                       <a href="../syscom/edit.htm#object_type_edit">type</a> of data
+                       area (<code>GLOBAL</code>, <code>LOCAL</code> or <code>PARAMETER</code>) you
+                       want to create.
+            </p> 
+                   
+            <p class="instep">For example:</p><pre class="command-input">EDIT LOCAL</pre> 
+                   
+                   <p class="instep">An editor screen with an empty editing area appears for an LDA
+                       (indicated by <code>LOCAL</code> in the top information line of the screen)
+                       similar to the example shown in the following instructions.
+            </p> 
+                 
+         </li>
+      </ul> 
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To invoke the data area editor for an existing data area</strong></p>
+      <ul>
+         <li> 
+                   
+                   
+            <p class="instep">Issue the command <a href="../syscom/edit.htm"><code>EDIT</code></a> specifying
+                       the <a href="../syscom/edit.htm#object_name_edit">name</a> of a
+                       data area that has been stored as a source object in your current Natural
+                       environment.
+            </p> 
+                   
+            <p class="instep">For example:</p><pre class="command-input">EDIT LDA1</pre> 
+                   
+                   <p class="instep">An editor screen similar to the example below appears which contains
+                       the source of the local data area <code>LDA1</code>:
+            </p> 
+                   
+            <table border="1" cellpadding="5" class="screen">
+               <tr>
+                  <td><pre>
+                       Press &lt;ESC&gt; to enter command mode                        
+ Mem: LDA1     Lib: SAGTEST  Type: LOCAL      Size:   1662  Line:    0 of:  36  
+C T    Comment                                                                  
+  *    *** Top of Data Area ***                                                 
+  V  1 EMPLOYEES_VIEW                                EMPLOYEES                  
+     2 PERSONNEL-ID                     A          8                            
+  G  2 FULL-NAME                                                                
+     3 FIRST-NAME                       A         20                            
+     3 MIDDLE-I                         A          1                            
+     3 NAME                             A         20                            
+     2 MIDDLE-NAME                      A         20                            
+     2 MAR-STAT                         A          1                            
+     2 SEX                              A          1                            
+     2 BIRTH                            D                                       
+     2 N@BIRTH                          I          2                            
+  G  2 FULL-ADDRESS                                                             
+  M  3 ADDRESS-LINE                     A         20 (1:191)                    
+     3 CITY                             A         20                            
+     3 ZIP                              A         10                            
+     3 POST-CODE                        A         10                            
+     3 COUNTRY                          A          3                            
+  G  2 TELEPHONE                                                                
+  F 1 HELP     F 2 CHOICE   F 3 QUIT     F 4 SAVE     F 5 STOW     F 6 CHECK    
+  F 7 READ     F 8 CLEAR    F 9 MEM TYPE F10 GEN      F11 FLD TYPE F12</pre></td>
+               </tr>
+            </table> 
+                 
+         </li>
+      </ul> 
+          
+      <p>The editor screen is organized in the following sections (from top to
+              bottom):
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th align="left">Section</th> 
+                       
+               <th align="left">Explanation</th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td align="left">Command line</td> 
+                       
+               <td align="left">Used to issue an editor or a system command or
+                  execute a program as described in <a href="edis_ux_data.htm#dae_ux_modes">Edit Mode and Command
+                              Mode</a>. This line only appears if command mode is set.
+                           Otherwise, a message regarding command mode is displayed instead.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td align="left">Information line</td> 
+                       
+               <td>
+                  <table border="0" width="100%">
+                     <colgroup>
+                        <col width="8%">
+                        <col width="92%">
+                     </colgroup> 
+                              
+                     <tbody align="left" valign="top"> 
+                                  
+                        <tr> 
+                                      
+                           <td colspan="2">Contains the following
+                              information (from left to right) about the data area currently on the editor
+                              screen:
+                           </td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td colspan="2">&nbsp;</td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td><span class="selectable_label">Mem:</span></td> 
+                                      
+                           <td>The name of the data area or
+                              <code>empty</code> for a new data area that has not yet been saved as a source
+                                          object with the <a href="edis_ux_data.htm#dae_ux_save"><code>SAVE</code></a> or
+                                          <a href="edis_ux_data.htm#dae_ux_stow"><code>STOW</code></a>
+                                          system command.
+                           </td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td colspan="2">&nbsp;</td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td><span class="selectable_label">Lib:</span></td> 
+                                      
+                           <td>The library to which you are currently logged
+                              on.
+                           </td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td colspan="2">&nbsp;</td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td><span class="selectable_label">Type:</span></td> 
+                                      
+                           <td>The type of data area: <code>LOCAL</code>,
+                                          <code>GLOBAL</code> or <code>PARAMETER</code>. <br>The type can be
+                                          changed by using the editor command <a href="edis_ux_data.htm#dae_ux_set_type"><code>SET TYPE</code></a>.
+                                          
+                           </td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td colspan="2">&nbsp;</td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td><span class="selectable_label">Size:</span></td> 
+                                      
+                           <td>The size (number of characters) of the current source. </td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td colspan="2">&nbsp;</td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td><span class="selectable_label">Line:</span></td> 
+                                      
+                           <td>The number of the current (highlighted) source
+                              line.
+                           </td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td colspan="2">&nbsp;</td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td><span class="selectable_label">of:</span></td> 
+                                      
+                           <td>The total number of lines contained in the source
+                              work area.
+                           </td> 
+                                     
+                        </tr> 
+                                 
+                     </tbody> 
+                             
+                  </table>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td align="left">Editing area</td> 
+                       
+               <td align="left"> Contains the source of a data area or appears
+                  empty for a new data area: see <cite>Using the Editing Area</cite>. 
+                           
+                  <p>You can only scroll in the source or modify the source if edit mode
+                               is set: see <a href="edis_ux_data.htm#dae_ux_modes">Edit Mode and Command
+                                  Mode</a>.
+                  </p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td align="left" nowrap>Function-key lines</td> 
+                       
+               <td align="left">Contains the function keys (F keys) available to
+                  execute an editor command: see <a href="edis_ux_data.htm#dae_ux_editor_cmds">Editor Commands and Function
+                              Keys</a>. 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td align="left">Message line</td> 
+                       
+               <td align="left">Appears if an error occurs, in which case the
+                  message line temporarily overwrites the first function-key line with an
+                  appropriate error message.
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+         
+      <div class="noprint">
+         <p><a href="edis_ux_data.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="dae_ux_modes"></a></div> 
+         
+      <h2>Edit Mode and Command Mode</h2> 
+          
+          
+      <p>The data area editor operates in two different modes: edit mode and
+              command mode.
+      </p> 
+          
+      <p>In edit mode, you can scroll up or down in the source of the current
+              data area, use the line commands required for creating or modifying source
+              lines, and press all F keys available on the screen.
+      </p> 
+          
+      <p>In command mode, you can enter or select an editor or a system command
+              or execute a program. In command mode, you cannot modify the source of the data
+              area.
+      </p> 
+          
+      <p>By default, the data area editor is in edit mode when you invoke it.
+              
+      </p> 
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To toggle between edit and command mode</strong></p>
+      <ul>
+         <li> 
+                   
+                   
+            <p class="instep">Press <span class="key">ESC</span>.
+            </p> 
+                   
+                   
+                   
+            <p class="instep">If command mode is set, the editor command line appears, which is
+                       indicated by <span class="selectable_label">Command:</span> in the top left corner of the editor
+                       screen.
+            </p> 
+                   
+            <p class="instep">The current mode is kept for the duration of the Natural
+                       session.
+            </p> 
+                 
+         </li>
+      </ul> 
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To enter a direct command or a program name</strong></p>
+      <ul>
+         <li> 
+                   
+                   
+            <p class="instep"> In the command line, enter one of the following:</p> 
+                   
+            <ul> 
+                       
+               <li> 
+                           
+                  <p class="initem">Any Natural system command.</p> 
+                           
+                  <p class="initem">For example: The system command <a href="../syscom/check.htm"><code>CHECK</code></a> can be
+                               used for checking the syntax of source code and
+                               <a href="../syscom/save.htm"><code>SAVE</code></a>
+                               for saving source code (see also <a href="edis_ux_data.htm#edis_ux_data_save_cat">Saving and Cataloging a Data
+                        Area</a>).
+                  </p> 
+                           
+                  <p class="initem">For other system commands related to maintaining and using object
+                               sources, see <a href="../syscom/groups.htm#Editing_Storing_PO">Editing and Storing
+                        Programming Objects</a> in the <cite>System
+                                  Commands</cite> documentation.
+                  </p> 
+                          
+               </li> 
+                       
+               <li> 
+                           
+                  <p class="initem">The name of a Natural program to be executed.</p> 
+                          
+               </li> 
+                       
+               <li> 
+                           
+                  <p class="initem">An editor command. All editor commands available are described in
+                               <a href="edis_ux_data.htm#dae_ux_editor_cmds">Editor Commands and Function
+                        Keys</a>. 
+                  </p> 
+                          
+               </li> 
+                      
+            </ul> 
+                   
+                 
+         </li>
+      </ul> 
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong><a name="dae_ux_select_cmd"></a>To select a direct command
+                  from a menu</strong></p>
+      <ul>
+         <li> 
+                   
+                   
+            <p class="instep">In the command line, enter an <code>M</code> (menu).
+            </p> 
+                   
+                   
+                   
+            <p class="instep">The following command menus appear:</p> 
+                   
+            <ul> 
+                       
+               <li> 
+                           
+                  <h4 class="floating-title"><span class="guimenuitem">Commands</span></h4> 
+                           
+                  <p class="initem">When you select this menu (selected by default), a window with a
+                               subset of most frequently used commands appears. You can select and execute one
+                               of the following commands: <a href="edis_ux_data.htm#dae_ux_check"><span class="guimenuitem">Check</span></a>,
+                               <a href="edis_ux_data.htm#dae_ux_clear"><span class="guimenuitem">Clear</span></a>,
+                               <a href="edis_ux_data.htm#dae_ux_fld_type"><span class="guimenuitem">Fld-type</span></a>,
+                               <a href="edis_ux_data.htm#dae_ux_generate"><span class="guimenuitem">Gen</span></a>,
+                               <a href="edis_ux_data.htm#dae_ux_read"><span class="guimenuitem">Read</span></a>,
+                               <a href="edis_ux_data.htm#dae_ux_save"><span class="guimenuitem">Save</span></a>,
+                               <a href="edis_ux_data.htm#dae_ux_set_type"><span class="guimenuitem">Type</span></a>
+                               or <a href="edis_ux_data.htm#dae_ux_stow"><span class="guimenuitem">Stow</span></a>.
+                               For explanations of these commands, see the corresponding direct commands
+                               described in <a href="edis_ux_data.htm#dae_ux_editor_cmds">Editor Commands
+                        and Function Keys</a>.
+                  </p> 
+                          
+               </li> 
+                       
+               <li> 
+                           
+                  <h4 class="floating-title"><span class="guimenuitem">Direct Command
+                        Line</span></h4> 
+                           
+                  <p class="initem">When you select this menu, all command menus are closed and the
+                               command line appears.
+                  </p> 
+                          
+               </li> 
+                       
+               <li> 
+                           
+                  <h4 class="floating-title"><span class="guimenuitem">Quit</span></h4> 
+                           
+                  <p class="initem">When you select this menu, the data area editor is terminated. Any
+                               changes made to the current data area since the last
+                               <code>SAVE</code> or <a href="edis_ux_data.htm#dae_ux_stow"><code>STOW</code></a> command are
+                               <em>not</em> saved.
+                  </p> 
+                          
+               </li> 
+                      
+            </ul> 
+                   
+                 
+         </li>
+      </ul> 
+         
+      <div class="noprint">
+         <p><a href="edis_ux_data.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="dae_ux_editing_area"></a></div> 
+         
+      <h2>Editing Area</h2> 
+          
+          
+      <p>The editing area is either empty or contains source code that was last
+              read into the source work area with the command <code>EDIT</code>
+              or <code>READ</code> as shown in the example in
+              <a href="edis_ux_data.htm#dae_ux_invoke_editor">Invoking the Data Area
+            Editor</a>.
+      </p> 
+          
+      <p>When you read in the source of an existing object, the entire source
+              code is loaded into the source work area and is available for editing. However,
+              depending on the size of the source, the editing area may not show all of the
+              lines that belong to the source. In this case, you have to scroll down in the
+              source to go to the line you want to view or modify as described in
+              <a href="edis_ux_data.htm#dae_ux_select_lines">Viewing and Selecting Source
+            Lines</a>.
+      </p> 
+          
+      <p>This section covers the following
+              topics:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="edis_ux_data.htm#d0e37777">Columns in the Editing Area</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="edis_ux_data.htm#dae_ux_select_lines">Viewing and Selecting Source Lines</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="edis_ux_data.htm#dae_ux_create_lines">Creating and Modifying Source Lines</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="edis_ux_data.htm#dae_ux_def_redef_window">Input Fields in the Definition or Redefine Window</a></p>
+         </li>
+      </ul>
+      <div><a name="d0e37777"></a></div> 
+          
+      <h3>Columns in the Editing Area</h3> 
+           
+           
+      <p>The editing area of the editor screen is organized in columns where all
+               attributes that belong to a variable or field definition are maintained in one
+               line.
+      </p> 
+           
+      <p>The columns contained in the editing area are described in the
+               following section. The contents of the columns depend on the values entered in
+               the <span class="selectable_label">Definition</span> or <span class="selectable_label">Redefine</span> window
+               (see <a href="edis_ux_data.htm#dae_ux_def_redef_window">Input Fields in the
+            Definition or Redefine Window</a>) when creating or modifying
+               a variable or field. The contents also depend on whether a counter field (C*
+               variable) was created from a field.
+      </p> 
+           
+      <p class="note"><strong>Note:</strong><br>A column heading can change or disappear depending on the type of
+               variable or field contained in the current source line.
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th align="left">Column Heading</th> 
+                        
+               <th align="left">Explanation</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td><span class="selectable_label">C</span></td> 
+                        
+               <td>The command column in which you can enter one of
+                  the line commands required to create or modify source lines. See also
+                  <a href="edis_ux_data.htm#dae_ux_line_cmds">Line
+                               Commands</a>.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><span class="selectable_label">T</span></td> 
+                        
+               <td>
+                  <table border="0" width="100%">
+                     <colgroup>
+                        <col width="8%">
+                        <col width="92%">
+                     </colgroup> 
+                               
+                     <tbody align="left" valign="top"> 
+                                   
+                        <tr> 
+                                       
+                           <td colspan="2">The
+                              <a name="dae_ux_field_type"></a>type of variable or field. 
+                                           
+                              <p>Possible types are:</p> 
+                           </td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td colspan="2">&nbsp;</td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td><code>B</code>&nbsp;&nbsp;&nbsp;
+                           </td> 
+                                       
+                           <td> <span class="selectable_label">Block</span><br>A data block within a
+                                GDA.
+                           </td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td colspan="2">&nbsp;</td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td><code>C</code></td> 
+                                       
+                           <td><span class="selectable_label">Constant</span> or <span class="selectable_label">Counter
+                                     Variable</span><br>A user-defined constant (not applicable to PDAs)
+                              or a counter field (C* variable). A counter field is used for a multiple-value
+                              field or a periodic group within a view (DDM). 
+                           </td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td colspan="2">&nbsp;</td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td><code>F</code></td> 
+                                       
+                           <td><span class="selectable_label">Data Field</span>: filler character.<br>The
+                              filler bytes that can be denoted within a field or variable being redefined.
+                                           
+                           </td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td colspan="2">&nbsp;</td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td><code>G</code></td> 
+                                       
+                           <td><span class="selectable_label">Group</span><br>A group within a view
+                              (DDM).
+                           </td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td colspan="2">&nbsp;</td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td><code>M</code></td> 
+                                       
+                           <td><span class="selectable_label">Multiple Field</span><br>A
+                              multiple-value field within a view (DDM).
+                           </td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td colspan="2">&nbsp;</td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td><code>O</code></td> 
+                                       
+                           <td><span class="selectable_label">Object Handle</span><br>The handle of
+                                 an object.
+                           </td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td colspan="2">&nbsp;</td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td><code>P</code></td> 
+                                       
+                           <td><span class="selectable_label">Periodic Group</span><br>A periodic
+                              group within a view (DDM).
+                           </td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td colspan="2">&nbsp;</td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td><code>R</code></td> 
+                                       
+                           <td><span class="selectable_label">Redefined Field</span><br>The
+                              redefinition of a variable or field.
+                           </td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td colspan="2">&nbsp;</td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td><code>V</code></td> 
+                                       
+                           <td>
+                              <p>Not applicable to PDAs.</p><span class="selectable_label">View</span><br>A view definition
+                                      created from a DDM.
+                           </td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td colspan="2">&nbsp;</td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td><em>blank</em></td> 
+                                       
+                           <td><span class="selectable_label">Data Field</span><br>A user-defined
+                              variable or field, or a group structure (not within a view).
+                           </td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td colspan="2">&nbsp;</td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td><code>*</code></td> 
+                                       
+                           <td><span class="selectable_label">Comment</span>.<br>A comment
+                                field.
+                           </td> 
+                                      
+                        </tr> 
+                                  
+                     </tbody> 
+                              
+                  </table>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><span class="selectable_label">L</span></td> 
+                        
+               <td>The level number of the variable or field (1 - 99). 
+                  
+                  <p>Variables which are not within a hierarchical structure and view
+                     definitions must be assigned level 1. Level numbers cannot be used with data
+                                block definitions.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td nowrap><span class="selectable_label">Name of
+                     <var>variable-field-type</var></span> 
+                            
+                  <p>or</p><span class="selectable_label">Comment</span></td> 
+                        
+               <td>The name of the variable or field. This column
+                  heading changes according to the <a href="edis_ux_data.htm#dae_ux_field_type">type of
+                               variable or field</a> currently selected as indicated in the description
+                            of column <span class="selectable_label">T</span>. 
+                            
+                  <p>For a view, in addition to <span class="selectable_label">Name of
+                                   <var>variable-field-type</var></span>, the <span class="selectable_label">Name
+                                   of DDM</span> column appears.
+                  </p> 
+                            
+                  <p>For a block, in addition to <span class="selectable_label">Name of
+                                   <var>variable-field-type</var></span>, the <span class="selectable_label">Name
+                                   of Parent Block</span> column appears.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><span class="selectable_label">F</span></td> 
+                        
+               <td> The Natural data format of the variable or field. </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><span class="selectable_label">Length</span></td> 
+                        
+               <td> The length of the variable or field.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><span class="selectable_label">Index/Comment</span></td> 
+                        
+               <td>The array indices and/or comment of the variable or
+                  field.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><span class="selectable_label">M</span></td> 
+                        
+               <td>The <span class="selectable_label">M</span> (Miscellaneous)
+                  column contains an <code>X</code> if an edit mask, header, and/or initial value
+                       is defined for a variable or field. 
+                            
+                  <p>This column does not appear for a view, or a group, periodic group
+                                or multiple-value field within a view.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+          
+      <div><a name="dae_ux_select_lines"></a></div> 
+          
+      <h3>Viewing and Selecting Source Lines</h3> 
+           
+           
+      <p>In edit mode, you can scroll up or down in the current data area to
+               view all lines of the source currently contained in the source work area,
+               select a line for modification, or position at the line where you want to
+               insert new lines.
+      </p> 
+           
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To scroll in a source and select a line</strong></p>
+      <ul>
+         <li> 
+                    
+                    
+            <p class="instep">Scroll up or down one line with <span class="key">UP ARROW</span> and <span class="key">DOWN
+                  ARROW</span> respectively.
+            </p> 
+                    
+                    
+                    
+            <p class="instep">Or:<br>Press <span class="key">HOME</span> or <span class="key">END</span> to access the corresponding
+                        first (topmost) line or the last (bottommost) line contained in the source work
+                        area.
+            </p> 
+                    
+                    
+                    
+            <p class="instep">Or:<br>Move the current source line up or down one screen page at a time
+                        with <span class="key">PAGE UP</span> or <span class="key">PAGE DOWN</span> respectively. Check your file
+                        <cite>SAGtermcap</cite> for entries if you have no access to any of
+                        these keys.
+            </p> 
+                    
+                    
+                    
+            <p class="instep">The line in which the cursor is positioned is the current line,
+                        which is selected (highlighted) and can be modified.
+            </p> 
+                  
+         </li>
+      </ul> 
+          
+      <div><a name="dae_ux_create_lines"></a></div> 
+          
+      <h3>Creating and Modifying Source Lines</h3> 
+           
+           
+      <p>In edit mode, you can create or modify the variable or field definition
+               in the current source line by using the appropriate line command described in
+               <a href="edis_ux_data.htm#dae_ux_line_cmds">Line
+            Commands</a>.
+      </p> 
+           
+      <p>The following are example instructions for using a line command to add
+               single or multiple lines to a source or modify a line.
+      </p> 
+           
+      <div><a name="dae_ux_add_line_other"></a></div>
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To add a line for a new definition other than a view, redefinition or
+                   counter field</strong></p>
+      <ol class="steps">
+         <li> 
+                    
+                    
+            <p class="instep">In the <span class="selectable_label">C</span> column, next to the selected line
+                        below which you want to place the new definition, type in the following line
+                        command:
+            </p> <pre class="command-input">I</pre> 
+                    <p class="instep">If the data area is empty, enter the <code>I</code>
+                        next to <span class="selectable_label">Top of Data Area</span>. 
+            </p> 
+                    
+                    
+                    
+            <p class="instep">A selection window appears.</p> 
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">Select one of the following:</p> 
+                    
+            <table border="0" cellpadding="3" margin-top="9pt">
+               <tbody valign="top">
+                  <tr align="left">
+                     <td class="titem"><span class="guimenuitem">Data
+                           Field</span>:
+                     </td>
+                     <td class="titem">For a user-defined variable or a database
+                                   field.
+                     </td> 
+                              
+                  </tr>
+                  <tr align="left">
+                     <td class="titem"><span class="guimenuitem">Block</span>:
+                     </td>
+                     <td class="titem">For a
+                                   <a href="../pg/pg_obj_darea.htm#Data_Blocks">data block</a> within
+                                   a GDA described in the <cite>Programming Guide</cite>.
+                     </td> 
+                              
+                  </tr>
+                  <tr align="left">
+                     <td class="titem"><span class="guimenuitem">Constant</span>:
+                     </td>
+                     <td class="titem">For
+                                   a user-defined constant described in <a href="../pg/pg_defi_udc.htm">User-Defined
+                           Constants</a> in the <cite>Programming
+                                      Guide</cite>.
+                     </td> 
+                              
+                  </tr>
+                  <tr align="left">
+                     <td class="titem"><span class="guimenuitem">Handle</span>:
+                     </td>
+                     <td class="titem">For
+                                   an object handle described in
+                                   <a href="../pg/pg_natx_dev.htm#Using_Classes_and_Objects">Using
+                           Classes and Objects</a> in the <cite>Programming
+                                      Guide</cite>.
+                     </td> 
+                              
+                  </tr>
+                  <tr align="left">
+                     <td class="titem"><span class="guimenuitem">Structure</span>:
+                     </td>
+                     <td class="titem">For
+                                   a hierarchical group structure (not within a view).
+                     </td> 
+                              
+                  </tr>
+                  <tr align="left">
+                     <td class="titem"><span class="guimenuitem">Comment</span>:
+                     </td>
+                     <td class="titem">For
+                                   a comment field.
+                     </td> 
+                              
+                  </tr>
+               </tbody>
+            </table> 
+                    
+                    
+            <p class="instep">A <a href="edis_ux_data.htm#dae_ux_def_redef_window"><span class="selectable_label">Definition</span></a>
+                        window appears for the selected type of variable or field in which you can
+                        enter the required attribute definitions. For explanations of the input fields
+                        contained in this window, see <a href="edis_ux_data.htm#dae_ux_def_redef_window">Input Fields in the Definition or
+                  Redefine Window</a>.
+            </p> 
+                    
+                  
+         </li>
+      </ol> 
+           
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong><a name="dae_ux_add_view"></a>To add lines for a view
+                   definition</strong></p>
+      <ol class="steps">
+         <li> 
+                    
+                    
+            <p class="instep">In the <span class="selectable_label">C</span> column, next to the selected line
+                        below which you want to place the view, type in the following line command:
+            </p>
+                    <pre class="command-input">V</pre> 
+                    <p class="instep">If the data area is empty, enter <code>V</code> next
+                        to <span class="selectable_label">Top of Data Area</span>. 
+            </p> 
+                    
+                    
+                    
+            <p class="instep">A <a href="edis_ux_data.htm#dae_ux_def_redef_window"><span class="selectable_label">View
+                     Definition</span></a> window appears.
+            </p> 
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">Enter the name of the view to be created and the DDM from which to
+                        create the view. The specified DDM must be contained in the current Natural
+                        library in the current system file.
+            </p> 
+                    
+                    
+            <p class="instep">A <span class="selectable_label">DDM</span> selection window appears with a list of
+                        all fields defined in the specified DDM.
+            </p> 
+                    
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">Scroll through the list with the arrow (cursor) keys and enter an
+                        <code>X</code> next to each DDM field you want to select for the view.
+            </p> 
+                    
+                    
+                    
+            <p class="instep">Or:<br>In the <span class="selectable_label">DDM</span> selection window, enter an
+                        <code>A</code> next to any of the DDM fields to select all DDM fields for the
+                        view.
+            </p> 
+                    
+            <p class="instep">You can deselect a field by replacing the <code>X</code> with a
+                        blank character.
+            </p> 
+                    
+                    
+                    
+            <p class="instep">If no periodic group or multiple-value field is selected, all fields
+                        are copied into the data area.
+            </p> 
+                    
+            <p class="instep">If you selected a periodic group or multiple-value field, an
+                        <span class="selectable_label">Occurrences Definition</span> window appears.
+            </p> 
+                    
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep"> In the <span class="selectable_label">From:</span> field(s), enter the lower bounds
+                        of the one- or two-dimensional array to be used in the view, and, in the
+                        <span class="selectable_label">To:</span> field(s), enter the upper bounds.
+            </p> 
+                    
+                    
+                    
+            <p class="instep">The periodic group or multiple-value field is copied into the data
+                        area with the specified occurrences as subordinate fields of a hierarchical
+                        view definition structure where the view name is at level 1.
+            </p> 
+                  
+         </li>
+      </ol> 
+           
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To modify the contents of a line</strong></p>
+      <ul>
+         <li> 
+                    
+                    
+            <p class="instep">In the <span class="selectable_label">C</span> column, next to the selected line,
+                        type in the following line command:
+            </p> <pre class="command-input">E</pre> 
+                    <p class="instep">The <span class="selectable_label">Definition</span> window (or
+                        <span class="selectable_label">Redefine</span> window for a redefinition) appears for the
+                        variable or field definition contained in the selected line.
+            </p> 
+                    
+                  
+         </li>
+      </ul> 
+          
+      <div><a name="dae_ux_def_redef_window"></a></div> 
+          
+      <h3>Input Fields in the Definition or Redefine Window</h3> 
+           
+           
+      <p>You create and modify a variable or field in the
+               <span class="selectable_label">Definition</span> window or the <span class="selectable_label">Redefine</span>
+               window for a redefinition. The input fields contained in this window depend on
+               the type of variable or field selected. The table below lists and describes all
+               possible input fields. 
+      </p> 
+           
+      <p>The definitions you enter in the <span class="selectable_label">Definition</span> or
+               <span class="selectable_label">Redefine</span> window are checked for syntax errors.
+      </p> 
+           
+      <p>For explanations of the variable or field attributes mentioned in this
+               section, see also <a href="../pg/pg_defi_dv.htm">User-Defined
+            Variables</a> and
+               <a href="../pg/pg_defi-over.htm#pg_defi-over">Defining
+            Fields</a> in the <cite>Programming Guide</cite> and
+               <a href="../sm/defineda.htm"><code>DEFINE DATA</code></a> in the
+               <cite>Statements</cite> documentation. The values used in the
+               <code>DEFINE DATA</code> statement correspond to the values used in a data
+               area.
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>Input Field</th> 
+                        
+               <th>Explanation</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td><span class="selectable_label">Level</span></td> 
+                        
+               <td>The level number (1 - 99) of the variable or
+                  field. 
+                  
+                  <p>Variables or fields which are not within a hierarchical structure
+                     must be assigned level 1. View definitions must be assigned level 1. Level
+                                numbers cannot be used with data block definitions.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><span class="selectable_label">Name</span> 
+               </td> 
+                        
+               <td>The name of one of the following: 
+                  
+                  <ul> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">User-defined variable or database field.</p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">User-defined constant.</p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">Structure (group definition, not within a view).</p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">Handle of object.</p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">Block and parent block (GDAs only).</p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">View (DDM).</p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">Multiple-value field (within a view).</p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">Periodic group (within a view).</p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">Counter field (C* variable) for a multiple-value field or a
+                                        periodic group within a view.
+                        </p> 
+                                   
+                     </li> 
+                               
+                  </ul> 
+                            
+                  <p>For valid names, see
+                                <a href="../using/use_rules.htm#use_rules-Variable_Names">Naming
+                                   Conventions for User-Defined Variables</a> in the
+                                <cite>Using Natural</cite> documentation.
+                  </p> 
+                            
+                  <p>For a user-defined constant, see also
+                                <a href="../sm/defineda_vari.htm#vari_CONST"><code>CONSTANT</code></a>
+                                in the <cite>Statements</cite> documentation.
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><span class="selectable_label">Format</span></td> 
+                        
+               <td>The Natural data format of the variable or
+                  field. 
+                  
+                  <p>For valid formats, see
+                                <a href="../pg/pg_defi_dv.htm#Format_Length_Def">Format and
+                                   Length of User-Defined Variables</a> and
+                                <a href="../pg/pg_defi_dv.htm#Special_Formats">Special
+                                   Formats</a> in the <cite>Programming Guide</cite>.
+                  </p>
+                            
+                            
+                  <p>For a counter field (C* variable), you can specify the Natural data
+                                format/length I2 or I4 (the default setting is N3 for no format/length). 
+                  </p>
+                            
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><span class="selectable_label">Length</span> 
+               </td> 
+                        
+               <td>The length of the variable or field. 
+                  
+                  <p>For valid lengths, see
+                                <a href="../pg/pg_defi_dv.htm#Format_Length_Def">Format and
+                                   Length of User-Defined Variables</a> in the
+                                <cite>Programming Guide</cite>.
+                  </p> 
+                            
+                  <p>No length is permitted for the Natural data formats C, D, T and L. You
+                                can define dynamic variables by specifying <code>DYNAMIC</code> in the
+                                <span class="selectable_label">Length</span> field. 
+                  </p> 
+                            
+                  <p>For a counter field (C* variable), you can specify the Natural data
+                                format/length I2 or I4 (the default setting is N3 for no
+                                format/length).
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><span class="selectable_label">Arraydefinition</span></td> 
+                        
+               <td>The array definition of the variable or field. 
+                  
+                  <p>You can define the upper and lower bounds of a one- or
+                           two-dimensional array as demonstrated in
+                                <a href="edis_ux_data.htm#edis_ux_data_ex_array">Examples of Array
+                                   Definitions</a>.
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><span class="selectable_label">Edit Mask</span></td> 
+                        
+               <td> Not applicable to PDAs. 
+                  
+                  <p>The edit mask of the variable or field to be used when the
+                     variable or field is displayed with an I/O statement.
+                  </p> 
+                            
+                  <p>Enter a valid value without using apostrophes or parentheses as
+                                shown in <a href="edis_ux_data.htm#edis_ux_data_ex_em">Examples of Edit Mask
+                                   Definitions</a>. For valid input values, see the corresponding
+                                session parameter <a href="../parms/sp_em.htm"><code>EM</code></a> described in the
+                                <cite>Parameter Reference</cite> documentation.
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td nowrap><span class="selectable_label">Header
+                     Definition</span></td> 
+                        
+               <td> Not applicable to PDAs. 
+                  
+                  <p>The header to be produced for the variable or field in a
+                                <code>DISPLAY</code> statement.
+                  </p> 
+                            
+                  <p>Enter any alphanumeric character string without using apostrophes
+                                or parentheses as shown in <a href="edis_ux_data.htm#edis_ux_data_ex_hd">Example of a Header
+                                   Definition</a>. For further information on headers, see the
+                                corresponding session parameter <a href="../parms/sp_hd.htm"><code>HD</code></a> described in the
+                                <cite>Parameter Reference</cite> documentation.
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><span class="selectable_label">Initialization</span></td> 
+                        
+               <td>
+                  <table border="0" width="100%">
+                     <colgroup>
+                        <col width="8%">
+                        <col width="92%">
+                     </colgroup> 
+                               
+                     <tbody align="left" valign="top"> 
+                                   
+                        <tr> 
+                                       
+                           <td colspan="2">Not applicable to PDAs. 
+                              
+                              <p>The initial value assigned to a variable or field or the array
+                                 occurrence(s) defined for a variable or field. You can specify one of the
+                                       following initialization modes: 
+                              </p>
+                           </td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td colspan="2">&nbsp;</td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td><code>F</code></td> 
+                                       
+                           <td>Free form mode.<br>If you enter
+                                           <code>F</code>, the <span class="selectable_label">Free Form Initialization</span> window
+                              appears, in which you can enter your initial value definitions according to the
+                                           common Natural syntax definitions in a <a href="../sm/defineda.htm"><code>DEFINE DATA</code></a> statement. You can
+                                           assign the same initial value to a whole range of field occurrences at a time. 
+                                           
+                              <p>See also <a href="edis_ux_data.htm#edis_ux_data_ex_init">Examples of Initial Value Assignments
+                                                  in Free Mode</a>.
+                              </p> 
+                                           
+                              <p>For detailed information on defining initial values, see
+                                               <a href="../sm/defineda_iniv.htm#defineda_iniv">Initial-Value
+                                                  Definition</a>
+                                               <a href="../sm/defineda_inia.htm#defineda_inia">Initial/Constant
+                                                  Values for an Array</a> in the <cite>Statements</cite>
+                                               documentation.
+                              </p> 
+                           </td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td colspan="2">&nbsp;</td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td><code>S</code></td> 
+                                       
+                           <td>Single-value mode.<br>If you enter
+                                           <code>S</code>, the <span class="selectable_label">Single Value Initialization</span> window
+                              appears, in which you can enter a single initial value rather than an
+                                           initialization clause. 
+                                           
+                              <p>Values are entered based on the variable or field type. You
+                                               only enter the required variable or field value; any further specifications
+                                               necessary (including apostrophes for alphanumeric variables or fields, or value
+                                               prefixes such as <code>H</code> for hexadecimal, <code>D</code> for date and
+                                               <code>T</code> for time) are generated automatically. For example, to specify
+                                               an initial value of H'F1F2' for a binary variable (B2), enter
+                                               <code>F1F2</code>. The data editor generates: <code>INIT
+                                                  &lt;H'F1F2'&gt;</code>. 
+                              </p> 
+                                           
+                              <p>If the variable or field is an array, all elements of the array
+                                               are listed. A value for each element can be entered (optional). 
+                              </p>
+                           </td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td colspan="2">&nbsp;</td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td colspan="2"> 
+                              
+                              <p class="caution"><strong>Caution:</strong><br>Changing the initialization type deletes all previously
+                                 entered initialization information.
+                              </p>
+                           </td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td colspan="2">&nbsp;</td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td colspan="2"> See also the sections
+                              <a href="../pg/pg_defi_init.htm#pg_defi_init">Initial Values
+                                            (and the RESET Statement)</a> and
+                                           <a href="../pg/pg_defi_array.htm#Initial_Values_for_Arrays">Initial Values
+                                              for Arrays</a> in the <cite>Programming
+                                              Guide</cite>.
+                           </td> 
+                                      
+                        </tr> 
+                                  
+                     </tbody> 
+                              
+                  </table>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><span class="selectable_label">Value Clause</span></td> 
+                        
+               <td>
+                  <table border="0" width="100%">
+                     <colgroup>
+                        <col width="36%">
+                        <col width="64%">
+                     </colgroup> 
+                               
+                     <tbody align="left" valign="top"> 
+                                   
+                        <tr> 
+                                       
+                           <td colspan="2">Only applies to PDAs. 
+                              
+                              <p>Determines the way in which the value of a variable or field
+                                       specified as a parameter in a <code>CALLNAT</code> statement is passed from a
+                                               program to an invoked object (for example, a subprogram). 
+                              </p> 
+                                           
+                              <p>Valid input values are: </p>
+                           </td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td colspan="2">&nbsp;</td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td><em>blank</em></td> 
+                                       
+                           <td>Indicates the parameter specification call-by-reference (default).</td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td><code>V</code></td> 
+                                       
+                           <td>Indicates the parameter specification call-by-value.</td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td><code>R</code></td> 
+                                       
+                           <td>Indicates the parameter specification call-by-value-result.</td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td colspan="2">&nbsp;</td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td colspan="2">For detailed information, see
+                              the corresponding options <code>BY VALUE</code> and <code>BY VALUE
+                                              RESULT</code> described for the <code>DEFINE DATA</code> statement in
+                                           <a href="../sm/defineda_pda.htm#parameter_data_definition">Parameter Data
+                                              Definition</a>, and
+                                           <a href="../sm/callnat.htm#operand2_callnat"><code><var>operand2</var></code></a>
+                                           described for the <code>CALLNAT</code> statement in the
+                                           <cite>Statements</cite> documentation.
+                           </td> 
+                                      
+                        </tr> 
+                                  
+                     </tbody> 
+                              
+                  </table>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><span class="selectable_label">Optional Param</span></td> 
+                        
+               <td>
+                  <table border="0" width="100%">
+                     <colgroup>
+                        <col width="8%">
+                        <col width="92%">
+                     </colgroup> 
+                               
+                     <tbody align="left" valign="top"> 
+                                   
+                        <tr> 
+                                       
+                           <td colspan="2">Only applies to PDAs. 
+                              
+                              <p>Determines whether the variable or field value is passed as a
+                                 parameter according to the setting of <span class="selectable_label">Value Clause</span> (see
+                                               above):
+                              </p>
+                           </td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td>&nbsp;</td> 
+                                       
+                           <td>&nbsp;</td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td><code>N</code></td> 
+                                       
+                           <td>A parameter must be passed (default).</td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td><code>Y</code></td> 
+                                       
+                           <td>A parameter <em>can</em> be passed.
+                           </td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td>&nbsp;</td> 
+                                       
+                           <td>&nbsp;</td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td colspan="2">For detailed information, see
+                              the corresponding option <code>OPTIONAL</code> described for the <code>DEFINE
+                                              DATA</code> statement in
+                                           <a href="../sm/defineda_pda.htm#parameter_data_definition">Parameter Data
+                                              Definition</a> and
+                                           <a href="../sm/callnat.htm#operand2_callnat"><code><var>operand2</var></code></a>
+                                           described for the <code>CALLNAT</code> statement in the
+                                           <cite>Statements</cite> documentation.
+                           </td> 
+                                      
+                        </tr> 
+                                  
+                     </tbody> 
+                              
+                  </table>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><span class="selectable_label">Indexdefinition</span></td> 
+                        
+               <td>The array definition of a variable of the type
+                  structure (group). 
+                  
+                  <p>This input field can be used to define the upper and lower bounds
+                     for an array, to supply initial values for a variable or to supply an edit mask
+                                for a variable.
+                  </p> See also <a href="edis_ux_data.htm#edis_ux_data_ex_array">Examples of Array
+                               Definitions</a>.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><span class="selectable_label">Comment</span></td> 
+                        
+               <td>Commentary text.</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <h4 class="floating-title"><a name="edis_ux_data_ex_array"></a>Examples of Array
+               Definitions:
+      </h4> 
+           <pre class="verbatim">
+(2,2)    /* 2 dimensions, 2 occurrences
+(2,2,2)  /* 3 dimensions, 2 occurrences
+(1:10,2)
+(-1:3,2)
+</pre> 
+           <h4 class="floating-title"><a name="edis_ux_data_ex_em"></a>Examples of Edit Mask
+               Definitions:
+      </h4> 
+           <pre class="verbatim">
+999.99
+XXX...XX
+MM.DD.YY
+</pre> 
+           <h4 class="floating-title"><a name="edis_ux_data_ex_hd"></a>Example of a Header
+               Definition:
+      </h4> 
+           <pre class="verbatim">
+HEADER TEXT
+</pre> 
+           <h4 class="floating-title"><a name="edis_ux_data_ex_init"></a>Examples of Initial
+               Value Assignments in Free Mode:
+      </h4> 
+           <pre class="verbatim">
+INIT&lt;3&gt;
+INIT&lt;'ABC'&gt;
+INIT&lt;H'F1F2'&gt; /* binary variable (B2)
+CONST&lt;12&gt;
+INIT ALL&lt;'ABC'&gt;
+</pre> 
+          <div class="noprint">
+         <p><a href="edis_ux_data.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="dae_ux_line_cmds"></a></div> 
+         
+      <h2>Line Commands</h2> 
+          
+          
+      <p>You enter a line command in the <span class="selectable_label">C</span> column of a
+              source line when edit mode is set. The command entered may not be indicated in
+              the column.
+      </p> 
+          
+      <p>For a selection list of all available line commands, press
+              <span class="key">F2</span>. 
+      </p> 
+          
+      <p>All line commands provided by the data area editor are described in the
+              following table. The expression "edit block" used in the table,
+              denotes a marked block of source lines.
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th align="left">Command</th> 
+                       
+               <th align="left">Function</th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td align="left"><a name="dae_ux_c"></a><code>C</code> 
+                   
+                  <p>(Copy)</p>
+               </td> 
+                       
+               <td align="left">Copies one or more lines to the clipboard. If
+                  <code>C</code> is entered within an edit block, all lines within
+                        this block are copied to the clipboard. 
+                           
+                  <p>See also <a href="edis_ux_data.htm#dae_ux_copy_paste_block">To
+                                  cut/copy and paste an edit block</a>.
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td align="left"><a name="dae_ux_d"></a><code>D</code> 
+                   
+                  <p>(Delete)</p>
+               </td> 
+                       
+               <td align="left">Deletes one or more lines. 
+                  
+                  <p>If <code>D</code> is entered within an edit block,
+                     all lines within this block are deleted. Deleted lines are placed on the
+                     clipboard. For additional information, see the line commands
+                               <a href="edis_ux_data.htm#dae_ux_c"><code>C</code></a> (Copy)
+                               and <a href="edis_ux_data.htm#dae_ux_p"><code>P</code></a>
+                               (Paste). 
+                  </p> 
+                           
+                  <p>See also <a href="edis_ux_data.htm#dae_ux_copy_paste_block">To
+                                  cut/copy and paste an edit block</a>.
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td align="left"><code>E</code> 
+                   
+                  <p>(Edit)</p>
+               </td> 
+                       
+               <td align="left">Depending on the variable or field type selected,
+                  opens the <span class="selectable_label">Definition</span> or <span class="selectable_label">Redefine</span>
+                           window (see also <a href="edis_ux_data.htm#dae_ux_def_redef_window">Input
+                              Fields in the Definition or Redefine Window</a>), in which you
+                           can modify the attributes of the variable or field contained in this line. 
+                           
+                  <p><a name="dae_ux_note"></a>For a field within a view definition, you can only
+                               modify the following: <span class="selectable_label">Level</span> (except periodic groups and
+                               multiple-value fields), <span class="selectable_label">Edit Mask</span>, <span class="selectable_label">Header
+                                  Definition</span>, <span class="selectable_label">Indexdefinition</span> and
+                               <span class="selectable_label">Comment</span>.
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td align="left"><code>H</code> 
+                   
+                  <p>(Unmark block)</p>
+               </td> 
+                       
+               <td align="left">Unmarks the current edit block. This command must
+                  be issued from within the edit block.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td align="left"><code>I</code> 
+                   
+                  <p>(Insert line)</p>
+               </td> 
+                       
+               <td align="left"> Inserts a line for a new definition as described
+                  in <a href="edis_ux_data.htm#dae_ux_add_line_other">To add a line for a new
+                     definition other than a view, redefinition or counter
+                              field</a>. 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td align="left"><code>M</code> 
+                   
+                  <p>(Add comment)</p>
+               </td> 
+                       
+               <td align="left">Adds comment mark(s) to the selected line or the
+                  marked edit block. These lines are ignored by a compiler check. This may be
+                  useful for testing purposes.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td align="left"><code>N</code> 
+                   
+                  <p>(Remove comment)</p>
+               </td> 
+                       
+               <td align="left">Removes comment mark(s) from the selected line or
+                  the marked edit block.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td align="left"><a name="dae_ux_p"></a><code>P</code> 
+                   
+                  <p>(Paste)</p>
+               </td> 
+                       
+               <td align="left">Pastes lines from the clipboard into the data area
+                  after the current line. The contents of the clipboard are not deleted, thus
+                  they can be pasted more than once. Clipboard contents are changed when a
+                  <a href="edis_ux_data.htm#dae_ux_c"><code>C</code></a> (Copy) or
+                           <a href="edis_ux_data.htm#dae_ux_d"><code>D</code></a> (Delete)
+                           line command is issued or when a new data area is edited. 
+                           
+                  <p>See also <a href="edis_ux_data.htm#dae_ux_copy_paste_block">To
+                                  cut/copy and paste an edit block</a>.
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td align="left"><a name="dae_ux_r_cmd"></a><code>R</code> 
+                   
+                  <p>(Redefine)</p>
+               </td> 
+                       
+               <td>
+                  <table border="0" width="100%"> 
+                              
+                     <tbody align="left" valign="top"> 
+                                  
+                        <tr> 
+                                      
+                           <td colspan="2">Redefines the variable or field
+                              contained in this line as single variable or a group of variables. 
+                              
+                              <p>A window appears in which you can select one of the following
+                                              redefine options:
+                              </p>
+                           </td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td colspan="2">&nbsp;</td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td nowrap><span class="guimenuitem">Data
+                                 Field</span></td> 
+                                      
+                           <td>Redefines the variable or field as a single
+                              user-defined variable.
+                           </td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td colspan="2">&nbsp;</td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td><span class="guimenuitem">Filler</span></td> 
+                                      
+                           <td> 
+                              
+                              <p>Redefines the variable or field using the filler option
+                                              (<code><var>n</var>X</code>). With the filler option,
+                                              <code><var>n</var></code> filler bytes can be denoted within
+                                              the variable or field being redefined, where
+                                              <code><var>n</var></code> can be up to 10 digits (1 GB). The
+                                              definition of trailing filler bytes is optional.
+                              </p>
+                           </td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td colspan="2">&nbsp;</td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td><span class="guimenuitem">Structure</span></td> 
+                                      
+                           <td>Redefines the variable or field as a structure
+                              (group).
+                           </td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td colspan="2">&nbsp;</td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td><span class="guimenuitem">Comment</span></td> 
+                                      
+                           <td>Redefines the variable or field as a
+                              comment.
+                           </td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td colspan="2">&nbsp;</td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td colspan="2">Depending on the redefine option
+                              selected, either a <span class="selectable_label">Redefine</span> or a
+                                          <span class="selectable_label">Definition</span> window appears, in which you can enter the
+                                          definitions required (see also <a href="edis_ux_data.htm#dae_ux_def_redef_window">Input Fields in the Definition or
+                                             Redefine Window</a>). 
+                                          
+                              <p>The data area editor keeps track of the number of free bytes
+                                              still available for the redefinition. If there are no free bytes, the redefine
+                                              function ends.
+                              </p> 
+                                          
+                              <p>Depending on the redefine option used, the data area editor
+                                              automatically adds the lines required for the redefinition above the variable
+                                              or field that is redefined. 
+                              </p>
+                           </td> 
+                                     
+                        </tr> 
+                                 
+                     </tbody> 
+                             
+                  </table>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td align="left"><code>S</code> 
+                   
+                  <p>(Show)</p>
+               </td> 
+                       
+               <td align="left">Displays the <span class="selectable_label">Definition</span> or
+                           <span class="selectable_label">Redefine</span> window which contains all definitions of the
+                  variable or field contained in this line (see also
+                           <a href="edis_ux_data.htm#dae_ux_def_redef_window">Input Fields in the
+                              Definition or Redefine Window</a>). Changes are not possible. 
+                           
+                  <p>If an initialization has been specified, a separate window
+                               containing initialization information is also displayed. Information scrolling
+                               is possible.
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td align="left"><code>V</code> 
+                   
+                  <p> (Insert view)</p>
+               </td> 
+                       
+               <td align="left"> Inserts a view definition as described in
+                  <a href="edis_ux_data.htm#dae_ux_add_view">To add lines for a view
+                              definition</a>. 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td align="left"><code>X</code> 
+                   
+                  <p>(Mark block start)</p>
+               </td> 
+                       
+               <td align="left">Marks the beginning of an edit block.</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td align="left"><code>Y</code> 
+                   
+                  <p>(Mark block end)</p>
+               </td> 
+                       
+               <td align="left">Marks the end of an edit block.</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td align="left"><code>Z</code> 
+                   
+                  <p>(Mark group)</p>
+               </td> 
+                       
+               <td align="left"> Marks an entire group structure as an edit block. 
+                  
+                  <p> The edit block starts at the current line and includes all
+                     consecutive lines with levels less than the current line. For example, if
+                               <code>Z</code> is entered in a view line, the entire view is
+                               marked as an edit block.
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td align="left" nowrap><a name="dae_ux_asterisk_cmd"></a><code>*</code> 
+                   
+                  <p>(Generate counter)</p>
+               </td> 
+                       
+               <td align="left">Not applicable to PDAs. 
+                  
+                  <p>Generates a counter field (C* variable) from the multiple-value
+                     field or periodic group contained in this line. The counter field is placed in
+                     the line above which you entered the command.
+                  </p> 
+                           
+                  <p>A counter field is used to retrieve the number of occurrences of a
+                               multiple-value field or a period group. See also
+                               <a href="../pg/pg_defi_dv.htm#DB_IC_Reference">Referencing the
+                                  Internal Count for a Database Array (C* Notation)</a> in the
+                               <cite>Programming Guide</cite>.
+                  </p>
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>The following are instructions for using line commands to move or copy a
+              block of lines or a single line within the source.
+      </p> 
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong><a name="dae_ux_copy_paste_block"></a>To cut/copy and paste an edit
+                  block</strong></p>
+      <ol class="steps">
+         <li> 
+                   
+                   
+            <p class="instep">Next to the first line of the block of lines (or the single line) to
+                       be cut or copied, enter the following line command:
+            </p><pre class="command-input">X</pre> 
+                   
+                   <p class="instep">The line is marked.</p> 
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Scroll up or down to the last line of the block of lines and enter
+                       the following line command:
+            </p><pre class="command-input">Y</pre> 
+                   <p class="instep">For a single line, you enter the line command
+                       <code>Y</code> in the same line, in which you entered the line
+                       command <code>X</code>.
+            </p> 
+                   
+                   
+            <p class="instep">All lines that belong to the block are marked (highlighted) thus
+                       representing the edit block.
+            </p> 
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Within the edit block, enter one of the following line commands:</p><pre class="command-input">C</pre> 
+                   <p class="instep">to copy the line(s) to the clipboard or</p><pre class="command-input">D</pre> 
+                   <p class="instep">to delete (cut) the line(s) from the source and paste them on the
+                       clipboard.
+            </p> 
+                   
+                   
+            <p class="instep">The line(s) are placed on the clipboard.</p> 
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Position the cursor in the line below which you want to paste the
+                       line(s) from the clipboard and enter the following line command:
+            </p> <pre class="command-input">P</pre> 
+                   
+                   
+                   <p class="instep">The line(s) are pasted into the source.</p> 
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">You can unmark the edit block by entering the following line command
+                       within the edit block:
+            </p><pre class="command-input">H</pre> 
+                   <p class="instep">The edit block is unmarked and only the current line is
+                       highlighted.
+            </p> 
+                   
+                 
+         </li>
+      </ol> 
+         
+      <div class="noprint">
+         <p><a href="edis_ux_data.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="dae_ux_editor_cmds"></a></div> 
+         
+      <h2>Editor Commands and Function Keys</h2> 
+          
+          
+      <p>This section describes the editor commands and editor-specific system
+              commands that can be entered in the command line or selected from the
+              <span class="guimenu">Commands</span> menu in command mode.
+      </p> 
+          
+      <p>In addition, this section describes alternative F keys that can be used
+              in edit mode. In command mode, you can only use <span class="key">F1</span>.
+      </p> 
+          
+      <p>For explanations of the syntax symbols used in the editor commands,
+              refer to <a href="../syscom/syntax.htm">System Command
+            Syntax</a> in the <cite>System Commands</cite>
+              documentation. 
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th align="left">Command</th> 
+                       
+               <th align="left" nowrap> F Key</th> 
+                       
+               <th align="left">Function</th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td align="left">n/a</td> 
+                       
+               <td align="left"><span class="key">F1</span></td> 
+                       
+               <td align="left">Provides help information on editor
+                  features. See also <a href="edis_ux_data.htm#edis_ux_data_Help">Help
+                              Information and Selection Options</a>. 
+                           
+                  <p class="note"><strong>Note:</strong><br>When you enter <code>HELP</code> you will invoke
+                               the help function for error messages as described for the system command
+                               <a href="../syscom/help.htm"><code>HELP</code></a>
+                               in the <cite>System Commands</cite> documentation.
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td align="left">n/a</td> 
+                       
+               <td align="left"><span class="key">F2</span></td> 
+                       
+               <td align="left">Invokes a selection window with
+                  valid input values for the input field in which the cursor is
+                  positioned.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td align="left" nowrap><code><u>CAT</u>ALOG
+                       [<var>object-name</var>]</code></td> 
+                       
+               <td align="left">n/a</td> 
+                       
+               <td align="left"> Executes the system command
+                  <code>CATALOG</code> which <a href="edis_ux_data.htm#dae_ux_check">checks</a> and catalogs the current data area
+                           definition. 
+                           
+                  <p>You must supply an object name with the command if you catalog a
+                      new data area definition or if you want to copy the current data area.
+                               Otherwise, an appropriate message appears. 
+                  </p> 
+                           
+                  <p>See also <a href="edis_ux_data.htm#edis_ux_data_save_cat">Saving
+                                  and Cataloging a Data Area</a>.
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td align="left"><a name="dae_ux_check"></a><code><u>C</u>HECK</code></td>
+                       
+                       
+               <td align="left"><span class="key">F6</span></td> 
+                       
+               <td align="left">Executes the system command
+                  <a href="../syscom/check.htm"><code>CHECK</code></a> which checks the syntax of the current data
+                  area definition. A window informs you that a syntax check is in process. If a
+                  syntax error is found, the line containing the error becomes the current line,
+                  and the error is displayed in the message line. If no errors are found, a
+                         corresponding message is displayed.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td align="left"><a name="dae_ux_clear"></a><code>CLEAR</code></td> 
+                       
+               <td align="left"><span class="key">F8</span></td> 
+                       
+               <td align="left">Executes the system command
+                  <a href="../syscom/clear.htm"><code>CLEAR</code></a> which clears the source work area. Changes to
+                  the data area currently contained in the source work area are lost if they were
+                           not previously saved.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td align="left"><a name="dae_ux_fld_type"></a><code>FLD TYPE</code></td> 
+                       
+               <td align="left"><span class="key">F11</span></td> 
+                       
+               <td>
+                  <table border="0" width="100%">
+                     <colgroup>
+                        <col width="12%">
+                        <col width="88%">
+                     </colgroup> 
+                              
+                     <tbody align="left" valign="top"> 
+                                  
+                        <tr> 
+                                      
+                           <td colspan="2"><code>FLD
+                                 TYPE</code> is available from the <span class="selectable_label">Commands</span> menu
+                              only (you cannot enter it in the command line). 
+                                          
+                              <p>Invokes a window in which you can change the type of the current
+                                              variable or comment. You can select one of the following types:
+                              </p>
+                           </td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td colspan="2">&nbsp;</td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td><span class="selectable_label">D</span></td> 
+                                      
+                           <td>Data field </td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td><span class="selectable_label">B</span></td> 
+                                      
+                           <td>Block</td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td><span class="selectable_label">C</span></td> 
+                                      
+                           <td>Constant</td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td><span class="selectable_label">H</span></td> 
+                                      
+                           <td>Handle</td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td><span class="selectable_label">S</span></td> 
+                                      
+                           <td>Structure</td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td><span class="selectable_label">*&nbsp;</span></td> 
+                                      
+                           <td>Comment</td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td colspan="2">&nbsp;</td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td colspan="2"> The type of a field within a
+                              view definition cannot be changed. 
+                              
+                              <p class="caution"><strong>Caution:</strong><br>When changing types, some attribute definitions of a
+                                              variable or comment can be lost.
+                              </p>
+                           </td> 
+                                     
+                        </tr> 
+                                 
+                     </tbody> 
+                             
+                  </table>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td align="left"><a name="dae_ux_generate"></a><code><u>GEN</u>ERATE
+                        <var>object-name</var></code> 
+               </td> 
+                       
+               <td align="left"><span class="key">F10</span></td> 
+                       
+               <td align="left">Generates a Natural object of the
+                  type copycode from the current data area definition thus overwriting the
+                  contents of the source work area. Changes made to the data area since the last
+                  <a href="edis_ux_data.htm#dae_ux_save"><code>SAVE</code></a> or
+                           <a href="edis_ux_data.htm#dae_ux_stow"><code>STOW</code></a> are
+                           lost. 
+                           
+                  <p>The copycode object is stored as a source object in the specified
+                               Natural library in the current system file under the
+                               <code><var>object-name</var></code> supplied with the
+                               command.
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td align="left" nowrap><code><u>Q</u>UIT</code><p>or</p> 
+                        
+                  <p><code>.</code></p> 
+                           
+                  <p>(a period)</p>
+               </td> 
+                       
+               <td align="left"><span class="key">F3</span></td> 
+                       
+               <td align="left">Terminates the data area editor. 
+                  
+                  <p>Any changes made since the last <a href="edis_ux_data.htm#dae_ux_save"><code>SAVE</code></a> or
+                               <a href="edis_ux_data.htm#dae_ux_stow"><code>STOW</code></a>
+                               command are lost.
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td align="left" nowrap><a name="dae_ux_read"></a><code>READ
+                     <var>object-name</var></code> 
+               </td> 
+                       
+               <td align="left"><span class="key">F7</span></td> 
+                       
+               <td align="left">Executes the system command
+                  <a href="../syscom/read.htm"><code>READ</code></a> which reads an existing data area definition
+                  into the source work area. The data area must be stored as a source object with
+                           the specified <code><var>object-name</var></code> in the
+                           current Natural library in the current system file.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td align="left"><a name="dae_ux_save"></a><code><u>SA</u>VE
+                      [<var>object-name</var>]</code></td> 
+                       
+               <td align="left"><span class="key">F4</span></td> 
+                       
+               <td>Executes the system command
+                  <code>SAVE</code>
+                  which saves the current data area definition. 
+                           
+                  <p>You must supply an object name if you save a new data area
+                     definition or if you want to copy the current data area. Otherwise, an
+                               appropriate message appears or input window appears. If you press
+                               <span class="key">F4</span>, a window always prompts you for name of the data area and the
+                               library. If the current object and library names are correct, no entry is
+                               required.
+                  </p> 
+                           
+                  <p>See also <a href="edis_ux_data.htm#edis_ux_data_save_cat">Saving
+                                  and Cataloging a Data Area</a>.
+                  </p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td align="left"><a name="dae_ux_scan"></a><code>SCAN
+                     <var>scan-value</var></code></td> 
+                       
+               <td align="left">n/a</td> 
+                       
+               <td>Scans the data area for a character string
+                  (<code><var>scan-value</var></code>) in the <span class="selectable_label">Name of
+                              <var>variable-field-type</var></span> column (default)
+                           and/or the <span class="selectable_label">M</span> column of the editor screen, depending on
+                           whether the <a href="edis_ux_data.htm#dae_ux_set_scan"><code>SET
+                                 SCAN</code></a> command was executed earlier. 
+                           
+                  <p>The line in which the
+                               <code><var>scan-value</var></code> is found is highlighted. If
+                               the first instance of <code><var>scan-value</var></code> is
+                               highlighted, you can go to the next instance by pressing <span class="key">ENTER</span>.
+                  </p> 
+                           
+                  <p>The scan is performed from the first to the last line in the source
+                               work area and wraps around to the beginning after the last line is reached.
+                  </p>
+                           
+                           
+                  <p class="note"><strong>Note:</strong><br>The <code>SCAN</code> command performs an exact
+                               search for the specified <code><var>scan-value</var></code>.
+                               This should be taken into account when searching for DBCS (Double Byte
+                               Character Set) characters.
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td align="left"><code>SET ABS [ON|OFF]</code></td>
+                       
+                       
+               <td align="left">n/a</td> 
+                       
+               <td>
+                  <table border="0" width="100%">
+                     <colgroup>
+                        <col width="8%">
+                        <col width="92%">
+                     </colgroup> 
+                              
+                     <tbody align="left" valign="top"> 
+                                  
+                        <tr> 
+                                      
+                           <td colspan="2">Determines whether the
+                              <code>SCAN</code> command operates in absolute or non-absolute
+                                          mode.
+                           </td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td colspan="2" align="left">&nbsp;</td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td align="left"><code>ON</code></td> 
+                                      
+                           <td align="left">The <a href="edis_ux_data.htm#dae_ux_scan"><code>SCAN</code></a> command
+                              operates in absolute mode, which means that the value to be scanned needs not
+                              be delimited by blanks or special characters.
+                           </td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td colspan="2" align="left">&nbsp;</td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td align="left"><code>OFF</code></td> 
+                                      
+                           <td align="left">The <code>SCAN</code> command
+                              operates in non-absolute mode, which means that the value to be scanned must be
+                              delimited by blanks or special characters.
+                           </td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td colspan="2" align="left">&nbsp;</td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td colspan="2" align="left">The default is
+                              <code>OFF</code>.
+                           </td> 
+                                     
+                        </tr> 
+                                 
+                     </tbody> 
+                             
+                  </table>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td align="left"><a name="dae_ux_set_scan"></a><code>SET SCAN
+                     [COMMENT|NAME|LEVEL]</code></td> 
+                       
+               <td align="left">n/a</td> 
+                       
+               <td>
+                  <table border="0" width="100%">
+                     <colgroup>
+                        <col width="12%">
+                        <col width="88%">
+                     </colgroup> 
+                              
+                     <tbody align="left" valign="top"> 
+                                  
+                        <tr> 
+                                      
+                           <td colspan="2">Determines the column(s) in
+                              which the <a href="edis_ux_data.htm#dae_ux_scan"><code>SCAN</code></a> command
+                                          searches for a <code><var>scan-value</var></code>: 
+                           </td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                       
+                                      
+                           <td colspan="2">&nbsp;</td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td><code>COMMENT</code></td> 
+                                      
+                           <td>The <span class="selectable_label">Index/Comment</span> column
+                                    is scanned.
+                           </td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                       
+                                      
+                           <td colspan="2">&nbsp;</td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td><code>NAME</code></td> 
+                                      
+                           <td>The <span class="selectable_label">Name of
+                                     <var>variable-field-type</var></span> (or
+                                          <span class="selectable_label">Comment</span>) column is scanned.
+                           </td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                       
+                                      
+                           <td colspan="2">&nbsp;</td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td><code>LEVEL</code></td> 
+                                      
+                           <td>Scans within a hierarchical group
+                              structure.
+                           </td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td colspan="2">&nbsp;</td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td colspan="2">The default is
+                              <code>NAME</code>.
+                           </td> 
+                                     
+                        </tr> 
+                                 
+                     </tbody> 
+                             
+                  </table>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td align="left"><a name="dae_ux_stow"></a><code>STOW
+                     [<var>object-name</var>]</code> 
+               </td> 
+                       
+               <td align="left"><span class="key">F5</span></td> 
+                       
+               <td align="left">Executes the system command
+                  <code>STOW</code> which saves and catalogs the current data area
+                           definition. 
+                           
+                  <p>You must supply an object name if you
+                               <code>STOW</code> a new data area or if you want to copy the
+                               current data area.
+                  </p> 
+                           
+                  <p>See also <a href="edis_ux_data.htm#edis_ux_data_save_cat">Saving
+                                  and Cataloging a Data Area</a>.
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td align="left"><a name="dae_ux_set_type"></a><code>SET TYPE G|L|A</code></td> 
+                       
+               <td align="left"><span class="key">F9</span></td> 
+                       
+               <td>
+                  <table border="0" width="100%">
+                     <colgroup>
+                        <col width="8%">
+                        <col width="92%">
+                     </colgroup> 
+                              
+                     <tbody align="left" valign="top"> 
+                                  
+                        <tr> 
+                                      
+                           <td colspan="2">Changes the type of the current
+                              data area: 
+                           </td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td colspan="2">&nbsp;</td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td><code>G</code></td> 
+                                      
+                           <td>Global data area</td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td><code>L&nbsp;&nbsp;</code></td> 
+                                      
+                           <td>Local data area</td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td><code>A</code></td> 
+                                      
+                           <td>Parameter data area</td> 
+                                     
+                        </tr> 
+                                 
+                     </tbody> 
+                             
+                  </table>
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+         
+      <div class="noprint">
+         <p><a href="edis_ux_data.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="edis_ux_data_save_cat"></a></div> 
+         
+      <h2>Saving and Cataloging a Data Area</h2> 
+          
+          
+      <p>Before a data area can be used in a Natural program (or another object),
+              the data area must be saved as a source object and/or a cataloged object in the current Natural environment.
+      </p> 
+           
+          
+      <p>The commands used for saving and cataloging the current data area
+              definition are described in the following
+              section. 
+      </p> 
+          
+      <p>You must supply an object name if you save or catalog a new data area
+              definition or if you want to copy the current data area. Otherwise, an
+              appropriate message appears or a window prompts you for the name. For the naming conventions that apply when saving or
+         cataloging a data area, refer to <a href="../using/use_rules.htm#use_rules-Object_Names">Object Naming
+            Conventions</a> in the <cite>Using Natural</cite>
+              documentation.
+      </p>
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To save a data area as a source object</strong></p>
+      <ul>
+         <li> 
+                   
+                   
+            <p class="instep">Enter the system command <a href="../syscom/save.htm"><code>SAVE</code></a> according
+                       to the syntax rules described in the <cite>System Commands</cite>
+                       documentation.
+            </p> 
+                   
+                   
+                   
+            <p class="instep">Or:<br>Press <span class="key">F4</span>.
+            </p> 
+                   
+                   
+                   
+            <p class="instep">Or:<br>From the <span class="guimenu">Commands</span> menu, choose
+                       <span class="guimenuitem">Save</span>.
+            </p> 
+                   
+                   
+                   
+            <p class="instep">The source of the data area is stored as a source object in the specified Natural library in the current system file. The
+               data area is not
+                       checked for syntax errors.
+            </p> 
+                 
+         </li>
+      </ul> 
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To save a data area as a cataloged object</strong></p>
+      <ul>
+         <li> 
+                   
+                   
+            <p class="instep">Enter the system command <a href="../syscom/catalog.htm"><code>CATALOG</code></a>
+                       according to the syntax rules described in the <cite>System
+                          Commands</cite> documentation.
+            </p> 
+                   
+                   
+                   
+            <p class="instep">The source of the data area is checked for syntax errors. If no
+                       errors are found, it is saved as a cataloged object in the specified Natural
+                       library in the current system file.
+            </p> 
+                 
+         </li>
+      </ul> 
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To save a data area as a source object <em>and</em> a cataloged object</strong></p>
+      <ul>
+         <li> 
+                   
+                   
+            <p class="instep">Enter the system command <a href="../syscom/stow.htm"><code>STOW</code></a> according
+                       to the syntax rules described in the <cite>System Commands</cite>
+                       documentation.
+            </p> 
+                   
+                   
+                   
+            <p class="instep">Or:<br>Press <span class="key">F5</span>.
+            </p> 
+                   
+                   
+                   
+            <p class="instep">Or:<br>From the <span class="guimenu">Commands</span> menu, choose
+                       <span class="guimenuitem">Stow</span>.
+            </p> 
+                   
+                   
+                   
+            <p class="instep">The source of the data area is checked for syntax errors. If no
+                       errors are found, it is saved as a source object and a cataloged object in the
+                       specified Natural library in the current system file.
+            </p> 
+                 
+         </li>
+      </ul> 
+           
+         
+      <div class="noprint">
+         <p><a href="edis_ux_data.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="edis_ux_data_Help"></a></div> 
+         
+      <h2>Help Information and Selection Options</h2> 
+          
+          
+      <p>You can use the help system to obtain help information on editor
+              functions and input fields. In addition, in edit mode, you can use the help
+              system to choose a valid input value or a line command from a list.
+      </p> 
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To display help information</strong></p>
+      <ol class="steps">
+         <li> 
+                   
+                   
+            <p class="instep">In edit mode, position the cursor in the <span class="selectable_label">C</span>
+                       column and press <span class="key">F1</span> for a summary of all editor functions
+                       available.
+            </p> 
+                   
+                   
+                   
+            <p class="instep">Or:<br>Place the cursor on the field about which you require further
+                       information and press <span class="key">F1</span> for instructions on using this field.
+            </p> 
+                   
+                   
+                   
+            <p class="instep">A window appears with help information.</p> 
+                   
+            <p class="instep">You can use the arrow (cursor) keys to scroll up or down in the
+                       window.
+            </p> 
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Choose <span class="key">ENTER</span> or <span class="key">ESC</span> to close the help window.
+                       
+            </p> 
+                   
+                 
+         </li>
+      </ol> 
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To select a valid value or appropriate line command</strong></p>
+      <ul>
+         <li> 
+                   
+                   
+            <p class="instep">Place the cursor on the field for which you want to select a valid
+                       input value or execute a line command and press <span class="key">F2</span>.
+            </p> 
+                   
+                   
+                   
+            <p class="instep">If applicable, a selection window appears from which you can select
+                       an input value or a line command.
+            </p> 
+                 
+         </li>
+      </ul> 
+         
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="edis_ux_data.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../edis/edis_ux_data.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/edis/edis_ux_data.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="edis-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pgm_ux_save_cat.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="edis_ux_map.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

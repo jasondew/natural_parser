@@ -1,0 +1,333 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Flexible SQL</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="flexib"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../sm/flexib.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/sm/flexib.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="sql-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="selexp.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="calldbpr_sql.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Statements&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> Flexible SQL 
+               <a name="x186"></a></h1>
+      </div> 
+         
+         
+      <p>This document covers the following topics:</p>
+         
+      <ul>
+         <li>
+            <p class="initem"><a href="flexib.htm#flex_sql">Using Flexible SQL</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="flexib.htm#Text_Variables">Specifying Text Variables in Flexible SQL</a></p>
+         </li>
+      </ul> 
+        
+      <hr> 
+        
+      <div><a name="flex_sql"></a></div> 
+         
+      <h2> Using Flexible SQL</h2> 
+          
+          
+      <p>In addition to the SQL syntax described in the previous sections,
+              flexible SQL allows you to use arbitrary SQL syntax.
+      </p> 
+          
+      <h4 class="floating-title">Characters <code> &lt;&lt;</code> and <code>&gt;&gt;</code>
+              
+      </h4> 
+          
+      <p>Flexible SQL is enclosed in <code>&lt;&lt;</code> and
+              <code>&gt;&gt;</code> characters. It can include arbitrary SQL text and host
+              variables. Within flexible SQL, host variables <em>must</em> be prefixed by a
+              colon (:).
+      </p> 
+          
+      <p>The flexible SQL string can cover several statement lines. Comments are
+              possible, too (see also the statement <a href="procsql_sql.htm#procsql_sql"><code>PROCESS SQL</code></a>).
+      </p> 
+          
+      <p>Flexible SQL can be used as a replacement for any of the following
+              syntactical SQL items:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="scalar.htm#atom"> <var>atom</var></a>
+                      
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="scalar.htm#column-reference_scalar">
+                         <var>column-reference</var> </a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="scalar.htm#scalar">
+                         <var>scalar-expression</var> </a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="search.htm#predicate"> <var>predicate</var>
+                         </a></p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>Flexible SQL can also be used between the clauses of a select
+              expression:
+      </p> 
+          <pre class="verbatim">SELECT selection   
+  &lt;&lt; ... &gt;&gt; 
+  INTO ... 
+  FROM ... 
+  &lt;&lt; ... &gt;&gt; 
+  WHERE ... 
+  &lt;&lt; ... &gt;&gt; 
+  GROUP BY ... 
+  &lt;&lt; ... &gt;&gt; 
+  HAVING ... 
+  &lt;&lt; ... &gt;&gt; 
+  ORDER BY ... 
+  &lt;&lt; ... &gt;&gt;</pre> 
+          <p class="note"><strong>Note:</strong><br> The SQL text used in flexible SQL is not recognized by the Natural
+              compiler. The SQL text (with replaced host variables) is simply copied into the
+              SQL string passed to the database system. Syntax errors in flexible SQL are
+              detected at runtime when the database executes the corresponding
+              statement.
+      </p> 
+          
+      <h4 class="floating-title"> Example 1</h4> 
+          <pre class="verbatim">SELECT NAME 
+FROM SQL-EMPLOYEES 
+WHERE &lt;&lt; MONTH (BIRTH) &gt;&gt;  =  &lt;&lt; MONTH (CURRENT_DATE) &gt;&gt; </pre> 
+          <h4 class="floating-title"> Example 2:</h4> 
+          <pre class="verbatim">SELECT NAME 
+FROM SQL-EMPLOYEES 
+WHERE &lt;&lt; MONTH (BIRTH) = MONTH (CURRENT_DATE) &gt;&gt;</pre> 
+          <h4 class="floating-title"> Example 3:</h4> 
+          <pre class="verbatim">SELECT NAME 
+FROM SQL-EMPLOYEES 
+WHERE SALARY &gt; 50000 
+&lt;&lt; INTERSECT 
+   SELECT NAME 
+   FROM SQL-EMPLOYEES 
+   WHERE DEPT = 'DEPT10'  
+&gt;&gt;</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="flexib.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Text_Variables"></a></div> 
+         
+      <h2> Specifying Text Variables in Flexible SQL</h2> 
+          
+          
+      <p>Within flexible SQL, you can also specify so-called "text
+              variables".
+      </p> 
+           
+           
+      <table border="0" class="syntax" cellpadding="3">  
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> &lt;&lt;<a href="flexib.htm#prefix">:<code class="keyword">T</code>:</a><a href="basic.htm#host-variable"><var>host-variable</var></a>
+                           [<a href="flexib.htm#LINDICATOR_flexib"><code class="keyword">LINDICATOR</code></a>:<a href="basic.htm#host-variable"><var>host-variable</var></a>]&gt;&gt;
+                           
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>The syntax items are described below:</p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th nowrap> <a name="prefix"></a>:T:
+                   
+               </th> 
+                       
+               <td> 
+                  
+                  <p>A text variable is a <var>host-variable</var>
+                               prefixed by <code>:T:</code>. It must be in alphanumeric format.
+                  </p> 
+                           
+                  <p>At runtime, a text variable within an SQL statement will be
+                     replaced by its contents that is, the text string contained in the text
+                               variable will be inserted into the SQL string.
+                  </p> 
+                           
+                  <p>After the replacement, trailing blanks will be removed from the
+                               inserted text string.
+                  </p> 
+                           
+                  <p>You have to make sure yourself that the content of a text variable
+                               results in a syntactically correct SQL string. In particular, the content of a
+                               text variable must not contain <var>host-variables</var>.
+                  </p> 
+                           
+                  <p>A statement containing a text variable will always be executed in
+                               dynamic SQL mode.
+                  </p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th nowrap> <a name="LINDICATOR_flexib"></a>LINDICATOR 
+               </th> 
+                       
+               <td> 
+                  
+                  <div><strong class="floating-title"> LINDICATOR Option:</strong></div> 
+                           
+                  <p>The text variable can be followed by the keyword
+                               <code>LINDICATOR</code> and a length indicator variable (that is, a
+                               <a href="basic.htm#host-variable"><var>host-variable</var></a>
+                               prefixed by colon).
+                  </p> 
+                           
+                  <p>The length indicator variable has to be of format/length I2.</p> 
+                           
+                  <p>If no <code>LINDICATOR</code> variable is specified, the entire
+                               content of the text variable will be inserted into the SQL string.
+                  </p> 
+                           
+                  <p>If you specify a <code>LINDICATOR</code> variable, only the first
+                               <var>n</var> characters (<var>n</var> being the
+                               value of the <code>LINDICATOR</code> variable) of the text variable content
+                               will be inserted into the SQL string. If the number in the
+                               <code>LINDICATOR</code> variable is greater than the length of the text
+                               variable content, the entire text variable content will be inserted. If the
+                               number in the <code>LINDICATOR</code> variable is negative or 0, nothing will
+                               be inserted.
+                  </p> 
+                           
+                  <p>See general information on <a href="basic.htm#host-variable"><var>host-variable</var></a>.
+                  </p>
+                           
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <h4 class="floating-title"> Example Using Text Variable</h4> 
+          <pre class="verbatim">   DEFINE DATA LOCAL 
+   01 TEXTVAR (A200) 
+   01 TABLES VIEW OF SYSIBM-SYSTABLES 
+      02 NAME 
+      02 CREATOR 
+   END-DEFINE 
+   * 
+   MOVE 'WHERE NAME &gt; ''SYS'' AND CREATOR = ''SYSIBM''' TO TEXTVAR  
+   * 
+   SELECT * INTO VIEW TABLES 
+     FROM SYSIBM-SYSTABLES 
+     &lt;&lt; :T:TEXTVAR &gt;&gt; 
+     DISPLAY TABLES 
+   END-SELECT 
+   * 
+   END</pre> 
+          <p>The generated SQL statement (as displayed with the <code>LISTSQL</code>
+              system command) will look as follows:
+      </p> 
+          <pre class="verbatim">SELECT NAME, CREATOR FROM SYSIBM.SYSTABLES:T: FOR FETCH ONLY</pre> 
+          <p>The executed SQL statement will look as follows:</p> 
+          <pre class="verbatim">SELECT TABNAME, CREATOR FROM SYSIBM.SYSTABLES  
+  WHERE TABNAME &gt; 'SYS' AND CREATOR = 'SYSIBM'</pre> 
+          
+        
+       <div class="noprint">
+         <div class="nospy">
+            <p><a href="flexib.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../sm/flexib.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/sm/flexib.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="sql-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="selexp.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="calldbpr_sql.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

@@ -1,0 +1,237 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Migrate Natural Web Interface SYSWEB to SYSWEB3</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="nwx_migrate"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../webtech/nwx_migrate.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/webtech/nwx_migrate.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="nwx_adapt.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="nwx_error.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="nwx_examp-over_t31_0300.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Web Technology&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+         
+      <div class="nospytext">
+         <h1> Migrate Natural Web Interface SYSWEB to SYSWEB3 
+                <a name="x91"></a> 
+                <a name="x92"></a></h1>
+      </div> 
+          
+          
+      <p>This section provides you with a step-by-step introduction on how to
+              update your programs written for the Natural Web
+         Interface (SYSWEB) to run with the new interface (SYSWEB3).
+      </p> 
+          
+      <ol> 
+              
+         <li> 
+                  
+            <p class="initem">You have to use the new interface programs <code>nww3</code>* instead
+                      of the old <code>nww</code>* programs. Copy the appropriate programs to your
+                      HTTP server, and configure your HTTP server.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Adapt your nww3*.ini file settings.</p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Adapt external URLs to <code>nww3</code>* instead of
+                      <code>nww</code>*
+            </p> 
+                  
+            <p class="note"><strong>Note:</strong><br> It is possible to rename the <code>nww3</code>* interface programs
+                      - but the new interface programs will only work with Natural subprograms stowed
+                      with SYSWEB3 and the old interface programs will only work with Natural
+                      subprograms stowed with SYSWEB.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">If you are running a Natural RPC server </p> 
+                  
+            <ul style="margin-top: 0px; margin-bottom: 0px;"> 
+                      
+               <li class="nesteditem"> 
+                          
+                  <p class="initem">On Windows or UNIX without Natural Security modify your steplib
+                              settings at NATPARM. Replace steplib SYSWEB with steplib SYSWEB3 (or use a new,
+                              different RPC server instead)
+                  </p> 
+                         
+               </li> 
+                      
+               <li class="nesteditem"> 
+                          
+                  <p class="initem">On mainframe systems without Natural Security modify your server
+                              startup logon from SYSWEB to SYSWEB3 (or use a new, different RPC server
+                              instead)
+                  </p> 
+                         
+               </li> 
+                      
+               <li class="nesteditem"> 
+                          
+                  <p class="initem">With Natural Security (all platforms) modify your steplib settings
+                              at Natural Security. Replace steplib SYSWEB with steplib SYSWEB3 (or use a new,
+                              different RPC server instead)
+                  </p> 
+                         
+               </li> 
+                      
+               <li class="nesteditem"> 
+                          
+                  <p class="initem">Check your EntireX Broker settings. You may have to expand your
+                              <code>NUM-COMBUF</code>, <code>NUM-LONG-BUFFER</code>,
+                              <code>MAX-MSG</code> settings, depending on the maximum page length
+                              you want to transfer.
+                  </p> 
+                         
+               </li> 
+                     
+            </ul> 
+                  
+            <p class="initem"></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">If you are running a DCOM server (Windows only), </p> 
+                  
+            <ul style="margin-top: 0px; margin-bottom: 0px;"> 
+                      
+               <li class="nesteditem"> 
+                          
+                  <p class="initem">Unregister your class (usually named according to your library name)
+                              first.
+                  </p> 
+                         
+               </li> 
+                      
+               <li class="nesteditem"> 
+                          
+                  <p class="initem">Delete your class (usually named according to your library name) and
+                              the associated LDA (usually named L)
+                  </p> 
+                         
+               </li> 
+                      
+               <li class="nesteditem"> 
+                          
+                  <p class="initem">Use the Web Interface plug-in and generate a new class for SYSWEB3
+                              with a new LDA (new GUIs).
+                  </p> 
+                         
+               </li> 
+                      
+               <li class="nesteditem"> 
+                          
+                  <p class="initem">Register the new class.</p> 
+                         
+               </li> 
+                     
+            </ul> 
+                  
+            <p class="initem"></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Adapt URLs, read work files, templates, etc. to point to SYSWEB3
+                      instead of SYSWEB.
+            </p> 
+                  
+            <p class="note"><strong>Note:</strong><br> If you rename SYSWEB3 to SYSWEB your application may work, but
+                      internal programs delivered with SYSWEB3 may not work correctly and may deliver
+                      wrong or unexpected results.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Recatalog all your programs that reference web interface programs by
+                      using SYSWEB3 as steplib instead of SYSWEB.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">All your programs should now run the same way, they did with SYSWEB
+                      before.
+            </p> 
+                 
+         </li> 
+             
+      </ol> 
+          
+        
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="nwx_migrate.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../webtech/nwx_migrate.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/webtech/nwx_migrate.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="nwx_adapt.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="nwx_error.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="nwx_examp-over_t31_0300.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

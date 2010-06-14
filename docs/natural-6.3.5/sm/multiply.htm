@@ -1,0 +1,705 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>MULTIPLY</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="multiply" id="16828"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../sm/multiply.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/sm/multiply.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="sm-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="moveindx.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="newpage.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Statements&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> MULTIPLY 
+               <a name="x122"></a></h1>
+      </div> 
+         
+         
+      <p>This document covers the following topics:</p>
+         
+      <ul>
+         <li>
+            <p class="initem"><a href="multiply.htm#Function_multiply">Function</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="multiply.htm#syntax_descr_multiply">Syntax Description</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="multiply.htm#Example_multiply">Example</a></p>
+         </li>
+      </ul> 
+         
+      <p>Related Statements: <a href="add.htm#add">ADD</a> |
+             <a href="compress.htm#compress">COMPRESS</a> |
+             <a href="compute.htm#compute">COMPUTE</a> | <a href="divide.htm#divide">DIVIDE</a> | <a href="examine.htm#examine">EXAMINE</a> | <a href="move.htm#move">MOVE</a> | <a href="moveall.htm#moveall">MOVE
+                ALL</a> | <a href="reset.htm#reset">RESET</a> |
+             <a href="separate.htm#separate">SEPARATE</a> |
+             <a href="subtract.htm#subtract">SUBTRACT</a></p> 
+         
+      <p>Belongs to Function Group:
+             <a href="stmt.htm#Arithmetic_and_Data_Movement_Operations">Arithmetic and Data
+            Movement Operations</a></p> 
+        
+      <hr> 
+        
+      <div><a name="Function_multiply"></a></div> 
+         
+      <h2> Function </h2> 
+          
+          
+      <p>The <code>MULTIPLY</code> statement is used to multiply two operands.
+              Depending on the syntax used, the result of the multiplication may be stored in
+              <var>operand1</var> or <var>operand3</var>.
+      </p>
+          
+          
+      <p>If a database field is used as the result field, the multiplication
+              results in an update only to the internal value of the field as used within the
+              program. The value for the field in the database remains unchanged.
+      </p> 
+          
+      <p>For multiplications involving arrays, see also
+              <a href="../pg/pg_furth_arithm.htm">Rules for Arithmetic
+            Assignments</a>,
+              <a href="../pg/pg_furth_arithm.htm#AO_Arrays">Arithmetic
+            Operations with Arrays</a> (in the <cite>Programming
+                 Guide</cite>).
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="multiply.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="syntax_descr_multiply"></a></div> 
+         
+      <h2> Syntax Description </h2> 
+          
+      <p>Two different structures are possible for this
+              statement.
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="multiply.htm#Syntax_1_multiply">Syntax 1 - MULTIPLY without GIVING Clause</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="multiply.htm#Syntax_2_multiply">Syntax 2 - MULTIPLY with GIVING Clause</a></p>
+         </li>
+      </ul>
+      <div><a name="Syntax_1_multiply"></a></div> 
+          
+      <h3>Syntax 1 - MULTIPLY without GIVING Clause</h3> 
+           
+           
+      <p>If Syntax 1 used, the result of the multiplication may be stored in
+               <var>operand1</var>.
+      </p> 
+            
+            
+      <table border="0" class="syntax" cellpadding="3">  
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td nowrap> <code class="keyword">MULTIPLY</code>&nbsp;[<a href="multiply.htm#rounded_option"><code class="keyword">ROUNDED</code></a>]&nbsp;
+                            <a href="multiply.htm#Result_Field_multiply"><var>operand1</var></a>
+                            <a href="multiply.htm#Result_Field_multiply"><code class="keyword">BY</code>
+                               <var>operand2</var></a> 
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>For an explanation of the symbols used in the syntax diagram, see
+               <a href="synsym.htm#Syntax_Symbols">Syntax
+            Symbols</a>.
+      </p> 
+           
+      <p>Operand Definition Table (Syntax 1):</p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>Operand</th> 
+                        
+               <th colspan="5" align="center">
+                  <a href="synsym.htm#statem_poss_struct">Possible Structure</a> 
+               </th> 
+                        
+               <th colspan="12" align="center">
+                  <a href="synsym.htm#statem_poss_form">Possible Formats</a> 
+               </th> 
+                        
+               <th align="center"> <a href="synsym.htm#statem_ref_perm">Referencing Permitted</a> 
+               </th> 
+                        
+               <th align="center"> <a href="synsym.htm#statem_dyn_def">Dynamic
+                     Definition</a> 
+               </th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> <var>operand1</var> 
+               </td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>S</td> 
+                        
+               <td>A</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>M</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>N</td> 
+                        
+               <td>P</td> 
+                        
+               <td>I</td> 
+                        
+               <td>F</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">yes</td> 
+                        
+               <td align="center">no</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <var>operand2</var> 
+               </td> 
+                        
+               <td>C</td> 
+                        
+               <td>S</td> 
+                        
+               <td>A</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>N</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>N</td> 
+                        
+               <td>P</td> 
+                        
+               <td>I</td> 
+                        
+               <td>F</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">yes</td> 
+                        
+               <td align="center">no</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>Syntax Element Description (Syntax 1):</p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th nowrap> <a name="Result_Field_multiply"></a> <var>operand1</var> BY
+                            <var>operand2</var>  
+               </th> 
+                        
+               <td> 
+                  
+                  <p> <var>operand1</var> is the multiplicand,
+                                <var>operand2</var> is the multiplier. As the
+                                <code>GIVING</code> clause is not used, the result is stored in
+                                <var>operand1</var>, hence the statement is equivalent to:
+                  </p> 
+                            <pre class="verbatim">&lt;<var>oper1</var>&gt; := &lt;<var>oper1</var>&gt; * &lt;<var>oper2</var>&gt;</pre> </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th> <a name="rounded_option"></a>ROUNDED
+                   
+               </th> 
+                        
+               <td>If you specify the keyword <code>ROUNDED</code>, the value will
+                  be rounded before it is assigned to <var>operand1</var> or
+                            <var>operand3</var>. For information on rounding, see
+                            <a href="../pg/pg_furth_arithm.htm">Rules for Arithmetic
+                               Assignment</a>,
+                            <a href="../pg/pg_furth_arithm.htm#Field_Trunc_Round">Field
+                               Truncation and Field Rounding</a> (in the
+                            <cite>Programming Guide</cite>).
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+          
+      <div><a name="Syntax_2_multiply"></a></div> 
+          
+      <h3>Syntax 2 - MULTIPLY with GIVING Clause</h3> 
+           
+           
+      <p>If Syntax 2 used, the result of the multiplication may be stored in
+               <var>operand3</var>.
+      </p> 
+            
+            
+      <table border="0" class="syntax" cellpadding="3">  
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td nowrap> <code class="keyword">MULTIPLY</code>&nbsp;[<a href="multiply.htm#rounded_option_2"><code class="keyword">ROUNDED</code></a>]&nbsp;
+                            <a href="multiply.htm#giving_clause_2"><var>operand1</var>
+                               <code class="keyword">BY</code> <var>operand2</var>
+                               <code class="keyword">GIVING</code>
+                               <var>operand3</var></a> 
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>For an explanation of the symbols used in the syntax diagram, see
+               <a href="synsym.htm#Syntax_Symbols">Syntax
+            Symbols</a>.
+      </p> 
+           
+      <p>Operand Definition Table (Syntax 2):</p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                  
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>Operand</th> 
+                        
+               <th colspan="5" align="center">
+                  <a href="synsym.htm#statem_poss_struct">Possible Structure</a> 
+               </th> 
+                        
+               <th colspan="13" align="center">
+                  <a href="synsym.htm#statem_poss_form">Possible Formats</a> 
+               </th> 
+                        
+               <th align="center"> <a href="synsym.htm#statem_ref_perm">Referencing Permitted</a> 
+               </th> 
+                        
+               <th align="center"> <a href="synsym.htm#statem_dyn_def">Dynamic
+                     Definition</a> 
+               </th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> <var>operand1</var> 
+               </td> 
+                        
+               <td>C</td> 
+                        
+               <td>S</td> 
+                        
+               <td>A</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>M</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>N</td> 
+                        
+               <td>P</td> 
+                        
+               <td>I</td> 
+                        
+               <td>F</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">yes</td> 
+                        
+               <td align="center">no</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <var>operand2</var> 
+               </td> 
+                        
+               <td>C</td> 
+                        
+               <td>S</td> 
+                        
+               <td>A</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>N</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>N</td> 
+                        
+               <td>P</td> 
+                        
+               <td>I</td> 
+                        
+               <td>F</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">yes</td> 
+                        
+               <td align="center">no</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <var>operand3</var> 
+               </td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>S</td> 
+                        
+               <td>A</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>M</td> 
+                        
+               <td>A</td> 
+                        
+               <td>U</td> 
+                        
+               <td>N</td> 
+                        
+               <td>P</td> 
+                        
+               <td>I</td> 
+                        
+               <td>F</td> 
+                        
+               <td>B*</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;T</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">yes</td> 
+                        
+               <td align="center">yes</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>* Format B of <var>operand3</var> may be used only with
+               a length of less than or equal to 4. 
+      </p> 
+           
+      <p>Syntax Element Description (Syntax 2):</p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th nowrap> <a name="giving_clause_2"></a>
+                   <var>operand1</var> BY <var>operand2</var>
+                            GIVING <var>operand3</var>  
+               </th> 
+                        
+               <td> 
+                  
+                  <p> <var>operand1</var> is the multiplicand,
+                                <var>operand2</var> is the multiplier. As the
+                                <code>GIVING</code> clause) is used, <var>operand1</var> will
+                                not be modified and the result will be stored in
+                                <var>operand3</var>, hence the statement is equivalent to:
+                  </p> 
+                            <pre class="verbatim">&lt;<var>oper3</var>&gt; := &lt;<var>oper1</var>&gt; * &lt;<var>oper2</var>&gt;</pre> 
+                            <p>If <var>operand1</var> is a numeric constant, the
+                                <code>GIVING</code> clause is required.
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th> <a name="rounded_option_2"></a>ROUNDED
+                   
+               </th> 
+                        
+               <td>If you specify the keyword <code>ROUNDED</code>, the value will
+                  be rounded before it is assigned to <var>operand1</var> or
+                            <var>operand3</var>. For information on rounding, see
+                            <a href="../pg/pg_furth_arithm.htm">Rules for Arithmetic
+                               Assignment</a>,
+                            <a href="../pg/pg_furth_arithm.htm#Field_Trunc_Round">Field
+                               Truncation and Field Rounding</a> (in the
+                            <cite>Programming Guide</cite>).
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+        
+        
+      <div class="noprint">
+         <p><a href="multiply.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Example_multiply"></a></div> 
+         
+      <h2> Example </h2> 
+          
+          <pre class="verbatim">** Example 'MULEX1': MULTIPLY                                           
+************************************************************************
+DEFINE DATA LOCAL                                                       
+1 #A      (N3) INIT &lt;20&gt;                                                
+1 #B      (N5)                                                          
+1 #C      (N3.1)                                                        
+1 #D      (N2)                                                          
+1 #ARRAY1 (N5/1:4,1:4) INIT (2,*) &lt;5&gt;                                   
+1 #ARRAY2 (N5/1:4,1:4) INIT (4,*) &lt;10&gt;                                  
+END-DEFINE                                                              
+*                                                                       
+<strong>MULTIPLY #A BY 3</strong>                                            
+WRITE NOTITLE 'MULTIPLY #A BY 3'            25X '=' #A                  
+*                                                                       
+<strong>MULTIPLY #A BY 3 GIVING #B</strong>                                      
+WRITE 'MULTIPLY #A BY 3 GIVING #B'          15X '=' #B                  
+*                                                                       
+<strong>MULTIPLY ROUNDED 3 BY 3.5 GIVING #C</strong>                       
+WRITE 'MULTIPLY ROUNDED 3 BY 3.5 GIVING #C'  6X '=' #C                  
+*                                                     
+<strong>MULTIPLY 3 BY -4 GIVING #D</strong>                    
+WRITE 'MULTIPLY  3 BY -4 GIVING #D'         14X '=' #D
+*                                                     
+<strong>MULTIPLY -3 BY -4 GIVING #D</strong>                 
+WRITE 'MULTIPLY -3 BY -4 GIVING #D'         14X '=' #D
+*                                                     
+<strong>MULTIPLY  3 BY  0 GIVING #D</strong>                   
+WRITE 'MULTIPLY  3 BY  0 GIVING #D'         14X '=' #D
+*                                                     
+WRITE / '=' #ARRAY1 (2,*) '=' #ARRAY2 (4,*)           
+<strong>MULTIPLY #ARRAY1 (2,*) BY #ARRAY2 (4,*)</strong>      
+WRITE / 'MULTIPLY #ARRAY1 (2,*) BY #ARRAY2 (4,*)'     
+      / '=' #ARRAY1 (2,*) '=' #ARRAY2 (4,*)           
+*                                                     
+END</pre> 
+          <h4 class="floating-title">Output of Program MULEX1:</h4> <pre class="system-output">MULTIPLY #A BY 3                         #A:   60                        
+MULTIPLY #A BY 3 GIVING #B               #B:    180                      
+MULTIPLY ROUNDED 3 BY 3.5 GIVING #C      #C:   10.5                      
+MULTIPLY  3 BY -4 GIVING #D              #D: -12                         
+MULTIPLY -3 BY -4 GIVING #D              #D:  12                         
+MULTIPLY  3 BY  0 GIVING #D              #D:   0                         
+                                                                         
+#ARRAY1:      5      5      5      5 #ARRAY2:     10     10     10     10
+                                                                         
+MULTIPLY #ARRAY1 (2,*) BY #ARRAY2 (4,*)                                  
+#ARRAY1:     50     50     50     50 #ARRAY2:     10     10     10     10</pre> 
+          
+        
+       <div class="noprint">
+         <div class="nospy">
+            <p><a href="multiply.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../sm/multiply.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/sm/multiply.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="sm-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="moveindx.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="newpage.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

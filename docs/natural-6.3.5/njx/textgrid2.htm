@@ -1,0 +1,1251 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>TEXTGRID2</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="textgrid2"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../njx/textgrid2.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/njx/textgrid2.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="workingwithgrids.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="basics.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="textgridsss2textgrid2withserversidescrolling.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Natural for Ajax&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x104"></a>TEXTGRID2
+         </h1>
+      </div> 
+         
+         
+      <p>This document covers the following
+             topics:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="textgrid2.htm#textgrid2-example">A Simple Example</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="textgrid2.htm#textgrid2-njxadapter">Adapter Interface</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="textgrid2.htm#textgrid2-selectrow">Selecting Rows in a TEXTGRID2</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="textgrid2.htm#textgrid2-attr">TEXTGRID2 Properties</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="textgrid2.htm#column-attr">COLUMN Properties</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="textgrid2.htm#textgrid2-styles">Dynamic Setting of Text Styles in TEXTGRID2</a></p>
+         </li>
+      </ul> 
+        
+      <hr> 
+        
+      <div><a name="textgrid2-example"></a></div> 
+         
+      <h2>A Simple Example</h2> 
+          
+          
+      <p>The following example shows a TEXTGRID2 control:</p> 
+          
+      <p><img src="graphics/image121.png" alt="graphics/image121.png"></p> 
+          
+      <p>There are two columns which hold data. There is one column at the very
+              left which displays a selection icon - in addition to a yellow background for a
+              selected line. Even and odd lines are displayed in slightly different colors.
+              At the very right of each title column, there is a symbol which indicates the
+              sorting status; if you double-click on this symbol, the column is sorted first
+              in ascending direction and, when clicking again, in descending direction.
+              Change the sequence of columns by dragging the title of a column and dropping
+              it on another column's title. Depending from where you drop, the column is
+              either moved left or right.
+      </p> 
+          
+      <p>The asterisk in the upper left corner of the grid is used
+              to select/deselect all lines in the grid. The behavior depends on the setting
+              of the <code>singleselect</code> property which determines
+              whether multiple lines can be selected in the grid (default) or whether only
+              one line can be selected:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                   
+                  
+            <p class="initem"><strong>Multiple Line Selection Mode</strong><br>When you choose the asterisk for the first time, all lines are
+                      selected. When you choose the asterisk a second time, all lines are
+                      deselected.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                   
+                  
+            <p class="initem"><strong>Single Line Selection Mode</strong><br>When you choose the asterisk (no matter how often), an existing
+                      selected line is deselected.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>The XML layout definition is:</p> 
+          <pre class="verbatim">&lt;rowarea name="Textgrid"&gt;
+    &lt;itr takefullwidth="true" fixlayout="true"&gt;
+        &lt;textgrid2 griddataprop="lines" width="100%" height="200" selectprop="selected"
+                   hscroll="true"&gt;
+            &lt;column name="First Name" property="firstName" width="50%"&gt;
+            &lt;/column&gt;
+            &lt;column name="Last Name" property="lastName" width="50%"&gt;
+            &lt;/column&gt;
+        &lt;/textgrid2&gt;
+    &lt;/itr&gt;
+    &lt;vdist height="5"&gt;
+    &lt;/vdist&gt;
+&lt;/rowarea&gt;</pre> 
+          <p>The TEXTGRID2 definition is bound to a grid data property
+              <code>lines</code>. 
+      </p> 
+          
+      <p>Inside the TEXTGRID2 control definition there are two columns. These
+              columns are bound to the properties <code>firstName</code> and
+              <code>lastName</code>.
+      </p> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="textgrid2.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="textgrid2-njxadapter"></a></div> 
+         
+      <h2>Adapter Interface</h2> 
+          
+          
+      <p>In the parameter data area of the adapter, the grid data is represented
+              by the following data structure:
+      </p> 
+          <pre class="verbatim">DEFINE DATA PARAMETER
+1 LINES (1:*)
+2 FIRSTNAME (U) DYNAMIC
+2 LASTNAME (U) DYNAMIC
+2 SELECTED (L)
+END-DEFINE</pre> 
+         <div class="noprint">
+         <p><a href="textgrid2.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="textgrid2-selectrow"></a></div> 
+         
+      <h2>Selecting Rows in a TEXTGRID2</h2> 
+          
+          
+      <p>Maybe you wonder why there is a <code>selected</code>
+              field
+              in the adapter parameter
+              data area of the previous example.
+      </p> 
+          
+      <p>This field is required for indicating which lines are
+              currently selected and which are not. Each line which is displayed in the
+              TEXTGRID2 control is represented in the adapter by an array occurrence of the array
+              <code>LINES</code>. Therefore, the selection status of the grid (which
+              lines are selected and which lines are not) is mirrored by the corresponding
+              <code>selected</code> field of each
+              array
+              occurrence.
+      </p> 
+           
+           
+          
+        
+        
+        
+      <div class="noprint">
+         <p><a href="textgrid2.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="textgrid2-attr"></a></div> 
+         
+      <h2>TEXTGRID2 Properties</h2> 
+               
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="14%">
+            <col width="55%">
+            <col width="14%">
+            <col width="14%">
+         </colgroup>      
+         <tbody align="left" valign="top">       
+            <tr>        
+               <td colspan="4">Basic</td>      
+            </tr>
+            <tr>        
+               <td align="left" valign="top">griddataprop</td>        
+               <td align="left" valign="top">
+                  <p>Name of the adapter parameter that represents the grid in the adapter.</p>
+               </td>        
+               <td align="left" valign="top">Obligatory</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">width</td>        
+               <td align="left" valign="top">
+                  <p>Width of the control.</p>
+                  <p></p>
+                  <p>There are three possibilities to define the width:</p>
+                  <p></p>
+                  <p>(A) You do not define a width at all. In this case the width of the control will either be a default width or - in case of
+                     container controls - it will follow the width that is occupied by its content.
+                  </p>
+                  <p>(B) Pixel sizing: just input a number value (e.g. "100").</p>
+                  <p>(C) Percentage sizing: input a percantage value (e.g. "50%"). Pay attention: percentage sizing will only bring up correct
+                     results if the parent element of the control properly defines a width this control can reference. If you specify this control
+                     to have a width of 50% then the parent element (e.g. an ITR-row) may itself define a width of "100%". If the parent element
+                     does not specify a width then the rendering result may not represent what you expect.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Obligatory</td>        
+               <td align="left" valign="top">
+                  <p>100</p>
+                  <p>120</p>
+                  <p>140</p>
+                  <p>160</p>
+                  <p>180</p>
+                  <p>200</p>
+                  <p>50%</p>
+                  <p>100%</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">height</td>        
+               <td align="left" valign="top">
+                  <p>Height of the control.</p>
+                  <p></p>
+                  <p>There are three possibilities to define the height:</p>
+                  <p></p>
+                  <p>(A) You do not define a height at all. As consequence the control will be rendered with its default height. If the control
+                     is a container control (containing) other controls then the height of the control will follow the height of its content.
+                  </p>
+                  <p>(B) Pixel sizing: just input a number value (e.g. "20").</p>
+                  <p>(C) Percentage sizing: input a percantage value (e.g. "50%"). Pay attention: percentage sizing will only bring up correct
+                     results if the parent element of the control properly defines a height this control can reference. If you specify this control
+                     to have a height of 50% then the parent element (e.g. an ITR-row) may itself define a height of "100%". If the parent element
+                     does not specify a width then the rendering result may not represent what you expect.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Obligatory</td>        
+               <td align="left" valign="top">
+                  <p>100</p>
+                  <p>150</p>
+                  <p>200</p>
+                  <p>250</p>
+                  <p>300</p>
+                  <p>250</p>
+                  <p>400</p>
+                  <p>50%</p>
+                  <p>100%</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">comment</td>        
+               <td align="left" valign="top">
+                  <p>Comment without any effect on rendering and behaviour. The comment is shown in the layout editor's tree view.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td colspan="4">Selection</td>      
+            </tr>
+            <tr>        
+               <td align="left" valign="top">selectprop</td>        
+               <td align="left" valign="top">
+                  <p>Name of the adapter parameter that is used to mark if an individual row of the text grid is selected.</p>
+                  <p></p>
+                  <p>If the user selects a text grid row, the value "true" is passed into the corresponding array element of the adapter parameter.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">singleselect</td>        
+               <td align="left" valign="top">
+                  <p>If set to "true" then only one row can be selected inside the text grid. - If set to "false" then multiple lines can be selected
+                     by using Ctrl- and Shift-key during mouse selection.
+                  </p>
+                  <p></p>
+                  <p>Default is "false".</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>true</p>
+                  <p>false</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">singleselectprop</td>        
+               <td align="left" valign="top">
+                  <p>Name of an adapter parameter that dynamically defines whether SINGLESELECT is true or false.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">onclickmethod</td>        
+               <td align="left" valign="top">
+                  <p>Name of the event that is sent to the adapter when the user selects a row.</p>
+                  <p></p>
+                  <p>In the event handler you can find the selected rows by iterating through the rows and finding out which one's selected element
+                     is set to "true". 
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">ondblclickmethod</td>        
+               <td align="left" valign="top">
+                  <p>Name of the event that is sent to the adapter when the user selects a row by a double click.</p>
+                  <p></p>
+                  <p>In the event handler you can find the selected rows by iterating through the rows and finding out which one's selected element
+                     is set to "true". 
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">withselectioncolumn</td>        
+               <td align="left" valign="top">
+                  <p>When defining a SELECTPROP property then automatically a selection column is added as first left column of the grid. Inside
+                     the column an icon inidicates if a row is currently selected.
+                  </p>
+                  <p></p>
+                  <p>Set this property to "false" in order to avoid the selection column.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>true</p>
+                  <p>false</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">withselectioncolumnicon</td>        
+               <td align="left" valign="top">
+                  <p>Flag that indicates whether the selection column shows a "select all" icon on top. Default is true.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>true</p>
+                  <p>false</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">fgselect</td>        
+               <td align="left" valign="top">
+                  <p>if switched to true then an additional "graying" of selected lines will be activated. Switch this property to "true" if you
+                     have coloured textgrid cells: the selection colour will not override the colour of each cell, as consequence you require an
+                     additional effect in order to make the user see which row is selected.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>true</p>
+                  <p>false</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">focusedprop</td>        
+               <td align="left" valign="top">
+                  <p>Name of an adapter parameter that is used to mark if an individual row of the text grid should receive the focus.</p>
+                  <p></p>
+                  <p>If the user selects a text grid row, the value "true" is passed into the corresponding array element of the adapter parameter.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td colspan="4">Right Mouse Button</td>      
+            </tr>
+            <tr>        
+               <td align="left" valign="top">oncontextmenumethod</td>        
+               <td align="left" valign="top">
+                  <p>Name of the event that is sent to the adapter when the user clicks with the right mouse button onto an empty area of the grid.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">singleselectcontextmenu</td>        
+               <td align="left" valign="top">
+                  <p>With SHIFT and CTRL key the user can select multiple lines (use property SINGLESELECT to suppress this feature). Use this
+                     property to ensure that the context menu is requested only for a single line.
+                  </p>
+                  <p></p>
+                  <p>Default is "false".</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>true</p>
+                  <p>false</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">enabledefaultcontextmenu</td>        
+               <td align="left" valign="top">
+                  <p>Use this property to enable the default context menu of the browser within the textgrid. Please note: do not enable the browser's
+                     context menu if your application itself provides for a context menu.
+                  </p>
+                  <p></p>
+                  <p>Default is "false".</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>true</p>
+                  <p>false</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td colspan="4">Appearance</td>      
+            </tr>
+            <tr>        
+               <td align="left" valign="top">width</td>        
+               <td align="left" valign="top">(already explained above)</td>        
+               <td align="left" valign="top">&nbsp;</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">height</td>        
+               <td align="left" valign="top">(already explained above)</td>        
+               <td align="left" valign="top">&nbsp;</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">minapparentrows</td>        
+               <td align="left" valign="top">
+                  <p>Number of rows that are displayed independent of the size of the server side collection.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>1</p>
+                  <p>2</p>
+                  <p>3</p>
+                  <p>int-value</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">hscroll</td>        
+               <td align="left" valign="top">
+                  <p>Indicates if to show a horizontal scrollbar ("true") or not ("false").</p>
+                  <p></p>
+                  <p>If no scrollbar is shown then the control occupies the horizontal space that is required by its content.</p>
+               </td>        
+               <td align="left" valign="top">Sometimes obligatory</td>        
+               <td align="left" valign="top">
+                  <p>true</p>
+                  <p>false</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">withtitlerow</td>        
+               <td align="left" valign="top">
+                  <p>If defined as "false" then no top title row is shown.</p>
+                  <p></p>
+                  <p>"True" is default.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>true</p>
+                  <p>false</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">colspan</td>        
+               <td align="left" valign="top">
+                  <p>Column spanning of control.</p>
+                  <p></p>
+                  <p>If you use TR table rows then you may sometimes want to control the number of columns your control occupies. By default it
+                     is "1" - but you may want to define the control to span over more than one columns.
+                  </p>
+                  <p></p>
+                  <p>The property only makes sense in table rows that are snychronized within one container (i.e. TR, STR table rows). It does
+                     not make sense in ITR rows, because these rows are explicitly not synched.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>1</p>
+                  <p>2</p>
+                  <p>3</p>
+                  <p>4</p>
+                  <p>5</p>
+                  <p>50</p>
+                  <p>int-value</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">rowspan</td>        
+               <td align="left" valign="top">
+                  <p>Row spanning of control.</p>
+                  <p></p>
+                  <p>If you use TR table rows then you may sometimes want to control the number of rows your control occupies. By default it is
+                     "1" - but you may want to define the control two span over more than one columns.
+                  </p>
+                  <p></p>
+                  <p>The property only makes sense in table rows that are snychronized within one container (i.e. TR, STR table rows). It does
+                     not make sense in ITR rows, because these rows are explicitly not synched.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>1</p>
+                  <p>2</p>
+                  <p>3</p>
+                  <p>4</p>
+                  <p>5</p>
+                  <p>50</p>
+                  <p>int-value</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">personalizable</td>        
+               <td align="left" valign="top">
+                  <p>If defined to "false" then no re-arranging of columns is offered to the user.</p>
+                  <p></p>
+                  <p>Default is "true". This means: if using COLUMN controls inside the grid definition then the user can re-arrange the sequence
+                     of columns by dragging and dropping them within the top title row.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>true</p>
+                  <p>false</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">stylevariant</td>        
+               <td align="left" valign="top">
+                  <p>Some controls offer the possibility to define style variants. By this style variant you can address different styles inside
+                     your style sheet definition file (.css). If not defined "normal" styles are chosen, if defined (e.g. "VAR1") then other style
+                     definitions (xxxVAR1xxx) are chosen.
+                  </p>
+                  <p></p>
+                  <p>Purpose: you can set up style variants in the style sheet defintion and use them multiple times by addressing them via the
+                     "stylevariant" property. CIS currently offerst two variants "VAR1" and "VAR2" but does not predefine any semantics behind
+                     - this is up to you!
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>VAR1</p>
+                  <p>VAR2</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">backgroundstyle</td>        
+               <td align="left" valign="top">
+                  <p>CSS style definition that is directly passed into this control.</p>
+                  <p></p>
+                  <p>With the style you can individually influence the rendering of the control. You can specify any style sheet expressions. Examples
+                     are:
+                  </p>
+                  <p></p>
+                  <p>border: 1px solid #FF0000</p>
+                  <p>background-color: #808080</p>
+                  <p></p>
+                  <p>You can combine expressions by appending and separating them with a semicolon.</p>
+                  <p></p>
+                  <p>Sometimes it is useful to have a look into the generated HTML code in order to know where direct style definitions are applied.
+                     Press right mouse-button in your browser and select the "View source" or "View frame's source" function.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">vscroll</td>        
+               <td align="left" valign="top">
+                  <p>Definition of the vertical scrollbar's appearance.</p>
+                  <p></p>
+                  <p>You can define that scrollbars only are shown if the content is exceeding the control's area ("auto"). Or scrollbars can be
+                     shown always ("scroll"). Or scrollbars are never shown - and the content is cut ("hidden").
+                  </p>
+                  <p></p>
+                  <p>Default is "auto".</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>auto</p>
+                  <p>scroll</p>
+                  <p>hidden</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">withrollover</td>        
+               <td align="left" valign="top">
+                  <p>The textgrid controls provide for a so called "roll over" effect. The row that is currently below the mouse pointer is highlighted
+                     in a certain way. Use this property to disable the roll over effect (Default is TRUE).
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>true</p>
+                  <p>false</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">fixedcolumnsizes</td>        
+               <td align="left" valign="top">
+                  <p>When switching the FIXEDCOLUMNSIZES property to value "true" then internally the grid is arranged in a way that the area always
+                     determines its size out of the width specification of the COLUMN controls. The browser does not look into the column contents
+                     in order to try to optimise the size of the area - but always follows the width that you define.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>true</p>
+                  <p>false</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">requiredheight</td>        
+               <td align="left" valign="top">
+                  <p>Minimum height of the control in pixels. Use this property to ensure a minimum height if the overall control's height is a
+                     percentage of the available space - i.e. if value of property HEIGHT is a percentage (e.g. 100%).
+                  </p>
+                  <p></p>
+                  <p>Please note:You must not use FIXLAYOUT at the surrounding row container (ITR and ROWAREA). Otherwise: if the available space
+                     is less than the required height the end of the control is just cut off.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>1</p>
+                  <p>2</p>
+                  <p>3</p>
+                  <p>int-value</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">disablecolumnresizing</td>        
+               <td align="left" valign="top">
+                  <p>Flag that indicates if the user can change the width of the grid columns. Default is false.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>true</p>
+                  <p>false</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">disablecolumnmoving</td>        
+               <td align="left" valign="top">
+                  <p>Flag that indicates if the user can change the order of grid columns. Default is false.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>true</p>
+                  <p>false</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">tabindex</td>        
+               <td align="left" valign="top">
+                  <p>Index that defines the tab order of the control. Controls are selected in increasing index order and in source order to resolve
+                     duplicates. 
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>-1</p>
+                  <p>0</p>
+                  <p>1</p>
+                  <p>2</p>
+                  <p>5</p>
+                  <p>10</p>
+                  <p>32767</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td colspan="4">Drag And Drop</td>      
+            </tr>
+            <tr>        
+               <td align="left" valign="top">draginfoprop</td>        
+               <td align="left" valign="top">
+                  <p>Name of the row item property that passes back the line's "drag info". When using this attribute the grid lines can be dragged
+                     onto "drop targets" (e.g. DROPICON control). The dragged line is identified by its "drag info". Use any string/information
+                     applicable.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td colspan="4">Natural</td>      
+            </tr>
+            <tr>        
+               <td align="left" valign="top">njx:natname</td>        
+               <td align="left" valign="top">
+                  <p>If a Natural variable with a name not valid for Application Designer (for instance #FIELD1) shall be bound to the control,
+                     a different name (for instance HFIELD1) can be bound instead. If the original name (in this case #FIELD1) is then specified
+                     in this attribute, the original name is generated into the parameter data area of the Natural adapter and a mapping between
+                     the two names is generated into the PROCESS PAGE statement of the Natural adapter.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">njx:natcomment</td>        
+               <td align="left" valign="top">
+                  <p>The value of this attribute is generated as comment line into the parameter data area of the Natural adapter, before the field
+                     name. The Map Converter, for instance, uses this attributes to indicate for a generated statusprop variable to which field
+                     the statusprop belongs.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td colspan="4">Deprecated</td>      
+            </tr>
+            <tr>        
+               <td align="left" valign="top">directselectevent</td>        
+               <td align="left" valign="top">
+                  <p>Use ONCLICKMETHOD and ONDBLCLICKMETHOD instead.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>ondblclick</p>
+                  <p>onclick</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">directselectmethod</td>        
+               <td align="left" valign="top">
+                  <p>Use ONCLICKMETHOD and ONDBLCLICKMETHOD instead.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>      
+         </tbody>     
+      </table>     
+          
+        
+        
+      <div class="noprint">
+         <p><a href="textgrid2.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="column-attr"></a></div> 
+         
+      <h2> 
+             <a name="x105"></a>COLUMN Properties
+      </h2> 
+          
+          
+      <p>The COLUMN tag is the typical tag that is placed inside a TEXTGRID2
+              definition. The COLUMN definition defines a column with its binding to a
+              property of the collection elements.
+      </p>      
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="14%">
+            <col width="55%">
+            <col width="14%">
+            <col width="14%">
+         </colgroup>      
+         <tbody align="left" valign="top">       
+            <tr>        
+               <td colspan="4">Basic</td>      
+            </tr>
+            <tr>        
+               <td align="left" valign="top">name</td>        
+               <td align="left" valign="top">
+                  <p>Text that is displayed inside the control. Please do not specify the name when using the multi language management - but specify
+                     a "textid" instead.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Sometimes obligatory</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">textid</td>        
+               <td align="left" valign="top">
+                  <p>Multi language dependent text that is displayed inside the control. The "textid" is translated into a corresponding string
+                     at runtime.
+                  </p>
+                  <p></p>
+                  <p>Do not specify a "name" inside the control if specifying a "textid".</p>
+               </td>        
+               <td align="left" valign="top">Sometimes obligatory</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">property</td>        
+               <td align="left" valign="top">
+                  <p>Property of the row item object that represents the column's content.</p>
+                  <p></p>
+                  <p>The content typically is straight text but can also be "complex HTML".</p>
+               </td>        
+               <td align="left" valign="top">Obligatory</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">width</td>        
+               <td align="left" valign="top">
+                  <p>Width of the control.</p>
+                  <p></p>
+                  <p>There are three possibilities to define the width:</p>
+                  <p></p>
+                  <p>(A) You do not define a width at all. In this case the width of the control will either be a default width or - in case of
+                     container controls - it will follow the width that is occupied by its content.
+                  </p>
+                  <p>(B) Pixel sizing: just input a number value (e.g. "100").</p>
+                  <p>(C) Percentage sizing: input a percantage value (e.g. "50%"). Pay attention: percentage sizing will only bring up correct
+                     results if the parent element of the control properly defines a width this control can reference. If you specify this control
+                     to have a width of 50% then the parent element (e.g. an ITR-row) may itself define a width of "100%". If the parent element
+                     does not specify a width then the rendering result may not represent what you expect.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Obligatory</td>        
+               <td align="left" valign="top">
+                  <p>100</p>
+                  <p>120</p>
+                  <p>140</p>
+                  <p>160</p>
+                  <p>180</p>
+                  <p>200</p>
+                  <p>50%</p>
+                  <p>100%</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">comment</td>        
+               <td align="left" valign="top">
+                  <p>Comment without any effect on rendering and behaviour. The comment is shown in the layout editor's tree view.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td colspan="4">Appearance</td>      
+            </tr>
+            <tr>        
+               <td align="left" valign="top">datatype</td>        
+               <td align="left" valign="top">
+                  <p>By default, the control is managing its content as string. By explicitly setting a datatype you can define that the control
+                     will format the data coming from the server: if the field has datatype "date" and the user inputs "010304" then the input
+                     will be translated into "01.03.2004" (or other representation, dependent on date format settings).
+                  </p>
+                  <p></p>
+                  <p>Please note: the datatype "float" is named a bit misleading - it represents any decimal format number. The server side representation
+                     may be a float value, but also can be a double or a BigDecimal property.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>date</p>
+                  <p>float</p>
+                  <p>int</p>
+                  <p>long</p>
+                  <p>time</p>
+                  <p>timestamp</p>
+                  <p>color</p>
+                  <p>xs:decimal</p>
+                  <p>xs:double</p>
+                  <p>xs:date</p>
+                  <p>xs:dateTime</p>
+                  <p>xs:time</p>
+                  <p>------------------------</p>
+                  <p>N n.n</p>
+                  <p>P n.n</p>
+                  <p>string n</p>
+                  <p>xs:byte</p>
+                  <p>xs:short</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">align</td>        
+               <td align="left" valign="top">
+                  <p>Horizontal alignment of the control's content.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>left</p>
+                  <p>center</p>
+                  <p>right</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">straighttext</td>        
+               <td align="left" valign="top">
+                  <p>If the text of the control contains HTML tags then these are by default interpreted by the browser. Specifiying STRAIGHTTEXT
+                     as "true" means that the browser will directly render the characters without HTML interpretation.
+                  </p>
+                  <p></p>
+                  <p>Example: if you want to output the source of an HTML text then STRAIGHTTEXT should be set to "true".</p>
+                  <p></p>
+                  <p>MOZILLA: this property is not available in Mozilla!</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>true</p>
+                  <p>false</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">convertspaces</td>        
+               <td align="left" valign="top">
+                  <p>If switched to "true" then all spaces inside the text that is rendered into the column are converted to non breakable spaces
+                     (andnbsp\").
+                  </p>
+                  <p></p>
+                  <p>Use this option if you have "meaningful" spaces inside the values you return from the server adapter object, e.g. if outputting
+                     some ASCII protocol inside a column.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>true</p>
+                  <p>false</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">cuttextline</td>        
+               <td align="left" valign="top">
+                  <p>If switched to "false" then the content of the column is broken if it excceeds the column's width definition. Default is "true"
+                     i.e. if the content is too big for the column cell then it is cut.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>true</p>
+                  <p>false</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">withsorticon</td>        
+               <td align="left" valign="top">
+                  <p>Flag that indicates if a small sort indicator is shown within the right corner of the control. Default is TRUE.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>true</p>
+                  <p>false</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">headerimage</td>        
+               <td align="left" valign="top">
+                  <p>URL of image that is displayed inside the control. Any image type (.gif, .jpg, ...) that your browser does understand is valid.</p>
+                  <p></p>
+                  <p>Use the following options to specify the URL:</p>
+                  <p>(A) Define the URL relative to your page. Your page is generated directly into your project's folder. Specifiying "images/xyz.gif"
+                     will point into a directory parallel to your page. Specifying "../HTMLBasedGUI/images/new.gif" will point to an image of a
+                     neighbour project.
+                  </p>
+                  <p>(B) Define a complete URL, like "http://www.softwareag.com/images/logo.gif".</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td colspan="4">Binding</td>      
+            </tr>
+            <tr>        
+               <td align="left" valign="top">property</td>        
+               <td align="left" valign="top">(already explained above)</td>        
+               <td align="left" valign="top">&nbsp;</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">textstyleprop</td>        
+               <td align="left" valign="top">
+                  <p>Name of the adapter parameter that provides a style-string that is used for rendering the column's content.</p>
+                  <p></p>
+                  <p>As consequence you can indiviudally assign a CSS-style to each cell of your text grid.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">textclassprop</td>        
+               <td align="left" valign="top">
+                  <p>Name of the adapter parameter that provides a style class to be used for rendering the content.</p>
+                  <p></p>
+                  <p>You can set up a limited number of style classes inside your style sheet definition - and dynamically reference them per grid
+                     cell.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">imageprop</td>        
+               <td align="left" valign="top">
+                  <p>Name of the adapter parameter that provides an image URL. The image is rendered at the very left of the column's area - in
+                     front of the text (PROPERTY property definition).
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">linkmethod</td>        
+               <td align="left" valign="top">
+                  <p>Name of the event that is sent to the adapter if user clicks the column's text. </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">celltitleprop</td>        
+               <td align="left" valign="top">
+                  <p>Name of the adapter parameter that provides the tooltip of this cell.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td colspan="4">Online help</td>      
+            </tr>
+            <tr>        
+               <td align="left" valign="top">title</td>        
+               <td align="left" valign="top">
+                  <p>Text that is shown as tooltip for the control.</p>
+                  <p></p>
+                  <p>Either specify the text "hard" by using this TITLE property - or use the TITLETEXTID in order to define a language dependent
+                     literal.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">titletextid</td>        
+               <td align="left" valign="top">
+                  <p>Text ID that is passed to the multi lanaguage management - representing the tooltip text that is used for the control.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">sorttitle</td>        
+               <td align="left" valign="top">
+                  <p>Text that is shown as tooltip for the sort indicator.</p>
+                  <p></p>
+                  <p>Either input text by using this SORTTITLE property - or use the SORTTITLETEXTID in order to define a language dependent literal.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">sorttitletextid</td>        
+               <td align="left" valign="top">
+                  <p>Text ID that is passed to the multi lanaguage management - representing the tooltip text for the sort indicator.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">celltitleprop</td>        
+               <td align="left" valign="top">(already explained above)</td>        
+               <td align="left" valign="top">&nbsp;</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td colspan="4">Natural</td>      
+            </tr>
+            <tr>        
+               <td align="left" valign="top">njx:natstringtype</td>        
+               <td align="left" valign="top">
+                  <p>If the control shall be bound to a Natural system variable of string format with the attribute njx:natsysvar, this attribute
+                     indicates the format of the string, A (code page) or U (Unicode). The default is A.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">njx:natsysio</td>        
+               <td align="left" valign="top">
+                  <p>If the control shall be bound to a Natural system variable with the attribute njx:natsysvar, this attribute indicates if the
+                     system variable is modifiable. The default is false.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">njx:natname</td>        
+               <td align="left" valign="top">
+                  <p>If a Natural variable with a name not valid for Application Designer (for instance #FIELD1) shall be bound to the control,
+                     a different name (for instance HFIELD1) can be bound instead. If the original name (in this case #FIELD1) is then specified
+                     in this attribute, the original name is generated into the parameter data area of the Natural adapter and a mapping between
+                     the two names is generated into the PROCESS PAGE statement of the Natural adapter.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">njx:natsysvar</td>        
+               <td align="left" valign="top">
+                  <p>If the control shall be bound to a Natural system variable, this attribute specifies the name of the system variable.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">njx:natcomment</td>        
+               <td align="left" valign="top">
+                  <p>The value of this attribute is generated as comment line into the parameter data area of the Natural adapter, before the field
+                     name. The Map Converter, for instance, uses this attributes to indicate for a generated statusprop variable to which field
+                     the statusprop belongs.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>      
+         </tbody>     
+      </table>     
+          
+        
+        
+      <div class="noprint">
+         <p><a href="textgrid2.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="textgrid2-styles"></a></div> 
+         
+      <h2>Dynamic Setting of Text Styles in TEXTGRID2</h2> 
+          
+          
+      <p>The example from the previous sections will now be enhanced in order to
+              demonstrate how to control the style of cells inside a TEXTGRID2 control
+              dynamically:
+      </p> 
+      <p><img src="graphics/image123.png" alt="graphics/image123.png"></p> 
+          
+      <p>Some of the cells in the TEXTGRID2 control are rendered with a different
+              style than the normal one. Each COLUMN definition has the property
+              <code>textstyleprop</code>:
+      </p> 
+          <pre class="verbatim">&lt;rowarea name="Textgrid"&gt;
+    &lt;itr takefullwidth="true" fixlayout="true"&gt;
+        &lt;textgrid2 griddataprop="lines" width="100%" height="200" selectprop="selected"
+                   hscroll="true"&gt;
+            &lt;column name="First Name" property="firstName" width="50%"
+                    textstyleprop="firstNameStyle"&gt;
+            &lt;/column&gt;
+            &lt;column name="Last Name" property="lastname" width="50%"
+                    textstyleprop="lastNameStyle"&gt;
+            &lt;/column&gt;
+        &lt;/textgrid2&gt;
+    &lt;/itr&gt;
+    &lt;vdist height="5"&gt;
+    &lt;/vdist&gt;
+    &lt;itr&gt;
+        &lt;button name="Remove Selected Items" method="onRemoveSelectedItems"&gt;
+        &lt;/button&gt;
+    &lt;/itr&gt;
+&lt;/rowarea&gt;</pre> 
+           
+          
+        
+        
+        
+        
+        
+        <div class="noprint">
+         <div class="nospy">
+            <p><a href="textgrid2.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../njx/textgrid2.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/njx/textgrid2.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="workingwithgrids.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="basics.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="textgridsss2textgrid2withserversidescrolling.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

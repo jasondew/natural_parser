@@ -1,0 +1,292 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>ETA - Error Transaction Program</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="eta" id="1022"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../parms/eta.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/parms/eta.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="parms-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="et.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="etdb.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Parameter Reference&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x122"></a>ETA - Error Transaction Program
+         </h1>
+      </div> 
+         
+         
+      <p>This Natural profile parameter provides the name of the program which
+             receives control if an error condition is detected during Natural program
+             execution.
+      </p> 
+          
+          
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+              
+         <tbody align="left" valign="top"> 
+                  
+            <tr> 
+                      
+               <th rowspan="2">Possible settings</th> 
+                      
+               <td>1 to 8 characters</td> 
+                      
+               <td>Program name for error transaction.</td> 
+                     
+            </tr> 
+                  
+            <tr> 
+                      
+               <td>blank</td> 
+                      
+               <td>With <code>ETA=' '</code> (blank), no error transaction program
+                    is called.
+               </td> 
+                     
+            </tr> 
+                  
+            <tr> 
+                      
+               <th>Default setting</th> 
+                      
+               <td>blank</td> 
+                      
+               <td>&nbsp;</td> 
+                     
+            </tr> 
+                  
+            <tr> 
+                      
+               <th>Dynamic specification</th> 
+                      
+               <td>yes</td> 
+                      
+               <td>&nbsp;</td> 
+                     
+            </tr> 
+                  
+            <tr> 
+                      
+               <th>Specification within session</th> 
+                      
+               <td>yes</td> 
+                      
+               <td>&nbsp;</td> 
+                     
+            </tr> 
+                 
+         </tbody> 
+             
+      </table> 
+          
+         
+      <p>The setting of this parameter can be modified by a user program with the
+             system variable <a href="../vari/appl.htm#ERROR_TA"><code>*ERROR-TA</code></a>.
+      </p>
+         
+         
+      <p class="note"><strong>Note:</strong><br> Error transaction programs must be in the library to which you are
+             currently logged on or a current steplib library.
+      </p> 
+         
+      <p>When an error occurs, Natural executes a <a href="../sm/stack.htm"><code>STACK TOP DATA</code></a> statement and
+             places the following information at the top of the stack:
+      </p> 
+         
+      <ul> 
+             
+         <li> 
+                 
+            <p class="initem">Error number (N4 if session parameter <a href="sp_sg.htm#sp_sg"><code>SG</code></a><code>=OFF</code>; N5 if
+                     <code>SG=ON</code>)
+            </p> 
+                
+         </li> 
+             
+         <li> 
+                 
+            <p class="initem">Line number (N4)</p> 
+                
+         </li> 
+             
+         <li> 
+                 
+            <p class="initem">Status (A1)</p> 
+                
+         </li> 
+             
+         <li> 
+                 
+            <p class="initem">Program name (A8)</p> 
+                
+         </li> 
+             
+         <li> 
+                 
+            <p class="initem">Level (N2)</p> 
+                
+         </li> 
+            
+      </ul> 
+         
+      <p>This information can be used as <code>INPUT</code> data by an error
+             transaction. The status can be one of the following settings:
+      </p> 
+          
+          
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+              
+         <thead align="left" valign="top"> 
+                  
+            <tr> 
+                      
+               <th align="left">Setting</th> 
+                      
+               <th align="left">Explanation</th> 
+                     
+            </tr> 
+                 
+         </thead> 
+              
+         <tbody align="left" valign="top"> 
+                  
+            <tr> 
+                      
+               <td><code>C</code></td> 
+                      
+               <td>Command processing error. (The line number will be 0.)</td> 
+                     
+            </tr> 
+                  
+            <tr> 
+                      
+               <td><code>L</code></td> 
+                      
+               <td>Logon processing error. (The line number will be 0.)</td> 
+                     
+            </tr> 
+                  
+            <tr> 
+                      
+               <td><code>R</code></td> 
+                      
+               <td>Error on Remote server (in conjunction with Natural RPC)</td> 
+                     
+            </tr> 
+                  
+            <tr> 
+                      
+               <td><code>O</code></td> 
+                      
+               <td>Object time error</td> 
+                     
+            </tr> 
+                  
+            <tr> 
+                      
+               <td><code>S</code></td> 
+                      
+               <td>Non-correctable Syntax error</td> 
+                     
+            </tr> 
+                 
+         </tbody> 
+             
+      </table> 
+          
+         
+      <p>If <strong>Natural Security</strong> is installed, the
+             following rules apply:
+      </p> 
+         
+      <ul> 
+             
+         <li> 
+                 
+            <p class="initem">If an error occurs during the <em>first</em> logon to Natural, the
+                     program specified with the <code>ETA</code> parameter applies. The
+                     error transaction must be in the library <code>SYSLIB</code> or in
+                     <code>SYSTEM</code> on the <code>FNAT</code> or <code>FUSER</code> system file
+                     at the time of the first logon.
+            </p> 
+                
+         </li> 
+             
+         <li> 
+                 
+            <p class="initem">If an error occurs <em>after</em> the first logon, the program
+                     specified as error transaction in the security profile of the current library
+                     applies. If no error transaction is specified, the <code>ETA</code>
+                     parameter applies.
+            </p> 
+                
+         </li> 
+            
+      </ul> 
+         
+      <p>For additional information concerning the definition and use of error
+             transaction programs, see <a href="../nsc/nsc_lib.htm#Transactions">Transactions</a>
+             in the <cite>Natural Security</cite> documentation.
+      </p> 
+        
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="eta.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../parms/eta.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/parms/eta.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="parms-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="et.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="etdb.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

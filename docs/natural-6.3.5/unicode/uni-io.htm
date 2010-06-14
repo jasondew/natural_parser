@@ -1,0 +1,326 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Unicode Input/Output Handling in Natural Applications</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="uni-io"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../unicode/uni-io.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/unicode/uni-io.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="uni-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="uni-devenv.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="uni-data.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Unicode and Code Page Support&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1>Unicode Input/Output Handling in Natural
+               Applications
+         </h1>
+      </div> 
+         
+      <p>This document covers the following
+             topics:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="uni-io.htm#uni-io-data">Displaying and Entering Unicode Data</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="uni-io.htm#uni-webiointerface">Natural Web I/O Interface Client</a></p>
+         </li>
+      </ul>
+      <hr>
+      <div><a name="uni-io-data"></a></div> 
+         
+      <h2>Displaying and Entering Unicode Data</h2> 
+          
+          
+      <p>If you want to display or enter Unicode data, the following
+              possibilities exist: 
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">When working in the local development environment with Natural for
+                      Windows, all Unicode characters can be displayed and entered in the Natural
+                      output window.
+                      
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">When working in a remote development environment with Natural for
+                      Windows (SPoD), the Natural Web I/O Interface client (see
+                      <a href="uni-io.htm#uni-webiointerface">below</a>) is necessary for
+                      displaying and entering all Unicode characters.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">When running applications with Natural for UNIX, Natural for OpenVMS,
+                      Natural for Mainframes or Natural for Windows, see
+                      <a href="uni-io.htm#uni-webiointerface">Natural Web I/O Interface
+                  Client</a> below.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p class="notes"><strong>Notes:</strong></p>
+      <ol class="note-list"> 
+              
+         <li>Even if you are working with a Unicode-enabled output interface on
+                  Windows, you will see only the Unicode characters which are supported by the
+                  currently selected font.
+         </li> 
+              
+         <li>Unicode data cannot be displayed on 3270 terminals.</li> 
+             
+      </ol> 
+          
+      <p>If you run Natural via a terminal emulation or a mainframe terminal like
+              3270/3279, the page will be converted to the default code page (value of the
+              system variable <a href="../vari/sysenv.htm#CODEPAGE"><code>*CODEPAGE</code></a>)
+              before displaying it, so that all characters which are not contained in the
+              default code page are replaced with the substitution character. Equally, input
+              is only possible in code page format and will be converted to Unicode format
+              before assigning it to a U format field. You have to regard that the
+              substitution character is defined by the ICU conversion tables. Depending on
+              this character, it is possible that garbage is displayed with a terminal
+              emulation. On UNIX and OpenVMS platforms, you can change this substitution
+              character by setting the profile parameter
+              <a href="../parms/subchar.htm"><code>SUBCHAR</code></a>. However, it is
+              strongly recommended that you use the Natural Web I/O Interface when displaying
+              characters not contained in the default code page. When running a remote
+              Windows session, the Natural Web I/O Interface will be used in any case. 
+      </p> 
+          
+      <p>On code page oriented mainframe terminals, it is important to select the
+              suitable code page. The default code page of Natural, the code page of the
+              terminal and even the font used by the terminal determine the capability of
+              displaying certain characters correctly. 
+      </p> 
+         
+      <div class="noprint">
+         <p><a href="uni-io.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="uni-webiointerface"></a></div> 
+         
+      <h2>Natural Web I/O Interface Client</h2> 
+          
+          
+      <p>The Natural Web I/O Interface client is used to display non-GUI
+              information which contains Unicode characters. It can be used in the following
+              environments:
+      </p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="uni-io.htm#uni-webiointerface-spod">SPoD Environment</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="uni-io.htm#uni-webiointerface-run">Runtime Environment</a></p>
+         </li>
+      </ul>
+      <div><a name="uni-webiointerface-spod"></a></div> 
+          
+      <h3>SPoD Environment</h3> 
+           
+           
+      <p>The Natural Web I/O Interface client can be invoked when you use
+               Natural for Windows and you are working with Natural Studio in a remote
+               development environment (SPoD); see
+               <cite>Natural Web I/O
+                  Interface Client</cite> in <cite>Remote Development Using
+                  SPoD</cite> which is part of the Natural for Windows documentation. 
+      </p> 
+           
+      <p>When the Natural Web I/O Interface client is used, the Web I/O windows
+               appears instead of the
+               terminal
+               emulation window which is not Unicode-enabled in remote UNIX,
+               OpenVMS or mainframe environments, or instead of the
+               output window
+               in remote Windows environments. 
+      </p> 
+           
+      <p>The following graphic shows the SPoD environment for Unicode
+               applications with Natural Development Servers (NDV) on UNIX, OpenVMS and
+               mainframes:
+      </p> 
+           
+      <p><img src="graphics/uni-spod-env.png" alt="SPoD environment" width="600" height="520"></p> 
+           
+      <p>So that the Natural Web I/O Interface client can be invoked, the
+               Natural Development Server has to be configured as follows:
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                    
+                   
+            <p class="initem"><strong>UNIX and OpenVMS</strong><br>If you want to use the Natural Web I/O Interface client in a remote
+                       UNIX or OpenVMS environment, the profile parameter
+                       <a href="../parms/webio.htm"><code>WEBIO</code></a> must be set to
+                       "ON" on the NDV server. See
+                       <a href="../config/cfg-over.htm">Configuration
+                  Utility</a> in the Natural for UNIX or Natural for OpenVMS
+                       documentation.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                    
+                   
+            <p class="initem"><strong>Mainframe</strong><br>If you want to use the Natural Web I/O Interface client in a remote
+                       mainframe environment, the NDV configuration parameter
+                       <code>TERMINAL_EMULATION</code> must be set to
+                       "WEBIO" on the NDV server. See <cite>NDV
+                          Configuration Parameters</cite> in the Natural Development Server
+                       documentation. Moreover, the Web I/O terminal converter module
+                       <code>NATWEB</code> must be linked to the Natural nucleus. The Natural profile
+                       parameter <code>TMODEL</code> can be used to determine the
+                       user screen size.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                    
+                   
+            <p class="initem"><strong>Windows</strong><br>In a remote Windows environment, the Natural Web I/O Interface client
+                       is always used, regardless of the setting of the profile parameter
+                       <code>WEBIO</code>. 
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+          
+      <div><a name="uni-webiointerface-run"></a></div> 
+          
+      <h3>Runtime Environment</h3> 
+           
+           
+      <p>The Natural Web I/O Interface client appears when running applications
+               with Natural for UNIX, Natural for OpenVMS, Natural for Mainframes or Natural
+               for Windows. It runs in a web/application server.
+      </p> 
+           
+      <p>The following graphic shows the runtime environment for Unicode
+               applications:
+      </p> 
+           
+      <p><img src="graphics/uni-run-env.png" alt="Runtime environment" width="440" height="440"></p> 
+           
+      <p>Natural recognizes automatically whether the session has been started
+               from the Natural Web I/O Interface client or from the terminal emulation.
+      </p> 
+           
+      <p>Prerequisites for using the Natural Web I/O Interface client:</p> 
+           
+      <ul> 
+               
+         <li> 
+                    
+                   
+            <p class="initem"><strong>Natural for UNIX and Natural for OpenVMS</strong><br>It is required that the Natural Web I/O Interface server (which is
+                       implemented as a daemon) has been installed and activated. See
+                       <a href="../webio/webio-over.htm">Natural Web I/O
+                  Interface</a> in the Natural for UNIX and in the Natural for
+                       OpenVMS documentation.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                    
+                   
+            <p class="initem"><strong>Natural for Mainframes</strong><br>It is required that the Natural Web I/O Interface server has been
+                       installed and configured. See <cite>Natural Web I/O Interface</cite> in the
+                       Natural for Mainframes documentation. Moreover, the Web I/O terminal converter
+                       module <code>NATWEB</code> must be linked to the Natural nucleus. The Natural
+                       profile parameter <code>TMODEL</code> can be used to determine the
+                       user screen size.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                    
+                   
+            <p class="initem"><strong>Natural for Windows</strong><br>It is required that the Natural Web I/O Interface server (which is
+                       implemented as a service) has been installed and activated. See
+                       <cite>Natural Web I/O
+                          Interface</cite> in the Natural for Windows documentation.
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+          
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="uni-io.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../unicode/uni-io.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/unicode/uni-io.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="uni-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="uni-devenv.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="uni-data.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

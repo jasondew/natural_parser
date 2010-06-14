@@ -1,0 +1,230 @@
+grammar Natural
+  rule program
+    section* <Program>
+  end
+
+  rule section
+    find_section /
+    define_data_section /
+    comment /
+    blank_line /
+    unknown
+  end
+
+  rule find_section
+    begin_find_section
+    (if_norec_section / if_section / where_statement / assignment_statement / comment / blank_line / unknown)*
+    end_find_section
+    <FindSection>
+  end
+
+  rule begin_find_section
+    line_number space* "FIND" space* limit_clause:("(" limit:(integer+) ")")? space* view_name:identifier space* with_clause:with_clause? eol <BeginFindSection>
+  end
+
+  rule end_find_section
+    line_number space* "END-FIND" eol <EndFindSection>
+  end
+
+  rule with_clause
+    "WITH" space* find_filter (("AND" / "OR") space* find_filter)*
+  end
+
+  rule find_filter
+    identifier space* "=" space* field_name space*
+  end
+
+  rule where_statement
+    line_number space* "WHERE" space* where_filter (("AND" / "OR") space* where_filter)* eol
+    <WhereStatement>
+  end
+
+  rule where_filter
+    field_name space* "=" space* field_name ("(" [A-Z0-9#]+ ")")? space*
+  end
+
+  rule assignment_statement
+    line_number space* assignee:identifier space* ":=" space* assign:(field_name / boolean / string / number) space* eol
+    <AssignmentStatement>
+  end
+
+  rule if_norec_section
+    line_number space* "IF" space+ "NO" eol
+    statements:(assignment_statement / escape_clause / unknown)*
+    line_number space* "END-NOREC" eol
+    <IfNoRecSection>
+  end
+
+  rule escape_clause
+    line_number space* "ESCAPE" space+ to:("TOP" / "BOTTOM" / "ROUTINE" / "MODULE") eol # FIXME
+    <EscapeClause>
+  end
+
+  rule define_data_section
+    begin_define_data_section
+    (comment / variable_definition / local_statement / parameter_statement / unknown)*
+    end_define_data_section
+    <DefineDataSection>
+  end
+
+  rule begin_define_data_section
+    line_number "DEFINE DATA" eol
+  end
+
+  rule end_define_data_section
+    line_number "END-DEFINE" eol
+  end
+
+  rule local_statement
+    line_number "LOCAL" space* using:using_clause? eol <LocalStatement>
+  end
+
+  rule parameter_statement
+    line_number "PARAMETER" space* using:using_clause? eol <ParameterStatement>
+  end
+
+  rule using_clause
+    "USING" space+ identifier
+  end
+
+  rule variable_definition
+    line_number level:[0-9]+ space+ redifine:"REDEFINE"? space* identifier space* type:variable_type? space* annotations:variable_annotations* eol <VariableDefinition>
+  end
+
+  rule variable_type
+    "("
+    format:([ADILNPTB])?
+    size:(number? ("/" [0-9]+ (":" [0-9]+)?)? )?
+    ")"
+  end
+
+  rule variable_annotations
+    init_clause / const_clause / view_of_clause
+  end
+
+  rule init_clause
+    "INIT" space* "<" literal ">"
+  end
+
+  rule const_clause
+    "CONST" space* "<" literal ">"
+  end
+
+  rule view_of_clause
+    "VIEW OF" space+ identifier
+  end
+
+  rule if_section
+    begin_if_section
+    then_statements:(statement+ / ignore_statement)
+    else_block:(else_statement else_statements:(statement+ / ignore_statement))?
+    end_if_section
+    <IfSection>
+  end
+
+  rule begin_if_section
+    line_number space* "IF" space* condition space* "THEN"? eol <BeginIfSection>
+  end
+
+  rule end_if_section
+    line_number space* "END-IF" eol
+  end
+
+  rule statement
+    assignment_statement
+  end
+
+  rule else_statement
+    line_number space* "ELSE" eol <ElseStatement>
+  end
+
+  rule ignore_statement
+    line_number space* "IGNORE" eol
+  end
+
+  rule condition
+#    (identifier / field_name) space* "=" space* (string / number / identifier / field_name / expression)
+    field_name space* "=" space* expression
+  end
+
+  rule expression
+    "MASK" "(" (string / ".")+ ")"
+  end
+
+  rule blank_line
+    line_number space* eol <BlankLine>
+  end
+
+  rule comment
+    line_number "/"? "*" comment_text eol <Comment>
+  end
+
+  rule inline_comment
+    "/*" non_eol_char*
+  end
+
+  rule comment_text
+    non_eol_char*
+  end
+
+  rule unknown
+    line_number space* (!reserved_word unknown_text) eol <Unknown>
+  end
+
+  rule unknown_text
+    non_eol_char*
+  end
+
+  rule line_number
+    (digit* space+)?
+  end
+
+  rule field_name
+    identifier "." identifier
+  end
+
+  rule reserved_word
+    "END-DEFINE" / "END-FIND" / "END-NOREC" / "END-IF"
+  end
+
+  rule identifier
+    (!reserved_word [A-Z\-_@#$/&+*] [A-Z0-9\-_@#$/&+*]+)
+  end
+
+  rule literal
+    string / number / boolean
+  end
+
+  rule string
+    "'" [^']* "'" / '"' [^"]* '"'
+  end
+
+  rule number
+    integer ("." integer+)?
+  end
+
+  rule integer
+    [0-9]+
+  end
+
+  rule boolean
+    "TRUE" / "FALSE"
+  end
+  
+  rule digit
+    [0-9]
+  end
+  
+  rule space
+    [ \t]
+  end
+
+  rule non_eol_char
+    [^\r\n]
+  end
+
+  rule eol
+    space* inline_comment? space* ("\r\n" / [\r\n])
+  end
+  
+end

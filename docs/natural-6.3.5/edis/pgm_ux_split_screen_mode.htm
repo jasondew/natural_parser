@@ -1,0 +1,200 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Split-Screen Mode</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="pgm_ux_split_screen_mode"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../edis/pgm_ux_split_screen_mode.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/edis/pgm_ux_split_screen_mode.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="edis_ux_pgm.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pgm_ux_editing_area.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pgm_ux_cmds_scroll.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Editors&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x153"></a> 
+               <a name="x154"></a> Split-Screen Mode
+         </h1>
+      </div> 
+         
+         
+      <p>In split-screen mode, you can use one half of the screen for editing an
+             object (editing section) and at the same time have another Natural object
+             displayed in the other half (display section). In addition, you can copy the
+             definitions shown in the display section.
+      </p> 
+         
+      <p>The following types of Natural object can be displayed in split-screen
+             mode:
+      </p> 
+         
+      <p>DDMs (Data Definition Modules), data areas, programs, subprograms,
+             subroutines, helproutines, copycodes, texts, maps, classes, functions and
+             Predict program descriptions.
+      </p> 
+         
+      <p>The instructions below show how to display the definitions of another
+             Natural object and copy them into the object you are currently editing.
+      </p> 
+         
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong><a name="pgm_ux_pgm_dis_split"></a>To display and copy
+                 definitions with <code>SPLIT</code></strong></p>
+      <ol class="steps">
+         <li> 
+                  
+                  
+            <p class="instep">In the current source, enter the
+                      <a href="pgm_ux_editor_cmds.htm#edis_ux_pgm_split_cmd"><code>SPLIT</code></a>
+                      editor command (described in <cite>Editor Commands</cite>) to display the
+                      source of the object from which you want to copy text, for example:
+            </p><pre class="command-input">SPLIT P LDATEST1</pre> 
+                  <p class="instep">Split-screen mode is set with the current source (in the example below
+                      program <code>PGMTEST1</code>) in the editing section (upper half) and a local
+                      data area (<code>LDATEST1</code>) in the display section (lower half) of the
+                      editor screen as shown in the example below:
+            </p> 
+                  
+            <table border="1" cellpadding="5" class="screen">
+               <tr>
+                  <td><pre>
+   &gt;&gt; -----------Columns 001 072  &lt;&lt;  Program PGMTEST1 Lines  187    User SAG      
+   Command ===&gt;                                                      Lib  SYSLIB   
+   001720   IF (RC NE 0)                                                           
+   001730    then                                                                  
+   001740     reset CMD_LINE_2                                                     
+   001750     IF (s_prog ne ' ')                                                   
+   001760      then                                                                
+   001770       assign CMD_LINE_PGM = S_PROG                                       
+   001780       assign CMD_LINE_LIB = S_LIB                                        
+   001790     END-IF                                                               
+   001800   END-IF                                                                 
+   &gt;&gt; -----------Columns 001 072  &lt;&lt;    Local LDATEST1 Lines  158    User SAG      
+   Command ===&gt;                                                      Lib  SYSLIB   
+   ****** ****************************** top of data ***************************** 
+   000001 DEFINE DATA LOCAL                                                        
+   000002 1 NPF_F_READ(A1)                                                         
+   000003 CONST                                                                    
+   000004 &lt;'R'&gt;                                                                    
+   000005 1 NPF_F_WRITE(A1)                                                        
+   000006 CONST                                                                    
+   000007 &lt;'W'&gt;                                                                    
+   Enter-PF1---PF2---PF3---PF4---PF5---PF6---PF7---PF8---PF9---PF10--PF11--PF12--- 
+         Help  Save  Exit  Run   Rfind Stow  -     +     Check Home  Undo  Canc  
+</pre></td>
+               </tr>
+            </table> 
+                  
+            <p class="notes"><strong>Notes:</strong></p>
+            <ol class="note-list"> 
+                      
+               <li>Because it is not possible to modify the definitions in the
+                          display section, not all editor commands are available. PF keys are reserved
+                          for the editing section. Thus, commands meant for the display section must be
+                          issued using the command line.
+               </li> 
+                      
+               <li>The <a href="pgm_ux_editor_cmds.htm#edis_ux_swap"><code>SWAP</code></a> editor
+                          command can be used to move the cursor between the command lines of the display
+                          and editing sections.
+               </li> 
+                     
+            </ol> 
+                  
+                
+         </li>
+         <li> 
+                  
+                  
+            <p class="instep">In the display section, mark the block of lines to be copied from
+                      <code>LDATEST1</code>, for example, by entering the line command
+                      <a href="pgm_ux_line_cmds.htm#edis_ux_commands_cc"><code>CC</code></a> next to
+                      the first and the last line of the required block.
+            </p> 
+                  
+                
+         </li>
+         <li> 
+                  
+                  
+            <p class="instep">In the editing section of <code>PGMTEST1</code>, next to the line
+                      below which you want to place the block of lines, enter the line command
+                      <code>A</code>.
+            </p> 
+                  
+                  
+                  
+            <p class="instep">The marked block of lines is copied into <code>PGMTEST1</code> below
+                      the line where you entered the line command.
+            </p> 
+                
+         </li>
+         <li> 
+                  
+                  
+            <p class="instep">If required, terminate split-screen mode by entering the
+                      <code>SPLIT END</code> editor command.
+            </p> 
+                  
+                
+         </li>
+      </ol> 
+        
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="pgm_ux_split_screen_mode.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../edis/pgm_ux_split_screen_mode.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/edis/pgm_ux_split_screen_mode.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="edis_ux_pgm.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pgm_ux_editing_area.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pgm_ux_cmds_scroll.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

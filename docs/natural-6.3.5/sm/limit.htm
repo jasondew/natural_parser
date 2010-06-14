@@ -1,0 +1,321 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>LIMIT</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="limit" id="16822"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../sm/limit.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/sm/limit.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="sm-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="interfa.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="loop.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Statements&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> LIMIT 
+               <a name="x116"></a></h1>
+      </div> 
+         
+          
+          
+      <table border="0" class="syntax" cellpadding="3">  
+              
+         <tbody align="left" valign="top"> 
+                  
+            <tr> 
+                      
+               <td> <code class="keyword">LIMIT</code> <a href="limit.htm#n_limit"><var>n</var></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+               </td> 
+                     
+            </tr> 
+                 
+         </tbody> 
+             
+      </table> 
+          
+         
+      <p>This document covers the following topics:</p>
+         
+      <ul>
+         <li>
+            <p class="initem"><a href="limit.htm#Function_limit">Function</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="limit.htm#syntax_descr_limit">Syntax Description</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="limit.htm#limit_exa">Examples</a></p>
+         </li>
+      </ul> 
+         
+      <p>Related Statements: <a href="accept.htm#accept">ACCEPT/REJECT</a>
+             | <a href="atbreak.htm#atbreak">AT BREAK</a> |
+             <a href="atstart.htm#atstart">AT START OF DATA</a> |
+             <a href="atenddat.htm#atenddat">AT END OF DATA</a> |
+             <a href="backout.htm#backout">BACKOUT TRANSACTION</a> |
+             <a href="before.htm#before">BEFORE BREAK PROCESSING</a> |
+             <a href="delete.htm#delete">DELETE</a> | <a href="endtrans.htm#endtrans">END TRANSACTION</a> | <a href="find.htm#find">FIND</a> | <a href="get.htm#get">GET</a> |
+             <a href="getsame.htm#getsame">GET SAME</a> |
+             <a href="gettrans.htm#gettrans">GET TRANSACTION</a> |
+             <a href="delete.htm#delete"> </a> <a href="histogra.htm#histogra">HISTOGRAM</a> | <a href="get.htm#get">
+                </a> <a href="passw.htm#passw">PASSW</a> |
+             <a href="performb.htm#performb">PERFORM BREAK PROCESSING</a> |
+             <a href="read.htm#read">READ</a> | <a href="retry.htm#retry">RETRY</a> | <a href="store.htm#store">STORE</a>
+             | <a href="update.htm#update">UPDATE</a></p> 
+         
+      <p>Belongs to Function Group:
+             <a href="stmt.htm#Database_Access_and_Update">Database Access and
+            Update</a></p> 
+        
+      <hr> 
+        
+      <div><a name="Function_limit"></a></div> 
+         
+      <h2> Function </h2> 
+          
+          
+      <p>The <code>LIMIT</code> statement is used to limit the number of
+              iterations of a processing loop initiated with a <a href="find.htm#find"><code>FIND</code></a>, <a href="read.htm#read"><code>READ</code></a>, or <a href="histogra.htm#histogra"><code>HISTOGRAM</code></a> statement.
+      </p> 
+          
+      <p>The limit remains in effect for all subsequent processing loops in the
+              program until it is overridden with another <code>LIMIT</code> statement.
+      </p> 
+          
+      <p>The <code>LIMIT</code> statement does not apply to individual statements
+              in which a limit is explicitly specified (for example,
+              <a href="find.htm#find"><code>FIND (<var>n</var>)
+                   ...</code></a>).
+      </p> 
+          
+      <p>If the limit is reached, processing stops and a message is displayed;
+              see also the session parameter <a href="../parms/le.htm"><code>LE</code></a> which determines the
+              reaction when the limit for the processing loop is exceeded.
+      </p> 
+          
+      <p>If no <code>LIMIT</code> statement is specified, the default global
+              limit defined with the Natural profile parameter
+              <a href="../parms/lt.htm"><code>LT</code></a> during
+              Natural installation will be used.
+      </p> 
+          
+         
+      <div><a name="Record_Counting"></a></div> 
+          
+      <h3> Record Counting </h3> 
+           
+           
+      <p>To determine whether a processing loop has reached the limit, each
+               record read in the loop is counted against the limit. If the processing loop
+               has reached the limit, the following will apply:
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">A record that is rejected because of criteria specified in a
+                       <a href="find.htm#find"><code>FIND</code></a> or
+                       <a href="read.htm#read"><code>READ</code></a> statement
+                       <a href="find.htm#WHERE-clause"><code>WHERE</code></a> clause is
+                       <em>not</em> counted against the limit.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">A record that is rejected as a result of an
+                       <a href="accept.htm#accept"><code>ACCEPT</code>/<code>REJECT</code></a>
+                       statement is counted against the limit.
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="limit.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="syntax_descr_limit"></a></div> 
+         
+      <h2> Syntax Description </h2> 
+          
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="35%">
+            <col width="62%">
+         </colgroup> 
+                
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th nowrap> <a name="n_limit"></a>LIMIT
+                   <var>n</var> 
+               </th> 
+                       
+               <td> 
+                  
+                  <div><strong class="floating-title"> Limit Specification:</strong></div> 
+                           
+                  <p>The limit <var>n</var> must be specified as a
+                     numeric constant in the range from 0 to 4294967295 (leading zeros are
+                               optional).
+                  </p> 
+                           
+                  <p>The processing loop is not entered if the limit is set to zero.</p>
+                           
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="limit.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="limit_exa"></a></div> 
+         
+      <h2> Examples </h2>
+      <ul>
+         <li>
+            <p class="initem"><a href="limit.htm#Example_1_limit">Example 1 - LIMIT Statement</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="limit.htm#Example_2_limit">Example 2 - LIMIT Statement (Valid for Two Database Loops)</a></p>
+         </li>
+      </ul>
+      <div><a name="Example_1_limit"></a></div> 
+          
+      <h3>Example 1 - LIMIT Statement</h3> 
+           
+           <pre class="verbatim">** Example 'LMTEX1': LIMIT                                              
+************************************************************************
+DEFINE DATA LOCAL                                                       
+1 EMPLOY-VIEW VIEW OF EMPLOYEES                                         
+  2 PERSONNEL-ID                                                        
+  2 NAME                                                                
+  2 CITY                                                                
+END-DEFINE                                                              
+*                                                                       
+<strong>LIMIT 4</strong>                                                           
+*                                                                       
+READ EMPLOY-VIEW BY NAME STARTING FROM 'BAKER'                          
+  DISPLAY NOTITLE                                                       
+          NAME PERSONNEL-ID CITY *COUNTER                               
+END-READ                                                                
+*                                                                       
+END                                                                    </pre> 
+           <h4 class="floating-title">Output of Program LMTEX1:</h4> <pre class="system-output">        NAME         PERSONNEL         CITY            CNT     
+                        ID                                     
+-------------------- --------- -------------------- -----------
+                                                               
+BAKER                20016700  OAK BROOK                      1
+BAKER                30008042  DERBY                          2
+BALBIN               60000110  BARCELONA                      3
+BALL                 30021845  DERBY                          4</pre> 
+          <div><a name="Example_2_limit"></a></div> 
+          
+      <h3>Example 2 - LIMIT Statement (Valid for Two Database Loops)</h3> 
+           
+           <pre class="verbatim">** Example 'LMTEX2': LIMIT (valid for two database loops)               
+************************************************************************
+DEFINE DATA LOCAL                                                       
+1 EMPLOY-VIEW VIEW OF EMPLOYEES                                         
+  2 NAME                                                                
+END-DEFINE                                                              
+*                                                                       
+<strong>LIMIT 3</strong>                                                          
+*                                                                       
+FIND EMPLOY-VIEW WITH NAME &gt; 'A'                                        
+  READ EMPLOY-VIEW BY NAME STARTING FROM 'BAKER'                        
+    DISPLAY NOTITLE 'CNT(0100)' *COUNTER(0100)                          
+                    'CNT(0110)' *COUNTER(0110)                          
+  END-READ                                                              
+END-FIND                                                                
+*                                                                       
+END                                                                    </pre> 
+           <h4 class="floating-title">Output of Program LMTEX2:</h4> <pre class="system-output"> CNT(0100)   CNT(0110) 
+----------- -----------
+                       
+          1           1
+          1           2
+          1           3
+          2           1
+          2           2
+          2           3
+          3           1
+          3           2
+          3           3</pre> 
+           
+        
+       <div class="noprint">
+         <div class="nospy">
+            <p><a href="limit.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../sm/limit.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/sm/limit.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="sm-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="interfa.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="loop.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

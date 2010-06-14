@@ -1,0 +1,363 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Generating Message and Text Files</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="syserr_generate"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../utis/syserr_generate.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/utis/syserr_generate.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="syserr.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="syserr_errchar.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="syserr_usr0020p.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Tools and Utilities&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1>Generating Message and Text Files </h1>
+      </div> 
+         
+      <p>You can create messages as text files in any environment outside Natural
+             and convert them into message files to be maintained with the SYSERR utility.
+             Message files are created and maintained with the import and export functions
+             of the SYSERR utility.
+      </p> 
+         
+      <p>Message files are created in a platform-independent
+             format, which is portable across any Natural-supported UNIX, OpenVMS and
+             Windows platforms. For example, a message file created in a Natural for Windows
+             environment, can be copied onto a UNIX or an OpenVMS platform without manual
+             conversion; the necessary endian conversion is performed by Natural. For
+             further information, see
+             <a href="../ops/ops-systemfiles.htm#ops-sysfile-portable">Portable Natural
+            System Files</a> in the <cite>Operations</cite>
+             documentation and <a href="../pg/pg_gp.htm#gp_transfer">Transferring Natural Generated
+            Programs</a> in the <cite>Programming
+                Guide</cite>.
+      </p> 
+         
+      <p>The section below contains information on:</p>
+         
+      <ul>
+         <li>
+            <p class="initem"><a href="syserr_generate.htm#syserr_generate_Storing_Message">Storing a Message File</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="syserr_generate.htm#syserr_generate_Creating_Text_Files">Creating a Text File</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="syserr_generate.htm#syserr_generate_Generating_Messages_Modules">Generating a Message File</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="syserr_generate.htm#syserr_generate_Recreating_Text_Files">Recreating a Text File</a></p>
+         </li>
+      </ul>
+      <hr>
+      <div><a name="syserr_generate_Storing_Message"></a></div> 
+         
+      <h2>Storing a Message File </h2> 
+          
+          
+      <p>The message files must be stored with the file extension .MSG in the
+              Natural Err directories.
+      </p> 
+           
+           
+          
+      <p>User-defined message files are stored in the subdirectory Err of the
+              library in the FNAT or FUSER system file from which the application is
+              executed, the steplib, or the library SYSTEM.
+      </p> 
+          
+      <p>For Natural system messages, the message files must be stored in the
+              subdirectory Err in the Natural root directory. Natural system messages are
+              stored in eight message files.
+      </p> 
+         
+      <div class="noprint">
+         <p><a href="syserr_generate.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="syserr_generate_Creating_Text_Files"></a></div> 
+         
+      <h2> Creating a Text File </h2> 
+          
+          
+      <p>For Natural system or user-defined messages, the import function of the
+              SYSERR utility generates a message file from one text file.
+      </p> 
+          
+      <p>To create such a text file, you must use a specific layout, as shown in
+              the following example:
+      </p> 
+          
+      <h4 class="floating-title">Example:</h4> 
+          <pre class="verbatim">NAT
+0010 
+0100 
+0010E NO MESSAGE TEXT DEFINED! 
+0020E MISSING/INVALID SYNTAX; UNDEFINED VARIABLE-NAME. 
+0025E ERROR IN ENTRY FOR NUMBER OF RECORDS TO BE PROCESSED. 
+0050E INCORRECT FIELD SPECIFICATION IN 'WHERE' CLAUSE. 
+#PLEASE CHECK PROGRAM 
+#FOR ERRORS 
+0100E FUNCTION NOT AVAILABLE.
+</pre> 
+          <h4 class="floating-title">Explanation:</h4> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="no%"> 
+               
+         <tbody align="left" valign="top"> 
+                    
+                   
+            <tr>
+               <td>NAT
+                  <p>or</p>
+                  <p><var>library-ID</var></p>
+               </td>
+               <td>The prefix of the message number to be displayed with the
+                  message. The default prefix is NAT for Natural system messages and the library ID for user-defined
+                  messages.
+               </td>
+            </tr>
+            <tr> 
+                       
+               <td>0010</td> 
+                       
+               <td>The four-digit starting number of a range of messages.</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>0100</td> 
+                       
+               <td>The four-digit ending number of a range of messages. All message
+                  numbers that are defined in this text file must be within this range.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>0010E</td> 
+                       
+               <td> 
+                  NO MESSAGE TEXT DEFINED.  
+                  
+                  <p>This is the short message for message number 0010. The
+                               <strong>E</strong> is mandatory and means "error". This message
+                               will be issued with the following Natural statement:
+                  </p> 
+                           
+                  <p><code>REINPUT *0010</code></p> 
+                           
+                  <p> Explanatory long messages must be placed immediately below this
+                               short message; each of these additional lines must start with a hash/number (#)
+                               sign. Up to 20 additional lines of long message text are allowed for each short
+                               message.
+                  </p>
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+         
+      <div class="noprint">
+         <p><a href="syserr_generate.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="syserr_generate_Generating_Messages_Modules" id="16149"></a></div> 
+         
+      <h2> Generating a Message File </h2> 
+          
+      <p>With the SYSERR utility, you can generate a message file from a text
+              file.
+      </p> 
+          
+      <p>For user-defined messages, one output message file can be created in one
+              language for each library. Each message file must be stored in the Err
+              subdirectory of that library.
+      </p>
+      <div><a name="d0e152351"></a></div> 
+          
+      <h3>Naming Conventions</h3> 
+           
+           
+      <p>For user-defined messages, the name of the message file must be:</p> 
+           
+      <p>N<var>nn</var>APMSL.MSG
+      </p> 
+           
+      <p>where <var>nn</var> is the language code (01 - 60), for
+               example 01 for English.
+      </p> 
+           
+      <p>For Natural system messages, the name of the message file must be:</p> 
+           
+      <p>N<var>nn</var>L<var>mmmm</var>.MSG
+      </p> 
+           
+      <p>where <var>nn</var> is the language code to be used and
+               <var>mmmm</var> the starting number of the message range. The
+               ranges of message numbers are fixed, as defined during Natural system
+               installation, for example: 
+      </p> 
+            
+            
+      <table border="0" cellpadding="3" width="no%"> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td>N01L0000&nbsp;&nbsp;&nbsp;</td> 
+                        
+               <td>Messages 1 - 1999</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>N01L2000</td> 
+                        
+               <td>Messages 2000 - 2999</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong> To generate a message file</strong></p>
+      <ol class="steps">
+         <li> 
+                    
+                    
+            <p class="instep">Enter the <code>IMPORT</code> command of the SYSERR
+                        utility. 
+            </p> 
+                    
+                    
+                    
+            <p class="instep">The window Import Text File to Message File is displayed.</p> 
+                    
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">In the <span class="selectable_label">From</span> input field, specify the name of
+                        the input text file from which all information is to be read.&nbsp; The full path
+                        name of the file must be specified. In the <span class="selectable_label">To</span> input
+                        fields, specify the language and the library of the message file to be
+                        generated.&nbsp;
+            </p> 
+                    
+                  
+         </li>
+      </ol> 
+            
+          
+      <div class="noprint">
+         <p><a href="syserr_generate.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="syserr_generate_Recreating_Text_Files" id="16150"></a></div> 
+         
+      <h2> Recreating a Text File </h2> 
+          
+          
+      <p>With the SYSERR utility, you can also recreate a text file for message
+              text maintenance. This is done by reconverting a messages file into a text
+              file.
+      </p> 
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong> To recreate a message text file </strong></p>
+      <ol class="steps">
+         <li> 
+                   
+                   
+            <p class="instep">Enter the <code>EXPORT</code> command of the SYSERR
+                       utility. 
+            </p> 
+                   
+                   
+                   
+            <p class="instep">The window Export Text File from Message File is displayed.</p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">In the <span class="selectable_label">From</span> input fields, specify the language
+                       and the library of the message(s) to be used as input.&nbsp;In the
+                       <span class="selectable_label">To</span> input field, specify the name of the text file to be
+                       created. The text file created will have the same format as an input text
+                       file.
+            </p> 
+                   
+                 
+         </li>
+      </ol> 
+           
+         
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="syserr_generate.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../utis/syserr_generate.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/utis/syserr_generate.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="syserr.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="syserr_errchar.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="syserr_usr0020p.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

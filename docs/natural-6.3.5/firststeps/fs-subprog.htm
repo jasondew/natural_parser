@@ -1,0 +1,845 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Subprograms</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="fs-subprog"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../firststeps/fs-subprog.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/firststeps/fs-subprog.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="fs-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="fs-extsub.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="fs-over.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;First Steps&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x39"></a>Subprograms
+         </h1>
+      </div> 
+         
+      <p>You will now expand your program to include a <code>CALLNAT</code>
+             statement that invokes a subprogram. In the subprogram, the employees
+             identified from the main program will be the basis of a <code>FIND</code>
+             request to the <code>VEHICLES</code> file which is also part of the demo
+             database. As a result, your output will contain vehicles information from the
+             subprogram as well as employees information from the main program.
+      </p> 
+         
+      <p>The new subprogram requires the creation of an additional local data area
+             and a parameter data area.
+      </p> 
+         
+      <p>When you have completed the exercises below, your sample application will
+             consist of the following modules:
+      </p> 
+         
+      <p><img src="graphics/fs-subprog.png" alt="Application structure" width="600" height="380"></p> 
+         
+      <p>This document contains the following
+             exercises:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="fs-subprog.htm#fs-subprog-lda1">Modifying the Local Data Area</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="fs-subprog.htm#fs-subprog-pda">Creating a Parameter Data Area from an Existing Local Data Area</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="fs-subprog.htm#fs-subprog-lda2">Creating Another Local Data Area Containing a Different View</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="fs-subprog.htm#fs-subprog-new">Creating a Subprogram</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="fs-subprog.htm#fs-subprog-ref">Referencing the Subprogram from Your Program</a></p>
+         </li>
+      </ul>
+      <hr>
+      <div><a name="fs-subprog-lda1"></a></div> 
+         
+      <h2>Modifying the Local Data Area</h2> 
+          
+          
+      <p>You will now add more fields to the local data area that you have
+              previously created. These fields will be used by the subprogram that you will
+              create later.
+      </p> 
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To add more fields to the local data area</strong></p>
+      <ol class="steps">
+         <li> 
+                   
+                   
+            <p class="instep">Return to your local data area.</p> <pre class="command-input">E LDA01</pre> 
+                   
+                 </li>
+         <li> 
+                   
+                    
+                   
+            <p class="instep">If required, press <span class="key">ESC</span> to switch to edit
+                       mode.
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Define the following fields below
+                       <code>#NAME-END</code> (use the line command
+                       <code>I</code> and from the resulting window, choose
+                       <span class="guilistitem">Data Field</span>):
+            </p> 
+                    
+                    
+            <table border="1" class="color" cellpadding="3" width="80%"> 
+                        
+               <thead align="left" valign="top"> 
+                            
+                  <tr> 
+                                
+                     <th>Level</th> 
+                                
+                     <th>Name</th> 
+                                
+                     <th>Format</th> 
+                                
+                     <th>Length</th> 
+                               
+                  </tr> 
+                           
+               </thead> 
+                        
+               <tbody align="left" valign="top"> 
+                            
+                  <tr> 
+                                
+                     <td>1</td> 
+                                
+                     <td><code>#PERS-ID</code></td> 
+                                
+                     <td>A</td> 
+                                
+                     <td>8</td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td>1</td> 
+                                
+                     <td><code>#MAKE</code></td> 
+                                
+                     <td>A</td> 
+                                
+                     <td>20</td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td>1</td> 
+                                
+                     <td><code>#MODEL</code></td> 
+                                
+                     <td>A</td> 
+                                
+                     <td>20</td> 
+                               
+                  </tr> 
+                           
+               </tbody> 
+                       
+            </table> 
+                    
+                   
+            <p class="instep">When all fields have been added, press <span class="key">ESC</span>.
+            </p>
+                   
+                   
+            <p class="instep">The local data area should now look as follows:</p> 
+                    
+                   
+            <table border="1" cellpadding="5" class="screen">
+               <tr>
+                  <td><pre>                       Press &lt;ESC&gt; to enter command mode                        
+ Mem: LDA01    Lib: TUTORIAL Type: LOCAL      Bytes:   376  Line:    5 of:   5  
+C T L  Name of Datafield                F     Length Index/Comment             M
+  *    *** Top of Data Area ***                                                 
+     1 #NAME-START                      A         20                            
+     1 #NAME-END                        A         20                            
+ <strong>    1 #PERS-ID                         A          8                            
+     1 #MAKE                            A         20                            
+     1 #MODEL                           A         20</strong>                            
+  *    *** End of Data Area ***                                                 
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+  F 1 HELP     F 2 CHOICE   F 3 QUIT     F 4 SAVE     F 5 STOW     F 6 CHECK    
+  F 7 READ     F 8 CLEAR    F 9 MEM TYPE F10 GEN      F11 FLD TYPE F12</pre></td>
+               </tr>
+            </table> 
+                    
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Stow the local data area.</p> 
+                   
+                 
+         </li>
+      </ol> 
+         
+      <div class="noprint">
+         <p><a href="fs-subprog.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="fs-subprog-pda"></a></div> 
+         
+      <h2>Creating a Parameter Data Area from an Existing Local Data
+             Area
+      </h2> 
+          
+          
+      <p>A parameter data area (PDA) is used to specify the data parameters to be
+              passed between your Natural program and the subprogram that you will create
+              later. The parameter data area will be referenced in the subprogram.
+      </p> 
+          
+      <p>With minor modifications, your local data area can be used to create the
+              parameter data area: you will delete two of the data fields in in the local
+              data area and then save the revised data area as a parameter data area. The
+              original local data area remains intact.
+      </p> 
+           
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To create the parameter data area</strong></p>
+      <ol class="steps">
+         <li> 
+                   
+                   
+            <p class="instep">In the local data area, delete the fields <code>#NAME-START</code>
+                       and <code>#NAME-END</code> using the line command
+                       <code>D</code>.
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                    
+                   
+            <p class="instep">Enter the following in the command line of the data
+                       area editor.
+            </p> <pre class="command-input">SA PDA01</pre> 
+                   
+                    
+                   <p class="instep">The current data area is saved with the new name
+                       <code>PDA01</code>. The existing local data area is still shown in the
+                       editor.
+            </p> 
+                 
+         </li>
+         <li> 
+                   
+                    
+                   
+            <p class="instep">Load the newly created data area into the editor by
+                       entering the following command:
+            </p> <pre class="command-input">E PDA01</pre> 
+                   
+                 </li>
+         <li> 
+                   
+                    
+                   
+            <p class="instep">To change the local data area into a parameter data
+                       area, enter the following command:
+            </p> <pre class="command-input">SET TYPE A</pre> 
+                   <p class="instep">where "A" denotes parameter
+                       data area.
+            </p> 
+                   
+                   
+                   
+            <p class="instep">The object type changes to "Parameter".
+                       This is indicated at the top of the screen. The
+                       parameter data area should now look as follows:
+            </p> 
+                    
+                   
+            <table border="1" cellpadding="5" class="screen">
+               <tr>
+                  <td><pre>Command:                                                                      
+ Mem: PDA01    Lib: TUTORIAL Type: PARAMETER  Bytes:   116  Line:      of:   3
+C T    Comment                                                                
+  *    *** Top of Data Area ***                                               
+     1 #PERS-ID                         A          8                          
+     1 #MAKE                            A         20                          
+     1 #MODEL                           A         20                          
+  *    *** End of Data Area ***                                               
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+  F 1 HELP     F 2 CHOICE   F 3 QUIT     F 4 SAVE     F 5 STOW     F 6 CHECK  
+  F 7 READ     F 8 CLEAR    F 9 MEM TYPE F10 GEN      F11 FLD TYPE F12</pre></td>
+               </tr>
+            </table> 
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Stow the parameter data area.</p> 
+                   
+                 
+         </li>
+      </ol> 
+         
+      <div class="noprint">
+         <p><a href="fs-subprog.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="fs-subprog-lda2"></a></div> 
+         
+      <h2>Creating Another Local Data Area Containing a Different View</h2> 
+          
+          
+      <p>You will now create a second local data area and import fields from the
+              DDM for the <code>VEHICLES</code> database file. 
+      </p> 
+          
+      <p>This local data area will be referenced in the subprogram.</p> 
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To create the local data area</strong></p>
+      <ol class="steps">
+         <li> 
+                   
+                    
+                   
+            <p class="instep">Enter the following command in the command line of the
+                       data area editor.
+            </p> <pre class="command-input">CLEAR</pre> 
+                   
+                   
+                   <p class="instep">The data area editor is now empty.</p> 
+                 
+         </li>
+         <li> 
+                   
+                    
+                   
+            <p class="instep">To change the type of the data area, enter the
+                       following in the command line:
+            </p> <pre class="command-input">SET TYPE L</pre> 
+                   <p class="instep">where "L" denotes local data
+                       area.
+            </p> 
+                   
+                   
+                 
+         </li>
+         <li> 
+                   
+                     
+                   
+            <p class="instep">Press <span class="key">ESC</span> to switch to edit mode. Then enter
+                       the following line command in the first column of the line indicating the top
+                       of the data area.
+            </p> <pre class="command-input">V</pre> 
+                   
+                 </li>
+         <li> 
+                   
+                    
+                    
+                   
+            <p class="instep">Enter the following in the resulting window and press
+                       <span class="key">ENTER</span>:
+            </p> 
+                   
+            <table border="1" cellpadding="5" class="screen">
+               <tr>
+                  <td><pre>+------------------- View Definition -------------------+
+&brvbar;Name of View:          <strong>VEHICLES-VIEW</strong>                   &brvbar;
+&brvbar;Name of DDM:           <strong>VEHICLES</strong>                        &brvbar;
+&brvbar;Comment:                                               &brvbar;
++-------------------------------------------------------+</pre></td>
+               </tr>
+            </table> 
+                   
+                    
+                    
+                    
+                   
+            <p class="instep">A window appears showing the fields of the specified
+                       DDM.
+            </p> 
+                   
+            <table border="1" cellpadding="5" class="screen">
+               <tr>
+                  <td><pre>                       Press &lt;ESC&gt; to enter command mode                        
+ Mem: empty    Lib: TUTORIAL Type: LOCAL      Bytes:     0  Line:    0 of:   0  
+C T    Comment                                                                  
+V *    *** Top of Data Area ***                                                 
+  *    *** End of Data Area ***                                                 
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
++------------------------------- DDM: VEHICLES --------------------------------+
+&brvbar;    1  AA  REG-NUM                           A         15  N D                &brvbar;
+&brvbar;    1  AB  CHASSIS-NUM                       B          4  F                  &brvbar;
+&brvbar;    1  AC  PERSONNEL-ID                      A          8    D                &brvbar;
+&brvbar;  G 1  CD  CAR-DETAILS                                                        &brvbar;
+&brvbar;    2  AD  MAKE                              A         20  N D                &brvbar;
+&brvbar;    2  AE  MODEL                             A         20  N                  &brvbar;
++------------------------------------------------------------------------------+
+                                                                                
+                                                                                
+                                                                                
+  F 1 HELP     F 2 CHOICE   F 3 QUIT     F 4 SAVE     F 5 STOW     F 6 CHECK    
+  F 7 READ     F 8 CLEAR    F 9 MEM TYPE F10 GEN      F11 FLD TYPE F12</pre></td>
+               </tr>
+            </table> 
+                 
+         </li>
+         <li> 
+                   
+                    
+                   
+            <p class="instep">Mark the following fields by entering 
+                       an "X" in the first
+                       column:
+            </p> 
+                   
+                   
+            <p class="mini-list"> 
+                       <code>PERSONNEL-ID</code><br> 
+                       <code>CAR-DETAILS</code><br> 
+                       <code>MAKE</code><br> 
+                       <code>MODEL</code> 
+                      
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                    
+                   
+            <p class="instep">After you have marked all required fields, press
+                       <span class="key">ENTER</span>.
+                       
+            </p> 
+                   
+                    
+                   
+            <p class="instep">The local data area should now look as follows (use the arrow keys to scroll to the top of the data
+                       area):
+            </p> 
+                    
+                   
+            <table border="1" cellpadding="5" class="screen">
+               <tr>
+                  <td><pre>                       Press &lt;ESC&gt; to enter command mode                      
+ Mem:          Lib: TUTORIAL Type: LOCAL      Bytes:   485  Line:    0 of:   5
+C T    Comment                                                                
+  *    *** Top of Data Area ***                                               
+  V  1 VEHICLES-VIEW                                 VEHICLES                 
+     2 PERSONNEL-ID                     A          8                          
+  G  2 CAR-DETAILS                                                            
+     3 MAKE                             A         20                          
+     3 MODEL                            A         20                          
+  *    *** End of Data Area ***                                               
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+  F 1 HELP     F 2 CHOICE   F 3 QUIT     F 4 SAVE     F 5 STOW     F 6 CHECK  
+  F 7 READ     F 8 CLEAR    F 9 MEM TYPE F10 GEN      F11 FLD TYPE F12</pre></td>
+               </tr>
+            </table> 
+                 
+         </li>
+         <li> 
+                   
+                    
+                   
+            <p class="instep">Save the new local data area by entering the following
+                       in the command line:
+            </p> <pre class="command-input">SA LDA02</pre> 
+                   
+                 </li>
+         <li> 
+                   
+                   
+            <p class="instep">Stow the new local data area.</p> 
+                   
+                 
+         </li>
+      </ol> 
+         
+      <div class="noprint">
+         <p><a href="fs-subprog.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="fs-subprog-new"></a></div> 
+         
+      <h2>Creating a Subprogram</h2> 
+          
+          
+      <p>You will now create a subprogram that uses a parameter data area and a
+              local data area to retrieve information from the <code>VEHICLES</code> file.
+              The subprogram receives the personnel ID passed by the program
+              <code>PGM01</code> and uses this ID as the basis for a search of the
+              <code>VEHICLES</code> file. 
+      </p> 
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To create the subprogram</strong></p>
+      <ol class="steps">
+         <li> 
+                   
+                    
+                   
+            <p class="instep">In the command line of the data area editor, enter the
+                       following command:
+            </p> <pre class="command-input">E N</pre> 
+                   <p class="instep">where "N" denotes
+                       subprogram. 
+            </p> 
+                   
+                    
+                   
+            <p class="instep">An empty program editor is invoked. The object type has
+                       been set to subprogram. 
+            </p> 
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Enter the following:</p> 
+                   <pre class="verbatim">DEFINE DATA
+  PARAMETER USING PDA01
+  LOCAL USING LDA02
+END-DEFINE
+*
+FD1. FIND (1) VEHICLES-VIEW
+  WITH PERSONNEL-ID = #PERS-ID
+  MOVE MAKE (FD1.) TO #MAKE
+  MOVE MODEL (FD1.) TO #MODEL
+  ESCAPE BOTTOM
+END-FIND
+*
+END</pre> 
+                   <p class="instep">This subprogram returns to a given personnel ID the make and model of
+                       the employee's company car.
+            </p> 
+                   
+            <p class="instep">The <code>FIND</code> statement selects a set of records (here: one
+                       record) from the database based on the search criterion <code>#PERS-ID</code>.
+                       
+            </p> 
+                   
+            <p class="instep">In the field <code>#PERS-ID</code>, the subprogram receives the value
+                       of <code>PERSONNEL-ID</code> that has been passed by the program
+                       <code>PGM01</code>. The subprogram uses this value as the basis for a search of
+                       the <code>VEHICLES</code> file. 
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Stow the subprogram.</p> <pre class="command-input">STOW SPGM01</pre> 
+                   
+                 </li>
+      </ol> 
+         
+      <div class="noprint">
+         <p><a href="fs-subprog.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="fs-subprog-ref"></a></div> 
+         
+      <h2>Referencing the Subprogram from Your Program</h2> 
+          
+          
+      <p>A subprogram is invoked from the main program using a
+              <code>CALLNAT</code> statement. A subprogram can only be invoked via a
+              <code>CALLNAT</code> statement; it cannot be executed by itself. A subprogram
+              has no access to the global data area used by the invoking object. 
+      </p> 
+          
+      <p>Data is passed from the main program to the specified subprogram through
+              a set of parameters that are referenced in the <code>DEFINE DATA
+            PARAMETER</code> statement of the subprogram. 
+      </p> 
+          
+      <p>The variables defined in the parameter data area of the subprogram do
+              not have to have the same names as the variables in the <code>CALLNAT</code>
+              statement. Since the parameters are passed by address, it is only necessary
+              that they match in sequence, format, and length. 
+      </p> 
+          
+      <p>You will now modify your main program so that it can use the subprogram
+              you have just defined.
+      </p> 
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To use the subprogram in your main program</strong></p>
+      <ol class="steps">
+         <li> 
+                   
+                   
+            <p class="instep">Return to the program editor by entering the
+                       following in the command line.
+            </p> <pre class="command-input">E PGM01</pre> 
+                   
+                 </li>
+         <li> 
+                   
+                   
+            <p class="instep">Insert the following directly above the <code>DISPLAY</code>
+                       statement:
+            </p> 
+                   <pre class="verbatim">RESET #MAKE #MODEL
+CALLNAT 'SPGM01' PERSONNEL-ID #MAKE #MODEL</pre> 
+                   <p class="instep">The <code>RESET</code> statement sets the values of
+                       <code>#MAKE</code> and <code>#MODEL</code> to null values.
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep"> Delete the line containing the <code>DISPLAY</code> statement and
+                       replace it with the following:
+            </p> 
+                   <pre class="verbatim">WRITE TITLE
+      / '*** PERSONS WITH 20 OR MORE DAYS LEAVE DUE ***'
+      / '***     ARE MARKED WITH AN ASTERISK        ***'//
+*
+DISPLAY   1X '//N A M E' NAME
+          1X '//DEPT'    DEPT
+          1X '/LV/DUE'   LEAVE-DUE
+             ' '         #MARK
+          1X '//MAKE'    #MAKE
+          1X '//MODEL'   #MODEL</pre> 
+                   <p class="instep">The text defined with the <code>WRITE TITLE</code> statement will
+                       appear at the top of each page in the output. The <code>WRITE TITLE</code>
+                       statement overrides the default page title: the information which was
+                       previously displayed at the top of each page (page number, date and time) is no
+                       longer shown. Each slash (/) causes the subsequent information to be shown in a
+                       new line.
+            </p> 
+                   
+            <p class="instep">Since the subprogram is now returning additional vehicles
+                       information, the columns in the output need to be resized. They receive shorter
+                       headers. The column in which the asterisk is to be shown (<code>#MARK</code>),
+                       does not receive a header at all. One space will be inserted between the
+                       columns (<code>1X</code>). Each slash in the header causes the subsequent
+                       information to be shown in a new line of the same column. 
+            </p> 
+                   
+                   
+            <p class="instep">Your program should now look as follows:</p> 
+                   <pre class="verbatim">DEFINE DATA
+  GLOBAL USING GDA01  
+  LOCAL USING LDA01
+END-DEFINE
+*
+RP1. REPEAT
+*
+  INPUT USING MAP 'MAP01'
+*
+  IF #NAME-START = '.' THEN
+    ESCAPE BOTTOM (RP1.)
+  END-IF
+*
+  IF #NAME-END = ' ' THEN
+    MOVE #NAME-START TO #NAME-END
+  END-IF
+*
+  RD1. READ EMPLOYEES-VIEW BY NAME
+    STARTING FROM #NAME-START
+    ENDING AT #NAME-END
+*    
+    IF LEAVE-DUE &gt;= 20 THEN
+      PERFORM MARK-SPECIAL-EMPLOYEES
+    ELSE
+      RESET #MARK
+    END-IF
+*    
+    RESET #MAKE #MODEL
+    CALLNAT 'SPGM01' PERSONNEL-ID #MAKE #MODEL
+*
+    WRITE TITLE
+      / '*** PERSONS WITH 20 OR MORE DAYS LEAVE DUE ***'
+      / '***     ARE MARKED WITH AN ASTERISK        ***'//         
+*
+    DISPLAY   1X '//N A M E' NAME
+              1X '//DEPT'    DEPT
+              1X '/LV/DUE'   LEAVE-DUE
+                 ' '         #MARK
+              1X '//MAKE'    #MAKE
+              1X '//MODEL'   #MODEL
+*
+  END-READ
+*
+  IF *COUNTER (RD1.) = 0 THEN
+    REINPUT 'No employees meet your criteria.'
+  END-IF
+*
+END-REPEAT
+*
+END</pre> 
+                 </li>
+         <li> 
+                   
+                   
+            <p class="instep">Run the program.</p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Enter "JONES" as the starting name and
+                       press <span class="key">ENTER</span>.
+            </p> 
+                   
+                   
+            <p class="instep">The resulting list should look similar to the following:</p> <pre class="system-output">MORE                                                                        
+                                                                            
+                *** PERSONS WITH 20 OR MORE DAYS LEAVE DUE ***              
+                ***     ARE MARKED WITH AN ASTERISK        ***              
+                                                                            
+                                                                            
+                                                                            
+                             LV                                             
+       N A M E         DEPT  DUE           MAKE                MODEL        
+ -------------------- ------ --- - -------------------- --------------------
+                                                                            
+ JONES                SALE30  25 * CHRYSLER             IMPERIAL            
+ JONES                MGMT10  34 * CHRYSLER             PLYMOUTH            
+ JONES                TECH10  11   GENERAL MOTORS       CHEVROLET           
+ JONES                MGMT10  18   FORD                 ESCORT              
+ JONES                TECH10  21 * GENERAL MOTORS       BUICK               
+ JONES                SALE00  30 * GENERAL MOTORS       PONTIAC             
+ JONES                SALE20  14   GENERAL MOTORS       OLDSMOBILE          
+ JONES                COMP12  26 * DATSUN               SUNNY               
+ JONES                TECH02  25 * FORD                 ESCORT 1.3          
+</pre> 
+                 </li>
+         <li> 
+                   
+                    
+                   
+            <p class="instep">To return to the program editor, enter
+                       <code>EDIT</code> at the <code>MORE</code> prompt.
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Stow the program.</p> 
+                   
+                 
+         </li>
+      </ol> 
+          
+      <p>You have successfully completed this tutorial.</p> 
+         
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="fs-subprog.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../firststeps/fs-subprog.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/firststeps/fs-subprog.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="fs-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="fs-extsub.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="fs-over.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

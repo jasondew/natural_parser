@@ -1,0 +1,792 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Work Files</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="ops-workfiles"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../ops/ops-workfiles.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/ops/ops-workfiles.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="ops-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="ops-systemfiles.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="ops-bufferpool.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Operations&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+         
+      <div class="nospytext">
+         <h1> 
+                <a name="x25"></a>Work Files
+         </h1>
+      </div> 
+          
+      <p>Work files are files to which data can be written and from which data
+              can be read by Natural programs. They are used for intermediate storage of data
+              and for data exchange between programs. Data can be transferred from or to a
+              work file by using the Natural statements <a href="../sm/readwork.htm"><code>READ WORK FILE</code></a> and
+              <a href="../sm/writewor.htm"><code>WRITE WORK
+               FILE</code></a>, or <a href="../sm/upload.htm"><code>UPLOAD PC FILE</code></a> and
+              <a href="../sm/download.htm"><code>DOWNLOAD PC
+               FILE</code></a>. 
+      </p> 
+          
+      <p>This document covers the following
+              topics:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="ops-workfiles.htm#ops-work-define">Defining Work Files</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="ops-workfiles.htm#ops-work-formats">Work File Formats</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="ops-workfiles.htm#ops-work-ncd">Special Considerations for Work Files with the Extension NCD</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="ops-workfiles.htm#ops-work-transfer">Using the Work File Type Transfer</a></p>
+         </li>
+      </ul>
+      <hr>
+      <div><a name="ops-work-define"></a></div> 
+          
+      <h2> 
+              <a name="x26"></a> 
+              <a name="x27"></a>Defining Work Files
+      </h2> 
+           
+           
+      <p>Using the <a href="../config/cfg-over.htm">Configuration
+                  Utility</a> or the <a href="../sm/definewo.htm"><code>DEFINE WORK
+               FILE</code></a> statement, you can assign names (including the path) for
+               up to 32 work files.
+      </p> 
+           
+      <p>The maximum number of work files that can be used depends on the
+               setting of the parameter <a href="../parms/work.htm"><code>WORK</code></a>.
+      </p> 
+           
+      <p>If you run a program which uses a work file for which a name and path
+               has not been assigned, Natural automatically creates the file name and writes
+               the work file into the
+               <a href="../config/cfg-confparm.htm#cfg-cf-loc-install">temporary
+                  directory</a> specified in the local configuration file. The name of
+               such a file consists of the specified work file number and an arbitrary number
+               assigned by the operating system. The generation of the work file name is based
+               on an algorithm which tries to generate a unique name. Depending on the Natural
+               parameter <a href="../parms/tmpsortuniq.htm"><code>TMPSORTUNIQ</code></a>,
+               the naming convention may vary. If work file names are referenced from outside
+               Natural, it is recommended that you specify the names explicitly to avoid
+               problems identifying the files. 
+      </p> 
+           
+      <p>The following topics are covered below:</p>
+           
+      <ul>
+         <li>
+            <p class="initem"><a href="ops-workfiles.htm#ops-work-define-cfgutil">Defining Work File Names with the Configuration Utility</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="ops-workfiles.htm#ops-work-define-envvar">Defining Work File Names with Environment Variables</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="ops-workfiles.htm#ops-work-define-api">Defining Work File Names with an Application Programming Interface</a></p>
+         </li>
+      </ul>
+      <div><a name="ops-work-define-cfgutil"></a></div> 
+           
+      <h3>Defining Work File Names with the Configuration Utility</h3> 
+            
+            
+      <p>In the Configuration Utility, the work file names are assigned in the
+                category <a href="../config/cfg-profileparm.htm#cfg-prf-exe-workfiles"><span class="guilistitem">Work
+               Files</span></a> of a parameter file. The above mentioned
+                parameters <code>WORK</code> and <code>TMPSORTUNIQ</code>
+                can also be found in this category. See
+                <a href="../config/cfg-profileparm.htm#cfg-prf-exe-workfiles-assign">Work
+            File Assignments</a> in the <cite>Configuration
+                   Utility</cite> documentation for further information.
+      </p> 
+             
+            
+      <p class="tip"><strong>Tip:</strong><br>Locate the work file assignments by searching for "Work
+                Files". See <a href="../config/cfg-work.htm#cfg-wrk-find">Finding a
+            Parameter</a> in the <cite>Configuration
+                   Utility</cite> documentation for further information.
+      </p> 
+           
+      <div><a name="ops-work-define-envvar"></a></div> 
+           
+      <h3>Defining Work File Names with Environment
+               Variables
+      </h3> 
+            
+      <p>The following topics are covered
+                below:
+      </p>
+      <ul>
+         <li><a href="ops-workfiles.htm#ops-work-define-envvar-gen">General Information</a></li>
+         <li><a href="ops-workfiles.htm#ops-work-define-envvar-delimit">Delimiters of Environment Variables</a></li>
+      </ul>
+      <div><a name="ops-work-define-envvar-gen"></a></div>
+            
+            
+      <h4>General Information</h4> 
+             
+             
+      <p>Work files can also be defined by using UNIX environment
+                 variables. Once you have defined
+                 the work file names in the parameter file, the work file names can be set
+                 without further change to the parameter file. For example, when you specify the
+                 following name for a work file in the parameter file (or in a <code>DEFINE WORK
+            FILE</code> statement): 
+      </p> 
+              
+               
+              <pre class="verbatim">$NATURAL/$myfile</pre> 
+              <p>and assume the following settings in your operating system:</p> 
+               
+              <pre class="verbatim">set NATURAL=/usr/natural
+set myfile=sub/test</pre> 
+              <p>this will expand into the following file name:</p> 
+               
+              <pre class="verbatim">usr/natural/sub/test</pre> 
+              
+            <div><a name="ops-work-define-envvar-delimit"></a></div> 
+            
+      <h4> 
+                <a name="x28"></a>Delimiters of Environment Variables
+      </h4> 
+             
+             
+      <p>Names of environment variables are delimited by special characters. A
+                 left-hand delimiter is to the left of a variable, a right-hand delimiter is to
+                 the right. 
+      </p> 
+             
+      <p>For example, the string <code>$TEMP</code> identifies an environment variable named
+                 <code>TEMP</code>; <code>$</code> is used as both the left-hand and right-hand delimiter.
+      </p> 
+             
+      <p>Valid delimiters are:</p> 
+              
+              
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                  
+         <thead align="left" valign="top"> 
+                      
+            <tr> 
+                          
+               <th>Type of Delimiter</th> 
+                          
+               <th>Valid Delimiters</th> 
+                         
+            </tr> 
+                     
+         </thead> 
+                  
+         <tbody align="left" valign="top"> 
+                      
+            <tr> 
+                          
+               <td>Left-hand delimiter</td> 
+                          
+               <td> 
+                  
+                  <p class="mini-list"> 
+                     
+                     $ 
+                                 
+                  </p>
+               </td> 
+                         
+            </tr> 
+                      
+            <tr> 
+                          
+               <td>Right-hand delimiter</td> 
+                          
+               <td> 
+                  
+                  <p class="mini-list"> 
+                     
+                                  /<br> 
+                                  . 
+                                   
+                                 
+                  </p>
+               </td> 
+                         
+            </tr> 
+                     
+         </tbody> 
+                 
+      </table> 
+              
+            
+      <div><a name="ops-work-define-api"></a></div> 
+           
+      <h3>Defining Work File Names with an Application Programming
+               Interface
+      </h3> 
+            
+            
+      <p>You can also define work files with the application programming
+                interface <code>USR1050N</code> in library <a href="../utis/sysext.htm"><code>SYSEXT</code></a>. 
+      </p> 
+           
+      <div class="noprint">
+         <p><a href="ops-workfiles.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="ops-work-formats"></a></div> 
+          
+      <h2> 
+              <a name="x31"></a>Work File Formats
+      </h2> 
+           
+      <p>The format of a work file depends on the work file type that has been
+               defined. Different work file formats are available. Natural recognizes the
+               format by checking the file name and its extension:
+      </p> 
+           <pre class="verbatim"><var>file-name.extension</var></pre> 
+           <p>where <var>file-name</var> can have a maximum of 8
+               characters and <var>extension</var> can have a maximum of 3
+               characters. 
+      </p> 
+           
+      <p>The work file formats are:</p>
+      <ul>
+         <li>
+            <p class="initem"><a href="ops-workfiles.htm#ops-work-formats-bin">Binary Format</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="ops-workfiles.htm#ops-work-formats-ascii">ASCII Format</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="ops-workfiles.htm#ops-work-formats-entireconn">Entire Connection Format</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="ops-workfiles.htm#ops-work-formats-portable">Portable Format</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="ops-workfiles.htm#ops-work-formats-unformatted">Unformatted Format</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="ops-workfiles.htm#ops-work-formats-csv">CSV Format</a></p>
+         </li>
+      </ul> 
+           
+      <p>See also
+               <a href="../unicode/uni-data.htm#uni-data-workprintfiles">Work
+            Files and Print Files</a> in the <cite>Unicode and Code
+                  Page Support</cite> documentation.
+      </p>
+      <div><a name="ops-work-formats-bin"></a></div> 
+           
+      <h3> 
+               <a name="x32"></a> 
+               <a name="x33"></a>Binary Format
+      </h3> 
+            
+            
+      <p>Possible type: SAG.</p> 
+            
+      <p>This format, which is specific to Software AG, is the preferred format
+                since it can be used with all data types.
+      </p> 
+            
+      <p>Each record that is written is preceded by two bytes which contain the
+                length of the record.
+      </p> 
+            
+      <p>To define binary format for a work file, use either a file name with a
+                period and the extension "SAG" (for example,
+                <cite><var>&lt;file-name&gt;</var>.SAG</cite>), or just
+                the file name without a period (for example,
+                <cite><var>&lt;file-name&gt;</var></cite>).
+      </p> 
+           
+      <div><a name="ops-work-formats-ascii"></a></div> 
+           
+      <h3> 
+               <a name="x34"></a>ASCII Format
+      </h3> 
+            
+            
+      <p>Possible types: ASCII and ASCII compressed.</p> 
+            
+      <p>Since each written record is terminated with a line feed (LF), ASCII format is only recommended for alphanumeric
+                data. 
+      </p> 
+            
+      <p>To define ASCII format for a work file, enter either a file name with
+                a period and any extension except "SAG" and
+                "NCD" (for example,
+                <cite><var>&lt;file-name&gt;</var>.<var>&lt;ext&gt;</var></cite>),
+                or a file name with a period and without an extension (for example,
+                <cite><var>&lt;file-name&gt;</var></cite>).
+      </p> 
+           
+      <div><a name="ops-work-formats-entireconn"></a></div> 
+           
+      <h3> 
+               <a name="x35"></a> 
+               <a name="x36"></a>Entire Connection Format
+      </h3> 
+            
+            
+      <p>Possible types: Entire Connection and Transfer.</p> 
+            
+      <p>Work files can be accessed in two different ways: </p> 
+            
+      <ul> 
+                
+         <li> 
+                    
+            <p class="initem">Locally on UNIX. The work file type Entire Connection is
+                        used for this purpose.
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">Via a data transfer with Entire Connection. The work file
+                        type Transfer is used for this purpose. The data are sent to Entire Connection
+                        which writes the data to the PC.
+            </p> 
+                   
+         </li> 
+               
+      </ul> 
+            
+      <p>The product Entire Connection uses two files: a data file which
+                contains the actual data and a format file which contains formatting
+                information about the data in the data file. 
+      </p> 
+            
+      <p>Natural automatically generates the corresponding format file for the
+                type Entire Connection. The format file has the same name as the data file,
+                however the extension is "NCF". For detailed
+                information on the content of a format file with the extension
+                "NCF", see the Entire Connection documentation.
+      </p> 
+            
+      <p>When using the type Transfer, the format file is generated
+                by the product Entire Connection (provided that the option <span class="selectable_label">Create
+            format file</span> has not been deactivated in the user properties; see the
+                Entire Connection documentation for further information). 
+      </p> 
+            
+      <p>To define Entire Connection format for a work file, enter a file name
+                with a period and the extension "NCD" (for example,
+                <cite><var>&lt;file-name&gt;</var>.NCD</cite>). 
+      </p> 
+            
+      <p>You can read/write work files in Entire Connection format directly
+                from/to your local disk. 
+      </p> 
+            
+      <p>See also <a href="ops-workfiles.htm#ops-work-ncd">Special
+            Considerations for Work Files with Extension NCD</a>.
+      </p> 
+            
+      <p class="notes"><strong>Notes:</strong></p>
+      <ol class="note-list"> 
+                
+         <li>The <code>RECORD</code> option of the
+                    <a href="../sm/readwork.htm"><code>READ WORK FILE</code></a>
+                    statement is not available for reading work files of format Entire
+                    Connection.
+         </li> 
+                
+         <li>The operand format U (Unicode) is not supported for the work file
+                    types Entire Connection and Transfer. If U is used
+                    with these work file types, a runtime error message is displayed.
+         </li> 
+               
+      </ol> 
+           
+      <div><a name="ops-work-formats-portable"></a></div> 
+           
+      <h3> 
+               <a name="x37"></a>Portable Format
+      </h3> 
+            
+            
+      <p>Possible type: Portable.</p> 
+            
+      <p>The type Portable performs an automatic endian conversion of a work
+                file when the work file is transferred to a different machine. For example, a
+                work file written on a PC (little endian) can be read correctly on an RS6000 or
+                HP machine (big endian). The endian conversion applies only to field formats
+                I2, I4, F4, F8 and U. The floating point format is assumed to be IEEE. There
+                are, however, slight differences in IEEE floating point representation by
+                different hardware systems. As a rule, these differences apply only to infinity
+                and NaN representations, which are normally not written into work files. Check
+                the hardware descriptions if you are uncertain. 
+      </p> 
+            
+      <p>The files are always written in the machine-specific representation,
+                so that a conversion is performed only if the file is read by a machine with
+                different representation. This keeps performance as fast as possible. 
+      </p> 
+            
+      <p>There are no other conversions for this format apart from the
+                conversions mentioned above.
+      </p> 
+            
+      <p>When a <a href="../sm/readwork.htm"><code>READ WORK
+               FILE</code></a> statement is used for a dynamic variable, the variable
+                is resized to the length of the current record.
+      </p> 
+           
+      <div><a name="ops-work-formats-unformatted"></a></div> 
+           
+      <h3> 
+               <a name="x38"></a>Unformatted Format
+      </h3> 
+            
+            
+      <p>Possible type: Unformatted.</p> 
+            
+      <p>The type Unformatted reads or writes a complete file with just one
+                dynamic variable and just one record (for example, to store a video which was
+                read from a database). No formatting information is inserted; everything is
+                written and read just as it is.
+      </p> 
+           
+      <div><a name="ops-work-formats-csv"></a></div> 
+           
+      <h3> 
+               <a name="x39"></a>CSV Format
+      </h3> 
+            
+            
+      <p>Possible type: CSV (comma-separated values).</p> 
+            
+      <p class="note"><strong>Note:</strong><br>If you want to use the work file type CSV, you have to recatalog
+                your sources using the <a href="../syscom/catalog.htm"><code>CATALOG</code></a> or
+                <a href="../syscom/stow.htm"><code>STOW</code></a>
+                command. It is not possible to use the work file type CSV with generated
+                programs of Natural Version 4.
+      </p> 
+            
+      <p>The Natural fields are stored in a CSV work file as described
+                below.
+      </p> 
+            
+      <ol> 
+                
+         <li> 
+                    
+            <p class="initem">In the first step, the internal field data is converted into a
+                        readable format: 
+            </p> 
+                    
+            <ul style="margin-top: 0px; margin-bottom: 0px;"> 
+                        
+               <li class="nesteditem"> 
+                            
+                  <p class="initem">The field data of the internal Natural data formats B (binary), O
+                                (object handle), G (GUI handle) and C (attribute control) is copied to the
+                                record without field conversion. The data is taken as it is.
+                  </p> 
+                           
+               </li> 
+                        
+               <li class="nesteditem"> 
+                            
+                  <p class="initem">The field data of the internal Natural data format A
+                                (alphanumeric) is converted into the specified work file code page (see
+                                <a href="../config/cfg-profileparm.htm#cfg-prf-exe-workfiles">Work
+                        Files</a> in the <cite>Configuration Utility</cite>
+                                documentation). If no work file code page is specified in the Configuration
+                                Utility, the default code page which is defined with the parameter
+                                <a href="../parms/cp.htm"><code>CP</code></a> is used
+                                and no conversion is done. 
+                  </p> 
+                            
+                  <p class="initem">The field data of the internal Natural data format U (Unicode), is
+                                converted into the specified work file code page (see
+                                <a href="../config/cfg-profileparm.htm#cfg-prf-exe-workfiles">Work
+                        Files</a> in the <cite>Configuration Utility</cite>
+                                documentation) or, if no work file code page is specified, into the default
+                                code page which is defined with the parameter <a href="../parms/cp.htm"><code>CP</code></a>.
+                  </p> 
+                           
+               </li> 
+                        
+               <li class="nesteditem"> 
+                            
+                  <p class="initem">The values of the internal Natural formats D (date) and T (time)
+                                are converted into an alphanumeric output format. The
+                                <a href="../parms/dtform.htm"><code>DTFORM</code></a>
+                                parameter is evaluated so that the user-specified date and time format is
+                                used.
+                  </p> 
+                           
+               </li> 
+                        
+               <li class="nesteditem"> 
+                            
+                  <p class="initem">The internal field values of the numeric types are converted into
+                                an alphanumeric output format.
+                  </p> 
+                           
+               </li> 
+                       
+            </ul> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">In the second step, the field data in readable format is copied to
+                        the CSV work file record. The fields in the work file are separated by the
+                        specified separator character. If a field contains special characters, the
+                        field is delimited by double quotes. Each written record is terminated with a
+                        carriage return and line feed (CR/LF).
+            </p> 
+                   
+         </li> 
+               
+      </ol> 
+            
+      <p>If you have defined that a header with the Natural field names is to
+                be written to the work file (see
+                <a href="../config/cfg-profileparm.htm#cfg-prf-exe-workfiles-assign">Work
+            File Assignments</a> in the <cite>Configuration
+                   Utility</cite> documentation), the following applies:
+      </p> 
+            
+      <ul> 
+                
+         <li> 
+                    
+            <p class="initem">With the <a href="../sm/writewor.htm"><code>WRITE WORK
+                     FILE</code></a> statement, a header line containing the field names of
+                        the first written record is stored in the first line of the work file. If
+                        subsequent CSV records contain a different number of fields, it may be possible
+                        that the header line does not correspond to these subsequent CSV records.
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">With the <a href="../sm/readwork.htm"><code>READ WORK
+                     FILE</code></a> statement, it is assumed that the first line of the CSV
+                        work file is the header line. Therefore, the first line is skipped (that is:
+                        the record data in the first line is not returned).
+            </p> 
+                   
+         </li> 
+               
+      </ul> 
+           
+      <div class="noprint">
+         <p><a href="ops-workfiles.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="ops-work-ncd"></a></div> 
+          
+      <h2> 
+              <a name="x40"></a>Special Considerations for Work Files with the Extension
+              NCD
+      </h2> 
+           
+           
+      <p>If files with the extension "NCD" are
+               created by Entire Connection and are then read into Natural via the <code>READ
+            WORK FILE</code> statement, it is required that the Entire Connection option
+               <span class="selectable_label">Keep trailing blanks</span> is activated in the session
+               properties. See your Entire Connection documentation for further
+               information.
+      </p> 
+           
+      <p class="note"><strong>Note:</strong><br>When you create an NCD file using Entire Connection and load this
+               file using the <a href="../utis/sysobjh.htm">Object Handler</a>,
+               you may receive an error indicating that the source control record is missing.
+               To avoid this, make sure that the option <span class="selectable_label">Keep trailing
+            blanks</span> is active when you create the NCD file. 
+      </p> 
+           
+      <p>The following considerations apply for work files in Entire Connection
+               format: 
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">If an NCD file is read with a <code>READ WORK FILE</code> statement
+                       and the corresponding NCF format file is not available or contains invalid
+                       information, the NCD file is assumed to be an ASCII work file.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">When the <code>APPEND</code> attribute is used to append data to an
+                       NCD file, the record layouts (that is: the field format and length information
+                       which is written to the NCF format file) of the old and new data must match. If
+                       the record layouts are different, an error occurs during runtime.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">The maximum work-file record size for <code>WRITE WORK FILE
+                  VARIABLE</code> that can be handled by Entire Connection is 32767 bytes. 
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">If you have "old" work files with the extension
+                       "NCD", the extensions must be changed. 
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Each of the following profile parameters must be set to the same
+                       value for both read and write operations: 
+            </p> 
+                   
+            <p class="mini-list"> 
+                       <code>DC</code> (decimal character)<br> 
+                       <code>IA</code> (input assign character)<br> 
+                       <code>ID</code> (input delimiter character) 
+                      
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Remember that the range of possible values for floating point
+                       variables on a mainframe computer is different from that on other platforms.
+                       The possible value range for F4 and F8 variables on a mainframe is:
+            </p> 
+                   <pre class="verbatim">&plusmn;5.4 * 10<sup>-79</sup> to &plusmn;7.2 * 10<sup>75</sup></pre> 
+                   <p class="initem">The possible value range on most other platforms for F4 variables
+                       is:
+            </p> 
+                   <pre class="verbatim">&plusmn;1.17 * 10<sup>-38</sup> to &plusmn;3.40 * 10<sup>38</sup></pre> 
+                   <p class="initem">The possible value range on most other platforms for F8 variables
+                       is:
+            </p> 
+                   <pre class="verbatim">&plusmn;2.22 * 10<sup>-308</sup> to &plusmn;1.79 * 10<sup>308</sup></pre> 
+                  </li> 
+               
+         <li> 
+                   
+            <p class="initem">A Natural error message is returned if DBMS calls are issued during
+                       an Entire Connection data transfer and their number exceeds the limit for DBMS
+                       calls permitted between screen I/Os (specified with the profile parameter
+                       <a href="../parms/madio.htm"><code>MADIO</code></a>). To
+                       circumvent this error, the application programming interface
+                       <code>USR1068N</code> in library <code>SYSEXT</code> is provided.
+                       <code>USR1068</code> resets the database call counter to zero (0). It must be
+                       invoked each time a DBMS call is issued during data transfer. 
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+          
+      <div class="noprint">
+         <p><a href="ops-workfiles.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="ops-work-transfer"></a></div> 
+          
+      <h2> 
+              <a name="x41"></a>Using the Work File Type
+              "Transfer"
+      </h2> 
+           
+           
+      <p>With local access (that is, without any data transfer being involved),
+               you can read/write work files in Entire Connection format directly from/to your
+               local disk. However, work files in Entire Connection format can also be
+               accessed by using a data transfer. Both methods can be used simultaneously, but
+               with different work file numbers only. 
+      </p> 
+           
+      <p>Work files to be accessed by using a data transfer (type Transfer) must
+               be in Entire Connection format (NCD).
+      </p> 
+           
+      <p>With data transfer, the Natural statements <code>READ WORK FILE</code>
+               and <code>WRITE WORK FILE</code> do not read from and/or write to your local
+               disk, but transfer the data to a PC that runs Entire Connection. The read/write
+               operations are then done by Entire Connection from/to the disk of the PC. 
+      </p> 
+           
+      <p>For the work file number to be used, you have to set the profile
+               parameter <a href="../parms/ecpmod.htm"><code>ECPMOD</code></a> to
+               "ON" in the <a href="../config/cfg-over.htm">Configuration Utility</a>. It is not
+               required that you assign a work file name in this case, because Entire
+               Connection prompts you to enter a file name.
+      </p> 
+          
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="ops-workfiles.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../ops/ops-workfiles.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/ops/ops-workfiles.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="ops-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="ops-systemfiles.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="ops-bufferpool.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

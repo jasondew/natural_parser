@@ -1,0 +1,835 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Natural Simple XML Parser</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="xml_nixe"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../webtech/xml_nixe.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/webtech/xml_nixe.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="xml-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="xml_dtd.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="xml_exa.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Web Technology&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> Natural Simple XML Parser 
+               <a name="x567"></a></h1>
+      </div> 
+         
+         
+      <p>The following topics are covered:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="xml_nixe.htm#nixe_descr">Parser Description and Example</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="xml_nixe.htm#nixe_restrictions">Parser Restrictions</a></p>
+         </li>
+      </ul> 
+        
+      <hr> 
+        
+      <div><a name="nixe_descr"></a></div> 
+         
+      <h2> Parser Description and Example 
+             <a name="x568"></a></h2> 
+          
+          
+      <p>The Natural simple XML Parser enables you to parse XML documents with
+              standard Natural programs. The parser sends an event, or runs an internal
+              subroutine callback if the next part of the document is parsed. The inline
+              subroutine "CALLBACK" is called with the name of the current element, text,
+              comment within an xpath-like syntax. The parser engine is included as copy code
+              "PARSER_X". If an error occurs during parsing, e.g. the document is not
+              wellformed, the "PARSER_ERROR" inline subroutine is called and then the parser
+              is canceled with "ESCAPE SUBROUTINE" (see also
+              <a href="xml_nixe.htm#nixe_restrictions">Parser Restrictions</a>).
+      </p> 
+          
+      <p>For extended error handling, it is possible to change the operand6
+              "Error Message Text" and operand7 "Error Number" to a value less than or equal
+              to -9000. Then the "PARSER_ERROR" inline subroutine is called and the
+              (sub)program is canceled with "ESCAPE SUBROUTINE". If other values are less
+              than or equal to -8000, only the parser is canceled with "ESCAPE
+              SUBROUTINE".
+      </p> 
+          
+      <p>The major variables of the parser are defined at the Local Data Area
+              "PARSER-X".
+      </p> 
+          
+      <p>The parser copycode takes the following operands:</p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th>Operand</th> 
+                       
+               <th>Format/Length</th> 
+                       
+               <th>Description</th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td>1</td> 
+                       
+               <td>A</td> 
+                       
+               <td>XML file to be parsed</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>2</td> 
+                       
+               <td>A</td> 
+                       
+               <td> <a href="xml_nixe.htm#exxpath">ex-XPATH</a> to repesent
+                  element structure
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>3</td> 
+                       
+               <td>A1</td> 
+                       
+               <td> 
+                  
+                  <p>Type of the XPATH content:</p> 
+                           
+                  <table border="0" cellpadding="3" margin-top="9pt">
+                     <tbody valign="top">
+                        <tr align="left"> 
+                                      
+                           <td class="titem">?</td> 
+                                      
+                           <td class="titem">Processing instruction</td> 
+                                     
+                        </tr>
+                        <tr align="left"> 
+                                      
+                           <td class="titem">D</td> 
+                                      
+                           <td class="titem">DOCTYPE</td> 
+                                     
+                        </tr>
+                        <tr align="left"> 
+                                      
+                           <td class="titem">!</td> 
+                                      
+                           <td class="titem">Comment</td> 
+                                     
+                        </tr>
+                        <tr align="left"> 
+                                      
+                           <td class="titem">C</td> 
+                                      
+                           <td class="titem">CDATA section</td> 
+                                     
+                        </tr>
+                        <tr align="left"> 
+                                      
+                           <td class="titem">T</td> 
+                                      
+                           <td class="titem">Starting Tag</td> 
+                                     
+                        </tr>
+                        <tr align="left"> 
+                                      
+                           <td class="titem">@</td> 
+                                      
+                           <td class="titem">Attribute</td> 
+                                     
+                        </tr>
+                        <tr align="left"> 
+                                      
+                           <td class="titem">/</td> 
+                                      
+                           <td class="titem">Close Tag</td> 
+                                     
+                        </tr>
+                     </tbody>
+                  </table> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>4</td> 
+                       
+               <td>A</td> 
+                       
+               <td>Parsed Data</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>5</td> 
+                       
+               <td>L</td> 
+                       
+               <td>Is TRUE if Parsed Data is empty</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>6</td> 
+                       
+               <td>A</td> 
+                       
+               <td>Error Message Text</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>7</td> 
+                       
+               <td>I4</td> 
+                       
+               <td>Error Number</td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>Return value of the XPATH data:</p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th> <a name="exxpath"></a>ex-Xpath 
+               </th> 
+                       
+               <th>XML Structure</th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td>?</td> 
+                       
+               <td>&lt;? ... ?&gt;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>!DOCTYPE</td> 
+                       
+               <td>&lt;!DOCTYPE ... &gt;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>!DOCTYPE[</td> 
+                       
+               <td>&lt;!DOCTYPE .. [...]&gt;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>![CDATA[</td> 
+                       
+               <td>&lt;![CDATA[ ... ]]&gt;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>!--</td> 
+                       
+               <td>&lt;!-- --&gt;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>!</td> 
+                       
+               <td>&lt;! .. &gt;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>doc</td> 
+                       
+               <td>&lt;doc&gt;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> 
+                  
+                  <p class="mini-list"> 
+                             doc<br> 
+                               doc/foo<br> 
+                               doc/foo/$<br> 
+                               doc/foo//<br> 
+                               doc// 
+                              
+                  </p>
+               </td> 
+                       
+               <td>&lt;doc&gt;&lt;foo&gt;text&lt;/foo&gt;&lt;/doc&gt;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> 
+                  
+                  <p class="mini-list"> 
+                             doc<br> 
+                               doc/@a1<br> 
+                               doc// 
+                              
+                  </p>
+               </td> 
+                       
+               <td>&lt;doc a1="a" /&gt;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> 
+                  
+                  <p class="mini-list"> 
+                             doc<br> 
+                               doc/@a1<br> 
+                               doc/@a2<br> 
+                               doc/$<br> 
+                               doc// 
+                              
+                  </p>
+               </td> 
+                       
+               <td>&lt;doc a1="a" a2="b"&gt;text&lt;/doc&gt;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> 
+                  
+                  <p class="mini-list"> 
+                            doc <br> 
+                               doc/$ <br> 
+                               doc/foo <br> 
+                               doc/foo/$ <br> 
+                               doc/foo// <br> 
+                               doc/$ <br> 
+                               doc// 
+                              
+                  </p>
+               </td> 
+                       
+               <td> 
+                  
+                  <p class="mini-list"> 
+                          &lt;doc&gt; <br> 
+                                <br> 
+                               &lt;foo&gt;text&lt;/foo&gt; <br> 
+                                <br> 
+                                <br> 
+                                <br> 
+                               &lt;/doc&gt; 
+                              
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> 
+                  
+                  <p class="mini-list"> 
+                            doc <br> 
+                               doc/![CDATA[ <br> 
+                               doc// 
+                              
+                  </p>
+               </td> 
+                       
+               <td>&lt;doc&gt;&lt;![CDATA[ ... ]]&gt;&lt;/doc&gt;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> 
+                  
+                  <p class="mini-list"> 
+                            doc <br> 
+                               doc/!-- <br> 
+                               doc// 
+                              
+                  </p>
+               </td> 
+                       
+               <td>&lt;doc&gt;&lt;!-- ... --&gt;&lt;/doc&gt;</td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p> <strong>Program Example:</strong> 
+      </p> 
+          <pre class="verbatim">
+* ----------------------------------------------------------------------
+* CLASS  NATURAL XML TOOLKIT - UTILITIES
+*
+*         PARSER
+*
+* DESCRIPTION
+*               Parse given XML
+*
+*
+* AUTHOR        SAG   01.2006
+*
+* VERSION       6.2.
+*
+* (c) Copyright Software AG 2006. All rights reserved.
+*
+* ----------------------------------------------------------------------
+*
+DEFINE DATA LOCAL
+1 XML_PARSER_INPUT             (A) DYNAMIC
+1 XML_PARSER_ERROR_TEXT        (A253)
+1 XML_PARSER_RESPONSE          (I4)
+LOCAL USING PARSER-X           /* parser internal data - do not change
+LOCAL
+1 XML_PARSER_XPATH             (A) DYNAMIC
+1 XML_PARSER_XPATH_TYPE        (A1)
+1 XML_PARSER_CONTENT           (A) DYNAMIC
+1 XML_PARSER_CONTENT_IS_EMPTY  (L)
+*
+1 ANFANG                       (T)
+* OUT                          (A) DYNAMIC
+1 OUT                          (A126)
+*
+END-DEFINE
+*
+FORMAT (0) LS=128 PS=40
+*
+DEFINE WORK FILE 12 "E:\EMPLOYEE1.XML" TYPE "UNFORMATTED"
+READ WORK FILE 12 XML_PARSER_INPUT
+END-WORK
+CLOSE WORK FILE 12
+*
+*
+* ------------------------------------------------- INCLUDE THE PARSER
+INCLUDE PARSER_X 'XML_PARSER_INPUT' /* XML file to be parsed
+  'XML_PARSER_XPATH'                /* XPATH to represent element...
+  'XML_PARSER_XPATH_TYPE'           /* Type of callback
+  'XML_PARSER_CONTENT'              /* Content of element found 
+  'XML_PARSER_CONTENT_IS_EMPTY'     /* Is TRUE if element is empty
+  'XML_PARSER_ERROR_TEXT'           /* error Message
+  'XML_PARSER_RESPONSE'             /* Error NR; 0 = OK
+*
+*
+DEFINE SUBROUTINE CALLBACK
+IF XML_PARSER_CONTENT_IS_EMPTY THEN
+  IF XML_PARSER_XPATH_TYPE NE "T" AND XML_PARSER_XPATH_TYPE NE "/" THEN
+    COMPRESS XML_PARSER_XPATH "(NULL)" INTO OUT WITH DELIMITER "="
+  ELSE
+    OUT := XML_PARSER_XPATH
+  END-IF
+ELSE
+  COMPRESS XML_PARSER_XPATH XML_PARSER_CONTENT INTO OUT WITH DELIMITER "="
+END-IF
+WRITE OUT
+END-SUBROUTINE
+/*
+DEFINE SUBROUTINE PARSER_ERROR
+OUT := XML_PARSER_ERROR_TEXT
+WRITE OUT
+END-SUBROUTINE
+END
+</pre> 
+          <p>With a given result document from Tamino for the Employee data, the
+              result of this program looks like this:
+      </p> 
+          <pre class="verbatim">
+&lt;?xml version="1.0" encoding="ISO-8859-1" ?&gt;
+&lt;Employee xmlns:ino="http://namespaces.softwareag.com/tamino/response2" ino:id="560"
+Personnel-ID="20006900"&gt;
+&lt;Full-Name&gt;
+&lt;First-Name&gt;JOE&lt;/First-Name&gt;
+&lt;Name&gt;ATHERTON&lt;/Name&gt;
+&lt;/Full-Name&gt;
+&lt;Mar-Stat&gt;S&lt;/Mar-Stat&gt;
+&lt;Sex&gt;M&lt;/Sex&gt;
+&lt;Birth&gt;1941-02-21&lt;/Birth&gt;
+&lt;Full-Address&gt;
+&lt;Address-Line&gt;11603 HUNTERS GREEN&lt;/Address-Line&gt;
+&lt;Address-Line&gt;SYRACUSE&lt;/Address-Line&gt;
+&lt;Address-Line&gt;NY&lt;/Address-Line&gt;
+&lt;City&gt;SYRACUSE&lt;/City&gt;
+&lt;Zip&gt;13201&lt;/Zip&gt;
+&lt;Post-Code&gt;13201&lt;/Post-Code&gt;
+&lt;Country&gt;USA&lt;/Country&gt;
+&lt;/Full-Address&gt;
+&lt;Telephone&gt;
+&lt;Phone&gt;173-9859&lt;/Phone&gt;
+&lt;Area-Code&gt;315&lt;/Area-Code&gt;
+&lt;/Telephone&gt;
+&lt;Dept&gt;TECH10&lt;/Dept&gt;
+&lt;Job-Title&gt;ANALYST&lt;/Job-Title&gt;
+&lt;Income&gt;
+&lt;Curr-Code&gt;USD&lt;/Curr-Code&gt;
+&lt;Salary&gt;43000&lt;/Salary&gt;
+&lt;/Income&gt;
+&lt;Income&gt;
+&lt;Curr-Code&gt;USD&lt;/Curr-Code&gt;
+&lt;Salary&gt;39500&lt;/Salary&gt;
+&lt;/Income&gt;
+&lt;Income&gt;
+&lt;Curr-Code&gt;USD&lt;/Curr-Code&gt;
+&lt;Salary&gt;36700&lt;/Salary&gt;
+&lt;/Income&gt;
+&lt;Income&gt;
+&lt;Curr-Code&gt;USD&lt;/Curr-Code&gt;
+&lt;Salary&gt;34400&lt;/Salary&gt;
+&lt;/Income&gt;
+&lt;Income&gt;
+&lt;Curr-Code&gt;USD&lt;/Curr-Code&gt;
+&lt;Salary&gt;32600&lt;/Salary&gt;
+&lt;/Income&gt;
+&lt;Leave-Data&gt;
+&lt;Leave-Due&gt;19&lt;/Leave-Due&gt;
+&lt;Leave-Taken&gt;4&lt;/Leave-Taken&gt;
+&lt;/Leave-Data&gt;
+&lt;Leave-Booked&gt;
+&lt;Leave-Start&gt;19980112&lt;/Leave-Start&gt;
+&lt;Leave-End&gt;19980112&lt;/Leave-End&gt;
+&lt;/Leave-Booked&gt;
+&lt;Leave-Booked&gt;
+&lt;Leave-Start&gt;19980605&lt;/Leave-Start&gt;
+&lt;Leave-End&gt;19980605&lt;/Leave-End&gt;
+&lt;/Leave-Booked&gt;
+&lt;Leave-Booked&gt;
+&lt;Leave-Start&gt;19980916&lt;/Leave-Start&gt;
+&lt;Leave-End&gt;19980916&lt;/Leave-End&gt;
+&lt;/Leave-Booked&gt;
+&lt;Lang&gt;ENG&lt;/Lang&gt;
+&lt;/Employee&gt;
+</pre> 
+          <p class="note"><strong>Note:</strong><br> There is no line break in the whole document.
+      </p> 
+          
+      <p>The result of the above Natural program looks like this:</p> 
+          <pre class="verbatim">
+?=xml version="1.0" encoding="ISO-8859-1"
+Employee
+Employee/@xmlns:ino=http://namespaces.softwareag.com/tamino/response2
+Employee/@ino:id=560
+Employee/@Personnel-ID=20006900
+Employee/Full-Name
+Employee/Full-Name/First-Name
+Employee/Full-Name/First-Name/$=JOE
+Employee/Full-Name/First-Name//
+Employee/Full-Name/Name
+Employee/Full-Name/Name/$=ATHERTON
+Employee/Full-Name/Name//
+Employee/Full-Name//
+Employee/Mar-Stat
+Employee/Mar-Stat/$=S
+Employee/Mar-Stat//
+Employee/Sex
+Employee/Sex/$=M
+Employee/Sex//
+Employee/Birth
+Employee/Birth/$=1941-02-21
+Employee/Birth//
+Employee/Full-Address
+Employee/Full-Address/Address-Line
+Employee/Full-Address/Address-Line/$=11603 HUNTERS GREEN
+Employee/Full-Address/Address-Line//
+Employee/Full-Address/Address-Line
+Employee/Full-Address/Address-Line/$=SYRACUSE
+Employee/Full-Address/Address-Line//
+Employee/Full-Address/Address-Line
+Employee/Full-Address/Address-Line/$=NY
+Employee/Full-Address/Address-Line//
+Employee/Full-Address/City
+Employee/Full-Address/City/$=SYRACUSE
+Employee/Full-Address/City//
+Employee/Full-Address/Zip
+Employee/Full-Address/Zip/$=13201
+Employee/Full-Address/Zip//
+Employee/Full-Address/Post-Code
+Employee/Full-Address/Post-Code/$=13201
+Employee/Full-Address/Post-Code//
+Employee/Full-Address/Country
+Employee/Full-Address/Country/$=USA
+Employee/Full-Address/Country//
+Employee/Full-Address//
+Employee/Telephone
+Employee/Telephone/Phone
+Employee/Telephone/Phone/$=173-9859
+Employee/Telephone/Phone//
+Employee/Telephone/Area-Code
+Employee/Telephone/Area-Code/$=315
+Employee/Telephone/Area-Code//
+Employee/Telephone//
+Employee/Dept
+Employee/Dept/$=TECH10
+Employee/Dept//
+Employee/Job-Title
+Employee/Job-Title/$=ANALYST
+Employee/Job-Title//
+Employee/Income
+Employee/Income/Curr-Code
+Employee/Income/Curr-Code/$=USD
+Employee/Income/Curr-Code//
+Employee/Income/Salary
+Employee/Income/Salary/$=43000
+Employee/Income/Salary//
+Employee/Income//
+Employee/Income
+Employee/Income/Curr-Code
+Employee/Income/Curr-Code/$=USD
+Employee/Income/Curr-Code//
+Employee/Income/Salary
+Employee/Income/Salary/$=39500
+Employee/Income/Salary//
+Employee/Income//
+Employee/Income
+Employee/Income/Curr-Code
+Employee/Income/Curr-Code/$=USD
+Employee/Income/Curr-Code//
+Employee/Income/Salary
+Employee/Income/Salary/$=36700
+Employee/Income/Salary//
+Employee/Income//
+Employee/Income
+Employee/Income/Curr-Code
+Employee/Income/Curr-Code/$=USD
+Employee/Income/Curr-Code//
+Employee/Income/Salary
+Employee/Income/Salary/$=34400
+Employee/Income/Salary//
+Employee/Income//
+Employee/Income
+Employee/Income/Curr-Code
+Employee/Income/Curr-Code/$=USD
+Employee/Income/Curr-Code//
+Employee/Income/Salary
+Employee/Income/Salary/$=32600
+Employee/Income/Salary//
+Employee/Income//
+Employee/Leave-Data
+Employee/Leave-Data/Leave-Due
+Employee/Leave-Data/Leave-Due/$=19
+Employee/Leave-Data/Leave-Due//
+Employee/Leave-Data/Leave-Taken
+Employee/Leave-Data/Leave-Taken/$=4
+Employee/Leave-Data/Leave-Taken//
+Employee/Leave-Data//
+Employee/Leave-Booked
+Employee/Leave-Booked/Leave-Start
+Employee/Leave-Booked/Leave-Start/$=19980112
+Employee/Leave-Booked/Leave-Start//
+Employee/Leave-Booked/Leave-End
+Employee/Leave-Booked/Leave-End/$=19980112
+Employee/Leave-Booked/Leave-End//
+Employee/Leave-Booked//
+Employee/Leave-Booked
+Employee/Leave-Booked/Leave-Start
+Employee/Leave-Booked/Leave-Start/$=19980605
+Employee/Leave-Booked/Leave-Start//
+Employee/Leave-Booked/Leave-End
+Employee/Leave-Booked/Leave-End/$=19980605
+Employee/Leave-Booked/Leave-End//
+Employee/Leave-Booked//
+Employee/Leave-Booked
+Employee/Leave-Booked/Leave-Start
+Employee/Leave-Booked/Leave-Start/$=19980916
+Employee/Leave-Booked/Leave-Start//
+Employee/Leave-Booked/Leave-End
+Employee/Leave-Booked/Leave-End/$=19980916
+Employee/Leave-Booked/Leave-End//
+Employee/Leave-Booked//
+Employee/Lang
+Employee/Lang/$=ENG
+Employee/Lang//
+Employee//
+</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="xml_nixe.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="nixe_restrictions"></a></div> 
+         
+      <h2> Parser Restrictions 
+             <a name="x569"></a></h2> 
+          
+          
+      <p>The parser does not handle:</p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">Composition of a tag (incl. processing instruction). Only start-tag
+                      must be equal to end-tag (incl. processing instruction).
+            </p> 
+                  
+            <p class="initem">Example:</p> 
+                  <pre class="verbatim">
+&lt;.doc&gt;&lt;/.doc&gt; &lt;!-- invalid character in tag --&gt;
+&lt;doc&gt;&lt;? ?&gt;&lt;/doc&gt; &lt;!-- invalid whitespace --&gt;
+&lt;doc&gt;&amp;#RE;&lt;/doc&gt; &lt;!-- invalid character in tag --&gt;
+</pre> 
+                 </li> 
+              
+         <li> 
+                  
+            <p class="initem">Character or entity references</p> 
+                  
+            <p class="initem">Example:</p> 
+                  <pre class="verbatim">
+&lt;doc&gt;&amp; no refc&lt;/doc&gt; &lt;!-- missing semicolon --&gt; &lt;doc a1=v1&gt;&lt;/doc&gt;
+&lt;!-- string literal expected --&gt;
+</pre> 
+                 </li> 
+              
+         <li> 
+                  
+            <p class="initem">Exact handling of CDATA-Sections</p> 
+                  
+            <p class="initem">Example:</p> 
+                  <pre class="verbatim">
+&lt;doc&gt;&lt;![CDATA [ stuff]]&gt;&lt;/doc&gt; &lt;!-- must be CDATA[ --&gt;
+</pre> 
+                 </li> 
+              
+         <li> 
+                  
+            <p class="initem">Content of an entity/processing instruction</p> 
+                  
+            <p class="initem">Example:</p> 
+                  <pre class="verbatim">&lt;doc&gt;]]&gt;&lt;/doc&gt; &lt;!-- ]] not allowed --&gt;</pre> 
+                 </li> 
+              
+         <li> 
+                  
+            <p class="initem">Number of tags/attributes</p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Headerinformation </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Unicode-charset (supports ISO-8859-1)</p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+        
+       
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="xml_nixe.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../webtech/xml_nixe.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/webtech/xml_nixe.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="xml-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="xml_dtd.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="xml_exa.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

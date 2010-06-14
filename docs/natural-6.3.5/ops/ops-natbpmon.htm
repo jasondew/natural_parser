@@ -1,0 +1,1298 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Using the Buffer Pool Monitor (NATBPMON)</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="ops-natbpmon"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../ops/ops-natbpmon.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/ops/ops-natbpmon.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="ops-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="ops-bufferpool.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="ops-batchmode.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Operations&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+         
+      <div class="nospytext">
+         <h1> 
+                <a name="x114"></a> 
+                <a name="x115"></a>Using the Buffer Pool Monitor (NATBPMON)
+         </h1>
+      </div> 
+          
+      <p>This document covers the following topics:</p>
+          
+      <ul>
+         <li>
+            <p class="initem"><a href="ops-natbpmon.htm#ops-natbpmon-invoke">Invoking the NATBPMON Utility</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="ops-natbpmon.htm#ops-natbpmon-cmds">NATBPMON Commands</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="ops-natbpmon.htm#ops-natbpmon-dir">Displaying the Objects in the Buffer Pool</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="ops-natbpmon.htm#ops-natbpmon-pattern">Specifying a Pattern</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="ops-natbpmon.htm#ops-natbpmon-param">Displaying the Buffer Pool Settings</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="ops-natbpmon.htm#ops-natbpmon-status">Statistical Information About the Buffer Pool</a></p>
+         </li>
+      </ul> 
+          
+      <p>See also <a href="ops-bufferpool.htm#ops-bufferpool">Natural Buffer
+            Pool</a> which provides general information on the buffer pool
+              and explains how to start the buffer pool.
+      </p> 
+          
+      <table border="0" cellspacing="0" width="80%" class="warning">
+         <tr>
+            <td valign="top" width="36"><img src="../graphics/warning.png" alt="" width="28" height="28"></td>
+            <td valign="top"><strong>Warning:<br>This utility should not be generally accessible to all users of
+                       Natural, because its use can cause damage to the work of other users of the
+                       buffer pool. </strong></td>
+         </tr>
+      </table>
+      <hr>
+      <div><a name="ops-natbpmon-invoke"></a></div> 
+          
+      <h2> 
+              <a name="x116"></a>Invoking the NATBPMON Utility
+      </h2> 
+           
+           
+      <p>You can invoke the <code>NATBPMON</code> utility either for the default
+               buffer pool <code>NATBP</code> or for another existing buffer pool.
+      </p> 
+           
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To invoke the <code>NATBPMON</code> utility</strong></p>
+      <ol class="steps">
+         <li> 
+                    
+                    
+            <p class="instep">If the default buffer pool <code>NATBP</code> is to be used, enter
+                        the following command in the command line:
+            </p><pre class="command-input">NATBPMON</pre> 
+                    
+                    
+                    <p class="instep">Or:<br>If another buffer pool is to be used, enter the following command in
+                        the command
+                        line:
+            </p><pre class="command-input">NATBPMON BP=<var>buffer-pool-name</var></pre> 
+                    
+                    <p class="instep">The following prompt appears:</p><pre class="system-output">NATBPMON&gt;</pre> 
+                  </li>
+      </ol> 
+          
+      <div class="noprint">
+         <p><a href="ops-natbpmon.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="ops-natbpmon-cmds"></a></div> 
+          
+      <h2> 
+              <a name="x117"></a>NATBPMON Commands
+      </h2> 
+           
+           
+      <p>The following commands can be entered at the <code>NATBPMON</code>
+               prompt:
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="34%">
+            <col width="63%">
+         </colgroup> 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>Command</th> 
+                        
+               <th>Description</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> 
+                  <a name="x118"></a><code>CLEAR</code></td> 
+                        
+               <td>This is the same as the
+                  <code>ZERO</code> command.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> 
+                  <a name="x119"></a><code>CORPSES</code></td> 
+                        
+               <td>Displays the list of corpses. A corpse is an
+                  object that has been deleted, but was still being used in the buffer pool when
+                  its deletion took place. Once this object is no longer used, it will
+                  automatically disappear from the list of corpses. 
+                  
+                  <p class="note"><strong>Note:</strong><br> The column <span class="selectable_label">cusr</span> which is shown with the
+                                <code>DIR</code> command indicates if an object is being
+                                used.
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> 
+                  <a name="x120"></a><code>DELETE
+                               {<var>pattern</var>|[*]}</code></td> 
+                        
+               <td>Deletes an object from the buffer pool. All
+                  objects can be deleted from the buffer pool by using an asterisk (*). A pattern
+                  is used to specify a collection of objects, similar to current operating
+                  systems which allow the specification of a class of files with wildcards. For
+                  further information, see <a href="ops-natbpmon.htm#ops-natbpmon-pattern">Specifying a
+                               Pattern</a>.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> 
+                  <a name="x121"></a><code>DIR
+                               {<var>pattern</var>|[*]}</code></td> 
+                        
+               <td>Displays a directory containing all objects in
+                  the buffer pool. For further information, see the sections
+                  <a href="ops-natbpmon.htm#ops-natbpmon-pattern">Specifying a
+                               Pattern</a> and <a href="ops-natbpmon.htm#ops-natbpmon-dir">Displaying the Objects in the Buffer
+                               Pool</a>.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> 
+                  <a name="x122"></a><code>DUMP</code></td> 
+                        
+               <td>Used for error analysis. 
+                  
+                  <p class="important"><strong>Important:</strong><br>Do not use this command unless you are requested to do so
+                                by Software AG Support.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> 
+                  <a name="x123"></a><code>EXIT</code></td> 
+                        
+               <td>Exits the <code>NATBPMON</code> utility.
+               </td>
+                        
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> 
+                  <a name="x124"></a><code>FIN</code></td> 
+                        
+               <td>Exits the <code>NATBPMON</code> utility. This is
+                    the same as the <code>EXIT</code> command. 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> 
+                  <a name="x125"></a><code>HELP</code></td> 
+                        
+               <td>Displays a list of all available commands of the
+                  <code>NATBPMON</code> utility. 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> 
+                  <a name="x126"></a><code>IPCRM</code></td> 
+                        
+               <td>Frees the resources allocated to the buffer
+                  pool. This command should only be used following a
+                  <code>SHUTDOWN</code> command when there are no active users.
+                            
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> 
+                  <a name="x127"></a><code>KILL
+                               <var>n</var></code></td> 
+                        
+               <td>Kills the specified buffer pool user.
+                  <var>n</var> is the number of the user to be
+                  "killed". This number corresponds to the index number as displayed
+                            by the <code>WHO</code> command. 
+                            
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> 
+                  <a name="x128"></a><code>PARAM</code></td> 
+                        
+               <td>Displays the buffer pool settings. For further
+                  information, see <a href="ops-natbpmon.htm#ops-natbpmon-param">Displaying
+                               the Buffer Pool Settings</a>.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> 
+                  <a name="x129"></a><code>QUIT</code></td> 
+                        
+               <td>Exits the <code>NATBPMON</code> utility. This is
+                    the same as the <code>EXIT</code> command.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> 
+                  <a name="x130"></a><code>SHUTDOWN [FORCE
+                               [<var>grace-period</var>]]</code></td> 
+                        
+               <td>Without the option
+                  <code>FORCE</code>: Shuts down the buffer pool. No new processes will
+                  be able to use the buffer pool once this command has been issued. The
+                            <code>NATBPMON</code> utility is able to run with a buffer pool which has the
+                            shutdown status "pending"; all commands of the
+                            <code>NATBPMON</code> utility are available in this case. As
+                            soon as all users have stopped using the buffer pool, the buffer pool's
+                            resources can be deleted with the <code>IPCRM</code>
+                            command. 
+                            
+                  <p>The option <code>FORCE</code> requires
+                                <code>NATBPMON</code> to be executed with super user rights. After
+                                <code>SUDO</code> or <code>SU</code> has validated
+                                the password and given control to <code>NATBPMON</code>, any new sessions will
+                                be inhibited to log in and the terminate signal
+                                <code>SIGTERM</code> will be sent to all active Natural sessions.
+                                <code>NATBPMON</code> will then wait the number of seconds defined with the
+                                parameter <var>grace-period</var> before the IPC resources used
+                                by the buffer pool are removed from the system. If the optional parameter
+                                <var>grace-period</var> is omitted (or set to 0),
+                                <code>NATBPMON</code> will wait until all processes performed their cleanup
+                                processing. This process can be considered as an emergency stop. If it is
+                                executed without super user rights, no action takes place and a message
+                                reporting the incapability to execute the command is sent. See also
+                                <a href="ops-bufferpool.htm#ops-bp-shutdown">Shutting Down and Restarting the
+                                   Buffer Pool</a>.
+                  </p> 
+                            
+                  <p class="note"><strong>Note:</strong><br>To start the buffer pool after shutdown, you can use the
+                                utility <code>NATBPSRV</code>. 
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> 
+                  <a name="x131"></a><code>STATUS</code></td> 
+                        
+               <td>Displays statistical information about the
+                  buffer pool. For further information, see
+                  <a href="ops-natbpmon.htm#ops-natbpmon-status">Statistical Information About
+                               the Buffer Pool</a>.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> 
+                  <a name="x132"></a><code>SWAP</code></td> 
+                        
+               <td>Only available for a
+                  <a href="ops-bufferpool.htm#ops-bp-gen-readonly">read-only</a> buffer pool. Tags
+                  a read-only buffer pool as "obsolete". All Natural sessions
+                  attached to such a buffer pool will detach from that buffer pool and attach to
+                            the alternate buffer pool. 
+               </td>
+                        
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> 
+                  <a name="x133"></a><code>WHO</code></td> 
+                        
+               <td>Displays a list of all users who are using the
+                  buffer pool. The following statistics are displayed: a number that the
+                  <code>NATBPMON</code> utility automatically assigns to each buffer pool user
+                            (index) and the user ID, terminal ID and process ID of the process using the
+                            buffer pool (tid).
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> 
+                  <a name="x134"></a><code>WRITE</code></td> 
+                        
+               <td>Writes a buffer pool object onto the disk. You
+                  are prompted to specify an index and a file name. 
+                  
+                  <p class="note"><strong>Note:</strong><br> The column "indx" which is shown with the
+                                <code>DIR</code> command shows the index numbers.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> 
+                  <a name="x135"></a><code>ZERO</code></td> 
+                        
+               <td>Resets to 0 all counters that are displayed by
+                  the <code>STATUS</code> command.
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+          
+      <div class="noprint">
+         <p><a href="ops-natbpmon.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="ops-natbpmon-dir"></a></div> 
+          
+      <h2>Displaying the Objects in the Buffer Pool</h2> 
+           
+           
+      <p>The <code>DIR</code> command displays a list of objects.
+               This list contains the following information:
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="9%">
+            <col width="88%">
+         </colgroup> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th align="left">Column</th> 
+                        
+               <th align="left">Explanation</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> <span class="selectable_label">indx</span> 
+               </td> 
+                        
+               <td>A number that the <code>NATBPMON</code> utility automatically
+                  assigns to an object when it is loaded into the buffer pool.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <span class="selectable_label">cusr</span> 
+               </td> 
+                        
+               <td>The current number of users that are using an object in the
+                  buffer pool.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <span class="selectable_label">pusr</span> 
+               </td> 
+                        
+               <td>The peak number of concurrent activations of an object in the
+                  buffer pool.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <span class="selectable_label">nusg</span> 
+               </td> 
+                        
+               <td>The number of times an object has been activated in the buffer
+                  pool.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><span class="selectable_label">g</span> 
+               </td> 
+                        
+               <td>
+                  <table border="0" width="100%">
+                     <colgroup>
+                        <col width="4%">
+                        <col width="96%">
+                     </colgroup> 
+                               
+                     <tbody align="left" valign="top"> 
+                                   
+                        <tr> 
+                                       
+                           <td colspan="2">Specifies whether an object is
+                              being loaded into the buffer pool from the system file. Has one of the
+                              following values: 
+                           </td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td>0</td> 
+                                       
+                           <td>The object is not being loaded. </td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td> 1</td> 
+                                       
+                           <td>The object is being loaded.</td> 
+                                      
+                        </tr> 
+                                  
+                     </tbody> 
+                              
+                  </table>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <span class="selectable_label">size</span> 
+               </td> 
+                        
+               <td>Specifies the size (in bytes) of an object in the buffer
+                  pool.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <span class="selectable_label">gpv</span> 
+               </td> 
+                        
+               <td>The version number of the generated program.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><span class="selectable_label">key</span></td> 
+                        
+               <td>
+                  <table border="0" width="100%">
+                     <colgroup>
+                        <col width="3%">
+                        <col width="97%">
+                     </colgroup> 
+                               
+                     <tbody align="left" valign="top"> 
+                                   
+                        <tr> 
+                                       
+                           <td colspan="2">Specifies the following
+                              information about an object:
+                           </td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td>D</td> 
+                                       
+                           <td>Database ID.</td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td>F</td> 
+                                       
+                           <td>File number.</td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td>L</td> 
+                                       
+                           <td>The library in which the object is
+                              located.
+                           </td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td>N</td> 
+                                       
+                           <td>The name of the object. Numbers and
+                              "@" indicate chunks of
+                              <cite>FILEDIR.SAG</cite> for the currently loaded library.
+                           </td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td>K</td> 
+                                       
+                           <td>The kind of object
+                              ("G"=generated object module;
+                              "S"=source; "D"=part of
+                              <cite>FILEDIR.SAG</cite>). 
+                           </td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td>T</td> 
+                                       
+                           <td>The object type (which is blank when
+                              "D" is shown in the "K"
+                              field).
+                           </td> 
+                                      
+                        </tr> 
+                                  
+                     </tbody> 
+                              
+                  </table>
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>When the <code>DIR</code> command is issued, all objects
+               in the pool will be displayed in a notation similar to the following:
+      </p> 
+           
+      <table border="1" cellpadding="5" class="screen">
+         <tr>
+            <td><pre>indx:    index of the element  
+ cusr:    current number of concurrent users  
+ pusr:    peak number of concurrent users  
+ nusg:    number of usages  
+ g   :    set if object is generating
+ gpv :    version of generated program
+
+indx | cusr | pusr |  nusg  |  g  |  size  |  gpv  |  key
+-----+------+------+--------+-----+--------+-------+---------------------------------------------------
+ 1   |  0   |  1   |    4   |  0  |   920  |       |  (D=99 F=101 L="DEMO" N="SEL-MAP" K='G' T='M') 
+ 2   |  1   |  7   |    2   |  0  |  3096  |       |  (D=99 F=101 L="DEMO" N="EMWND" K='G' T='P') 
+ 3   |  4   |  9   |    4   |  0  |   604  |       |  (D=99 F=101 L="DEMO" N="HDR" K='G' T='P') 
+ 4   |  2   |  3   |    7   |  0  |   412  |       |  (D=99 F=101 L="RPA" N="MMUPROG1" K='G' T='P') 
+ 5   |  0   |  1   |    5   |  0  |   372  |       |  (D=99 F=101 L="RPA" N="MMUPROG2" K='G' T='P') 
+ 6   |  0   |  5   |    4   |  0  |   372  |       |  (D=99 F=101 L="RPA" N="MMUPROG3" K='G' T='P')</pre></td>
+         </tr>
+      </table> 
+          
+      <div class="noprint">
+         <p><a href="ops-natbpmon.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="ops-natbpmon-pattern"></a></div> 
+          
+      <h2>Specifying a Pattern</h2> 
+           
+           
+      <p>A pattern can be specified with the commands
+               <code>DIR</code> and <code>DELETE</code>. The
+               examples in this section apply to the <code>DIR</code>
+               command.
+      </p> 
+           
+      <p>To select some objects, it is possible to restrict the values of
+               certain key fields by specifying a matching pattern expression.
+      </p> 
+           
+      <p>To restrict the allowed field values of a given field, the following
+               pattern notation must be used:
+      </p> 
+           
+      <div><a name="d0e9983"></a></div> 
+            <pre class="text"><var>name</var>=<var>expression</var></pre> 
+           <p>You can specify multiple patterns by separating them with a comma.</p> 
+           
+      <p>The specified patterns must all match their corresponding fields in
+               order to accept the entire key.
+      </p> 
+           
+      <p>The expression accepts the specification of the wildcard characters
+               "*" and "?".
+      </p> 
+           
+      <p>The character "*" matches any or no
+               occurrences of a sequence of characters, and the wildcard character
+               "?" matches exactly one specific character.
+      </p> 
+           
+      <h4 class="floating-title">Examples</h4> 
+           
+      <p>To select all objects of type "P" in the
+               sample above, the following command would be used:
+      </p> <pre class="command-input">DIR T=P </pre> 
+           <p>To select all programs in the demo library, the following command would
+               be used:
+      </p> <pre class="command-input">DIR T=P, L=DEMO</pre> 
+           <p>To select all objects containing an "M" in
+               their name, the following command would be used:
+      </p> <pre class="command-input">DIR N=*M*</pre> 
+          <div class="noprint">
+         <p><a href="ops-natbpmon.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="ops-natbpmon-param"></a></div> 
+          
+      <h2>Displaying the Buffer Pool Settings</h2> 
+           
+           
+      <p>The following settings are displayed with the
+               <code>PARAM</code> command:
+      </p> 
+            
+           
+      <table border="1" cellpadding="5" class="screen">
+         <tr>
+            <td><pre>Active since ..............:  4-JAN-2007 10:16:52, Version 6.3(631) 
+Last time cleared .........:  4-JAN-2007 10:16:52                   
+                                                                    
+Bpid ......................: NATBP                                  
+Shmkey ....................: 0x16211389                             
+Semkey ....................: 0x16211389                             
+Memsize ...................:   20971508                             
+Maxusers ..................:         50                             </pre></td>
+         </tr>
+      </table> 
+            
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="18%">
+            <col width="79%">
+         </colgroup> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td><span class="selectable_label">Bpid</span></td> 
+                        
+               <td>Buffer pool ID.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><span class="selectable_label">Shmkey</span></td> 
+                        
+               <td>Unique name used to create a buffer pool or to
+                  connect to a buffer pool.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><span class="selectable_label">Semkey</span></td> 
+                        
+               <td>Unique name used to synchronize accesses to the
+                  buffer pool memory.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><span class="selectable_label">Memsize</span></td> 
+                        
+               <td>Size of the available shared memory.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><span class="selectable_label">Maxusers</span></td> 
+                        
+               <td>Maximum number of users that can have
+                  simultaneous access to the buffer pool.
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>See <a href="../config/cfg-confparm.htm#cfg-cf-loc-buffer">Buffer Pool
+            Assignments</a> in the <cite>Configuration
+                  Utility</cite> documentation.
+      </p> 
+          
+      <div class="noprint">
+         <p><a href="ops-natbpmon.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="ops-natbpmon-status"></a></div> 
+          
+      <h2>Statistical Information About the Buffer Pool</h2> 
+           
+           
+      <p>The following statistics are displayed with the
+               <code>STATUS</code> command:
+      </p> 
+           
+      <table border="1" cellpadding="5" class="screen">
+         <tr>
+            <td><pre>Active since ..............:  4-JAN-2007 10:16:52, Version 6.3(631)          
+Last time cleared .........:  4-JAN-2007 10:16:52                            
+Bpid ......................: NATBP                                           
+Allocated memory (bytes) ..:   18207752 Max users ...............:         50
+Smallest allocation .......:         32 Current users ...........:          5
+Largest allocation ........:    4707272 Peak users ..............:          9
+Free memory (bytes) .......:    2763768 Dead users purged .......:        623
+Smallest free .............:        136                                      
+Largest free ..............:      33136                                      
+                                                                             
+Dormant objects ...........:       2010 Smallest object (bytes) .:         15
+Active objects ............:          1 Largest object (bytes) ..:      49383
+Generating objects ........:          0 Total object sizes ......:   12394644
+Obsolete objects ..........:          0                                      
+                                                                             
+Attempted locates .........: 1646837910 Stored objects ..........:          0
+Attempted fast locates ....:  823725223 Loaded objects ..........:    1520609
+Successful fast locates ...:  822423506 Activated objects .......: 1645410434
+Percent ...................:      99.84 Aborted loads ...........:     323104
+                                                                             
+Dormant objects purged ....:      51919 Peak parallel activations:          4
+Object reusage factor .....:    1082.07                                      </pre></td>
+         </tr>
+      </table> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="29%">
+            <col width="68%">
+         </colgroup> 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th colspan="2" align="left">General
+                  Information
+               </th> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <span class="selectable_label">Active since</span></td> 
+                        
+               <td>Date and time when the buffer pool was started and the version
+                  number of the buffer pool.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <span class="selectable_label">Last time cleared</span> 
+               </td> 
+                        
+               <td>Date and time when the buffer pool was most recently
+                  cleared.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <span class="selectable_label">Bpid</span> 
+               </td> 
+                        
+               <td>Buffer pool ID.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th colspan="2" align="left">Memory
+                  Allocation
+               </th> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <span class="selectable_label">Allocated memory (bytes)</span></td> 
+                        
+               <td>Total of all allocated memory.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <span class="selectable_label">Smallest allocatio</span> 
+               </td> 
+                        
+               <td>Smallest amount of allocated memory.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <span class="selectable_label">Largest allocation</span></td> 
+                        
+               <td>Largest amount of allocated memory.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <span class="selectable_label">Free memory (bytes)</span></td> 
+                        
+               <td>Total of all free memory.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <span class="selectable_label">Smallest free</span></td> 
+                        
+               <td>Smallest amount of contiguous free memory.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <span class="selectable_label">Largest free</span></td> 
+                        
+               <td>Largest amount of contiguous free memory.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th colspan="2" align="left">User
+                  Statistics
+               </th> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><span class="selectable_label">Max. users</span></td> 
+                        
+               <td> Maximum number of users that can have
+                  simultaneous access to the buffer pool. See
+                  <a href="../config/cfg-confparm.htm#cfg-cf-loc-buffer">Buffer
+                               Pool Assignments</a> in the <cite>Configuration
+                               Utility</cite> documentation.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <span class="selectable_label">Current users</span></td> 
+                        
+               <td>Number of users currently using the buffer pool.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <span class="selectable_label">Peak users</span></td> 
+                        
+               <td>Peak number of users that have been using the buffer
+                  pool.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <span class="selectable_label">Dead users purged</span> 
+               </td> 
+                        
+               <td>Number of inactive users that have been deleted from the buffer
+                  pool. This number should be close to 0 (zero). An increment of this number
+                  indicates that entries for buffer pool users (i.e. Natural sessions) were
+                  canceled or killed unconditionally. Each time an entry for such a user is
+                  identified by the buffer pool manager, this number is incremented and cleanup
+                  is performed to remove residuals which have been left in the buffer pool by a
+                  canceled session.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th colspan="2" align="left">Object
+                  Use Statistics
+               </th> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <span class="selectable_label">Dormant objects</span> 
+               </td> 
+                        
+               <td>Number of available, but inactive objects. These objects are in
+                  the buffer pool, but are not being used. They are available for later use and
+                  will become active objects as soon as a buffer pool user requests their
+                  availability.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <span class="selectable_label">Active objects</span> 
+               </td> 
+                        
+               <td>Number of active objects. These objects are currently in use by
+                  one or more buffer pool users.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <span class="selectable_label">Generating objects</span></td> 
+                        
+               <td>Number of objects that are currently being loaded into the
+                  buffer pool. These objects will become available as soon as the load operation
+                  completes.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <span class="selectable_label">Obsolete objects</span> 
+               </td> 
+                        
+               <td>Number of objects that are to be deleted from the buffer pool,
+                  but are still being used. These objects can be displayed by using the
+                  <code>CORPSES</code> command. An obsolete object is removed from
+                  the buffer pool as soon as all users who activated this object have released
+                  this object. In a production environment, this number should be 0 (zero). A
+                            value other than zero indicates that objects were deleted either using the
+                            <code>DELETE</code> command of <code>NATBPMON</code> or became
+                            obsolete because new objects were created (for example, due to a
+                            <code>CATALOG</code> command). 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th colspan="2" align="left">Object
+                  Size Statistics
+               </th> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <span class="selectable_label">Smallest object (bytes)</span></td> 
+                        
+               <td>Size of smallest object in the buffer pool.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <span class="selectable_label">Largest object (bytes)</span></td> 
+                        
+               <td>Size of largest object in the buffer pool.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <span class="selectable_label">Total object sizes</span></td> 
+                        
+               <td>Total size of all objects in the buffer pool.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th colspan="2" align="left">Locate
+                  Statistics
+               </th> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <span class="selectable_label">Attempted locates</span> 
+               </td> 
+                        
+               <td>Number of successful and failed object locates. This number
+                  tells you how many times the buffer pool manager was asked to locate an object
+                  in the buffer pool.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <span class="selectable_label">Attempted fast locates</span> 
+               </td> 
+                        
+               <td>Number of attempted activations with known slot. This is the
+                  number of object activations when the former location of an object was known.
+                  It is highly probable that an object can be found in the same place in the
+                  buffer pool when it is reactivated.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <span class="selectable_label">Successful fast locates</span> 
+               </td> 
+                        
+               <td>Number of successful fast locates.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <span class="selectable_label">Percent</span> 
+               </td> 
+                        
+               <td>Percentage of successful fast locates.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th colspan="2" align="left">Object
+                  Loading Statistics
+               </th> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <span class="selectable_label">Stored objects</span></td> 
+                        
+               <td>The number of objects stored in the buffer pool. This is the
+                  number of objects that were stored into the buffer pool and which were not
+                  loaded from the system file.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <span class="selectable_label">Loaded objects</span></td> 
+                        
+               <td>The number of objects loaded from the system file. Each time an
+                  object is not found in the buffer pool, it is loaded from the system file. This
+                  number is increased each time an object is successfully loaded into the buffer
+                  pool.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <span class="selectable_label">Activated objects</span></td> 
+                        
+               <td>The number of activated objects. Activation is the process of
+                  marking an object which is found in the buffer pool as "in use" by
+                  a buffer pool user. 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <span class="selectable_label">Aborted loads</span></td> 
+                        
+               <td>The number of load operations that were aborted due to memory
+                  shortages within the buffer pool, or due to an error when loading an object
+                  into the buffer pool. This number should not vary in a noticeable way.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th colspan="2" align="left">General
+                  Loading Statistics
+               </th> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <span class="selectable_label">Dormant objects purged</span> 
+               </td> 
+                        
+               <td>The number of unused objects deleted from the buffer pool to
+                  make room for newly loaded ones.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <span class="selectable_label">Peak parallel activations</span> 
+               </td> 
+                        
+               <td>The maximum number of parallel activations of one of the
+                  objects in the buffer pool.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <span class="selectable_label">Object reusage factor</span> 
+               </td> 
+                        
+               <td>Average number of times an object was reactivated. This number
+                  is the ratio of the number of object activations to the number of objects
+                  loaded into the buffer pool.
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+          
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="ops-natbpmon.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../ops/ops-natbpmon.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/ops/ops-natbpmon.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="ops-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="ops-bufferpool.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="ops-batchmode.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

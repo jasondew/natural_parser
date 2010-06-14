@@ -1,0 +1,844 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Data Computation</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="pg_furth_compu"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_furth_compu.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_furth_compu.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_furth-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_furth_break.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_furth_vari.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Programming Guide&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x329"></a> Data Computation
+         </h1>
+      </div> 
+         
+         
+      <p>This document discusses arithmetic statements that are used for
+             computing data: 
+      </p> 
+         
+      <ul> 
+             
+         <li> 
+                 
+            <p class="initem"> <a href="../sm/compute.htm"><code>COMPUTE</code></a></p> 
+                
+         </li> 
+             
+         <li> 
+                 
+            <p class="initem"> <a href="../sm/add.htm"><code>ADD</code></a></p> 
+                
+         </li> 
+             
+         <li> 
+                 
+            <p class="initem"> <a href="../sm/subtract.htm"><code>SUBTRACT</code></a></p> 
+                
+         </li> 
+             
+         <li> 
+                 
+            <p class="initem"> <a href="../sm/multiply.htm"><code>MULTIPLY</code></a></p> 
+                
+         </li> 
+             
+         <li> 
+                 
+            <p class="initem"> <a href="../sm/divide.htm"><code>DIVIDE</code></a></p> 
+                
+         </li> 
+            
+      </ul> 
+         
+      <p>In addition, the following statements are discussed which are used to
+             transfer the value of an operand into one or more fields:
+      </p> 
+         
+      <ul> 
+             
+         <li> 
+                 
+            <p class="initem"> <a href="../sm/move.htm"><code>MOVE</code></a></p> 
+                
+         </li> 
+             
+         <li> 
+                 
+            <p class="initem"> <a href="../sm/compress.htm"><code>COMPRESS</code></a></p> 
+                
+         </li> 
+            
+      </ul> 
+         
+      <div><a name="Format_of_Fields"></a></div>
+      <p class="important"><strong>Important:</strong><br>For optimum processing,
+             <a href="pg_defi_dv.htm#pg_defi_dv">user-defined variables</a> used in
+             arithmetic statements should be defined with format P (packed
+             numeric).
+      </p> 
+         
+      <p>The following topics are covered:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_furth_compu.htm#compute_Statement">COMPUTE Statement</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_compu.htm#Statements_MOVE_and_compute">Statements MOVE and COMPUTE</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_compu.htm#Statements_ADD_SUBTRACT_MULTIPLY_and_DIVIDE">Statements ADD, SUBTRACT, MULTIPLY and DIVIDE</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_compu.htm#move_exa">Example of MOVE, SUBTRACT and COMPUTE Statements</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_compu.htm#compress_Statement">COMPRESS Statement</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_compu.htm#compress_exa">Example of COMPRESS and MOVE Statements</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_compu.htm#compress_2_exa">Example of COMPRESS Statement</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_compu.htm#Mathematical_Functions">Mathematical Functions</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_compu.htm#further_exa_compu">Further Examples of COMPUTE, MOVE and COMPRESS Statements</a></p>
+         </li>
+      </ul> 
+        
+      <hr> 
+        
+      <div><a name="compute_Statement"></a></div> 
+         
+      <h2> 
+             <a name="x330"></a>COMPUTE Statement 
+      </h2> 
+          
+          
+      <p>The <a href="../sm/compute.htm"><code>COMPUTE</code></a>
+              statement is used to perform arithmetic operations. The following connecting
+              operators are available:
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th> ** </th> 
+                       
+               <td>Exponentiation</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> * </th> 
+                       
+               <td>Multiplication</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> / </th> 
+                       
+               <td>Division</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> + </th> 
+                       
+               <td>Addition</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> - </th> 
+                       
+               <td>Subtraction</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> ( ) </th> 
+                       
+               <td>Parentheses may be used to indicate logical grouping.</td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <h4 class="floating-title"> Example 1:</h4> 
+          <pre class="verbatim">COMPUTE LEAVE-DUE = LEAVE-DUE * 1.1</pre> 
+          <p>In this example, the value of the field <code>LEAVE-DUE</code> is
+              multiplied by 1.1, and the result is placed in the field
+              <code>LEAVE-DUE</code>.
+      </p> 
+          
+      <h4 class="floating-title"> Example 2:</h4> 
+          <pre class="verbatim">COMPUTE #A = SQRT (#B)</pre> 
+          <p>In this example, the square root of the value of the field
+              <code>#B</code> is evaluated, and the result is assigned to the field
+              <code>#A</code>.
+      </p> 
+          
+      <p><code>SQRT</code> is a mathematical function supported in the following
+              arithmetic statements:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../sm/compute.htm"><code>COMPUTE</code></a>
+                      
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../sm/add.htm"><code>ADD</code></a> 
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../sm/subtract.htm"><code>SUBTRACT</code></a>
+                      
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../sm/multiply.htm"><code>MULTIPLY</code></a>
+                      
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../sm/divide.htm"><code>DIVIDE</code></a> 
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>For an overview of mathematical functions, see
+              <a href="pg_furth_compu.htm#Mathematical_Functions">Mathematical Functions</a>
+              below.
+      </p> 
+          
+      <h4 class="floating-title"> Example 3:</h4> 
+          <pre class="verbatim">COMPUTE #INCOME = BONUS (1,1) + SALARY (1)</pre> 
+          <p>In this example, the first bonus of the current year and the current
+              salary amount are added and assigned to the field <code>#INCOME</code>.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_furth_compu.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Statements_MOVE_and_compute"></a></div> 
+         
+      <h2> 
+             <a name="x331"></a> Statements MOVE and COMPUTE 
+      </h2> 
+          
+          
+      <p>The statements <a href="../sm/move.htm"><code>MOVE</code></a> and
+              <a href="../sm/compute.htm"><code>COMPUTE</code></a> can be used
+              to transfer the value of an operand into one or more fields. The operand may be
+              a constant such as a text item or a number, a database field, a user-defined
+              variable, a system variable, or, in certain cases, a system function.
+      </p> 
+          
+      <p>The difference between the two statements is that in the
+              <code>MOVE</code> statement the value to be moved is specified on the left; in
+              the <code>COMPUTE</code> statement the value to be assigned is specified on the
+              right, as shown in the following examples.
+      </p> 
+          
+      <h4 class="floating-title"> Examples:</h4> 
+          <pre class="verbatim">
+MOVE NAME TO #LAST-NAME 
+COMPUTE #LAST-NAME = NAME
+</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_furth_compu.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Statements_ADD_SUBTRACT_MULTIPLY_and_DIVIDE"></a></div> 
+         
+      <h2> 
+             <a name="x332"></a> 
+             <a name="x333"></a> 
+             <a name="x334"></a> 
+             <a name="x335"></a> Statements ADD, SUBTRACT, MULTIPLY and DIVIDE 
+      </h2> 
+          
+          
+      <p>The <a href="../sm/add.htm"><code>ADD</code></a>,
+              <a href="../sm/subtract.htm"><code>SUBTRACT</code></a>,
+              <a href="../sm/multiply.htm"><code>MULTIPLY</code></a> and
+              <a href="../sm/divide.htm"><code>DIVIDE</code></a> statements are
+              used to perform arithmetic operations.
+      </p> 
+          
+      <h4 class="floating-title"> Examples:</h4> 
+          <pre class="verbatim">
+ADD +5 -2 -1 GIVING #A 
+SUBTRACT 6 FROM 11 GIVING #B 
+MULTIPLY 3 BY 4 GIVING #C 
+DIVIDE 3 INTO #D GIVING #E
+</pre> 
+          <p>All four statements have a
+              <a href="../sm/add.htm#add-synt1-rounded"><code>ROUNDED</code></a>
+              option, which you can use if you wish the result of the operation to be
+              rounded.
+      </p> 
+          
+      <p>For rules on rounding, see <a href="pg_furth_arithm.htm#pg_furth_arithm">Rules for Arithmetic
+            Assignment</a>.
+      </p> 
+          
+      <p>The <a href="../sm/sm-over.htm">Statements</a>
+              documentation provides more detailed information on these statements.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_furth_compu.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="move_exa"></a></div> 
+         
+      <h2> Example of MOVE, SUBTRACT and COMPUTE Statements </h2> 
+          
+          
+      <p>The following program demonstrates the use of
+              <a href="pg_defi_dv.htm#pg_defi_dv">user-defined variables</a> in arithmetic
+              statements. It calculates the ages and wages of three employees and outputs
+              these.
+      </p> 
+          <pre class="verbatim">
+** Example 'COMPUX01': COMPUTE
+************************************************************************
+DEFINE DATA LOCAL
+1 MYVIEW VIEW OF EMPLOYEES
+  2 NAME
+  2 BIRTH
+  2 JOB-TITLE
+  2 SALARY         (1:1)
+  2 BONUS          (1:1,1:1)
+*
+1 #DATE            (N8)
+1 REDEFINE #DATE
+  2 #YEAR          (N4)
+  2 #MONTH         (N2)
+  2 #DAY           (N2)
+1 #BIRTH-YEAR      (A4)
+1 REDEFINE #BIRTH-YEAR
+  2 #BIRTH-YEAR-N  (N4)
+1 #AGE             (N3)
+1 #INCOME          (P9)
+END-DEFINE
+*
+MOVE *DATN TO #DATE
+*
+READ (3) MYVIEW BY NAME STARTING FROM 'JONES'
+  MOVE EDITED BIRTH (EM=YYYY) TO #BIRTH-YEAR
+  SUBTRACT #BIRTH-YEAR-N FROM #YEAR GIVING #AGE
+  /*
+  <strong>COMPUTE #INCOME = BONUS (1:1,1:1) + SALARY (1:1)</strong>
+  /*
+  DISPLAY NAME 'POSITION' JOB-TITLE #AGE #INCOME
+END-READ
+END
+</pre> 
+          <p>Output of Program COMPUX01:</p> <pre class="system-output">
+Page      1                                                  04-11-11  14:15:54
+ 
+        NAME                 POSITION          #AGE  #INCOME
+-------------------- ------------------------- ---- ----------
+
+JONES                MANAGER                     63      55000
+JONES                DIRECTOR                    58      50000
+JONES                PROGRAMMER                  48      31000
+</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_furth_compu.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="compress_Statement"></a></div> 
+         
+      <h2> 
+             <a name="x336"></a>COMPRESS Statement 
+      </h2> 
+          
+          
+      <p>The <a href="../sm/compress.htm"><code>COMPRESS</code></a>
+              statement is used to transfer (combine) the contents of two or more operands
+              into a single alphanumeric field.
+      </p> 
+          
+      <p>Leading zeros in a numeric field and trailing blanks in an alphanumeric
+              field are suppressed before the field value is moved to the receiving
+              field.
+      </p> 
+          
+      <p>By default, the transferred values are separated from one another by a
+              single blank in the receiving field. For other separating possibilities, see
+              the <code>COMPRESS</code> statement option
+              <a href="../sm/compress.htm#leaving_no_space"><code>LEAVING NO
+               SPACE</code></a> (in the <cite>Statements</cite>
+              documentation).
+      </p> 
+          
+      <h4 class="floating-title"> Example:</h4> 
+          <pre class="verbatim">COMPRESS 'NAME:' FIRST-NAME #LAST-NAME INTO #FULLNAME</pre> 
+          <p>In this example, a <code>COMPRESS</code> statement is used to combine a
+              text constant (<code>'NAME:'</code>), a database field
+              (<code>FIRST-NAME</code>) and a user-defined variable (<code>#LAST-NAME</code>)
+              into one user-defined variable (<code>#FULLNAME</code>).
+      </p> 
+          
+      <p>For further information on the <code>COMPRESS</code> statement, please
+              refer to the <a href="../sm/compress.htm"><code>COMPRESS</code></a> statement description
+              (in the <cite>Statements</cite> documentation).
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_furth_compu.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="compress_exa"></a></div> 
+         
+      <h2> Example of COMPRESS and MOVE Statements </h2> 
+          
+          
+      <p>The following program illustrates the use of the statements
+              <a href="../sm/move.htm"><code>MOVE</code></a> and
+              <a href="../sm/compress.htm"><code>COMPRESS</code></a>.
+      </p> 
+          <pre class="verbatim">
+** Example 'COMPRX01': COMPRESS
+************************************************************************
+DEFINE DATA LOCAL
+1 MYVIEW VIEW OF EMPLOYEES
+  2 NAME
+  2 FIRST-NAME
+  2 MIDDLE-I
+*
+1 #LAST-NAME (A15)
+1 #FULL-NAME (A30)
+END-DEFINE
+*
+READ (3) MYVIEW BY NAME STARTING FROM 'JONES'
+  MOVE NAME TO #LAST-NAME
+  /*  
+  <strong>COMPRESS 'NAME:' FIRST-NAME MIDDLE-I #LAST-NAME INTO #FULL-NAME</strong>
+  /*
+  DISPLAY #FULL-NAME (UC==) FIRST-NAME 'I' MIDDLE-I (AL=1) NAME 
+END-READ 
+END
+</pre> 
+          <p>Output of Program COMPRX01:</p> 
+          
+      <p>Notice the output format of the compressed field.</p> <pre class="system-output">
+Page      1                                                  04-11-11  14:15:54
+ 
+          #FULL-NAME                FIRST-NAME      I         NAME
+============================== -------------------- - --------------------
+
+NAME: VIRGINIA J JONES         VIRGINIA             J JONES
+NAME: MARSHA JONES             MARSHA                 JONES
+NAME: ROBERT B JONES           ROBERT               B JONES
+</pre> 
+          <p>In multiple-line displays, it may be useful to combine fields/text in a
+              <a href="pg_defi_dv.htm#pg_defi_dv">user-defined variables</a> by using a
+              <a href="../sm/compress.htm"><code>COMPRESS</code></a>
+              statement.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_furth_compu.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="compress_2_exa"></a></div> 
+         
+      <h2> Example of COMPRESS Statement </h2> 
+          
+          
+      <p>In the following program, three <a href="pg_defi_dv.htm#pg_defi_dv">user-defined variables</a> are used:
+              <code>#FULL-SALARY</code>, <code>#FULL-NAME</code>, and
+              <code>#FULL-CITY</code>. <code>#FULL-SALARY</code>, for example, contains the
+              text <code>'SALARY:'</code> and the database fields <code>SALARY</code> and
+              <code>CURR-CODE</code>. The <a href="../sm/write.htm"><code>WRITE</code></a> statement then references
+              only the compressed variables.
+      </p> 
+          <pre class="verbatim">
+** Example 'COMPRX02': COMPRESS
+************************************************************************
+DEFINE DATA LOCAL
+1 VIEWEMP VIEW OF EMPLOYEES
+  2 NAME
+  2 FIRST-NAME
+  2 SALARY       (1:1)
+  2 CURR-CODE    (1:1)
+  2 CITY
+  2 ADDRESS-LINE (1:1)
+  2 ZIP
+*
+<strong>1 #FULL-SALARY   (A25)
+1 #FULL-NAME     (A25)
+1 #FULL-CITY     (A25)
+END-DEFINE
+*
+READ (3) VIEWEMP BY CITY STARTING FROM 'NEW YORK'
+  COMPRESS 'SALARY:' CURR-CODE(1) SALARY(1) INTO #FULL-SALARY
+  COMPRESS FIRST-NAME NAME                  INTO #FULL-NAME
+  COMPRESS ZIP CITY                         INTO #FULL-CITY
+  /*
+  DISPLAY 'NAME AND ADDRESS' NAME (EM=X^X^X^X^X^X^X^X^X^X^X^X)
+  WRITE 1/5  #FULL-NAME
+        1/37 #FULL-SALARY
+        2/5  ADDRESS-LINE (1)
+        3/5  #FULL-CITY</strong>
+  SKIP 1
+END-READ
+END
+</pre> 
+          <p>Output of Program COMPRX02:</p> <pre class="system-output">
+Page      1                                                  04-11-11  14:15:54
+ 
+   NAME AND ADDRESS
+-----------------------
+ 
+R U B I N
+    SYLVIA RUBIN                    SALARY: USD 17000
+    2003 SARAZEN PLACE
+    10036 NEW YORK
+ 
+W A L L A C E
+    MARY WALLACE                    SALARY: USD 38000
+    12248 LAUREL GLADE C
+    10036 NEW YORK
+ 
+K E L L O G G
+    HENRIETTA KELLOGG               SALARY: USD 52000
+    1001 JEFF RYAN DR.
+    19711 NEWARK
+</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_furth_compu.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Mathematical_Functions"></a></div> 
+         
+      <h2> 
+             <a name="x337"></a>Mathematical Functions 
+      </h2> 
+          
+          
+      <p>The following Natural mathematical functions are supported in arithmetic
+              processing statements (<a href="../sm/add.htm"><code>ADD</code></a>,
+              <a href="../sm/compute.htm"><code>COMPUTE</code></a>,
+              <a href="../sm/divide.htm"><code>DIVIDE</code></a>,
+              <a href="../sm/subtract.htm"><code>SUBTRACT</code></a>,
+              <a href="../sm/multiply.htm"><code>MULTIPLY</code></a>).
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="49%">
+            <col width="49%">
+         </colgroup> 
+                
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th align="left"> Mathematical Function </th> 
+                       
+               <th align="left"> Natural System Function </th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td>Absolute value of <var>field</var>.
+               </td> 
+                       
+               <td> <a href="../func/func_math.htm#ABS_System_Function">ABS(<var>field</var>)</a>
+                           
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>Arc tangent of <var>field</var>.
+               </td> 
+                       
+               <td> <a href="../func/func_math.htm#ATN_System_Function">ATN(<var>field</var>)</a>
+                           
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>Cosine of <var>field</var>.
+               </td> 
+                       
+               <td> <a href="../func/func_math.htm#COS_System_Function">COS(<var>field</var>)</a>
+                           
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>Exponential of <var>field</var>.
+               </td> 
+                       
+               <td> <a href="../func/func_math.htm#EXP_System_Function">EXP(<var>field</var>)</a>
+                           
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>Fractional part of <var>field</var>.
+               </td> 
+                       
+               <td> <a href="../func/func_math.htm#FRAC_System_Function">FRAC(<var>field</var>)</a>
+                           
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>Integer part of <var>field</var>.
+               </td> 
+                       
+               <td> <a href="../func/func_math.htm#INT_System_Function">INT(<var>field</var>)</a>
+                           
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>Natural logarithm of <var>field</var>.
+               </td> 
+                       
+               <td> <a href="../func/func_math.htm#LOG_System_Function">LOG(<var>field</var>)</a>
+                           
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>Sign of <var>field</var>.
+               </td> 
+                       
+               <td> <a href="../func/func_math.htm#SGN_System_Function">SGN(<var>field</var>)</a>
+                           
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>Sine of <var>field</var>.
+               </td> 
+                       
+               <td> <a href="../func/func_math.htm#SIN_System_Function">SIN(<var>field</var>)</a>
+                           
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>Square root of <var>field</var>.
+               </td> 
+                       
+               <td> <a href="../func/func_math.htm#SQRT_System_Function">SQRT(<var>field</var>)</a>
+                           
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>Tangent of <var>field</var>.
+               </td> 
+                       
+               <td> <a href="../func/func_math.htm#TAN_System_Function">TAN(<var>field</var>)</a>
+                           
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>Numeric value of an alphanumeric
+                  <var>field</var>.
+               </td> 
+                       
+               <td> <a href="../func/func_math.htm#VAL_System_Function">VAL(<var>field</var>)</a>
+                           
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>See also the <a href="../func/func-over.htm">System
+            Functions</a> documentation for a detailed explanation of
+              each mathematical function.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_furth_compu.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="further_exa_compu"></a></div> 
+         
+      <h2> Further Examples of COMPUTE, MOVE and COMPRESS Statements </h2> 
+          
+          
+      <p>See the following example programs:</p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="pg_exas.htm#WRITEX11">WRITEX11 - WRITE (with
+                  <var>n</var>X,
+                         <var>n</var>/<var>n</var> and
+                         COMPRESS)</a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="pg_exas.htm#IFX03">IFX03 - IF
+                  statement</a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="pg_exas.htm#COMPRX03">COMPRX03 - COMPRESS (using
+                  parameters LC and TC)</a></p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+        
+       
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="pg_furth_compu.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_furth_compu.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_furth_compu.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_furth-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_furth_break.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_furth_vari.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

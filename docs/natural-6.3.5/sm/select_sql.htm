@@ -1,0 +1,3245 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>SELECT - SQL</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="select_sql" id="16926"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../sm/select_sql.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/sm/select_sql.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="sql-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="rollback_sql.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="update_sql.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Statements&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> SELECT - SQL 
+               <a name="x194"></a></h1>
+      </div> 
+         
+         
+      <p>This document covers the following topics:</p>
+         
+      <ul>
+         <li>
+            <p class="initem"><a href="select_sql.htm#function_select_sql">Function</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="select_sql.htm#syntax_descr_select_sql">Syntax Description</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="select_sql.htm#Join_Queries">Join Queries</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="select_sql.htm#select_cursor-oriented">SELECT - Cursor-Oriented</a></p>
+         </li>
+      </ul> 
+         
+      <p>For an explanation of the symbols used in the syntax diagram, see
+             <a href="synsym.htm#Syntax_Symbols">Syntax
+            Symbols</a>.
+      </p>
+         
+      <p>Belongs to Function Group:
+             <a href="stmt.htm#Database_Access_and_Update">Database Access and
+            Update</a></p> 
+        
+      <hr> 
+        
+      <div><a name="function_select_sql"></a></div> 
+         
+      <h2> Function</h2> 
+          
+          
+      <p>The <code>SELECT</code> statement supports both the
+              <a href="select_sql.htm#Cursor">cursor-oriented selection</a> that is used
+              to retrieve an arbitrary number of rows and the <a href="select_sql.htm#Non_Cursor">non-cursor selection</a> (singleton
+              <code>SELECT</code>) that retrieves at most one single row.
+      </p> 
+          
+      <p>With the <code>SELECT ... END-SELECT</code> construction, Natural uses
+              the same database loop processing as with the <code>FIND</code> statement.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="select_sql.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="syntax_descr_select_sql"></a></div> 
+         
+      <h2> Syntax Description</h2> 
+          
+          
+      <p>Two different structures are possible:</p> 
+          
+      <div><a name="Cursor"></a></div>
+      <h4 class="floating-title"> Syntax 1 - Cursor-Oriented
+              Selection
+      </h4> 
+          
+      <p>Common Set Syntax</p> 
+           
+           
+      <table border="0" class="syntax" cellpadding="3">  
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td colspan="3"><code class="keyword">SELECT</code> &nbsp; <var>selection&nbsp;</var><a href="select_sql.htm#INTO_select_sql"><code class="keyword">INTO</code> </a>
+                           
+               </td> 
+                       
+               <td> 
+                  
+                  <p><img src="../graphics/cbo2.gif" alt="" width="6" height="38"></p>
+               </td> 
+                       
+               <td> 
+                  
+                  <p class="mini-list"> 
+                               <a href="select_sql.htm#parameter_INTO">
+                                   <var>parameter</var><code class="keyword">,</code></a><img src="../graphics/dot3.gif" alt="" width="12" height="4"><br> 
+                               <a href="select_sql.htm#VIEW"> <code class="keyword">VIEW</code>
+                                   </a> {<a href="basic.htm#view-name_basic"><var>view-name</var></a>
+                                [<a href="select_sql.htm#correlation-name_select_sql"><var>correlation-name</var></a>]},<img src="../graphics/dot3.gif" alt="" width="12" height="4">  
+                              
+                  </p>
+               </td> 
+                       
+               <td> 
+                  
+                  <p><img src="../graphics/cbc3.gif" alt="" width="6" height="59"></p>
+               </td> 
+                       
+               <td><a href="select_sql.htm#table-expression_select_sql"><var>table-expression</var></a></td>
+                       
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td colspan="2">&nbsp;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td rowspan="3"> 
+                  
+                  <p><img src="../graphics/sbo3.gif" alt="" width="5" height="61"></p> 
+               </td> 
+                       
+               <td rowspan="3"> 
+                  
+                  <p><img src="../graphics/cbo3.gif" alt="" width="6" height="59"></p>
+               </td> 
+                       
+               <td><a href="select_sql.htm#UNION"><code class="keyword">UNION</code></a></td> 
+                       
+               <td rowspan="3"> 
+                  
+                  <p><img src="../graphics/cbc3.gif" alt="" width="6" height="59"></p>
+               </td> 
+                       
+               <td rowspan="3" colspan="5">[<code class="keyword">ALL</code>] [(]<code class="keyword">SELECT</code> &nbsp;
+                           <a href="selexp.htm#selection"> <var>selection</var>
+                              </a> <a href="select_sql.htm#table-expression_select_sql">
+                              <var>table-expression</var></a>[)] 
+               </td> 
+                       
+               <td rowspan="3" colspan="2"> 
+                  
+                  <p><img src="../graphics/sbc3.gif" alt="" width="5" height="61"></p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code class="keyword"> EXCEPT</code></td>
+                       
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code class="keyword">INTERSECT</code></td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td rowspan="3" colspan="3"><a href="select_sql.htm#ORDER_BY"><code class="keyword">ORDER BY</code></a></td> 
+                       
+               <td rowspan="3"> 
+                  
+                  <p><img src="../graphics/cbo3.gif" alt="" width="6" height="59"></p>
+               </td> 
+                       
+               <td><a href="select_sql.htm#integer_select_sql"><var>integer</var>
+                            </a></td> 
+                       
+               <td rowspan="3"> 
+                  
+                  <p><img src="../graphics/cbc3.gif" alt="" width="6" height="59"></p>
+               </td> 
+                       
+               <td rowspan="3"> 
+                  
+                  <p><img src="../graphics/sbo2.gif" alt="" width="6" height="38"></p>
+               </td> 
+                       
+               <td rowspan="3"><a href="select_sql.htm#ascending_select_sql"><code class="keyword"><u>ASC</u></code></a><br>
+                     <a href="select_sql.htm#descending"><code class="keyword">DESC</code></a> 
+               </td> 
+                       
+               <td rowspan="3"> 
+                  
+                  <p><img src="../graphics/sbc2.gif" alt="" width="6" height="38"></p>
+               </td> 
+                       
+               <td rowspan="3" colspan="2">&nbsp;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><a href="select_sql.htm#column-reference_select_sql">
+                     <var>column-reference</var></a></td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><var>expression</var></td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td colspan="11"><a href="synsym.htm#note_statement"> <var>statement</var>
+                              </a><img src="../graphics/dot3.gif" alt="" width="12" height="4"> <code class="keyword"></code> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td rowspan="2" colspan="2"> 
+                  
+                  <p><img src="../graphics/cbo2.gif" alt="" width="6" height="38"></p>
+               </td> 
+                       
+               <td><code class="keyword">END-SELECT</code>
+                           (<em>structured mode only</em>) 
+               </td> 
+                       
+               <td rowspan="2" colspan="2"> 
+                  
+                  <p><img src="../graphics/cbc2.gif" alt="" width="6" height="38"></p>
+               </td> 
+                       
+               <td rowspan="2">&nbsp;</td> 
+                       
+               <td rowspan="2">&nbsp;</td> 
+                       
+               <td rowspan="2">&nbsp;</td> 
+                       
+               <td rowspan="2">&nbsp;</td> 
+                       
+               <td rowspan="2" colspan="2">&nbsp;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code class="keyword">LOOP</code> &nbsp; &nbsp; &nbsp;
+                     (<em>reporting mode only</em>)
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>Extended Set Syntax:</p> 
+           
+           
+      <table border="0" class="syntax" cellpadding="3">  
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td colspan="13" nowrap>[<a href="select_sql.htm#select-with-cte"><code class="keyword">WITH_CTE</code>
+                              <var>common-table-expression</var></a>,...] 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td rowspan="2" colspan="3"><code class="keyword">SELECT</code> &nbsp; <var>selection&nbsp;</var><a href="select_sql.htm#INTO_select_sql"><code class="keyword">INTO</code> </a>
+                           
+               </td> 
+                       
+               <td rowspan="2" colspan="2"> 
+                  
+                  <p><img src="../graphics/cbo2.gif" alt="" width="6" height="38"></p>
+               </td> 
+                       
+               <td><a href="select_sql.htm#parameter_INTO">
+                     <var>parameter</var><code class="keyword">,</code></a><img src="../graphics/dot3.gif" alt="" width="12" height="4"></td> 
+                       
+               <td rowspan="2" colspan="2">&nbsp;</td> 
+                       
+               <td rowspan="2">&nbsp;</td> 
+                       
+               <td rowspan="2">&nbsp;</td> 
+                       
+               <td rowspan="2">&nbsp;</td> 
+                       
+               <td rowspan="2" colspan="2">&nbsp;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td nowrap><a href="select_sql.htm#VIEW">
+                     <code class="keyword">VIEW</code> </a> {<a href="basic.htm#view-name_basic"><var>view-name</var></a>
+                           [<a href="select_sql.htm#correlation-name_select_sql"><var>correlation-name</var></a>]},<img src="../graphics/dot3.gif" alt="" width="12" height="4"> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td rowspan="3"> 
+                  
+                  <p><img src="../graphics/sbo3.gif" alt="" width="5" height="61"></p> 
+               </td> 
+                       
+               <td rowspan="3"> 
+                  
+                  <p><img src="../graphics/cbo3.gif" alt="" width="6" height="59"></p>
+               </td> 
+                       
+               <td><a href="select_sql.htm#UNION"><code class="keyword">UNION</code></a></td> 
+                       
+               <td rowspan="3" colspan="2"> 
+                  
+                  <p><img src="../graphics/cbc3.gif" alt="" width="6" height="59"></p>
+               </td> 
+                       
+               <td rowspan="3" colspan="6" nowrap>[<code class="keyword">ALL</code>] [(]<code class="keyword">SELECT</code> &nbsp;
+                           <a href="selexp.htm#selection"> <var>selection</var>
+                              </a> <a href="select_sql.htm#table-expression_select_sql">
+                              <var>table-expression</var></a>[)] 
+               </td> 
+                       
+               <td rowspan="3" colspan="2"> 
+                  
+                  <p><img src="../graphics/sbc3.gif" alt="" width="5" height="61"></p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code class="keyword"> EXCEPT</code></td>
+                       
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code class="keyword">INTERSECT</code></td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td rowspan="4" colspan="3"><a href="select_sql.htm#ORDER_BY"><code class="keyword">ORDER BY</code></a></td> 
+                       
+               <td rowspan="4" colspan="2"> 
+                  
+                  <p><img src="../graphics/cbo4.gif" alt="" width="6" height="80"></p>
+               </td> 
+                       
+               <td><a href="select_sql.htm#integer_select_sql"><var>integer</var>
+                            </a></td> 
+                       
+               <td rowspan="4" colspan="2"> 
+                  
+                  <p><img src="../graphics/cbc4.gif" alt="" width="6" height="80"></p>
+               </td> 
+                       
+               <td rowspan="4"> 
+                  
+                  <p><img src="../graphics/sbo2.gif" alt="" width="6" height="38"></p>
+               </td> 
+                       
+               <td rowspan="4"><a href="select_sql.htm#ascending_select_sql"><code class="keyword"><u>ASC</u></code></a><br>
+                     <a href="select_sql.htm#descending"><code class="keyword">DESC</code></a> 
+               </td> 
+                       
+               <td rowspan="4"> 
+                  
+                  <p><img src="../graphics/sbc2.gif" alt="" width="6" height="38"></p>
+               </td> 
+                       
+               <td rowspan="4" colspan="2">&nbsp;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td nowrap><a href="select_sql.htm#column-reference_select_sql">
+                     <var>column-reference</var></a></td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><var>expression</var></td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code class="keyword">INPUT
+                     SEQUENCE</code></td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td colspan="13">[<a href="select_sql.htm#OPTIMIZE_FOR_SM"><code class="keyword">OPTIMIZE&nbsp;FOR</code></a><a href="select_sql.htm#OPTIMIZE_FOR_SM"> <var>integer</var>
+                              <code class="keyword">ROWS</code></a>] 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td rowspan="6" colspan="2"> 
+                  
+                  <p><img src="../graphics/sbo6.gif" alt="" width="6" height="138"></p>
+               </td> 
+                       
+               <td rowspan="6"><a href="select_sql.htm#WITH_CS"><code class="keyword">WITH</code></a></td> 
+                       
+               <td rowspan="6" colspan="2"> 
+                  
+                  <p><img src="../graphics/cbo6.gif" alt="" width="6" height="138"></p>
+               </td> 
+                       
+               <td><code class="keyword">CS</code></td> 
+                       
+               <td rowspan="6" colspan="2"> 
+                  
+                  <p><img src="../graphics/cbc6.gif" alt="" width="6" height="138"></p>
+               </td> 
+                       
+               <td rowspan="6"> 
+                  
+                  <p><img src="../graphics/sbc6.gif" alt="" width="6" height="138"></p>
+               </td> 
+                       
+               <td rowspan="6">&nbsp;</td> 
+                       
+               <td rowspan="6">&nbsp;</td> 
+                       
+               <td rowspan="6" colspan="2">&nbsp;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code class="keyword">RR</code></td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code class="keyword">UR</code></td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code class="keyword">RS</code></td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td nowrap><code class="keyword">RS KEEP UPDATE
+                     LOCKS</code></td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td nowrap><code class="keyword">RR KEEP UPDATE
+                     LOCKS</code></td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td colspan="13"><a href="select_sql.htm#QUERYNO_select_sql"><code class="keyword">QUERYNO</code> </a>
+                          <var>integer</var></td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td rowspan="2" colspan="2"> 
+                  
+                  <p><img src="../graphics/sbo2.gif" alt="" width="6" height="38"></p>
+               </td> 
+                       
+               <td rowspan="2"><a href="select_sql.htm#FETCH_FIRST"><code class="keyword">FETCH
+                        FIRST</code></a></td> 
+                       
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/sbo2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                       
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/cbo2.gif" alt="" width="6" height="38"></p>
+               </td> 
+                       
+               <td>1</td> 
+                       
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/cbc2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                       
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/sbc2.gif" alt="" width="6" height="38"></p>
+               </td> 
+                       
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/cbo2.gif" alt="" width="6" height="38"></p>
+               </td> 
+                       
+               <td><code class="keyword">ROW</code></td> 
+                       
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/cbc2.gif" alt="" width="6" height="38"></p>
+               </td> 
+                       
+               <td rowspan="2"><code class="keyword">ONLY</code></td> 
+                       
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/sbc2.gif" alt="" width="6" height="38"></p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><var>integer</var></td> 
+                       
+               <td><code class="keyword">ROWS</code></td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td colspan="13">[<a href="select_sql.htm#WITH_HOLD_SM"><code class="keyword">WITH
+                        HOLD</code></a>]
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td colspan="13">[<a href="select_sql.htm#WITH_RETURN_SM"><code class="keyword">WITH RETURN</code></a>]
+                           
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td rowspan="4" colspan="2"> 
+                  
+                  <p><img src="../graphics/sbo4.gif" alt="" width="6" height="80"></p>
+               </td> 
+                       
+               <td rowspan="4"><a href="select_sql.htm#WITH_SCROLL"> <code class="keyword">WITH</code></a></td> 
+                       
+               <td rowspan="4" colspan="2"> 
+                  
+                  <p><img src="../graphics/cbo4.gif" alt="" width="6" height="80"></p>
+               </td> 
+                       
+               <td><code class="keyword">ASENSITIVE
+                     SCROLL</code></td> 
+                       
+               <td rowspan="4" colspan="2"> 
+                  
+                  <p><img src="../graphics/cbc4.gif" alt="" width="6" height="80"></p>
+               </td> 
+                       
+               <td rowspan="4" colspan="3" nowrap>
+                  [:]<var>scroll_hv</var> [<code class="keyword">GIVING</code> [:]
+                           <var>sqlcode</var> 
+               </td> 
+                       
+               <td rowspan="4" colspan="2"> 
+                  
+                  <p><img src="../graphics/sbc4.gif" alt="" width="6" height="80"></p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td nowrap><code class="keyword">INSENSITIVE
+                     SCROLL</code></td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td nowrap><code class="keyword">SENSITIVE
+                     STATIC SCROLL</code></td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td nowrap><code class="keyword">SENSITIVE
+                     DYNAMIC SCROLL</code></td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td rowspan="2" colspan="2"> 
+                  
+                  <p><img src="../graphics/sbo2.gif" alt="" width="6" height="38"></p>
+               </td> 
+                       
+               <td rowspan="2"><code class="keyword">WITH
+                     ROWSET POSITIONING FOR</code></td> 
+                       
+               <td rowspan="2" colspan="2"> 
+                  
+                  <p><img src="../graphics/cbo2.gif" alt="" width="6" height="38"></p>
+               </td> 
+                       
+               <td>[:] <var>row_hv</var></td> 
+                       
+               <td rowspan="2" colspan="2"> 
+                  
+                  <p><img src="../graphics/cbc2.gif" alt="" width="6" height="38"></p>
+               </td> 
+                       
+               <td rowspan="2"><code class="keyword">ROWS</code></td> 
+                       
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/sbc2.gif" alt="" width="6" height="38"></p>
+               </td> 
+                       
+               <td rowspan="2"><code class="keyword">ROWS_RETURNED</code> [:]
+                           <var>ret_row</var></td> 
+                       
+               <td rowspan="2" colspan="2"> 
+                  
+                  <p><img src="../graphics/sbc2.gif" alt="" width="6" height="38"></p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><var>integer</var></td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td colspan="13" nowrap>[<a href="select_sql.htm#IF_NO_RECORDS_FOUND"><var>IF-NO-RECORDS-FOUND-clause</var></a>]
+                           
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td colspan="13"><a href="synsym.htm#note_statement"> <var>statement</var>
+                              </a><img src="../graphics/dot3.gif" alt="" width="12" height="4"> <code class="keyword"></code> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td rowspan="2" colspan="2"> 
+                  
+                  <p><img src="../graphics/cbo2.gif" alt="" width="6" height="38"></p>
+               </td> 
+                       
+               <td nowrap><code class="keyword">END-SELECT</code> (<em>structured mode only</em>) 
+               </td> 
+                       
+               <td rowspan="2" colspan="3"> 
+                  
+                  <p><img src="../graphics/cbc2.gif" alt="" width="6" height="38"></p>
+               </td> 
+                       
+               <td rowspan="2" colspan="2">&nbsp;</td> 
+                       
+               <td rowspan="2">&nbsp;</td> 
+                       
+               <td rowspan="2">&nbsp;</td> 
+                       
+               <td rowspan="2">&nbsp;</td> 
+                       
+               <td rowspan="2" colspan="2">&nbsp;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td nowrap><code class="keyword">LOOP</code> &nbsp; &nbsp; &nbsp; (<em>reporting mode only</em>)
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>Syntax Element Description - Syntax 1:</p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th nowrap> <a name="sel_selection"></a>SELECT
+                   <var>selection</var> 
+               </th> 
+                       
+               <td> Like the <a href="find.htm#find"><code>FIND</code></a>
+                  statement, a cursor-oriented selection is used to select a set of rows
+                  (records) from one or more database tables, based on a search criterion. In
+                  addition, no cursor management is required from the application program; it is
+                  automatically handled by Natural. For further information, see
+                           <a href="select_sql.htm#select_cursor-oriented">SELECT-
+                              Cursor-Oriented</a> below. 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th nowrap> <a name="into_clause_s1"></a>INTO 
+               </th> 
+                       
+               <td> The <code>INTO</code> clause is used to specify the target
+                  fields in the program which are to be filled with the result of the selection.
+                  For further information and examples, see <a href="select_sql.htm#INTO_select_sql">INTO Clause</a> below.
+                           
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th nowrap> <a name="view_clause_s1"></a>VIEW 
+               </th> 
+                       
+               <td> If one or more views are referenced in the <code>INTO</code>
+                  clause, the number of items specified in the
+                           <var>selection</var> must correspond to the number of fields
+                  defined in the view(s) (not counting group fields, redefining fields and
+                           indicator fields). For further information and examples, see
+                           <a href="select_sql.htm#VIEW">VIEW Clause</a> below.
+                           
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th nowrap> <a name="table_expression_s1"></a><var>table-expression</var>
+                           
+               </th> 
+                       
+               <td> The <var>table-expression</var> consists of a
+                           <code>FROM</code> clause and an optional <code>WHERE</code> clause. For further
+                           information and examples, see <a href="select_sql.htm#table-expression_select_sql"><var>table-expression</var></a>
+                           below. 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th nowrap> <a name="union_s1"></a>UNION 
+               </th> 
+                       
+               <td> <code>UNION</code> unites the results of two or more
+                        <var>select-expressions</var>. For further information and an
+                           example, see <a href="select_sql.htm#UNION">Query Involving
+                              UNION</a> below. 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th nowrap> <a name="order_clause_s1"></a>ORDER
+                  BY 
+               </th> 
+                       
+               <td> The <code>ORDER BY</code> clause arranges the result of a
+                           <code>SELECT</code> statement in a particular sequence. For further information
+                           and examples, see <a href="select_sql.htm#ORDER_BY">ORDER BY
+                              Clause</a> below. 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th nowrap> <a name="no_rec_found_clause_s1"></a> IF NO RECORDS FOUND 
+               </th> 
+                       
+               <td> The <code>IF NO RECORDS FOUND</code> clause is used to initiate
+                  a processing loop if no records meet the selection criteria specified in the
+                           preceding <code>SELECT</code> statement. For further information, see
+                           <a href="select_sql.htm#IF_NO_RECORDS_FOUND">IF NO RECORDS FOUND
+                              Clause</a> below. 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> <a name="end_select_s1"></a>END-SELECT
+                   
+               </th> 
+                       
+               <td>The Natural reserved keyword <code>END-SELECT</code> must be
+                           used to end the <code>SELECT</code> statement.
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>The following syntax elements belong to the <a href="common.htm#common">SQL Extended Set</a>:
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th nowrap><a name="select-with-cte"></a>WITH_CTE
+                  <var>common-table-expression</var>,...
+               </th> 
+                       
+               <td> 
+                  
+                  <div><strong class="floating-title">WITH_CTE
+                                  <var>common-table-expression</var>:</strong></div> 
+                           
+                  <p>This optional clause allows you to define a result table which can
+                               be referenced in any <code>FROM</code> clause of the <code>SELECT</code> that
+                               follows. Multiple common-table-expressions can be specified following the
+                               single <code>WITH_CTE</code> keyword. Each common-table-expression can also be
+                               referenced in the <code>FROM</code> clause of subsequent
+                               common-table-expression. 
+                  </p> 
+                           
+                  <p>For further information, see
+                               <a href="select_sql.htm#select_cursor-oriented">SELECT-
+                                  Cursor-Oriented</a>. 
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th nowrap> <a name="OPTIMIZE_FOR_SM"></a>OPTIMIZE FOR 
+               </th> 
+                       
+               <td> 
+                  
+                  <div><strong class="floating-title"> OPTIMIZE FOR Clause:</strong></div> 
+                            
+                           
+                  <p>This clause is only valid against DB2 databases.
+                     When used against other databases, it will cause runtime errors.
+                  </p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th nowrap> <a name="WITH_CS"></a>WITH
+                  CS/RS/UR/... 
+               </th> 
+                       
+               <td> 
+                  
+                  <div><strong class="floating-title"> WITH CS/RS/UR/...Clause:</strong></div> 
+                            
+                           
+                  <p>This clause is only valid against DB2 databases.
+                     When used against other databases, it will cause runtime errors.
+                  </p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th nowrap> <a name="QUERYNO_select_sql"></a>QUERYNO 
+               </th> 
+                       
+               <td> 
+                  
+                  <div><strong class="floating-title"> QUERYNO Clause:</strong></div> 
+                            
+                           
+                  <p>This clause is not currently supported and will be
+                               ignored.
+                  </p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th nowrap> <a name="FETCH_FIRST"></a>FETCH
+                  FIRST 
+               </th> 
+                       
+               <td> 
+                  
+                  <div><strong class="floating-title"> FETCH FIRST Clause:</strong></div> 
+                            
+                           
+                  <p>This clause is only valid against DB2 databases.
+                     When used against other databases, it will cause runtime errors.
+                  </p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th nowrap> <a name="WITH_HOLD_SM"></a>WITH
+                  HOLD 
+               </th> 
+                       
+               <td> 
+                  
+                  <div><strong class="floating-title"> WITH HOLD Clause:</strong></div> 
+                           
+                  <p>This clause
+                     is not currently supported. When used, it will cause a compiler
+                               error.
+                  </p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th nowrap> <a name="WITH_RETURN_SM"></a>WITH
+                  RETURN 
+               </th> 
+                       
+               <td> 
+                  
+                  <div><strong class="floating-title"> WITH RETURN Clause:</strong></div> 
+                            
+                           
+                  <p>This clause is not currently supported. When used,
+                               it will cause a compiler error.
+                  </p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th nowrap> <a name="WITH_SCROLL"></a>WITH ...
+                  SCROLL 
+               </th> 
+                       
+               <td> 
+                  
+                  <div><strong class="floating-title"> WITH ... SCROLL Clause:</strong></div> 
+                           
+                  <p> RDBMS
+                     scrollable cursors are enabled with this clause. Scrollable cursors can be
+                               <code>ASENSITIVE</code>, <code>INSENSITIVE</code>, <code>SENSITIVE
+                                  STATIC</code> or <code>SENSITIVE DYNAMIC</code>. 
+                  </p> 
+                           
+                  <p class="note"><strong>Note:</strong><br>Not all SQL database systems support all
+                               options.
+                  </p> 
+                           
+                  <ul> 
+                               
+                     <li> 
+                                   
+                        <p class="initem"><code>WITH ASENSITIVE SCROLL</code> specifies that the cursor is
+                                       either <code>INSENSITIVE</code> or <code>SENSITIVE DYNAMIC</code>. This is
+                                       determined by the
+                                       database at open time of the cursor, depending on the read-only
+                                       property of the cursor: If the cursor is read-only, the cursor will become
+                                       <code>INSENSITIVE</code>. If the cursor is not read-only, the cursor will
+                                       become <code>SENSITIVE DYNAMIC</code>. This is supported
+                                       for DB2 databases.
+                        </p> 
+                                  
+                     </li> 
+                               
+                     <li> 
+                                   
+                        <p class="initem"><code>WITH INSENSITIVE SCROLL</code> specifies that the cursor is
+                                       insensitive for updates, deletes and inserts executed against the base table,
+                                       after the cursor has been updated. Positioned updates and deletes are not
+                                       allowed against <code>INSENSITIVE SCROLL</code> cursors. This is supported for Oracle, Adabas D, Informix, MS SQL Server
+                                       ODBC and DB2 databases.
+                        </p> 
+                                  
+                     </li> 
+                               
+                     <li> 
+                                   
+                        <p class="initem"><code>WITH SENSITIVE STATIC</code> specifies that the cursor is
+                                       sensitive for updates and deletes against the base table, but not against
+                                       inserts, after the cursor has been opened. Positioned updates and deletes are
+                                       allowed against <code>SENSITIVE STATIC SCROLL</code> cursors.
+                                       This is supported for Adabas D, MS SQL Server ODBC and
+                                       DB2 databases.
+                        </p> 
+                                  
+                     </li> 
+                               
+                     <li> 
+                                   
+                        <p class="initem"><code>WITH SENSITIVE DYNAMIC</code> specifies that the cursor is
+                                       sensitive for updates, deletes and inserts against the base table, after the
+                                       cursor has been opened. Positioned updates and deletes are allowed against
+                                       <code>SENSITIVE DYNAMIC SCROLL</code> cursors. This is
+                                       supported for Adabas D, MS SQL Server ODBC and DB2 databases.
+                        </p> 
+                                  
+                     </li> 
+                              
+                  </ul> 
+                           
+                  <p>Scrollable cursors allow the application to position any row in the
+                               cursor at any time as long as the cursor is open.
+                  </p> 
+                           
+                  <p>Scrollable cursors are not supported for Sybase
+                               databases at all. Scrollable cursors are not supported for the MS SQL Server
+                               DBLIB interface, but only for the MS SQL Server ODBC interface. 
+                  </p> 
+                           
+                  <p>The positioning is performed depending on the content of the
+                               <var>scroll_hv</var>. The content is evaluated each time a
+                               <code>FETCH</code> against the database is executed.
+                  </p> 
+                           
+                  <p>For more information, see
+                               <a href="select_sql.htm#select_cursor-oriented">SELECT -
+                                  Cursor-Oriented</a>.
+                  </p> 
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <div><a name="Non_Cursor"></a></div>
+      <h4 class="floating-title"> Syntax 2 - Non-Cursor
+              Selection
+      </h4> 
+          
+      <p>Common Set Syntax</p> 
+           
+           
+      <table border="0" class="syntax" cellpadding="3"> 
+                
+                
+                
+                
+                 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td colspan="7" nowrap>
+                  <a href="select_sql.htm#select_single"> <code class="keyword">SELECT SINGLE</code>
+                              </a> 
+               </td> 
+                       
+               <td colspan="4">&nbsp;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td colspan="11">&nbsp;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td rowspan="2" colspan="5" nowrap>
+                  <var>selection</var> <a href="select_sql.htm#into_clause_s2">
+                              <code class="keyword">INTO</code></a> 
+               </td> 
+                       
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/cbo2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                       
+               <td colspan="2" align="left" nowrap>
+                  <a href="select_sql.htm#parameter_INTO"><var>parameter</var>
+                              <code class="keyword">,</code></a><img src="../graphics/dot3.gif" alt="" width="12" height="4"> 
+               </td> 
+                       
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/cbc2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                       
+               <td rowspan="2" nowrap>
+                  <a href="select_sql.htm#table_expression_s2">
+                              <var>table-expression</var> </a> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td colspan="2" align="left" nowrap>
+                  <a href="select_sql.htm#view_clause_s2"> <code class="keyword">VIEW</code>
+                              </a> {<a href="basic.htm#view-name_basic"><var>view-name</var> </a>
+                           [<a href="select_sql.htm#correlation-name_select_sql"><var>correlation-name</var>
+                              </a>]},
+                           <img src="../graphics/dot3.gif" alt="" width="12" height="4">
+                           
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td colspan="11">&nbsp;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td colspan="10" nowrap> [<a href="select_sql.htm#no_rec_found_clause_s2"><var>IF-NO-RECORDS-FOUND-clause</var></a>]
+               </td>
+                       
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td colspan="10">
+                  <var>statement</var><img src="../graphics/dot3.gif" alt="" width="12" height="4"> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td colspan="11">&nbsp;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/cbo2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                       
+               <td colspan="6" align="left" nowrap>
+                  <a href="select_sql.htm#end_select_s2"> <code class="keyword">END-SELECT</code></a>&nbsp;(<var>structured&nbsp;mode&nbsp;only</var>)
+               </td>
+                       
+                       
+               <td rowspan="2" colspan="4"> 
+                  
+                  <p><img src="../graphics/cbc2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td colspan="6" align="left" nowrap>
+                  <a href="loop.htm#loop"> <code class="keyword">LOOP</code></a>&nbsp;(<var>reporting&nbsp;mode&nbsp;only</var>)
+                           
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>Extended Set Syntax</p> 
+           
+           
+      <table border="0" class="syntax" cellpadding="3"> 
+                
+                
+                
+                
+                 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td colspan="7" nowrap>
+                  <a href="select_sql.htm#select_single"> <code class="keyword">SELECT SINGLE</code>
+                              </a> 
+               </td> 
+                       
+               <td colspan="4">&nbsp;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td colspan="11">&nbsp;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td rowspan="2" colspan="5" nowrap>
+                  <var>selection</var> <a href="select_sql.htm#into_clause_s2">
+                              <code class="keyword">INTO</code></a> 
+               </td> 
+                       
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/cbo2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                       
+               <td colspan="2" align="left" nowrap>
+                  <a href="select_sql.htm#parameter_INTO"><var>parameter</var>
+                              <code class="keyword">,</code></a><img src="../graphics/dot3.gif" alt="" width="12" height="4"> 
+               </td> 
+                       
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/cbc2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                       
+               <td rowspan="2" nowrap>
+                  <a href="select_sql.htm#table_expression_s2">
+                              <var>table-expression</var> </a> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td colspan="2" align="left" nowrap>
+                  <a href="select_sql.htm#view_clause_s2"> <code class="keyword">VIEW</code>
+                              </a> {<a href="basic.htm#view-name_basic"><var>view-name</var> </a>
+                           [<a href="select_sql.htm#correlation-name_select_sql"><var>correlation-name</var>
+                              </a>]},
+                           <img src="../graphics/dot3.gif" alt="" width="12" height="4">
+                           
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td colspan="11">&nbsp;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td rowspan="3"> 
+                  
+                  <p><img src="../graphics/sbo3.gif" alt="" width="5" height="61"></p> 
+               </td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td rowspan="3"> 
+                  
+                  <p><img src="../graphics/cbo3.gif" alt="" width="6" height="59"></p> 
+               </td> 
+                       
+               <td> <code class="keyword">CS</code> 
+               </td> 
+                       
+               <td rowspan="3"> 
+                  
+                  <p><img src="../graphics/cbc3.gif" alt="" width="6" height="59"></p> 
+               </td> 
+                       
+               <td rowspan="3"> 
+                  
+                  <p><img src="../graphics/sbc3.gif" alt="" width="5" height="61"></p> 
+               </td> 
+                       
+               <td colspan="4">&nbsp;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td> <code class="keyword">WITH</code> 
+               </td> 
+                       
+               <td> <code class="keyword">RR</code> 
+               </td> 
+                       
+               <td colspan="4">&nbsp;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td> <code class="keyword">UR</code> 
+               </td> 
+                       
+               <td colspan="4">&nbsp;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td colspan="11">&nbsp;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td colspan="10" nowrap> [<a href="select_sql.htm#no_rec_found_clause_s2"><var>IF-NO-RECORDS-FOUND-clause</var></a>]
+               </td>
+                       
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td colspan="10">
+                  <var>statement</var><img src="../graphics/dot3.gif" alt="" width="12" height="4"> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td colspan="11">&nbsp;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/cbo2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                       
+               <td colspan="6" align="left" nowrap>
+                  <a href="select_sql.htm#end_select_s2"> <code class="keyword">END-SELECT</code></a>&nbsp;(<var>structured&nbsp;mode&nbsp;only</var>)
+               </td>
+                       
+                       
+               <td rowspan="2" colspan="4"> 
+                  
+                  <p><img src="../graphics/cbc2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td colspan="6" align="left" nowrap>
+                  <a href="loop.htm#loop"> <code class="keyword">LOOP</code></a>&nbsp;(<var>reporting&nbsp;mode&nbsp;only</var>)
+                           
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>Syntax Element Description - Syntax 2:</p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th nowrap> <a name="select_single"></a>SELECT
+                  SINGLE 
+               </th> 
+                       
+               <td> The <code>SELECT SINGLE</code> statement supports the
+                  functionality of a non-cursor selection (singleton <code>SELECT</code>); that
+                  is, a select expression that retrieves at most one row without using a cursor.
+                           It cannot be referenced by a <a href="update_sql.htm#Syntax_2_update_sql">positioned <code>UPDATE</code></a> or a
+                           <a href="update_sql.htm#Syntax_2_update_sql">positioned
+                              <code>DELETE</code></a> statement.  
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th nowrap> <a name="into_clause_s2"></a>INTO 
+               </th> 
+                       
+               <td> The <code>INTO</code> clause is used to specify the target
+                  fields in the program which are to be filled with the result of the selection.
+                  For further information and examples, see <a href="select_sql.htm#INTO_select_sql">INTO Clause</a> below.
+                           
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th nowrap> <a name="view_clause_s2"></a>VIEW 
+               </th> 
+                       
+               <td> If one or more views are referenced in the <code>INTO</code>
+                  clause, the number of items specified in the
+                           <var>selection</var> must correspond to the number of fields
+                  defined in the view(s) (not counting group fields, redefining fields and
+                           indicator fields). For further information and examples, see
+                           <a href="select_sql.htm#VIEW">VIEW Clause</a> below.
+                           
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th nowrap> <a name="table_expression_s2"></a><var>table-expression</var>
+                           
+               </th> 
+                       
+               <td> The <var>table-expression</var> consists of a
+                           <code>FROM</code> clause and an optional <code>WHERE</code> clause. For further
+                           information and examples, see <a href="select_sql.htm#table-expression_select_sql"><var>table-expression</var></a>
+                           below. 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th nowrap><a name="WITH_CS_2"></a>WITH CS/RR/UR 
+               </th> 
+                       
+               <td> 
+                  
+                  <div><strong class="floating-title"> WITH CS/RR/UR Clause:</strong></div> 
+                            
+                           
+                  <p>This clause is only valid against DB2 databases.
+                     When used against other databases, it will cause runtime errors.
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th nowrap> <a name="no_rec_found_clause_s2"></a> IF NO RECORDS FOUND 
+               </th> 
+                       
+               <td> &nbsp;The <code>IF NO RECORDS FOUND</code> clause is used to
+                  initiate a processing loop if no records meet the selection criteria specified
+                          in the preceding <code>SELECT</code> statement. For further information, see
+                           <a href="select_sql.htm#IF_NO_RECORDS_FOUND">IF NO RECORDS FOUND
+                              Clause</a> below. 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> <a name="end_select_s2"></a>END-SELECT
+                   
+               </th> 
+                       
+               <td>The Natural reserved keyword <code>END-SELECT</code> must be
+                           used to end the <code>SELECT</code> statement.
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+         
+      <div><a name="INTO_select_sql"></a></div> 
+          
+      <h3> INTO Clause</h3> 
+           
+            
+            
+      <table border="0" class="syntax" cellpadding="3"> 
+                 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td rowspan="2"> <code class="keyword">INTO</code> 
+               </td> 
+                        
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/cbo2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                        
+               <td align="left"> <a href="select_sql.htm#parameter_INTO">
+                      <var>parameter</var> </a><code class="keyword">,</code><img src="../graphics/dot3.gif" alt="" width="12" height="4"> 
+               </td> 
+                        
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/cbc2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td align="left"> <a href="select_sql.htm#VIEW"> <code class="keyword">VIEW</code> </a> {<a href="basic.htm#view-name_basic"><var>view-name</var></a>
+                            [<a href="select_sql.htm#correlation-name_select_sql"><var>correlation-name</var></a>
+                            ]},<img src="../graphics/dot3.gif" alt="" width="12" height="4">
+                            
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>The <code>INTO</code> clause is used to specify the target fields in
+               the program which are to be filled with the result of the selection. The
+               <code>INTO</code> clause can specify either single
+               <var>parameters</var> or one or more views as defined in the
+               <code>DEFINE DATA</code> statement.
+      </p> 
+           
+      <p>All target field values can come either from a single table or from
+               more than one table as a result of a join operation (see also the section
+               <a href="select_sql.htm#Join_Queries">Join
+            Queries</a>).
+      </p> 
+           
+      <p class="note"><strong>Note:</strong><br> In standard SQL syntax, an <code>INTO</code> clause is only used in
+               non-cursor select operations (singleton <code>SELECT</code>) and can be
+               specified only if a single row is to be selected. In Natural, however, the
+               <code>INTO</code> clause is used for both cursor-oriented and non-cursor select
+               operations.
+      </p> 
+           
+      <p>The <var>selection</var> can also merely consist of an
+               asterisk (*). In a standard select expression, this is a shorthand for a list
+               of all column names in the table(s) specified in the <code>FROM</code> clause.
+               In the Natural <code>SELECT</code> statement, however, the same syntactical
+               item <code>SELECT *</code> has a different semantic meaning: all the items
+               listed in the <code>INTO</code> clause are also used in the selection. Their
+               names must correspond to names of existing database columns.
+      </p> 
+           
+      <h4 class="floating-title"> Examples:</h4> 
+           
+      <p>Example 1:</p> 
+           <pre class="verbatim">DEFINE DATA LOCAL
+01 PERS VIEW OF SQL-PERSONNEL  
+  02 NAME
+  02 AGE
+END-DEFINE
+...
+SELECT *
+  INTO NAME, AGE</pre> 
+           <p>Example 2:</p> 
+           <pre class="verbatim">...
+SELECT *
+  INTO VIEW PERS </pre> 
+           <p>These examples are equivalent to the following ones:</p> 
+           
+      <p>Example 3:</p> 
+           <pre class="verbatim">...
+SELECT NAME, AGE  
+  INTO NAME, AGE</pre> 
+           <p>Example 4:</p> 
+           <pre class="verbatim">...
+SELECT NAME, AGE  
+  INTO VIEW PERS</pre> 
+           
+          
+         <div><a name="VIEW"></a></div> 
+          
+      <h3> VIEW Clause</h3> 
+           
+            
+            
+      <table border="0" class="syntax" cellpadding="3">  
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td align="left"> <code class="keyword">VIEW </code>{<a href="basic.htm#view-name_basic"><var>view-name</var></a>
+                            [<a href="select_sql.htm#correlation-name_select_sql"><var>correlation-name</var></a>]},
+                            <img src="../graphics/dot3.gif" alt="" width="12" height="4">
+                            
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>If one or more views are referenced in the <code>INTO</code> clause,
+               the number of items specified in the <var>selection</var> must
+               correspond to the number of fields defined in the view(s) (not counting group
+               fields, redefining fields and indicator fields).
+      </p> 
+           
+      <p class="note"><strong>Note:</strong><br> Both the Natural target fields and the table columns must be
+               defined in a Natural DDM. Their names, however, can be different, since
+               assignment is made according to their sequence.
+      </p> 
+           
+      <p> Example of <code>INTO</code> Clause with View:
+      </p> 
+           <pre class="verbatim">DEFINE DATA LOCAL
+01 PERS VIEW OF SQL-PERSONNEL   
+  02 NAME
+  02 AGE
+END-DEFINE
+...
+SELECT FIRSTNAME, AGE
+  INTO VIEW PERS
+  FROM SQL-PERSONNEL
+...</pre> 
+           <p>The target fields <code>NAME</code> and <code>AGE</code>, which are
+               part of a Natural view, receive the contents of the table columns
+               <code>FIRSTNAME</code> and <code>AGE</code>.
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th nowrap> <a name="parameter_INTO"></a>
+                   <var>parameter</var> 
+               </th> 
+                        
+               <td> 
+                  
+                  <p>If single parameters are specified as target fields, their number
+                     and formats must correspond to the number and formats of the
+                                <var>columns</var> and/or
+                                <var>scalar-expressions</var> specified in the corresponding
+                                selection as described above (for details, see <a href="scalar.htm#scalar">Scalar Expressions</a>).
+                  </p> 
+                            
+                  <p> Example:</p> 
+                            <pre class="verbatim">DEFINE DATA LOCAL
+01 #NAME   (A20)
+01 #AGE    (I2)
+END-DEFINE
+...
+SELECT NAME, AGE
+  INTO #NAME, #AGE
+  FROM SQL-PERSONNEL   
+...</pre> 
+                            <p>The target fields <code>#NAME</code> and <code>#AGE</code>, which
+                                are Natural program variables, receive the contents of the table columns
+                                <code>NAME</code> and <code>AGE</code>.
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th nowrap>
+                  <a name="correlation-name_select_sql"></a>
+                            <var>correlation-name</var> 
+               </th> 
+                        
+               <td> 
+                  
+                  <p>If the <code>VIEW</code> clause is used within a <code>SELECT
+                                   *</code> construction where multiple tables are to be joined,
+                                <var>correlation-names</var> are required if the specified view
+                     contains fields that reference columns which exist in more than one of these
+                                tables. In order to know which column to select, all these columns are
+                                qualified by the specified <var>correlation-name</var> at
+                                generation of the selection list. The
+                                <var>correlation-name</var> assigned to a view must correspond
+                                to one of the <var>correlation-names</var> used to qualify the
+                                tables to be joined. See also the section <a href="select_sql.htm#Join_Queries">Join Queries</a>.
+                  </p> 
+                            
+                  <p> Example:</p> 
+                            <pre class="verbatim">DEFINE DATA LOCAL
+01 PERS VIEW OF SQL-PERSONNEL
+  02 NAME
+  02 FIRST-NAME
+  02 AGE
+END-DEFINE
+...
+SELECT *
+  INTO VIEW PERS A
+  FROM SQL-PERSONNEL A, SQL-PERSONNEL B  
+...</pre> </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+          
+         
+      <div><a name="table-expression_select_sql"></a></div> 
+          
+      <h3><var> table-expression</var></h3> 
+           
+           
+      <p>The <var>table-expression</var> consists of a
+               <code>FROM</code> clause and an optional <code>WHERE</code> clause. The
+               <code>GROUP BY</code> and <code>HAVING</code> clauses are not permitted.
+      </p> 
+           
+      <p> Example 1:</p> 
+           <pre class="verbatim">DEFINE DATA LOCAL
+01 #NAME      (A20)
+01 #FIRSTNAME (A15)
+01 #AGE       (I2)
+...
+END-DEFINE
+...
+SELECT NAME, FIRSTNAME, AGE
+  INTO #NAME, #FIRSTNAME, #AGE
+  FROM SQL-PERSONNEL
+    WHERE NAME IS NOT NULL
+      AND AGE &gt; 20
+...
+  DISPLAY #NAME #FIRSTNAME #AGE   
+END-SELECT
+...
+END</pre> 
+           <p> Example 2:</p> 
+           <pre class="verbatim">DEFINE DATA LOCAL
+01 #COUNT    (I4)
+...
+END-DEFINE
+...
+SELECT SINGLE COUNT(*) INTO #COUNT FROM SQL-PERSONNEL   
+...</pre> 
+           <p>See further information on <a href="selexp.htm#selection"><var>selection</var></a> and
+               <a href="selexp.htm#table-expression_selexp"><var>table-expression</var></a>.
+      </p>
+           
+           
+          
+         
+      <div><a name="UNION"></a></div> 
+          
+      <h3> Query Involving UNION</h3> 
+           
+           
+      <p class="note"><strong>Note:</strong><br> In the following, the term "SELECT statement" is used
+               as a synonym for the whole query-expression consisting of multiple select
+               expressions concatenated with <code>UNION</code> operations.
+      </p> 
+           
+      <p><code>UNION</code> unites the results of two or more
+               <var>select-expressions</var>. The columns specified in the
+               individual <var>select-expressions</var> must be
+               <code>UNION</code>-compatible; that is, matching in number, type and
+               format.
+      </p> 
+           
+      <p>Redundant duplicate rows are always eliminated from the result of a
+               <code>UNION</code> unless the <code>UNION</code> operator explicitly includes
+               the <code>ALL</code> qualifier. With <code>UNION</code>, however, there is no
+               explicit <code>DISTINCT</code> option as an alternative to
+               <code>ALL</code>.
+      </p> 
+           
+      <p> Example:</p> 
+           <pre class="verbatim">DEFINE DATA LOCAL
+01 PERS VIEW OF SQL-PERSONNEL   
+  02 NAME
+  02 AGE
+  02 ADDRESS (1:6)
+END-DEFINE
+...
+SELECT NAME, AGE, ADDRESS
+  INTO VIEW PERS
+  FROM SQL-PERSONNEL
+  WHERE AGE &gt; 55
+UNION ALL
+SELECT NAME, AGE, ADDRESS
+  FROM SQL-EMPLOYEES
+  WHERE PERSNR &lt; 100
+ORDER BY NAME
+...
+END-SELECT
+...</pre> 
+           <p>In general, any number of <var>select-expressions</var>
+               can be concatenated with <code>UNION</code>.
+      </p> 
+           
+      <p>The <code>INTO</code> clause must be specified with the first
+               <var>select-expression</var> only.
+      </p> 
+           
+      <p>Any <code>ORDER BY</code> clause must appear after the final
+               <var>select-expression</var>; the ordering columns must be
+               identified by number, not by name.
+      </p> 
+           
+          
+         
+      <div><a name="ORDER_BY"></a></div> 
+          
+      <h3> ORDER BY Clause</h3> 
+           
+            
+            
+      <table border="0" class="syntax" cellpadding="3"> 
+                 
+                 
+                 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td rowspan="2" align="center"> <code class="keyword">ORDER
+                     BY</code> 
+               </td> 
+                        
+               <td rowspan="2">
+                  <img src="../graphics/cbo2.gif" alt="" width="6" height="38">
+                            <img src="../graphics/cbo2.gif" alt="" width="6" height="38">
+                            
+               </td> 
+                        
+               <td align="center"> <a href="select_sql.htm#integer_select_sql">
+                      <var>integer</var> </a> 
+               </td> 
+                        
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/cbc2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                        
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/sbo2.gif" alt="" width="5" height="40"></p> 
+               </td> 
+                        
+               <td align="center"> <a href="select_sql.htm#ascending_select_sql">
+                      <code class="keyword"><u>ASC</u></code> </a> 
+               </td> 
+                        
+               <td rowspan="2" align="center"> 
+                  
+                  <p><img src="../graphics/sbc2.gif" alt="" width="5" height="40"></p> 
+               </td> 
+                        
+               <td rowspan="2" align="center">
+                  <img src="../graphics/cbc2.gif" alt="" width="6" height="38">
+                            <code class="keyword">,</code><img src="../graphics/dot3.gif" alt="" width="12" height="4"> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td align="center">
+                  <a href="select_sql.htm#column-reference_select_sql">
+                               <var>column-reference</var> </a> 
+               </td> 
+                        
+               <td align="center"> <a href="select_sql.htm#descending">
+                      <code class="keyword">DESC</code> </a> 
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>The <code>ORDER BY</code> clause arranges the result of a
+               <code>SELECT</code> statement in a particular sequence.
+      </p> 
+           
+      <p>Each <a name="column-reference_select_sql"></a><code>ORDER
+            BY</code> clause must specify a column of the result table. In most
+               <code>ORDER BY</code> clauses a column can be identified either by
+               <var>column-reference</var> (that is, by an optionally
+               qualified column name) or by column number. In a query involving
+               <code>UNION</code>, a column must be identified by column number. The column
+               number is the ordinal left-to-right position of a column within the
+               <var>selection</var>, which means it is an
+               <a name="integer_select_sql"></a><var>integer</var>
+               value. This feature makes it possible to order a result on the basis of a
+               computed column which does not have a name.
+      </p> 
+           
+      <p> Example:</p> 
+           <pre class="verbatim">DEFINE DATA LOCAL
+1 #NAME          (A20)
+1 #YEARS-TO-WORK (I2)
+END-DEFINE
+...
+SELECT NAME , 65 - AGE
+  INTO #NAME, #YEARS-TO-WORK   
+  FROM SQL-PERSONNEL
+  ORDER BY 2
+  ...</pre> 
+           <p><a name="ascending_select_sql"></a>The order specified in the <code>ORDER
+            BY</code> clause can be either ascending (<code>ASC</code>) or descending
+               <a name="descending"></a>(<code>DESC</code>). <code>ASC</code> is the
+               default.
+      </p> 
+           
+      <p> Example:</p> 
+           <pre class="verbatim">DEFINE DATA LOCAL
+1 PERS VIEW OF SQL-PERSONNEL
+1 NAME
+1 AGE
+1 ADDRESS   (1:6)
+END-DEFINE
+...
+SELECT NAME, AGE, ADDRESS
+  INTO VIEW PERS
+  FROM SQL-PERSONNEL
+  WHERE AGE = 55
+  ORDER BY NAME DESC
+  ...</pre> 
+           <p>See further information on <a href="select_sql.htm#integer_select_sql"><var>integer</var></a>
+               values and <a href="select_sql.htm#column-reference_select_sql"><var>column-reference</var></a>.
+      </p>
+           
+           
+          
+         
+      <div><a name="IF_NO_RECORDS_FOUND" id="11369"></a></div> 
+          
+      <h3> IF NO RECORDS FOUND-Clause</h3> 
+           
+           
+      <p class="note"><strong>Note:</strong><br> This clause actually does not belong to Natural SQL; it represents
+               Natural functionality which has been made available to SQL loop
+               processing.
+      </p> 
+           
+      <div><a name="Structured_Mode_Syntax_select_sql"></a></div>
+      <h4 class="floating-title"> Structured Mode
+               Syntax
+      </h4> 
+            
+            
+      <table border="0" class="syntax" cellpadding="3"> 
+                  
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td colspan="2" nowrap>
+                  <code class="keyword">IF NO</code> [<code class="keyword">RECORDS</code>] [<code class="keyword">FOUND</code>] 
+               </td> 
+                        
+               <td>&nbsp;</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/cbo2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                        
+               <td><a href="select_sql.htm#ENTER_select_sql"> <code class="keyword">ENTER</code> </a> 
+               </td> 
+                        
+               <td rowspan="2" align="left"> 
+                  
+                  <p><img src="../graphics/cbc2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><var>statement</var><img src="../graphics/dot3.gif" alt="" width="12" height="4"> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td colspan="3" align="left" nowrap>
+                  <code class="keyword">END</code>- <code class="keyword">NOREC</code> 
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <div><a name="Reporting_Mode_Syntax_select_sql"></a></div>
+      <h4 class="floating-title"> Reporting Mode
+               Syntax
+      </h4> 
+            
+            
+      <table border="0" class="syntax" cellpadding="3"> 
+                  
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td colspan="3" nowrap>
+                  <code class="keyword">IF NO</code> [<code class="keyword">RECORDS</code>] [<code class="keyword">FOUND</code>] 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td rowspan="3"> 
+                  
+                  <p><img src="../graphics/cbo3.gif" alt="" width="6" height="59"></p> 
+               </td> 
+                        
+               <td><a href="select_sql.htm#ENTER_select_sql"> <code class="keyword">ENTER</code> </a> 
+               </td> 
+                        
+               <td rowspan="3" align="left"> 
+                  
+                  <p><img src="../graphics/cbc3.gif" alt="" width="6" height="59"></p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><var>statement</var> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><a href="dodoend.htm#dodoend"> <code class="keyword">DO</code>
+                        </a> <a href="dodoend.htm#dodoend"><var>statement</var></a><img src="../graphics/dot3.gif" alt="" width="12" height="4">
+                            <a href="dodoend.htm#dodoend"><code class="keyword">DOEND</code></a>
+                            
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>&nbsp;The <code>IF NO RECORDS FOUND</code> clause is used to initiate a
+               processing loop if no records meet the selection criteria specified in the
+               preceding <code>SELECT</code> statement.
+      </p> 
+           
+      <p>If no records meet the specified selection criteria, the <code>IF NO
+            RECORDS FOUND</code> clause causes the processing loop to be executed once with
+               an "empty" record. If this is not desired, specify the statement
+               <code>ESCAPE BOTTOM</code> within the <code>IF NO RECORDS FOUND</code>
+               clause.
+      </p> 
+           
+      <p><a name="ENTER_select_sql"></a>If one or more statements are specified with the
+               <code>IF NO RECORDS FOUND</code> clause, the statements are executed
+               immediately before the processing loop is entered. If no statements are to be
+               executed before entering the loop, the keyword <code>ENTER</code> must be
+               used.
+      </p> 
+           
+      <p class="note"><strong>Note:</strong><br> If the result set of the <code>SELECT</code> statement consists of
+               a single row of NULL values, the <code>IF NO RECORDS FOUND</code> clause is not
+               executed. This could occur if the selection list consists solely of one of the
+               aggregate functions <code>SUM</code>, <code>AVG</code>, <code>MIN</code> or
+               <code>MAX</code> on columns, and the set on which these aggregate functions
+               operate is empty. When you use these aggregate functions in the above-mentioned
+               way, you should therefore check the values of the corresponding null-indicator
+               fields instead of using an <code>IF NO RECORDS FOUND</code> clause.
+      </p> 
+           
+          
+      <div><a name="d0e171315"></a></div> 
+           
+      <h4>Database Values</h4> 
+            
+            
+      <p>Unless other value assignments are made in the statements accompanying
+                an <code>IF NO RECORDS FOUND</code> clause, Natural resets to empty all
+                database fields which reference the file specified in the current loop.
+      </p> 
+            
+      <h4 class="floating-title"> Evaluation of System Functions</h4> 
+            
+      <p>Natural system functions are evaluated once for the empty record that
+                is created for processing as a result of the <code>IF NO RECORDS FOUND</code>
+                clause.
+      </p> 
+            
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="select_sql.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Join_Queries"></a></div> 
+         
+      <h2> Join Queries</h2> 
+          
+          
+      <p>A join is a query in which data is retrieved from more than one table.
+              All the tables involved must be specified in the <code>FROM</code> clause.
+      </p> 
+          
+      <p> Example:</p> 
+          <pre class="verbatim">DEFINE DATA LOCAL
+1 #NAME     (A20)
+1 #MONEY    (I4)
+END-DEFINE
+...
+SELECT NAME, ACCOUNT
+  INTO #NAME, #MONEY
+  FROM  SQL-PERSONNEL P, SQL-FINANCE F   
+  WHERE P.PERSNR = F.PERSNR
+    AND F.ACCOUNT &gt; 10000
+    ...</pre> 
+          <p>A join always forms the Cartesian product of the tables listed in the
+              <code>FROM</code> clause and later eliminates from this Cartesian product table
+              all the rows that do not satisfy the join condition specified in the
+              <code>WHERE</code> clause.
+      </p> 
+          
+      <p> <a href="select_sql.htm#correlation-name_select_sql">
+                 <var>Correlation-names</var></a> can be used to save
+              writing if table names are rather long.
+              <var>Correlation-names</var> must be used when a column
+              specified in the selection list exists in more than one of the tables to be
+              joined in order to know which of the identically named columns to select.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="select_sql.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="select_cursor-oriented"></a></div> 
+         
+      <h2> SELECT - Cursor-Oriented </h2> 
+          
+          
+      <p>Like the Natural <a href="find.htm#find"><code>FIND</code></a>
+              statement, the cursor-oriented <code>SELECT</code> statement is used to select
+              a set of rows (records) from one or more DB2 tables, based on a search
+              criterion. Since a database loop is initiated, the loop must be closed by a
+              <code>LOOP</code> (reporting mode) or <code>END-SELECT</code> statement. With
+              this construction, Natural uses the same loop processing as with the
+              <code>FIND</code> statement.
+      </p> 
+          
+      <p>In addition, no cursor management is required from the application
+              program; it is automatically handled by Natural.
+      </p> 
+          
+      <p>Below is information on:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="select_sql.htm#select_cursor-oriented-cte">WITH_CTE common-table-expression,&#8230;</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="select_sql.htm#OPTIMIZE_FOR">OPTIMIZE FOR integer ROWS</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="select_sql.htm#WITH_Isolation">WITH - Isolation Level</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="select_sql.htm#FETCH_FIRST_select_cursor-oriented">FETCH FIRST</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="select_sql.htm#WITH_SENS">WITH INSENSITIVE/SENSITIVE</a></p>
+         </li>
+      </ul> 
+          
+         
+      <div><a name="select_cursor-oriented-cte"></a></div> 
+          
+      <h3>WITH_CTE
+              <var>common-table-expression</var>,&#8230;
+      </h3> 
+           
+           
+      <p>This clause permits to define result tables that can be referenced in
+               any <code>FROM</code> clause of the <code>SELECT</code> statement that follows.
+               
+      </p> 
+           
+      <p>The Natural specific keyword <code>WITH_CTE</code> corresponds to the
+               SQL keyword <code>WITH</code>. <code>WITH_CTE</code> will be translated into
+               the SQL keyword <code>WITH</code> by the Natural compiler. 
+      </p> 
+           
+      <p>Each common-table-expression has to obey the following syntax: </p> 
+            
+            
+      <table border="0" class="syntax" cellpadding="3">  
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td>[<code><var>common-table-expression-name</var>
+                               </code>[<code>(<var>column-name</var>,&#8230;)</code>] <code>AS
+                               (<var>fullselect</var>)</code> ]
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>Syntax Description:</p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td><code><var>common-table-expression-name</var></code></td>
+                        
+                        
+               <td>Has to be an unqualified SQL identifier and must
+                  be different from any other common-table-expression-name specified in the same
+                  statement. 
+                  
+                  <p>Each
+                                <code><var>common-table-expression-name</var></code> can be
+                                specified in the <code>FROM</code> clause of any
+                                <code><var>common-table-expression-name</var></code> following
+                                or in the <code>FROM</code> clause of the <code>SELECT</code> statement
+                                following.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><code><var>column-name</var></code></td> 
+                        
+               <td>Has to be an unqualified SQL identifier and must
+                  be unique within one
+                  <code><var>common-table-expression-name</var></code>. 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><code>AS
+                     (<var>fullselect</var>)</code></td> 
+                        
+               <td>The number of
+                  <code><var>column-names</var></code> must match the number of
+                            columns of the <code><var>fullselect</var></code>. 
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>A common-table-expression can be used </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">in place of a view to avoid creating the view;</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">when the same result table needs to be shared in a
+                       <code><var>fullselect</var></code> ;
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">when the result needs to be derived using recursion.</p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>Queries using recursion are useful in applications such as bill of
+               material.
+      </p> 
+           
+      <p>Example:</p> 
+           <pre class="verbatim">WITH_CTE                                                        
+ RPL (PART,SUBPART,QUANTITY) AS                                 
+ (SELECT ROOT.PART,ROOT.SUBPART,ROOT.QUANTITY                   
+    FROM HGK-PARTLIST ROOT                                      
+   WHERE ROOT.PART ='01'                                       
+  UNION ALL                                                     
+  SELECT CHILD.PART,CHILD.SUBPART,CHILD.QUANTITY                
+    FROM  RPL PARENT, HGK-PARTLIST CHILD                        
+    WHERE PARENT.SUBPART = CHILD.PART                            
+  )                                                             
+SELECT DISTINCT PART,SUBPART,QUANTITY                           
+  INTO VIEW V1                                                  
+  FROM RPL                                                      
+  ORDER BY PART,SUBPART,QUANTITY                                
+END-SELECT </pre> 
+          <div><a name="OPTIMIZE_FOR"></a></div> 
+          
+      <h3> OPTIMIZE FOR <var>integer</var> ROWS
+      </h3> 
+           
+            
+            
+      <table border="0" class="syntax" cellpadding="3">  
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td>[<code class="keyword">OPTIMIZE FOR</code>
+                            <var>integer</var> <code class="keyword">ROWS</code>]
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>The <code>OPTIMIZE FOR <var>integer</var> ROWS</code>
+               clause is used to inform DB2 in advance of the number
+               (<var>integer</var>) of rows to be retrieved from the result
+               table. Without this clause, DB2 assumes that all rows of the result table are
+               to be retrieved and optimizes accordingly.
+      </p> 
+           
+      <p>This optional clause is useful if you know how many rows are likely to
+               be selected, because optimizing for <var>integer</var> rows can
+               improve performance if the number of rows actually selected does not exceed the
+               <var>integer</var> value (which can be in the range from 0 to
+               2147483647).
+      </p> 
+           
+      <p> Example: </p> 
+           <pre class="verbatim">SELECT name INTO 
+#name FROM table WHERE AGE = 2 OPTIMIZE FOR 100 ROWS
+</pre> 
+           
+         <div><a name="WITH_Isolation"></a></div> 
+          
+      <h3> WITH - Isolation Level </h3> 
+           
+            
+            
+      <table border="0" class="syntax" cellpadding="3"> 
+                 
+                 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> 
+                  
+                  <p><img src="../graphics/sbo5.gif" alt="" width="4" height="138"></p> 
+               </td> 
+                        
+               <td> <code class="keyword">WITH</code> 
+               </td> 
+                        
+               <td> 
+                  
+                  <p><img src="../graphics/cbo4b.gif" alt="" width="6" height="130"></p> 
+               </td> 
+                        
+               <td nowrap> <code class="keyword">CS<br>RR<br>RR
+                     KEEP UPDATE LOCK <br>RS<br>RS KEEP UPDATE LOCKS<br>UR</code>
+                            
+               </td> 
+                        
+               <td> 
+                  
+                  <p><img src="../graphics/cbc4b.gif" alt="" width="6" height="130"></p> 
+               </td> 
+                        
+               <td> 
+                  
+                  <p><img src="../graphics/sbc5.gif" alt="" width="4" height="138"></p> 
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>This <code>WITH</code> clause allows you to specify an explicit
+               isolation level with which the statement is to be executed. The following
+               options are provided:
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>Option </th> 
+                        
+               <th>Meaning</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td>CS</td> 
+                        
+               <td>Cursor Stability</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>RR</td> 
+                        
+               <td>Repeatable Read</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>RS</td> 
+                        
+               <td>Read Stability</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>RS KEEP UPDATE LOCKS </td> 
+                        
+               <td> Only valid if a <code>FOR UPDATE OF</code>
+                  clause is specified. 
+                            
+                  <p>Read Stability and retaining update locks.</p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>RR KEEP UPDATE LOCKS </td> 
+                        
+               <td>Only valid if a <code>FOR UPDATE OF</code>
+                  clause is specified. 
+                            
+                  <p>Repeatable Read and retaining update locks. </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>UR</td> 
+                        
+               <td>Uncommitted Read</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p><code>WITH UR</code> can only be specified within a <code>SELECT</code>
+               statement and when the table is read-only. The default isolation level is
+               determined by the isolation of the package or plan into which the statement is
+               bound. The default isolation level also depends on whether the result table is
+               read-only or not. To find out the default isolation level, refer to the IBM
+               literature.
+      </p> 
+           
+      <p class="note"><strong>Note:</strong><br> This option also works for non-cursor selection.
+      </p> 
+           
+          
+          
+         
+      <div><a name="FETCH_FIRST_select_cursor-oriented"></a></div> 
+          
+      <h3> FETCH FIRST </h3> 
+           
+            
+            
+      <table border="0" class="syntax" cellpadding="3"> 
+                 
+                 
+                 
+                 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td nowrap> 
+                  
+                  <p><img src="../graphics/sbo3.gif" alt="" width="5" height="61"></p> 
+               </td> 
+                        
+               <td nowrap> <code class="keyword">FETCH FIRST</code> 
+               </td>
+                        
+                        
+               <td> 
+                  
+                  <p><img src="../graphics/cbo2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                        
+               <td> <code class="keyword"><u>1</u></code><br>
+                    <var>integer</var> 
+               </td> 
+                        
+               <td> 
+                  
+                  <p><img src="../graphics/cbc2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                        
+               <td> 
+                  
+                  <p><img src="../graphics/cbo2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                        
+               <td><code class="keyword">ROWS</code><br><code class="keyword">ROW</code></td> 
+                        
+               <td> 
+                  
+                  <p><img src="../graphics/cbc2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                        
+               <td> <code class="keyword">ONLY</code> 
+               </td> 
+                        
+               <td> 
+                  
+                  <p><img src="../graphics/sbc3.gif" alt="" width="5" height="61"></p> 
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>The <code>FETCH FIRST</code> clause limits the number of rows to be
+               fetched. It improves the performance of queries with potentially large result
+               sets if only a limited number of rows is needed.
+      </p> 
+           
+          
+          
+          
+         
+      <div><a name="WITH_SENS"></a></div> 
+          
+      <h3> WITH INSENSITIVE/SENSITIVE </h3> 
+           
+            
+            
+      <table border="0" class="syntax" cellpadding="3"> 
+                 
+                 
+                 
+                 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> 
+                  
+                  <p><img src="../graphics/sbo3.gif" alt="" width="5" height="61"></p> 
+               </td> 
+                        
+               <td> <code class="keyword">WITH</code> 
+               </td> 
+                        
+               <td> 
+                  
+                  <p><img src="../graphics/cbo2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                        
+               <td nowrap> <code class="keyword">ASENSITIVE SCROLL</code><br>
+                            <code class="keyword">INSENSITIVE SCROLL</code><br><code class="keyword">SENSITIVE STATIC SCROLL</code><br><code class="keyword">SENSITIVE DYNAMIC SCROLL</code> 
+               </td> 
+                        
+               <td> 
+                  
+                  <p><img src="../graphics/cbc2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                        
+               <td nowrap> [:] <a href="select_sql.htm#scroll_hv"><var>scroll_hv</var> </a> 
+               </td> 
+                        
+               <td>[<code class="keyword">GIVING </code></td> 
+                        
+               <td> [:]</td> 
+                        
+               <td> <a href="select_sql.htm#GIVING">
+                      <var>sqlcode</var></a>] 
+               </td> 
+                        
+               <td> 
+                  
+                  <p><img src="../graphics/sbc3.gif" alt="" width="5" height="61"></p> 
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>Natural supports SQL scrollable cursors by
+               using the clauses <code>WITH ASENSITIVE SCROLL</code>, <code>WITH SENSITIVE
+            STATIC SCROLL</code> and <code>SENSITVE DYNAMIC SCROLL</code>. Scrollable
+               cursors allow Natural applications to position
+               randomly any row in a result set. With non-scrollable cursors, the data can
+               only be read sequentially, from top to bottom.
+      </p> 
+           
+      <p><code>ASENSITIVE</code> scrollable cursors are either
+               <code>INSENSITIVE</code> - if the cursor is <code>READ-ONLY</code> - or
+               <code>SENSITIVE DYNAMIC</code> - if the cursor is not
+               <code>READ-ONLY</code>.
+      </p> 
+           
+      <p><code>INSENSITIVE</code> and <code>SENSITIVE STATIC</code> scrollable
+               cursors use temporary result tables and require a TEMP database in DB2 (see the
+               relevant DB2 literature by IBM).
+      </p> 
+           
+      <p><code>INSENSITIVE SCROLL</code> refers to a cursor that cannot be used
+               in Positioned <code>UPDATE</code> or Positioned <code>DELETE</code> operations.
+               In addition, once opened, an <code>INSENSITIVE SCROLL</code> cursor does not
+               reflect <code>UPDATE</code>s, <code>DELETE</code>s or <code>INSERT</code>s
+               against the base table, after the cursor was opened.
+      </p> 
+           
+      <p><code>SENSITIVE STATIC SCROLL</code> refers to a cursor that can be
+               used for Positioned <code>UPDATE</code>s or Positioned <code>DELETE</code>
+               operations. In addition, a <code>SENSITIVE STATIC SCROLL</code> cursor reflects
+               <code>UPDATE</code>s, <code>DELETE</code>s of base table rows. The cursor does
+               not reflect <code>INSERT</code> operations.
+      </p> 
+           
+      <p><code>SENSITIVE DYNAMIC</code> scrollable cursors reflect
+               <code>UPDATE</code>s, <code>DELETE</code>s and <code>INSERT</code>s against the
+               base table while the cursor is open.
+      </p> 
+           
+      <p>Below is information on:</p> 
+      <ul>
+         <li><a href="select_sql.htm#scroll_hv">scroll_hv</a></li>
+         <li><a href="select_sql.htm#d0e172630">scroll_hv - Options</a></li>
+         <li><a href="select_sql.htm#GIVING">GIVING [:] sqlcode</a></li>
+      </ul> 
+           
+          
+      <div><a name="scroll_hv"></a></div> 
+           
+      <h4><var> scroll_hv</var></h4> 
+            
+            
+      <p>The variable <var>scroll_hv</var> must be
+                alphanumeric.
+      </p> 
+            
+      <p>The variable <var>scroll_hv</var> specifies which row
+                of the result table will be fetched during one execution of the database
+                processing loop. The contents of
+                <var>scroll_hv</var> is evaluated each time the database
+                processing loop cycle is executed.
+      </p> 
+             
+             
+      <table border="0" class="syntax" cellpadding="3"> 
+                  
+                  
+                  
+                   
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <td nowrap> 
+                  
+                  <p><img src="../graphics/sbo2b.gif" alt="" width="7" height="42"></p> 
+               </td> 
+                         
+               <td nowrap> 
+                  
+                  <p><img src="../graphics/cbo2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                         
+               <td nowrap> <code class="keyword">
+                      <u>I</u>NSENSITIVE<br>
+                                <u>S</u>ENSITVE</code></td> 
+                         
+               <td nowrap> 
+                  
+                  <p><img src="../graphics/cbc2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                         
+               <td nowrap> 
+                  
+                  <p><img src="../graphics/sbc2b.gif" alt="" width="6" height="43"></p> 
+               </td> 
+                         
+               <td rowspan="2" nowrap> 
+                  
+                  <p><img src="../graphics/cbo10.gif" alt="" width="10" height="200"></p> 
+               </td> 
+                         
+               <td colspan="3" nowrap> 
+                  <code class="keyword"><u>C</u>URRENT<br>
+                                <u>F</u>IRST<br>
+                                <u>L</u>AST<br><u>P</u>RIOR<br>
+                                <u>NEXT</u> | N </code> 
+               </td> 
+                         
+               <td nowrap>&nbsp;</td> 
+                         
+               <td rowspan="2" nowrap> 
+                  
+                  <p><img src="../graphics/cbc10.gif" alt="" width="10" height="200"></p> 
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td nowrap>&nbsp;</td> 
+                         
+               <td nowrap>&nbsp;</td> 
+                         
+               <td nowrap>&nbsp;</td> 
+                         
+               <td nowrap>&nbsp;</td> 
+                         
+               <td nowrap>&nbsp;</td> 
+                         
+               <td nowrap> 
+                  
+                  <p><img src="../graphics/cbo2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                         
+               <td nowrap> <code class="keyword">
+                      <u>ABS</u>OLUTE<br><u>REL</u>ATIVE</code></td>
+                         
+                         
+               <td nowrap> 
+                  
+                  <p><img src="../graphics/cbc2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                         
+               <td nowrap>[+ | - ] <var>integer</var>
+                             
+               </td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+           
+           
+          
+      <div><a name="d0e172630"></a></div> 
+           
+      <h4><var> scroll_hv</var> - Options 
+      </h4> 
+            
+             
+             
+             
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="36%">
+            <col width="61%">
+         </colgroup> 
+                 
+         <thead align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <th>Option </th> 
+                         
+               <th>Explanation</th> 
+                        
+            </tr> 
+                    
+         </thead> 
+                 
+         <tbody align="left" valign="top"> 
+                      
+                      
+                     
+            <tr> 
+                         
+               <td>CURRENT</td> 
+                         
+               <td>Fetches the current row (again).</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>FIRST</td> 
+                         
+               <td>Fetches the first row.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>LAST</td> 
+                         
+               <td>Fetches the last row.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>NEXT</td> 
+                         
+               <td>Fetches the row after the current one. This is
+                  the default value. 
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>PRIOR</td> 
+                         
+               <td>Fetch the row before the current one.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td><var>+/- integer</var></td> 
+                         
+               <td> 
+                  
+                  <p>Only applies in connection with <code>ABSOLUTE</code> or
+                                 <code>RELATIVE</code>.
+                  </p> 
+                             
+                  <p> Specifies the position of the row to be fetched
+                                 <code>ABSOLUTE</code> or <code>RELATIVE</code>. 
+                  </p> 
+                             
+                  <p>Enter a plus (+) or minus (-) sign followed by an integer. </p> 
+                             
+                  <p>The default value is a plus (+). </p>
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>ABSOLUTE</td> 
+                         
+               <td> 
+                  
+                  <p>Only applies in connection with <var>+/-
+                                    integer</var>.
+                  </p> 
+                             
+                  <p>Uses <var>integer</var> as the absolute position
+                                 within the result set from where the row is fetched.
+                  </p> 
+                             
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>RELATIVE </td> 
+                         
+               <td> 
+                  
+                  <p>Only applies in connection with <var>+/-
+                                    integer</var>.
+                  </p> 
+                             
+                  <p>Uses <var>integer</var> as the relative position
+                           to the current position within the result set from where the row is
+                                 fetched.
+                  </p> 
+                             
+               </td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+             
+             
+      <p>There are some restrictions for special RDBMS systems:</p> 
+             
+      <ul> 
+                 
+         <li> 
+                     
+            <p class="initem">DB2 does not support the keyword <code>CURRENT</code>.
+            </p> 
+                    
+         </li> 
+                 
+         <li> 
+                     
+            <p class="initem">In a <code>SELECT FOR UPDATE</code> loop DB2 only supports
+                         <code>NEXT</code> as scrolling option.
+            </p> 
+                    
+         </li> 
+                 
+         <li> 
+                     
+            <p class="initem">MS SQL Server (ODBC interface) does not support the keyword
+                         <code>CURRENT</code>.
+            </p> 
+                    
+         </li> 
+                 
+         <li> 
+                     
+            <p class="initem">Adabas D does not support <code>RELATIVE</code> scrolling.
+            </p> 
+                    
+         </li> 
+                
+      </ul> 
+            
+           
+          
+      <div><a name="GIVING"></a></div> 
+           
+      <h4> GIVING [:] <var>sqlcode</var></h4> 
+            
+            
+      <p>The specification of <code>GIVING [:]
+            <var>sqlcode</var></code> is optional. If specified, the
+                Natural variable <code>[:] <var>sqlcode</var></code> must be of
+                the Format I4. The values for this variable are returned from the DB2 SQLCODE
+                of the underlying <code>FETCH</code> operation. This allows the application to
+                react to different statuses encountered while the scrollable cursor is open.
+                The most important status codes indicated by SQLCODE are listed in the
+                following table:
+      </p> 
+             
+             
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+         <thead align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <th>SQLCODE</th> 
+                         
+               <th>Explanation</th> 
+                        
+            </tr> 
+                    
+         </thead> 
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <td>0</td> 
+                         
+               <td><code>FETCH</code> operation successful, data
+                  returned except for <code>FETCH</code> with option <code>BEFORE</code> or
+                             <code>AFTER</code>. 
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>+100</td> 
+                         
+               <td>Row not found, cursor still open, no data
+                  returned.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>-1</td> 
+                         
+               <td>General error while trying to
+                  <code>FETCH</code> a row
+               </td> 
+                        
+            </tr> 
+                      
+                      
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+      <p>If you specify <code>GIVING [:]
+            <var>sqlcode</var></code>, the application must react to the
+                different statuses. If an SQLCODE +100 is entered five times successively and
+                without terminal I/O, the NDB runtime will issue Natural Error NAT3296 in order
+                to avoid application looping. The application can terminate the processing loop
+                by executing an <code>ESCAPE</code> statement.
+      </p> 
+            
+      <p>If you do not specify <code>GIVING [:]
+            <var>sqlcode</var></code>, except for SQLCODE 0 and SQLCODE
+                +100, each SQLCODE will generate Natural Error NAT3700 and the processing loop
+                will be terminated. SQLCODE +100 (row not found) will terminate the processing
+                loop.
+      </p> 
+            
+      <p>See also the example program DEM2SCRL supplied in the Natural system
+                library SYSDB2.
+      </p> 
+            
+           
+          
+        
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="select_sql.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../sm/select_sql.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/sm/select_sql.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="sql-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="rollback_sql.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="update_sql.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

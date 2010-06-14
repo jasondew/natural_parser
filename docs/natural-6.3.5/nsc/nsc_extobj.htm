@@ -1,0 +1,1614 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Protecting External Objects</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="nsc_extobj"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../nsc/nsc_extobj.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/nsc/nsc_extobj.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc_rpc.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc_mail.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Natural Security&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x52"></a> 
+               <a name="x53"></a>Protecting External Objects
+         </h1>
+      </div> 
+         
+         
+      <p>This section covers the following topics:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="nsc_extobj.htm#Types_of_External_Objects">Types of External Objects</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_extobj.htm#IDs_for_External_Objects">IDs for External Objects</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_extobj.htm#Components_of_an_External_Objects_Security_Profile">Components of an External Object's Security Profile</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_extobj.htm#CreaMainExtObj">Creating and Maintaining External Object Security Profiles</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_extobj.htm#Linking_Users_to_External_Objects">Linking Users to External Objects</a></p>
+         </li>
+      </ul> 
+        
+      <hr> 
+        
+      <div><a name="Types_of_External_Objects"></a></div> 
+         
+      <h2> Types of External Objects</h2> 
+          
+          
+      <p>With Natural Security, you can control the use of various types of
+              objects used by:
+      </p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="nsc_extobj.htm#PRDobjects">Predict Objects</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_extobj.htm#OtherObjects">Other Objects</a></p>
+         </li>
+      </ul> 
+          
+      <p>The term <em>external objects</em> used in the Natural Security
+              documentation comprises all the object types listed below.
+      </p> 
+          
+         
+      <div><a name="PRDobjects"></a></div> 
+          
+      <h3> Predict Objects</h3> 
+           
+           
+      <p>The following are Predict object types (they are described in the
+               Predict documentation):
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">documentation objects (*PRD-Docu-Object) (PO)</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">external objects (*PRD-Ext-Object) (PE)</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">functions (*PRD-Function) (PF)</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">3GL libraries (*PRD-3GL-Library) (PL)</p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>The two-letter codes in parentheses are the corresponding object-type
+               codes as used by some Natural Security functions.
+      </p> 
+           
+      <table border="0" cellspacing="0" width="80%" class="warning">
+         <tr>
+            <td valign="top" width="36"><img src="../graphics/warning.png" alt="" width="28" height="28"></td>
+            <td valign="top"><strong>Warning:<br>For documentation objects of types "base
+                        application" and "compound application" (SY-B and SY-O), it
+                        is strongly recommended that instead of Natural Security's subsystem for
+                        external objects you use the application maintenance subsystem; see the section
+                        <a href="nsc_appl.htm#nsc_appl">Protecting Natural Development Server
+                     Applications</a></strong></td>
+         </tr>
+      </table> 
+           
+          
+         
+      <div><a name="OtherObjects"></a></div> 
+          
+      <h3> Other Objects</h3> 
+           
+           
+      <p>The following types of objects are used by various other products (they
+               are described in the corresponding product documentation):
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">batch jobs (JB)</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">datasets (DS)</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">nodes (ND)</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">operations (OP)</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">printers (PR)</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">volume serials (VS)</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">VTAM applications (VT)</p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>The two-letter codes in parentheses are the corresponding object-type
+               codes as used by some Natural Security functions.
+      </p> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="nsc_extobj.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="IDs_for_External_Objects"></a></div> 
+         
+      <h2> IDs for External Objects</h2> 
+          
+          
+      <p>IDs are used by Natural Security to identify external objects and their
+              security profiles. The ID of an external object must be unique amongst all IDs
+              of objects of the same type defined to Natural Security.
+      </p> 
+          
+      <p>The length of the IDs and other naming conventions that may apply to
+              external objects differ from object type to object type; please refer to the
+              respective product documentation for information.
+      </p> 
+          
+         
+      <div><a name="Asterisk_Notation"></a></div> 
+          
+      <h3> Asterisk Notation</h3> 
+           
+           
+      <p>For the ID of an external object, you can use asterisk notation: if you
+               create a security profile for an external object and choose as ID a character
+               string followed by an asterisk (*), the security profile will apply to all
+               objects of that type whose IDs begin with that character string. For single
+               objects (or ranges of objects) within such a range you may still define
+               individual security profiles.
+      </p> 
+           
+      <p>For example, you can create a security profile for a batch job with ID
+               "ADAX", which will apply to batch job ADAX; moreover, you can
+               create a security profile for a batch job with ID "ADA*", which
+               will apply to all other batch jobs whose IDs begin with "ADA";
+               further, you can create a security profile for a batch job with ID
+               "A*", which will apply to all other batch jobs whose IDs begin
+               with "A"; and, you can also create a security profile for a batch
+               job with ID "*", which will apply to all other batch jobs for
+               which no individual security profiles are defined.
+      </p> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="nsc_extobj.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Components_of_an_External_Objects_Security_Profile"></a></div> 
+         
+      <h2> Components of an External Object's Security Profile</h2> 
+          
+          
+      <p>The following type of screen is the "basic" security
+              profile screen for an external object, which appears when you invoke one of the
+              functions Add, Copy, Modify, Display for an external object's security
+              profile:
+      </p> 
+          
+      <table border="1" cellpadding="5" class="screen">
+         <tr>
+            <td><pre>
+11:31:46                    *** NATURAL SECURITY ***                 2008-10-31
+                                 - Modify Dataset -                              
+                                                                                 
+                                                 Modified .. 2008-08-12 by SAG   
+                                                                                 
+  Dataset ........... XYZ.SYS.SOURCE                                             
+                                                                                 
+                                                                                 
+  ------ Default Access -------                                                  
+  N I Info                                                                       
+  N R Read                                                                       
+  N A Alter                                                                      
+  N D Delete                                                                     
+                                                                                 
+                                                                                 
+                                                                                 
+                                                                                 
+                                                                                 
+                                                                                 
+  Additional Options ... N                                                       
+                                                                                 
+                                                                                 
+  Enter-PF13--PF14--PF15--PF16--PF17--PF18--PF19--PF20--PF21--PF22--PF23--PF24---
+        Refr        Menu                                                       
+</pre></td>
+         </tr>
+      </table> 
+          
+      <p>This screen varies slightly from object type to object type.</p> 
+          
+      <p>The individual items you may define as part of an external object's
+              security profile are explained below.
+      </p> 
+          
+         
+      <div><a name="Default_Access_nsc_extobj"></a></div> 
+          
+      <h3> Default Access</h3> 
+           
+           
+      <p>In this column, you can allow/disallow general access methods for the
+               external object. The possible access methods differ from object type to object
+               type, as shown below:
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th colspan="2">Access to Predict Documentation
+                  Objects, External Objects and 3GL Libraries:
+               </th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> R &nbsp;</td> 
+                        
+               <td>Read</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> A &nbsp;</td> 
+                        
+               <td>Add</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> M &nbsp;</td> 
+                        
+               <td>Modify</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> D &nbsp;</td> 
+                        
+               <td>Delete</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th colspan="2"> Access to Predict
+                  Functions:
+               </th> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> E &nbsp;</td> 
+                        
+               <td>Execute</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th colspan="2"> Access to Batch
+                  Jobs:
+               </th> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> I &nbsp;</td> 
+                        
+               <td>Display</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> S &nbsp;</td> 
+                        
+               <td>Submit</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> A &nbsp;</td> 
+                        
+               <td>Alter</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> D &nbsp;</td> 
+                        
+               <td>Delete</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th colspan="2"> Access to Datasets:
+                  &nbsp;
+               </th> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> I</td> 
+                        
+               <td>Info</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> R &nbsp;</td> 
+                        
+               <td>Read</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> A &nbsp;</td> 
+                        
+               <td>Alter</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> D &nbsp;</td> 
+                        
+               <td>Delete</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th colspan="2"> Access to Nodes,
+                  Printers, VTAM Applications:
+               </th> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> U &nbsp;</td> 
+                        
+               <td>Use</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th colspan="2"> Access to
+                  Operations: &nbsp;
+               </th> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> P &nbsp;</td> 
+                        
+               <td>Passive</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> A &nbsp;</td> 
+                        
+               <td>Active</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th colspan="2"> Access to Volume
+                  Serials:
+               </th> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> I &nbsp;</td> 
+                        
+               <td>Info</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> C &nbsp;</td> 
+                        
+               <td>Allocate</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> A &nbsp;</td> 
+                        
+               <td>Alter</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> D &nbsp;</td> 
+                        
+               <td>Delete</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>The individual access methods are the same as those described in the
+               corresponding product documentation.
+      </p> 
+           
+      <p>Mark with "Y" the access methods that are to be allowed;
+               mark with "N" the access methods that are not to be allowed.
+      </p> 
+           
+      <p>The access methods allowed/disallowed here will apply to all users for
+               which no special access is defined via a link (for information on links, see
+               <a href="nsc_extobj.htm#Linking_Users_to_External_Objects">Linking Users to
+                  External Objects</a> below).
+      </p> 
+           
+          
+         
+      <div><a name="Additional_Options_nsc_extobj"></a></div> 
+          
+      <h3> Additional Options</h3> 
+           
+           
+      <p>If you mark the field "Additional Options" on the basic security
+               profile screen with "Y", a window will be displayed
+               from which you can select the following options:
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">Maintenance Information</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Security Notes</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Owners</p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>The options for which something has already been specified or defined
+               are marked with a plus sign (+).
+      </p> 
+           
+      <p>You can select one or more items from the window by marking them with
+               any character. For each item selected, an additional window will be
+               displayed:
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th align="left">Additional Option</th> 
+                        
+               <th align="left">Explanation</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> Maintenance Information (display only)</td> 
+                        
+               <td>The following information is displayed: 
+                  
+                  <ul> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">the date and time when the security profile was created, the ID
+                           of the ADMINISTRATOR who created it, and (if applicable) the IDs of the
+                                        co-owners who countersigned for the creation;
+                        </p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">the date and time when the security profile was last modified,
+                                        the ID of the ADMINISTRATOR who made the last modification, and (if applicable)
+                                        the IDs of the co-owners who countersigned for the modification.
+                        </p> 
+                                   
+                     </li> 
+                               
+                  </ul>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Security Notes &nbsp;</td> 
+                        
+               <td>You may enter your notes on the security profile.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Owners &nbsp;</td> 
+                        
+               <td>You may enter up to eight IDs of ADMINISTRATORs. Only the
+                  ADMINISTRATORs specified here will be allowed to maintain the security profile.
+                  
+                  
+                  <p>If no owner is specified, any user of type ADMINISTRATOR may
+                                maintain the security profile.
+                  </p> 
+                            
+                  <p>For each owner, the number of co-owners whose countersignatures
+                                will be required for maintenance permission may optionally be specified in the
+                                field after the ID.
+                  </p> 
+                            
+                  <p>For an explanation of owners and co-owners, see the section
+                                <a href="nsc_count.htm#nsc_count">Countersignatures</a>.
+                  </p>
+               </td>
+                        
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="nsc_extobj.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="CreaMainExtObj"></a></div> 
+         
+      <h2> Creating and Maintaining External Object Security Profiles</h2> 
+          
+          
+      <p>This section describes the functions used to create and maintain
+              security profiles for external objects. It covers the following topics:
+      </p>
+          
+      <ul>
+         <li>
+            <p class="initem"><a href="nsc_extobj.htm#How_to_Invoke_Maintenance_for_External_Objects">Invoking Maintenance for External Objects</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_extobj.htm#Adding_a_New_External_Object">Adding a New External Object</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_extobj.htm#Selecting_Existing_External_Objects_for_Processing">Selecting Existing External Objects for Processing</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_extobj.htm#Copying_an_External_Object">Copying an External Object</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_extobj.htm#Modifying_an_External_Object">Modifying an External Object</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_extobj.htm#Renaming_an_External_Object">Renaming an External Object</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_extobj.htm#Deleting_an_External_Object">Deleting an External Object</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_extobj.htm#Displaying_an_External_Object">Displaying an External Object</a></p>
+         </li>
+      </ul> 
+         
+      <div><a name="How_to_Invoke_Maintenance_for_External_Objects"></a></div> 
+          
+      <h3> Invoking Maintenance for External Objects</h3> 
+           
+           
+      <p>On the Main Menu, enter code "M" for
+               "Maintenance". A window will be displayed.
+      </p> 
+           
+      <p>In the window, mark one type of external object with a character or
+               with the cursor. The Maintenance selection list for the selected object type
+               will be displayed.
+      </p> 
+           
+      <p>From this selection list, you invoke all maintenance functions as
+               described below.
+      </p> 
+           
+          
+         
+      <div><a name="Adding_a_New_External_Object"></a></div> 
+          
+      <h3> Adding a New External Object</h3> 
+           
+           
+      <p>The Add External Object function is used to define external objects to
+               Natural Security, that is, create security profiles for them.
+      </p> 
+           
+      <p>In the command line of the external object Maintenance selection list,
+               enter the command <code>ADD</code>.
+      </p> 
+           
+      <p>A window will be displayed. In this window, enter an
+               <a href="nsc_extobj.htm#IDs_for_External_Objects">ID</a> for the object.
+      </p>
+           
+           
+      <p>The Add screen for the specified object type will be displayed. On this
+               screen, you may define a security profile for the external object.
+      </p> 
+           
+      <p>The individual items you may define on this screen and any additional
+               windows that may be part of an external object's security profile are described
+               under <a href="nsc_extobj.htm#Components_of_an_External_Objects_Security_Profile">Components
+            of an External Object's Security Profile</a> above.
+      </p> 
+           
+      <p>When you add a new external object, the owners specified in your own
+               user security profile will automatically be copied into the external object's
+               security profile you are creating.
+      </p> 
+           
+          
+         
+      <div><a name="Selecting_Existing_External_Objects_for_Processing"></a></div> 
+          
+      <h3> Selecting Existing External Objects for Processing</h3> 
+           
+           
+      <p>When you invoke Maintenance for an external object, a list of all
+               external objects of this type for which a security profile exists will be
+               displayed.
+      </p> 
+           
+      <p>If you do not wish to get a list of all existing external objects but
+               would like only certain external objects to be listed, you may use the Start
+               Value option as described in the section <a href="nsc_way.htm#nsc_way">Finding Your Way In Natural
+            Security</a>.
+      </p> 
+           
+      <p>On the Main Menu, enter code "M" for
+               "Maintenance". A window will be displayed. In the window, mark one
+               type of external object with a character or with the cursor (and, if desired,
+               enter a start value). The selection list for the selected object type will be
+               displayed; for example:
+      </p> 
+           
+      <table border="1" cellpadding="5" class="screen">
+         <tr>
+            <td><pre>
+ 13:11:23                   *** NATURAL SECURITY ***                 2008-10-31
+                            - Dataset Maintenance -                            
+                                                                                 
+  Co Dataset                                                Message              
+  __ ______________________________________________________ _____________________
+  __ XYZ.S                                                                       
+  __ XYZ.SYS                                                                     
+                                                                                 
+                                                                                 
+                                                                                 
+                                                                                 
+                                                                                 
+                                                                                 
+                                                                                 
+                                                                                 
+                                                                                 
+                                                                                 
+                                                                                 
+                                                                                 
+                                                                                 
+                                                                                 
+  Command ===&gt;                                                                   
+  Enter-PF1---PF2---PF3---PF4---PF5---PF6---PF7---PF8---PF9---PF10--PF11--PF12---
+        Help        Exit              Flip  -     +                       Canc  
+</pre></td>
+         </tr>
+      </table> 
+           
+      <p>The list can be scrolled as described in the section
+               <a href="nsc_way.htm#nsc_way">Finding Your Way In Natural
+            Security</a>.
+      </p> 
+           
+      <p>The following maintenance functions are available for external objects
+               (possible code abbreviations are underlined):
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th align="left">Code</th> 
+                        
+               <th align="left">Function</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> <code><u>C</u>O</code></td> 
+                        
+               <td> <a href="nsc_extobj.htm#Copying_an_External_Object">Copy</a></td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code><u>M</u>O</code></td> 
+                        
+               <td> <a href="nsc_extobj.htm#Modifying_an_External_Object">Modify</a></td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>RE</code> &nbsp;
+               </td> 
+                        
+               <td> <a href="nsc_extobj.htm#Renaming_an_External_Object">Rename</a></td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>DE</code> &nbsp;
+               </td> 
+                        
+               <td> <a href="nsc_extobj.htm#Deleting_an_External_Object">Delete</a></td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code><u>D</u>I</code></td> 
+                        
+               <td> <a href="nsc_extobj.htm#Displaying_an_External_Object">Display</a></td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>LU</code> &nbsp;
+               </td> 
+                        
+               <td> <a href="nsc_extobj.htm#Linking_Users_to_External_Objects">Link
+                     user</a></td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>The individual functions are described below.</p> 
+           
+      <p>To invoke a specific function for an external object, mark the object
+               with the appropriate function code in column "Co".
+      </p> 
+           
+      <p>You may select various objects for various functions at the same time;
+               that is, you can mark several objects on the screen with a function code. For
+               each object marked, the appropriate processing screen will be displayed. You
+               may then perform for one object after another the selected functions.
+      </p> 
+           
+          
+         
+      <div><a name="Copying_an_External_Object"></a></div> 
+          
+      <h3> Copying an External Object</h3> 
+           
+           
+      <p>The Copy function is used to define a new external object to Natural
+               Security by creating a security profile which is identical to an already
+               existing external object's security profile.
+      </p> 
+           
+          
+      <div><a name="What_is_Copied_nsc_extobj"></a></div> 
+           
+      <h4> What is Copied?</h4> 
+            
+            
+      <p>All components of the existing security profile will be copied into
+                the new security profile - except the owners (these will be copied from your
+                own user security profile into the new security profile you are creating).
+      </p> 
+            
+      <p>Any links that exist to the existing external object will
+                <var>not</var> be copied.
+      </p> 
+            
+           
+          
+      <div><a name="How_to_Copy_nsc_extobj"></a></div> 
+           
+      <h4> How to Copy</h4> 
+            
+            
+      <p>On the Maintenance selection list, mark the external object whose
+                security profile you wish to duplicate with function code
+                "CO".
+      </p> 
+            
+      <p>A window will be displayed. In the window, enter the ID of the new
+                external object.
+      </p> 
+            
+      <p>The Copy screen for the external object will be displayed showing the
+                new security profile.
+      </p> 
+            
+      <p>This screen and any additional windows that may be part of an external
+                object's security profile as well as the individual items you may define or
+                modify are described under
+                <a href="nsc_extobj.htm#Components_of_an_External_Objects_Security_Profile">Components
+            of an External Object's Security Profile</a> above.
+      </p> 
+            
+           
+          
+         
+      <div><a name="Modifying_an_External_Object"></a></div> 
+          
+      <h3> Modifying an External Object</h3> 
+           
+           
+      <p>The Modify function is used to change an existing external object's
+               security profile.
+      </p> 
+           
+      <p>On the Maintenance selection list, you mark the external object whose
+               security profile you wish to change with function code "MO". The
+               Modify screen for the external object will be displayed.
+      </p> 
+           
+      <p>This screen and any additional windows that may be part of an external
+               object's security profile as well as the individual items you may define or
+               modify are described under
+               <a href="nsc_extobj.htm#Components_of_an_External_Objects_Security_Profile">Components
+            of an External Object's Security Profile</a> above.
+      </p> 
+           
+          
+         
+      <div><a name="Renaming_an_External_Object"></a></div> 
+          
+      <h3> Renaming an External Object</h3> 
+           
+           
+      <p>The Rename function allows you to change the ID of an existing external
+               object's security profile.
+      </p> 
+           
+      <p>On the Maintenance selection list, you mark the external object whose
+               ID you wish to change with function code "RE". A window will be
+               displayed in which you can enter a new ID for the external object.
+      </p> 
+           
+          
+         
+      <div><a name="Deleting_an_External_Object"></a></div> 
+          
+      <h3> Deleting an External Object</h3> 
+           
+           
+      <p>The Delete function is used to delete an existing external object's
+               security profile.
+      </p> 
+           
+      <p>On the Maintenance selection list, you mark the external object you
+               wish to delete with function code "DE". A window will be
+               displayed.
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">If you have invoked the Delete function and should then decide
+                       against deleting the given external object's security profile, leave the Delete
+                       window by pressing <span class="key">ENTER</span> without having typed in anything.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">If you wish to delete the given external object's security profile,
+                       enter the object's ID in the window to confirm the deletion.
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>When you delete an external object, all existing links to the external
+               object will also be deleted.
+      </p> 
+           
+      <p>If you mark more than one external object with "DE", a
+               window will appear in which you are asked whether you wish to confirm the
+               deletion of each external object's security profile with entering the object's
+               ID, or whether all external objects selected for deletion are to be deleted
+               without this individual confirmation. Be careful not to delete an external
+               object accidentally.
+      </p> 
+           
+          
+         
+      <div><a name="Displaying_an_External_Object"></a></div> 
+          
+      <h3> Displaying an External Object</h3> 
+           
+           
+      <p>The Display function is used to display an existing external object's
+               security profile.
+      </p> 
+           
+      <p>On the Maintenance selection list, you mark the external object whose
+               security profile you wish to view with function code "DI". The
+               Display screen for the external object will be displayed.
+      </p> 
+           
+      <p>The items displayed on this screen and any additional windows that may
+               be part of a external object's security profile are explained under
+               <a href="nsc_extobj.htm#Components_of_an_External_Objects_Security_Profile">Components
+            of an External Object's Security Profile</a> above.
+      </p> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="nsc_extobj.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Linking_Users_to_External_Objects"></a></div> 
+         
+      <h2> Linking Users to External Objects</h2> 
+          
+          
+      <p>The access methods allowed/disallowed in an external object's security
+              profile apply to all users who are not linked to the external object.
+      </p> 
+          
+      <p>If you wish to allow an individual user more or less access methods, you
+              can <var>link</var> the user to the external object and in the
+              link's security profile define which access methods are to be available for
+              this particular user. This means that by using links you may define for
+              different users different access rights to the same external object.
+      </p> 
+          
+      <p><img src="graphics/nscextobj1.jpg" alt="" width="400" height="299"></p> 
+          
+      <p>Only users of types "Administrator", "Person"
+              and "Group" can be linked to an external object. Administrators
+              and Persons can be linked to an external object either directly or via a Group.
+              "Members" and "Terminals" can be linked to an
+              external object only via a Group; that is, they must be assigned to a Group,
+              and the Group be linked to the external object.
+      </p> 
+          
+      <p>Two functions are available to establish and maintain links between
+              users and external objects:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">To link <var>one user</var> to <var>various
+                         external objects</var>, use the function "Link user to external
+                      objects" (which is invoked from the User Maintenance selection
+                      list).
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">To link <var>various users</var> to <var>one
+                         external object</var>, use the function "Link users to external
+                      object" (which is invoked from the Maintenance selection list of that
+                      type of external object).
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>Both functions are described below.</p> 
+          
+         
+      <div><a name="Link_User_to_External_Objects"></a></div> 
+          
+      <h3> Linking a Single User to External Objects</h3> 
+           
+           
+      <p>The function "Link user to external objects" is used to
+               link one user to one or more external objects.
+      </p> 
+           
+      <p>On the User Maintenance selection list, you mark the user you wish to
+               link with function code "LO".
+      </p> 
+           
+      <p>A window will be displayed, in which you mark with the cursor or with a
+               character the type of external object to which you wish to link the user. In
+               addition, the window provides the following options:
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem"><span class="selectable_label">Start value</span> - Here you can enter a start value
+                       (as described in the section <a href="nsc_way.htm#nsc_way">Finding Your
+                  Way in Natural Security</a>) for the list of objects to be
+                       displayed.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"><span class="selectable_label">Selection criterion</span> - N = none: all objects will
+                       be listed; L = linked: only objects to which the user is already linked will be
+                       listed; U = unlinked: only objects to which the user is not yet linked will be
+                       listed.
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>Then, the Link User To External Objects selection list will be
+               displayed, showing the list of objects. For example:
+      </p> 
+           
+      <table border="1" cellpadding="5" class="screen">
+         <tr>
+            <td><pre>
+ 16:04:48                   *** NATURAL SECURITY ***                 2008-10-31
+                             - Link User to Dataset -                            
+                                                                                 
+  User ID .... AD          User Name .... ARTHUR DENT                            
+                                                   Access                        
+  Co Dataset                                       IRAD     Message              
+  __ _____________________________________________ ________ _____________________
+  __ XYZ.S                                         I_______                      
+  __ XYZ.SYS                                       I_A_____                      
+                                                                                 
+                                                                                 
+                                                                                 
+                                                                                 
+                                                                                 
+                                                                                 
+                                                                                 
+                                                                                 
+                                                                                 
+                                                                                 
+                                                                                 
+                                                                                 
+  Enter-PF1---PF2---PF3---PF4---PF5---PF6---PF7---PF8---PF9---PF10--PF11--PF12---
+        Help        Exit              Flip  -     +                       Canc   
+  Command ===&gt; _________________________________________________________________
+</pre></td>
+         </tr>
+      </table> 
+           
+      <p>The list can be scrolled as described in the section
+               <a href="nsc_way.htm#nsc_way">Finding Your Way In Natural
+            Security</a>.
+      </p> 
+           
+      <p>On the list, you mark the external objects to which you wish to link
+               the user.
+      </p> 
+           
+      <p>In the "Co" column, you may mark each object with one of
+               the following function codes (possible code abbreviations are underlined):
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th align="left">Code</th> 
+                        
+               <th align="left">Function</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> <code>LK</code> &nbsp;
+               </td> 
+                        
+               <td> Link - The user may use the external object with a special
+                  security profile to be defined for the link; the link profile will take
+                  precedence over the external object's profile (see below). 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>CL</code> &nbsp;
+               </td> 
+                        
+               <td> Cancel - An existing link will be cancelled. </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code><u>D</u>I</code></td> 
+                        
+               <td> Display Object - The object's security profile will be
+                  displayed. 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>DL</code> &nbsp;
+               </td> 
+                        
+               <td> Display Link - The link security profile will be displayed.
+                  
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>You can mark one or more objects on the screen with a function code.
+               For each object marked, the selected functions will then be executed one after
+               another. When processing is completed, a message will be displayed stating the
+               link situation now in effect between the user and each object.
+      </p> 
+           
+          
+      <div><a name="Creating_a_Link_user"></a></div> 
+           
+      <h4> Creating a Link Security Profile</h4> 
+            
+            
+      <p>If you mark an external object with "LK", you may define
+                the security profile for this link on the screen which will be displayed. The
+                default settings which will appear in the link security profile are taken from
+                the security profile of the external object.
+      </p> 
+            
+      <p>The items you may define as part of a link security profile correspond
+                with the items you may define as part of an external object's security profile
+                (see <a href="nsc_extobj.htm#Components_of_an_External_Objects_Security_Profile">Components of an
+                   External Object's Security Profile</a> above).
+      </p> 
+            
+      <p>Instead of allowing/disallowing the access methods in the link
+                security profile, you can also enter/delete the corresponding letter in the
+                appropriate position in the Access column of the Link User To External Objects
+                selection list.
+      </p> 
+            
+      <p>Moreover, you have the option to set "Activation Dates"
+                in the link security profile; these are in analogy to the Activation Dates in a
+                user security profile (as explained under
+                <a href="nsc_user.htm#Components_of_a_User_Profile">Components of a User
+            Profile</a> in the section <cite>User
+                   Maintenance</cite>).
+      </p> 
+            
+           
+          
+      <div><a name="Modifying_a_Link_user"></a></div> 
+           
+      <h4> Modifying a Link Security Profile</h4> 
+            
+            
+      <p>To modify an existing link security profile, you mark the respective
+                external object with "LK" again on the Link User To External
+                Objects screen to invoke the link security profile screen.
+      </p> 
+            
+           
+          
+         
+      <div><a name="Link_Users_to_External_Object"></a></div> 
+          
+      <h3> Linking Multiple Users to an External Object</h3> 
+           
+           
+      <p>The function "Link users to external object" is used to
+               link one or more users to one external object.
+      </p> 
+           
+      <p>On the Maintenance selection list of an external object, you mark the
+               object to which you wish to link users with code "LU".
+      </p> 
+           
+      <p>A window will be displayed, providing the following options:</p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem"><span class="selectable_label">Start value</span> - Here you can enter a start value
+                       (as described in the section <a href="nsc_way.htm#nsc_way">Finding Your
+                  Way in Natural Security</a>) for the list of users to be
+                       displayed.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"><span class="selectable_label">Selection criterion</span> - N = none: all users will
+                       be listed; L = linked: only users already linked to the object will be listed;
+                       U = unlinked: only users not yet linked to the object will be listed.
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>Then, the Link Users To External Object selection list will be
+               displayed. For example:
+      </p> 
+           
+      <table border="1" cellpadding="5" class="screen">
+         <tr>
+            <td><pre>
+ 13:21:12                   *** NATURAL SECURITY ***                 2008-10-31
+                             - Link Users to Dataset -                           
+                                                                                 
+  Dataset ........... ABC.S                                                      
+  Default Access .... I                                                          
+                                                 Access                          
+  Co User ID  User Name                        T IRAD     Message                
+  __ ________ ________________________________ _ ________ _____________________  
+  __ AD       ARTHUR DENT                      A I_A_____                        
+  __ ADMIN1   BUNGALOW BILL                    A I_AD____                        
+  __ ADMIN2   MARIA ALVAREZ                    P I_______                        
+  __ ADMIN3   SARA SANDOVAL                    A I_______                        
+  __ ADMIN4   ALOYSIUS PENDERGAST              A IRA_____                        
+  __ ADMIN5   JACK SPARROW                     A __AD____                        
+  __ ADSON    BRIAN OF NAZARETH                A I_______                        
+  __ AGROUP   CUALQIER GRUPO                   G I__D____                        
+  __ HC       HAGBARD CELINE                   P I_______                        
+  __ KG       KARL GLOGAUER                    P IR______                        
+  __ MW       MIA WALLACE                      A I_______                        
+  __ NH       NATHANIEL HAWKEYE                A ___D____                        
+                                                                                 
+  Command ===&gt; _________________________________________________________________ 
+  Enter-PF1---PF2---PF3---PF4---PF5---PF6---PF7---PF8---PF9---PF10--PF11--PF12---
+        Help        Exit              Flip  -     +                       Canc  
+</pre></td>
+         </tr>
+      </table> 
+           
+      <p>The list includes all users of types "Group",
+               "Administrator" and "Person".
+      </p> 
+           
+      <p>The list can be scrolled as described in the section
+               <a href="nsc_way.htm#nsc_way">Finding Your Way In Natural
+            Security</a>.
+      </p> 
+           
+      <p>On the list, you may mark the users you wish to be linked to the
+               external object.
+      </p> 
+           
+      <p>In the "Co" column, you may mark each user with one of the
+               following function codes (possible code abbreviations are underlined):
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th align="left">Code</th> 
+                        
+               <th align="left">Function</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> <code>LK</code> &nbsp;
+               </td> 
+                        
+               <td> Link - The user may use the external object with a special
+                  security profile to be defined for the link; the link profile will take
+                  precedence over the external object's profile (see below). 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>CL</code> &nbsp;
+               </td> 
+                        
+               <td> Cancel - An existing link will be cancelled. </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code><u>D</u>I &nbsp;</code></td> 
+                        
+               <td> Display User - The user security profile will be displayed.
+                  
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>DL</code> &nbsp;
+               </td> 
+                        
+               <td> Display Link - The link security profile will be displayed.
+                  
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>You can mark one or more users on the screen with a function code. For
+               each user marked, the selected functions will then be executed one after
+               another. When processing is completed, a message will be displayed stating the
+               link situation now in effect between the user and each object.
+      </p> 
+           
+          
+      <div><a name="Creating_a_Link_users"></a></div> 
+           
+      <h4> Creating a Link Security Profile</h4> 
+            
+            
+      <p>If you mark a user with "LK", you may define the security
+                profile for this link on the screen which will be displayed. The default
+                settings which will appear in the link security profile are taken from the
+                security profile of the external object.
+      </p> 
+            
+      <p>The items you may define as part of a link security profile correspond
+                with the items you may define as part of an external object's security profile
+                (see <a href="nsc_extobj.htm#Components_of_an_External_Objects_Security_Profile">Components of an
+                   External Object's Security Profile</a> above).
+      </p> 
+            
+      <p>Instead of allowing/disallowing the access methods in the link
+                security profile, you can also enter/delete the corresponding letter in the
+                appropriate position in the Access column of the Link Users To External Object
+                selection list.
+      </p> 
+            
+      <p>Moreover, you have the option to set "Activation Dates"
+                in the link security profile; these are in analogy to the Activation Dates in a
+                user security profile (as explained under
+                <a href="nsc_user.htm#Components_of_a_User_Profile">Components of a User
+            Profile</a> in the section <cite>User
+                   Maintenance</cite>).
+      </p> 
+            
+           
+          
+      <div><a name="Modifying_a_Link_users"></a></div> 
+           
+      <h4> Modifying a Link Security Profile</h4> 
+            
+            
+      <p>To modify an existing link security profile, you mark the respective
+                user/object with "LK" again on the Link Users To External Object
+                screen to invoke the link security profile screen.
+      </p> 
+            
+           
+          
+        
+       
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="nsc_extobj.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../nsc/nsc_extobj.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/nsc/nsc_extobj.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc_rpc.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc_mail.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

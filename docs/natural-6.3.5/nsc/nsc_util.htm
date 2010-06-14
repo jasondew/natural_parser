@@ -1,0 +1,4972 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Protecting Utilities</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="nsc_util"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../nsc/nsc_util.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/nsc/nsc_util.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc_ddmos.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc_appl.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Natural Security&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x32"></a>Protecting Utilities
+         </h1>
+      </div> 
+         
+         
+      <p>This section describes how you can control with Natural Security the use
+             of various Natural utilities. It covers the following topics:
+      </p>
+         
+      <ul>
+         <li>
+            <p class="initem"><a href="nsc_util.htm#Further_Utility_Protection_Considerations">General Utility Protection Considerations</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_util.htm#Which_Utilities_Can_Be_Protected">Which Utilities Can Be Protected?</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_util.htm#Utility_Profiles">Utility Profiles</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_util.htm#Defining_Default_Profiles">Defining Default Profiles</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_util.htm#Defining_Individual_Profiles_-_Utility_Maintenance">Defining Individual Profiles - Utility Maintenance</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_util.htm#ComponentsUtilProf">Components of Utility Profiles</a></p>
+         </li>
+      </ul> 
+        
+      <hr> 
+        
+      <div><a name="Further_Utility_Protection_Considerations"></a></div> 
+         
+      <h2> General Utility Protection Considerations</h2> 
+          
+          
+      <p>The utility protection provided by Natural Security, as described in
+              this section, is function-oriented, which means that it is based on the concept
+              that you can allow or disallow individual functions of a utility. You control
+              the use of a utility by defining <em>utility profiles</em> for it, in which you
+              allow/disallow its functions. The utilities that can be protected in this
+              manner are listed below.
+      </p> 
+          
+      <p>To invoke a Natural utility, you usually enter the utility name as a
+              system command (for example, to invoke the SYSERR utility, you enter the system
+              command SYSERR). If a utility is invoked in this way, one of the utility
+              profiles defined for this utility applies and controls the use of the utility -
+              thus providing consistent protection of the utility.
+      </p> 
+          
+      <p>Invoking a utility does not change the library you are currently in;
+              that is, when you exit the utility, you are still in the same library from
+              which you invoked the utility. See also the section
+              <a href="../utis/utis_activate.htm">Utility
+            Activation</a> in the Natural <cite>Utilities</cite>
+              documentation.
+      </p> 
+          
+      <p>To control the use of a utility, you need not define a library profile
+              for the library which contains the utility. A library profile for a utility is
+              only relevant if the utility requires access to programs in other libraries
+              (for example, user exits contained in steplibs).
+      </p> 
+          
+      <p>If a library profile is defined for a library containing a utility, and
+              you log on to a utility library, the same logon rules apply as for a logon to
+              any other library (as described in the section <a href="nsc_logon.htm#nsc_logon">Logging On</a>). From within the
+              utility library, the utility may be invoked either by entering the utility name
+              as system command (as from any other library) or by the startup transaction
+              "MENU" (if defined in the utility's library profile) being
+              executed. In the latter case, however, a LOGOFF command will be performed when
+              you exit the utility.
+      </p> 
+          
+      <p>The utilities SYSERR and SYSMAIN (and NATLOAD, NATUNLD and SYSTRANS)
+              process the contents of libraries; if the use of these utilities is not
+              controlled by utility profiles, the
+              <a href="nsc_lib.htm#Maintenance_with_Natural_Utilities">Utilities</a>
+              option in the library profile of the library processed applies.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="nsc_util.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Which_Utilities_Can_Be_Protected"></a></div> 
+         
+      <h2> Which Utilities Can Be Protected?</h2> 
+          
+          
+      <p>The use of the following Natural utilities can be controlled with
+              utility profiles:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="nsc_util.htm#Default_Profile_for_NATLOAD_Utility">NATLOAD</a> (*)
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="nsc_util.htm#Default_Profile_for_NATUNLD_Utility">NATUNLD</a> (*)
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="nsc_util.htm#Default_Profile_for_SYSBPM_Utility">SYSBPM</a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"><a href="nsc_util.htm#SYSCPprofiles">SYSCP - Code Page
+                         Administration</a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="nsc_util.htm#SYSDB2profiles">SYSDB2 - Tools for DB2</a>
+                      
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="nsc_util.htm#Default_Profile_for_SYSDDM_Utility">SYSDDM</a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="nsc_util.htm#Default_Profile_for_SYSERR_Utility">SYSERR</a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="nsc_util.htm#Default_Profile_for_SYSMAIN_Utility">SYSMAIN</a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="nsc_util.htm#Default_Profile_for_SYSOBJH_Utility">SYSOBJH -
+                         Object Handler</a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="nsc_util.htm#Default_Profile_for_SYSPARM_Utility">SYSPARM</a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="nsc_util.htm#Default_Profile_for_SYSRPC_Utility">SYSRPC</a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="nsc_util.htm#Default_Profile_for_SYSTRANS_Utility">SYSTRANS</a> (*)
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>(*) These utilities are only available with Natural versions prior to
+              4.2 on mainframes and 6.2 on UNIX and Windows. For compatibility reasons,
+              existing utility profiles for these utilities can still be be maintained.
+              However, as the functionality of these utilities is now provided by the SYSOBJH
+              utility, it is recommended that
+              <a href="nsc_util.htm#Default_Profile_for_SYSOBJH_Utility">SYSOBJH</a> be
+              used - and protected accordingly.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="nsc_util.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Utility_Profiles"></a></div> 
+         
+      <h2> 
+             <a name="x33"></a>Utility Profiles
+      </h2> 
+          
+          
+      <p>This section covers the following topics:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="nsc_util.htm#Types_of_Utility_Profiles">Types of Utility Profiles</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_util.htm#Default_Utility_Profile">Default Utility Profile</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_util.htm#User-Specific_Utility_Profiles">User-Specific Utility Profiles</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_util.htm#Library-Specific_Utility_Profiles">Library-Specific Utility Profiles</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_util.htm#User-Library-Specific_Utility_Profiles">User-Library-Specific Utility Profiles</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_util.htm#Which_Utility_Profile_Applies">Which Utility Profile Applies?</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_util.htm#When_Does_a_Utility_Profile_Take_Effect">When Does a Utility Profile Take Effect?</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_util.htm#Available_System_Commands">Available System Commands</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_util.htm#Where_to_Define_Profiles">Where to Define Profiles</a></p>
+         </li>
+      </ul> 
+          
+         
+      <div><a name="Types_of_Utility_Profiles"></a></div> 
+          
+      <h3> Types of Utility Profiles</h3> 
+           
+           
+      <p>Basically, a utility profile consists of a list of the utility's
+               functions, each of which can be allowed or disallowed by marking it with
+               "A" or "D" respectively.
+      </p> 
+           
+      <p>For each utility listed under
+               <a href="nsc_util.htm#Which_Utilities_Can_Be_Protected">Which Utilities
+            Can Be Protected?</a> (see above), you can define:
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">a default profile,</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">user-specific profiles,</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">library-specific profiles,</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">user-library-specific profiles.</p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>Each utility is treated individually; that is, any utility profiles
+               only apply to the utility they are defined for, and not to any other
+               utilities.
+      </p> 
+           
+      <p class="note"><strong>Note:</strong><br> If the use of a utility is protected by a utility profile, the
+               Natural profile parameter settings MADIO=0 and MAXCL=0 apply
+               automatically.
+      </p> 
+           
+          
+         
+      <div><a name="Default_Utility_Profile"></a></div> 
+          
+      <h3> Default Utility Profile</h3> 
+           
+           
+      <p>The <em>default profile</em> of a utility applies for all users (except
+               those for which user-specific profiles are defined). It determines which of the
+               utility's functions the users may use and which not.
+      </p> 
+           
+          
+         
+      <div><a name="User-Specific_Utility_Profiles"></a></div> 
+          
+      <h3> User-Specific Utility Profiles</h3> 
+           
+           
+      <p>If an individual user is to use (or not to use) other functions than
+               the other users, you can define a <em>user-specific utility profile</em>.
+      </p> 
+           
+      <p>Such a profile only applies to this user, it overrides the default
+               profile, and determines which of the utility's functions this particular user
+               may use and which not.
+      </p> 
+           
+      <h4 class="floating-title"> Example:</h4> 
+           
+      <p><img src="graphics/11ut5.png" alt="" width="450" height="230"></p> 
+           
+      <p>In this example, the SYSBPM function "Delete Object from Buffer
+               Pool" is disallowed for all users - except for the user UX, for whom it
+               is allowed.
+      </p> 
+           
+      <p>This means that UX is the only user who may delete objects from the
+               buffer pool.
+      </p> 
+           
+      <p>User-specific utility profiles can be defined for users of types GROUP,
+               ADMINISTRATOR and PERSON.
+      </p> 
+           
+      <p>A user-specific utility profile can only be defined if a default
+               profile (or a template) has been defined for that utility. (Templates are
+               described under <a href="nsc_util.htm#Defining_Default_Profiles">Defining Default
+            Profiles</a> below.)
+      </p> 
+           
+          
+         
+      <div><a name="Library-Specific_Utility_Profiles"></a></div> 
+          
+      <h3> Library-Specific Utility Profiles</h3> 
+           
+           
+      <p>Several utilities affect individual Natural libraries (for example,
+               SYSERR can be used to maintain error messages that belong to a specific
+               library). Generally, the utility's default profile applies to all affected
+               libraries.
+      </p> 
+           
+      <p>However, if some of the utility's functions are only to be
+               allowed/disallowed for a particular library, you can define a
+               <em>library-specific utility profile</em>.
+      </p> 
+           
+      <p>Such a profile only applies to this library, it overrides the default
+               profile as well as any user-specific profiles for that utility, and determines
+               which of the utility's functions may be applied to this library and which
+               not.
+      </p> 
+           
+      <h4 class="floating-title"> Example 1:</h4> 
+           
+      <p><img src="graphics/11ut4.png" alt="" width="450" height="230"></p> 
+           
+      <p>In this example, the SYSERR function "Delete messages" is
+               allowed for all libraries - except for the library MYLIB, for which it is
+               disallowed.
+      </p> 
+           
+      <p>This means that all users can delete user error messages from any
+               library, except from library MYLIB. No-one can delete messages from MYLIB.
+      </p> 
+           
+      <p>(If any user-specific profiles were defined for SYSERR, they would
+               apply to all other libraries, but not to library MYLIB.)
+      </p> 
+           
+      <h4 class="floating-title"> Example 2:</h4> 
+           
+      <p><img src="graphics/11ut3.png" alt="" width="450" height="300"></p> 
+           
+      <p>In this example, the SYSERR function "Delete messages" is
+               disallowed for all libraries - except for the library PLAYLIB, for which it is
+               allowed. For the user UX, the function "Delete messages" is
+               allowed for all libraries.
+      </p> 
+           
+      <p>This means that all users can delete error messages from library
+               PLAYLIB. However, no user - except user UX - can delete messages from any other
+               library. User UX is the only user who may delete messages from any library
+               (including PLAYLIB).
+      </p> 
+           
+      <p>Please note that user UX's permission to delete messages from PLAYLIB
+               depends on the library-specific profile, not the user-specific profile.
+      </p> 
+           
+      <p>Library-specific utility profiles can be defined for the following
+               utilities: NATLOAD, NATUNLD, SYSBPM, SYSDDM, SYSERR, SYSMAIN, SYSOBJH,
+               SYSTRANS.
+      </p> 
+           
+      <p>A library-specific utility profile can only be defined if a default
+               profile has been defined for that utility.
+      </p> 
+           
+          
+         
+      <div><a name="User-Library-Specific_Utility_Profiles"></a></div> 
+          
+      <h3> User-Library-Specific Utility Profiles</h3> 
+           
+           
+      <p>As described above, several utilities affect individual Natural
+               libraries. Two kinds of situations may occur in which a
+               <var>user-library-specific utility profile</var> may have to be
+               defined:
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">A <em>user-specific</em> utility profile determines which of a
+                       utility's functions a particular user may use, regardless of the libraries
+                       which are affected by the functions (provided that no <em>library-specific</em>
+                       profiles are defined for this utility). However, if this user is to have
+                       different function usage permissions for a particular library affected by the
+                       utility's functions, you can define these in a <em>user-library-specific</em>
+                       utility profile.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">A <em>library-specific</em> utility profile determines which of a
+                       utility's functions may be used when applied to a particular library; for this
+                       library, it applies for all users (regardless of any <em>user-specific</em>
+                       profiles). However, if a particular user is to have different function usage
+                       permissions for this library, you can define these in a
+                       <em>user-library-specific</em> utility profile.
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>A <em>user-library-specific</em> profile only applies for one user and
+               one library, it overrides the library-specific utility profile of that library
+               as well as the user-specific profile of that user, and it determines which of
+               the utility's functions the user may use for this library.
+      </p> 
+           
+      <h4 class="floating-title"> Example 1:</h4> 
+           
+      <p><img src="graphics/11ut2.png" alt="" width="450" height="300"></p> 
+           
+      <p>In this example, the SYSERR function "Delete messages" is
+               disallowed for all users (due to the default profile). The SYSERR function
+               "Modify messages" is also disallowed for all users (due to the
+               default profile) - except for user UX, for whom it is allowed (due to his/her
+               user-specific profile). Also, for the user UX both functions are allowed for
+               the library MYLIB (due to the user-library-specific profile).
+      </p> 
+           
+      <p>This means that no user can modify or delete any error messages from
+               any library. The only exception is user UX: User UX may modify messages from
+               any library; moreover, user UX may delete messages from library MYLIB (but not
+               from any other library).
+      </p> 
+           
+      <p>Please note that user UX's permission to modify messages from MYLIB
+               depends on the user-library-specific profile, not the user-specific
+               profile.
+      </p> 
+           
+      <h4 class="floating-title"> Example 2:</h4> 
+           
+      <p><img src="graphics/11ut1.png" alt="" width="450" height="400"></p> 
+           
+      <p>This example results in the following setup:</p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">Error messages of library MYLIB may only be modified by user UX.</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Error messages of any other library may be modified by any user.</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Error messages of library MYLIB cannot be deleted by any user.</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Error messages of any other library may only be deleted by user UX,
+                       but not by any other user.
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>User-library-specific utility profiles can be defined for the following
+               utilities: NATLOAD, NATUNLD, SYSBPM, SYSDDM, SYSERR, SYSMAIN, SYSOBJH,
+               SYSTRANS.
+      </p> 
+           
+      <p>A user-library-specific utility profile can only be defined for a user
+               for which a user-specific utility profile has been defined.
+      </p> 
+           
+          
+         
+      <div><a name="Which_Utility_Profile_Applies"></a></div> 
+          
+      <h3> Which Utility Profile Applies?</h3> 
+           
+           
+      <p>When a user tries to use a utility function, Natural Security searches
+               for the appropriate utility profile to determine whether the user is allowed to
+               perform the function.
+      </p> 
+           
+      <p>As shown below, you can influence the search sequence with the Session
+               Options <a href="nsc_util.htm#PrivilegedGroup">Privileged Groups</a> and
+               <a href="nsc_util.htm#SternGROUPonly">*GROUP Only</a>, which can be set in
+               a utility's default profile.
+      </p> 
+           
+      <p>If "*GROUP Only" is set to "N", Natural
+               Security searches for the following utility profiles in the following
+               order:
+      </p> 
+           
+      <ol> 
+               
+         <li> 
+                   
+            <p class="initem">the <em>user-library-specific</em> profile
+            </p> 
+                   
+            <ol style="margin-top: 0px; margin-bottom: 0px;"> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem"> of the <em>user</em> for the library affected (only if the user is
+                               of type A or P);
+                  </p> 
+                          
+               </li> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem">of a <em>privileged group</em> for the library affected (only if
+                               "Privileged Groups" is set to "Y");
+                  </p> 
+                          
+               </li> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem">of the <em>current group</em> in which the user is contained for
+                               the library affected;
+                  </p> 
+                          
+               </li> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem">of <em>another group</em> in which the user is contained for the
+                               library affected;
+                  </p> 
+                          
+               </li> 
+                      
+            </ol> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">the <em>library-specific</em> profile of the library affected;
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">the <em>user-specific</em> profile
+            </p> 
+                   
+            <ol style="margin-top: 0px; margin-bottom: 0px;"> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem">of the <em>user</em> (only if the user is of type A or P);
+                  </p> 
+                          
+               </li> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem">of a <em>privileged group</em> (only if
+                               <a href="nsc_util.htm#PrivilegedGroup">"Privileged
+                                  Groups"</a> is set to "Y");
+                  </p> 
+                          
+               </li> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem">of the <em>current group</em> in which the user is contained;
+                  </p> 
+                          
+               </li> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem">of <em>another group</em> in which the user is contained;
+                  </p> 
+                          
+               </li> 
+                      
+            </ol> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">the utility's <em>default</em> profile.
+            </p> 
+                  
+         </li> 
+              
+      </ol> 
+           
+      <p>If "*GROUP Only" is set to "Y", Natural
+               Security searches for the following utility profiles in the following
+               order:
+      </p> 
+           
+      <ol> 
+               
+         <li> 
+                   
+            <p class="initem">the <em>user-library-specific</em> profile
+            </p> 
+                   
+            <ol style="margin-top: 0px; margin-bottom: 0px;"> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem"> of the <em>user</em> for the library affected (only if the user is
+                               of type A or P);
+                  </p> 
+                          
+               </li> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem">of the <em>current group</em> in which the user is contained for
+                               the library affected;
+                  </p> 
+                          
+               </li> 
+                      
+            </ol> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">the <em>library-specific</em> profile of the library affected;
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">the <em>user-specific</em> profile
+            </p> 
+                   
+            <ol style="margin-top: 0px; margin-bottom: 0px;"> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem">of the <em>user</em> (only if the user is of type A or P);
+                  </p> 
+                          
+               </li> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem">of the <em>current group</em> in which the user is contained;
+                  </p> 
+                          
+               </li> 
+                      
+            </ol> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">the utility's <em>default</em> profile.
+            </p> 
+                  
+         </li> 
+              
+      </ol> 
+           
+      <p>For the search, the user and current group are determined by the
+               current values of the Natural system variables *USER and *GROUP respectively.
+               Privileged groups are the groups which are specified as
+               <a href="nsc_user.htm#PrivGroups">Privileged Groups</a> in the user's
+               security profile; their IDs are processed in the sequence in which they are
+               specified in the user profile. IDs of other groups are processed in
+               alphabetical order.
+      </p> 
+           
+      <p>The first profile encountered in this search determines whether the
+               user is allowed to perform the function.
+      </p> 
+           
+      <p>If none of the above profiles exists and the utility function affects
+               the contents of a library, the
+               <a href="nsc_lib.htm#Maintenance_with_Natural_Utilities">Utilities</a>
+               option in the library profile applies.
+      </p> 
+           
+      <p>A user may obtain information about the utility profile which currently
+               applies by using the Natural system command PROFILE (see also the
+               <a href="nsc_prolib.htm#The_PROFILE_Command">PROFILE Command</a> in the
+               section <cite>Protecting Libraries</cite>).
+      </p> 
+           
+      <p>The following diagram shows the hierarchy of the utility profiles.</p> 
+           
+      <h4 class="floating-title"> Hierarchy of Utility Profiles</h4> 
+           
+      <p><img src="graphics/11ut0.png" alt="" width="450" height="230"></p> 
+           
+      <h4 class="floating-title"> Example:</h4> 
+           
+      <p>Assume the following situation: User UX (user type A), who is contained
+               in group GX, wants to copy programming objects with the SYSMAIN utility from
+               library LIB1 to library LIB2.
+      </p> 
+           
+      <p>First, Natural Security checks if the user may copy programming objects
+               with SYSMAIN <em>from library LIB1</em>; that is, if the Copy function for
+               Programming Objects is allowed:
+      </p> 
+           
+      <ol> 
+               
+         <li> 
+                   
+            <p class="initem">It checks the <em>user-library-specific</em> profile of user UX and
+                       library LIB1 for SYSMAIN.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">If no such profile exists, it checks the
+                       <em>user-library-specific</em> profile of user GX and library LIB1 for
+                       SYSMAIN.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">If no such profile exists, it checks the <em>library-specific</em>
+                       profile of library LIB1 for SYSMAIN.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">If no such profile exists, it checks the <em>user-specific</em>
+                       profile of user UX for SYSMAIN.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">If no such profile exists, it checks the <em>user-specific</em>
+                       profile of user GX for SYSMAIN.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">If no such profile exists, it checks the <em>default</em> profile of
+                       SYSMAIN.
+            </p> 
+                  
+         </li> 
+              
+      </ol> 
+           
+      <p>Then, Natural Security checks if the user may copy programming objects
+               with SYSMAIN <em>into library LIB2</em>; that is, if the Copy function for
+               Programming Objects is allowed:
+      </p> 
+           
+      <ol> 
+               
+         <li> 
+                   
+            <p class="initem">It checks the <em>user-library-specific</em> profile of user UX and
+                       library LIB2 for SYSMAIN.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">If no such profile exists, it checks the
+                       <em>user-library-specific</em> profile of user GX and library LIB2 for
+                       SYSMAIN.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">If no such profile exists, it checks the <em>library-specific</em>
+                       profile of library LIB2 for SYSMAIN.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">If no such profile exists, it checks the <em>user-specific</em>
+                       profile of user UX for SYSMAIN.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">If no such profile exists, it checks the <em>user-specific</em>
+                       profile of user GX for SYSMAIN.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">If no such profile exists, it checks the <em>default</em> profile of
+                       SYSMAIN.
+            </p> 
+                  
+         </li> 
+              
+      </ol> 
+           
+          
+         
+      <div><a name="When_Does_a_Utility_Profile_Take_Effect"></a></div> 
+          
+      <h3> When Does a Utility Profile Take Effect?</h3> 
+           
+           
+      <p>As the various Natural utilities and their functions differ greatly
+               from one another, the time when Natural Security checks whether a user may use
+               a requested utility function differs from utility to utility, and from function
+               to function.
+      </p> 
+           
+          
+         
+      <div><a name="Available_System_Commands"></a></div> 
+          
+      <h3> Available System Commands</h3> 
+           
+           
+      <p>When a user uses a utility under the control of a utility profile, the
+               only Natural system commands available to the user within the utility are: FIN,
+               LOGON, MAIL and PROFILE; all other system commands cannot be used. The reason
+               for this is to preclude any "loopholes" in the protection
+               established by the utility profiles.
+      </p> 
+           
+          
+         
+      <div><a name="Where_to_Define_Profiles"></a></div> 
+          
+      <h3> Where to Define Profiles</h3> 
+           
+           
+      <p>To define <em>default profiles</em>, you use the Administrator Services
+               section of Natural Security (as described under
+               <a href="nsc_util.htm#Defining_Default_Profiles">Defining Default
+            Profiles</a> below).
+      </p> 
+           
+      <p>To define <em>all other utility profiles</em>, you use the Utility
+               Maintenance section of Natural Security (as described under
+               <a href="nsc_util.htm#Defining_Individual_Profiles_-_Utility_Maintenance">Defining
+            Individual Profiles - Utility Maintenance</a> below).
+      </p> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="nsc_util.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Defining_Default_Profiles"></a></div> 
+         
+      <h2> Defining Default Profiles</h2> 
+          
+          
+      <p>On the Main Menu, you select "Administrator Services". The
+              Administrator Services Menu will be displayed.
+      </p> 
+          
+      <p class="note"><strong>Note:</strong><br> <a href="nsc_admin.htm#Access_to_Administrator_Services">Access to
+                 Administrator Services</a> may be restricted (as explained in the
+              section <cite>Administrator Services</cite>).
+      </p> 
+          
+      <p>On the Administrator Services Menu 2, you select "Utility
+              defaults/templates". The Define Utility Defaults/Templates screen will
+              be displayed, listing all the utilities for which profiles can be defined.
+      </p> 
+          
+      <p>The status of a utility (as indicated in the Message field) can be one
+              of the following:
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="80%">
+         <colgroup>
+            <col width="18%">
+            <col width="62%">
+         </colgroup> 
+                
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th align="left">Status</th> 
+                       
+               <th align="left">Meaning</th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> Nothing defined &nbsp;</td> 
+                       
+               <td>No profile is defined for the utility. 
+                  
+                  <p>If a utility function affects the contents of a library, its use is
+                               controlled by the <a href="nsc_lib.htm#Maintenance_with_Natural_Utilities">Utilities</a> option in
+                               the library security profile.
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> Default defined &nbsp;</td> 
+                       
+               <td>A default profile has been defined for the utility. This default
+                  profile applies for all users for which no individual user-specific profile is
+                  defined. 
+                  
+                  <p>The Utilities option in library security profiles is ignored for
+                               this utility.
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> Template defined &nbsp;</td> 
+                       
+               <td>A profile has been defined for the utility. However, this
+                  profile can only be used as a template to define individual user-specific
+                  utility profiles. 
+                  
+                  <p>If a utility function affects the contents of a library, its use is
+                               controlled by the <a href="nsc_lib.htm#Maintenance_with_Natural_Utilities">Utilities</a> option in
+                               the library security profile - except for those users for which a user-specific
+                               utility profile is defined.
+                  </p>
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>Whether a default profile is a "real" profile or only a
+              template is determined by the field
+              <a href="nsc_util.htm#Applies_as_Default_Profile">"Applies as Default
+                 Profile"</a> (see below) within the profile.
+      </p> 
+          
+      <table border="0" cellspacing="0" width="80%" class="warning">
+         <tr>
+            <td valign="top" width="36"><img src="../graphics/warning.png" alt="" width="28" height="28"></td>
+            <td valign="top"><strong>Warning:<br>To avoid the applicability of utility profiles and the Utilities
+                       option in library profiles getting mixed up, you should always define a default
+                       profile (not only a template) for a utility if you intend to define
+                       user-specific profiles for that utility.</strong></td>
+         </tr>
+      </table> 
+          
+      <p>On the Define Utility Defaults/Templates screen, you can mark a utility
+              with one of the following function codes:
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="80%">
+         <colgroup>
+            <col width="18%">
+            <col width="62%">
+         </colgroup> 
+                
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th align="left">Code</th> 
+                       
+               <th align="left">Function</th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> AD &nbsp;</td> 
+                       
+               <td>Define a default profile or template for the utility.</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> MO &nbsp;</td> 
+                       
+               <td>Modify the utility's existing default profile or
+                  template.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> DE &nbsp;</td> 
+                       
+               <td>Delete the utility's existing default profile or
+                  template.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> DI &nbsp;</td> 
+                       
+               <td>Display the utility's existing default profile or
+                  template.
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>When you mark a utility with code "DE", a window will be
+              displayed in which you confirm the deletion by entering the utility name. When
+              you delete a utility's default profile or template, all other profiles for that
+              utility - that is, user-specific, library-specific and user-library-specific
+              utility profiles - will also be deleted.
+      </p> 
+          
+      <p>When you mark a utility with code "AD", "MO"
+              or "DI", its default profile or template will be displayed.
+      </p> 
+          
+      <p>The default profile/template for each utility provides several options,
+              which correspond to functions of the utility concerned. The options for each
+              utility are described under <a href="nsc_util.htm#ComponentsUtilProf">Components of Utility
+            Profiles</a> below.
+      </p> 
+          
+      <p>You can <em>allow</em> or <em>disallow</em> each option by marking it
+              with "A" or "D" respectively. Initially, all options are disallowed.
+      </p> 
+          
+      <p>With <span class="key">PF16</span> and <span class="key">PF17</span>, you can set all options in a
+              utility profile simultaneously to "A" or "D" respectively.
+      </p> 
+          
+      <p class="note"><strong>Note:</strong><br> Natural Security performs consistency checks on the combinations of
+              allowed and disallowed options - impossible combinations of "A" and "D" are
+              automatically rejected.
+      </p> 
+          
+      <p>Moreover, each profile provides the following field, which determines
+              whether the profile is a "real" default profile or only a
+              template:
+      </p> 
+          
+      <div><a name="Applies_as_Default_Profile"></a></div>
+      <h4 class="floating-title"> Applies as Default Profile
+              
+      </h4> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="80%">
+         <colgroup>
+            <col width="20%">
+            <col width="60%">
+         </colgroup> 
+                
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th> Y</th> 
+                       
+               <td> Default Profile - The profile applies for all users for which
+                  no individual utility profile is defined.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> N &nbsp;</th> 
+                       
+               <td> Template - The profile does not apply for any user. It can only
+                  be used as a template for the definition of individual user-specific utility
+                  profiles.
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>Once this field is set to "Y" and any user-specific or library-specific
+              profiles have been defined for that utility, you <em>cannot</em> reset it to
+              "N". This is to ensure consistent utility protection.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="nsc_util.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Defining_Individual_Profiles_-_Utility_Maintenance"></a></div> 
+         
+      <h2> Defining Individual Profiles - Utility Maintenance</h2> 
+          
+          
+      <p>Natural Security's Utility Maintenance is used to perform all functions
+              related to the maintenance of individual utility profiles: user-specific
+              profiles, library-specific profiles and user-library-specific profiles.
+      </p> 
+          
+      <p>The components of an individual profile correspond to those of the
+              corresponding default profile; they are described under
+              <a href="nsc_util.htm#ComponentsUtilProf">Components of Utility
+            Profiles</a> below.
+      </p> 
+          
+      <p class="note"><strong>Note:</strong><br> Owner logic applies to the creation/maintenance of individual
+              utility profiles.
+      </p> 
+          
+      <p>This section covers the following topics related to utility profile
+              creation/maintenance:
+      </p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="nsc_util.htm#How_to_Invoke_Utility_Maintenance">Invoking Utility Maintenance</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_util.htm#Utility_Maintenance_Functions">Utility Maintenance Functions</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_util.htm#Adding_a_User-Specific_Utility_Profile">Adding a User-Specific Utility Profile</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_util.htm#ModifyingDisplaying_a_User-Specific_Utility_Profile">Modifying/Displaying a User-Specific Utility Profile</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_util.htm#Deleting_a_User-Specific_Utility_Profile">Deleting a User-Specific Utility Profile</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_util.htm#Adding_a_Library-Specific_Utility">Adding a Library-Specific Utility</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_util.htm#ModifyingDisplaying_a_Library-Specific_Utility_Profile">Modifying/Displaying a Library-Specific Utility Profile</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_util.htm#Deleting_a_Library-Specific_Utility_Profile">Deleting a Library-Specific Utility Profile</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_util.htm#Adding_a_User-Library-Specific_Utility_Profile">Adding a User-Library-Specific Utility Profile</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_util.htm#ModifyingDisplaying_a_User-Library-Specific_Utility_Profile">Modifying/Displaying a User-Library-Specific Utility Profile</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_util.htm#Deleting_a_User-Library-Specific_Utility_Profile">Deleting a User-Library-Specific Utility Profile</a></p>
+         </li>
+      </ul> 
+          
+         
+      <div><a name="How_to_Invoke_Utility_Maintenance"></a></div> 
+          
+      <h3> Invoking Utility Maintenance</h3> 
+           
+           
+      <p>On the Main Menu, enter code "M" for
+               "Maintenance". A window will be displayed.
+      </p> 
+           
+      <p>In the window, mark object type "Utility" with a character
+               or with the cursor. The Utility Maintenance selection list will be
+               displayed.
+      </p> 
+           
+      <p>The Utility Maintenance selection list shows all utilities for which
+               either a default profile or a template has been defined. For each utility, the
+               following information is displayed:
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="80%">
+         <colgroup>
+            <col width="17%">
+            <col width="63%">
+         </colgroup> 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th> Default</th> 
+                        
+               <td>Indicates whether a default profile has been defined for this
+                  utility (YES/NO). 
+                  
+                  <p>"NO" means that only a template has been defined.</p>
+                            
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th> User &nbsp;</th> 
+                        
+               <td>Indicates whether any user-specific profiles exist for this
+                  utility (YES/NO).
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th> Library &nbsp;</th> 
+                        
+               <td>Indicates whether any library-specific profiles exist for this
+                  utility (YES/NO).
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th> User-Lib. &nbsp;</th> 
+                        
+               <td>Indicates whether any user-library-specific profiles exist for
+                  this utility (YES/NO).
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+          
+         
+      <div><a name="Utility_Maintenance_Functions"></a></div> 
+          
+      <h3> Utility Maintenance Functions</h3> 
+           
+           
+      <p>From the Utility Maintenance selection list, you invoke all functions
+               for the creation, modification, deletion and display of individual utility
+               profiles.
+      </p> 
+           
+      <p>The following functions are available:</p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="80%">
+         <colgroup>
+            <col width="20%">
+            <col width="60%">
+         </colgroup> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th align="left">Code</th> 
+                        
+               <th align="left">Function</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> DD &nbsp;</td> 
+                        
+               <td> Display default profile or template. 
+                  
+                  <p>This function displays the default profile (or the template)
+                                defined for a utility.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td colspan="2">Functions for
+                  <em>user-specific</em> utility profiles:
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> DU &nbsp;</td> 
+                        
+               <td> Display user-specific profiles. 
+                  
+                  <p>This function displays a list of existing user-specific profiles
+                     for a utility. From the list, you can select the profiles to be displayed.
+                  </p>
+                            
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> AU &nbsp;</td> 
+                        
+               <td> Add or maintain user-specific profiles. 
+                  
+                  <p>This function displays a list of users (of types A, P and G). From
+                     the list, you can select the users for which you wish to define user-specific
+                                profiles for a utility.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> MU &nbsp;</td> 
+                        
+               <td> Maintain user-specific profiles. 
+                  
+                  <p>This function displays a list of existing user-specific profiles
+                     for a utility. From the list, you can select the profiles to be maintained.
+                  </p>
+                            
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td colspan="2">Functions for
+                  <em>library-specific</em> utility profiles:
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> DL &nbsp;</td> 
+                        
+               <td> Display library-specific profiles. 
+                  
+                  <p>This function displays a list of existing library-specific
+                     profiles for a utility. From the list, you can select the profiles to be
+                                displayed.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> AL &nbsp;</td> 
+                        
+               <td> Add or maintain library-specific profiles. 
+                  
+                  <p>This function displays a list of libraries. From the list, you can
+                     select the libraries for which you wish to define library-specific utility
+                                profiles.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> ML &nbsp;</td> 
+                        
+               <td> Maintain library-specific profiles. 
+                  
+                  <p>This function displays a list of existing library-specific
+                     profiles for a utility. From the list, you can select the profiles to be
+                                maintained.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td colspan="2">Functions for
+                  <em>user-library-specific</em> utility profiles:
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> DX &nbsp;</td> 
+                        
+               <td> Display user-library-specific profiles. 
+                  
+                  <p>This function displays a list of existing user-library-specific
+                     profiles of a specific user for a utility. From the list, you can select the
+                                profiles to be displayed.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> AX &nbsp;</td> 
+                        
+               <td> Add or maintain user-library-specific profiles. 
+                  
+                  <p>This function displays a list of libraries. From the list, you can
+                     select the libraries for which you wish to define user-library-specific utility
+                                profiles for a specific user.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> MX &nbsp;</td> 
+                        
+               <td> Maintain user-library-specific profiles. 
+                  
+                  <p>This function displays a list of existing user-library-specific
+                     profiles of a specific user for a utility. From the list, you can select the
+                                profiles to be maintained.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+          
+      <div><a name="Add_or_Maintain_or_Maintain"></a></div> 
+           
+      <h4> "Add or Maintain" or "Maintain"?</h4> 
+            
+            
+      <p>The "Add or Maintain" functions (codes AU, AL, AX)
+                display lists of all users/libraries, comprising those for which utility
+                profiles exist as well as those for which no utility profiles have been
+                defined. They allow you to add new utility profiles as well as modify, delete
+                and display existing utility profiles.
+      </p> 
+            
+      <p>The "Maintain" functions (codes MU, ML, MX) display lists
+                of only those users/libraries for which utilities profiles exist. They allow
+                you to modify, delete and display existing utility profiles.
+      </p> 
+            
+      <p>You can "switch" directly from "Add or
+                Maintain" to "Maintain" by reducing the displayed list from
+                a list of all users/libraries to a list of only those with existing profiles.
+                To do so, you mark with "X" the selection criterion field
+                "U" (user-specific profile exists) "L"
+                (library-specific profile exists) or "U-L" (user-library-specific
+                profile exists) respectively in the heading of the list.
+      </p> 
+            
+      <p>However, if you know beforehand that you are going to only maintain
+                existing profiles but not add any new ones, it is recommended (for better
+                performance) that you directly use codes MU, ML and MX respectively.
+      </p> 
+            
+           
+          
+      <div><a name="Start_Values"></a></div> 
+           
+      <h4> Start Values</h4> 
+            
+            
+      <p>Each of the functions listed displays a list of items (users,
+                libraries, profiles). When you invoke a function, a window will be displayed in
+                which you can enter a start value for the list of items to be displayed.
+      </p> 
+            
+      <p>For functions related to <em>user-library-specific</em> profiles, the
+                ID of the user whose user-library-specific profiles are to be listed must also
+                be specified in the start value window.
+      </p> 
+            
+           
+          
+      <div><a name="Subfunctions"></a></div> 
+           
+      <h4> Subfunctions</h4> 
+            
+            
+      <p>When you invoke one of the functions listed, you get a list of items
+                (users, libraries or utility profiles).
+      </p> 
+            
+      <p>On this list, you mark one or more items with a code to invoke a
+                subfunction to be performed on the item.
+      </p> 
+            
+      <p>The available subfunctions (Add, Modify, etc.) differ depending on the
+                function invoked.
+      </p> 
+            
+      <p>For a list of available subfunctions, you enter a question mark (?) in
+                the field "Co".
+      </p> 
+            
+           
+          
+      <div><a name="Information_Displayed"></a></div> 
+           
+      <h4> Information Displayed</h4> 
+            
+            
+      <h4 class="floating-title"> Add/Maintain/Display User-Specific Utility Profiles
+                
+      </h4> 
+            
+      <p>On the selection list of users displayed with function codes AU, DU
+                and MU, the following information is displayed for each user:
+      </p> 
+             
+             
+      <table border="1" class="color" cellpadding="3" width="80%">
+         <colgroup>
+            <col width="19%">
+            <col width="61%">
+         </colgroup> 
+                  
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <th> Type</th> 
+                         
+               <td>Indicates the user type (A, P or G).</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th> U &nbsp;</th> 
+                         
+               <td>An "X" indicates that the user has a
+                  user-specific profile for this utility.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th> U-L &nbsp;</th> 
+                         
+               <td>An "X" indicates that the user has one or more
+                  user-library-specific profiles for this utility.
+               </td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+      <h4 class="floating-title"> Add/Maintain/Display Library-Specific Utility Profiles
+                
+      </h4> 
+            
+      <p>On the selection list of libraries displayed with function codes AL,
+                DL and ML, the following information is displayed for each library:
+      </p> 
+             
+             
+      <table border="1" class="color" cellpadding="3" width="80%"> 
+                  
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <th> Prot.</th> 
+                         
+               <td>Indicates the "people-protected" and
+                  "terminal-protected" settings as defined in the library security
+                  profile.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th> Link &nbsp;</th> 
+                         
+               <td>(empty)</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th> L &nbsp;</th> 
+                         
+               <td>An "X" indicates that the library has a
+                  library-specific profile for this utility.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th> U &nbsp;</th> 
+                         
+               <td>An "X" indicates that the library has one or more
+                  user-library-specific profiles for this utility.
+               </td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+      <h4 class="floating-title"> Add/Maintain/Display User-Library-Specific Utility
+                Profiles
+      </h4> 
+            
+      <p>On the selection list of libraries displayed with function codes AX,
+                DX and MX, the following information is displayed for each library:
+      </p> 
+             
+             
+      <table border="1" class="color" cellpadding="3" width="80%"> 
+                  
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <th> Prot.</th> 
+                         
+               <td>Indicates the "people-protected" and
+                  "terminal-protected" settings as defined in the library security
+                  profile.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th> Link &nbsp;</th> 
+                         
+               <td>Indicates whether the user is linked to the library (LK =
+                  normal link, SL = special link).
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th> U-L &nbsp;</th> 
+                         
+               <td>An "X" indicates that the user has a
+                  user-library-specific profile for this library for this utility.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th> L &nbsp;</th> 
+                         
+               <td>An "X" indicates that the library has a
+                  library-specific profile for this utility.
+               </td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+           
+          
+         
+      <div><a name="Adding_a_User-Specific_Utility_Profile"></a></div> 
+          
+      <h3> Adding a User-Specific Utility Profile</h3> 
+           
+           
+      <p>A user-specific utility profile can only be defined for a utility for
+               which either a <em>default profile</em> or a <em>template</em> exists.
+      </p> 
+           
+      <p>To add a user-specific utility profile, you mark the desired utility on
+               the Utility Maintenance selection list with "AU". A window will be
+               displayed in which you can enter a start value for the list of users to be
+               displayed. Then a list of users (of types A, P and G) will be displayed.
+      </p> 
+           
+      <p>On that list, you mark the desired user with "AD". The
+               user-specific profile for the utility will be displayed for you to define.
+      </p> 
+           
+      <p>The options you can allow or disallow within the profile are the same
+               as in the corresponding default profile or template (see
+               <a href="nsc_util.htm#ComponentsUtilProf">Components of Utility
+                  Profiles</a> below).
+      </p> 
+           
+      <p>The initial "allowed/disallowed" settings in the
+               user-specific profile are taken from the default profile or the template.
+      </p> 
+           
+          
+         
+      <div><a name="ModifyingDisplaying_a_User-Specific_Utility_Profile"></a></div> 
+          
+      <h3> Modifying/Displaying a User-Specific Utility Profile</h3> 
+           
+           
+      <p>To modify or display a user-specific utility profile, you mark the
+               desired utility on the Utility Maintenance selection list with
+               "MU" or "DU" respectively. A window will be displayed
+               in which you can enter a start value for the list of user-specific profiles to
+               be displayed. Then a list of existing user-specific profiles for the selected
+               utility will be displayed.
+      </p> 
+           
+      <p>On that list, you mark the desired profile with "MO"
+               (modify) or "DU" (display) respectively. The profile will be
+               displayed for modification/display.
+      </p> 
+           
+      <p>The options in the profile are the same as in the corresponding default
+               profile or template (see <a href="nsc_util.htm#ComponentsUtilProf">Components of
+                  Utility Profiles</a> below).
+      </p> 
+           
+          
+         
+      <div><a name="Deleting_a_User-Specific_Utility_Profile"></a></div> 
+          
+      <h3> Deleting a User-Specific Utility Profile</h3> 
+           
+           
+      <p>To delete a user-specific utility profile, you mark the desired utility
+               on the Utility Maintenance selection list with "MU". A window will
+               be displayed in which you can enter a start value for the list of user-specific
+               profiles to be displayed. Then a list of existing user-specific profiles for
+               the selected utility will be displayed.
+      </p> 
+           
+      <p>On that list, you mark the desired profile with "DE". A
+               window will be displayed in which you confirm the deletion.
+      </p> 
+           
+      <p>When you delete a user-specific utility profile, all
+               <em>user-library-specific</em> utility profiles for this user for this utility
+               will also be deleted.
+      </p> 
+           
+          
+         
+      <div><a name="Adding_a_Library-Specific_Utility"></a></div> 
+          
+      <h3> Adding a Library-Specific Utility</h3> 
+           
+           
+      <p>A library-specific utility profile can only be defined for a utility
+               for which a <var>default profile</var> (not only a template)
+               has been defined.
+      </p> 
+           
+      <p>To add a library-specific utility profile, you mark the desired utility
+               on the Utility Maintenance selection list with "AL". A window will
+               be displayed in which you can enter a start value for the list of libraries to
+               be displayed. Then a list of libraries will be displayed.
+      </p> 
+           
+      <p>On that list, you mark the desired library with "AD". The
+               library-specific profile for the utility will be displayed for you to
+               define.
+      </p> 
+           
+      <p>The options you can allow or disallow within the profile are the same
+               as in the corresponding default profile (see
+               <a href="nsc_util.htm#ComponentsUtilProf">Components of Utility
+                  Profiles</a> below).
+      </p> 
+           
+      <p>The initial "allowed/disallowed" settings in the
+               library-specific profile are taken from the default profile.
+      </p> 
+           
+          
+         
+      <div><a name="ModifyingDisplaying_a_Library-Specific_Utility_Profile"></a></div> 
+          
+      <h3> Modifying/Displaying a Library-Specific Utility Profile</h3> 
+           
+           
+      <p>To modify or display a library-specific utility profile, you mark the
+               desired utility on the Utility Maintenance selection list with
+               "ML" or "DL" respectively. A window will be displayed
+               in which you can enter a start value for the list of library-specific profiles
+               to be displayed. Then a list of existing library-specific profiles for the
+               selected utility will be displayed.
+      </p> 
+           
+      <p>On that list, you mark the desired profile with "MO"
+               (modify) or "DL" (display) respectively. The profile will be
+               displayed for modification/display.
+      </p> 
+           
+      <p>The options in the profile are the same as in the corresponding default
+               profile (see <a href="nsc_util.htm#ComponentsUtilProf">Components of Utility
+                  Profiles</a> below).
+      </p> 
+           
+          
+         
+      <div><a name="Deleting_a_Library-Specific_Utility_Profile"></a></div> 
+          
+      <h3> Deleting a Library-Specific Utility Profile</h3> 
+           
+           
+      <p>To delete a library-specific utility profile, you mark the desired
+               utility on the Utility Maintenance selection list with "ML". A
+               window will be displayed in which you can enter a start value for the list of
+               library-specific profiles to be displayed. Then a list of existing
+               library-specific profiles for the selected utility will be displayed.
+      </p> 
+           
+      <p>On that list, you mark the desired profile with "DE". A
+               window will be displayed in which you confirm the deletion.
+      </p> 
+           
+          
+         
+      <div><a name="Adding_a_User-Library-Specific_Utility_Profile"></a></div> 
+          
+      <h3> Adding a User-Library-Specific Utility Profile</h3> 
+           
+           
+      <p>A user-library-specific utility profile can only be defined for a user
+               for which a <em>user-specific profile</em> for that utility exists.
+      </p> 
+           
+      <p>To add a library-specific utility profile, you mark the desired utility
+               on the Utility Maintenance selection list with "AX". A window will
+               be displayed in which you enter the ID of the user for whom a
+               user-library-specific profile is to be defined; also, you can enter a start
+               value for the list of libraries to be displayed. Then a list of libraries will
+               be displayed.
+      </p> 
+           
+      <p>On that list, you mark the desired library with "AD". The
+               user-library-specific profile for the specified user for this library will be
+               displayed for you to define.
+      </p> 
+           
+      <p>The options you can allow or disallow within the profile are the same
+               as in the corresponding default profile (see
+               <a href="nsc_util.htm#ComponentsUtilProf">Components of Utility
+                  Profiles</a> below).
+      </p> 
+           
+      <p>The initial "allowed/disallowed" settings in the
+               user-library-specific profile are taken from the corresponding library-specific
+               profile; if no such profile exists, they are taken from the corresponding
+               user-specific profile.
+      </p> 
+           
+          
+         
+      <div><a name="ModifyingDisplaying_a_User-Library-Specific_Utility_Profile"></a></div> 
+          
+      <h3> Modifying/Displaying a User-Library-Specific Utility Profile
+              
+      </h3> 
+           
+           
+      <p>To modify or display a library-specific utility profile, you mark the
+               desired utility on the Utility Maintenance selection list with
+               "MX" or "DX" respectively. A window will be displayed
+               in which you enter the ID of the user whose user-library-specific profile(s)
+               are to be listed; also, you can enter a start value for the list of profiles to
+               be displayed. Then a list of existing user-library-specific profiles of the
+               specified user for the selected utility will be displayed.
+      </p> 
+           
+      <p>On that list, you mark the desired profile with "MO"
+               (modify) or "DX" (display) respectively. The profile will be
+               displayed for modification/display.
+      </p> 
+           
+      <p>The options in the profile are the same as in the corresponding default
+               profile (see <a href="nsc_util.htm#ComponentsUtilProf">Components of Utility
+                  Profiles</a> below).
+      </p> 
+           
+          
+         
+      <div><a name="Deleting_a_User-Library-Specific_Utility_Profile"></a></div> 
+          
+      <h3> Deleting a User-Library-Specific Utility Profile</h3> 
+           
+           
+      <p>To delete a user-library-specific utility profile, you mark the desired
+               utility on the Utility Maintenance selection list with "MX". A
+               window will be displayed in which you enter the ID of the user whose
+               user-library-specific profile(s) are to be listed; also, you can enter a start
+               value for the list of profiles to be displayed. Then a list of existing
+               user-library-specific profiles of the specified user for the selected utility
+               will be displayed.
+      </p> 
+           
+      <p>On that list, you mark the desired profile with "DE". A
+               window will be displayed in which you confirm the deletion.
+      </p> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="nsc_util.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="ComponentsUtilProf"></a></div> 
+         
+      <h2> Components of Utility Profiles</h2> 
+          
+          
+      <p>A utility profile provides several options which correspond to the
+              functions of the utility concerned. These options are the same in every profile
+              related to that utility: default profile, user-specific, library-specific and
+              user-library-specific profiles.
+      </p> 
+          
+      <p>The individual options are described below for each utility:</p>
+          
+      <ul>
+         <li>
+            <p class="initem"><a href="nsc_util.htm#Default_Profile_for_NATLOAD_Utility">NATLOAD Utility Profiles</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_util.htm#Default_Profile_for_NATUNLD_Utility">NATUNLD Utility Profiles</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_util.htm#Default_Profile_for_SYSBPM_Utility">SYSBPM Utility Profiles</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_util.htm#SYSCPprofiles">SYSCP - Code Page Administration - Utility Profiles</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_util.htm#SYSDB2profiles">SYSDB2 - Tools for DB2 - Utility Profiles</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_util.htm#Default_Profile_for_SYSDDM_Utility">SYSDDM Utility Profiles</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_util.htm#Default_Profile_for_SYSERR_Utility">SYSERR Utility Profiles</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_util.htm#Default_Profile_for_SYSMAIN_Utility">SYSMAIN Utility Profiles</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_util.htm#Default_Profile_for_SYSOBJH_Utility">SYSOBJH - Object Handler - Utility Profiles</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_util.htm#Default_Profile_for_SYSPARM_Utility">SYSPARM Utility Profiles</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_util.htm#Default_Profile_for_SYSRPC_Utility">SYSRPC Utility Profiles</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_util.htm#Default_Profile_for_SYSTRANS_Utility">SYSTRANS Utility Profiles</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_util.htm#AddOptions">Additional Options</a></p>
+         </li>
+      </ul> 
+          
+         
+      <div><a name="Default_Profile_for_NATLOAD_Utility"></a></div> 
+          
+      <h3> 
+              <a name="x34"></a> NATLOAD Utility Profiles
+      </h3> 
+           
+           
+      <p>The NATLOAD utility is only available with Natural versions prior to
+               4.2 on mainframes and 6.2 on UNIX and Windows. For compatibility reasons,
+               existing utility profiles for NATLOAD can still be maintained. However, instead
+               of NATLOAD, it is recommended that the
+               <a href="nsc_util.htm#Default_Profile_for_SYSOBJH_Utility">SYSOBJH
+                  utility</a> be used and profiles defined for it.
+      </p> 
+           
+      <p>The profiles for the NATLOAD utility provide the following options:</p>
+           
+            
+            
+      <table border="1" class="color" cellpadding="3" width="80%"> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th align="left">Option</th> 
+                        
+               <th align="left">Explanation</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td nowrap> Load Natural Objects 
+                  
+                  <p> Del.</p>
+               </td> 
+                        
+               <td>Determines whether the user may load programming objects. 
+                  
+                  <p>Determines whether the user may process delete instructions for
+                     programming objects (this requires that the loading of programming objects is
+                                allowed).
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Load DDMs 
+                  
+                  <p> Del.</p>
+               </td> 
+                        
+               <td>Determines whether the user may load DDMs. 
+                  
+                  <p>Determines whether the user may process delete instructions for
+                     DDMs (this requires that the loading of DDMs is allowed).
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Load Error Messages 
+                  
+                  <p> Del.</p>
+               </td> 
+                        
+               <td>Determines whether the user may load error messages. 
+                  
+                  <p>Determines whether the user may process delete instructions for
+                     error messages (this requires that the loading of error messages is
+                                allowed).
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Scan Natural Objects &nbsp;</td> 
+                        
+               <td>Determines whether the user may scan the work file for
+                  programming objects.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Scan DDMs &nbsp;</td> 
+                        
+               <td>Determines whether the user may scan the work file for
+                  DDMs.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Scan Error Messages &nbsp;</td> 
+                        
+               <td>Determines whether the user may scan the work file for error
+                  messages.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> PC Upload &nbsp;</td> 
+                        
+               <td rowspan="3">Determine whether the user may use the NATLOAD
+                  parameters of the same names.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Replace &nbsp;</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> New Library &nbsp;</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+          
+         
+      <div><a name="Default_Profile_for_NATUNLD_Utility"></a></div> 
+          
+      <h3> 
+              <a name="x35"></a>NATUNLD Utility Profiles
+      </h3> 
+           
+           
+      <p>The NATUNLD utility is only available with Natural versions prior to
+               4.2 on mainframes and 6.2 on UNIX and Windows. For compatibility reasons,
+               existing utility profiles for NATUNLD can still be maintained. However, instead
+               of NATUNLD, it is recommended that the
+               <a href="nsc_util.htm#Default_Profile_for_SYSOBJH_Utility">SYSOBJH
+                  utility</a> be used and profiles defined for it.
+      </p> 
+           
+      <p>The profiles for the NATUNLD utility provide the following options:</p>
+           
+            
+            
+      <table border="1" class="color" cellpadding="3" width="80%"> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th align="left">Option</th> 
+                        
+               <th align="left">Determines whether the user may:</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> Unload Natural Objects &nbsp;</td> 
+                        
+               <td>Unload programming objects.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Unload DDMs &nbsp;</td> 
+                        
+               <td>Unload DDMs.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Unload Error Messages &nbsp;</td> 
+                        
+               <td>Unload error messages.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Unload Delete Instructions &nbsp;</td> 
+                        
+               <td>Unload delete instructions.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> PC Download &nbsp;</td> 
+                        
+               <td rowspan="2">Use the NATUNLD parameters of the same
+                  names.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Target Library &nbsp;</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+          
+         
+      <div><a name="Default_Profile_for_SYSBPM_Utility"></a></div> 
+          
+      <h3> 
+              <a name="x36"></a>SYSBPM Utility Profiles
+      </h3> 
+           
+           
+      <p>The SYSBPM utility is only available with Natural on mainframe
+               computers.
+      </p> 
+           
+      <p>The profiles for the SYSBPM utility provide the following options:</p> 
+           
+          
+      <div><a name="d0e26509"></a></div> 
+           
+      <h4>Object Pool Statistics</h4> 
+            
+             
+             
+      <table border="1" class="color" cellpadding="3" width="80%"> 
+                  
+                 
+         <thead align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <th align="left">Option</th> 
+                         
+               <th align="left">Explanation</th> 
+                        
+            </tr> 
+                    
+         </thead> 
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <td> Buffer Pool</td> 
+                         
+               <td rowspan="10">Determine whether the user may use the SYSBPM
+                  functions/commands of the same names.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> - General BP Statistics</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> - BP Load/Locate Statistics</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> - BP Fragmentation</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> - Internal Function Usage</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> - BP Hash Table Statistics</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> BP Cache</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> - General BP Cache Statistics</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> - BP Cache Call Statistics</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> -&nbsp;BP&nbsp;Cache&nbsp;Hash&nbsp;Table&nbsp;Statistics</td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+           
+          
+      <div><a name="d0e26606"></a></div> 
+           
+      <h4>Buffer Pool Library Object Maintenance</h4> 
+            
+             
+             
+      <table border="1" class="color" cellpadding="3" width="80%"> 
+                  
+                 
+         <thead align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <th align="left">Option</th> 
+                         
+               <th align="left">Explanation</th> 
+                        
+            </tr> 
+                    
+         </thead> 
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <td> Object Functions</td> 
+                         
+               <td rowspan="26"> Determine whether the user may use the SYSBPM
+                  functions/commands of the same names.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> - List Objects</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> - Delete Objects</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> - Directory Information</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> - Hexadecimal Display</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> - Write to Work File</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> - Display Sorted Extract</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> Functions&nbsp;for&nbsp;the&nbsp;Objects&nbsp;Displayed</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> - CLEAR</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> - DELETE</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> - FDELETE</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> - RESIDENT</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> Blacklist Maintenance</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> - Maintain Blacklist</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> - Maintain Blacklist ADD</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> - Maintan Blacklist DELETE</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> - Maintain Blacklist DELETE ALL</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> - Maintain Blacklist UPDATE</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> - List Object Sets</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> - Edit Object Set</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> - Add Object Set to Blacklist</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> - Delete Obj. Set from Blacklist</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> Preload List Maintenance</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> - List Preload Lists</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> - Edit Preload List</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> - Gen. Preload List from BP</td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+           
+          
+      <div><a name="d0e26799"></a></div> 
+           
+      <h4>Buffer Pool Global Commands</h4> 
+            
+             
+             
+      <table border="1" class="color" cellpadding="3" width="80%"> 
+                  
+                 
+         <thead align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <th align="left">Option</th> 
+                         
+               <th align="left">Explanation</th> 
+                        
+            </tr> 
+                    
+         </thead> 
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <td> CHECK HASH</td> 
+                         
+               <td rowspan="15"> Determine whether the user may use the SYSBPM
+                  functions/commands of the same names.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> CLOSE BPC</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> CLOSE HASH</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> DELETE BP</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> DELETE BPC</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> DISPLAY CDIR</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> INITIALIZE</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> - INITIALIZE BP</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> - INITIALIZE BPC</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> REBUILD HASH</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> REORG HASH</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> REORGC HASH</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> RESET BP</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> SELECT BP</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> DISPLAY BP</td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+           
+          
+         
+      <div><a name="SYSCPprofiles"></a></div> 
+          
+      <h3> 
+              <a name="x37"></a>SYSCP - Code Page Administration - Utility Profiles
+      </h3> 
+           
+           
+      <p>The profiles for the SYSCP utility (Natural Code Page Administration)
+               provide the following options:
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="80%">
+         <colgroup>
+            <col width="28%">
+            <col width="52%">
+         </colgroup> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th align="left">Option</th> 
+                        
+               <th align="left">Explanation</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> Code Page Maintenance of Source Objects</td> 
+                        
+               <td rowspan="8">Determine whether the user may use the Natural
+                  Code Page Administration's functions of the same names.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> - List Code Page Information of Sources</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> - Check Conversion of Unassigned Sources</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> - Assign Code Page Information to Sources</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> - Check Conversion of Assigned Sources</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> - Convert to Different Code Page</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> All Code Pages</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Unicode Properties</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+          
+      <div><a name="SYSDB2profiles"></a></div> 
+          
+      <h3> 
+              <a name="x38"></a> SYSDB2 - Tools for DB2 - Utility Profiles
+      </h3> 
+           
+           
+      <p>The SYSDB2 utility (Natural Tools for DB2) is only available with
+               Natural on mainframe computers.
+      </p> 
+           
+      <p>The profiles for the SYSDB2 utility provide the following options:</p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="80%"> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th align="left">Option</th> 
+                        
+               <th align="left">Explanation</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> Application Plan Maintenance</td> 
+                        
+               <td rowspan="28">Determine whether the user may use the Natural
+                  Tools for DB2's functions/commands of the same names.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> - Prepare Job Profile</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> - Create DBRM</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> - Bind</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> - Rebind</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> - Free</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> -List JCL</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> - Display Job Output</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Catalog Maintenance</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Interactive SQL</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> - SWL Input Member</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> - Data Output Member</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Retrieval of System Tables</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> - List Databases</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> - List Packages</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> - List Plans</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> - List Tables</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> - User Authorization</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> - Statistic Table</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Environment Settings</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Explain PLAN_TABLE</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> - List PLAN_TABLE - Latest</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> - List PLAN_TABLE - All</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> - Delete from PLAN_TABLE</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> File Server Statistics</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> DB2 Command Execution</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> - Display Command</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> - Display Output</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+          
+         
+      <div><a name="Default_Profile_for_SYSDDM_Utility"></a></div> 
+          
+      <h3> 
+              <a name="x39"></a>SYSDDM Utility Profiles
+      </h3> 
+           
+           
+      <p>The SYSDDM utility is only available with Natural on mainframe
+               computers, UNIX and OpenVMS.
+      </p> 
+           
+      <p>The profiles for the SYSDDM utility provide the following options:</p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="80%"> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th align="left">Option</th> 
+                        
+               <th align="left">Explanation</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> Generate DDM from Adabas FDT &nbsp;</td> 
+                        
+               <td rowspan="12">Determine whether the user may use the SYSDDM
+                  functions of the same names.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Catalog DDM &nbsp;</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Edit DDM &nbsp;</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Delete DDM &nbsp;</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> List DDMs &nbsp;</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> List DDMs with Additional Information &nbsp;</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Copy DDM to Another FDIC File &nbsp;</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Show Defined DBIDs and Used FNRs &nbsp;</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> SQL Services (NDB/NSQ) &nbsp;</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> DL/I Services &nbsp;</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>SQL Services (NSB)</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Rename DDM &nbsp;</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+          
+         
+      <div><a name="Default_Profile_for_SYSERR_Utility"></a></div> 
+          
+      <h3> 
+              <a name="x40"></a>SYSERR Utility Profiles
+      </h3> 
+           
+           
+      <p>The profiles for the SYSERR utility provide the following options:</p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="80%"> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th align="left">Option</th> 
+                        
+               <th align="left">Explanation</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> Add New Messages &nbsp;</td> 
+                        
+               <td rowspan="8">Determine whether the user may use the SYSERR
+                  functions of the same names.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Delete Messages &nbsp;</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Display Messages &nbsp;</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Modify Messages &nbsp;</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Print Messages &nbsp;</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Scan in Messages &nbsp;</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Select Messages from a List &nbsp;</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Translate Messages into Another Language &nbsp;</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>You can allow/disallow these options separately for:</p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">user messages (<span class="key">PF7</span>),
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Natural system messages (<span class="key">PF8</span>).
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+          
+         
+      <div><a name="Default_Profile_for_SYSMAIN_Utility"></a></div> 
+          
+      <h3> 
+              <a name="x41"></a>SYSMAIN Utility Profiles
+      </h3> 
+           
+           
+      <p>As the SYSMAIN utility is not identical on all platforms, some SYSMAIN
+               options/functions may not be available on some platforms.
+      </p> 
+           
+      <p>The SYSMAIN utility can be invoked in two ways:</p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">with the command SYSMAIN,</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">via the application programming interface MAINUSER.</p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>By default, utility profiles defined for the SYSMAIN utility apply to
+               both ways. However, it is possible to define a separate set of utility profiles
+               which control the use of SYSMAIN functions when invoked via MAINUSER. See
+               <a href="nsc_util.htm#MAINUSER">MAINUSER API</a> under Additional Options
+               below for details.
+      </p> 
+           
+      <p>The profiles for the SYSMAIN utility provide the following options:</p>
+           
+            
+            
+      <table border="1" class="color" cellpadding="3" width="80%"> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th align="left">Option</th> 
+                        
+               <th align="left">Explanation</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td nowrap> Programming Objects &nbsp;</td> 
+                        
+               <td rowspan="9">This general setting in the first column of the
+                  screen determines whether the user may use SYSMAIN at all for this type of
+                  object. 
+                  
+                  <p>If this is set to "D" (disallowed), all subordinate
+                                function specifications for this object type must also be set to
+                                "D".
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Debug Environments &nbsp;</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> User Messages &nbsp;</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> DDMs &nbsp;</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Natural Messages &nbsp;</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Profiles &nbsp;</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Rules &nbsp;</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> DL/I Subfiles &nbsp;</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Resources</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>In addition, you can allow/disallow the following functions for each
+               object type individually:
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="80%"> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th align="left">Option</th> 
+                        
+               <th align="left">Determines whether the user may use:</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> Co &nbsp;</td> 
+                        
+               <td>The SYSMAIN function COPY for this type of object.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> De &nbsp;</td> 
+                        
+               <td>The SYSMAIN function DELETE for this type of object.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Fi &nbsp;</td> 
+                        
+               <td>The SYSMAIN function FIND for this type of object.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Im &nbsp;</td> 
+                        
+               <td>The SYSMAIN function IMPORT for this type of object.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Li &nbsp;</td> 
+                        
+               <td>The SYSMAIN function LIST for this type of object.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Mo &nbsp;</td> 
+                        
+               <td>The SYSMAIN function MOVE for this type of object.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Ren &nbsp;</td> 
+                        
+               <td>The SYSMAIN function RENAME for this type of object.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Rep &nbsp;</td> 
+                        
+               <td>The SYSMAIN function REPLACE for this type of object.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> FNAT &nbsp;</td> 
+                        
+               <td>The SYSMAIN function SET FNAT for this type of object.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> FSEC &nbsp;</td> 
+                        
+               <td>The SYSMAIN function SET FSEC for this type of object.
+                  (*)
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> FDIC &nbsp;</td> 
+                        
+               <td>The SYSMAIN function SET FDIC for this type of object.
+                  (*)
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>(*) These options can be set in the default profile and in
+               user-specific profiles, but not in library-specific or user-library-specific
+               profiles.
+      </p> 
+           
+          
+         
+      <div><a name="Default_Profile_for_SYSOBJH_Utility"></a></div> 
+          
+      <h3> 
+              <a name="x42"></a> SYSOBJH - Object Handler - Utility Profiles
+      </h3> 
+           
+           
+      <p>The profiles for the SYSOBJH utility (Natural Object Handler) provide
+               the following options:
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="80%"> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th align="left">Option</th> 
+                        
+               <th align="left">Explanation</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> Unload &nbsp;</td> 
+                        
+               <td rowspan="5">Determine whether the user may use the Object
+                  Handler functions of the same names.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>UnDeLi</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Load &nbsp;</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Delete &nbsp;</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>Scan</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>In addition, you can allow/disallow the above functions for each object
+               type individually:
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="80%"> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th align="left">Option</th> 
+                        
+               <th align="left">Determines whether the function may be applied
+                  to:
+               </th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> Nat &nbsp;</td> 
+                        
+               <td>Natural programming objects.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Err &nbsp;</td> 
+                        
+               <td>Error messages.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> CPr &nbsp;</td> 
+                        
+               <td>Command processors.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> NRe &nbsp;</td> 
+                        
+               <td>Natural-related objects.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Ext &nbsp;</td> 
+                        
+               <td>External objects.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> FDT &nbsp;</td> 
+                        
+               <td>Adabas FDTs.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> MfD &nbsp;</td> 
+                        
+               <td>Mainframe DDMs.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> MfR &nbsp;</td> 
+                        
+               <td>Mainframe-related objects.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> App &nbsp;</td> 
+                        
+               <td>Applications.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>Del</td> 
+                        
+               <td>This option determines whether the Object
+                  Handler parameter DELETEALLOWED may be specified for the function.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Par &nbsp;</td> 
+                        
+               <td>This option determines whether Object Handler parameters may be
+                  specified for the function.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Rep &nbsp;</td> 
+                        
+               <td>This option determines whether the Object Handler parameter
+                  REPLACE may be specified for the function.
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>Also, the profiles for SYSOBJH provide the following general
+               options:
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="80%"> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th align="left">Option</th> 
+                        
+               <th align="left">Explanation</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> Admin &nbsp;</td> 
+                        
+               <td>Determines whether the user may use the "Admin" section of the
+                  Object Handler.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> FSEC &nbsp;</td> 
+                        
+               <td rowspan="2">Determines whether the user may specify the Object
+                  Handler parameters of the same names.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> FDIC &nbsp;</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Transfer only &nbsp;</td> 
+                        
+               <td> 
+                  
+                  <ul> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">Y = Only the transfer format may be used (processes only
+                                        sources).
+                        </p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">N = Transfer and internal formats may be used (processes sources
+                                        and cataloged objects). 
+                        </p> 
+                                   
+                     </li> 
+                               
+                  </ul>
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>In the profiles for SYSOBJH, you can also allow/disallow the following
+               Object Handler direct commands:
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="80%"> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th align="left">Command</th> 
+                        
+               <th align="left">Explanation</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th colspan="2" align="left">Navigation Commands:</th> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> GO</td> 
+                        
+               <td rowspan="10"> 
+                  
+                  <p>Determine whether the user may use the Object Handler direct
+                     commands of the same names.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> - GO HOME</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> - GO UNLOAD</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> - GO LOAD</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> - GO SCAN</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> - GO RESTART</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> - GO ADMIN</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> - GO VIEW</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> - GO FIND</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>- GO UNDELI</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th colspan="2" align="left">Configuration Commands:</th> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> SET</td> 
+                        
+               <td rowspan="7"> 
+                  
+                  <p>Determine whether the user may use the Object Handler direct
+                     commands of the same names.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> - SET TRACE ON</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> - SET TRACE WORKFILE</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> - SET TRACEFILE</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> - SET FREE ON/OFF</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> - SET EXECUTIONMSG ON/OFF</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> - SET ADVANCEDCMD ON/OFF</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th colspan="2" align="left">Show
+                  Commands:
+               </th> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> SHOW</td> 
+                        
+               <td rowspan="7"> 
+                  
+                  <p>Determine whether the user may use the Object Handler direct
+                     commands of the same names.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> - SHOW LAST RESULT</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> - SHOW LAST MESSAGE</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> - SHOW PROFILE</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> - SHOW REPORT</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> - SHOW STATUS</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> - SHOW TRACE</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th colspan="2" align="left">Other
+                  Commands:
+               </th> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> CHANGE WORKPLAN LIBRARY</td> 
+                        
+               <td rowspan="5"> 
+                  
+                  <p>Determine whether the user may use the Object Handler direct
+                     commands of the same names.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> CLEAR</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> INIT</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> READ PROFILE</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> SETTINGS</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+          
+         
+      <div><a name="Default_Profile_for_SYSPARM_Utility"></a></div> 
+          
+      <h3> 
+              <a name="x43"></a> SYSPARM Utility Profiles
+      </h3> 
+           
+           
+      <p>The SYSPARM utility is only available with Natural on mainframe
+               computers.
+      </p> 
+           
+      <p>The profiles for the SYSPARM utility provide the following options:</p>
+           
+            
+            
+      <table border="1" class="color" cellpadding="3" width="80%"> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th align="left">Option</th> 
+                        
+               <th align="left">Explanation</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> List Profiles &nbsp;</td> 
+                        
+               <td rowspan="6">Determine whether the user may use the SYSPARM
+                  functions of the same names.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Display Profile &nbsp;</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Add New Profile &nbsp;</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Modify Profile &nbsp;</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Copy Profile &nbsp;</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Delete Profile &nbsp;</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+          
+         
+      <div><a name="Default_Profile_for_SYSRPC_Utility"></a></div> 
+          
+      <h3> 
+              <a name="x44"></a> SYSRPC Utility Profiles
+      </h3> 
+           
+           
+      <p>The profiles for the SYSRPC utility provide the following options:</p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="80%"> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th align="left">Option</th> 
+                        
+               <th align="left">Explanation</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> Parameter Maintenance &nbsp;</td> 
+                        
+               <td rowspan="5">Determine whether the user may use the SYSRPC
+                  functions of the same names.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Service Directory Maintenance &nbsp;</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Remote Directory Maintenance &nbsp;</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Stub Generation &nbsp;</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Terminate Server &nbsp;</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+          
+         
+      <div><a name="Default_Profile_for_SYSTRANS_Utility"></a></div> 
+          
+      <h3> 
+              <a name="x45"></a> SYSTRANS Utility Profiles
+      </h3> 
+           
+           
+      <p>The SYSTRANS utility is only available with Natural versions prior to
+               4.2 on mainframes and 6.2 on UNIX and Windows. For compatibility reasons,
+               existing utility profiles for SYSTRANS can still be maintained. However,
+               instead of SYSTRANS, it is recommended that the
+               <a href="nsc_util.htm#Default_Profile_for_SYSOBJH_Utility">SYSOBJH
+                  utility</a> be used and profiles defined for it.
+      </p> 
+           
+      <p>The profiles for the SYSTRANS utility provide the following
+               options:
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="80%"> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th align="left">Option</th> 
+                        
+               <th align="left">Determines whether the user may use:</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> Unload &nbsp;</td> 
+                        
+               <td>The SYSTRANS Unload function.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Load &nbsp;</td> 
+                        
+               <td>The SYSTRANS Load function.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Replace &nbsp;</td> 
+                        
+               <td>The Replace option of the SYSTRANS Load function.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Scan &nbsp;</td> 
+                        
+               <td>The SYSTRANS Scan function.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Restart &nbsp;</td> 
+                        
+               <td>The SYSTRANS Restart function.</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>In addition, you can allow/disallow the above functions for each object
+               type individually:
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="80%"> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th align="left">Option</th> 
+                        
+               <th align="left">Determines whether the function may be applied
+                  to:
+               </th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> NAT &nbsp;</td> 
+                        
+               <td>Natural programming objects.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Map &nbsp;</td> 
+                        
+               <td>Maps.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> DDM &nbsp;</td> 
+                        
+               <td>DDMs.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> FDT &nbsp;</td> 
+                        
+               <td>Adabas FDTs.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Err &nbsp;</td> 
+                        
+               <td>Error messages.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> CPr &nbsp;</td> 
+                        
+               <td>Command processors.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Lib &nbsp;</td> 
+                        
+               <td>Libraries.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> All &nbsp;</td> 
+                        
+               <td>All objects on the work file to be processed.</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>Also, the profiles for SYSTRANS provide the following options, which
+               apply to the Direct Transfer functions of SYSTRANS:
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="80%"> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th align="left">Option</th> 
+                        
+               <th align="left">Determines whether the user may use:</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td nowrap> Direct Transfer Functions &nbsp;</td> 
+                        
+               <td>Any SYSTRANS Direct Transfer functions (using Natural
+                  RPC).
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Transfer &nbsp;</td> 
+                        
+               <td>The SYSTRANS function "Direct Transfer (using
+                  RPC)".
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Restart &nbsp;</td> 
+                        
+               <td>The SYSTRANS function "Restart Direct
+                  Transfer".
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Report &nbsp;</td> 
+                        
+               <td>The SYSTRANS function "Get Report from Direct Transfer
+                  Load".
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Define &nbsp;</td> 
+                        
+               <td>The SYSTRANS function "Define Local Transfer
+                  System".
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+          
+         
+      <div><a name="AddOptions"></a></div> 
+          
+      <h3> Additional Options</h3> 
+           
+           
+      <p>The following Additional Options are part of the default security
+               profiles of all utilities. They can only be set in the <em>default</em>
+               profiles, but not in individual user-specific, library-specific or
+               user-library-specific profiles. For each utility, the Additional Options
+               settings apply to all utility profiles related to that utility.
+      </p> 
+           
+      <p>If you press <span class="key">PF4</span> on a basic utility default profile screen,
+               a window will be displayed from which you can select the following options:
+      </p>
+           
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">Maintenance Information</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Security Notes</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Owners</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Session Options</p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>The options for which something has already been specified or defined
+               are marked with a plus sign (+).
+      </p> 
+           
+      <p>You can select one or more items from the window by marking them with
+               any character. For each item selected, an additional window will be
+               displayed:
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="80%"> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th align="left">Additional Option</th> 
+                        
+               <th align="left">Explanation</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> Maintenance Information (display only)</td> 
+                        
+               <td>In this window, the following information is displayed: 
+                  
+                  <ul> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">the date and time when the security profile was created, the ID
+                           of the ADMINISTRATOR who created it, and (if applicable) the IDs of the
+                                        co-owners who countersigned for the creation;
+                        </p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">the date and time when the security profile was last modified,
+                                        the ID of the ADMINISTRATOR who made the last modification, and (if applicable)
+                                        the IDs of the co-owners who countersigned for the modification.
+                        </p> 
+                                   
+                     </li> 
+                               
+                  </ul>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Security Notes &nbsp;</td> 
+                        
+               <td>In this window, you may enter your notes on the security
+                  profile.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Owners &nbsp;</td> 
+                        
+               <td>In this window, you may enter up to eight IDs of
+                  ADMINISTRATORs. Only the ADMINISTRATORs specified here will be allowed to
+                  maintain this utility security profile. If no owner is specified, any user of
+                  type ADMINISTRATOR may maintain the security profile. 
+                  
+                  <p>For each owner, the number of co-owners whose countersignatures
+                                will be required for maintenance permission may optionally be specified in the
+                                field after the ID.
+                  </p> 
+                            
+                  <p>For an explanation of owners and co-owners, see the section
+                                <a href="nsc_count.htm#nsc_count">Countersignatures</a>.
+                  </p>
+               </td>
+                        
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Session Options &nbsp;</td> 
+                        
+               <td> See below.</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+          
+      <div><a name="d0e28859"></a></div> 
+           
+      <h4>Session Options</h4> 
+            
+            
+      <p>If you mark "Session Options" in the Additional Options
+                window with any character, the Session Options window will be displayed. In
+                this window, you can set the following options:
+      </p> 
+             
+             
+      <table border="1" class="color" cellpadding="3" width="80%"> 
+                  
+                 
+         <thead align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <th align="left">Option</th> 
+                         
+               <th align="left">Explanation</th> 
+                        
+            </tr> 
+                    
+         </thead> 
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <td> <a name="AccessRecorded"></a> Access Recorded
+                   
+               </td> 
+                         
+               <td>
+                  <table border="0" width="100%"> 
+                                 
+                                
+                     <tbody align="left" valign="top"> 
+                                    
+                        <tr> 
+                                        
+                           <td colspan="2">This option determines whether
+                              users' access to the utility is to be recorded or not.
+                           </td> 
+                                       
+                        </tr> 
+                                    
+                        <tr> 
+                                        
+                           <th> Y</th> 
+                                        
+                           <td>Every time a user invokes the utility, a record will be
+                              written by Natural Security. You may review the use of the utilities by viewing
+                              these access records (see <a href="nsc_admin.htm#Logon_Records_Processing">Logon
+                                               Records</a> in the section <cite>Administrator Services</cite> for
+                                            further information).
+                           </td> 
+                                       
+                        </tr> 
+                                    
+                        <tr> 
+                                        
+                           <th> N</th> 
+                                        
+                           <td>Access to the utility is not recorded.</td> 
+                                       
+                        </tr> 
+                                   
+                     </tbody> 
+                               
+                  </table>
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> <a name="PrivilegedGroup"></a> Privileged
+                  Groups
+               </td> 
+                         
+               <td>
+                  <table border="0" width="100%"> 
+                                 
+                                
+                     <tbody align="left" valign="top"> 
+                                    
+                        <tr> 
+                                        
+                           <td colspan="2"> With this option, you can
+                              influence the order in which Natural Security searches for the appropriate
+                              utility profile to apply. It determines whether or not utility profiles defined
+                              for groups which are specified as <a href="nsc_user.htm#PrivGroups">Privileged
+                                               Groups</a> in a user security profile are part of the search order. See
+                                            the section <a href="nsc_util.htm#Which_Utility_Profile_Applies">Which
+                                               Utility Profile Applies?</a> above. 
+                           </td> 
+                                       
+                        </tr> 
+                                    
+                        <tr> 
+                                        
+                           <th> Y</th> 
+                                        
+                           <td>User-library-specific and user-specific profiles of
+                              privileged groups are part of the search order.
+                           </td> 
+                                       
+                        </tr> 
+                                    
+                        <tr> 
+                                        
+                           <th> N</th> 
+                                        
+                           <td>Privileged groups have no influence on the search
+                              order.
+                           </td> 
+                                       
+                        </tr> 
+                                    
+                        <tr> 
+                                        
+                           <td colspan="2">If the option *GROUP Only (see
+                              below) is set to "Y", this option must be set to "N".
+                           </td> 
+                                       
+                        </tr> 
+                                   
+                     </tbody> 
+                               
+                  </table>
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> <a name="SternGROUPonly"></a> *GROUP Only 
+               </td> 
+                         
+               <td>
+                  <table border="0" width="100%"> 
+                                 
+                                
+                     <tbody align="left" valign="top"> 
+                                    
+                        <tr> 
+                                        
+                           <td colspan="2"> With this option, you can
+                              influence the order in which Natural Security searches for the appropriate
+                              utility profile to apply: 
+                           </td> 
+                                       
+                        </tr> 
+                                    
+                        <tr> 
+                                        
+                           <th> Y</th> 
+                                        
+                           <td>User-library-specific and user-specific profiles of the
+                              current group (as determined by the value of the Natural system variable
+                              *GROUP) are part of the search order, but those of any other group in which the
+                              user is contained are not.
+                           </td> 
+                                       
+                        </tr> 
+                                    
+                        <tr> 
+                                        
+                           <th> N</th> 
+                                        
+                           <td>User-library-specific and user-specific profiles of
+                              <em>all</em> groups in which the user is contained are part of the search
+                                            order.
+                           </td> 
+                                       
+                        </tr> 
+                                    
+                        <tr> 
+                                        
+                           <td colspan="2"> 
+                              
+                              <p>See the section
+                                                <a href="nsc_util.htm#Which_Utility_Profile_Applies">Which Utility
+                                                   Profile Applies?</a> above for details. 
+                              </p> 
+                                            
+                              <p>If this option is set to "Y", the option Privileged Groups
+                                                (see above) must be set to "N".
+                              </p>
+                           </td> 
+                                       
+                        </tr> 
+                                   
+                     </tbody> 
+                               
+                  </table>
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> <a name="MAINUSER"></a> MAINUSER API &nbsp;
+               </td> 
+                         
+               <td> 
+                  
+                  <p>This option is only available for the SYSMAIN utility. It
+                     controls the use of SYSMAIN functions invoked via the application programming
+                     interface (API) MAINUSER.
+                  </p> 
+                             
+                  <p>If you set this option to "Y", a separate entry named MAINUSER
+                     will be created on the Define Utility Defaults/Templates screen. With this, you
+                     can create a separate set of utility profiles to allow/disallow the use of
+                     SYSMAIN functions when invoked via the MAINUSER API. These profiles are
+                                 independent of the "normal" SYSMAIN utility profiles which control the use
+                                 SYSMAIN functions when invoked via the SYSMAIN command.
+                  </p> 
+                             
+                  <p>The components of the MAINUSER utility profiles are the same as
+                                 those of the <a href="nsc_util.htm#Default_Profile_for_SYSMAIN_Utility">SYSMAIN
+                                    utility profiles</a>.
+                  </p>
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> <a name="SYSOBJHutilitiesoption"></a>Utilities option
+                   
+               </td> 
+                         
+               <td>
+                  <table border="0" width="100%"> 
+                                 
+                                
+                     <tbody align="left" valign="top"> 
+                                    
+                        <tr> 
+                                        
+                           <td colspan="2"> 
+                              
+                              <p>This option is only available for the utilities SYSMAIN and
+                                 SYSOBJH. It can be used to apply the "<a href="nsc_lib.htm#Maintenance_with_Natural_Utilities">Utilities</a>" option in
+                                                library profiles to these utilities.
+                              </p>
+                           </td> 
+                                       
+                        </tr> 
+                                    
+                        <tr> 
+                                        
+                           <th> Y</th> 
+                                        
+                           <td>The "Utilities" option in a library profile determines who
+                              may use SYSMAIN/SYSOBJH to process the contents of the library.
+                           </td> 
+                                       
+                        </tr> 
+                                    
+                        <tr> 
+                                        
+                           <th> N</th> 
+                                        
+                           <td>The "Utilities" option in library profiles has no effect
+                              for SYSOBJH; it has no effect for SYSMAIN if no utility profile is defined for
+                              SYSMAIN.
+                           </td> 
+                                       
+                        </tr> 
+                                   
+                     </tbody> 
+                               
+                  </table>
+               </td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+           
+          
+        
+       
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="nsc_util.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../nsc/nsc_util.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/nsc/nsc_util.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc_ddmos.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc_appl.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

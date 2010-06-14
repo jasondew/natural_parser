@@ -1,0 +1,594 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Activating the Natural Web I/O Interface Daemon on UNIX</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="inst-nwodaemon"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../install/inst-nwodaemon.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/install/inst-nwodaemon.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="inst-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="inst-ndv.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="inst-nsc.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Installation on UNIX&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x9"></a> 
+               <a name="x10"></a> 
+               <a name="x11"></a>Activating the Natural Web I/O Interface Daemon on
+               UNIX
+         </h1>
+      </div> 
+         
+      <p>When a Natural Web I/O Interface daemon is used, a procedure to activate
+             the daemon may be called during system startup.
+      </p> 
+         
+      <p>The Natural installation process provides a Natural Web I/O Interface
+             daemon start/stop service procedure. The name of the procedure will be
+             generated depending on the <cite>$SAG</cite> directory and the Natural
+             version.
+      </p> 
+         
+      <p>Furthermore, the Natural installation process determines the platform
+             automatically and prepares the system (V style or AIX) to execute the
+             start/stop service procedure during start/stop of the system. Depending on the
+             platform, the system directory for initialization and, if needed, the runlevel
+             startup directories will be selected. The start/stop service procedure will be
+             copied to the system directory for initialization and links will be created in
+             the runlevel startup directories.
+      </p> 
+         
+      <p>The Natural installation process installs the Natural Web I/O Interface
+             daemon start/stop service as an optional feature. You can also set up this
+             service manually as described below. This document
+             covers the following topics: 
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="inst-nwodaemon.htm#inst-nwodaemon-systemv">Preparing the System V Style Startup Procedure</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="inst-nwodaemon.htm#inst-nwodaemon-aix">Preparing the AIX Startup Procedure</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="inst-nwodaemon.htm#inst-nwodaemon-sample">Sample of a Natural Web I/O Interface Daemon Start/Stop Procedure</a></p>
+         </li>
+      </ul> 
+         
+      <p>To verify the operation of the Natural Web I/O Interface daemon, invoke a
+             Natural Web I/O Interface client on Windows and connect to the system on which
+             the server runs. Use the port that was specified when starting the Natural Web
+             I/O Interface daemon. 
+      </p>
+      <hr>
+      <div><a name="inst-nwodaemon-systemv"></a></div> 
+         
+      <h2>Preparing the System V Style Startup Procedure </h2> 
+          
+          
+      <p>The procedure template <cite>nwosrvd.tpl</cite> in the
+              <cite>$NATDIR/$NATVERS/INSTALL</cite> directory may be used to create a
+              script which is used to invoke the Natural Web I/O Interface daemon during
+              system startup. 
+      </p> 
+          
+      <p>The following table shows where the <cite>init.d</cite> and
+              <cite>rc3.d</cite> directories are located on the various platforms. In
+              the following description, <cite>init.d</cite> or
+              <cite>rc3.d</cite> stand for the relevant path indicated below for the
+              platform you are using.
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th>Platform</th> 
+                       
+               <th align="center">System Directory for Initialization</th> 
+                       
+               <th align="center">Runlevel Startup Directory</th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td>Solaris</td> 
+                       
+               <td align="center"> <cite>/etc/init.d</cite> 
+               </td> 
+                       
+               <td align="center"> <cite>/etc/rc3.d</cite> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>HP-UX</td> 
+                       
+               <td align="center"> <cite>/sbin/init.d</cite> 
+               </td> 
+                       
+               <td align="center"> <cite>/sbin/rc3.d</cite> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>Linux</td> 
+                       
+               <td align="center"> <cite>/etc/init.d</cite> 
+               </td> 
+                       
+               <td align="center"> <cite>/etc/init.d/rc3.d or
+                     /etc/init.d/rc5.d</cite> 
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>A sample copy of the Natural Web I/O Interface daemon start/stop
+              procedure is shown below. It can be edited with a text editor. 
+      </p> 
+          
+      <p>To set up the system, proceed as described below: </p> 
+          
+      <ol> 
+              
+         <li> 
+                  
+            <p class="initem">Log in as user "root".</p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Copy the template <cite>nwosrvd.tpl</cite> to the
+                      <cite>init.d</cite> system directory and rename it, for example to
+                      <cite>sag1nwo63srv</cite>.
+            </p>
+                  
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">If already available, create a backup copy of your current
+                      <cite>sag1nwo63srv</cite> file contained in the
+                      <cite>init.d</cite> directory (see the above table).
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Set the following environment variables in the
+                      <cite>sag1nwo63srv</cite> procedure:
+            </p> 
+                   
+                   
+            <table border="1" class="color" cellpadding="3" width="80%">
+               <colgroup>
+                  <col width="13%">
+                  <col width="67%">
+               </colgroup> 
+                        
+                       
+               <tbody align="left" valign="top"> 
+                           
+                  <tr> 
+                               
+                     <th><code>NATDIR</code></th> 
+                               
+                     <td>Location where Natural was installed.</td> 
+                              
+                  </tr> 
+                           
+                  <tr> 
+                               
+                     <th><code>NATVERS</code></th> 
+                               
+                     <td>Natural version number.</td> 
+                              
+                  </tr> 
+                           
+                  <tr> 
+                               
+                     <th><code>NATADM</code></th> 
+                               
+                     <td>The login name of the Natural system administrator responsible
+                        for this Natural Web I/O Interface daemon. It is assumed that this
+                        administrator account is called "sag", and that the
+                        user ID is already known to the system. It does not have to be a user with root
+                        privileges.
+                     </td> 
+                              
+                  </tr> 
+                           
+                  <tr> 
+                               
+                     <th><code>NWODIR</code></th> 
+                               
+                     <td>Home directory of the product located at
+                        <cite>$NATDIR/$NATVERS/nwo</cite>.
+                     </td> 
+                              
+                  </tr> 
+                           
+                  <tr> 
+                               
+                     <th><code>NWONODE</code></th> 
+                               
+                     <td>Name of the node on which the Natural Web I/O Interface daemon
+                        is installed. 
+                     </td> 
+                              
+                  </tr> 
+                           
+                  <tr> 
+                               
+                     <th><code>NWO_SRVDCONF</code></th> 
+                               
+                     <td><cite>$NATDIR/nwo/$NWONODE/nwosrvd.conf</cite></td>
+                               
+                              
+                  </tr> 
+                          
+               </tbody> 
+                      
+            </table> 
+                   
+                  
+            <p class="note"><strong>Note:</strong><br> The Bourne shell does not allow blanks before and after the equals
+                      sign in the lines to be customized.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Create a link
+                      "S<var>99</var>sag1nwo63srv" to the
+                      <cite>sag1nwo63srv</cite> procedure in the <cite>rc3.d</cite>
+                      directory.
+            </p> 
+                 
+         </li> 
+             
+      </ol> 
+          
+      <p>You may create a link to the Natural Web I/O Interface daemon start/stop
+              procedure in the runlevel 3 startup directory of your UNIX machine. The
+              <cite>rc3.d</cite> directory contains several Bourne shell scripts or
+              links to Bourne shell scripts that start with "S"
+              followed by a number, for example "99". A lower
+              number will be executed first. If you add a file or a link to this directory,
+              the respective code is executed when the system changes to "multi-user
+              mode".
+      </p> 
+         
+      <div class="noprint">
+         <p><a href="inst-nwodaemon.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="inst-nwodaemon-aix"></a></div> 
+         
+      <h2>Preparing the AIX Startup Procedure</h2> 
+          
+          
+      <p>The procedure template <cite>nwosrvd.tpl</cite> in the
+              <cite>$NATDIR/$NATVERS/INSTALL</cite> directory may be used to create a
+              script which is used to invoke the Natural Web I/O Interface daemon during
+              system startup. 
+      </p> 
+          
+      <p>To set up the system, proceed as described below: </p> 
+          
+      <ol> 
+              
+         <li> 
+                  
+            <p class="initem">Log in as user "root".</p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Copy the template <cite>nwosrvd.tpl</cite> to the
+                      <cite>etc</cite> system directory and rename it, for example to
+                      <cite>sag1nwo63srv</cite>.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Set the following environment variables in the
+                      <cite>sag1nwo63srv</cite> procedure:
+            </p> 
+                   
+                   
+            <table border="1" class="color" cellpadding="3" width="80%">
+               <colgroup>
+                  <col width="12%">
+                  <col width="68%">
+               </colgroup> 
+                        
+                       
+               <tbody align="left" valign="top"> 
+                           
+                  <tr> 
+                               
+                     <th><code>NATDIR</code></th> 
+                               
+                     <td>Location where Natural was installed.</td> 
+                              
+                  </tr> 
+                           
+                  <tr> 
+                               
+                     <th><code>NATVERS</code></th> 
+                               
+                     <td>Natural version number.</td> 
+                              
+                  </tr> 
+                           
+                  <tr> 
+                               
+                     <th><code>NATADM</code></th> 
+                               
+                     <td>The login name of the Natural system administrator responsible
+                        for this Natural Web I/O Interface daemon. It is assumed that this
+                        administrator account is called "sag", and that the
+                        user ID is already known to the system. It does not have to be a user with root
+                        privileges.
+                     </td> 
+                              
+                  </tr> 
+                           
+                  <tr> 
+                               
+                     <th><code>NWODIR</code></th> 
+                               
+                     <td>Home directory of the product located at
+                        <cite>$NATDIR/$NATVERS/nwo</cite>.
+                     </td> 
+                              
+                  </tr> 
+                           
+                  <tr> 
+                               
+                     <th><code>NWONODE</code></th> 
+                               
+                     <td>Name of the node on which Natural Web I/O Interface daemon is
+                        installed. 
+                     </td> 
+                              
+                  </tr> 
+                           
+                  <tr> 
+                               
+                     <th><code>NWO_SRVDCONF</code></th> 
+                               
+                     <td><cite>$NATDIR/nwo/$NWONODE/nwosrvd.conf</cite></td>
+                               
+                              
+                  </tr> 
+                          
+               </tbody> 
+                      
+            </table> 
+                   
+                  
+            <p class="note"><strong>Note:</strong><br> The Bourne shell does not allow blanks before and after the equals
+                      sign in the lines to be customized.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">The <cite>/etc/inittab</cite> file supplies the script to the
+                      init command's role as a general process dispatcher. Therefore, enter a record
+                      with the <cite>sag1nwo63srv</cite> script in the
+                      <cite>/etc/inittab</cite> file using the
+                      <code>mkitab</code> command. For example:
+            </p><pre class="command-input">mkitab "sag1nwo63srv:3:wait:/etc/sag1nwo63srv &gt; dev/console"</pre> 
+                 </li> 
+              
+         <li> 
+                  
+            <p class="initem">Verify your changes to make sure that the changes made consist only of
+                      those changes desired.
+            </p> 
+                 
+         </li> 
+             
+      </ol> 
+         
+      <div class="noprint">
+         <p><a href="inst-nwodaemon.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="inst-nwodaemon-sample"></a></div> 
+         
+      <h2>Sample of a Natural Web I/O Interface Daemon Start/Stop
+             Procedure
+      </h2> 
+          
+          
+          <pre class="verbatim">#!/bin/sh
+#
+# Copyright (c) 2007 Software AG, Germany. All rights reserved.
+#
+# Start/stop script for Web I/O Interface Daemon      
+#
+#===================================================================
+
+#
+# For a logfile see variable "logfile" below!!!
+#
+
+start_daemon ()
+{
+  echo "Starting Web I/O Interface Daemon ..."
+  if [ "x$pid" = 'x' ]; then
+     if [ -x "${nwosrvd}" ]; then
+        . ${natenv} &gt; /dev/null &amp;&amp; ${nwosrvd} ${PORT} &gt; $logfile 2&gt;&amp;1 &amp;
+     else
+        exit 1
+     fi
+     sleep 2
+     chmod 775 $logfile
+     chown ${NATADM}: $logfile
+     pid='ps -A -o pid= -o args= | grep $PORT | grep nwosrvd | grep -v grep | awk '{print $1}''
+     if [ "x$pid" = 'x' ]; then
+        echo "failed"
+     else
+        echo "done"
+     fi
+  else
+     echo "skipped"  
+  fi
+}
+
+stop_daemon ()
+{
+  echo "Stopping Web I/O Interface Daemon ..." 
+  if [ "x$pid" != 'x' ]; then
+     kill -TERM $pid  
+     sleep 2
+     ps -p $pid &gt; /dev/null 2&gt;&amp;1
+     pidstat="echo $?"
+     if [ "$pidstat" != 0 ]; then
+        echo "done"
+     else
+        echo "failed"
+     fi
+  else
+     echo "skipped"
+  fi
+}
+
+
+if [ ! -r /opt/softwareag/nat/v6320/INSTALL/natenv ] ; then
+  echo "$0: Natenv not found!"
+  exit 6
+else
+  natenv="/opt/softwareag/nat/v6320/INSTALL/natenv "
+fi
+
+SAG=/opt/softwareag                   # customize
+export SAG                            # customize
+
+NATDIR=/opt/softwareag/nat            # customize
+NATVERS=v6320                         # customize
+NATADM=sag                            # customize
+NWODIR=/opt/softwareag/nat/v6320/nwo  # customize
+NWONODE=computerName                  # customize
+NWO_SRVDCONF=/opt/softwareag/nat/v6320/nwo/computerName/nwosrvd.conf  # customize
+NWOTIMEOUT=0                          # customize
+
+PORT=pnum                             # customize
+
+export NATDIR NATVERS NWODIR NWONODE NWO_SRVDCONF NWOTIMEOUT PORT
+
+# needed for longer output of the ps command on Linux
+COLUMNS=500
+# needed for the options -o or -f of the ps command on hp-ux
+UNIX95=
+
+nwosrvd=$NATDIR/$NATVERS/nwo/bin/nwosrvd
+logfile=$NATDIR/nwo/$NWONODE/nwosrv_${PORT}.log
+rfile=$NATDIR/nwo/$NWONODE/nwosrvd.conf
+
+#look pid of the server running on port $PORT
+pid=''
+pid='ps -A -o pid= -o args= | grep $PORT | grep nwosrvd | grep -v grep | awk '{print $1}''
+# Startup the daemon
+case "$1" in
+  start)
+    start_daemon
+    ;;
+  stop)
+    stop_daemon
+    ;;
+  *)
+    echo "Usage: $0 {start|stop}"
+    exit 1
+    ;;
+esac
+#
+#===================================================================
+#</pre> 
+         <div class="noprint">
+         <div class="nospy">
+            <p><a href="inst-nwodaemon.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../install/inst-nwodaemon.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/install/inst-nwodaemon.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="inst-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="inst-ndv.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="inst-nsc.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

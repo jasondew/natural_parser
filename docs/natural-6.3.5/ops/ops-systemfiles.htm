@@ -1,0 +1,1452 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>System Files</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="ops-systemfiles"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../ops/ops-systemfiles.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/ops/ops-systemfiles.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="ops-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="ops-parms.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="ops-workfiles.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Operations&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+         
+      <div class="nospytext">
+         <h1> 
+                <a name="x8"></a>System Files
+         </h1>
+      </div> 
+          
+      <p>Natural for
+              UNIX stores objects in files
+              accessible by operating system functions. Unlike Natural for Mainframes where
+              the objects are stored in Adabas system files, Natural for UNIX stores the objects in specific directories on the disk. Thus,
+              a database such as Adabas is not required to run Natural for UNIX.
+      </p> 
+          
+      <p>This document covers the following
+              topics:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="ops-systemfiles.htm#ops-sysfile-structure">System File Structure</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="ops-systemfiles.htm#ops-sysfile-rights">Access Rights</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="ops-systemfiles.htm#ops-sysfile-fnat-fuser">System Files FNAT and FUSER</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="ops-systemfiles.htm#ops-sysfile-fddm">System File FDDM</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="ops-systemfiles.htm#ops-sysfile-important">Important Information and Warnings</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="ops-systemfiles.htm#ops-sysfile-filedir">The File FILEDIR.SAG</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="ops-systemfiles.htm#ops-sysfile-portable">Portable Natural System Files</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="ops-systemfiles.htm#ops-sysfile-rootdir">Natural Root Directory</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="ops-systemfiles.htm#ops-sysfile-semaphore">Synchronizing Access to the System Files Using Semaphores</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="ops-systemfiles.htm#ops-nfs">Using NFS to Store Natural Libraries</a></p>
+         </li>
+      </ul>
+      <hr>
+      <div><a name="ops-sysfile-structure"></a></div> 
+          
+      <h2>System File Structure</h2> 
+           
+           
+      <p>By default, the Natural libraries are created as subdirectories below
+               the Natural root directory of a specific Natural version. The subdirectories
+               have the same names as the libraries.
+      </p> 
+           
+      <p>The Natural objects are stored as files in the subdirectories. The file
+               name for a Natural object has the following form:
+      </p> 
+           <pre class="verbatim"><var>file-name</var>.N<var>KT</var></pre> 
+            
+            <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="23%">
+            <col width="74%">
+         </colgroup> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td><var>file-name</var></td> 
+                        
+               <td>This the name of the object. See also
+                  <a href="../using/use_rules.htm#use_rules-Object_Names">Object
+                               Naming Conventions</a> in <cite>Using Natural</cite>.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>N</td> 
+                        
+               <td>The first character of the extension is always
+                  "N". It stands for "Natural".
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><var>K</var></td> 
+                        
+               <td>
+                  <table border="0" width="100%"> 
+                               
+                     <tbody align="left" valign="top"> 
+                                   
+                        <tr> 
+                                       
+                           <td colspan="2">The second character of the
+                              extension can be one of the following:
+                           </td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td>S</td> 
+                                       
+                           <td>for source files</td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td>G</td> 
+                                       
+                           <td>for generated programs</td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td>R</td> 
+                                       
+                           <td> for resources</td> 
+                                      
+                        </tr> 
+                                  
+                     </tbody> 
+                              
+                  </table>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><var>T</var></td> 
+                        
+               <td>The third character of the extension stands of
+                  the type of the object. For valid values, see the list below. 
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>For example, the source program <code>TESTPROG</code> is stored as file
+               <cite>TESTPROG.NSP</cite>, while the generated code for the map
+               <code>TESTMAP</code> is stored as file <cite>TESTMAP.NGM</cite>. 
+      </p> 
+           
+      <p class="note"><strong>Note:</strong><br>The file name is not always identical to the object name. Both the
+               current object name and the corresponding internal object name are documented
+               in the file <a href="ops-systemfiles.htm#ops-sysfile-filedir">FILEDIR.SAG</a>.
+      </p>
+           
+           
+      <p>The following object types and the respective letters and numbers are
+               used for the extensions available: 
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="16%">
+            <col width="81%">
+         </colgroup> 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>Letter or Number</th> 
+                        
+               <th>Object Type</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td>A</td> 
+                        
+               <td>Parameter data area (PDA)</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>C</td> 
+                        
+               <td>Copycode</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>D</td> 
+                        
+               <td>DDM </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>G</td> 
+                        
+               <td>Global data area (GDA) </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>H</td> 
+                        
+               <td>Helproutine</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>L</td> 
+                        
+               <td>Local data area (LDA) </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>M</td> 
+                        
+               <td>Map</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>N</td> 
+                        
+               <td>Subprogram</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>P</td> 
+                        
+               <td>Program</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>S</td> 
+                        
+               <td>Subroutine</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>T</td> 
+                        
+               <td>Text</td> 
+                       
+            </tr> 
+                     
+                    
+            <tr> 
+                        
+               <td>4</td> 
+                        
+               <td>Class</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>5</td> 
+                        
+               <td>Command processor </td> 
+                       
+            </tr> 
+                     
+                    
+            <tr> 
+                        
+               <td>7</td> 
+                        
+               <td>Function</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>8</td> 
+                        
+               <td>Adapter</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+          
+      <div class="noprint">
+         <p><a href="ops-systemfiles.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="ops-sysfile-rights"></a></div> 
+          
+      <h2> 
+              <a name="x9"></a>Access Rights
+      </h2> 
+           
+           
+      <p>By default, objects allocated by Natural get the access rights
+               "rw-rw-rw-". This makes sure that users not
+               belonging to the group of the owner (that is, other users) can recatalog
+               Natural programs. If this is not desirable, you have to run the UNIX utility
+               <code>umask</code> and set the appropriate mask.
+      </p> 
+          
+      <div class="noprint">
+         <p><a href="ops-systemfiles.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="ops-sysfile-fnat-fuser"></a></div> 
+          
+      <h2> 
+              <a name="x10"></a> 
+              <a name="x11"></a>System Files FNAT and FUSER
+      </h2> 
+           
+           
+      <p>The Natural system files <code>FNAT</code> (for system programs) and
+               <code>FUSER</code> (for user-written programs) are located in different
+               subdirectories. 
+      </p> 
+           
+      <p><code>FNAT</code> assumes the following directory structure: 
+      </p> 
+           <pre class="verbatim">FNAT
+<img src="graphics/hierarchy.gif" alt=" " width="20" height="16">LIBDIR.SAG
+<img src="graphics/hierarchy.gif" alt=" " width="20" height="16">SYSTEM
+     <img src="graphics/hierarchy.gif" alt=" " width="20" height="16">FILEDIR.SAG
+     <img src="graphics/hierarchy.gif" alt=" " width="20" height="16">SRC
+     <img src="graphics/hierarchy.gif" alt=" " width="20" height="16">GP
+     <img src="graphics/hierarchy.gif" alt=" " width="20" height="16">ERR
+     <img src="graphics/hierarchy.gif" alt=" " width="20" height="16">RES
+<img src="graphics/hierarchy.gif" alt=" " width="20" height="16">SYS*
+     <img src="graphics/hierarchy.gif" alt=" " width="20" height="16">FILEDIR.SAG
+     <img src="graphics/hierarchy.gif" alt=" " width="20" height="16">SRC
+     <img src="graphics/hierarchy.gif" alt=" " width="20" height="16">GP
+     <img src="graphics/hierarchy.gif" alt=" " width="20" height="16">ERR
+     <img src="graphics/hierarchy.gif" alt=" " width="20" height="16">RES</pre> 
+           <p> 
+               <a name="x12"></a>The file <cite>LIBDIR.SAG</cite>, which is only
+               available for <code>FNAT</code>, contains information on all further installed
+               Software AG products using Natural. This information can be displayed by using
+               the system command <a href="../syscom/sysprod.htm"><code>SYSPROD</code></a>. 
+      </p>
+           
+           
+      <p><code>FUSER</code> assumes the following directory structure: 
+      </p> 
+           <pre class="verbatim">FUSER
+<img src="graphics/hierarchy.gif" alt=" " width="20" height="16">SYSTEM
+     <img src="graphics/hierarchy.gif" alt=" " width="20" height="16">FILEDIR.SAG
+     <img src="graphics/hierarchy.gif" alt=" " width="20" height="16">SRC
+     <img src="graphics/hierarchy.gif" alt=" " width="20" height="16">GP
+     <img src="graphics/hierarchy.gif" alt=" " width="20" height="16">ERR
+     <img src="graphics/hierarchy.gif" alt=" " width="20" height="16">RES
+<img src="graphics/hierarchy.gif" alt=" " width="20" height="16"><var>user-library1</var>
+     <img src="graphics/hierarchy.gif" alt=" " width="20" height="16">FILEDIR.SAG
+     <img src="graphics/hierarchy.gif" alt=" " width="20" height="16">SRC
+     <img src="graphics/hierarchy.gif" alt=" " width="20" height="16">GP
+     <img src="graphics/hierarchy.gif" alt=" " width="20" height="16">ERR
+     <img src="graphics/hierarchy.gif" alt=" " width="20" height="16">RES</pre> 
+           <p>The name of a user library must not start with
+               "SYS".
+      </p> 
+           
+      <p>The directory structure is generated during the installation of
+               Natural. The directories representing the system and user libraries contain the
+               following: 
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                    
+                   
+            <p class="initem"><strong><cite>FILEDIR.SAG </cite></strong><br>This file contains internal library information used by Natural. For
+                       further information, see <a href="ops-systemfiles.htm#ops-sysfile-filedir">The
+                  File FILEDIR.SAG</a> below.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                    
+                   
+            <p class="initem"><strong> 
+                          <a name="x13"></a><cite>SRC</cite></strong><br>This subdirectory contains the Natural source objects stored in the
+                       library.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                    
+                   
+            <p class="initem"><strong> 
+                          <a name="x14"></a><cite>GP</cite></strong><br>This subdirectory contains the generated Natural programs stored in
+                       the library. 
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                    
+                   
+            <p class="initem"><strong> 
+                          <a name="x15"></a><cite>ERR</cite></strong><br>This subdirectory contains the error messages stored in the library.
+                       
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                    
+                   
+            <p class="initem"><strong> 
+                          <a name="x16"></a><cite>RES</cite></strong><br>This subdirectory contains the private and shared resources stored in
+                       the library. 
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>DDMs can be stored in local libraries. If DDMs are used by a program,
+               Natural first searches the current library, then the steplibs, and then the
+               library <code>SYSTEM</code>. If the DDMs are not found, the program does not
+               compile and displays an error message. However, if
+               <a href="ops-systemfiles.htm#ops-sysfile-fddm-activate">FDDM mode</a> has been
+               activated, Natural searches for the DDMs only in the system file
+               <code>FDDM</code>.
+      </p> 
+           
+      <p>The paths to the system files <code>FNAT</code>, <code>FUSER</code> and
+               <code>FDDM</code> are defined in the <a href="../config/cfg-over.htm">Configuration Utility</a>. System files are
+               version-dependent. Therefore, Natural can only access system files of the
+               current Natural version. It is recommended that you only have one
+               <code>FNAT</code> system file. It is possible, however, to define several
+               <code>FUSER</code> system files (for example, when you have different
+               development areas for different purposes).
+      </p> 
+          
+      <div class="noprint">
+         <p><a href="ops-systemfiles.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="ops-sysfile-fddm"></a></div> 
+          
+      <h2> 
+              <a name="x17"></a>System File FDDM
+      </h2> 
+           
+      <p>The system file <code>FDDM</code> is a container in which all DDMs can
+               be stored.
+      </p> 
+           
+      <p><code>FDDM</code> assumes the following directory structure: 
+      </p> 
+           <pre class="verbatim">FDDM
+<img src="graphics/hierarchy.gif" alt=" " width="20" height="16">SYSTEM
+     <img src="graphics/hierarchy.gif" alt=" " width="20" height="16">FILEDIR.SAG
+     <img src="graphics/hierarchy.gif" alt=" " width="20" height="16">SRC
+     <img src="graphics/hierarchy.gif" alt=" " width="20" height="16">GP
+</pre> 
+           <p>By default, the system file <code>FDDM</code> is not active. If you
+               want to use it, you have to activate FDDM mode as described
+               below.
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="ops-systemfiles.htm#ops-sysfile-fddm-activate">Activating FDDM Mode</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="ops-systemfiles.htm#ops-sysfile-fddm-migrate">Migrating DDMs to the System File FDDM</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="ops-systemfiles.htm#ops-sysfile-fddm-check">Checking whether the System File FDDM is Used</a></p>
+         </li>
+      </ul>
+      <div><a name="ops-sysfile-fddm-activate"></a></div> 
+           
+      <h3> 
+               <a name="x18"></a>Activating FDDM Mode
+      </h3> 
+            
+            
+      <p>If FDDM mode is activated (both database ID and file number do not
+                equal 0 in the global configuration file), all DDMs are stored and read in the
+                system file <code>FDDM</code>. DDMs stored in libraries will no longer be
+                accessible from Natural. This is similar to the mainframe, where all DDMs are
+                stored in the system file <code>FDIC</code>.
+      </p> 
+            
+      <p>If the <code>FDDM</code> system file is undefined in the global
+                configuration file, the DDMs are stored in the Natural libraries
+                <code>FUSER</code> and <code>FNAT</code>.
+                
+      </p> 
+            
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To activate FDDM mode</strong></p>
+      <ol class="steps">
+         <li> 
+                     
+                     
+            <p class="instep">Create an empty directory in which the DDMs are to be stored in
+                         FDDM mode. The directory can have any name which corresponds to the Natural
+                         <a href="../using/use_rules.htm">naming conventions</a>.
+            </p> 
+                     
+                   
+         </li>
+         <li> 
+                     
+                     
+            <p class="instep">Invoke the <a href="../config/cfg-over.htm">Configuration
+                            Utility</a>.
+            </p> 
+                     
+                   
+         </li>
+         <li> 
+                     
+                     
+            <p class="instep">In the global configuration file (category <span class="guilistitem">System
+                  Files</span>), assign a database ID and file number for the system file
+                         <code>FDDM</code> and define the path to the directory that you have created in
+                         the first step.
+            </p> 
+                     
+                   
+         </li>
+         <li> 
+                     
+                     
+            <p class="instep">Open
+                         the required parameter file.
+            </p> 
+                     
+                   
+         </li>
+         <li> 
+                     
+                     
+            <p class="instep">Locate the parameter <code>FDDM</code>.
+            </p> 
+                     
+            <p class="tip"><strong>Tip:</strong><br>Locate this parameter by searching for
+                         "FDDM". See
+                         <a href="../config/cfg-work.htm#cfg-wrk-find">Finding a
+                  Parameter</a> in the <cite>Configuration
+                            Utility</cite> documentation for further information.
+            </p> 
+                     
+                   
+         </li>
+         <li> 
+                     
+                      
+                     
+            <p class="instep">For the parameter <code>FDDM</code>, specify
+                         the same database ID and file number that you have defined in the global
+                         configuration file.
+            </p> 
+                     
+                   
+         </li>
+         <li> 
+                     
+                     
+            <p class="instep">Save your changes.</p> 
+                     
+                   
+         </li>
+         <li> 
+                     
+                     
+            <p class="instep">Migrate all required DDMs to the system file <code>FDDM</code> as
+                         described below.
+            </p> 
+                     
+                   
+         </li>
+      </ol> 
+           
+      <div><a name="ops-sysfile-fddm-migrate"></a></div> 
+           
+      <h3> 
+               <a name="x19"></a>Migrating DDMs to the System File FDDM
+      </h3> 
+            
+            
+      <p>All DDMs that are to be available in FDDM mode must be contained in
+                the system file <code>FDDM</code>. Especially the example DDMs delivered with
+                Natural in library <code>SYSEXDDM</code> must be available in the system file
+                <code>FDDM</code>.
+      </p> 
+            
+      <p>For migration of DDMs to the <code>FDDM</code> system file, you can
+                choose between different alternatives:
+      </p> 
+            
+      <ul> 
+                
+         <li> 
+                    
+            <p class="initem">You can use the <a href="../utis/sysobjh.htm">Object
+                           Handler</a> which supports the <code>FDDM</code> system file and offers
+                        the possibility to migrate the DDMs into the <code>FDDM</code> system file. The
+                        DDMs can be unloaded from the Natural libraries and can be stored into the
+                        <code>FDDM</code> system file in the active Natural session. 
+            </p> 
+                    
+            <p class="important"><strong>Important:</strong><br>To migrate a complete development environment, it is
+                        recommended to use the Object Handler. 
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">It is also possible to migrate the DDMs with the copy or move
+                        function of the <a href="../utis/sysmain_ux-over.htm"><code>SYSMAIN</code></a>
+                        utility. In this case, it is required that
+                        the <code>FDDM</code> parameter is first deactivated so that your old
+                        environment is used again.
+            </p> 
+                   
+                   
+         </li> 
+               
+      </ul> 
+            
+      <p>These alternatives are described below in detail.</p> 
+            
+      <p class="note"><strong>Note:</strong><br>The <a href="../utis/inpl.htm"><code>INPL</code>
+                   utility</a> loads DDMs either to Natural libraries if FDDM mode is not
+                active or to the system file <code>FDDM</code> if FDDM mode is active. This may
+                have some impact if the loaded INPL files are intended to work in both modes.
+                It may be necessary that the DDMs are available in the Natural libraries as
+                well as in the <code>FDDM</code> system file.
+      </p> 
+             
+            
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To migrate DDMs to the system file <code>FDDM</code> using the
+                    Object Handler</strong></p>
+      <ol class="steps">
+         <li> 
+                     
+                     
+            <p class="instep">Activate FDDM mode as described above. </p> 
+                     
+                   
+         </li>
+         <li> 
+                     
+                     
+            <p class="instep">Start Natural using the modified parameter file (that is, the
+                         parameter file in which path for the parameter <code>FDDM</code> has
+                         been defined).
+            </p> 
+                     
+                   
+         </li>
+         <li> 
+                     
+                     
+            <p class="instep">Issue the direct command <code>SYSOBJH</code> to
+                         invoke the Object Handler.
+            </p> 
+                     
+            <p class="instep">The following steps assume that you use the Object Handler
+                         wizards.
+            </p> 
+                     
+                   
+         </li>
+         <li> 
+                     
+                     
+            <p class="instep">In the main menu, mark the <span class="selectable_label">Unload</span> function and
+                         press <span class="key">ENTER</span>.
+            </p> 
+                     
+                   
+         </li>
+         <li> 
+                     
+                     
+            <p class="instep">In the resulting screen, mark the option <span class="selectable_label">Unload objects
+                  into Natural work file(s)</span> and press <span class="key">ENTER</span>.
+            </p> 
+                     
+                   
+         </li>
+         <li> 
+                     
+                     
+            <p class="instep">In the resulting screen, mark the option <span class="selectable_label">Set additional
+                  options</span> and press <span class="key">ENTER</span>.
+            </p> 
+                     
+                   
+         </li>
+         <li> 
+                     
+                     
+            <p class="instep">In the resulting screen, deactivate the option <span class="selectable_label">Use FDDM
+                  file for processing DDMs</span> and press <span class="key">ENTER</span> to return to the
+                         previous screen.
+            </p> 
+                     
+                     
+            <p class="instep">This activates your old environment (which contains the DDM to
+                         migrated). If you do not deactivate this option, you cannot access the DDMs
+                         that are to be migrated.
+            </p> 
+                   
+         </li>
+         <li> 
+                     
+                     
+            <p class="instep">Press <span class="key">ENTER</span> repeatedly until the screen is shown in
+                         which the object type for the unload has to be selected.
+            </p> 
+                     
+                     
+            <p class="instep">The option <span class="selectable_label">Natural library objects only</span> is
+                         selected by default. This option is required for the next steps.
+            </p> 
+                   
+         </li>
+         <li> 
+                     
+                     
+            <p class="instep">Press <span class="key">ENTER</span>.
+            </p> 
+                     
+                   
+         </li>
+         <li> 
+                     
+                     
+            <p class="instep">In the resulting screen, enter an asterisk (*) in the fields
+                         <span class="selectable_label">Library</span> and <span class="selectable_label">Object name</span>. In addition,
+                         mark the field <span class="selectable_label">More detailed specification of objects</span>.
+                         Press <span class="key">ENTER</span>.
+            </p> 
+                     
+                   
+         </li>
+         <li> 
+                     
+                     
+            <p class="instep">In the resulting screen, deactivate the options <span class="selectable_label">Error
+                  messages</span> and <span class="selectable_label">Shared resources</span>. In the
+                         <span class="selectable_label">Natural types</span> field, enter "V"
+                         and press <span class="key">ENTER</span>.
+            </p> 
+                     
+                   
+         </li>
+         <li> 
+                     
+                     
+            <p class="instep">Press <span class="key">ENTER</span> to display the command that is to be
+                         processed.
+            </p> 
+                     
+                   
+         </li>
+         <li> 
+                     
+                     
+            <p class="instep">Press <span class="key">ENTER</span> to start the unload function.
+            </p> 
+                     
+                   
+         </li>
+         <li> 
+                     
+                     
+            <p class="instep">When the objects have been unloaded, return to the main menu.</p> 
+                     
+                   
+         </li>
+         <li> 
+                     
+                     
+            <p class="instep">In the main menu, mark the <span class="selectable_label">Load</span> function and
+                         press <span class="key">ENTER</span>.
+            </p> 
+                     
+                   
+         </li>
+         <li> 
+                     
+                     
+            <p class="instep">In the resulting screen, mark the option <span class="selectable_label">Load objects
+                  from Natural work file(s)</span> and press <span class="key">ENTER</span>.
+            </p> 
+                     
+                   
+         </li>
+         <li> 
+                     
+                     
+            <p class="instep">In the resulting screen, mark the option <span class="selectable_label">Set additional
+                  options</span> and press <span class="key">ENTER</span>.
+            </p> 
+                     
+                   
+         </li>
+         <li> 
+                     
+                     
+            <p class="instep">In the resulting screen, activate the option <span class="selectable_label">Use FDDM
+                  file for processing DDMs</span>. 
+            </p> 
+                     
+                     
+                     
+            <p class="instep">This activates your new environment containing the
+                         <code>FDDM</code> system file.
+            </p> 
+                     
+            <p class="note"><strong>Note:</strong><br>In different libraries, DDMs can exist with identical names. To
+                         prevent overwriting DDMs in the <code>FDDM</code> system file and to detect
+                         DDMs with identical names, it is recommended to load the DDMs with the
+                         <span class="selectable_label">Do not replace</span> option. This option is located on the same
+                         page as the option <span class="selectable_label">Use FDDM file for processing DDMs</span>.
+                         
+            </p> 
+                   
+         </li>
+         <li> 
+                     
+                     
+            <p class="instep">Press <span class="key">ENTER</span> to return to the previous screen.
+            </p> 
+                     
+                   
+         </li>
+         <li> 
+                     
+                     
+            <p class="instep">Press <span class="key">ENTER</span> repeatedly until the screen is shown in
+                         which the object type for the load has to be selected.
+            </p> 
+                     
+                     
+            <p class="instep">The option <span class="selectable_label">Load all option from the work file</span>
+                         is selected by default. This option is required for the next
+                         steps.
+            </p> 
+                   
+         </li>
+         <li> 
+                     
+                     
+            <p class="instep">Press <span class="key">ENTER</span>.
+            </p> 
+                     
+                     
+            <p class="instep">The command that is to be processed is now shown.</p> 
+                   
+         </li>
+         <li> 
+                     
+                     
+            <p class="instep">Press <span class="key">ENTER</span> to load the objects.
+            </p> 
+                     
+                   
+         </li>
+      </ol> 
+             
+           
+      <div><a name="ops-sysfile-fddm-check"></a></div> 
+           
+      <h3>Checking whether the System File FDDM is Used</h3> 
+            
+            
+      <p>When you have migrated all DDMs to the system file <code>FDDM</code>,
+                you can check whether <code>FDDM</code> is used.
+      </p> 
+            
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To check whether <code>FDDM</code> is used</strong></p>
+      <ol class="steps">
+         <li> 
+                     
+                     
+            <p class="instep">Start Natural.</p> 
+                     
+                   
+         </li>
+         <li> 
+                     
+                      
+                     
+            <p class="instep">Issue the system command
+                         <a href="../syscom/sysprof.htm"><code>SYSPROF</code></a>.
+            </p> 
+                     
+                   
+         </li>
+         <li> 
+                     
+                     
+                     
+            <p class="instep">If the <code>FDDM</code> file is displayed, Natural will access
+                         only DDMs stored in this system file. 
+            </p> 
+                     
+            <p class="instep">If the <code>FDDM</code> file is not displayed or if the expected
+                         files are not displayed, revise the parameter file used for your session.
+                         
+            </p> 
+                   
+         </li>
+      </ol> 
+           
+      <div class="noprint">
+         <p><a href="ops-systemfiles.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="ops-sysfile-important"></a></div> 
+          
+      <h2>Important Information and Warnings</h2> 
+           
+           
+      <p>A Natural developer must have read, write and delete rights for all
+               objects.
+      </p> 
+           
+      <p>An end-user must only have read rights for the generated programs (and
+               in some special cases also read rights for the sources).
+      </p> 
+           
+      <p>Do not access Natural files with operating system utilities. These
+               utilities might modify and destroy the Natural directory information. 
+      </p> 
+           
+      <p>The use of an <a href="../parms/editor.htm">external
+                  editor</a> is not recommended as code page conflicts may arise. These
+               conflicts can - but not necessarily must - deteriorate your source code. 
+      </p> 
+           
+      <p>Do not store private data files in the directories <code>FNAT</code>,
+               <code>FUSER</code> and <code>FDDM</code>, since Natural may delete or modify
+               them in an unexpected way. 
+      </p> 
+           
+      <p>Do not use one of the directories <code>FNAT</code>, <code>FUSER</code>
+               and <code>FDDM</code> as working directories for your UNIX applications, since this can cause problems when
+               issuing Natural system commands.
+      </p> 
+           
+      <p>The file name (i.e path including file name in 8.3 format) of any
+               object accessed by Natural must not exceed 255 bytes. 
+      </p> 
+          
+      <div class="noprint">
+         <p><a href="ops-systemfiles.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="ops-sysfile-filedir"></a></div> 
+          
+      <h2> 
+              <a name="x20"></a>The File <cite>FILEDIR.SAG</cite></h2> 
+           
+           
+      <p>The file <cite>FILEDIR.SAG</cite> supports up to 60000 objects.
+               It contains internal library information used by Natural including the
+               programming mode of an object (structured or reporting) and internally
+               converted object names. These internal object names are automatically created
+               when storing Natural objects to disk with: 
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">names longer than 8 characters (which can be the case with DDMs);
+                       
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">names containing any special character supported by Natural but not
+                       by the operating system. 
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>Internal object names are unique and consist of an abbreviation of the
+               current object name and an arbitrary number. Both the current object name and
+               the corresponding internal object name are documented in
+               <cite>FILEDIR.SAG</cite>. 
+      </p> 
+           
+      <p>Even if an object is located in the correct directory, it can only be
+               used by Natural after this library information is included in
+               <cite>FILEDIR.SAG</cite>. For objects created within Natural, the
+               library information is included automatically. For all other objects, the
+               <span class="selectable_label">Import</span> function of the
+               <a href="../utis/sysmain_ux-over.htm"><code>SYSMAIN</code></a>
+               utility should be used.
+      </p> 
+           
+      <p>The utility <a href="../utis/ftouch.htm"><code>FTOUCH</code></a> can be used to update
+               <cite>FILEDIR.SAG</cite> without entering Natural.
+      </p> 
+          
+      <div class="noprint">
+         <p><a href="ops-systemfiles.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="ops-sysfile-portable"></a></div> 
+          
+      <h2> 
+              <a name="x21"></a>Portable Natural System Files
+      </h2> 
+           
+      <p>Starting with Natural Version 6.2, the directory file
+               <cite>FILEDIR.SAG</cite> in a Natural library as well as the Natural
+               error message files are created in a portable platform-independent format. This
+               offers, for example, the possibility of exchanging <code>FUSER</code> libraries
+               between different Windows, UNIX and OpenVMS platforms simply by copying the
+               libraries via operating system commands. 
+      </p> 
+           
+      <p>The <code>FNAT</code> system file belongs to a Natural installation and
+               is both version-specific and platform-specific. Therefore, it is not
+               recommended to share <code>FNAT</code> system files among different platforms.
+               Especially the <code>FNAT</code> system file on a Windows platform contains a
+               completely different set of utilities as the <code>FNAT</code> system file on
+               some UNIX or OpenVMS platforms. 
+      </p> 
+           
+      <p>Although it is now possible to share an <code>FUSER</code> system file
+               among different platforms, this possibility should by handled with care because
+               Natural's locking mechanism does not cross machine boundaries and hence it
+               would be possible for two Natural sessions on different platforms to modify the
+               same object at the same time with unpredictable results. 
+      </p> 
+           
+      <p>All libraries that are newly created as of Natural Version 6.2 have a
+               new <cite>FILEDIR.SAG</cite> structure. Especially the
+               <code>FNAT</code> system file delivered and installed as of Natural Version 6.2
+               has only libraries with the new structure.
+      </p> 
+           
+      <p>The following topics are covered below:</p>
+           
+      <ul>
+         <li>
+            <p class="initem"><a href="ops-systemfiles.htm#ops-sysfile-portable-language">Language-dependent Objects</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="ops-systemfiles.htm#ops-sysfile-portable-migrate">Migrating an Old FILEDIR.SAG File</a></p>
+         </li>
+      </ul>
+      <div><a name="ops-sysfile-portable-language"></a></div> 
+           
+      <h3>Language-dependent Objects</h3> 
+            
+            
+      <p>When the application to be ported uses the system variable
+                <a href="../vari/natenv.htm#LANGUAGE"><code>*LANGUAGE</code></a>,
+                you have to take notice of the following information.
+      </p> 
+            
+      <p>Almost all Natural objects are stored in the system file with a name
+                which contains only upper-case characters. An exception are the
+                language-dependent objects (that is: the objects which have been created for a
+                specific language). Language-dependent objects may contain lower-case
+                characters in their names. Since Windows is a case-preserving operating system
+                (whereas UNIX is a case-sensitive operating system), it may happen that names
+                which have been created under UNIX cause a conflict in Windows, or that an
+                application which has been developed under UNIX yields unexpected results in
+                Windows. 
+      </p> 
+            
+      <p class="note"><strong>Note:</strong><br>OpenVMS behaves similar to Windows. It does not distinguish between
+                upper-case and lower-case characters. However, file names are always created
+                with upper-case characters.
+      </p> 
+            
+      <h4 class="floating-title">Example</h4> 
+            
+      <p>The command <code>SAVE PGM&amp;</code> creates an object
+                where the object name contains the language identifier. The resulting object
+                name depends on the setting of <code>*LANGUAGE</code>:
+      </p> 
+             
+             
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+         <thead align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <th>Setting of
+                  <code>*LANGUAGE</code> 
+               </th> 
+                         
+               <th>An object with the following name is
+                  created
+               </th> 
+                        
+            </tr> 
+                    
+         </thead> 
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <td>33</td> 
+                         
+               <td><code>PGMX</code> (with an upper-case
+                    X)
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>59</td> 
+                         
+               <td><code>PGMx</code> (with a lower-case x)
+               </td>
+                         
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+      <p>The separate objects which have been created under UNIX
+                (<cite>PGMX.NGP</cite> and <cite>PGMx.NGP</cite>) get entries
+                in the file <cite>FILEDIR.SAG</cite> with the names <code>PGMX</code>
+                and <code>PGMx</code>. These two objects will be treated differently, depending
+                on the environment in which Natural is being executed:
+      </p> 
+            
+      <ul> 
+                
+         <li> 
+                    
+            <p class="initem">When you execute <code>PGMX</code> with Natural for UNIX, the file
+                        <cite>PGMX.NGP</cite> is loaded into the buffer pool and executed.
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">When you execute <code>PGMX</code> with Natural for Windows, either
+                        the file <cite>PGMX.NGP</cite> or <cite>PGMx.NGP</cite> is
+                        loaded into the buffer pool and executed. This is because Windows does not
+                        distinguish between these two objects and treats them as one and the same
+                        object. Thus it may be possible that applications which share an
+                        <code>FUSER</code>, or a copy of such an <code>FUSER</code>, behave in a
+                        different manner.
+            </p> 
+                   
+         </li> 
+               
+      </ul> 
+           
+      <div><a name="ops-sysfile-portable-migrate"></a></div> 
+           
+      <h3> 
+               <a name="x22"></a>Migrating an Old <cite>FILEDIR.SAG</cite>
+               File
+      </h3> 
+            
+            
+      <p>Starting with version 6.2, Natural can read old platform-specific
+                <cite>FILEDIR.SAG</cite> files on the platform for which they were
+                formerly generated, but it cannot modify old <cite>FILEDIR.SAG</cite>
+                files. When a library with an old <cite>FILEDIR.SAG</cite> file is
+                accessed for modification, <cite>FILEDIR.SAG</cite> is converted into
+                the new format before any further modification takes place. 
+      </p> 
+            
+      <p class="important"><strong>Important:</strong><br>It is recommended that you create a backup copy of the old
+                <code>FUSER</code> system file before executing any of the steps (which lead to
+                a conversion of <cite>FILEDIR.SAG</cite>) listed below.
+      </p> 
+            
+      <p>There are a number of possibilities that lead to a conversion of an
+                old <cite>FILEDIR.SAG</cite> file into the new format: 
+      </p> 
+            
+      <ul> 
+                
+         <li> 
+                    
+            <p class="initem">As of version 6.2, Natural automatically converts an old
+                        <cite>FILEDIR.SAG</cite> format when a modify access is made. This is
+                        completely transparent for the user; it has not to be forced in any way. A
+                        modify access is, for example, a <a href="../syscom/save.htm"><code>SAVE</code></a> of a new
+                        source, a <a href="../syscom/catalog.htm"><code>CATALOG</code></a> of a
+                        source or a <a href="../syscom/catall_uw.htm"><code>CATALL</code></a>. A
+                        copy operation modifies the destination library and hence the
+                        <cite>FILEDIR.SAG</cite> file of the destination library. A move
+                        operation additionally modifies the source library because the object has to be
+                        deleted there. In any case, the original <cite>FILEDIR.SAG</cite> file
+                        is saved as <cite>FILEDIR.BCK</cite> in the library directory.
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">All libraries that are to be converted can be unloaded with the
+                        <a href="../utis/sysobjh.htm">Object Handler</a>
+                        (<code>SYSOBJH</code>). When the resulting work file is reloaded into a new
+                        <code>FUSER</code> system file, all libraries are generated with the new
+                        <cite>FILEDIR.SAG</cite> structure.
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">The utility <code>FTOUCH</code> provides the option
+                        <code>convert</code> which converts the <cite>FILEDIR.SAG</cite> file
+                        of the specified library into the new structure. The original
+                        <cite>FILEDIR.SAG</cite> file remains in the library directory as
+                        <cite>FILEDIR.BCK</cite>. Refer to the description of the
+                        <a href="../utis/ftouch.htm"><code>FTOUCH</code></a> utility for
+                        the syntax and a usage example.
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">The copy function of the utility <a href="../utis/sysmain_ux-over.htm"><code>SYSMAIN</code></a> can be used to copy a complete set of
+                        libraries from an old format <code>FUSER</code> system file into a new
+                        <code>FUSER</code> system file. In the destination <code>FUSER</code>, the
+                        <cite>FILEDIR.SAG</cite> files are automatically generated with the new
+                        structure.
+            </p> 
+                   
+         </li> 
+               
+      </ul> 
+            
+      <p>The Natural versions prior to Natural Version 6.2 cannot access
+                libraries with a new portable <cite>FILEDIR.SAG</cite> file. Therefore,
+                system files cannot be shared between Natural Version 6.2 or above and an older
+                version of Natural. This is only possible when all libraries are still in the
+                old <cite>FILEDIR.SAG</cite> format and when no modify access has ever
+                been made. In a production environment, it is possible, for example, to make
+                use of an <code>FUSER</code> from Natural Version 6.1 with Natural Version 6.2
+                when no modification on the libraries is made. However, it is recommended not
+                share system files between Natural Version 6.2 or above and an older version
+                
+      </p> 
+           
+      <div class="noprint">
+         <p><a href="ops-systemfiles.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="ops-sysfile-rootdir"></a></div> 
+          
+      <h2>Natural Root Directory</h2> 
+           
+            
+            
+      <p>During the installation, the environment variables
+                <code>$NATDIR</code> and <code>$NATVERS</code>
+                are created automatically. They point to Natural's version-dependent root
+                directory. 
+      </p> 
+            <pre class="verbatim">$NATDIR/$NATVERS</pre> 
+            
+          <div class="noprint">
+         <p><a href="ops-systemfiles.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="ops-sysfile-semaphore"></a></div> 
+          
+      <h2>Synchronizing Access to the System Files Using Semaphores</h2> 
+           
+           
+      <p>Semaphores are used to synchronize access to the Natural system files.
+               Since this requires additional operating-system resources, you should consider
+               incrementing the kernel parameters <code>SEMMNI</code> and
+               <code>SEMMNS</code> by the number of system files to be accessed (see
+               <a href="../install/inst-bp.htm">Activating the Natural Buffer
+            Pool on UNIX</a> and its subsection
+               <a href="../install/inst-bp.htm#inst-bp-kernel">Changing the
+            Kernel Parameters</a> in the <cite>Installation</cite>
+               documentation). 
+      </p> 
+           
+      <p>With the usage of semaphores, several users have permission to address
+               the system files <code>FNAT</code> and <code>FUSER</code>. The semaphore ID is
+               saved together with a lock file (<cite>*.LCK</cite>). If a further
+               Natural session is started, the buffer pool looks for the semaphore ID and the
+               corresponding lock file for synchronization. 
+      </p> 
+           
+      <p>If the lock file is not present, a new semaphore ID and lock file will
+               be generated. This means that no synchronization will be possible. 
+      </p> 
+           
+      <p class="caution"><strong>Caution:</strong><br>It is not allowed to delete only one of the resources. You must
+               always delete the semaphore ID and the corresponding lock file. 
+      </p> 
+          
+         
+      <div class="noprint">
+         <p><a href="ops-systemfiles.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="ops-nfs"></a></div> 
+          
+      <h2> 
+              <a name="x23"></a> 
+              <a name="x24"></a>Using NFS to Store Natural Libraries
+      </h2> 
+           
+           
+      <p>When you use NFS (Network File System) to store Natural libraries, you
+               can run into problems when the directories in which the Natural libraries are
+               stored are mounted via NFS from a file server in your network.
+      </p> 
+           
+      <p>The reason for this is the need to lock the
+               <cite>FILEDIR.SAG</cite> file stored in each library during update
+               operations of Natural objects.
+      </p> 
+           
+      <p>If your NFS locking is incompatible or not properly set up between the
+               involved platforms, Natural can hang in an uninterruptible state while waiting
+               for NFS locking requests to be processed. These requests are generally logged
+               on the consoles of the involved systems or in some other system-dependent log
+               file.
+      </p> 
+           
+      <p>The work-around to solve this problem is to store Natural libraries
+               only on local disks if problems with a hanging and uninterruptible nucleus
+               occur.
+      </p> 
+          
+        
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="ops-systemfiles.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../ops/ops-systemfiles.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/ops/ops-systemfiles.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="ops-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="ops-parms.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="ops-workfiles.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

@@ -1,0 +1,15 @@
+find (1) dep with dep-subscriber-ssn = his350a1.ssn
+     where dep.dep-ssn = his350a1.dep-ssn(#i)
+    
+     if no
+       #student-cert-req := TRUE
+       escape bottom
+     end-norec
+     if dep.DEP-eligibility = mask('2'.)
+       #student-cert-req := FALSE
+     else
+       #student-cert-req := TRUE
+     end-if
+    
+     #orig-DEP-ELIGIBILITY := dep.DEP-eligibility
+end-find

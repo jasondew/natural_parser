@@ -1,0 +1,459 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>DELETE - SQL</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="delete_sql" id="16921"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../sm/delete_sql.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/sm/delete_sql.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="sql-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="commit_sql.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="insert_sql.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Statements&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> DELETE - SQL 
+               <a name="x189"></a></h1>
+      </div> 
+         
+         
+      <p>This document covers the following topics:</p>
+         
+      <ul>
+         <li>
+            <p class="initem"><a href="delete_sql.htm#Function_delete_sql">Function</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="delete_sql.htm#syntax_descr_delete_sql">Syntax Description</a></p>
+         </li>
+      </ul> 
+         
+      <p>Belongs to Function Group:
+             <a href="stmt.htm#Database_Access_and_Update">Database Access and
+            Update</a></p> 
+        
+      <hr> 
+        
+      <div><a name="Function_delete_sql"></a></div> 
+         
+      <h2> Function</h2> 
+          
+          
+      <p>The SQL <code>DELETE</code> statement is used to delete either rows in a
+              table without using a cursor (<a href="delete_sql.htm#Syntax_1_delete_sql">"searched"
+                 <code>DELETE</code></a>) or rows in a table to which a cursor is
+              positioned (<a href="delete_sql.htm#Syntax_2_delete_sql">"positioned"
+                 <code>DELETE</code></a>).
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="delete_sql.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="syntax_descr_delete_sql"></a></div> 
+         
+      <h2> Syntax Description</h2> 
+          
+      <p>Two different structures are
+              possible:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="delete_sql.htm#Syntax_1_delete_sql">Syntax 1 - Searched DELETE</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="delete_sql.htm#Syntax_2_delete_sql">Syntax 2 - Positioned DELETE</a></p>
+         </li>
+      </ul> 
+         
+      <div><a name="Syntax_1_delete_sql"></a></div> 
+          
+      <h3> Syntax 1 - Searched DELETE</h3> 
+           
+           
+      <p>The "searched" <code>DELETE</code> statement is a
+               stand-alone statement not related to any <a href="select_sql.htm#select_sql"><code>SELECT</code></a> statement. With a single
+               statement you can delete zero, one, multiple or all rows of a table. The rows
+               to be deleted are determined by a <var>search-condition</var>
+               that is applied to the table. Optionally, the table name can be assigned a
+               <var>correlation-name</var>.
+      </p> 
+           
+      <p class="note"><strong>Note:</strong><br> The number of rows that have actually been deleted with a
+               "searched" <code>DELETE</code> can be ascertained by using the
+               system variable <a href="../vari/appl.htm#ROWCOUNT"><code>*ROWCOUNT</code></a>
+               (see <cite>System Variables</cite> documentation).
+      </p> 
+           
+      <p>Common Set Syntax:</p> 
+            
+            
+      <table border="0" class="syntax" cellpadding="3">  
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td nowrap> <code class="keyword">DELETE</code>
+                         <a href="delete_sql.htm#FROM"> <code class="keyword">FROM</code></a>
+                            <a href="delete_sql.htm#FROM"><var>table-name</var></a>
+                            [(<a href="delete_sql.htm#correlation-name_delete_sql"><var>correlation-name</var></a>
+                            )] [<a href="delete_sql.htm#WHERE_delete_sql"><code class="keyword">WHERE</code></a><a href="delete_sql.htm#WHERE_delete_sql">
+                               <var>search-condition</var></a>] 
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>Extended Set Syntax:</p> 
+            
+            
+      <table border="0" class="syntax" cellpadding="3"> 
+                 
+                 
+                 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td rowspan="3" nowrap><code class="keyword">DELETE</code>
+                        <a href="delete_sql.htm#FROM"> <code class="keyword">FROM</code></a>
+                            <a href="delete_sql.htm#FROM"><var>table-name</var></a>
+                            [(<a href="delete_sql.htm#correlation-name_delete_sql"><var>correlation-name</var></a>
+                            )] [<a href="delete_sql.htm#WHERE_delete_sql"><code class="keyword">WHERE</code>
+                               </a> <a href="delete_sql.htm#WHERE_delete_sql">
+                               <var>search-condition</var></a>] 
+               </td> 
+                        
+               <td rowspan="3"> 
+                  
+                  <p><img src="../graphics/sbo3.gif" alt="" width="5" height="61"></p> 
+               </td> 
+                        
+               <td rowspan="3"> <a href="delete_sql.htm#WITH_IL_delete_sql">
+                      <code class="keyword">WITH</code></a></td> 
+                        
+               <td rowspan="3"> 
+                  
+                  <p><img src="../graphics/cbo3.gif" alt="" width="6" height="59"></p> 
+               </td> 
+                        
+               <td valign="bottom"> <code class="keyword">RR</code></td> 
+                        
+               <td rowspan="3"> 
+                  
+                  <p><img src="../graphics/cbc3.gif" alt="" width="6" height="59"></p> 
+               </td> 
+                        
+               <td rowspan="3"> 
+                  
+                  <p><img src="../graphics/sbc3.gif" alt="" width="5" height="61"></p> 
+               </td> 
+                        
+               <td rowspan="3" nowrap> [<a href="delete_sql.htm#QUERYNO_delete_sql"><code class="keyword">QUERYNO</code> </a>
+                            <a href="delete_sql.htm#QUERYNO_delete_sql">
+                               <var>integer</var></a>] 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><code class="keyword">RS</code></td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td valign="top"><code class="keyword">CS</code>
+                    
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>For an explanation of the symbols used in the syntax diagram, see
+               <a href="synsym.htm#Syntax_Symbols">Syntax
+            Symbols</a>.
+      </p> 
+           
+      <p>Syntax Element Description:</p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th nowrap> <a name="FROM"></a>FROM
+                   <var>table-name</var> 
+               </th> 
+                        
+               <td> 
+                  
+                  <div><strong class="floating-title"> FROM Clause:</strong></div> 
+                            
+                  <p>This clause specifies the table from which the rows are to be
+                                deleted.
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th nowrap>
+                  <a name="correlation-name_delete_sql"></a><var>correlation-name</var>
+                            
+               </th> 
+                        
+               <td> 
+                  
+                  <p>Optionally, the table name can be assigned a
+                                <var>correlation-name</var>.
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th nowrap> <a name="WHERE_delete_sql"></a>WHERE <a name="search-condition_delete_sql"></a><var>search-condition</var>
+                            
+               </th> 
+                        
+               <td> 
+                  
+                  <div><strong class="floating-title"> WHERE Clause:</strong></div> 
+                            
+                  <p>This clause is used to specify the selection criteria for the rows
+                                to be deleted.
+                  </p> 
+                            
+                  <p>If no <code>WHERE</code> clause is specified, the entire table is
+                                deleted.
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th nowrap><a name="WITH_IL_delete_sql"></a>WITH 
+               </th> 
+                        
+               <td> 
+                  
+                  <div><strong class="floating-title"> WITH Isolation Level Clause:</strong></div> 
+                            
+                  <p>This clause belongs to the <a href="common.htm#common">SQL
+                                   Extended Set</a>.
+                  </p> 
+                            
+                  <p>This clause allows the explicit specification of the isolation
+                                level used when locating the row to be deleted. 
+                  </p> 
+                             
+                            
+                  <p>It is only valid against DB2 databases. When used
+                                against other databases, it will cause runtime errors.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th nowrap><a name="QUERYNO_delete_sql"></a>QUERYNO <var>integer</var>
+                            
+               </th> 
+                        
+               <td> 
+                  
+                  <div><strong class="floating-title"> QUERYNO Clause:</strong></div> 
+                            
+                  <p>This clause belongs to the <a href="common.htm#common">SQL
+                                   Extended Set</a>.
+                  </p> 
+                             
+                            
+                  <p>This clause is not currently supported and will be
+                                ignored.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+          
+      <div><a name="Syntax_2_delete_sql"></a></div> 
+          
+      <h3>Syntax 2 - Positioned DELETE</h3> 
+           
+           
+      <p>The "positioned" <code>DELETE</code> statement always
+               refers to a cursor within a database loop. Therefore the table referenced by a
+               positioned <code>DELETE</code> statement must be the same as the one referenced
+               by the corresponding <a href="select_sql.htm#select_sql"><code>SELECT</code></a> statement, otherwise an
+               error message is returned. A positioned <code>DELETE</code> cannot be used with
+               a non-cursor selection.
+      </p> 
+           
+      <p>The functionality of the positioned <code>DELETE</code> statement
+               corresponds to that of the <a href="delete.htm#delete">"normal"
+                  Natural <code>DELETE</code> statement</a>.
+      </p> 
+            
+            
+            
+      <table border="0" class="syntax" cellpadding="3">  
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> <code class="keyword">DELETE FROM</code>
+                            <var>table-name</var> <code class="keyword">WHERE CURRENT OF
+                               CURSOR</code> [(<var>r</var>)] 
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+            
+            
+           
+      <p>For an explanation of the symbols used in the syntax diagram, see
+               <a href="synsym.htm#Syntax_Symbols">Syntax
+            Symbols</a>.
+      </p> 
+           
+      <p>Syntax Element Description:</p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th> <a name="FROM_2"></a>FROM
+                   <var>table-name</var> WHERE CURRENT OF CURSOR
+               </th> 
+                        
+               <td> 
+                  
+                  <div><strong class="floating-title"> FROM Clause:</strong></div> 
+                            
+                  <p>This clause specifies the table from which the rows are to be
+                                deleted.
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th>(<a name="r_delete_sql"></a><var>r</var>)
+               </th> 
+                        
+               <td> 
+                  
+                  <div><strong class="floating-title"> Statement Reference:</strong></div> 
+                            
+                  <p>The <code>(<var>r</var>)</code> notation is used
+                     to reference the statement which was used to select the row to be deleted. If
+                                no statement reference is specified, the <code>DELETE</code> statement is
+                                related to the innermost active processing loop in which a database record was
+                                selected.
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                     
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+          
+        
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="delete_sql.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../sm/delete_sql.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/sm/delete_sql.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="sql-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="commit_sql.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="insert_sql.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

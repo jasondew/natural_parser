@@ -1,0 +1,1780 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>SET KEY</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="setkey" id="16860"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../sm/setkey.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/sm/setkey.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="sm-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="setgloba.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="settime.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Statements&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> SET KEY 
+               <a name="x158"></a></h1>
+      </div> 
+         
+         
+      <p>This document covers the following topics:</p>
+         
+      <ul>
+         <li>
+            <p class="initem"><a href="setkey.htm#Function_setkey">Function</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="setkey.htm#syntax_descr_set_key">Syntax Description</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="setkey.htm#Making">Making Keys Program-Sensitive and Deactivating Keys</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="setkey.htm#Commands">Assigning Commands/Programs</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="setkey.htm#DATA_setkey">Assigning Input DATA</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="setkey.htm#COMMAND_OFF_ON">COMMAND OFF/ON</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="setkey.htm#HELP_setkey">Assigning HELP</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="setkey.htm#DYNAMIC">DYNAMIC Option</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="setkey.htm#DISABLED">DISABLED Option</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="setkey.htm#SET_KEY_Statements_on">SET KEY Statements on Different Program Levels</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="setkey.htm#Assigning_Names">Assigning Names</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="setkey.htm#Example_setkey">Example</a></p>
+         </li>
+      </ul> 
+        
+      <hr> 
+        
+      <div><a name="Function_setkey"></a></div> 
+         
+      <h2> Function </h2> 
+          
+          
+      <p>The <code>SET KEY</code> statement is used to assign functions to the
+              following types of keys:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem"><a name="PA"></a>video terminal PA (program attention) keys,
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"><a name="PF"></a> PF (program function) keys,
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"><a name="CLEAR"></a> <span class="key">CLEAR</span> key.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>When a <code>SET KEY</code> statement is executed, Natural receives
+              control of the keys during program execution and uses the values assigned to
+              the keys.
+      </p> 
+          
+      <p>The Natural system variable <a href="../vari/inout.htm#PF_KEY"><code>*PF-KEY</code></a>
+              identifies which key was pressed last.
+      </p> 
+          
+      <p class="note"><strong>Note:</strong><br>If a user presses a key to which no function is assigned, either a
+              warning message will be issued prompting the user to press a valid key, or the
+              value <code>ENTR</code> will be placed into the Natural system variable
+              <code>*PF-KEY</code>; that is, Natural will react as if the
+              <span class="key">ENTER</span> key had been pressed (this depends on the Natural profile
+              parameter <a href="../parms/ikey.htm"><code>IKEY</code></a> as set by the
+              Natural administrator). 
+      </p> 
+           
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="setkey.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="syntax_descr_set_key"></a></div> 
+         
+      <h2> Syntax Description </h2> 
+          
+          
+      <p>Several structures are possible for this statement.</p> 
+          
+      <p>For an explanation of the symbols used in the syntax diagrams, see
+              <a href="synsym.htm#Syntax_Symbols">Syntax
+            Symbols</a>.
+      </p> 
+          
+      <p><a name="Syntax_1_setkey"></a> Syntax 1 - Affecting All Keys:
+      </p> 
+           
+           
+      <table border="0" class="syntax" cellpadding="3"> 
+               
+                
+                 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td rowspan="3" nowrap><code class="keyword">SET KEY</code>
+                         
+               </td> 
+                       
+               <td rowspan="3"> 
+                  
+                  <p><img src="../graphics/cbo7.gif" alt="" width="8" height="185"></p>
+               </td> 
+                       
+               <td colspan="4" align="left"> 
+                  
+                  <p class="mini-list"> 
+                               <a href="setkey.htm#ALL_setkey"> <code class="keyword">ALL</code> </a><br> 
+                               <a href="setkey.htm#ON"> <code class="keyword">ON</code></a><br> 
+                               <a href="setkey.htm#OFF_setkey"> <code class="keyword">OFF</code></a> 
+                              
+                  </p> 
+               </td> 
+                       
+               <td rowspan="3"> 
+                  
+                  <p><img src="../graphics/cbc7.gif" alt="" width="8" height="185"></p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td align="left"> <a href="setkey.htm#COMMAND_OFF_ON"> <code class="keyword">COMMAND</code> </a>
+                           
+               </td> 
+                       
+               <td align="left"> 
+                  
+                  <p><img src="../graphics/cbo3.gif" alt="" width="6" height="59"></p> 
+               </td> 
+                       
+               <td align="left"> 
+                  
+                  <p class="mini-list"> 
+                               <a href="setkey.htm#COMMAND_OFF_ON"> <code class="keyword">ON</code> </a><br> 
+                               <a href="setkey.htm#COMMAND_OFF_ON"> <code class="keyword">OFF</code> </a> 
+                              
+                  </p> 
+               </td> 
+                       
+               <td align="left"> 
+                  
+                  <p><img src="../graphics/cbc3.gif" alt="" width="6" height="59"></p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td colspan="4" align="left" nowrap>
+                  <a href="setkey.htm#NAMED_OFF"> <code class="keyword">NAMED OFF</code>
+                              </a> 
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p><a name="Syntax_2_setkey"></a> Syntax 2 - Affecting Individual Keys:
+      </p> 
+           
+           
+      <table border="0" class="syntax" cellpadding="3"> 
+               
+                
+                
+               
+                
+                
+                 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td rowspan="3" align="left" valign="middle"><code class="keyword">SET KEY</code> 
+               </td> 
+                       
+               <td rowspan="3"> 
+                  
+                  <p><img src="../graphics/cbo7.gif" alt="" width="8" height="185"></p>
+               </td> 
+                       
+               <td rowspan="3"> 
+                  
+                  <p><img src="../graphics/cbo5b.gif" alt="" width="6" height="137"></p> 
+               </td> 
+                       
+               <td rowspan="3" align="left" nowrap> 
+                  
+                  <p class="mini-list"> 
+                               <a href="setkey.htm#PA"> <code class="keyword">PA</code><var>n</var> </a><br> 
+                               <a href="setkey.htm#PF"> <code class="keyword">PF</code><var>n</var> </a><br> 
+                               <a href="setkey.htm#CLEAR"> <code class="keyword">CLR</code>
+                                   </a><br> 
+                               <a href="setkey.htm#DYNAMIC"> <code class="keyword">DYNAMIC</code> </a> <a href="setkey.htm#DYNAMIC">
+                                   <var>operand1</var> </a> 
+                              
+                  </p> 
+               </td> 
+                       
+               <td rowspan="3"> 
+                  
+                  <p><img src="../graphics/cbc5b.gif" alt="" width="6" height="137"></p> 
+               </td> 
+                       
+               <td rowspan="3"> 
+                  
+                  <p><img src="../graphics/sbo7.gif" alt="" width="7" height="185"></p> 
+               </td> 
+                       
+               <td rowspan="3"> <code class="keyword">=</code>
+                    
+               </td> 
+                       
+               <td rowspan="3"> 
+                  
+                  <p><img src="../graphics/cbo6b.gif" alt="" width="6" height="160"></p> 
+               </td> 
+                       
+               <td colspan="4">&nbsp;</td> 
+                       
+               <td rowspan="3"> 
+                  
+                  <p><img src="../graphics/cbc6b.gif" alt="" width="6" height="160"></p> 
+               </td> 
+                       
+               <td rowspan="3"> 
+                  
+                  <p><img src="../graphics/sbc7.gif" alt="" width="7" height="185"></p> 
+               </td> 
+                       
+               <td rowspan="3">
+                  <img src="../graphics/cbc7.gif" alt="" width="8" height="185">
+                           <img src="../graphics/dot3.gif" alt="" width="12" height="4">
+                           
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td colspan="4" align="left"> 
+                  
+                  <p class="mini-list"> 
+                               <a href="setkey.htm#ON"> <code class="keyword">ON</code>
+                                   </a><br> 
+                               <a href="setkey.htm#OFF_setkey"> <code class="keyword">OFF</code> </a><br> 
+                               <a href="setkey.htm#DISABLED"> <code class="keyword">DISABLED</code> </a> 
+                              
+                  </p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td align="left"> <a href="setkey.htm#COMMAND_OFF_ON"> <code class="keyword">COMMAND</code> </a>
+                           
+               </td> 
+                       
+               <td align="left"> 
+                  
+                  <p><img src="../graphics/cbo2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                       
+               <td align="left"> 
+                  
+                  <p class="mini-list"> 
+                               <a href="setkey.htm#COMMAND_OFF_ON"> <code class="keyword">ON</code> </a><br> 
+                               <a href="setkey.htm#COMMAND_OFF_ON"> <code class="keyword">OFF</code> </a> 
+                              
+                  </p> 
+               </td> 
+                       
+               <td align="left"> 
+                  
+                  <p><img src="../graphics/cbc2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p><a name="Syntax_3"></a> Syntax 3 - Affecting Individual Keys:
+      </p> 
+           
+           
+      <table border="0" class="syntax" cellpadding="3">
+         <colgroup>
+            <col width="97%">
+         </colgroup> 
+                 
+                
+               
+                
+                
+                
+                
+                
+                
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td rowspan="7" nowrap><code class="keyword">SET KEY</code>
+                         
+               </td> 
+                       
+               <td rowspan="7"> 
+                  
+                  <p><img src="../graphics/cbo10.gif" alt="" width="10" height="200"></p>
+               </td> 
+                       
+               <td rowspan="4" colspan="2" align="center" valign="middle"> 
+                  
+                  <p><img src="../graphics/cbo5.gif" alt="" width="6" height="100"></p> 
+               </td> 
+                       
+               <td rowspan="4" align="left" nowrap> 
+                  
+                  <p class="mini-list"> 
+                               <a href="setkey.htm#PA"> <code class="keyword">PA</code><var>n</var> </a><br> 
+                               <a href="setkey.htm#PF"> <code class="keyword">PF</code><var>n</var> </a><br> 
+                               <a href="setkey.htm#CLEAR"> <code class="keyword">CLR</code>
+                                   </a><br> 
+                               <a href="setkey.htm#DYNAMIC"> <code class="keyword">DYNAMIC</code> </a> <a href="setkey.htm#DYNAMIC">
+                                   <var>operand1</var> </a> 
+                              
+                  </p> 
+               </td> 
+                       
+               <td rowspan="4" align="center" valign="middle"> 
+                  
+                  <p><img src="../graphics/cbc4.gif" alt="" width="6" height="100"></p> 
+               </td> 
+                       
+               <td rowspan="4"> 
+                  
+                  <p><img src="../graphics/sbo4.gif" alt="" width="5" height="100"></p> 
+               </td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td rowspan="4"> 
+                  
+                  <p><img src="../graphics/cbo4.gif" alt="" width="6" height="100"></p> 
+               </td> 
+                       
+               <td rowspan="4" colspan="2" align="left" nowrap> 
+                  
+                  <p class="mini-list"> 
+                               <a href="setkey.htm#PGM"><code class="keyword">PGM</code>
+                                   </a><br> 
+                               <a href="setkey.htm#operand2_setkey">
+                                   <var>operand2</var> </a><br> 
+                               <a href="setkey.htm#HELP_setkey"> <code class="keyword">HELP</code> </a><br> 
+                               <a href="setkey.htm#DATA_setkey"> <code class="keyword">DATA</code> </a> <a href="setkey.htm#DATA_setkey">
+                                   <var>operand3</var> </a> 
+                              
+                  </p> 
+               </td> 
+                       
+               <td rowspan="4"> 
+                  
+                  <p><img src="../graphics/cbc4.gif" alt="" width="6" height="100"></p> 
+               </td> 
+                       
+               <td rowspan="4"> 
+                  
+                  <p><img src="../graphics/sbc4.gif" alt="" width="5" height="100"></p> 
+               </td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td rowspan="7"> 
+                  
+                  <p><img src="../graphics/cbc10.gif" alt="" width="10" height="200"></p> 
+               </td> 
+                       
+               <td>&nbsp;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td rowspan="2"> <code class="keyword">=</code>
+                    
+               </td> 
+                       
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/sbo2b.gif" alt="" width="7" height="42"></p> 
+               </td> 
+                       
+               <td rowspan="2">
+                  <a href="setkey.htm#Assigning_Names"> <code class="keyword">NAMED</code>
+                              </a> 
+               </td> 
+                       
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/cbo2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                       
+               <td rowspan="2" align="left"> 
+                  
+                  <p class="mini-list"> 
+                               <a href="setkey.htm#Assigning_Names">
+                                   <var>operand4</var> </a><br> 
+                               <a href="setkey.htm#NAMED_OFF"> <code class="keyword">OFF</code> </a> 
+                              
+                  </p> 
+               </td> 
+                       
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/cbc2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                       
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/sbc2b.gif" alt="" width="6" height="43"></p> 
+               </td> 
+                       
+               <td>&nbsp;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>&nbsp;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td colspan="2">&nbsp;</td> 
+                       
+               <td align="center">&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td colspan="2" align="center">&nbsp;</td> 
+                       
+               <td align="center">&nbsp;</td> 
+                       
+               <td colspan="2">&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td colspan="2">&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td colspan="2">&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td colspan="2">&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code><strong>ENTR</strong></code>
+                      
+               </td> 
+                       
+               <td> 
+                  
+                  <p><img src="../graphics/sbo2b.gif" alt="" width="7" height="42"></p>
+               </td> 
+                       
+               <td colspan="6"> <a href="setkey.htm#ENTR_NAMED">
+                      <code class="keyword">NAMED</code></a> 
+               </td> 
+                       
+               <td align="right"> 
+                  
+                  <p><img src="../graphics/cbo2.gif" alt="" width="8" height="38"></p> 
+               </td> 
+                       
+               <td> 
+                  
+                  <p class="mini-list"> 
+                               <a href="setkey.htm#Assigning_Names">
+                                   <var>operand4</var> </a><br> 
+                               <code class="keyword"> OFF</code> 
+                              
+                  </p> 
+               </td> 
+                       
+               <td> 
+                  
+                  <p><img src="../graphics/cbc2.gif" alt="" width="8" height="38"></p> 
+               </td> 
+                       
+               <td> 
+                  
+                  <p><img src="../graphics/sbc2.gif" alt="" width="8" height="38"></p> 
+               </td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td> 
+                  
+                  <p><img src="../graphics/dot3.gif" alt="" width="12" height="4"></p> 
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>Operand Definition Table:</p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th>Operand</th> 
+                       
+               <th colspan="5">Possible Structure</th> 
+                       
+               <th colspan="13">Possible Formats</th> 
+                       
+               <th>Referencing Permitted</th> 
+                       
+               <th>Dynamic Definition</th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> <a href="setkey.htm#DYNAMIC">
+                      <var>operand1</var> </a> 
+               </td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>S</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>A</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td align="center">yes</td> 
+                       
+               <td align="center">no</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a href="setkey.htm#operand2_setkey">
+                      <var>operand2</var> </a> 
+               </td> 
+                       
+               <td>C</td> 
+                       
+               <td>S</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>A</td> 
+                       
+               <td>U</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td align="center">&nbsp;</td> 
+                       
+               <td align="center">&nbsp;</td> 
+                       
+               <td align="center">yes</td> 
+                       
+               <td align="center">no</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a href="setkey.htm#DATA_setkey">
+                      <var>operand3</var> </a> 
+               </td> 
+                       
+               <td>C</td> 
+                       
+               <td>S</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>A</td> 
+                       
+               <td>U</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td align="center">&nbsp;</td> 
+                       
+               <td align="center">&nbsp;</td> 
+                       
+               <td align="center">yes</td> 
+                       
+               <td align="center">no</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a href="setkey.htm#Assigning_Names">
+                      <var>operand4</var> </a> 
+               </td> 
+                       
+               <td>C</td> 
+                       
+               <td>S</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>A</td> 
+                       
+               <td>U</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td align="center">yes</td> 
+                       
+               <td align="center">no</td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="setkey.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Making"></a></div> 
+         
+      <h2> Making Keys Program-Sensitive and Deactivating Keys</h2> 
+          
+          
+      <p>Making a key program-sensitive means that the key will be available for
+              interrogation by the currently active program. If a key is made
+              program-sensitive, pressing the key has the same effect as pressing
+              <span class="key">ENTER</span>. All data that have been entered on the screen are transferred
+              to the program.
+      </p> 
+          
+      <p class="note"><strong>Note:</strong><br> PA keys and the <span class="key">CLEAR</span> key, when made program-sensitive,
+              do not cause any data to be transferred from the screen.
+      </p> 
+          
+      <p>The program-sensitivity remains in effect only for the execution of the
+              current program. See also the section
+              <a href="setkey.htm#SET_KEY_Statements_on">SET KEY Statements on
+            Different Program Levels</a>.
+      </p> 
+          
+      <p> Examples: </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th> <a name="ALL_setkey" id="11106"></a>SET KEY
+                  ALL 
+               </th> 
+                       
+               <td>This statement causes all keys to be made program-sensitive. All
+                  function assignments to any keys are overwritten.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th nowrap> 
+                  
+                  <p class="mini-list"> 
+                               <a name="PF2"></a>SET KEY PF2<br> 
+                               SET KEY PF2=<a name="PGM"></a>PGM 
+                              
+                  </p> 
+               </th> 
+                       
+               <td>Each of these statements causes <span class="key">PF2</span> to be made
+                           program-sensitive.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> <a name="OFF_setkey" id="11109"></a>SET KEY
+                  OFF 
+               </th> 
+                       
+               <td>This statement de-activates all key settings. The Natural system
+                  variable <code>*PF-KEY</code> contains <code>ENTR</code> after
+                           <code>SET KEY OFF</code> has been executed.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> <a name="ON" id="11110"></a>SET KEY
+                  ON 
+               </th> 
+                       
+               <td>This statement re-activates the functions assigned to all keys
+                  that had an assignment and re-activates the program-sensitivity of keys that
+                  were made program-sensitive before they were de-activated.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> SET KEY PF2=OFF </th> 
+                       
+               <td>This statement de-activates <span class="key">PF2</span>. After execution of
+                           <code>SET KEY PF2=OFF</code>, the Natural system variable
+                           <code>*PF-KEY</code> contains <code>ENTR</code> if it contained
+                           <code>PF2</code> before.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> SET KEY PF2=ON </th> 
+                       
+               <td>This statement re-activates the function assigned to
+                  <span class="key">PF2</span> before it was de-activated or made program-sensitive. If no
+                           function had been assigned to <span class="key">PF2</span>, it will be made program-sensitive
+                           again.
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+         
+      <div><a name="d0e138234"></a></div> 
+          
+      <h3>Key Program-Sensitivity and Contents of *PF-KEY</h3> 
+           
+           
+      <p>The following example shows the relation between the
+               program-sensitivity of a key and the contents of the system variable
+               <a href="../vari/inout.htm#PF_KEY"><code>*PF-KEY</code></a>.
+      </p>
+           
+           
+      <p>Assume that <span class="key">PF2</span> has been made program-sensitive by means of
+               <code>SET KEY PF2=PGM</code> and an <code>INPUT</code> statement is executed
+               afterwards. The table below shows how user actions and executed Natural
+               statements influence the contents of <code>*PF-KEY</code>.
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="11%">
+            <col width="43%">
+            <col width="43%">
+         </colgroup> 
+                
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>Sequence</th> 
+                        
+               <th>Natural Statement Executed / User Action</th> 
+                        
+               <th>Contents of *PF-KEY</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td align="center">1</td> 
+                        
+               <td>User presses <span class="key">PF2</span>.
+               </td> 
+                        
+               <td><code>PF2</code></td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td align="center">2</td> 
+                        
+               <td><code>SET KEY OFF</code></td> 
+                        
+               <td><code>ENTR</code></td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td align="center">3</td> 
+                        
+               <td><code>SET KEY ON</code></td> 
+                        
+               <td><code>PF2</code></td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td align="center">4</td> 
+                        
+               <td><code>SET KEY PF2=OFF</code></td> 
+                        
+               <td><code>ENTR</code></td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td align="center">5</td> 
+                        
+               <td><code>SET KEY PF2=ON</code></td> 
+                        
+               <td><code>PF2</code></td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td align="center">6</td> 
+                        
+               <td><code>SET KEY PF3=OFF</code></td> 
+                        
+               <td><code>PF2</code></td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="setkey.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Commands"></a></div> 
+         
+      <h2> Assigning Commands/Programs </h2> 
+          
+          
+      <p>You can assign a command or program name to a key. When the key is
+              pressed, the current program is terminated and the command/program assigned to
+              the key is invoked via the Natural stack. When assigning a command/program, you
+              can also pass parameters to the command/program (see third example below).
+      </p> 
+          
+      <p>You can also assign a terminal command to a key. When the key is
+              pressed, the terminal command assigned to the key is executed.
+      </p> 
+          
+      <p><a name="operand2_setkey"></a>When <var>operand2</var> is
+              specified as a constant, it must be enclosed within apostrophes.
+      </p> 
+          
+      <p> Examples:</p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th> <code>SET KEY PF4='SAVE' </code></th> 
+                       
+               <td>The command <code>SAVE</code> is assigned to
+                           <span class="key">PF4</span>.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> <code>SET KEY PF4=#XYX </code></th> 
+                       
+               <td>The value contained in the variable
+                  <code>#XYZ</code> is assigned to <span class="key">PF4</span>.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th nowrap> <code>SET KEY PF6='LIST MAP *'
+                      </code></th> 
+                       
+               <td>The command <code>LIST</code>, including the <code>LIST</code>
+                           parameters <code>MAP</code> and <code>*</code>, is assigned to
+                           <span class="key">PF6</span>.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> <code>SET KEY PF2='%%' </code></th> 
+                       
+               <td>The terminal command <a href="../tcom/pcpc.htm"><code>%%</code></a> is assigned to
+                           <span class="key">PF2</span>.
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>The assignment remains in effect until it is overwritten by another
+              <code>SET KEY</code> statement, until the user logs on to another application,
+              or until the end of the Natural session. See also the section
+              <a href="setkey.htm#SET_KEY_Statements_on">SET KEY Statements on
+            Different Program Levels</a>.
+      </p> 
+          
+      <p class="note"><strong>Note:</strong><br> Before a program invoked via a key is executed, Natural internally
+              issues a <code>BACKOUT TRANSACTION</code> statement.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="setkey.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="DATA_setkey"></a></div> 
+         
+      <h2> Assigning Input DATA </h2> 
+          
+          
+      <p>You can assign a data string (<var>operand3</var>) to a
+              key. When the key is pressed, the data string is placed into the input field in
+              which the cursor is currently positioned, and the data are transferred to the
+              executing program (as if <span class="key">ENTER</span> had been pressed).
+      </p> 
+          
+      <p>When <var>operand3</var> is specified as a constant, it
+              must be enclosed within apostrophes.
+      </p> 
+          
+      <p> Example:</p> 
+          <pre class="verbatim">SET KEY PF12=DATA 'YES'</pre> 
+          <p>For the validity of a <code>DATA</code> assignment, the same applies as
+              for a command assignment, that is, it remains in effect until it is overwritten
+              by another <code>SET KEY</code> statement, until the user logs on to another
+              application, or until the end of the Natural session. See also the section
+              <a href="setkey.htm#SET_KEY_Statements_on">SET KEY Statements on
+            Different Program Levels</a>.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="setkey.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="COMMAND_OFF_ON"></a></div> 
+         
+      <h2> COMMAND OFF/ON </h2> 
+          
+          
+      <p>With <code>COMMAND OFF</code>, you can temporarily de-activate any
+              function (command, program, or data) assigned to a key. If the key had been
+              program-sensitive before the function was assigned, <code>COMMAND OFF</code>
+              will make it program-sensitive again.
+      </p> 
+          
+      <p>With a subsequent <code>COMMAND ON</code>, you can re-activate the
+              assigned function again.
+      </p> 
+          
+      <p> Examples:</p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="42%">
+            <col width="55%">
+         </colgroup> 
+                
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th nowrap> <code>SET KEY PF4=COMMAND
+                     OFF</code></th> 
+                       
+               <td>The function that has been assigned to <span class="key">PF4</span> is
+                           temporarily de-activated; if <span class="key">PF4</span> had been program-sensitive before
+                           the function was assigned, it is now made program-sensitive again.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th nowrap> <code>SET KEY PF4=COMMAND
+                     ON</code></th> 
+                       
+               <td>The function assigned to <span class="key">PF4</span> is re-activated
+                           again.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th nowrap> <code>SET KEY COMMAND
+                     OFF</code></th> 
+                       
+               <td>All functions assigned to all keys are temporarily de-activated;
+                  those keys which had been program-sensitive before functions were assigned to
+                  them, are now made program-sensitive again.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th nowrap> <code>SET KEY COMMAND
+                     ON</code></th> 
+                       
+               <td>All functions assigned to all keys are re-activated
+                  again.
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>With <code>SET KEY PF<var>nn</var>=''</code> you can
+              delete the function assigned to a key and at the same time deactivate the
+              program sensitivity of the key.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="setkey.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="HELP_setkey"></a></div> 
+         
+      <h2> Assigning HELP </h2> 
+          
+          
+      <p>You can assign <code>HELP</code> to a key. When the key is pressed, the
+              helproutine assigned to the field in which the cursor is currently positioned
+              will be invoked.
+      </p> 
+          
+      <p>The effect is the same as when entering the help character in the field
+              to invoke help. (The help character - default is a question mark (?) - is
+              determined by the Natural profile parameter <a href="../parms/hi.htm"><code>HI</code></a> as set by the
+              Natural administrator.)
+      </p> 
+          
+      <p> Example: </p> 
+          <pre class="verbatim">SET KEY PF1=HELP</pre> 
+          <p>For the validity of a <code>HELP</code> assignment, the same applies as
+              for program-sensitivity, that is, it remains in effect only for the execution
+              of the current program. See also the section
+              <a href="setkey.htm#SET_KEY_Statements_on">SET KEY Statements on
+            Different Program Levels</a>.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="setkey.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="DYNAMIC"></a></div> 
+         
+      <h2> DYNAMIC Option </h2> 
+          
+          
+      <p>Instead of specifying a specific key with the <code>SET KEY</code>
+              statement, you can use the <code>DYNAMIC</code> option with a variable
+              (<var> operand1 </var>), and assign a value
+              (PF<var>n</var>, PA<var>n</var>, CLR) to this
+              variable in the program. This allows you to specify a function and make it
+              dependent on the program logic which key this function is assigned to.
+      </p> 
+          
+      <p> Example: </p> 
+          <pre class="verbatim">...
+IF ...
+   MOVE 'PF4' TO #KEY
+ELSE
+   MOVE 'PF7' TO #KEY
+END-IF
+...
+SET KEY DYNAMIC #KEY = 'SAVE'  
+...</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="setkey.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="DISABLED"></a></div> 
+         
+      <h2> DISABLED Option </h2> 
+          
+          
+      <p>Graphical user interface (GUI) elements, such as push buttons, menus,
+              and bitmaps, are implemented as PF keys. With the <code>DISABLED</code> option,
+              you can disable the use the of a GUI element assigned to a PF key. Push buttons
+              and menu items will then be displayed grey.
+      </p> 
+          
+      <p>To cancel the effect of <code>SET KEY
+            PF<var>nn</var>=DISABLED</code>, you use <code>SET KEY
+            PF<var>nn</var>=ON</code>.
+      </p> 
+          
+      <p> Example: </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th> <code>SET KEY PF10=DISABLED </code></th> 
+                       
+               <td>Disables the use of the GUI element assigned to
+                  <span class="key">PF10</span>.
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>The <code>DISABLED</code> option can only be used within a processing
+              rule.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="setkey.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="SET_KEY_Statements_on"></a></div> 
+         
+      <h2> SET KEY Statements on Different Program Levels </h2> 
+          
+          
+      <p>When an application contains <code>SET KEY</code> statements at
+              different levels, the following applies:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">When keys are made program-sensitive, the program-sensitivity also
+                      applies to all lower level (called) programs, unless these programs contain
+                      further <code>SET KEY</code> statements. When control is returned to a higher
+                      level program, the <code>SET KEY</code> assignments made at the higher level
+                      come into effect again.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">For keys which are defined as <code>HELP</code> keys, the same applies
+                      as for keys which are program-sensitive.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">When a function (program, command, terminal command, or data string)
+                      is assigned to a key, this assignment is valid at all higher and lower levels -
+                      regardless of the level at what the assignment is made - until another function
+                      is assigned to the key or it is made program-sensitive, or until the user logs
+                      on to another application or the Natural session is terminated.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+         
+      <div><a name="d0e138839"></a></div> 
+          
+      <h3>Example of SET KEY Statements on Different Program Levels</h3> 
+           
+           
+      <p><img src="graphics/sm-setkey.png" alt="Example" width="500" height="570"></p> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="setkey.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Assigning_Names"></a></div> 
+         
+      <h2> Assigning Names </h2> 
+          
+          
+      <p>With the <code>NAMED</code> clause, you can assign a name (<var>
+                 operand4 </var>) to a key. The name will then be displayed in the
+              PF-key lines on the screen; this allows the users to identify the functions
+              assigned to the keys:
+      </p> 
+          
+      <table border="1" cellpadding="5" class="screen">
+         <tr>
+            <td><pre>
+                  ?   Help
+                .   Exit
+               ---- ----------------------------------------------------
+       Code ..: ?   Library ..: *_______
+                    Object ...: *_______________________________________
+                    DBID .....: 0__    FILENR ...: 0__
+  
+  
+   Command ===&gt;
+  Enter-PF1---PF2---PF3---PF4---PF5---PF6---PF7---PF8---PF9---PF10--PF11--PF12---  
+        Help        Exit  Last        Flip                                Canc
+</pre></td>
+         </tr>
+      </table> 
+          
+      <p>The display of the PF-key lines is activated with the session parameter
+              <a href="../parms/sp_kd.htm"><code>KD</code></a> (see
+              the <cite>Parameter Reference</cite>). You can
+              control the way in which the PF-key lines are displayed by using the terminal
+              command <a href="../tcom/pcy.htm"><code>%Y</code></a> (see the
+              <cite>Terminal Commands</cite> documentation).
+      </p> 
+          
+      <p>The maximum length of a name to be assigned to a key is 10 characters.
+              In normal tabular PF-key line format (<a href="../tcom/pcy.htm#PERCENT_YN"><code>%YN</code></a>), only
+              the first 5 characters are displayed.
+      </p> 
+          
+      <p>When <var>operand4</var> is specified as a constant, it
+              must be enclosed within apostrophes (see examples below).
+      </p> 
+          
+      <p>You cannot assign a name to a key without assigning a function to it or
+              making it program-sensitive. To the <span class="key">ENTER</span> key, however, you can only
+              assign a name, but no function.
+      </p> 
+          
+      <p><a name="NAMED_OFF"></a>With <code>NAMED OFF</code>, you delete the name assigned
+              to a program-sensitive key.
+      </p> 
+          
+      <p> Examples: </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th> <a name="ENTR_NAMED"></a><code>SET KEY ENTR NAMED
+                     'EXEC'</code> 
+               </th> 
+                       
+               <td>The name <code>EXEC</code> is assigned to the <span class="key">ENTER</span>
+                           key.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> <code>SET KEY PF3 NAMED 'EXIT'</code></th> 
+                       
+               <td><span class="key">PF3</span> is made program-sensitive, and the name
+                     <code>EXIT</code> is assigned to <span class="key">PF3</span>.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> <code>SET KEY PF3 NAMED OFF</code></th> 
+                       
+               <td><span class="key">PF3</span> is made program-sensitive, and the name that has
+                  been assigned to <span class="key">PF3</span> is deleted.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> <code>SET KEY NAMED OFF</code></th> 
+                       
+               <td>All names that have been assigned to any program-sensitive keys
+                  are deleted.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th nowrap> <code>SET KEY PF4='AP1' NAMED
+                     'APPL1'</code></th> 
+                       
+               <td>The program <code>AP1</code> and the name <code>APPL1</code> are
+                           assigned to <span class="key">PF4</span>.
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>When you use normal tabular PF-key line format
+              (<a href="../tcom/pcy.htm#PERCENT_YN"><code>%YN</code></a>), the
+              following applies:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">If you omit the <code>NAMED</code> clause when assigning a
+                      command/program to a key, the command/program name will be displayed in the
+                      PF-key line; if the command/program name is longer than 5 characters,
+                      <code>CMND</code> will be displayed.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">If you omit the <code>NAMED</code> clause when assigning input data to
+                      a key, <code>DATA</code> will be displayed in the PF-key line.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">If you assign (with the NAMED clause) a name in Unicode format to a
+                      PF-key, the name might not be correctly positioned under the respective
+                      headers. This problem, however, may occur only when you are using the
+                      <a href="../unicode/uni-io.htm#uni-webiointerface">Natural Web
+                  I/O Interface</a> and only for "wide" characters. In this
+                      case, the sequential PF-key line format  (<a href="../tcom/pcy.htm#PERCENT_YS"><code>%YS</code></a> or
+                      <a href="../tcom/pcy.htm#PERCENT_YP"><code>%YP</code></a>) is
+                      recommended. 
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>When you use sequential PF-key line format
+              (<a href="../tcom/pcy.htm#PERCENT_YS"><code>%YS</code></a> or
+              <a href="../tcom/pcy.htm#PERCENT_YP"><code>%YP</code></a>), only
+              those keys to which names have been assigned will be displayed in the PF-key
+              line; that is, if you omit the <code>NAMED</code> clause when assigning a
+              command/program/data to a key, the key will not be displayed in the PF-key
+              line.
+      </p> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="setkey.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Example_setkey"></a></div> 
+         
+      <h2> Example</h2> 
+          
+          <pre class="verbatim">** Example 'SKYEX1': SET KEY                                            
+************************************************************************
+DEFINE DATA LOCAL                                                       
+1 #PF4 (A56)                                                            
+END-DEFINE                                                              
+*                                                                       
+MOVE 'LIST VIEW' TO #PF4                                                
+*                                                                       
+<strong>SET KEY PF1 PF2                                                         
+SET KEY PF3 = 'MENU'                                                    
+        PF4 = #PF4                                                      
+        PF5 = 'LIST VIEW EMPLOYEES' NAMED 'Empl'</strong>                
+*                                                                       
+FORMAT KD=ON                                                            
+INPUT ////                                                              
+      10X 'The following function keys are assigned:' //                
+      10X 'PF1: Function for PF1      ' /                               
+      10X 'PF2: Function for PF2      ' /                               
+      10X 'PF3: Return to MENU program' /                               
+      10X 'PF4: LIST VIEW             ' /                               
+      10X 'PF5: LIST VIEW EMPLOYEES   ' ///
+*                                          
+IF *PF-KEY = 'PF1'                         
+  WRITE 'Function for PF1 executed.'       
+END-IF                                     
+IF *PF-KEY = 'PF2'                         
+  WRITE 'Function for PF2 executed.'       
+END-IF                                     
+*                                          
+END         </pre> 
+          <h4 class="floating-title">Output of Program SKYEX1:</h4> <pre class="system-output">
+The following function keys are assigned:
+                                         
+PF1: Function for PF1                    
+PF2: Function for PF2                    
+PF3: Return to MENU program              
+PF4: LIST VIEW                           
+PF5: LIST VIEW EMPLOYEES                
+</pre> 
+          
+        
+       <div class="noprint">
+         <div class="nospy">
+            <p><a href="setkey.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../sm/setkey.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/sm/setkey.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="sm-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="setgloba.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="settime.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

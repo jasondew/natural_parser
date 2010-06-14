@@ -1,0 +1,141 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Threading Issues</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="pg_nni_threading_issues"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_nni_threading_issues.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_nni_threading_issues.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_nni-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_nni_interface_usage.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_natx-over.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Programming Guide&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x611"></a> Threading Issues 
+         </h1>
+      </div> 
+         
+         
+      <p>A Natural process on Windows, UNIX and OpenVMS always contains only one
+             thread that executes Natural code. Thus in an interactively started Natural
+             session, it can never occur that several threads try to execute Natural code in
+             parallel. The situation is different when a client program that runs several
+             threads in parallel uses the Natural Native Interface.
+      </p> 
+         
+      <p>The Natural Native Interface can be used by multithreaded applications.
+             The interface functions are thread safe. As long as a given thread T is
+             executing one of the interface functions, other threads of the same process
+             that call one of the interface functions are blocked until T has left the
+             interface function. Effectively the parallel executing threads of the process
+             are serialized as far as the usage of the interface functions is concerned. It
+             is not necessary to serialize interface access among the threads of different
+             processes, because each different process that uses the NNI runs its own
+             Natural session.
+      </p> 
+         
+      <p>The calling application can also control the multithreaded access to the
+             NNI explicitly. This can make sense if a thread wants to execute a series of
+             NNI calls without being interrupted by another thread. To achieve this, the
+             thread calls <a href="pg_nni_func-over.htm#pg_nni_enter"><code>nni_enter</code></a>, which lets the
+             thread wait until all other threads have left the NNI. Then the thread does its
+             work and calls NNI functions at will. After having finished its work, the
+             thread calls <a href="pg_nni_func-over.htm#pg_nni_leave"><code>nni_leave</code></a> to allow other
+             threads to access the NNI.
+      </p> 
+         
+      <p>A multithreaded application that uses the NNI must follow these
+             rules:
+      </p> 
+         
+      <ul> 
+             
+         <li> 
+                 
+            <p class="initem">The functions <a href="pg_nni_func-over.htm#pg_nni_initialize"><code>nni_initialize</code></a> and
+                     <a href="pg_nni_func-over.htm#pg_nni_uninitialize"><code>nni_uninitialize</code></a> must be
+                     called at least once per process.
+            </p> 
+                
+         </li> 
+             
+         <li> 
+                 
+            <p class="initem">The function <a href="pg_nni_func-over.htm#pg_nni_uninitialize"><code>nni_uninitialize</code></a> must be
+                     called on the same thread as the corresponding call to
+                     <a href="pg_nni_func-over.htm#pg_nni_initialize"><code>nni_initialize</code></a>.
+            </p> 
+                
+         </li> 
+             
+         <li> 
+                 
+            <p class="initem">The function <a href="pg_nni_func-over.htm#pg_nni_uninitialize"><code>nni_uninitialize</code></a> must
+                     not be called before the last thread that uses the NNI has terminated.
+            </p> 
+                
+         </li> 
+            
+      </ul> 
+         
+       
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="pg_nni_threading_issues.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_nni_threading_issues.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_nni_threading_issues.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_nni-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_nni_interface_usage.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_natx-over.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

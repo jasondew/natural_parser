@@ -1,0 +1,809 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Reliable RPC</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="reliable_rpc"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../rpc/reliable_rpc.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/rpc/reliable_rpc.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="rpc-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="using.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="rds.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Natural Remote Procedure Call (RPC)&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1>Reliable RPC</h1>
+      </div>
+      <ul>
+         <li>
+            <p class="initem"><a href="reliable_rpc.htm#reliable_rpc_gen">General Information</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="reliable_rpc.htm#reliable_rpc_client">Reliable RPC on the Natural RPC Client Side</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="reliable_rpc.htm#reliable_rpc_server">Reliable RPC on the Natural RPC Server Side</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="reliable_rpc.htm#reliable_rpc_messages">Viewing the Status of Reliable RPC Messages</a></p>
+         </li>
+      </ul>
+      <hr>
+      <div><a name="reliable_rpc_gen"></a></div> 
+         
+      <h2>General Information</h2> 
+          
+          
+      <p>In the architecture of modern e-business applications (SOA), loosely
+              coupled systems are becoming more and more important. Reliable messaging is one
+              important technology for this type of system.
+      </p> 
+          
+      <p>Reliable RPC is the Natural RPC implementation of a reliable messaging
+              system. It combines the Natural RPC technology and persistence, which is
+              implemented by means of units of work (UOWs) that are offered by the EntireX
+              Broker. Reliable RPC is characterized by following features:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">The Natural RPC client executes a <code>CALLNAT</code> statement
+                      without waiting for a reply from the server (the RPC message is sent in
+                      asynchronous mode). 
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">An RPC server needs not be active at the time the <code>CALLNAT</code>
+                      is executed.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">The reliable RPC message is stored in the Broker&#8217;s persistent store
+                      until an RPC server is available. 
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">The Natural RPC server executes the reliable RPC by calling the
+                      requested subprogram but does not send a reply to the RPC client.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">A Natural RPC client may ask the status of the sent reliable RPC
+                      messages.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">A Natural RPC client may send a reliable RPC message to an EntireX RPC
+                      server. 
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">A Natural RPC server may receive a reliable RPC message from an
+                      EntireX RPC client. 
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p><img src="graphics/concept.png" alt="Reliable RPC diagram" width="290" height="340"></p> 
+         
+         
+      <div class="noprint">
+         <p><a href="reliable_rpc.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="reliable_rpc_client"></a></div> 
+         
+      <h2>Reliable RPC on the Natural RPC Client Side</h2> 
+          
+          
+      <p>The Natural RPC client for a reliable RPC is configured in the same way
+              as for a normal Natural RPC. The same Natural RPC client session can send
+              standard RPC requests and reliable RPC messages.
+      </p> 
+          
+      <p>To enable a Natural RPC client to use reliable RPC, the Natural RPC
+              client must use application programming interface
+              <a href="securi.htm#securi_entirex_sec_client_side"><code>USR2071N</code></a> for
+              an explicit EntireX Broker logon. This implies that the profile parameter
+              <a href="../parms/acivers.htm"><code>ACIVERS</code></a>
+              must be set to <code>2</code> or higher.
+      </p> 
+          
+      <p>Reliable RPC is used to send messages to a persistent EntireX Broker
+              service. The messages are described by the PDA of the caller and may only
+              contain output parameters. A parameter is defined as "output" in
+              one of the following ways:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">If a Natural stub subprogram (<a href="intro_rpc.htm#interface-object">interface object</a>) is used: 
+            </p> 
+                  
+            <p class="initem">In the <code>Attr</code> field on the
+                      <a href="../utis/sysrpc_stub_single.htm#sysrpc_stub_single_Parms">Stub
+                         Generation</a> screen of the <code>SYSRPC</code> utility, set the
+                      attribute of the parameter to <code>O</code> (output).
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">If no Natural stub subprogram is used: </p> 
+                  
+            <p class="initem">Use the
+                      <a href="../parms/sp_ad.htm#sp_ad_Field_Input_-_Output_Characteristics"><code>AD=O</code></a>
+                      session parameter in the <a href="../sm/callnat.htm"><code>CALLNAT</code></a> statement.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>If you generate a Natural stub subprogram from an IDL file, the
+              attribute of the parameter is taken from the IDL file. In this case, the IDL
+              file must only contain inbound (from the client's point of view)
+              parameters.
+      </p> 
+          
+      <p>Reliable RPC is enabled at runtime. The client has to set the one of two
+              different modes before issuing a reliable RPC request:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem"><code>AUTO_COMMIT</code></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"><code>CLIENT_COMMIT</code></p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>While <code>AUTO_COMMIT</code> commits each message implicitly after
+              sending it, a series of RPC messages sent in a unit of work (UOW) can be
+              committed or rolled back explicitly using <code>CLIENT_COMMIT</code> mode.
+      </p> 
+          
+      <p>For this purpose, Natural provides the two application programming
+              interfaces <code>USR6304N</code> and <code>USR6305N</code>. With interface
+              <code>USR6304N</code>, the mode for reliable RPC is set. With interface
+              <code>USR6305N</code>, a unit of work that has been created with
+              <code>CLIENT_COMMIT</code> can be committed or rolled back.
+      </p> 
+          
+      <div><a name="USR6304N"></a></div>
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To make use of <code>USR6304N</code></strong></p>
+      <ol class="steps">
+         <li> 
+                   
+                   
+            <p class="instep">Copy the subprogram <code>USR6304N</code> from the library
+                       <code>SYSEXT</code> to the library <code>SYSTEM</code> or to the steplib
+                       library or to any application in the client environment.
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Using the <a href="../sm/defineda_pda.htm"><code>DEFINE DATA
+                     PARAMETER</code></a> statement, specify the following parameters:
+            </p> 
+                    
+                    
+            <table border="1" class="color" cellpadding="3" width="85%"> 
+                        
+               <thead align="left" valign="top"> 
+                            
+                  <tr> 
+                                
+                     <th>Parameter</th> 
+                                
+                     <th>I/O</th> 
+                                
+                     <th>Format</th> 
+                                
+                     <th colspan="2">Description</th> 
+                               
+                  </tr> 
+                           
+               </thead> 
+                        
+               <tbody align="left" valign="top"> 
+                            
+                  <tr> 
+                                
+                     <td rowspan="3"><code>P-FUNC</code></td> 
+                                
+                     <td rowspan="3">I</td> 
+                                
+                     <td rowspan="3">A01</td> 
+                                
+                     <td colspan="2">Function code; possible values
+                        are:
+                     </td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td><code>P</code> (Put) 
+                     </td> 
+                                
+                     <td>Set the mode for reliable RPC. The mode
+                        applies to all subsequent calls.
+                     </td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td><code>G</code> (Get) 
+                     </td> 
+                                
+                     <td>Get the previously specified mode. </td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td rowspan="4"><code>P-MODE</code></td> 
+                                
+                     <td rowspan="4">I/O</td> 
+                                
+                     <td rowspan="4">N01</td> 
+                                
+                     <td colspan="2">Mode for reliable RPC:</td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td><code>0</code></td> 
+                                
+                     <td>No reliable RPC (standard RPC
+                        execution)
+                     </td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td><code>1</code></td> 
+                                
+                     <td>Reliable RPC
+                        <code>AUTO_COMMIT</code></td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td><code>2</code></td> 
+                                
+                     <td>Reliable RPC
+                        <code>CLIENT_COMMIT</code> 
+                     </td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td><code>P-RC</code></td> 
+                                
+                     <td>O</td> 
+                                
+                     <td>N04</td> 
+                                
+                     <td colspan="2">Return code</td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td><code>P-MESSAGE</code></td> 
+                                
+                     <td>O</td> 
+                                
+                     <td>A80</td> 
+                                
+                     <td colspan="2">Message text</td> 
+                               
+                  </tr> 
+                           
+               </tbody> 
+                       
+            </table> 
+                    
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">In the calling program on the client side, specify the following
+                       statement:
+            </p> 
+                   <pre class="verbatim">CALLNAT 'USR6304N' P-FUNC P-MODE P-RC P-MESSAGE</pre> 
+                   
+                 </li>
+      </ol> 
+          
+      <p class="note"><strong>Note:</strong><br>The mode <code>CLIENT_COMMIT</code> cannot be changed
+              if reliable RPC messages have been sent but not yet committed or rolled
+              back.
+      </p> 
+          
+      <div><a name="USR6305N"></a></div>
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To make use <code>of USR6305N</code></strong></p>
+      <ol class="steps">
+         <li> 
+                   
+                   
+            <p class="instep">Copy the subprogram <code>USR6305N</code> from the library
+                       <code>SYSEXT</code> to the library <code>SYSTEM</code> or to the steplib
+                       library or to any application in the client environment.
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Using the <a href="../sm/defineda_pda.htm"><code>DEFINE DATA
+                     PARAMETER</code></a> statement, specify the following parameters:
+            </p> 
+                    
+                    
+            <table border="1" class="color" cellpadding="3" width="85%"> 
+                        
+               <thead align="left" valign="top"> 
+                            
+                  <tr> 
+                                
+                     <th>Parameter</th> 
+                                
+                     <th>I/O</th> 
+                                
+                     <th>Format</th> 
+                                
+                     <th colspan="2">Description</th> 
+                               
+                  </tr> 
+                           
+               </thead> 
+                        
+               <tbody align="left" valign="top"> 
+                            
+                  <tr> 
+                                
+                     <td rowspan="3"><code>P-FUNC</code></td> 
+                                
+                     <td rowspan="3">I</td> 
+                                
+                     <td rowspan="3">A08</td> 
+                                
+                     <td colspan="2">Function code; possible values
+                        are:
+                     </td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td><code>COMMIT</code></td> 
+                                
+                     <td>Commit the sent reliable RPC messages. The
+                        messages are now available for an RPC server.
+                     </td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td><code>ROLLBACK</code></td> 
+                                
+                     <td>Discard the already sent reliable RPC
+                        messages.
+                     </td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td><code>P-RC</code></td> 
+                                
+                     <td>O</td> 
+                                
+                     <td>N04</td> 
+                                
+                     <td colspan="2">Return code</td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td><code>P-MESSAGE</code></td> 
+                                
+                     <td>O</td> 
+                                
+                     <td>A80</td> 
+                                
+                     <td colspan="2">Message text</td> 
+                               
+                  </tr> 
+                           
+               </tbody> 
+                       
+            </table> 
+                    
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">In the calling program on the client side, specify the following
+                       statement:
+            </p> 
+                   <pre class="verbatim">CALLNAT 'USR6305N' P-FUNC P-MODE P-RC P-MESSAGE</pre> 
+                   
+                 </li>
+      </ol> 
+         
+      <div class="noprint">
+         <p><a href="reliable_rpc.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="reliable_rpc_server"></a></div> 
+         
+      <h2>Reliable RPC on the Natural RPC Server Side</h2> 
+          
+          
+      <p>The Natural RPC server for reliable RPC is configured in the same way as
+              for normal Natural RPC. The same Natural RPC server session can process
+              standard RPC requests and reliable RPC messages.
+      </p> 
+          
+      <p>To enable the processing of reliable RPC messages, the profile parameter
+              <a href="../parms/acivers.htm"><code>ACIVERS</code></a>
+              must be set to <code>2</code> or higher.
+      </p> 
+         
+      <div class="noprint">
+         <p><a href="reliable_rpc.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="reliable_rpc_messages"></a></div> 
+         
+      <h2>Viewing the Status of Reliable RPC Messages</h2> 
+          
+          
+      <p>To view the status of sent reliable RPC messages, Natural provides the
+              application programming interface <code>USR6306N</code>. With
+              <code>USR6306N</code> you can get the status of all reliable RPC messages that
+              you have previously sent under your user ID. <code>USR6306N</code> must not
+              necessarily be called within the Natural session in which the reliable RPC
+              messages have been sent. If <code>USR6306N</code> is used in a different
+              Natural session, the application programming interface
+              <a href="securi.htm#securi_entirex_sec_client_side"><code>USR2071N</code></a> must
+              first be used to log on to the EntireX Broker with the same user ID that has
+              been used to send the reliable RPC messages.
+      </p> 
+          
+      <p>The reliable RPC messages are implemented by EntireX Broker unit of
+              works (UOWs). The information about reliable RPC messages is therefore
+              information about UOWs.
+      </p> 
+          
+      <div><a name="USR6306N"></a></div>
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To make use of <code>USR6306N</code></strong></p>
+      <ol class="steps">
+         <li> 
+                   
+                   
+            <p class="instep">Copy the subprogram <code>USR6306N</code> from the library
+                       <code>SYSEXT</code> to the library <code>SYSTEM</code> or to the steplib
+                       library or to any application in the client environment.
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Using the <a href="../sm/defineda_pda.htm"><code>DEFINE DATA
+                     PARAMETER</code></a> statement, specify the following parameters:
+            </p> 
+                    
+                    
+            <table border="1" class="color" cellpadding="3" width="85%"> 
+                        
+               <thead align="left" valign="top"> 
+                            
+                  <tr> 
+                                
+                     <th>Parameter</th> 
+                                
+                     <th>I/O</th> 
+                                
+                     <th>Format</th> 
+                                
+                     <th>Description</th> 
+                               
+                  </tr> 
+                           
+               </thead> 
+                        
+               <tbody align="left" valign="top"> 
+                            
+                  <tr> 
+                                
+                     <td><code>P-UOW-ID-IN</code></td> 
+                                
+                     <td>I</td> 
+                                
+                     <td>A16</td> 
+                                
+                     <td>ID for the UOW to be retrieved. Possible
+                        values are: 
+                        
+                        <p>UOWID of a UOW </p> 
+                                    
+                        <p><code>LAST</code>: the UOW for the last reliable RPC message in
+                                        the current Natural session 
+                        </p> 
+                                    
+                        <p><code>ALL</code> or blank: all UOWs for the logged on EntireX
+                                        Broker user 
+                        </p>
+                     </td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td><code>P-USER-ID</code></td> 
+                                
+                     <td>O</td> 
+                                
+                     <td>A32</td> 
+                                
+                     <td>User ID of the user who has created the
+                        UOWs.
+                     </td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td><code>P-BROKER-ID</code></td> 
+                                
+                     <td>O</td> 
+                                
+                     <td>A32</td> 
+                                
+                     <td>Broker ID of the EntireX Broker that hosts the
+                        UOWs.
+                     </td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td><code>P-UOW-COUNT</code></td> 
+                                
+                     <td>O</td> 
+                                
+                     <td>I4</td> 
+                                
+                     <td>Number of UOWs in the <code>P-UOW-INFO</code>
+                                    array.
+                     </td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td><code>P-UOW-INFO
+                           (/1:*)</code></td> 
+                                
+                     <td>&nbsp;</td> 
+                                
+                     <td>&nbsp;</td> 
+                                
+                     <td>X-array with information about each
+                        UOW
+                     </td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td><code>P-UOW-ID</code></td> 
+                                
+                     <td>O</td> 
+                                
+                     <td>A32</td> 
+                                
+                     <td>ID of the UOW </td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td><code>P-UOW-STATUS</code></td> 
+                                
+                     <td>O</td> 
+                                
+                     <td>A10</td> 
+                                
+                     <td>Status of the UOW according to EntireX Broker 
+                        
+                        <p>The status depends on the processing state and is assigned by
+                                        the EntireX Broker.
+                        </p>
+                     </td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td><code>P-USERR-STATUS</code></td> 
+                                
+                     <td>O</td> 
+                                
+                     <td>A32</td> 
+                                
+                     <td>User information about the UOW. 
+                        
+                        <p>This is typically error information that has been set by the RPC
+                                        server.
+                        </p>
+                     </td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td><code>P-CREATE-TIME</code></td> 
+                                
+                     <td>O</td> 
+                                
+                     <td>A32</td> 
+                                
+                     <td>Creation time of the UOW according to EntireX
+                        Broker.
+                     </td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td><code>P-RC</code></td> 
+                                
+                     <td>O</td> 
+                                
+                     <td>N04</td> 
+                                
+                     <td>Return code</td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td><code>P-MESSAGE</code></td> 
+                                
+                     <td>O</td> 
+                                
+                     <td>A80</td> 
+                                
+                     <td>Message text</td> 
+                               
+                  </tr> 
+                           
+               </tbody> 
+                       
+            </table> 
+                    
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">In the calling program on the client side, specify the following
+                       statement:
+            </p> 
+                   <pre class="verbatim">CALLNAT 'USR6306N' P-UOW-ID-IN P-USER-ID P-BROKER-ID P-UOW-COUNT P-OUW-INFO(*) P-RC P-MESSAGE</pre> 
+                   
+                 </li>
+      </ol> 
+         
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="reliable_rpc.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../rpc/reliable_rpc.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/rpc/reliable_rpc.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="rpc-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="using.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="rds.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

@@ -1,0 +1,1344 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Parameters to Influence the Output of Fields</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="pg_output_parms"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_output_parms.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_output_parms.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_output-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_output_headers.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_output_masks.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Programming Guide&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x257"></a> 
+               <a name="x258"></a> Parameters to Influence the Output of Fields 
+         </h1>
+      </div> 
+         
+         
+      <p>This document discusses the use of those Natural profile and/or session
+             parameters which you can use to control the output format of fields.
+      </p> 
+         
+      <p>The following topics are covered:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_output_parms.htm#output_rel_parms">Overview of Field-Output-Relevant Parameters</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_parms.htm#leading_char">Leading Characters - LC Parameter</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_parms.htm#leading_char_unicode">Unicode Leading Characters - LCU Parameter</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_parms.htm#insertion_char">Insertion Characters - IC Parameter</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_parms.htm#insertion_char_unicode">Unicode Insertion Characters - ICU Parameter</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_parms.htm#trailing_char">Trailing Characters - TC Parameter</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_parms.htm#trailing_char_unicode">Unicode Trailing Characters - TCU Parameter</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_parms.htm#output_length">Output Length - AL and NL Parameters</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_parms.htm#display_length">Display Length for Output - DL Parameter</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_parms.htm#sign_position">Sign Position - SG Parameter</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_parms.htm#identical_suppr">Identical Suppress - IS Parameter</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_parms.htm#zero_print">Zero Printing - ZP Parameter</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_parms.htm#empty_line_suppr">Empty Line Suppression - ES Parameter</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_parms.htm#further_exa_parms_pg_output_parms">Further Examples of Field-Output-Relevant Parameters</a></p>
+         </li>
+      </ul> 
+          
+        
+      <hr> 
+        
+      <div><a name="output_rel_parms"></a></div> 
+         
+      <h2> 
+             <a name="x259"></a>Overview of Field-Output-Relevant Parameters 
+      </h2> 
+          
+          
+      <p>Natural provides several profile and/or session parameters you can use
+              to control the format in which fields are output:
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="24%">
+            <col width="73%">
+         </colgroup> 
+                
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th align="left"> Parameter </th> 
+                       
+               <th align="left"> Function </th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> <a href="../parms/sp_lc.htm">LC</a>,
+                     <a href="../parms/sp_ic.htm">IC</a> and
+                           <a href="../parms/sp_tc.htm">TC</a> 
+               </td> 
+                       
+               <td>With these session parameters, you can specify characters that
+                  are to be displayed before or after a field or before a field value.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><a href="../parms/sp_lcu.htm">LCU</a>,
+                     <a href="../parms/sp_icu.htm">ICU</a> and
+                           <a href="../parms/sp_tcu.htm">TCU</a> 
+               </td> 
+                       
+               <td>With these session parameters, you can specify characters in
+                  Unicode format that are to be displayed before or after a field or before a
+                  field value.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a href="../parms/sp_al.htm">AL</a> and
+                     <a href="../parms/sp_nl.htm">NL</a> 
+               </td> 
+                       
+               <td>With these session parameters, you can increase or reduce the
+                  output length of fields.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a href="../parms/sp_dl.htm">DL</a> 
+               </td> 
+                       
+               <td>With this session parameter, you can specify the default output
+                  length for an alphanumeric map field of format U.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a href="../parms/sp_sg.htm">SG</a> 
+               </td> 
+                       
+               <td>With this session parameter, you can determine whether negative
+                  values are to be displayed with or without a minus sign.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a href="../parms/sp_is.htm">IS</a> 
+               </td> 
+                       
+               <td>With this session parameter, you can suppress the display of
+                  subsequent identical field values.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a href="../parms/zp.htm">ZP</a> 
+               </td> 
+                       
+               <td>With this profile and session parameter, you can determine
+                  whether field values of <code>0</code> are to be displayed or not.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a href="../parms/sp_es.htm">ES</a> 
+               </td> 
+                       
+               <td>With this session parameter, you can suppress the display of
+                  empty lines generated by a <a href="../sm/display.htm"><code>DISPLAY</code></a> or
+                           <a href="../sm/write.htm"><code>WRITE</code></a>
+                           statement.
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>These parameters are discussed below.</p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_output_parms.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="leading_char"></a></div> 
+         
+      <h2> 
+             <a name="x260"></a> 
+             <a name="x261"></a>Leading Characters - LC Parameter 
+      </h2> 
+          
+          
+      <p>With the session parameter <a href="../parms/sp_lc.htm"><code>LC</code></a>, you can specify
+              leading characters that are to be displayed immediately <em>before a field</em>
+              that is output with a <a href="../sm/display.htm"><code>DISPLAY</code></a> statement. The width of
+              the output column is enlarged accordingly. You can specify 1 to 10
+              characters.
+      </p> 
+          
+      <p>By default, values are displayed left-justified in alphanumeric fields
+              and right-justified in numeric fields. (These defaults can be changed with the
+              <code>AD</code> parameter; see the
+              <a href="../parms/parms-over.htm">Parameter
+            Reference</a>). When a leading character is specified for an
+              alphanumeric field, the character is therefore displayed immediately before the
+              field value; for a numeric field, a number of spaces may occur between the
+              leading character and the field value.
+      </p> 
+          
+      <p>The <a href="../parms/sp_lc.htm"><code>LC</code></a> parameter can be
+              used with the following statements:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../sm/format.htm"><code>FORMAT</code></a> 
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../sm/display.htm"><code>DISPLAY</code></a>
+                      
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>It can be set at statement level and at element level.</p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_output_parms.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="leading_char_unicode"></a></div> 
+         
+      <h2> 
+             <a name="x262"></a>Unicode Leading Characters - LCU Parameter
+      </h2> 
+          
+          
+      <p>The session parameter <a href="../parms/sp_lcu.htm"><code>LCU</code></a> is identical to
+              the session parameter <a href="../parms/sp_lc.htm"><code>LC</code></a>. The difference
+              is that the leading characters are always stored in Unicode format. 
+      </p> 
+          
+      <p>This allows you to specify leading characters with mixed characters from
+              different code pages, and assures that always the correct character is
+              displayed independent of the installed system code page. 
+      </p> 
+          
+      <p>For further information, see <a href="../unicode/uni-language.htm">Unicode and Code Page Support in
+            the Natural Programming Language</a>,
+              <a href="../unicode/uni-language.htm">Session
+            Parameters</a>, section <cite>EMU, ICU, LCU, TCU versus EM,
+                 IC, LC, TC</cite>.
+      </p> 
+          
+      <p>The parameters <code>LCU</code> and <code>ICU</code>
+              cannot both be applied to one field. 
+      </p> 
+         
+      <div class="noprint">
+         <p><a href="pg_output_parms.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="insertion_char"></a></div> 
+         
+      <h2> 
+             <a name="x263"></a> 
+             <a name="x264"></a>Insertion Characters - IC Parameter 
+      </h2> 
+          
+          
+      <p>With the session parameter <a href="../parms/sp_ic.htm"><code>IC</code></a>, you specify the
+              characters to be inserted in the column immediately <em>preceding the value of
+            a field</em> that is output with a <a href="../sm/display.htm"><code>DISPLAY</code></a> statement. You can
+              specify 1 to 10 characters.
+      </p> 
+          
+      <p>For a numeric field, the insertion characters will be placed immediately
+              before the first significant digit that is output, with no intervening spaces
+              between the specified character and the field value. For alphanumeric fields,
+              the effect of the <code>IC</code> parameter is the same as that of
+              the <a href="../parms/sp_lc.htm"><code>LC</code></a>
+              parameter.
+      </p> 
+          
+      <p>The parameters <a href="../parms/sp_lc.htm"><code>LC</code></a> and
+              <a href="../parms/sp_ic.htm"><code>IC</code></a> cannot
+              both be applied to one field.
+      </p> 
+          
+      <p>The <a href="../parms/sp_ic.htm"><code>IC</code></a> parameter can be
+              used with the following statements:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../sm/format.htm"><code>FORMAT</code></a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../sm/display.htm"><code>DISPLAY</code></a></p>
+                  
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>It can be set at statement level and at element level.</p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_output_parms.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="insertion_char_unicode"></a></div> 
+         
+      <h2> 
+             <a name="x265"></a>Unicode Insertion Characters - ICU Parameter
+      </h2> 
+          
+          
+      <p>The session parameter <a href="../parms/sp_icu.htm"><code>ICU</code></a> is identical to
+              the session parameter <a href="../parms/sp_ic.htm"><code>IC</code></a>. The difference
+              is that the insertion characters are always stored in Unicode format. 
+      </p> 
+          
+      <p>This allows you to specify insertion characters with mixed characters
+              from different code pages, and assures that always the correct character is
+              displayed independent of the installed system code page. 
+      </p> 
+          
+      <p>For further information, see <a href="../unicode/uni-language.htm">Unicode and Code Page Support in
+            the Natural Programming Language</a>,
+              <a href="../unicode/uni-language.htm">Session
+            Parameters</a>, section <cite>EMU, ICU, LCU, TCU versus EM,
+                 IC, LC, TC</cite>.
+      </p> 
+          
+      <p>The parameters <code>LCU</code> and <code>ICU</code>
+              cannot both be applied to one field. 
+      </p> 
+         
+      <div class="noprint">
+         <p><a href="pg_output_parms.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="trailing_char"></a></div> 
+         
+      <h2> 
+             <a name="x266"></a> 
+             <a name="x267"></a>Trailing Characters - TC Parameter
+      </h2> 
+          
+          
+      <p>With the session parameter <a href="../parms/sp_tc.htm"><code>TC</code></a>, you can specify
+              trailing characters that are to be displayed immediately <em>to the right of a
+            field</em> that is output with a <a href="../sm/display.htm"><code>DISPLAY</code></a> statement. The width of
+              the output column is enlarged accordingly. You can specify 1 to 10
+              characters.
+      </p> 
+          
+      <p>The <a href="../parms/sp_tc.htm"><code>TC</code></a> parameter can be
+              used with the following statements:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../sm/format.htm"><code>FORMAT</code></a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../sm/display.htm"><code>DISPLAY</code></a></p>
+                  
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>It can be set at statement level and at element level.</p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_output_parms.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="trailing_char_unicode"></a></div> 
+         
+      <h2> 
+             <a name="x268"></a>Unicode Trailing Characters - TCU Parameter
+      </h2> 
+          
+          
+      <p>The session parameter <a href="../parms/sp_tcu.htm"><code>TCU</code></a> is identical to
+              the session parameter <a href="../parms/sp_tc.htm"><code>TC</code></a>. The difference
+              is that the trailing characters are always stored in Unicode format. 
+      </p> 
+          
+      <p>This allows you to specify trailing characters with mixed characters
+              from different code pages, and assures that always the correct character is
+              displayed independent of the installed system code page. 
+      </p> 
+          
+      <p>For further information, see <a href="../unicode/uni-language.htm">Unicode and Code Page Support in
+            the Natural Programming Language</a>,
+              <a href="../unicode/uni-language.htm">Session
+            Parameters</a>, section <cite>EMU, ICU, LCU, TCU versus EM,
+                 IC, LC, TC</cite>.
+      </p> 
+         
+      <div class="noprint">
+         <p><a href="pg_output_parms.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="output_length"></a></div> 
+         
+      <h2> 
+             <a name="x269"></a> 
+             <a name="x270"></a> 
+             <a name="x271"></a>Output Length - AL and NL Parameters 
+      </h2> 
+          
+          
+      <p>With the session parameter <a href="../parms/sp_al.htm"><code>AL</code></a>, you can specify
+              the <em>output length for an alphanumeric field</em>; with the
+              <a href="../parms/sp_nl.htm"><code>NL</code></a>
+              parameter, you can specify the <em>output length for a numeric field</em>. This
+              determines the length of a field as it will be output, which may be shorter or
+              longer than the actual length of the field (as defined in the DDM for a
+              database field, or in the <a href="../sm/defineda.htm"><code>DEFINE
+               DATA</code></a> statement for a user-defined variable).
+      </p> 
+          
+      <p>Both parameters can be used with the following statements:</p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../sm/format.htm"><code>FORMAT</code></a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../sm/display.htm"><code>DISPLAY</code></a></p>
+                  
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../sm/write.htm"><code>WRITE</code></a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../sm/printsm.htm"><code>PRINT</code></a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../sm/input.htm"><code>INPUT</code></a></p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>They can be set at statement level and at element level.</p> 
+          
+      <p class="note"><strong>Note:</strong><br> If an edit mask is specified, it overrides an
+              <a href="../parms/sp_nl.htm"><code>NL</code></a> or
+              <a href="../parms/sp_al.htm"><code>AL</code></a>
+              specification. <a href="pg_output_masks.htm#pg_output_masks">Edit masks</a> are
+              described in <a href="pg_output_masks.htm#pg_output_masks">Edit Masks - EM
+            Parameter</a>.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_output_parms.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="display_length"></a></div> 
+         
+      <h2> 
+             <a name="x272"></a> 
+             <a name="x273"></a> 
+             <a name="x274"></a> Display Length for Output - DL Parameter 
+      </h2> 
+          
+          
+      <p class="note"><strong>Note:</strong><br>You should use the Web I/O Interface to make use of the
+              full functionality of the <code>DL</code> parameter. When using the
+              terminal emulation, it is not possible, for example, to scroll in a field when
+              the value defined with <code>DL</code> is smaller than the field
+              length. 
+      </p> 
+          
+      <p>With the session parameter <a href="../parms/sp_dl.htm"><code>DL</code></a>, you can specify
+              the <em>display length for a field of format A or U</em>, since the display
+              width of a Unicode string can be twice the length of the string, and the user
+              must be able to display the whole string. The default will be the length, for
+              example, for a format/length U10, the display length can be 10 to 20, whereas
+              the default length (when <code>DL</code> is not specified) is 10.
+      </p>
+          
+          
+      <p>This session parameter can be used with the following statements:</p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../sm/format.htm"><code>FORMAT</code></a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../sm/display.htm"><code>DISPLAY</code></a></p>
+                  
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../sm/write.htm"><code>WRITE</code></a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../sm/printsm.htm"><code>PRINT</code></a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../sm/input.htm"><code>INPUT</code></a></p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>It can be set at statement level and at element level.</p> 
+          
+      <p>The difference between the session parameters
+              <a href="../parms/sp_al.htm"><code>AL</code></a> and
+              <a href="../parms/sp_dl.htm"><code>DL</code></a> is that
+              <code>AL</code> defines the data length of a field whereas
+              <code>DL</code> defines the number of columns which are used on the
+              screen for displaying the field. The user can scroll in input fields to view
+              the entire content of a field if the value specified with the
+              <code>DL</code> session parameter is less than the length of the
+              field data. 
+      </p> 
+          
+      <p>Using the <code>DL</code> parameter with a
+              length that is smaller than the length of the field is only recommended with
+              the Web I/O Interface. When running Natural in a terminal emulation, scrolling
+              in a field is not possible and so the effect is the same as using the
+              <code>AL</code> parameter. Moreover, when changing the field
+              contents, all characters which are beyond the display length will be lost. 
+      </p>
+          
+          
+      <p class="note"><strong>Note:</strong><br><code>DL</code> is allowed for A-format fields as well.
+              In conjunction with the Web I/O Interface,
+              this would allow making the edit control
+              size smaller than the content of a field.
+      </p> 
+          
+      <h4 class="floating-title"> Example: </h4> 
+          <pre class="verbatim">
+DEFINE DATA LOCAL
+1    #U1 (U10)
+1    #U2 (U10)
+END-DEFINE
+*
+#U1 := U'latintxt00'
+#U2 := U'<img src="graphics/u2.gif" alt="graphics/u2.gif" width="137" height="11">'
+*
+INPUT (AD=M) #U1 <strong>#U2</strong>
+END
+</pre> 
+          <p>The above program produces the following output where the content of the
+              field <code>#U2</code> is incomplete:
+      </p> 
+          
+          <pre class="verbatim">#U1 latintxt00 #U2 <img src="graphics/u2-incomplete.gif" alt="graphics/u2-incomplete.gif" width="67" height="11"></pre> 
+          <p>When the session parameter <code>DL</code> is used with the
+              field <code>#U2</code> and is specified accordingly, the content of this field
+              will be displayed correctly:
+      </p> 
+          <pre class="verbatim">
+DEFINE DATA LOCAL
+1    #U1 (U10)
+1    #U2 (U10)
+END-DEFINE
+*
+#U1 := U'latintxt00'
+#U2 := U'<img src="graphics/u2.gif" alt="graphics/u2.gif" width="137" height="11">'
+*
+INPUT (AD=M) #U1 <strong>#U2 (DL=20)</strong>
+END
+</pre> 
+          <p>Result:</p> 
+          <pre class="verbatim">#U1 latintxt00 #U2 <img src="graphics/u2.gif" alt="graphics/u2.gif" width="137" height="11"></pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_output_parms.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="sign_position"></a></div> 
+         
+      <h2> 
+             <a name="x275"></a> 
+             <a name="x276"></a>Sign Position - SG Parameter 
+      </h2> 
+          
+          
+      <p>With the session parameter <a href="../parms/sp_sg.htm"><code>SG</code></a>, you can
+              determine whether or not a sign position is to be allocated for numeric
+              fields.
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">By default, <code>SG=ON</code> applies, which means that a
+                      sign position is allocated for numeric fields.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">If you specify <code>SG=OFF</code>, negative values in
+                      numeric fields will be output without a minus sign (-).
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>The <code>SG</code> parameter can be used with the following
+              statements:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../sm/format.htm"><code>FORMAT</code></a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../sm/display.htm"><code>DISPLAY</code></a></p>
+                  
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../sm/printsm.htm"><code>PRINT</code></a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../sm/write.htm"><code>WRITE</code></a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../sm/input.htm"><code>INPUT</code></a></p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>It can be set at both statement level and element level.</p> 
+          
+      <p class="note"><strong>Note:</strong><br> If an edit mask is specified, it overrides an
+              <a href="../parms/sp_sg.htm"><code>SG</code></a>
+              specification. <a href="pg_output_masks.htm#pg_output_masks">Edit masks</a> are
+              described in <a href="pg_output_masks.htm#pg_output_masks">Edit Masks - EM
+            Parameter</a>.
+      </p> 
+          
+         
+      <div><a name="d0e30392"></a></div> 
+          
+      <h3>Example Program without Parameters</h3> 
+           
+           <pre class="verbatim">
+** Example 'FORMAX03': FORMAT (without FORMAT and compare with FORMAX04)
+************************************************************************
+DEFINE DATA LOCAL
+1 VIEWEMP VIEW OF EMPLOYEES
+  2 NAME
+  2 FIRST-NAME
+  2 SALARY (1:1)
+  2 BONUS  (1:1,1:1)
+END-DEFINE
+*
+READ (5) VIEWEMP BY NAME STARTING FROM 'JONES'
+  DISPLAY NAME
+          FIRST-NAME
+          SALARY (1:1)
+          BONUS  (1:1,1:1)
+END-READ
+END
+</pre> 
+           <p>The above program contains no parameter settings and produces the
+               following output:
+      </p> <pre class="system-output">
+  Page      1                                                  04-11-11  11:11:11  
+                                                                                 
+          NAME              FIRST-NAME        ANNUAL     BONUS   
+                                              SALARY             
+  -------------------- -------------------- ---------- ----------
+                                                                 
+  JONES                VIRGINIA                  46000       9000
+  JONES                MARSHA                    50000          0
+  JONES                ROBERT                    31000          0
+  JONES                LILLY                     24000          0
+  JONES                EDWARD                    37600          0
+</pre> 
+           
+          
+         <div><a name="d0e30410"></a></div> 
+          
+      <h3>Example Program with Parameters AL, NL, LC, IC and TC</h3> 
+           
+           
+      <p>In this example, the session parameters
+               <a href="../parms/sp_al.htm"><code>AL</code></a>,
+               <a href="../parms/sp_nl.htm"><code>NL</code></a>,
+               <a href="../parms/sp_lc.htm"><code>LC</code></a>,
+               <a href="../parms/sp_ic.htm"><code>IC</code></a> and
+               <a href="../parms/sp_tc.htm"><code>TC</code></a> are
+               used.
+      </p> 
+           <pre class="verbatim">
+** Example 'FORMAX04': FORMAT (with parameters AL, NL, LC, TC, IC and
+**                     compare with FORMAX03)
+************************************************************************
+DEFINE DATA LOCAL
+1 VIEWEMP VIEW OF EMPLOYEES
+  2 NAME
+  2 FIRST-NAME
+  2 SALARY (1:1)
+  2 BONUS  (1:1,1:1)
+END-DEFINE
+*
+<strong>FORMAT AL</strong>=10 <strong>NL</strong>=6
+*
+READ (5) VIEWEMP BY NAME STARTING FROM 'JONES'
+  DISPLAY NAME            (<strong>LC</strong>=*)
+          FIRST-NAME      (<strong>TC</strong>=*)
+          SALARY (1:1)    (<strong>IC</strong>=$)
+          BONUS (1:1,1:1) (<strong>LC</strong>=&gt;)
+END-READ
+END
+</pre> 
+           <p>The above program produces the following output. Compare the layout of
+               this output with that of the previous program to see the effect of the
+               individual parameters:
+      </p> <pre class="system-output">
+  Page      1                                                  04-11-11  11:11:11  
+                                                                                 
+     NAME     FIRST-NAME   ANNUAL   BONUS  
+                           SALARY          
+  ----------- ----------- -------- --------
+                                           
+  *JONES      VIRGINIA  *   $46000 &gt;   9000
+  *JONES      MARSHA    *   $50000 &gt;      0
+  *JONES      ROBERT    *   $31000 &gt;      0
+  *JONES      LILLY     *   $24000 &gt;      0
+  *JONES      EDWARD    *   $37600 &gt;      0
+</pre> 
+           <p>As you can see in the above example, any output length you specify with
+               the <a href="../parms/sp_al.htm"><code>AL</code></a> or
+               <a href="../parms/sp_nl.htm"><code>NL</code></a>
+               parameter does not include any characters specified with the
+               <a href="../parms/sp_lc.htm"><code>LC</code></a>,
+               <a href="../parms/sp_ic.htm"><code>IC</code></a> and
+               <a href="../parms/sp_tc.htm"><code>TC</code></a>
+               parameters: the width of the <code>NAME</code> column, for example, is 11
+               characters - 10 for the field value (<code>AL=10</code>) plus 1
+               leading character.
+      </p> 
+           
+      <p>The width of the <code>SALARY</code> and <code>BONUS</code> columns is
+               8 characters - 6 for the field value (<a href="../parms/sp_nl.htm"><code>NL=6</code></a>), plus 1
+               leading/inserted character, plus 1 sign position (because
+               <a href="../parms/sp_sg.htm"><code>SG=ON</code></a>
+               applies).
+      </p> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_output_parms.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="identical_suppr"></a></div> 
+         
+      <h2> 
+             <a name="x277"></a> 
+             <a name="x278"></a>Identical Suppress - IS Parameter 
+      </h2> 
+          
+          
+      <p>With the session parameter <a href="../parms/sp_is.htm"><code>IS</code></a>, you can suppress
+              the display of identical information in successive lines created by a
+              <a href="../sm/write.htm"><code>WRITE</code></a> or
+              <a href="../sm/display.htm"><code>DISPLAY</code></a>
+              statement.
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">By default, <code>IS=OFF</code> applies, which means that
+                      identical field values will be displayed.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">If <code>IS=ON</code> is specified, a value which is
+                      identical to the previous value of that field will not be displayed.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>The <code>IS</code> parameter can be specified
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">with a <a href="../sm/format.htm"><code>FORMAT</code></a>
+                      statement to apply to the whole report, or
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">in a <a href="../sm/display.htm"><code>DISPLAY</code></a>
+                      or <a href="../sm/write.htm"><code>WRITE</code></a> statement at
+                      both statement level and element level.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>The effect of the parameter <code>IS=ON</code> can be
+              suspended for one record by using the statement
+              <a href="../sm/suspend.htm"><code>SUSPEND IDENTICAL
+               SUPPRESS</code></a>; see the <cite>Statements</cite>
+              documentation for details.
+      </p> 
+          
+      <p>Compare the output of the following two example programs to see the
+              effect of the <code>IS</code> parameter. In the second one, the
+              display of identical values in the <code>NAME</code> field is suppressed.
+      </p> 
+          
+         
+      <div><a name="d0e30628"></a></div> 
+          
+      <h3>Example Program without IS Parameter</h3> 
+           
+           <pre class="verbatim">
+** Example 'FORMAX05': FORMAT (without parameter IS
+**                     and compare with FORMAX06)
+************************************************************************
+DEFINE DATA LOCAL
+1 VIEWEMP VIEW OF EMPLOYEES
+  2 NAME
+  2 FIRST-NAME
+END-DEFINE
+*
+READ (3) VIEWEMP BY NAME STARTING FROM 'JONES'
+  DISPLAY NAME FIRST-NAME
+END-READ
+END
+</pre> 
+           <p>The above program produces the following output:</p> <pre class="system-output">
+  Page      1                                                  04-11-11  11:11:11  
+                                                                                 
+          NAME              FIRST-NAME     
+  -------------------- --------------------
+                                           
+  JONES                VIRGINIA            
+  JONES                MARSHA              
+  JONES                ROBERT             
+</pre> 
+           
+          
+         <div><a name="d0e30646"></a></div> 
+          
+      <h3>Example Program with IS Parameter</h3> 
+           
+           <pre class="verbatim">
+** Example 'FORMAX06': FORMAT (with parameter IS
+**                     and compare with FORMAX05)
+************************************************************************
+DEFINE DATA LOCAL
+1 VIEWEMP VIEW OF EMPLOYEES
+  2 NAME
+  2 FIRST-NAME
+END-DEFINE
+*
+<strong>FORMAT IS=ON</strong>
+*
+READ (3) VIEWEMP BY NAME STARTING FROM 'JONES'
+  DISPLAY NAME FIRST-NAME
+END-READ
+END
+</pre> 
+           <p>The above program produces the following output:</p> <pre class="system-output">
+Page      1                                                 04-11-11  11:54:01  
+                                                                                
+        NAME              FIRST-NAME     
+-------------------- --------------------
+                                           
+JONES                VIRGINIA            
+                     MARSHA              
+                     ROBERT             
+</pre> 
+           
+          
+        
+        <div class="noprint">
+         <p><a href="pg_output_parms.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="zero_print"></a></div> 
+         
+      <h2> 
+             <a name="x279"></a> 
+             <a name="x280"></a>Zero Printing - ZP Parameter 
+      </h2> 
+          
+          
+      <p>With the profile and session parameter <a href="../parms/zp.htm"><code>ZP</code></a>, you determine how a
+              field value of zero is to be displayed.
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">By default, <code>ZP=ON</code> applies, which means that one
+                      <code>0</code> (for numeric fields) or all zeros (for time fields) will be
+                      displayed for each field value that is zero.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">If you specify <code>ZP=OFF</code>, the display of each
+                      field value which is zero will be suppressed.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>The <a href="../parms/zp.htm"><code>ZP</code></a>
+              parameter can be specified
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">with a <a href="../sm/format.htm"><code>FORMAT</code></a>
+                      statement to apply to the whole report, or
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">in a <a href="../sm/display.htm"><code>DISPLAY</code></a>
+                      or <a href="../sm/write.htm"><code>WRITE</code></a> statement at
+                      both statement level and element level.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>Compare the output of the following two
+              <a href="pg_output_parms.htm#exa_wo_zp_es">example programs</a> to see the effect
+              of the parameters <a href="../parms/zp.htm"><code>ZP</code></a> and
+              <a href="../parms/sp_es.htm"><code>ES</code></a>.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_output_parms.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="empty_line_suppr"></a></div> 
+         
+      <h2> 
+             <a name="x281"></a> 
+             <a name="x282"></a>Empty Line Suppression - ES Parameter 
+      </h2> 
+          
+          
+      <p>With the session parameter <a href="../parms/sp_es.htm"><code>ES</code></a>, you can suppress
+              the output of empty lines created by a <a href="../sm/display.htm"><code>DISPLAY</code></a> or
+              <a href="../sm/write.htm"><code>WRITE</code></a> statement.
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">By default, <code>ES=OFF</code> applies, which means that
+                      lines containing all blank values will be displayed.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">If <code>ES=ON</code> is specified, a line resulting from a
+                      <a href="../sm/display.htm"><code>DISPLAY</code></a> or
+                      <a href="../sm/write.htm"><code>WRITE</code></a> statement which
+                      contains all blank values will not be displayed. This is particularly useful
+                      when displaying multiple-value fields or fields which are part of a periodic
+                      group if a large number of empty lines are likely to be produced.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>The <a href="../parms/sp_es.htm"><code>ES</code></a> parameter can be
+              specified
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">with a <a href="../sm/format.htm"><code>FORMAT</code></a>
+                      statement to apply to the whole report, or
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">in a <a href="../sm/display.htm"><code>DISPLAY</code></a>
+                      or <a href="../sm/write.htm"><code>WRITE</code></a> statement at
+                      statement level.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p class="note"><strong>Note:</strong><br> To achieve empty suppression for numeric values, in addition to
+              <code>ES=ON</code> the parameter <code>ZP=OFF</code> must
+              also be set for the fields concerned in order to have null values turned into
+              blanks and thus not output either.
+      </p> 
+          
+      <p>Compare the output of the following two example programs to see the
+              effect of the parameters <code>ZP</code> and
+              <code>ES</code>.
+      </p> 
+          
+         
+      <div><a name="exa_wo_zp_es"></a></div> 
+          
+      <h3> Example Program without Parameters ZP and ES </h3> 
+           
+           <pre class="verbatim">
+** Example 'FORMAX07': FORMAT (without parameter ES and ZP
+**                     and compare with FORMAX08)
+************************************************************************
+DEFINE DATA LOCAL
+1 VIEWEMP VIEW OF EMPLOYEES
+  2 NAME
+  2 FIRST-NAME
+  2 BONUS (1:2,1:1)
+END-DEFINE
+*
+READ (4) VIEWEMP BY NAME STARTING FROM 'JONES'
+  DISPLAY NAME FIRST-NAME BONUS (1:2,1:1)
+END-READ
+END
+</pre> 
+           <p>The above program produces the following output:</p> <pre class="system-output">
+Page      1                                                  04-11-11  11:58:23
+                                                                               
+        NAME              FIRST-NAME        BONUS
+-------------------- -------------------- ----------
+                                           
+JONES                VIRGINIA                   9000
+                                                6750
+JONES                MARSHA                        0
+                                                   0
+JONES                ROBERT                        0
+                                                   0
+JONES                LILLY                         0
+                                                   0
+</pre> 
+           
+          
+         <div><a name="d0e30904"></a></div> 
+          
+      <h3>Example Program with Parameters ZP and ES</h3> 
+           
+           <pre class="verbatim">
+** Example 'FORMAX08': FORMAT (with parameters ES and ZP
+**                     and compare with FORMAX07)
+************************************************************************
+DEFINE DATA LOCAL
+1 VIEWEMP VIEW OF EMPLOYEES
+  2 NAME
+  2 FIRST-NAME
+  2 BONUS (1:2,1:1)
+END-DEFINE
+*
+<strong>FORMAT ES=ON</strong>
+*
+READ (4) VIEWEMP BY NAME STARTING FROM 'JONES'
+  DISPLAY NAME FIRST-NAME BONUS (1:2,1:1)<strong>(ZP=OFF)</strong>
+END-READ
+END
+</pre> 
+           <p>The above program produces the following output:</p> <pre class="system-output">
+Page      1                                                  04-11-11  11:59:09
+                                                                               
+        NAME              FIRST-NAME        BONUS
+-------------------- -------------------- ----------
+                                           
+JONES                VIRGINIA                   9000
+                                                6750
+JONES                MARSHA
+JONES                ROBERT
+JONES                LILLY
+</pre> 
+           
+          
+        
+        <div class="noprint">
+         <p><a href="pg_output_parms.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="further_exa_parms_pg_output_parms"></a></div> 
+         
+      <h2> Further Examples of Field-Output-Relevant Parameters </h2> 
+          
+          
+      <p>For further examples of the parameters
+              <a href="../parms/sp_lc.htm"><code>LC</code></a>,
+              <a href="../parms/sp_ic.htm"><code>IC</code></a>,
+              <a href="../parms/sp_tc.htm"><code>TC</code></a>,
+              <a href="../parms/sp_al.htm"><code>AL</code></a>,
+              <a href="../parms/sp_nl.htm"><code>NL</code></a>,
+              <a href="../parms/sp_is.htm"><code>IS</code></a>,
+              <a href="../parms/zp.htm"><code>ZP</code></a> and
+              <a href="../parms/sp_es.htm"><code>ES</code></a>, and
+              the <a href="../sm/suspend.htm"><code>SUSPEND IDENTICAL
+               SUPPRESS</code></a> statement, see the following example programs:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="pg_exas.htm#DISPLX17">DISPLX17 - DISPLAY (with NL,
+                  AL, IC, LC, TC)</a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="pg_exas.htm#DISPLX18">DISPLX18 - DISPLAY (using
+                  default settings for SF, AL, UC, LC, IC, TC and compare with
+                  DISPLX19)</a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="pg_exas.htm#DISPLX19">DISPLX19 - DISPLAY (with SF,
+                  AL, LC, IC, TC and compare with DISPLX18)</a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="pg_exas.htm#SUSPEX01">SUSPEX01 - SUSPEND IDENTICAL
+                  SUPPRESS (in conjunction with parameters IS, ES, ZP in
+                  DISPLAY)</a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="pg_exas.htm#SUSPEX02">SUSPEX02 - SUSPEND IDENTICAL
+                  SUPPRESS (in conjunction with parameters IS, ES, ZP in DISPLAY). Identical to
+                  SUSPEX01, but with IS=OFF.</a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="pg_exas.htm#COMPRX03">COMPRX03 -
+                  COMPRESS</a></p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+        
+       
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="pg_output_parms.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_output_parms.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_output_parms.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_output-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_output_headers.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_output_masks.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

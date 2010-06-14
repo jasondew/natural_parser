@@ -1,0 +1,314 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>OPRB - Database Open/Close Processing</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="oprb" id="1060"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../parms/oprb.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/parms/oprb.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="parms-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="opf.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="parm.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Parameter Reference&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x217"></a>OPRB - Database Open/Close Processing
+         </h1>
+      </div> 
+          
+          
+      <p>This Natural profile parameter controls the use of the Adabas C
+              <code>Open/Close</code> commands during a Natural session.
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th rowspan="2">Possible settings</th> 
+                       
+               <td><code>OFF</code></td> 
+                       
+               <td>If the <code>OPRB</code> parameter is set to
+                           <code>OFF</code>, a Natural session starts with an Adabas
+                           <code>OP</code> command requesting <code>UPD</code>
+                           (access/update) to the Natural system file. Natural also issues
+                           <code>RELEASE CID</code> (Adabas RC) commands to release all ISN
+                           lists (ISN lists specified in a <code>RETAIN</code> clause of a Natural
+                           <code>FIND</code> statement are not released).
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>OPRB=(<var>string</var>)</code></td> 
+                       
+               <td>You can specify an <code>Open</code> request in
+                  accordance with the syntax described below. See also the examples
+                           listed.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th>Default setting</th> 
+                       
+               <td><code>OFF</code></td> 
+                       
+               <td>&nbsp;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th>Dynamic specification</th> 
+                       
+               <td>no</td> 
+                       
+               <td>&nbsp;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th>Specification within session</th> 
+                       
+               <td>no</td> 
+                       
+               <td>&nbsp;</td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>It is required if any of the following conditions are true:</p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">An explicit list of Adabas files to be accessed/updated is to be
+                      provided. This is necessary, for example, if Adabas cluster updating or
+                      exclusive file control is to be requested.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">The Adabas record buffer to be used with the initial Adabas
+                      <code>OP</code> command can be explicitly provided. To access
+                      databases you have to specify the DBIDs and file numbers with their
+                      corresponding access rights at the <code>OPRB</code> string.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">The character set for Adabas format W is to be provided. To access
+                      databases you have to specify the DBIDs and the required encoding name.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>Entries may not contain blanks, must be enclosed in parenthesis and must
+              follow the rules defined in the relevant Adabas documentation.
+      </p> 
+          
+      <p>In addition to the Adabas syntax, internal file numbers can be specified
+              by using the <var>x-y</var> notation (that is, all numbers
+              between <var>x</var> and <var>y</var>).
+      </p> 
+          
+         
+      <hr>
+        
+      <div><a name="d0e45006"></a></div> 
+         
+      <h2>OPRB String Syntax</h2> 
+          
+          
+      <p><code>DBID=(<var>x</var>)</code> specifies the database
+              for the following access right entries:
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td><code>UPD=(<var>file-list</var>)</code></td> 
+                       
+               <td>Specifies update permission (read/write) for the files in the
+                  file list.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>ACC=(<var>file-list</var>)</code></td> 
+                       
+               <td>Specifies access permission (read) for the files in the file
+                  list.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>EXU=(<var>file-list</var>)</code></td> 
+                       
+               <td>Specifies exclusive update permission (exclusive read/write) for
+                  the files in the file list.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>WCODE=<var>encoding</var></code></td> 
+                       
+               <td>Specifies the encoding for W fields in the Adabas user session
+                  (Adabas for Mainframes). Required encoding code for Adabas on Mainframes is
+                  4095.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>WCHARSET=<var>charset</var></code></td>
+                       
+                       
+               <td>Specifies the default character set used for W fields in record
+                  and value buffers in the Adabas user session (Adabas for UNIX, OpenVMS and
+                  Windows). Required encoding names for Adabas on UNIX, OpenVMS and Windows are
+                  <code>UTF-16LE</code> or <code>UTF-16BE</code>.
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>The trailing record buffer dot (.) can be omitted in the
+              <code>OPRB</code> string because it is appended automatically.
+      </p> 
+          
+      <p><code>DBID=0</code> specifies the default record buffer entry and can be
+              omitted if it is the first DBID listed in the <code>OPRB</code>
+              string. This default record buffer is taken if there is no specific entry for
+              the requested database.
+      </p> 
+          
+      <p>Combinations of the keywords <code>ACC</code>, <code>UPD</code>,
+              <code>EXU</code> and <code>WCODE</code> or <code>WCHARSET</code> must follow
+              the rules as defined in the relevant Adabas documentation. Natural issues an
+              <code>OP</code> command at the start of a Natural session and a
+              <code>CL</code> command at the end of the session. At the end of
+              a Natural program, only the required <code>RC</code> commands are
+              issued to release held ISN lists.
+      </p> 
+          
+      <h4 class="floating-title">Example 1:</h4> 
+          <pre class="verbatim">(ACC=2,3,4,DBID=15,UPD=3,4,ACC=5)</pre> 
+          <p>The following entries were defined:</p> 
+          <pre class="verbatim">'UPD=3,4,ACC=5.' for DB 15 
+'ACC=2,3,4.' for other databases (DB 0)</pre> 
+          <h4 class="floating-title"><a name="oprb_exa2"></a>Example 2:
+      </h4>
+          
+          <pre class="verbatim">(DBID=15,ACC=2-7)</pre> 
+          <p>The following entry was defined:</p> 
+          <pre class="verbatim">'ACC=2,3,4,5,6,7.' for DB 15; access to other databases is not permitted.</pre> 
+          <h4 class="floating-title">Example 3:</h4> 
+          <pre class="verbatim">(DBID=0,ACC=2,3,4,5.)</pre> 
+          <p>The following entry was defined:</p> 
+          <pre class="verbatim">'ACC=2,3,4,5.' for all databases (DB 0).</pre> 
+          <p class="note"><strong>Note:</strong><br> If you have Natural Security installed, open/close processing works
+              the same way as without Natural Security; the OPRB parameter in the security
+              profile is provided for future use only.
+      </p> 
+          
+      <h4 class="floating-title">Example 4:</h4> 
+          <pre class="verbatim">(DBID=0,ACC=2,3,4,5,DBID=12,WCHARSET='UTF-16LE',UPD=3-10)</pre> 
+          <p>The following entry was defined:</p> 
+          <pre class="verbatim">'ACC=2,3,4,5.' for all databases (DB 0).</pre> 
+          <pre class="verbatim">WCHARSET='UTF-16LE',UPD=3,4,5,6,7,8,9,10. for DB 12.</pre> 
+          
+        
+       <div class="noprint">
+         <div class="nospy">
+            <p><a href="oprb.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../parms/oprb.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/parms/oprb.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="parms-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="opf.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="parm.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

@@ -1,0 +1,456 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Configuring Security (J2EE only)</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="clientcfg-security"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../webio/clientcfg-security.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/webio/clientcfg-security.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="clientcfg-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="clientcfg-themes.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="clientcfg-trust.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Natural Web I/O Interface&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1>Configuring Security (J2EE only)</h1>
+      </div> 
+         
+      <p>The Natural Web I/O Interface client and Natural for Ajax come as
+             standard J2EE applications. For the ease of installation, the access to these
+             applications is by default not secured. You might, however, wish to restrict
+             the access to certain parts of these applications to certain users. An
+             important example is the <a href="clientcfg-tool.htm#clientcfg-tool">configuration
+                tool</a>, which enables you to modify the Natural session definitions
+             and the logging configuration of the Natural Web I/O Interface client and of
+             Natural for Ajax. Other examples are the Application Designer development workplace contained
+             in Natural for Ajax or the Natural logon page. 
+      </p> 
+         
+      <p>This document does not cover the concepts of J2EE security in full
+             extent. It provides, however, sufficient information to activate the
+             preconfigured security settings of the Natural Web I/O Interface client and of
+             Natural for Ajax and to adapt them to your requirements. More information on
+             the topics described in this document can be found, for instance, at
+             <a href="http://www.jboss.org/jbossas/docs/" target="_blank">http://www.jboss.org/jbossas/docs/</a>
+             (security on JBoss is described in the <cite>Configuration
+                Guide</cite>) or
+             <a href="http://java.sun.com/j2ee/1.4/docs/tutorial/doc/index.html" target="_blank">http://java.sun.com/j2ee/1.4/docs/tutorial/doc/index.html</a>
+             (see the chapter on security).
+      </p> 
+         
+      <p>This document covers the following topics:</p>
+         
+      <ul>
+         <li>
+            <p class="initem"><a href="clientcfg-security.htm#clientcfg-security-location">Name and Location of the Configuration File</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="clientcfg-security.htm#clientcfg-security-activate">Activating Security</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="clientcfg-security.htm#clientcfg-security-constraints">Defining Security Constraints</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="clientcfg-security.htm#clientcfg-security-roles">Defining Roles</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="clientcfg-security.htm#clientcfg-security-authmethod">Selecting the Authentication Method</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="clientcfg-security.htm#clientcfg-security-loginmodule">Choosing the Login Module (JBoss Application Server only)</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="clientcfg-security.htm#clientcfg-security-realmusers">Defining the Security Realm and Users (Sun Java System Application Server only)</a></p>
+         </li>
+      </ul>
+      <hr>
+      <div><a name="clientcfg-security-location"></a></div> 
+         
+      <h2>Name and Location of the Configuration File</h2> 
+          
+          
+      <p>Security is configured in the file <cite>web.xml</cite>. The
+              path to this file depends on the application server and the type of client that
+              you are using.
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                   
+                  
+            <p class="initem"><strong>JBoss Application Server</strong><br>Natural Web I/O Interface client:
+            </p> 
+                  
+            <p class="initem"><cite><var>&lt;application-server-install-dir&gt;</var>server/default/deploy/natuniapp.ear/natuniweb.war/WEB-INF</cite></p>
+                  
+                  
+            <p class="initem">Natural for Ajax:</p> 
+                  
+            <p class="initem"><cite><var>&lt;application-server-install-dir&gt;</var>/server/default/deploy/njx<var>&lt;nn&gt;</var>.ear/cisnatural.war/WEB-INF</cite></p>
+                  
+                 
+         </li> 
+              
+         <li> 
+                   
+                  
+            <p class="initem"><strong>Sun Java System Application Server</strong><br>Natural Web I/O Interface client:
+            </p> 
+                  
+            <p class="initem"><cite><var>&lt;application-server-install-dir&gt;</var>/domains/domain1/applications/j2ee-apps/natuniapp/natuniweb_war/WEB-INF</cite></p>
+                  
+                  
+            <p class="initem">Natural for Ajax:</p> 
+                  
+            <p class="initem"><cite><var>&lt;application-server-install-dir&gt;</var>/server/domains/domain1/applications/j2ee-apps/njx<var>&lt;nn&gt;</var>/cisnatural_war/WEB-INF</cite></p>
+                  
+                 
+         </li> 
+             
+      </ul> 
+         
+      <div class="noprint">
+         <p><a href="clientcfg-security.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="clientcfg-security-activate"></a></div> 
+         
+      <h2>Activating Security</h2> 
+          
+          
+      <p>Great care must be taken when editing and changing the configuration
+              file <cite>web.xml</cite>. After a change, the application server must
+              be restarted. 
+      </p> 
+          
+      <p>Edit the file <cite>web.xml</cite> and look for the section that
+              is commented with "Uncomment the next lines to add security
+              constraints and roles.". Uncomment this section by removing the
+              comment marks shown in boldface below: 
+      </p> 
+          <pre class="verbatim">&lt;!-- Uncomment the next lines to add security constraints and roles. --&gt;
+<strong>&lt;!--</strong> 
+&lt;security-constraint&gt;
+    &lt;web-resource-collection&gt;   
+    &lt;web-resource-name&gt;Configuration Tool&lt;/web-resource-name&gt;
+        &lt;url-pattern&gt;/conf_index.jsp&lt;/url-pattern&gt;
+        &lt;url-pattern&gt;/faces/*&lt;/url-pattern&gt;
+    &lt;/web-resource-collection&gt;
+...
+&lt;security-role&gt;
+    &lt;description&gt;Administrator&lt;/description&gt;
+    &lt;role-name&gt;nwoadmin&lt;/role-name&gt;
+&lt;/security-role&gt;
+<strong>--&gt;</strong></pre> 
+         <div class="noprint">
+         <p><a href="clientcfg-security.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="clientcfg-security-constraints"></a></div> 
+         
+      <h2>Defining Security Constraints</h2> 
+          
+          
+      <p>The security constraints defined by default are just examples. A
+              <code>&lt;security-constraint&gt;</code> element contains of a
+              number of <code>&lt;web-resource-collection&gt;</code> elements
+              combined with an <code>&lt;auth-constraint&gt;</code> element.
+              The <code>&lt;auth-constraint&gt;</code> element contains a
+              <code>&lt;role-name&gt;</code>. The whole
+              <code>&lt;security-constraint&gt;</code> element describes which
+              roles have access to the specified resources. 
+      </p> 
+          
+      <p>Example - the following definition specifies that only users in the role
+              "nwoadmin" have access to the configuration
+              tool:
+      </p> 
+          <pre class="verbatim">&lt;security-constraint&gt;
+    &lt;web-resource-collection&gt;   
+    &lt;web-resource-name&gt;Configuration Tool&lt;/web-resource-name&gt;
+        &lt;url-pattern&gt;/conf_index.jsp&lt;/url-pattern&gt;            
+        &lt;url-pattern&gt;/faces/*&lt;/url-pattern&gt;
+    &lt;/web-resource-collection&gt;
+    &lt;auth-constraint&gt;
+        &lt;role-name&gt;nwoadmin&lt;/role-name&gt;
+    &lt;/auth-constraint&gt;
+&lt;/security-constraint&gt;</pre> 
+          <p>In the following section, you will see where and how the roles are
+              defined. 
+      </p> 
+         
+      <div class="noprint">
+         <p><a href="clientcfg-security.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="clientcfg-security-roles"></a></div> 
+         
+      <h2>Defining Roles</h2> 
+          
+          
+      <p>A few lines below in the file <cite>web.xml</cite>, there is a
+              section <code>&lt;security-role&gt;</code>. Here, the roles that
+              can be used in <code>&lt;security-constraint&gt;</code> elements
+              are defined. You can define additional roles as needed. The assignment of users
+              to roles is done outside this file and will often be done in a user management
+              that is already established at your site. 
+      </p> 
+          
+      <p>Example:</p> 
+          <pre class="verbatim">&lt;security-role&gt;
+    &lt;description&gt;Administrator&lt;/description&gt;
+    &lt;role-name&gt;nwoadmin&lt;/role-name&gt;
+&lt;/security-role&gt;</pre> 
+         <div class="noprint">
+         <p><a href="clientcfg-security.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="clientcfg-security-authmethod"></a></div> 
+         
+      <h2>Selecting the Authentication Method</h2> 
+          
+          
+      <p>In the file <cite>web.xml</cite>, there is a section
+              <code>&lt;login-config&gt;</code>. The only element that should
+              possibly be adapted here is <code>&lt;auth-method&gt;</code>. You
+              can choose between the authentication methods "FORM"
+              and "BASIC". Form-based authentication displays a
+              specific page on which users who try to access a restricted resource can
+              authenticate themselves. Basic authentication advises the web browser to
+              retrieve the user credentials with its own dialog box. 
+      </p> 
+          
+      <p>Example:</p> 
+          <pre class="verbatim">&lt;login-config&gt;
+    &lt;auth-method&gt;FORM&lt;/auth-method&gt;
+...
+&lt;/login-config&gt;</pre> 
+         <div class="noprint">
+         <p><a href="clientcfg-security.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="clientcfg-security-loginmodule"></a></div> 
+         
+      <h2>Choosing the Login Module (JBoss Application Server only)</h2> 
+          
+          
+      <p>In the directory
+              <cite><var>&lt;application-server-install-dir&gt;</var>/server/default/conf</cite>,
+              there is a file named <cite>njxnwo-login-config.xml</cite>. The
+              relevant part in this file is the selection of the login module specified in
+              the <code>&lt;login-module&gt;</code> element and the
+              configuration of this login module. The login module determines where the user
+              definitions and the assignment of users to roles is maintained. 
+      </p> 
+          
+      <p>By default, the <code>UsersRolesLoginModule</code> is preconfigured. The
+              <code>UsersRolesLoginModule</code> expects the role definitions in one file
+              (<cite>props/njxnwo-roles.properties</cite>) and the user definitions
+              (password and assignment to roles in another file
+              (<cite>props/njxnwo-users.properties</cite>). An example user
+              "admin" with the password
+              "adminadmin" and the role
+              "nwoadmin" is defined to begin with. 
+      </p> 
+          
+      <p>You can choose and configure a different login module, for instance, one
+              that expects the user and role definitions in a database or in an LDAP
+              directory, or even write a custom login module. 
+      </p> 
+          
+      <p>More information on using JBoss login modules is provided at
+              <a href="http://www.jboss.org/jbossas/docs/" target="_blank">http://www.jboss.org/jbossas/docs/</a> (see
+              the <cite>Configuration Guide</cite>).
+      </p> 
+         
+      <div class="noprint">
+         <p><a href="clientcfg-security.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="clientcfg-security-realmusers"></a></div> 
+         
+      <h2>Defining the Security Realm and Users (Sun Java System Application
+             Server only)
+      </h2> 
+          
+          
+      <p>The following information applies to Sun Java System Application Server
+              9.1, however, the procedure is similar in other versions. 
+      </p> 
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To create a new security realm and define the user</strong></p>
+      <ol class="steps">
+         <li> 
+                   
+                   
+            <p class="instep">Open the tree node <span class="guilistitem">Configuration &gt; Security &gt;
+                  Realms</span>.
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Choose <span class="guibutton">New</span>.
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Enter "NaturalWebIOAndAjaxRealm" as the
+                       name of the new realm.
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Select
+                       <code>com.sun.enterprise.security.auth.realm.file.FileRealm</code> as
+                       the class name.
+            </p> 
+                   
+            <p class="instep">Use the following properties which are predefined for this class:</p>
+                   
+                    
+                    
+            <table border="1" class="color" cellpadding="3" width="85%"> 
+                        
+               <thead align="left" valign="top"> 
+                            
+                  <tr> 
+                                
+                     <th>Option</th> 
+                                
+                     <th>Value</th> 
+                               
+                  </tr> 
+                           
+               </thead> 
+                        
+               <tbody align="left" valign="top"> 
+                            
+                  <tr> 
+                                
+                     <td>JAAS Context</td> 
+                                
+                     <td>fileRealm</td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td>Key File</td> 
+                                
+                     <td>${com.sun.aas.instanceRoot}/config/keyfile</td> 
+                               
+                  </tr> 
+                           
+               </tbody> 
+                       
+            </table> 
+                    
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Choose <span class="selectable_label">OK</span>.
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Edit the new realm <code>NaturalWebIOAndAjaxRealm</code> and choose
+                       the <span class="guibutton">Manage Users</span> button.
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Choose <span class="guibutton">New</span>.
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Enter the user names and the passwords for the users. The name of the
+                       group list must be "nwoadmin".
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Choose <span class="selectable_label">OK</span>.
+            </p> 
+                   
+                 
+         </li>
+      </ol> 
+         
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="clientcfg-security.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../webio/clientcfg-security.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/webio/clientcfg-security.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="clientcfg-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="clientcfg-themes.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="clientcfg-trust.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

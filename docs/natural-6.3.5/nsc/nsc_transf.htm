@@ -1,0 +1,1087 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Transferring Security Data To Another System File</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="nsc_transf"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../nsc/nsc_transf.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/nsc/nsc_transf.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc_batch.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc_exits.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Natural Security&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x69"></a> 
+               <a name="x70"></a> 
+               <a name="x71"></a> Transferring Security Data To Another System File
+         </h1>
+      </div> 
+         
+         
+      <p>This section describes how to transfer Natural Security data from one
+             system file to another. It covers the following topics:
+      </p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="nsc_transf.htm#General_Information">General Information on Security Data Transfer</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_transf.htm#Using_SECULD">Using SECULD2</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_transf.htm#Using_SECLOAD">Using SECLOAD</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_transf.htm#Transferring_Data_to_Another_Hardware_Platform">Transferring Data to Another Hardware Platform</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_transf.htm#Transferring_Data_in_Batch_Mode">Transferring Data in Batch Mode</a></p>
+         </li>
+      </ul> 
+        
+      <hr> 
+        
+      <div><a name="General_Information"></a></div> 
+         
+      <h2> General Information on Security Data Transfer</h2> 
+          
+          
+      <p>The transfer of Natural Security data from one system file to another is
+              only relevant if you use more than one Natural Security system file.
+      </p> 
+          
+      <p>A Natural Security system file is specified with the Natural profile
+              parameter <a href="../parms/fsec.htm">FSEC</a> (which is described
+              in the Natural <cite>Parameter Reference</cite> documentation).
+      </p> 
+          
+      <p>The library SYSSEC contains two programs for the transfer of Natural
+              Security data from one system file to another: SECULD2 and SECLOAD:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">SECULD2 is used to unload data from one system file to a work
+                      file.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">SECLOAD is used to load the data from the work file onto the other
+                      system file.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>The selection of data to be transferred is done with SECULD2. SECLOAD
+              will always attempt to transfer the complete work file. However, SECLOAD will
+              check whether the data to be transferred are consistent with the data already
+              stored on the system file. Inconsistent data will not be loaded.
+      </p> 
+          
+      <p>The programs SECULD2 and SECLOAD you use must both be of the same
+              Natural Security version. Moreover, it is recommended that the latest available
+              version of SECULD2 and SECLOAD be used.
+      </p> 
+          
+      <p>An FSEC system file can be shared by all supported Natural Security
+              versions. This means that you can continue to use an existing FSEC file and
+              need not create a new FSEC file for a new Natural Security version. However,
+              should you decide to use a new FSEC file for a new Natural Security version and
+              wish to transfer existing security data to this new file, you unload/load the
+              data using the standard SECULD2/SECLOAD transfer procedure.
+      </p> 
+          
+      <p> Both SECULD2 and SECLOAD can only be invoked from <em>within</em> the
+              library SYSSEC.
+      </p> 
+          
+      <p class="note"><strong>Note:</strong><br>SECULD2 is the replacement of the old unloading program
+              SECULD.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="nsc_transf.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Using_SECULD"></a></div> 
+         
+      <h2> Using SECULD2</h2> 
+          
+          
+      <p>To invoke SECULD2, you enter the command "SECULD2" in the
+              command line of any Natural Security screen. The SECULD2 menu will be
+              displayed.
+      </p> 
+          
+      <p>To select the type of data to be transferred, you enter one of the
+              following function codes on the SECULD2 menu:
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th align="left">Function Code</th> 
+                       
+               <th align="left">Type of Data to be Unloaded</th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> * &nbsp;</td> 
+                       
+               <td>All security data.</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> D &nbsp;</td> 
+                       
+               <td>All security data with deletion (all data will be loaded onto
+                  the work file and be deleted from the system file).
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> O &nbsp;</td> 
+                       
+               <td>Objects defined in Natural Security (users, libraries, utility
+                  profiles, etc.).
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> L &nbsp;</td> 
+                       
+               <td>Links between users and objects.</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> F &nbsp;</td> 
+                       
+               <td>Links between libraries and files (this function is only
+                  available on mainframes).
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> C &nbsp;</td> 
+                       
+               <td>Components of library profile (this function is not available on
+                  mainframes).
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> P &nbsp;</td> 
+                       
+               <td>Default profiles (user or utility profiles).</td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>In addition to the function code, you can specify the following on the
+              SECULD2 menu:
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th> Transfer &nbsp;</th> 
+                       
+               <td>
+                  <table border="0" width="100%"> 
+                               
+                              
+                     <tbody align="left" valign="top"> 
+                                  
+                        <tr> 
+                                      
+                           <td colspan="2">With this option, you specify to
+                              which work file the selected data are to be written:
+                           </td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <th> Y</th> 
+                                      
+                           <td>The data will be written to Work File 1 in alphanumeric form
+                              (this is the default for non-mainframe environments). Work File 1 can be used
+                              for any form of transfer supported by SECULD2/SECLOAD.
+                           </td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <th> N</th> 
+                                      
+                           <td>The data will be written to Work File 5 in binary form (this
+                              is the default for mainframe environments). Work File 5 can only be used if the
+                              data are to be transferred to another system file on the same hardware
+                              platform.
+                           </td> 
+                                     
+                        </tr> 
+                                 
+                     </tbody> 
+                             
+                  </table>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th nowrap> Object Type &nbsp;</th> 
+                       
+               <td> 
+                  
+                  <p>If you select function code "O", "L" or
+                     "P", you also have to specify the type of object/link to be
+                       unloaded.
+                  </p> 
+                           
+                  <p>If you select function code "C", you also have to
+                               specify the type of components (DDM profiles) to be unloaded.
+                  </p> 
+                           
+                  <p>For a selection list of possible types, enter a question mark (?)
+                               in the Object Type field.
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th nowrap> Start Value</th> 
+                       
+               <td> 
+                  
+                  <p>You can specify an ID to unload a certain object or range of
+                        objects.
+                  </p> 
+                           
+                  <p>See also Range below.</p> 
+                           
+                  <p> Start Value is not applicable to function codes "*"
+                               and "D".
+                  </p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th>Range</th> 
+                       
+               <td> 
+                  
+                  <p>This field determines how the value specified in the Start Value
+                     field is to be treated:
+                  </p> 
+                           
+                  <ul> 
+                               
+                     <li> 
+                                   
+                        <p class="initem">If you leave the Range field blank, the value in the Start Value
+                           field will be treated as an actual start value; that is, the range of objects
+                                       to be unloaded will begin with the one whose object ID begins with to the value
+                                       specified as Start Value.
+                        </p> 
+                                  
+                     </li> 
+                               
+                     <li> 
+                                   
+                        <p class="initem">If you enter an asterisk (*) in the Range field, the range of
+                                       objects to be unloaded will comprise only those whose object IDs begin with the
+                                       value specified as Start Value.
+                        </p> 
+                                  
+                     </li> 
+                               
+                     <li> 
+                                   
+                        <p class="initem">If you enter a plus sign (+) in the Range field, the range of
+                                       objects to be unloaded will consist only of the one whose object ID is
+                                       specified as Start Value - or, in the case of links, will include only those
+                                       whose object ID is specified as Start Value.
+                        </p> 
+                                  
+                     </li> 
+                              
+                  </ul>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th>Link ID</th> 
+                       
+               <td> 
+                  
+                  <p>This field can only be used in conjunction with function code
+                     "L". You can specify a user ID to unload only links of a certain
+                     user or range of users.
+                  </p> 
+                           
+                  <p>To selecte a range of links, you use see Range field (see
+                               below).
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th>Range</th> 
+                       
+               <td> 
+                  
+                  <p>This field can only be used in conjunction with function code
+                     "L". It determines how the value specified in the Link ID field is
+                     to be treated:
+                  </p> 
+                           
+                  <ul> 
+                               
+                     <li> 
+                                   
+                        <p class="initem">If you leave the Range field blank, the value in the Link ID
+                                      field will be treated as an actual start value; that is, the range of links to
+                                       be unloaded will begin with the one whose user ID corresponds to the value
+                                       specified as Link ID.
+                        </p> 
+                                  
+                     </li> 
+                               
+                     <li> 
+                                   
+                        <p class="initem">If you enter an asterisk (*) in the Range field, the range of
+                                       links to be unloaded will only include those whose user IDs begin with the
+                                       value specified as Link ID.
+                        </p> 
+                                  
+                     </li> 
+                               
+                     <li> 
+                                   
+                        <p class="initem">If you enter a plus sign (+) in the Range field, the range of
+                                       links to be unloaded will only include those whose user ID corresponds to the
+                                       value specified as Link ID.
+                        </p> 
+                                  
+                     </li> 
+                              
+                  </ul>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> Number &nbsp;</th> 
+                       
+               <td> 
+                  
+                  <p>You may specify the number of objects to be transferred.</p> 
+                           
+                  <p>(This option is not applicable to function codes "*"
+                               and "D".)
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> Date from/to &nbsp;</th> 
+                       
+               <td> 
+                  
+                  <p>You may specify two dates to unload only objects which were
+                     created/last modified in that period of time.
+                  </p> 
+                           
+                  <p>(This option is not applicable to function code
+                               "D".)
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> Work File &nbsp;</th> 
+                       
+               <td> 
+                  
+                  <p>You specify the name of the work file to which the data are to be
+                        written.
+                  </p> 
+                           
+                  <p>If you use Work File 5, the work-file name must end with
+                               ".sag". 
+                  </p> 
+                           
+                  <p>This field is not available on mainframes.</p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> Ty</th> 
+                       
+               <td>
+                  <table border="0" width="100%"> 
+                               
+                              
+                     <tbody align="left" valign="top"> 
+                                  
+                        <tr> 
+                                      
+                           <td colspan="2">The type of work file:</td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <th> D</th> 
+                                      
+                           <td>Default.</td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <th> N</th> 
+                                      
+                           <td>Entire Connection work file.</td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td colspan="2">This field is not available on
+                              mainframes.
+                           </td> 
+                                     
+                        </tr> 
+                                 
+                     </tbody> 
+                             
+                  </table>
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="nsc_transf.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Using_SECLOAD"></a></div> 
+         
+      <h2> Using SECLOAD</h2> 
+          
+          
+      <p>To invoke SECLOAD, you enter the command "SECLOAD" in the
+              command line of any Natural Security screen. You will then be prompted to make
+              the following specifications:
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th> Load NSC Data from Work File 1</th> 
+                       
+               <td>
+                  <table border="0" width="100%"> 
+                               
+                              
+                     <tbody align="left" valign="top"> 
+                                  
+                        <tr> 
+                                      
+                           <th> Y</th> 
+                                      
+                           <td>The data will be read from Work File 1 (this is the default
+                              for non-mainframe environments).
+                           </td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <th> N</th> 
+                                      
+                           <td>The data will be read from Work File 5 (this is the default
+                              for mainframe environments).
+                           </td> 
+                                     
+                        </tr> 
+                                 
+                     </tbody> 
+                             
+                  </table>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> User-Defined Conversion Table</th> 
+                       
+               <td> 
+                  
+                  <p>You can determine whether or not a conversion table is to be used
+                          (Y/N).
+                  </p> 
+                           
+                  <p>The conversion table used is provided by the API subprogram
+                     NSCCONV, which is contained in the library SYSSEC. You can adjust the table to
+                               suit your requirements. For details, see the source of NSCCONV.
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> Simulate Loading &nbsp;</th> 
+                       
+               <td>
+                  <table border="0" width="100%"> 
+                               
+                              
+                     <tbody align="left" valign="top"> 
+                                  
+                        <tr> 
+                                      
+                           <td colspan="2">This option can be used to
+                              ascertain whether all data from the work file can be loaded, before you
+                              actually load them. When this function is executed, the data are loaded into
+                              the system file, and then, upon completion of the function, immediately deleted
+                              from it again. 
+                              
+                              <p>When activating this function, you select what type of load
+                                              report you want as a result of the simulation:
+                              </p>
+                           </td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <th> N</th> 
+                                      
+                           <td>Simulation not active.</td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <th> A</th> 
+                                      
+                           <td>Simulation with load report listing All records.</td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <th> R</th> 
+                                      
+                           <td>Simulation with load report listing only Rejected
+                              records.
+                           </td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <th> L</th> 
+                                      
+                           <td>Simulation with load report listing only Loadable
+                              records.
+                           </td> 
+                                     
+                        </tr> 
+                                 
+                     </tbody> 
+                             
+                  </table>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> Work File &nbsp;</th> 
+                       
+               <td>You specify the name of the work file from which the data are to
+                  be written. 
+                  
+                  <p>This field is not available on mainframes.</p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th nowrap> Type of Work File</th> 
+                       
+               <td>
+                  <table border="0" width="100%"> 
+                               
+                              
+                     <tbody align="left" valign="top"> 
+                                  
+                        <tr> 
+                                      
+                           <th> D</th> 
+                                      
+                           <td>Default.</td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <th> N</th> 
+                                      
+                           <td>Entire Connection work file.</td> 
+                                     
+                        </tr> 
+                                  
+                        <tr> 
+                                      
+                           <td colspan="2">This field is not available on
+                              mainframes.
+                           </td> 
+                                     
+                        </tr> 
+                                 
+                     </tbody> 
+                             
+                  </table>
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p class="note"><strong>Note:</strong><br> Data which are inconsistent or which already exist on the target
+              system file will not be loaded. To ascertain why data were not loaded, please
+              refer to the load report.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="nsc_transf.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Transferring_Data_to_Another_Hardware_Platform"></a></div> 
+         
+      <h2> Transferring Data to Another Hardware Platform</h2> 
+          
+          
+      <p>With SECULD2 and SECLOAD, you can also transfer security data from one
+              hardware platform to another.
+      </p> 
+          
+      <p>To do so, you enter a "Y" in the Transfer field of the
+              SECULD2 menu.
+      </p> 
+          
+      <p>By pressing <span class="key">PF4</span>, you can then invoke an additional window in
+              which you can specify the following optional parameters:
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th nowrap> Target Environment &nbsp;</th> 
+                       
+               <td>The operating system (as in the Natural system variable
+                  <a href="../vari/vari-over.htm">*OPSYS</a>) of the target
+                           environment.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> Target FSEC DBID/FNR &nbsp;</th> 
+                       
+               <td>The database ID and file number of the FSEC system file to which
+                  the data are to be transferred. SECLOAD will compare these specifications with
+                  the DBID/FNR of the actual FSEC file to which the data are to be loaded: if
+                  they are not the same, the data cannot be loaded. In this way, you can prevent
+                  an uncontrolled loading of security data. Otherwise anybody who got hold of the
+                  work file, could load it anywhere.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> Conversion EBCDIC-ASCII</th> 
+                       
+               <td> 
+                  
+                  <p>You can determine whether EBCDIC-ASCII conversion is to be
+                     performed (Y/N).
+                  </p> 
+                           
+                  <p>The conversion is performed by the API subprogram NSCCONV, which is
+                               contained in the library SYSSEC. For details, see the source of NSCCONV.
+                  </p>
+                           
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> User-Defined Conversion Table</th> 
+                       
+               <td> 
+                  
+                  <p>You can determine whether or not a conversion table is to be used
+                          (Y/N).
+                  </p> 
+                           
+                  <p>The conversion table used is provided by the API subprogram
+                     NSCCONV, which is contained in the library SYSSEC. You can adjust the table to
+                               suit your requirements. For details, see the source of subprogram NSCCONV.
+                  </p>
+                           
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>The data will then be written, in alphanumeric form, to Work File 1,
+              from where they can be loaded with SECLOAD.
+      </p> 
+          
+      <p class="note"><strong>Note:</strong><br> When data are transferred from a mainframe platform to another
+              platform, SECLOAD also checks if library IDs conform to the naming conventions
+              for libraries (as described under the system command
+              <a href="../syscom/logon.htm">LOGON</a> in the Natural
+              <cite>System Commands</cite> documentation).
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="nsc_transf.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Transferring_Data_in_Batch_Mode"></a></div> 
+         
+      <h2> Transferring Data in Batch Mode</h2> 
+         
+      <div><a name="d0e40281"></a></div> 
+          
+      <h3>SECULD2/SECLOAD in Batch Mode on Mainframes</h3> 
+           
+           
+      <p>Example jobs for executing SECULD2 and SECLOAD in batch mode on
+               mainframe computers are shown below.
+      </p> 
+           
+      <h4 class="floating-title"> Example 1 of SECULD2 Job:</h4> 
+           
+      <p>In this example, all users whose IDs begin with "ADE" and
+               who were last modified between 1st January and 10th June 2008, and the library
+               TESTLIB will be transferred to the work file CMWKF05.
+      </p> 
+           <pre class="verbatim">
+//SECULD2 JOB DEMO,CLASS= ,MSGCLASS= ,REGION=2048K 
+//********************************************************** 
+//ULD      EXEC PGM=NATBAT<var>nn</var>, 
+// PARM='DBID=10,FNR=5,FSEC=(,8),FDIC=(,9),IM=D,MT=0,MAXCL=0,MADIO=0'
+//STEPLIB  DD DISP=SHR,DSN=NATURAL.V<var>nn</var>.LOAD 
+//         DD DISP=SHR,DSN=ADABAS.V<var>nn</var>.ADALOAD
+//DDCARD   DD * 
+ADARUN PROGRAM=USER,SVC=249,DATABASE=10,MODE=MULTI 
+/* 
+//CMPRINT  DD SYSOUT=* 
+//CMWKF05  DD UNIT=TAPE,VOL=SER=NATSEC,DSN=NSC.ULD, 
+// DCB=(RECFM=VB,LRECL=4624,BLKSIZE=4628,DEN=3),DISP=(,KEEP) 
+//CMSYNIN  DD * 
+<strong>SYSSEC,DBA,PASSWORD 
+SECULD2 
+O,N,US,ADE,*,,,,2008-01-01,2008-06-10 
+O,N,LI,TESTLIB,1 
+. 
+FIN</strong>
+/*
+</pre> 
+           <h4 class="floating-title"> Example 2 of SECULD2 Job:</h4> 
+           
+      <p>In this example, all users whose IDs begin with "ADE" will
+               be transferred to the work file CMWKF01. If the "Transfer" option
+               is specified as "Y", the job must contain a line for additional
+               parameters (see
+               <a href="nsc_transf.htm#Transferring_Data_to_Another_Hardware_Platform">Transferring Data to
+                  Another Hardware Platform</a> above). In this example, no additional
+               parameter specifications are made (that is, they are either not specified or
+               specified as "N") .
+      </p> 
+           <pre class="verbatim">
+//SECULD2 JOB DEMO,CLASS= ,MSGCLASS= ,REGION=2048K 
+//********************************************************** 
+//ULD      EXEC PGM=NATBAT<var>nn</var>, 
+// PARM='DBID=10,FNR=5,FSEC=(,8),FDIC=(,9),IM=D,MT=0,MAXCL=0,MADIO=0'
+//STEPLIB  DD DISP=SHR,DSN=NATURAL.V<var>nn</var>.LOAD 
+//         DD DISP=SHR,DSN=ADABAS.V<var>nn</var>.ADALOAD
+//DDCARD   DD * 
+ADARUN PROGRAM=USER,SVC=249,DATABASE=10,MODE=MULTI 
+/* 
+//CMPRINT  DD SYSOUT=* 
+//CMWKF01  DD UNIT=TAPE,VOL=SER=NATSEC,DSN=NSC.ULD, 
+// DCB=(RECFM=VB,LRECL=4624,BLKSIZE=4628,DEN=3),DISP=(,KEEP) 
+//CMSYNIN  DD * 
+<strong>SYSSEC,DBA,PASSWORD 
+SECULD2 
+O,Y,US,ADE,* 
+,,,N,N 
+. 
+FIN</strong>
+/*
+</pre> 
+           <h4 class="floating-title"> Example 3 of SECULD2 Job:</h4> 
+           
+      <p>In this example, all libraries whose IDs begin with "SF"
+               will be transferred to the work file CMWKF01. The target environment is a PC,
+               and the database ID and file number of the target FSEC system file are 89 and
+               356.
+      </p> 
+           <pre class="verbatim">
+//SECULD2 JOB DEMO,CLASS= ,MSGCLASS= ,REGION=2048K 
+//********************************************************** 
+//ULD      EXEC PGM=NATBAT<var>nn</var>, 
+// PARM='DBID=10,FNR=5,FSEC=(,8),FDIC=(,9),IM=D,MT=0,MAXCL=0,MADIO=0'
+//STEPLIB  DD DISP=SHR,DSN=NATURAL.V<var>nn</var>.LOAD 
+//         DD DISP=SHR,DSN=ADABAS.V<var>nn</var>.ADALOAD
+//DDCARD   DD * 
+ADARUN PROGRAM=USER,SVC=249,DATABASE=10,MODE=MULTI 
+/* 
+//CMPRINT  DD SYSOUT=* 
+//CMWKF01  DD UNIT=TAPE,VOL=SER=NATSEC,DSN=NSC.ULD, 
+// DCB=(RECFM=VB,LRECL=4624,BLKSIZE=4628,DEN=3),DISP=(,KEEP) 
+//CMSYNIN  DD * 
+<strong>SYSSEC,DBA,PASSWORD 
+SECULD2 
+O,Y,LI,SF,*
+WNT-X86,89,356,N,N 
+. 
+FIN</strong>
+/*
+</pre> 
+           <h4 class="floating-title"> Example 1 of SECLOAD Job:</h4> 
+           
+      <p>In this example, the data will be read from work file 5 (CMWKF05).</p> 
+           <pre class="verbatim">
+//SECLOAD JOB  DEMO,MSGCLASS= ,CLASS= ,REGION=2048K 
+//*************************************************** 
+//LOAD     EXEC PGM=NATBAT<var>nn</var>, 
+// PARM='DBID=7,FNR=23,FSEC=(,24),FDIC=(,25),EJ=OFF,MT=0,IM=D,MADIO=0,MAXCL=0'
+//STEPLIB  DD DSN=NATURAL.V<var>nn</var>.LOAD,DISP=SHR 
+//         DD DSN=ADABAS.V<var>nn</var>.ADALOAD,DISP=SHR 
+//CMPRINT  DD SYSOUT=* 
+//DDCARD   DD * 
+ADARUN PROGRAM=USER,SVC=249,DATABASE=7,MODE=MULTI 
+/* 
+//CMWKF05  DD UNIT=TAPE,VOL=SER=NATSEC,DSN=NSC.ULD,DISP=SHR 
+//CMSYNIN  DD * 
+<strong>SYSSEC,DBA,PASSWORD 
+SECLOAD 
+N,N,N
+FIN</strong>
+/*
+</pre> 
+           <h4 class="floating-title"> Example 2 of SECLOAD Job:</h4> 
+           
+      <p>In this example, the data will be read from work file 1 (CMWKF01).</p> 
+           <pre class="verbatim">
+//SECLOAD JOB  DEMO,MSGCLASS= ,CLASS= ,REGION=2048K 
+//*************************************************** 
+//LOAD     EXEC PGM=NATBAT<var>nn</var>, 
+// PARM='DBID=7,FNR=23,FSEC=(,24),FDIC=(,25),EJ=OFF,MT=0,IM=D,MADIO=0,MAXCL=0'
+//STEPLIB  DD DSN=NATURAL.V<var>nn</var>.LOAD,DISP=SHR 
+//         DD DSN=ADABAS.V<var>nn</var>.ADALOAD,DISP=SHR 
+//CMPRINT  DD SYSOUT=* 
+//DDCARD   DD * 
+ADARUN PROGRAM=USER,SVC=249,DATABASE=7,MODE=MULTI 
+/* 
+//CMWKF01  DD UNIT=TAPE,VOL=SER=NATSEC,DSN=NSC.ULD,DISP=SHR 
+//CMSYNIN  DD * 
+<strong>SYSSEC,DBA,PASSWORD 
+SECLOAD 
+Y,N,N
+FIN</strong>
+/*</pre> 
+           
+          
+         <div><a name="d0e40419"></a></div> 
+          
+      <h3>SECULD2/SECLOAD in Batch Mode under UNIX and OpenVMS</h3> 
+           
+           
+      <p>To execute SECULD2 and SECLOAD in batch mode under UNIX or OpenVMS, you
+               have to provide input in the batch-mode files as follows:
+      </p> 
+           
+      <p>The input file assigned to CMSYNIN has to contain the following:</p> 
+           <pre class="verbatim">
+SECULD2
+FIN</pre> 
+           <p>In the input file assigned to CMOBJIN you specify the data to be
+               transferred; for example:
+      </p> 
+           <pre class="verbatim">
+SYSSEC,DBA,PASSWORD,,
+O,Y,US,ADE*,,,,,2008-02-01,2008-02-28
+,,,N,N
+.
+</pre> 
+           <p>This example assumes that the session was started with AUTO=OFF. With
+               AUTO=ON, you omit the user ID and password from the first line.
+      </p> 
+           
+      <p>The result of the data transfer will be shown in the output file
+               assigned to CMPRINT.
+      </p> 
+           
+      <p>For general information, see the batch-mode section in the Natural
+               <cite>Operations</cite> documentation for UNIX or OpenVMS.
+      </p> 
+          
+       
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="nsc_transf.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../nsc/nsc_transf.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/nsc/nsc_transf.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc_batch.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc_exits.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

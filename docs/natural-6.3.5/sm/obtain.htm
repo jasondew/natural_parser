@@ -1,0 +1,567 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>OBTAIN</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="obtain" id="16830"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../sm/obtain.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/sm/obtain.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="sm-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="newpage.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="onerror.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Statements&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> OBTAIN 
+               <a name="x124"></a></h1>
+      </div> 
+         
+          
+          
+      <table border="0" class="syntax" cellpadding="3">  
+              
+         <tbody align="left" valign="top"> 
+                  
+            <tr> 
+                      
+               <td nowrap> <code class="keyword">OBTAIN</code> &nbsp;
+                         <a href="obtain.htm#obtain_operand1"> <var>operand1</var>
+                             </a>
+                          <img src="../graphics/dot3.gif" alt="" width="12" height="4"> &nbsp;&nbsp;&nbsp;
+                          
+               </td> 
+                     
+            </tr> 
+                 
+         </tbody> 
+             
+      </table> 
+          
+         
+      <p>This document covers the following topics:</p>
+         
+      <ul>
+         <li>
+            <p class="initem"><a href="obtain.htm#Function_obtain">Function</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="obtain.htm#restriction_obtain">Restriction</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="obtain.htm#operand1_obtain">Syntax Description</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="obtain.htm#Examples_obtain">Examples</a></p>
+         </li>
+      </ul> 
+        
+      <hr> 
+        
+      <div><a name="Function_obtain"></a></div> 
+         
+      <h2> Function </h2> 
+          
+          
+      <p>The <code>OBTAIN</code> statement is used in reporting mode to cause one
+              or more fields to be read from a file. The <code>OBTAIN</code> statement does
+              not generate any executable code in the Natural object program. It is primarily
+              used to read a range of values of a multiple-value field or a range of
+              occurrences of a periodic group so that portions of these ranges may be
+              subsequently referenced in the program.
+      </p> 
+          
+      <p>An <code>OBTAIN</code> statement is <em>not</em> required for each
+              database field to be referenced in the program since Natural automatically
+              reads each database field referenced in a subsequent statement (for example, a
+              <a href="display.htm#display"><code>DISPLAY</code></a> or
+              <a href="compute.htm#compute"><code>COMPUTE</code></a> statement).
+      </p> 
+          
+      <p>When multiple-value or periodic-group fields in the form of an array are
+              referenced, the array must be defined with an <code>OBTAIN</code> statement to
+              ensure that it is built for all occurrences of the fields. If individual
+              multiple-value or periodic-group fields are referenced before the array is
+              defined, the fields will not be placed within the array and will exist
+              independent of the array. The fields will contain the same value as the
+              corresponding occurrence within the array.
+      </p> 
+          
+      <p>Individual occurrences of multiple-value or periodic-group fields or
+              subarrays can be held within a previously defined array if the array dimensions
+              of the second individual occurrence or array are contained within the initial
+              array.
+      </p> 
+          
+      <p>References to multiple-value or periodic-group fields with unique
+              variable index cannot be contained in an array of values. If indvidual
+              occurrences of an array are to be processed with a variable index, the index
+              expression must be prefixed with the unique variable index to denote the
+              individual array.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="obtain.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="restriction_obtain"></a></div> 
+         
+      <h2> Restriction </h2> 
+          
+          
+      <p>The <code>OBTAIN</code> statement is for reporting mode only.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="obtain.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="operand1_obtain"></a></div> 
+         
+      <h2> Syntax Description </h2> 
+          
+          
+      <p>Operand Definition Table:</p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th>Operand</th> 
+                       
+               <th colspan="5" align="center">
+                  <a href="synsym.htm#statem_poss_struct">Possible Structure</a> 
+               </th> 
+                       
+               <th colspan="13" align="center">
+                  <a href="synsym.htm#statem_poss_form">Possible Formats</a> 
+               </th> 
+                       
+               <th align="center"> <a href="synsym.htm#statem_ref_perm">Referencing
+                     Permitted</a> 
+               </th> 
+                       
+               <th align="center"> <a href="synsym.htm#statem_dyn_def">Dynamic
+                     Definition</a> 
+               </th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> <var>operand1</var> 
+               </td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>S</td> 
+                       
+               <td>A</td> 
+                       
+               <td>G</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>A</td> 
+                       
+               <td>U</td> 
+                       
+               <td>N</td> 
+                       
+               <td>P</td> 
+                       
+               <td>I</td> 
+                       
+               <td>F</td> 
+                       
+               <td>B</td> 
+                       
+               <td>D</td> 
+                       
+               <td>T</td> 
+                       
+               <td>L</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td align="center">&nbsp;</td> 
+                       
+               <td align="center">&nbsp;</td> 
+                       
+               <td align="center">yes</td> 
+                       
+               <td align="center">yes</td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>Syntax Element Description:</p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th align="left"> <a name="obtain_operand1"></a><var>operand1</var> 
+               </th> 
+                       
+               <td>With <var>operand1</var> you specify the
+                  field(s) to be made available as a result of the <code>OBTAIN</code>
+                           statement.
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <h4 class="floating-title"> Examples:</h4> 
+          <pre class="verbatim">READ FINANCE OBTAIN CREDIT-CARD (1-10)
+DISPLAY CREDIT-CARD (3-5) CREDIT-CARD (6-8)
+SKIP 1 END</pre> 
+          <p>The above example results in the first 10 occurrences of the field
+              <code>CREDIT-CARD</code> (which is contained in a periodic group) being read
+              and occurrences 3-5 and 6-8 being displayed where the subsequent subarrays will
+              reside in the initial array (1-10).
+      </p> 
+          <pre class="verbatim">READ FINANCE
+MOVE 'ONE' TO CREDIT-CARD (1)
+DISPLAY CREDIT-CARD (1) CREDIT-CARD (1-5)</pre> 
+          <p>Output:</p> <pre class="system-output">    CREDIT-CARD      CREDIT-CARD
+------------------ ----------------
+
+
+ONE                DINERS CLUB
+                   AMERICAN EXPRESS
+
+
+
+
+ONE                AVIS
+                   AMERICAN EXPRESS
+
+
+
+ONE                HERTZ
+                   AMERICAN EXPRESS
+
+
+
+ONE                UNITED AIR TRAVEL
+</pre> 
+          <p>The first reference to <code>CREDIT-CARD (1)</code> is not contained
+              within the array. The array which is defined after the reference to the unique
+              occurrence (1) cannot retroactively include a unique occurrence or an array
+              which is shorter than the one being defined.
+      </p> 
+          <pre class="verbatim">READ FINANCE
+OBTAIN CREDIT-CARD (1-5)
+MOVE 'ONE' TO CREDIT-CARD (1)
+DISPLAY CREDIT-CARD (1) CREDIT-CARD (1-5)</pre> 
+          <p>Output:</p> <pre class="system-output">    CREDIT-CARD      CREDIT-CARD
+------------------ ----------------
+
+
+ONE                ONE
+                   AMERICAN EXPRESS
+
+
+
+ONE                ONE
+                   AMERICAN EXPRESS
+
+
+
+ONE                ONE
+                   AMERICAN EXPRESS
+
+
+
+ONE                ONE
+
+</pre> 
+          <p>The individual reference to <code>CREDIT-CARD (1)</code> is contained
+              within the array defined in the <code>OBTAIN</code> statement.
+      </p> 
+          <pre class="verbatim">MOVE (1) TO INDEX
+READ FINANCE
+DISPLAY CREDIT-CARD (1-5) CREDIT-CARD (INDEX)</pre> 
+          <p>Output:</p> <pre class="system-output">    CREDIT-CARD      CREDIT-CARD
+------------------- ----------------
+
+
+DINERS CLUB         DINERS CLUB
+AMERICAN EXPRESS
+
+
+
+AVIS                AVIS
+AMERICAN EXPRESS
+
+
+
+HERTZ              HERTZ
+AMERICAN EXPRESS
+
+
+
+UNITED AIR TRAVEL  UNITED AIR TRAVEL
+
+</pre> 
+          <p>The reference to <code>CREDIT-CARD</code> using the variable
+              <a href="../pg/pg_defi_dv.htm#Index_Notation">index notation</a>
+              is not contained within the array.
+      </p> 
+          <pre class="verbatim">RESET A(A20) B(A20) C(A20)
+MOVE 2 TO I (N3)
+MOVE 3 TO J (N3)
+READ FINANCE
+ OBTAIN CREDIT-CARD (1:3) CREDIT-CARD (I:I+2) CREDIT-CARD (J:J+2)
+ FOR K (N3) = 1 TO 3
+  MOVE CREDIT-CARD (1.K) TO A
+  MOVE CREDIT-CARD (I.K) TO B
+  MOVE CREDIT-CARD (J.K) TO C
+  DISPLAY A B C
+ LOOP /* FOR
+LOOP / * READ
+END</pre> 
+          <p>Output:</p> <pre class="system-output">         A                   B                   C
+------------------- ------------------- -------------------
+CARD 01             CARD 02             CARD 03
+CARD 02             CARD 03             CARD 04
+CARD 03             CARD 04             CARD 05</pre> 
+          <p>The three arrays may be accessed individually by using the unique base
+              index as qualifier for the index expression.
+      </p> 
+          
+      <h4 class="floating-title"> Invalid Example 1 </h4> 
+          <pre class="verbatim">READ FINANCE
+OBTAIN CREDIT-CARD (1-10)
+FOR I 1 10
+MOVE CREDIT-CARD (I) TO A(A20)
+WRITE A
+END</pre> 
+          <p>The above example will produce error message NAT1006 (value for variable
+              index = 0) because, at the time the record is read (READ), the index
+              <code>I</code> still contains the value 0.
+      </p> 
+          
+      <p>In any case, the above example would not have printed the first 10
+              occurrences of <code>CREDIT-CARD</code> because the individual occurrence with
+              the variable index cannot be contained in the array and the variable index
+              (<code>I</code>) is only evaluated when the next record is read.
+      </p> 
+          
+      <p>The following is the correct method of performing the above:</p> 
+          <pre class="verbatim">READ FINANCE
+OBTAIN CREDIT-CARD (1-10)
+FOR I 1 10
+MOVE CREDIT-CARD (1.I) TO A (A20)
+WRITE A
+END</pre> 
+          <h4 class="floating-title">Invalid Example 2</h4> 
+          <pre class="verbatim">READ FINANCE
+FOR I 1 10
+WRITE CREDIT-CARD (I)
+END</pre> 
+          <p>The above example will produce error message NAT1006 because the index
+              <code>I</code> is zero when the record is read in the <a href="read.htm#read"><code>READ</code></a> statement.
+      </p> 
+          
+      <p>The following is the correct method of performing the above:</p> 
+          <pre class="verbatim">READ FINANCE
+FOR I 1 10
+GET SAME
+WRITE CREDIT-CARD (0030/I)
+END</pre> 
+          <p>The <a href="getsame.htm#getsame"><code>GET SAME</code></a>
+              statement is necessary to reread the record after the variable index has been
+              updated in the <a href="for.htm#for"><code>FOR</code></a> loop.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="obtain.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Examples_obtain"></a></div> 
+         
+      <h2> Examples </h2>
+      <ul>
+         <li>
+            <p class="initem"><a href="obtain.htm#obtain_exa1">Example 1 - OBTAIN Statement</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="obtain.htm#obtain_exa2">Example 2 - OBTAIN Statement with Multiple Ranges</a></p>
+         </li>
+      </ul>
+      <div><a name="obtain_exa1"></a></div> 
+          
+      <h3>Example 1 - OBTAIN Statement</h3> 
+           
+           <pre class="verbatim">** Example 'OBTEX1': OBTAIN                                             
+************************************************************************
+RESET #INDEX (I1)                                                       
+*                                                                       
+LIMIT 5                                                                 
+READ EMPLOYEES BY CITY                                                    
+  <strong>OBTAIN SALARY (1:4)</strong>                                             
+  /*                                                                    
+  IF SALARY (4) GT 0 DO                                                 
+    WRITE '=' NAME / 'SALARIES (1:4):' SALARY (1:4)                     
+    FOR #INDEX 1 TO 4                                                   
+      WRITE 'SALARY' #INDEX  SALARY (1.#INDEX)                          
+    LOOP                                                                
+    SKIP 1                                                              
+  DOEND                                                                 
+LOOP                                                                    
+*                                                                       
+END                                                                    </pre> 
+           <h4 class="floating-title">Output of Program OBTEX1:</h4> <pre class="system-output">Page      1                                                  05-02-08  13:37:48
+                                                                               
+NAME: SENKO                                                                    
+SALARIES (1:4):      31500      29900      28100      26600                    
+SALARY    1      31500                                                         
+SALARY    2      29900                                                         
+SALARY    3      28100                                                         
+SALARY    4      26600                                                         
+                                                                               
+NAME: HAMMOND                                                                  
+SALARIES (1:4):      22000      20200      18700      17500                    
+SALARY    1      22000                                                         
+SALARY    2      20200                                                         
+SALARY    3      18700                                                         
+SALARY    4      17500                                                        </pre> 
+          <div><a name="obtain_exa2"></a></div> 
+          
+      <h3> Example 2 - OBTAIN Statement with Multiple Ranges</h3> 
+           
+           <pre class="verbatim">** Example 'OBTEX2': OBTAIN (with multiple ranges)                      
+************************************************************************
+RESET #INDEX (I1) #K (I1)                                               
+*                                                                       
+#INDEX  := 2                                                            
+#K      := 3                                                            
+*                                                                       
+LIMIT 2                                                                 
+*                                                                       
+READ EMPLOYEES BY CITY                                                  
+  <strong>OBTAIN SALARY (1:5)                                                   
+         SALARY (#INDEX:#INDEX+3)</strong>                                 
+  /*                                                                    
+  IF SALARY (5) GT 0 DO                                                 
+    WRITE '=' NAME                                                      
+    WRITE 'SALARIES (1-5):' SALARY (1:5) /                              
+    WRITE 'SALARIES (2-5):' SALARY (#INDEX:#INDEX+3)                    
+    WRITE 'SALARIES (2-5):' SALARY (#INDEX.1:4) /                       
+    WRITE 'SALARY 3:' SALARY (3)                                        
+    WRITE 'SALARY 3:' SALARY (#K)       
+    WRITE 'SALARY 4:' SALARY (#INDEX.#K)
+  DOEND                                 
+LOOP                                   </pre> 
+           <h4 class="floating-title">Output of Program OBTEX2:</h4> <pre class="system-output">Page      1                                                  05-02-08  13:38:31
+                                                                               
+NAME: SENKO                                                                    
+SALARIES (1-5):      31500      29900      28100      26600      25200         
+                                                                               
+SALARIES (2-5):      29900      28100      26600      25200                    
+SALARIES (2-5):      29900      28100      26600      25200                    
+                                                                               
+SALARY 3:      28100                                                           
+SALARY 3:      28100                                                           
+SALARY 4:      26600                                                          </pre> 
+           <p>For further examples of using the <code>OBTAIN</code> statement, see
+               <a href="../pg/pg_defi_dv.htm#DB_Array_Ref"></a></p> 
+           
+      <p><a href="../pg/pg_defi_dv.htm#DB_Array_Ref">Referencing
+            a Database Array</a> (in the <cite>Programming
+                  Guide</cite>).
+      </p> 
+           
+        
+       
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="obtain.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../sm/obtain.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/sm/obtain.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="sm-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="newpage.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="onerror.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

@@ -1,0 +1,1043 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>User-Defined Functions</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="pg_udf"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_udf.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_udf.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_defi_xarry.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_dbms-over.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Programming Guide&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x123"></a> 
+               <a name="x124"></a>
+               User-Defined Functions
+         </h1>
+      </div> 
+         
+         
+      <p>This document covers the following topics:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_udf.htm#intro_pg_defi_udf">Introduction to User-Defined Functions</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_udf.htm#advantage">Difference between Function Call and Subprogram Call</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_udf.htm#func_def">Function Definition (DEFINE FUNCTION)</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_udf.htm#proto_def">Prototype Definition (DEFINE PROTOTYPE)</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_udf.htm#symvfc">Symbolic and Variable Function Call</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_udf.htm#proto_def_gp">Automatic/Implicit Prototype Definition (APT)</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_udf.htm#proto">Prototype Cast (PT Clause)</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_udf.htm#ir_clause">Intermediate Result for Return Value (IR Clause)</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_udf.htm#pt_def_meth_ovw">Combinations of Possible Prototype Definitions</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_udf.htm#recurs">Recursive Function Call</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_udf.htm#behave">Behavior of Functions in Statements and Expressions</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_udf.htm#usage">Usage of Functions as Statements</a></p>
+         </li>
+      </ul> 
+        
+      <hr> 
+        
+      <div><a name="intro_pg_defi_udf"></a></div> 
+         
+      <h2> Introduction to User-Defined Functions</h2> 
+          
+          
+      <p>Functions, as do subprograms, give you the possibility to receive data,
+              to change it and to give the results to the calling module. The advantage of
+              using functions over subprograms is that function calls can be used directly in
+              statements and expressions without the need for additional temporary
+              variables.
+      </p> 
+          
+      <p>Normally, depending on the parameters that are given to the function,
+              the result is produced in the function and is returned to the calling object.
+              If other values are to be returned to the calling module, this can be done by
+              using the parameters; see <a href="pg_obj_prog.htm#Subprogram">Subprogram</a>.
+      </p> 
+          
+      <p>Once the function code has been completely executed, control is given
+              back to the calling object and the program continues with the statement that
+              comes after the function call.
+      </p> 
+          
+      <p>For further information, see also:</p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">Natural object type <a href="pg_obj_prog.htm#Function">Function</a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"><a href="pg_defi_funcall.htm#pg_defi_funcall">Function Call</a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Natural statements <a href="../sm/definefu.htm"><code>DEFINE
+                     FUNCTION</code></a>, <a href="../sm/definepro.htm"><code>DEFINE
+                     PROTOTYPE</code></a></p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_udf.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="advantage"></a></div> 
+         
+      <h2> 
+             <a name="x125"></a> 
+             <a name="x126"></a> Difference between Function Call and Subprogram Call
+      </h2> 
+          
+          
+      <p>The following two examples show the difference between using function
+              calls and subprogram calls.
+      </p> 
+          
+      <div><a name="exfc"></a></div>
+      <h4 class="floating-title"> Example of Using a Function
+              Call:
+      </h4> 
+          
+      <p>The following example comprises a program object that uses a function
+              call, a function object containing a function definition created with a
+              <a href="../sm/definefu.htm"><code>DEFINE FUNCTION</code></a>
+              statement, and a copycode object created with a
+              <a href="../sm/definepro.htm"><code>DEFINE PROTOTYPE</code></a>
+              statement.
+      </p> 
+          
+      <p>Program Object:</p> 
+          <pre class="verbatim">
+/* Excerpt from a Natural program using a function call
+INCLUDE C#ADD
+WRITE #ADD(&lt; 2,3 &gt;) /* function call; no temporary variable necessary
+END
+</pre> 
+          <p>Function Object:</p> 
+          <pre class="verbatim">
+/* Natural function definition
+DEFINE FUNCTION #ADD
+  RETURNS (I4) BY VALUE
+  DEFINE DATA PARAMETER
+  1 #SUMMAND1 (I4) BY VALUE
+  1 #SUMMAND2 (I4) BY VALUE
+  END-DEFINE
+
+  #ADD := #SUMMAND1 + #SUMMAND2
+END-FUNCTION
+END
+</pre> 
+          <p>Copycode Object (for example, <code>C#ADD</code>):
+      </p> 
+          <pre class="verbatim">
+/* Natural copycode containing prototype
+DEFINE PROTOTYPE #ADD
+  RETURNS (I4)
+  DEFINE DATA PARAMETER
+  1 #SUMMAND1 (I4) BY VALUE
+  1 #SUMMAND2 (I4) BY VALUE
+  END-DEFINE
+END-PROTOTYPE
+</pre> 
+          <p>If you want to achieve the same functionality by using a subprogram, you
+              must use temporary variables.
+      </p> 
+          
+      <div><a name="exsub"></a></div>
+      <h4 class="floating-title"> Example of Using a Subprogram:
+              
+      </h4> 
+          
+      <p>The following example comprises a program object that calls a subprogram
+              object, involving the use of a temporary variable.
+      </p> 
+          
+      <p>Program Object:</p> 
+          <pre class="verbatim">
+/* Natural program using a subprogram
+DEFINE DATA LOCAL
+1 #RESULT (I4) INIT &lt;0&gt;           /* temporary variable
+END-DEFINE
+
+CALLNAT 'N#ADD' USING #RESULT 2 3 /* result is stored into #RESULT
+WRITE #RESULT                     /* print out the result of the subprogram
+END
+</pre> 
+          <p>Subprogram Object (for example, <code>N#ADD</code>):
+      </p> 
+          <pre class="verbatim">
+/* Natural program using a subprogram
+DEFINE DATA PARAMETER
+1 #RETURN   (I4) BY VALUE RESULT
+1 #SUMMAND1 (I4) BY VALUE
+1 #SUMMAND2 (I4) BY VALUE
+END-DEFINE
+
+#RETURN := #SUMMAND1 + #SUMMAND2
+END
+</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_udf.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="func_def"></a></div> 
+         
+      <h2> 
+             <a name="x127"></a> Function Definition (DEFINE FUNCTION) 
+      </h2> 
+          
+          
+      <p>The function definition contains the Natural code to be executed when
+              the function is called. As with subprograms, you need to create a Natural
+              object, in this case, of type "Function" which contains the
+              function definition. The function definition is created using the Natural
+              statement <a href="../sm/definefu.htm"><code>DEFINE
+               FUNCTION</code></a>.
+      </p> 
+          
+      <p>The <a href="pg_defi_funcall.htm#pg_defi_funcall">function call</a> itself
+              can be in any object type which contains executable code.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_udf.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="proto_def"></a></div> 
+         
+      <h2> 
+             <a name="x128"></a>Prototype Definition (DEFINE PROTOTYPE)
+      </h2> 
+          
+          
+      <p>To be able to compile function calls, Natural needs information about
+              the <var>format-length/array-definition</var> of the return
+              value. This information is then made available to the compiler in the prototype
+              definition. This definition is created using the Natural statement
+              <a href="../sm/definepro.htm"><code>DEFINE PROTOTYPE</code></a>.
+              You can also include the definition of the parameter to be passed back, which
+              is then checked at compile time.
+      </p> 
+          
+      <p>Since Natural makes the connection between "calling" and
+              "called" objects at runtime, and not before, the computer does not
+              know with which type of a function return value it is dealing at compile time.
+              This is due to the fact that the object containing the function does not
+              necessarily have to exist (at compile time). It is for this reason that the
+              prototype definition is created, so that the
+              <var>format-length/array-definition</var> can be generated into
+              the generated program at compile time.
+      </p> 
+          
+      <p>It is important to remember that a prototype definition never contains
+              executable code. A prototype definition simply contains the following
+              information about the function call: the
+              <var>format/length/array-definition</var> of the return value
+              or the parameter being passed back.
+      </p> 
+         
+      <div class="noprint">
+         <p><a href="pg_udf.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="symvfc"></a></div> 
+         
+      <h2> 
+             <a name="x129"></a> 
+             <a name="x130"></a>Symbolic and Variable Function Call
+      </h2> 
+          
+          
+      <p>To define a variable function call, it is always necessary to use a
+              <a href="../sm/definepro.htm"><code>DEFINE PROTOTYPE
+               VARIABLE</code></a> statement. Otherwise, the function call is assumed
+              to be an implicit symbolic function call.
+      </p> 
+          
+      <p>See the section <a href="pg_defi_funcall.htm#pg_defi_funcall">Function
+            Call</a> for more details about this topic.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_udf.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="proto_def_gp"></a></div> 
+         
+      <h2>Automatic/Implicit Prototype Definition (APT) </h2> 
+          
+          
+      <p>If neither an explicit prototype definition (EPT) nor a <code>PT</code>
+              clause exists, a search for the prototype definition takes place in the
+              generated program. For further information, see
+              <a href="pg_udf.htm#pt_def_meth_ovw">Combinations of Possible
+            Prototype Definitions</a> below.
+      </p> 
+         
+      <div class="noprint">
+         <p><a href="pg_udf.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="proto"></a></div> 
+         
+      <h2> Prototype Cast (PT Clause)</h2> 
+          
+          
+      <p>In order to find the corresponding prototype of a specific function,
+              Natural searches for a prototype which bears the name of the function. If this
+              is not the case, it is assumed that the function call is symbolic. In this
+              case, the function "signature" must be defined by using the
+              keyword <a href="pg_defi_funcall.htm#pro_cast"><code>PT=</code></a> in the
+              function call.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_udf.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="ir_clause"></a></div> 
+         
+      <h2>Intermediate Result for Return Value (IR Clause)</h2> 
+          
+          
+      <p>This clause enables you to specify the format/length of the return value
+              for a function call without using an explicit or implicit prototype definition,
+              that is, it enables the explicit specification of an intermediate result. For
+              further information, see <a href="pg_defi_funcall.htm#pg_defi_funcall">Function
+            Call</a>, <a href="pg_defi_funcall.htm#intermediate-result-definition"><var>intermediate-result-definition</var></a>.
+      </p>
+          
+         
+      <div class="noprint">
+         <p><a href="pg_udf.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="pt_def_meth_ovw"></a></div> 
+         
+      <h2>Combinations of Possible Prototype Definitions</h2> 
+          
+          
+      <p>The following table explains the effects on the prototype definition
+              according to various syntax combinations that are possible when using the
+              <a href="../sm/definepro.htm"><code>DEFINE PROTOTYPE</code></a>
+              statement and/or the clauses available in the function call. The following
+              possibilities are available in order to define parts of a function prototype
+              taking effect only on the function call to which they belong:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                   
+                  
+            <p class="initem"><strong>Explicit DEFINE PROTOTYPE Definition (EPT)</strong><br>Can decide on symbolic/variable function call; parameter definition;
+                      return value definition. 
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                   
+                  
+            <p class="initem"><strong>Prototype Cast (PT Clause)</strong><br>Can decide on parameter definition; return value definition. 
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                   
+                  
+            <p class="initem"><strong>Intermediate Result for Return Value (IR Clause)</strong><br>Can decide on return value definition. 
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col align="center">
+            <col align="center">
+            <col align="center">
+            <col align="center">
+            <col align="center">
+         </colgroup> 
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th>Case</th> 
+                       
+               <th align="center">Explicit prototype definition in
+                  <code>DEFINE PROTOTYPE</code> (EPT) 
+               </th> 
+                       
+               <th align="center"><code>PT</code> clause in function
+                  call (PT) 
+               </th> 
+                       
+               <th align="center"><code>IR</code> clause in function
+                  call (IR) 
+               </th> 
+                       
+               <th align="center">&nbsp;</th> 
+                       
+               <th align="center">Automatic reading-in of prototype
+                  definition from GP (APT)
+               </th> 
+                       
+               <th>Prototype behavior</th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th>1</th> 
+                       
+               <td align="center">x</td> 
+                       
+               <td align="center">x</td> 
+                       
+               <td align="center">x</td> 
+                       
+               <td align="center">&nbsp;</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td>SV(EPT), PS(PT), R(IR)</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th>2</th> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">x</td> 
+                       
+               <td align="center">x</td> 
+                       
+               <td align="center">&nbsp;</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td>S, PS(PT), R(IR)</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th>3</th> 
+                       
+               <td align="center">x</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">x</td> 
+                       
+               <td align="center">&nbsp;</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td>SV(EPT), PS(EPT), R(IR)</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th>4</th> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">x</td> 
+                       
+               <td align="center">&nbsp;</td> 
+                       
+               <td align="center">x</td> 
+                       
+               <td>S, PS(APT), R(IR)</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th>5</th> 
+                       
+               <td align="center">x</td> 
+                       
+               <td align="center">x</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">&nbsp;</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td>SV (EPT), PS(PT), R(PT)</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th>6</th> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">x</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">&nbsp;</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td>S, PS(PT), R(IR)</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th>7</th> 
+                       
+               <td align="center">x</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">&nbsp;</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td>SV(EPT), PS(EPT), R(EPT)</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th>8</th> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">-</td> 
+                       
+               <td align="center">&nbsp;</td> 
+                       
+               <td align="center">x</td> 
+                       
+               <td>S, PS(APT), R(APT)</td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>Where:</p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="12%">
+            <col width="85%">
+         </colgroup> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th>EPT </th> 
+                       
+               <td>Explicit <code>DEFINE PROTOTYPE</code>
+                           statement.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th>PT </th> 
+                       
+               <td>Prototype Cast (<code>PT</code> clause).
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th>IR </th> 
+                       
+               <td>Intermediate Result for Return Value
+                  (<code>IR</code> clause).
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th>APT </th> 
+                       
+               <td>Automatic Prototype Definition via external
+                  GP.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th>S </th> 
+                       
+               <td>Symbolic function call.</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th>V </th> 
+                       
+               <td>Variable function call.</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th>SV(EPT) </th> 
+                       
+               <td>Explicit prototype definition decides whether a
+                  symbolic or variable function call is performed.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th>R(IR) </th> 
+                       
+               <td>The return variable (R) is defined by the
+                  <code>IR</code> clause in the function call.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th>R(PT) </th> 
+                       
+               <td>The return variable (R) is defined by the
+                  <code>PT</code> clause in the function call.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th>R(EPT) </th> 
+                       
+               <td>The return variable (R) is defined by the
+                  explicit <code>DEFINE PROTOTYPE</code> statement.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th>PS(PT) </th> 
+                       
+               <td>The parameter signature (PS) (that is, the
+                  parameter definition, without return value definition) is defined by the
+                  <code>PT</code> clause in the function call. 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th>PS(EPT) </th> 
+                       
+               <td>The parameter signature (PS) (that is, the
+                  parameter definition, without return value definition) is defined by the
+                  explicit <code>DEFINE PROTOTYPE</code> statement. 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th>PS(APT) </th> 
+                       
+               <td>The parameter signature (PS) is defined
+                  automatically by reading in the prototype definition from the generated program
+                  (GP).
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>For example, the behavior of Case1 shown in the table above:</p> 
+          
+      <p>What is the behavior if an explicit <code>DEFINE PROTOTYPE</code>
+              statement (EPT) is used, and in the function call, the <code>PT</code> and
+              <code>IR</code> clauses are defined?
+      </p> 
+          
+      <p>The EPT definition decides whether a symbolic or variable function call
+              is performed. The variable function call is assumed when <code>DEFINE PROTOTYPE
+            VARIABLE</code> has been defined previously. The parameter signature (that is,
+              the format/length definition of all parameters without return value definition)
+              is defined by the <code>PT</code> clause, and the format/length of the return
+              value is defined by the <code>IR</code> clause in the function call. In this
+              case, no automatic prototype definition (APT) will be started. 
+      </p> 
+          
+      <p>In conclusion, the following general rules can be derived from the above
+              cases: 
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">In case of variable function calls, there must always be an explicit
+                      prototype definition (EPT) for the call. 
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">The <code>PT</code> clause does not decide whether it is a symbolic or
+                      variable function call. 
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">The definitions in the <code>PT</code> clause overwrite the EPT
+                      definitions for parameters and return value. 
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">The definitions in the <code>IR</code> clause overwrite the return
+                      value definition. 
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">If neither an EPT nor a <code>PT</code> clause exists, a search for
+                      the prototype definition takes place in the generated program (automatic
+                      prototype definition). 
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+         
+      <div class="noprint">
+         <p><a href="pg_udf.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="recurs"></a></div> 
+         
+      <h2> 
+             <a name="x131"></a> Recursive Function Call
+      </h2> 
+          
+          
+      <p>If a function is to be called recursively, the function prototype must
+              be contained in the function definition, or be inserted by means of an
+              <code>INCLUDE</code> file.
+      </p> 
+          
+      <h4 class="floating-title"> Example:</h4> 
+          
+      <p>Function Object:</p> 
+          <pre class="verbatim">
+/* Function definition for calculation of the math. factorial
+DEFINE FUNCTION #FACT
+  RETURNS (I4) BY VALUE
+  DEFINE DATA PARAMETER
+  1 #PARA (I4) BY VALUE
+  LOCAL
+  1 #TEMP (I4)
+  END-DEFINE
+
+  /* Prototype definition is necessary
+  INCLUDE C#FACT
+
+  /* Program code
+  IF #PARA=0
+    #FACT := 1
+  ELSE
+    #TEMP := #PARA - 1
+    #FACT := #PARA * #FACT(&lt; #TEMP &gt;)
+  END-IF
+
+END-FUNCTION
+END
+</pre> 
+          <p>Copycode Object (for example, named <code>C#FACT</code>):
+      </p> 
+          <pre class="verbatim">
+/* Prototype definition is necessary
+DEFINE PROTOTYPE #FACT
+  RETURNS (I4)
+  DEFINE DATA PARAMETER
+  1 #PARA (I4) BY VALUE
+  END-DEFINE
+END-PROTOTYPE
+</pre> 
+          <p>Program Object:</p> 
+          <pre class="verbatim">
+/* Prototype definition
+INCLUDE C#FACT
+
+/* function call
+WRITE #FACT(&lt;12&gt;)
+END
+</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_udf.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="behave"></a></div> 
+         
+      <h2> 
+             <a name="x132"></a> Behavior of Functions in Statements and Expressions
+      </h2> 
+          
+          
+      <p>Instead of operands, function calls can be used directly in statements
+              or expressions. However, this is only allowed in places where operands cannot
+              be modified.
+      </p> 
+          
+      <p>All function calls are executed according to their syntactical sequence
+              which is analyzed at compile time. The results of the function calls are saved
+              in internal temporary variables and passed to the statement or expression.
+      </p> 
+          
+      <p>This fixed sequence makes it possible to allow and execute standard
+              output in functions, without, for example, unwillingly influencing the output
+              of a statement.
+      </p> 
+          
+      <h4 class="floating-title"> Example:</h4> 
+          
+      <p>Program:</p> 
+          <pre class="verbatim">
+/* Natural program using a function call
+INCLUDE CPRINT
+PRINT 'before' #PRINT(&lt;&gt;) 'after'
+END
+</pre> 
+          <p>Function Object:</p> 
+          <pre class="verbatim">
+/* Natural function definition
+/* function returns integer value 10
+DEFINE FUNCTION #PRINT
+  RETURNS (I4)
+  WRITE '#PRINT'
+  #PRINT := 10
+END-FUNCTION
+END
+</pre> 
+          <p>Copycode (for example, <code>CPRINT</code>):
+      </p> 
+          <pre class="verbatim">
+DEFINE PROTOTYPE #PRINT END-PROTOTYPE
+</pre> 
+          <p>The following is the result which is then sent to the standard
+              output:
+      </p> 
+          <pre class="verbatim">
+#PRINT
+before       10 after
+</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_udf.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="usage"></a></div> 
+         
+      <h2> 
+             <a name="x133"></a> Usage of Functions as Statements
+      </h2> 
+          
+          
+      <p>Functions can also be called as statements independently from statements
+              and expressions. In this case, the return value - assuming it has been defined
+              - is not taken into account.
+      </p> 
+          
+      <p>If, however, an independent function is declared after an optional
+              operand list, the operand list must be followed by a semicolon to make it clear
+              that the function call is not a part of the operand list.
+      </p> 
+          
+      <h4 class="floating-title"> Example: </h4> 
+          
+      <p>Program Object:</p> 
+          <pre class="verbatim">
+/* Natural program using a function call
+DEFINE DATA LOCAL
+1 #A (I4) INIT &lt;1&gt;
+1 #B (I4) INIT &lt;2&gt;
+END-DEFINE
+
+INCLUDE CPROTO
+
+WRITE #A #B 
+#PRINT_ADD(&lt; 2,3 &gt;) /* function call belongs to operand list just in front of it
+
+WRITE '******'
+
+WRITE #A #B;        /* semicolon separates operand list and function call
+#PRINT_ADD(&lt; 2,3 &gt;) /* function call doesn't belong to the operand list
+END
+</pre> 
+          <p>Function Object:</p> 
+          <pre class="verbatim">
+/* Natural function definition
+DEFINE FUNCTION #PRINT_ADD
+  RETURNS (I4) BY VALUE
+  DEFINE DATA PARAMETER
+  1 #SUMMAND1 (I4) BY VALUE
+  1 #SUMMAND2 (I4) BY VALUE
+  END-DEFINE
+
+  #PRINT_ADD := #SUMMAND1 + #SUMMAND2
+  PRINT '#PRINT_ADD =' #PRINT_ADD
+END-FUNCTION
+END
+</pre> 
+          <p>Copycode Object (for example, named <code>CPROTO</code>):
+      </p> 
+          <pre class="verbatim">
+/* Natural copycode containing prototype
+DEFINE PROTOTYPE #PRINT_ADD
+  RETURNS (I4)
+  DEFINE DATA PARAMETER
+  1 #SUMMAND1 (I4) BY VALUE
+  1 #SUMMAND2 (I4) BY VALUE
+  END-DEFINE
+END-PROTOTYPE
+</pre> 
+          
+        
+       <div class="noprint">
+         <div class="nospy">
+            <p><a href="pg_udf.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_udf.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_udf.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_defi_xarry.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_dbms-over.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

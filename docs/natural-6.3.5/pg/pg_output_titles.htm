@@ -1,0 +1,1229 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Page Titles, Page Breaks, Blank Lines</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="pg_output_titles"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_output_titles.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_output_titles.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_output-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_output_index.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_output_headers.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Programming Guide&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x230"></a> 
+               <a name="x231"></a> Page Titles, Page Breaks, Blank Lines
+         </h1>
+      </div> 
+         
+         
+      <p>This document describes various ways of controlling page
+             breaks in a report, the output of page titles at the top of each report page
+             and the generation of empty lines in an output report.
+      </p> 
+         
+      <p>The following topics are covered:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_output_titles.htm#Default_Page_Title">Default Page Title</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_titles.htm#Suppress_Page_Title_-_The_NOTITLE_Option">Suppress Page Title - NOTITLE Option</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_titles.htm#Define_Your_Own_Page_Title_-_The_WRITE_TITLE_Statement">Define Your Own Page Title - WRITE TITLE Statement</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_titles.htm#Logical_Page_and_Physical_Page">Logical Page and Physical Page</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_titles.htm#Page_Size_-_The_PS_Parameter">Page Size - PS Parameter</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_titles.htm#page_advance">Page Advance</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_titles.htm#NEWPAGE_WITH_TITLE">New Page with Title</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_titles.htm#page_trailer">Page Trailer - WRITE TRAILER Statement</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_titles.htm#skip_statement">Generating Blank Lines - SKIP Statement</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_titles.htm#AT_TOP_OF_PAGE_Statement">AT TOP OF PAGE Statement</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_titles.htm#AT_END_OF_PAGE_Statement">AT END OF PAGE Statement</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_titles.htm#further_exa_titles">Further Example</a></p>
+         </li>
+      </ul> 
+        
+      <hr> 
+        
+      <div><a name="Default_Page_Title"></a></div> 
+         
+      <h2> Default Page Title </h2> 
+          
+          
+      <p>For each page output via a <a href="../sm/display.htm"><code>DISPLAY</code></a> or
+              <a href="../sm/write.htm"><code>WRITE</code></a> statement,
+              Natural automatically generates a single default title line. This title line
+              contains the page number, the date and the time of day.
+      </p> 
+          
+      <p>Example:</p> 
+          <pre class="verbatim">
+WRITE 'HELLO'  
+END
+</pre> 
+          <p>The above program produces the following output with default page
+              title:
+      </p> <pre class="system-output">
+Page      1                                                  04-12-14  13:19:33
+                                                                               
+HELLO                                                                         
+</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_output_titles.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Suppress_Page_Title_-_The_NOTITLE_Option"></a></div> 
+         
+      <h2> 
+             <a name="x232"></a>Suppress Page Title - NOTITLE Option
+      </h2> 
+          
+          
+      <p>If you wish your report to be output without page titles, you add the
+              keyword <a href="../sm/display.htm#NOTITLE_display"><code>NOTITLE</code></a> to the
+              statement <a href="../sm/display.htm"><code>DISPLAY</code></a> or
+              <a href="../sm/write.htm"><code>WRITE</code></a>.
+      </p> 
+          
+      <h4 class="floating-title"> Example - DISPLAY with NOTITLE: </h4> 
+          <pre class="verbatim">
+** Example 'DISPLX20': DISPLAY (with NOTITLE)
+************************************************************************
+DEFINE DATA LOCAL
+1 EMPLOY-VIEW VIEW OF EMPLOYEES
+  2 CITY
+  2 NAME
+  2 FIRST-NAME
+END-DEFINE
+*
+READ (5) EMPLOY-VIEW BY CITY FROM 'BOSTON'
+  <strong>DISPLAY NOTITLE NAME FIRST-NAME CITY</strong>
+END-READ
+END
+
+</pre> 
+          <p>Output of Program DISPLX20:</p> <pre class="system-output">
+        NAME              FIRST-NAME              CITY
+-------------------- -------------------- --------------------
+
+SHAW                 LESLIE               BOSTON
+STANWOOD             VERNON               BOSTON
+CREMER               WALT                 BOSTON
+PERREAULT            BRENDA               BOSTON
+COHEN                JOHN                 BOSTON
+</pre> 
+          <h4 class="floating-title"> Example - WRITE with NOTITLE: </h4> 
+          <pre class="verbatim">
+WRITE NOTITLE 'HELLO'  
+END
+</pre> 
+          <p>The above program produces the following output without page title:</p> <pre class="system-output">
+HELLO                                                                          
+</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_output_titles.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Define_Your_Own_Page_Title_-_The_WRITE_TITLE_Statement"></a></div> 
+         
+      <h2> 
+             <a name="x233"></a>Define Your Own Page Title - WRITE TITLE Statement 
+      </h2> 
+          
+          
+      <p>If you wish a page title of your own to be output instead of the Natural
+              default page title, you use the statement <a href="../sm/writeti.htm"><code>WRITE TITLE</code></a>.
+      </p> 
+          
+      <p>The following topics are covered below:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_output_titles.htm#own_title">Specifying Text for Your Title</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_titles.htm#empty_lines">Specifying Empty Lines after the Title</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_titles.htm#title_just">Title Justification and/or Underlining</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_titles.htm#write_title_w_page_number">Title with Page Number</a></p>
+         </li>
+      </ul> 
+          
+         
+      <div><a name="own_title"></a></div> 
+          
+      <h3> Specifying Text for Your Title </h3> 
+           
+           
+      <p>With the statement <a href="../sm/writeti.htm"><code>WRITE
+               TITLE</code></a>, you specify the text for your title (in
+               apostrophes).
+      </p> 
+           <pre class="verbatim">
+WRITE TITLE 'THIS IS MY PAGE TITLE' 
+WRITE 'HELLO' 
+END
+</pre> 
+           <p>The above program produces the following output:</p> <pre class="system-output">
+                             THIS IS MY PAGE TITLE                             
+HELLO                                                                         
+</pre> 
+           
+          
+         <div><a name="empty_lines"></a></div> 
+          
+      <h3> Specifying Empty Lines after the Title</h3> 
+           
+           
+      <p>With the <a href="../sm/writeti.htm#operand2_writeti"><code>SKIP</code></a> option of
+               the <a href="../sm/writeti.htm"><code>WRITE TITLE</code></a>
+               statement, you can specify the number of empty lines to be output immediately
+               below the title line. After the keyword <code>SKIP</code>, you specify the
+               number of empty lines to be inserted.
+      </p> 
+           <pre class="verbatim">
+WRITE TITLE 'THIS IS MY PAGE TITLE' SKIP 2 
+WRITE 'HELLO' 
+END
+</pre> 
+           <p>The above program produces the following output:</p> <pre class="system-output">
+                             THIS IS MY PAGE TITLE                             
+                                                                               
+                                                                               
+HELLO                                                                         
+</pre> 
+           <p><code>SKIP</code> is not only available as part of the
+               <a href="../sm/writeti.htm"><code>WRITE TITLE</code></a>
+               statement, but also as a <a href="../sm/skip.htm">stand-alone
+                  statement</a>.
+      </p> 
+           
+          
+         
+      <div><a name="title_just"></a></div> 
+          
+      <h3> Title Justification and/or Underlining </h3> 
+           
+           
+      <p>By default, the page title is centered on the page and not
+               underlined.
+      </p> 
+           
+      <p>The <a href="../sm/writeti.htm"><code>WRITE
+               TITLE</code></a> statement provides the following options which can be
+               used independent of each other:
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="17%">
+            <col width="80%">
+         </colgroup> 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>Option</th> 
+                        
+               <th>Effect</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td>LEFT JUSTIFIED</td> 
+                        
+               <td>Causes the page trailer to be displayed
+                  left-justified. 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>UNDERLINED</td> 
+                        
+               <td>Causes the title to be displayed underlined. The
+                  underlining runs the width of the line size (see also Natural profile and
+                  session parameter <a href="../parms/ls.htm"><code>LS</code></a>). By default, titles
+                            are underlined with a hyphen (-). However, with the
+                            <a href="../parms/sp_uc.htm"><code>UC</code></a> session
+                            parameter you can specify another character to be used as underlining character
+                            (see <a href="pg_output_headers.htm#title_header_underline">Underlining Character
+                               for Titles and Headers</a>).
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>The following example shows the effect of the
+               <a href="../sm/writeti.htm#justification"><code>LEFT JUSTIFIED</code> and
+                  <code>UNDERLINED</code></a> options:
+      </p> 
+           <pre class="verbatim">
+WRITE TITLE LEFT JUSTIFIED UNDERLINED 'THIS IS MY PAGE TITLE' 
+SKIP 2 
+WRITE 'HELLO' 
+END
+</pre> 
+           <p>The above program produces the following output:</p> <pre class="system-output">
+THIS IS MY PAGE TITLE                                                          
+-------------------------------------------------------------------------------
+                                                                               
+                                                                               
+HELLO                                                                         
+</pre> 
+           <p>The <a href="../sm/writeti.htm"><code>WRITE
+               TITLE</code></a> statement is executed whenever a new page is initiated
+               for the report.
+      </p> 
+           
+          
+         
+      <div><a name="write_title_w_page_number"></a></div> 
+          
+      <h3> Title with Page Number </h3> 
+           
+           
+      <p>In the following examples, the system variable
+               <code>*PAGE-NUMBER</code> is used in conjunction with the
+               <code>WRITE TITLE</code> statement to output the page number in the title
+               line.
+      </p> 
+           <pre class="verbatim">
+** Example 'WTITLX01': WRITE TITLE (with *PAGE-NUMBER)
+************************************************************************
+DEFINE DATA LOCAL
+1 VEHIC-VIEW VIEW OF VEHICLES
+  2 MAKE
+  2 YEAR
+  2 MAINT-COST (1)
+END-DEFINE
+*
+LIMIT 5
+*
+READ VEHIC-VIEW
+END-ALL
+SORT BY YEAR USING MAKE MAINT-COST (1)
+  DISPLAY NOTITLE YEAR MAKE MAINT-COST (1)
+  AT BREAK OF YEAR
+    MOVE 1 TO *PAGE-NUMBER
+    NEWPAGE
+  END-BREAK
+  /*
+  <strong>WRITE TITLE LEFT JUSTIFIED
+        'YEAR:' YEAR 15X 'PAGE' *PAGE-NUMBER</strong>
+END-SORT
+END
+</pre> 
+           <p>Output of Program WTITLX01:</p> <pre class="system-output">
+<strong>YEAR:  1980               PAGE      1</strong>
+YEAR          MAKE         MAINT-COST
+----- -------------------- ----------
+
+ 1980 RENAULT                 20000
+ 1980 RENAULT                 20000
+ 1980 PEUGEOT                 20000
+</pre> 
+           
+          
+        
+        <div class="noprint">
+         <p><a href="pg_output_titles.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Logical_Page_and_Physical_Page"></a></div> 
+         
+      <h2> 
+             <a name="x234"></a> 
+             <a name="x235"></a>Logical Page and Physical Page 
+      </h2> 
+          
+          
+      <p>A <em>logical page</em> is the output produced by a Natural program. A
+              <em>physical page</em> is your terminal screen on which the output is
+              displayed; or it may be the piece of paper on which the output is printed.
+      </p> 
+          
+      <p>The size of the logical page is determined by the number of lines output
+              by the Natural program.
+      </p> 
+          
+      <p>If more lines are output than fit onto one screen, the logical page will
+              exceed the physical screen, and the remaining lines will be displayed on the
+              next screen. 
+      </p> 
+          
+      <p><img src="graphics/pgscreen.png" alt="" width="500" height="600"></p> 
+          
+      <p class="note"><strong>Note:</strong><br> If information you wish to appear at the bottom of the screen (for
+              example, output created by a <a href="../sm/writetra.htm"><code>WRITE
+               TRAILER</code></a> or <a href="../sm/atendpag.htm"><code>AT END OF
+               PAGE</code></a> statement) is output on the next screen instead, reduce
+              the logical page size accordingly (with the session parameter
+              <a href="../parms/ps.htm"><code>PS</code></a>, which is
+              discussed below).
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_output_titles.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Page_Size_-_The_PS_Parameter"></a></div> 
+         
+      <h2> 
+             <a name="x236"></a>Page Size - PS Parameter 
+      </h2> 
+          
+          
+      <p>With the parameter <a href="../parms/ps.htm"><code>PS</code></a> (Page Size for
+              Natural Reports), you determine the maximum number of lines per (logical) page
+              for a report.
+      </p> 
+          
+      <p>When the number of lines specified with the <code>PS</code>
+              parameter is reached, a page advance occurs (unless page advance is controlled
+              with a <a href="../sm/newpage.htm"><code>NEWPAGE</code></a> or
+              <a href="../sm/eject.htm"><code>EJECT</code></a> statement; see
+              <a href="pg_output_titles.htm#Page_Advance_-_The_EJ_Parameter">Page Advance
+            Controlled by EJ Parameter</a> below).
+      </p> 
+          
+      <p>The <code>PS</code> parameter can be set either at session
+              level with the system command <a href="../syscom/globals.htm"><code>GLOBALS</code></a>, or
+              within a program with the following statements:
+      </p> 
+          
+      <h4 class="floating-title"> At report level: </h4> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem"> <code>FORMAT PS=<var>nn</var></code></p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <h4 class="floating-title"> At statement level: </h4> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem"> <code>DISPLAY (PS=<var>nn</var>)</code></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <code>WRITE (PS=<var>nn</var>)</code></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <code>WRITE TITLE (PS=<var>nn</var>)</code></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <code>WRITE TRAILER (PS=<var>nn</var>)</code></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <code>INPUT (PS=<var>nn</var>)</code></p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_output_titles.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="page_advance"></a></div> 
+         
+      <h2> 
+             <a name="x237"></a>Page Advance 
+      </h2> 
+          
+          
+      <p>A page advance can be triggered by one of the following methods:</p>
+          
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_output_titles.htm#Page_Advance_-_The_EJ_Parameter">Page Advance Controlled by EJ Parameter</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_titles.htm#Page_Advance_-_The_EJECT_and_NEWPAGE_Statements">Page Advance Controlled by EJECT or NEWPAGE Statements</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_titles.htm#EJECT_NEWPAGE_WHEN_LESS_THAN_n_LINES_LEFT">Eject/New Page when less than n Lines Left</a></p>
+         </li>
+      </ul> 
+          
+      <p>These methods are discussed below.</p> 
+          
+         
+      <div><a name="Page_Advance_-_The_EJ_Parameter"></a></div> 
+          
+      <h3> Page Advance Controlled by EJ Parameter </h3> 
+           
+           
+      <p>With the session parameter <a href="../parms/ej.htm"><code>EJ</code></a> (Page Eject), you
+               determine whether page ejects are to be performed or not. By default,
+               <code>EJ=ON</code> applies, which means that page ejects will be
+               performed as specified.
+      </p> 
+           
+      <p>If you specify <code>EJ=OFF</code>, page break information
+               will be ignored. This may be useful to save paper during test runs where page
+               ejects are not needed.
+      </p> 
+           
+      <p>The <code>EJ</code> parameter can be set at session level
+               with the system command <a href="../syscom/globals.htm"><code>GLOBALS</code></a>; for
+               example:
+      </p> <pre class="command-input">GLOBALS EJ=OFF</pre> 
+           <p>The <a href="../parms/ej.htm"><code>EJ</code></a> parameter setting is
+               overridden by the <a href="../sm/eject.htm"><code>EJECT</code></a>
+               statement.
+      </p> 
+           
+          
+         
+      <div><a name="Page_Advance_-_The_EJECT_and_NEWPAGE_Statements"></a></div> 
+          
+      <h3> 
+              <a name="x238"></a> 
+              <a name="x239"></a>Page Advance Controlled by EJECT or NEWPAGE Statements
+              
+      </h3> 
+           
+           
+      <p>The following topics are covered
+               below:
+      </p>
+      <ul>
+         <li><a href="pg_output_titles.htm#d0e28002">Page Advance without Title/Header on Next Page</a></li>
+         <li><a href="pg_output_titles.htm#d0e28055">Page Advance with End/Top-of-Page Processing</a></li>
+      </ul>
+      <div><a name="d0e28002"></a></div> 
+           
+      <h4>Page Advance without Title/Header on Next Page</h4> 
+            
+            
+      <p>The <a href="../sm/eject.htm"><code>EJECT</code></a>
+                statement causes a page advance <em>without</em> a title or header line being
+                generated on the next page. A new physical page is started <em>without</em> any
+                top-of-page or end-of-page processing being performed (for example, no
+                <a href="../sm/writetra.htm"><code>WRITE TRAILER</code></a> or
+                <a href="../sm/atendpag.htm"><code>AT END OF PAGE</code></a>,
+                <a href="../sm/writeti.htm"><code>WRITE TITLE</code></a>,
+                <a href="../sm/attoppag.htm"><code>AT TOP OF PAGE</code></a> or
+                <a href="../vari/inout.htm#PAGE_NUMBER"><code>*PAGE-NUMBER</code></a>
+                processing).
+      </p> 
+            
+      <p>The <a href="../sm/eject.htm"><code>EJECT</code></a>
+                statement overrides the <a href="../parms/ej.htm"><code>EJ</code></a> parameter
+                setting.
+      </p> 
+            
+           
+          
+      <div><a name="d0e28055"></a></div> 
+           
+      <h4>Page Advance with End/Top-of-Page Processing</h4> 
+            
+            
+      <p>The <a href="../sm/newpage.htm"><code>NEWPAGE</code></a>
+                statement causes a page advance <em>with</em> associated end-of-page and
+                top-of-page processing. A trailer line will be displayed, if specified. A title
+                line, either default or user-specified, will be displayed on the new page,
+                unless the <a href="../sm/display.htm#NOTITLE_display"><code>NOTITLE</code></a> option
+                has been specified in a <a href="../sm/display.htm"><code>DISPLAY</code></a> or
+                <a href="../sm/write.htm"><code>WRITE</code></a> statement (as
+                described <a href="pg_output_titles.htm#Suppress_Page_Title_-_The_NOTITLE_Option">above</a>).
+      </p> 
+            
+      <p>If the <a href="../sm/newpage.htm"><code>NEWPAGE</code></a> statement is not used,
+                page advance is automatically controlled by the setting of the
+                <a href="../parms/ps.htm"><code>PS</code></a> parameter;
+                see <a href="pg_output_titles.htm#Page_Size_-_The_PS_Parameter">Page Size - PS
+            Parameter</a> above).
+      </p> 
+            
+           
+          
+         
+      <div><a name="EJECT_NEWPAGE_WHEN_LESS_THAN_n_LINES_LEFT"></a></div> 
+          
+      <h3> Eject/New Page when less than <var>n</var> Lines
+              Left 
+      </h3> 
+           
+           
+      <p>Both the <a href="../sm/newpage.htm"><code>NEWPAGE</code></a> statement and the
+               <a href="../sm/eject.htm"><code>EJECT</code></a> statement provide
+               a <a href="../sm/eject.htm#IF_LESS_THAN"><code>WHEN LESS THAN
+               <var>n</var> LINES LEFT</code></a> option. With this
+               option, you specify a number of lines (<var>n</var>). The
+               <code>NEWPAGE</code>/<code>EJECT</code> statement will then be executed if - at
+               the time the statement is processed - less than <var>n</var>
+               lines are available on the current page.
+      </p> 
+           
+      <h4 class="floating-title"> Example 1: </h4> 
+           <pre class="verbatim">
+FORMAT PS=55 
+... 
+NEWPAGE WHEN LESS THAN 7 LINES LEFT 
+...
+</pre> 
+           <p>In this example, the page size is set to 55 lines.</p> 
+           
+      <p>If only 6 or less lines are left on the current page at the time when
+               the <a href="../sm/newpage.htm"><code>NEWPAGE</code></a> statement
+               is processed, the <code>NEWPAGE</code> statement is executed and a page advance
+               occurs. If 7 or more lines are left, the <code>NEWPAGE</code> statement is not
+               executed and no page advance occurs; the page advance then occurs depending on
+               the session parameter <a href="../parms/ps.htm"><code>PS</code></a> (Page Size for
+               Natural Reports), that is, after 55 lines.
+      </p> 
+           
+      <h4 class="floating-title"> Example 2: </h4> 
+           <pre class="verbatim">
+** Example 'NEWPAX02': NEWPAGE (in combination with EJECT and
+**                     parameter PS)
+************************************************************************
+DEFINE DATA LOCAL
+1 EMPLOY-VIEW VIEW OF EMPLOYEES
+  2 CITY
+  2 NAME
+  2 JOB-TITLE
+END-DEFINE
+*
+<strong>FORMAT PS=15</strong>
+*
+READ (9) EMPLOY-VIEW BY CITY STARTING FROM 'BOSTON'
+  AT START OF DATA
+    <strong>EJECT</strong>
+    WRITE /// 20T '%' (29) /
+              20T '%%'                          47T '%%' /
+              20T '%%' 3X 'REPORT OF EMPLOYEES' 47T '%%' /
+              20T '%%' 3X '  SORTED BY CITY   ' 47T '%%' /
+              20T '%%'                          47T '%%' /
+              20T '%' (29) /
+    <strong>NEWPAGE</strong>
+  END-START
+  <strong>AT BREAK OF CITY
+    NEWPAGE WHEN LESS 3 LINES LEFT
+  END-BREAK</strong>
+  DISPLAY CITY (IS=ON) NAME JOB-TITLE
+END-READ
+END
+</pre> 
+           
+          
+        
+        <div class="noprint">
+         <p><a href="pg_output_titles.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="NEWPAGE_WITH_TITLE" id="16350"></a></div> 
+         
+      <h2> 
+             <a name="x240"></a>New Page with Title 
+      </h2> 
+          
+          
+      <p>The <a href="../sm/newpage.htm"><code>NEWPAGE</code></a>
+              statement also provides a <a href="../sm/newpage.htm#WITH_TITLE"><code>WITH TITLE</code></a> option.
+              If this option is not used, a default title will appear at the top of the new
+              page or a <a href="../sm/writeti.htm"><code>WRITE TITLE</code></a>
+              statement or <a href="../sm/display.htm#NOTITLE_display"><code>NOTITLE</code></a> clause
+              will be executed.
+      </p> 
+          
+      <p>The <a href="../sm/newpage.htm#WITH_TITLE"><code>WITH
+               TITLE</code></a> option of the <code>NEWPAGE</code> statement allows you
+              to override these with a title of your own choice. The syntax of the <code>WITH
+            TITLE</code> option is the same as for the
+              <a href="pg_output_titles.htm#Define_Your_Own_Page_Title_-_The_WRITE_TITLE_Statement"><code>WRITE
+               TITLE</code></a> statement.
+      </p> 
+          
+      <h4 class="floating-title"> Example: </h4> 
+          <pre class="verbatim">
+NEWPAGE WITH TITLE LEFT JUSTIFIED 'PEOPLE LIVING IN BOSTON:'
+</pre> 
+          <p>The following program illustrates the use of the session parameter
+              <a href="../parms/ps.htm"><code>PS</code></a> (Page Size
+              for Natural Reports) and the <a href="../sm/newpage.htm"><code>NEWPAGE</code></a> statement. Moreover,
+              the system variable <a href="../vari/inout.htm#PAGE_NUMBER"><code>*PAGE-NUMBER</code></a>
+              is used to display the current page number.
+      </p> 
+          <pre class="verbatim">
+** Example 'NEWPAX01': NEWPAGE
+************************************************************************
+DEFINE DATA LOCAL
+1 VIEWEMP VIEW OF EMPLOYEES
+  2 NAME
+  2 CITY
+  2 DEPT
+END-DEFINE
+*
+<strong>FORMAT PS=20</strong>
+READ (5) VIEWEMP BY CITY STARTING FROM 'M'
+  DISPLAY NAME 'DEPT' DEPT 'LOCATION' CITY
+  <strong>AT BREAK OF CITY
+    NEWPAGE WITH TITLE LEFT JUSTIFIED
+           'EMPLOYEES BY CITY - PAGE:' *PAGE-NUMBER
+  END-BREAK</strong>
+END-READ
+END
+</pre> 
+          <p>Output of Program NEWPAX01:</p> 
+          
+      <p>Note the position of the page breaks and the title line:</p> <pre class="system-output">
+<strong>Page      1</strong>                                                  04-11-11  14:15:54
+                                                                               
+        NAME          DEPT        LOCATION                              
+-------------------- ------ --------------------                         
+                                                                               
+FICKEN               TECH10 MADISON                                      
+KELLOGG              TECH10 MADISON                                      
+ALEXANDER            SALE20 MADISON           
+
+</pre> 
+          <p>Page 2:</p> <pre class="system-output">
+<strong>EMPLOYEES BY CITY - PAGE:      2</strong>                                               
+        NAME          DEPT        LOCATION                               
+-------------------- ------ --------------------                         
+                                                                           
+DE JUAN              SALE03 MADRID                                       
+DE LA MADRID         PROD01 MADRID 
+
+</pre> 
+          <p>Page 3:</p> <pre class="system-output">
+<strong>EMPLOYEES BY CITY - PAGE: 3</strong>        
+
+</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_output_titles.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="page_trailer"></a></div> 
+         
+      <h2> 
+             <a name="x241"></a>Page Trailer - WRITE TRAILER Statement
+      </h2> 
+          
+          
+      <p>The following topics are covered below:</p>
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_output_titles.htm#spec_page_trailer">Specifying a Page Trailer</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_titles.htm#logical_page_size">Considering Logical Page Size</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_titles.htm#trailer_just">Page Trailer Justification and/or Underlining</a></p>
+         </li>
+      </ul> 
+          
+         
+      <div><a name="spec_page_trailer"></a></div> 
+          
+      <h3> 
+              <a name="x242"></a>Specifying a Page Trailer 
+      </h3> 
+           
+           
+      <p>The <a href="../sm/writetra.htm"><code>WRITE
+               TRAILER</code></a> statement is used to output text (in apostrophes) at
+               the bottom of a page.
+      </p> 
+           <pre class="verbatim">
+WRITE TRAILER 'THIS IS THE END OF THE PAGE'
+</pre> 
+           <p>The statement is executed when an end-of-page condition is detected, or
+               as a result of a <a href="../sm/skip.htm"><code>SKIP</code></a> or
+               <a href="../sm/newpage.htm"><code>NEWPAGE</code></a>
+               statement.
+      </p> 
+           
+          
+         
+      <div><a name="logical_page_size"></a></div> 
+          
+      <h3> 
+              <a name="x243"></a>Considering Logical Page Size
+      </h3> 
+           
+           
+      <p>As the end-of-page condition is checked only <em>after</em> an entire
+               <a href="../sm/display.htm"><code>DISPLAY</code></a> or
+               <a href="../sm/write.htm"><code>WRITE</code></a> statement has
+               been processed, it may occur that the logical page size (that is, the number of
+               lines output by a <a href="../sm/display.htm"><code>DISPLAY</code></a> or
+               <a href="../sm/write.htm"><code>WRITE</code></a> statement) causes
+               the physical size of the output page to be exceeded before the
+               <a href="../sm/writetra.htm"><code>WRITE TRAILER</code></a>
+               statement is executed.
+      </p> 
+           
+      <p>To ensure that a page trailer actually appears at the bottom of a
+               physical page, you should set the logical page size (with the
+               <a href="../parms/ps.htm"><code>PS</code></a> session
+               parameter) to a value less than the physical page size.
+      </p> 
+           
+          
+         
+      <div><a name="trailer_just"></a></div> 
+          
+      <h3> Page Trailer Justification and/or Underlining </h3> 
+           
+           
+      <p>By default, the page trailer is displayed centered on the page and not
+               underlined.
+      </p> 
+           
+      <p>The <a href="../sm/writetra.htm"><code>WRITE
+               TRAILER</code></a> statement provides the following options which can be
+               used independent of each other:
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="19%">
+            <col width="78%">
+         </colgroup> 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>Option</th> 
+                        
+               <th>Effect</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> LEFT JUSTIFIED</td> 
+                        
+               <td>Causes the page trailer to be displayed left
+                  justified. 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>UNDERLINED</td> 
+                        
+               <td>The underlining runs the width of the line size
+                  (see also Natural profile and session parameter <a href="../parms/ls.htm"><code>LS</code></a>). By default, titles
+                            are underlined with a hyphen (-). However, with the
+                            <a href="../parms/sp_uc.htm"><code>UC</code></a> session
+                            parameter you can specify another character to be used as underlining character
+                            (see <a href="pg_output_headers.htm#pg_output_headers">Underlining Character for
+                               Titles and Headers</a>).
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>The following examples show the use of the
+               <a href="../sm/writetra.htm#Justification_Underlining"><code>LEFT
+               JUSTIFIED</code> and <code>UNDERLINED</code></a> options of the
+               <a href="../sm/writetra.htm"><code>WRITE TRAILER</code></a>
+               statement:
+      </p> 
+           
+      <h4 class="floating-title"> Example 1: </h4> 
+           <pre class="verbatim">
+WRITE TRAILER LEFT JUSTIFIED UNDERLINED 'THIS IS THE END OF THE PAGE'
+</pre> 
+           <h4 class="floating-title"> Example 2: </h4> 
+           <pre class="verbatim">
+** Example 'WTITLX02': WRITE TITLE AND WRITE TRAILER
+************************************************************************
+DEFINE DATA LOCAL
+1 EMPLOY-VIEW VIEW OF EMPLOYEES
+  2 CITY
+  2 NAME
+  2 FIRST-NAME
+  2 ADDRESS-LINE (1)
+END-DEFINE
+*
+<strong>WRITE TITLE LEFT JUSTIFIED UNDERLINED</strong>
+       *TIME
+   5X  'PEOPLE LIVING IN SALT LAKE CITY'
+   21X 'PAGE:' *PAGE-NUMBER /
+   15X 'AS OF' *DAT4E //
+*
+<strong>WRITE TRAILER UNDERLINED 'REGISTER OF' / 'SALT LAKE CITY'</strong>
+*
+READ (2) EMPLOY-VIEW WITH CITY = 'SALT LAKE CITY'
+  DISPLAY  NAME /
+           FIRST-NAME
+           'HOME/CITY' CITY
+           'STREET/OR BOX NO.' ADDRESS-LINE (1)
+  SKIP 1
+END-READ
+END
+</pre> 
+           
+          
+        
+        <div class="noprint">
+         <p><a href="pg_output_titles.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="skip_statement"></a></div> 
+         
+      <h2> 
+             <a name="x244"></a> 
+             <a name="x245"></a>Generating Blank Lines - SKIP Statement
+      </h2> 
+          
+          
+      <p>The <code>SKIP</code> statement is used to generate one or more blank
+              lines in an output report.
+      </p> 
+          
+      <h4 class="floating-title"> Example 1 - SKIP in conjunction with WRITE and
+              DISPLAY:
+      </h4> 
+          <pre class="verbatim">
+** Example 'SKIPX01': SKIP (in conjunction with WRITE and DISPLAY)
+************************************************************************
+DEFINE DATA LOCAL
+1 EMPLOY-VIEW VIEW OF EMPLOYEES
+  2 CITY
+  2 NAME
+  2 FIRST-NAME
+  2 ADDRESS-LINE (1)
+END-DEFINE
+*
+WRITE TITLE LEFT JUSTIFIED UNDERLINED
+     'PEOPLE LIVING IN SALT LAKE CITY AS OF' *DAT4E 7X
+     'PAGE:' *PAGE-NUMBER
+<strong>SKIP 3</strong>
+*
+READ (2) EMPLOY-VIEW WITH CITY = 'SALT LAKE CITY'
+  DISPLAY NAME / FIRST-NAME CITY ADDRESS-LINE (1)
+  <strong>SKIP 1</strong>
+END-READ
+END
+</pre> 
+          <h4 class="floating-title"> Example 2 - SKIP in conjunction with DISPLAY
+              VERT:
+      </h4> 
+          <pre class="verbatim">
+** Example 'SKIPX02': SKIP (in conjunction with DISPLAY VERT)
+************************************************************************
+DEFINE DATA LOCAL
+1 EMPLOY-VIEW VIEW OF EMPLOYEES
+  2 NAME
+  2 FIRST-NAME
+  2 CITY
+  2 JOB-TITLE
+END-DEFINE
+*
+READ (2) EMPLOY-VIEW WITH JOB-TITLE = 'SECRETARY'
+  <strong>DISPLAY NOTITLE VERT
+          NAME FIRST-NAME / CITY
+  SKIP 3</strong>
+END-READ
+*
+NEWPAGE
+*
+READ (2) EMPLOY-VIEW WITH JOB-TITLE = 'SECRETARY'
+  DISPLAY NOTITLE
+          NAME FIRST-NAME / CITY
+  SKIP 3
+END-READ
+END
+</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_output_titles.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="AT_TOP_OF_PAGE_Statement"></a></div> 
+         
+      <h2> 
+             <a name="x246"></a>AT TOP OF PAGE Statement 
+      </h2> 
+          
+          
+      <p>The <a href="../sm/attoppag.htm"><code>AT TOP OF
+               PAGE</code></a> statement is used to specify any processing that is to
+              be performed whenever a new page of the report is started.
+      </p> 
+          
+      <p>If the <code>AT TOP OF PAGE</code> processing produces any output, this
+              will be output below the page title (with a skipped line in between).
+      </p> 
+          
+      <p>By default, this output is displayed left-justified on the page.</p> 
+          
+      <h4 class="floating-title"> Example: </h4> 
+          <pre class="verbatim">
+** Example 'ATTOPX01': AT TOP OF PAGE
+************************************************************************
+DEFINE DATA LOCAL
+1 EMPLOY-VIEW VIEW OF EMPLOYEES
+  2 PERSONNEL-ID
+  2 NAME
+  2 MAR-STAT
+  2 BIRTH
+  2 CITY
+  2 JOB-TITLE
+  2 DEPT
+END-DEFINE
+*
+LIMIT 10
+READ EMPLOY-VIEW BY PERSONNEL-ID FROM '20017000'
+  DISPLAY NOTITLE (AL=10)
+          NAME DEPT JOB-TITLE CITY 5X
+          MAR-STAT 'DATE OF/BIRTH' BIRTH (EM=YY-MM-DD)
+  /*
+  <strong>AT TOP OF PAGE
+    WRITE /   '-BUSINESS INFORMATION-'
+          26X '-PRIVATE INFORMATION-'
+  END-TOPPAGE</strong>
+END-READ
+END
+</pre> 
+          <p>Output of Program ATTOPX01:</p> <pre class="system-output">
+  
+<strong>-BUSINESS INFORMATION-                          -PRIVATE INFORMATION-</strong>
+   NAME    DEPARTMENT  CURRENT      CITY         MARITAL   DATE OF
+              CODE     POSITION                   STATUS    BIRTH
+---------- ---------- ---------- ----------     ---------- --------
+ 
+CREMER     TECH10     ANALYST    GREENVILLE     S          70-01-01
+MARKUSH    SALE00     TRAINEE    LOS ANGELE     D          79-03-14
+GEE        TECH05     MANAGER    CHAPEL HIL     M          41-02-04
+KUNEY      TECH10     DBA        DETROIT        S          40-02-13
+NEEDHAM    TECH10     PROGRAMMER CHATTANOOG     S          55-08-05
+JACKSON    TECH10     PROGRAMMER ST LOUIS       D          70-01-01
+PIETSCH    MGMT10     SECRETARY  VISTA          M          40-01-09
+PAUL       MGMT10     SECRETARY  NORFOLK        S          43-07-07
+HERZOG     TECH05     MANAGER    CHATTANOOG     S          52-09-16
+DEKKER     TECH10     DBA        MOBILE         W          40-03-03
+</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_output_titles.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="AT_END_OF_PAGE_Statement"></a></div> 
+         
+      <h2> 
+             <a name="x247"></a>AT END OF PAGE Statement 
+      </h2> 
+          
+          
+      <p>The <a href="../sm/atendpag.htm"><code>AT END OF
+               PAGE</code></a> statement is used to specify any processing that is to
+              be performed whenever an end-of-page condition occurs.
+      </p> 
+          
+      <p>If the <code>AT END OF PAGE</code> processing produces any output, this
+              will be output after any <a href="pg_output_titles.htm#page_trailer">page
+                 trailer</a> (as specified with the <a href="../sm/writetra.htm"><code>WRITE TRAILER</code></a> statement).
+      </p> 
+          
+      <p>By default, this output is displayed left-justified on the page.</p> 
+          
+      <p>The same considerations <a href="pg_output_titles.htm#logical_page_size">described
+                 above</a> for page trailers regarding physical and logical page sizes
+              and the number of lines output by a <a href="../sm/display.htm"><code>DISPLAY</code></a> or
+              <a href="../sm/write.htm"><code>WRITE</code></a> statement also
+              apply to <a href="../sm/atendpag.htm"><code>AT END OF
+               PAGE</code></a> output.
+      </p> 
+          
+      <h4 class="floating-title"> Example: </h4> 
+          <pre class="verbatim">
+** Example 'ATENPX01': AT END OF PAGE (with system function available
+**                     via GIVE SYSTEM FUNCTIONS in DISPLAY)
+************************************************************************
+DEFINE DATA LOCAL
+1 EMPLOY-VIEW VIEW OF EMPLOYEES
+  2 PERSONNEL-ID
+  2 NAME
+  2 JOB-TITLE
+  2 SALARY (1)
+END-DEFINE
+*
+READ (10) EMPLOY-VIEW BY PERSONNEL-ID = '20017000'
+  DISPLAY NOTITLE GIVE SYSTEM FUNCTIONS
+          NAME JOB-TITLE 'SALARY' SALARY(1)
+  /*
+  <strong>AT END OF PAGE
+    WRITE / 24T 'AVERAGE SALARY: ...' AVER(SALARY(1))
+  END-ENDPAGE</strong>
+END-READ
+END
+</pre> 
+          <p>Output of Program ATENPX01:</p> <pre class="system-output">
+        NAME                  CURRENT            SALARY
+                             POSITION
+-------------------- ------------------------- ----------
+ 
+CREMER               ANALYST                        34000
+MARKUSH              TRAINEE                        22000
+GEE                  MANAGER                        39500
+KUNEY                DBA                            40200
+NEEDHAM              PROGRAMMER                     32500
+JACKSON              PROGRAMMER                     33000
+PIETSCH              SECRETARY                      22000
+PAUL                 SECRETARY                      23000
+HERZOG               MANAGER                        48500
+DEKKER               DBA                            48000
+ 
+                       
+<strong>AVERAGE SALARY: ...      34270</strong>            
+            </pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_output_titles.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="further_exa_titles"></a></div> 
+         
+      <h2> Further Example</h2> 
+          
+          
+      <p>See the following example program:</p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="pg_exas.htm#DISPLX21">DISPLX21 - DISPLAY (with slash
+                  '/' and compare with WRITE)</a></p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+        
+       
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="pg_output_titles.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_output_titles.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_output_titles.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_output-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_output_index.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_output_headers.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

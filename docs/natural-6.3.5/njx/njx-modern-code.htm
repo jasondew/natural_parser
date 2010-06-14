@@ -1,0 +1,1126 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Code Conversion</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="njx-modern-code"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../njx/njx-modern-code.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/njx/njx-modern-code.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="njx-modern-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="njx-modern-mapconv-cust.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="workingwithcontrols.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Natural for Ajax&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+         
+      <div class="nospytext">
+         <h1> 
+                <a name="x57"></a>Code Conversion
+         </h1>
+      </div> 
+          
+          
+      <p>This document covers the following
+              topics:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="njx-modern-code.htm#njx-modern-code-geninfo">General Information</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="njx-modern-code.htm#njx-modern-code-adapter">Generating Adapters</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="njx-modern-code.htm#njx-modern-code-structmap">Structure of a Map-Based Application</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="njx-modern-code.htm#njx-modern-code-structnjx">Structure of a Natural for Ajax Application</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="njx-modern-code.htm#njx-modern-code-tasks">Tasks of the Code Conversion</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="njx-modern-code.htm#njx-modern-code-definedata">DEFINE DATA Statement</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="njx-modern-code.htm#njx-modern-code-input">INPUT Statement</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="njx-modern-code.htm#njx-modern-code-reinput">REINPUT Statement</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="njx-modern-code.htm#njx-modern-code-pfkey">PF-Key Event Handling</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="njx-modern-code.htm#njx-modern-code-setkey">SET KEY Statement</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="njx-modern-code.htm#njx-modern-code-procrules">Processing Rules</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="njx-modern-code.htm#njx-modern-code-sysvar">System Variables</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="njx-modern-code.htm#njx-modern-code-varnames">Variable Names Containing Special Characters</a></p>
+         </li>
+      </ul>
+      <hr>
+      <div><a name="njx-modern-code-geninfo"></a></div> 
+          
+      <h2>General Information</h2> 
+           
+           
+      <p>After the <a href="njx-modern-mapconv.htm#njx-modern-mapconv">Map
+                  Converter</a> has been used to create page layouts from map extract
+               files, the last step in the conversion process is adapting the application code
+               to the new user interface. This step can either be performed manually or, with
+               Natural Engineer, partly automatically. In the following, the manual code
+               conversion is described.
+      </p> 
+          
+      <div class="noprint">
+         <p><a href="njx-modern-code.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="njx-modern-code-adapter"></a></div> 
+          
+      <h2>Generating Adapters</h2> 
+           
+           
+      <p>First of all, it is necessary to generate HTML code and Natural
+               adapters from the page layouts that have been created by the Map Converter.
+               This is the same procedure as with page layouts that have been created manually
+               with the Layout Painter. Then, the adapters are imported into the Natural development
+               environment.
+      </p> 
+          
+      <div class="noprint">
+         <p><a href="njx-modern-code.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="njx-modern-code-structmap"></a></div> 
+          
+      <h2>Structure of a Map-Based Application</h2> 
+           
+           
+      <p>In this context, we need not consider the application code as a whole,
+               but only the layer that handles the user interface. Often, the user interface
+               handling part of a map-based application is structured in the following
+               way:
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem"><code>DEFINE DATA</code></p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Initialization</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"><code>REPEAT</code></p> 
+                   
+            <ul style="margin-top: 0px; margin-bottom: 0px;"> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem"><code>INPUT [USING MAP
+                        <var>map-name</var>]</code></p> 
+                           
+                  <ul style="margin-top: 0px; margin-bottom: 0px;"> 
+                               
+                     <li class="nesteditem"> 
+                                   
+                        <p class="initem">Includes client-side validations (processing rules)</p> 
+                                  
+                     </li> 
+                              
+                  </ul> 
+                          
+               </li> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem">Server-side validations</p> 
+                           
+                  <ul style="margin-top: 0px; margin-bottom: 0px;"> 
+                               
+                     <li class="nesteditem"> 
+                                   
+                        <p class="initem"><code>REINPUT</code> or <code>ESCAPE TOP</code></p> 
+                                  
+                     </li> 
+                              
+                  </ul> 
+                          
+               </li> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem"><code>DECIDE ON *PF-KEY</code></p> 
+                           
+                  <ul style="margin-top: 0px; margin-bottom: 0px;"> 
+                               
+                     <li class="nesteditem"> 
+                                   
+                        <p class="initem">Function key handler 1</p> 
+                                   
+                        <ul style="margin-top: 0px; margin-bottom: 0px;"> 
+                                       
+                           <li class="nesteditem"> 
+                                           
+                              <p class="initem">Processing</p> 
+                                          
+                           </li> 
+                                       
+                           <li class="nesteditem"> 
+                                           
+                              <p class="initem"><code>REINPUT</code> or <code>ESCAPE TOP</code></p> 
+                                          
+                           </li> 
+                                      
+                        </ul> 
+                                  
+                     </li> 
+                               
+                     <li class="nesteditem"> 
+                                   
+                        <p class="initem">Function key handler 2</p> 
+                                   
+                        <ul style="margin-top: 0px; margin-bottom: 0px;"> 
+                                       
+                           <li class="nesteditem"> 
+                                           
+                              <p class="initem">Processing</p> 
+                                          
+                           </li> 
+                                       
+                           <li class="nesteditem"> 
+                                           
+                              <p class="initem"><code>REINPUT</code> or <code>ESCAPE TOP</code></p> 
+                                          
+                           </li> 
+                                      
+                        </ul> 
+                                  
+                     </li> 
+                               
+                     <li class="nesteditem"> 
+                                   
+                        <p class="initem">Function key handler <var>n</var></p> 
+                                   
+                        <ul style="margin-top: 0px; margin-bottom: 0px;"> 
+                                       
+                           <li class="nesteditem"> 
+                                           
+                              <p class="initem">Processing</p> 
+                                          
+                           </li> 
+                                       
+                           <li class="nesteditem"> 
+                                           
+                              <p class="initem"><code>ESCAPE BOTTOM</code></p> 
+                                          
+                           </li> 
+                                      
+                        </ul> 
+                                  
+                     </li> 
+                               
+                     <li class="nesteditem"> 
+                                   
+                        <p class="initem">...</p> 
+                                  
+                     </li> 
+                              
+                  </ul> 
+                          
+               </li> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem"><code>END-DECIDE</code></p> 
+                          
+               </li> 
+                      
+            </ul> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"><code>END-REPEAT</code></p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Cleanup</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"><code>END</code></p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>In practice,</p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">the <code>REPEAT</code> loop might or might not be there, and
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">there might not be a clean <code>DECIDE</code> structure for the
+                       function key handlers. Instead, checks for the pressed function key might be
+                       spread all over the code.
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>However, accepting these differences, the above structure should match
+               a large number of applications.
+      </p> 
+          
+      <div class="noprint">
+         <p><a href="njx-modern-code.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="njx-modern-code-structnjx"></a></div> 
+          
+      <h2>Structure of a Natural for Ajax Application</h2> 
+           
+           
+      <p>The corresponding part of a Natural for Ajax application looks as
+               follows:
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem"><code>DEFINE DATA</code></p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Initialization</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"><code>REPEAT</code></p> 
+                   
+            <ul style="margin-top: 0px; margin-bottom: 0px;"> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem"><code>PROCESS PAGE USING
+                        <var>adapter-name</var></code></p> 
+                           
+                  <ul style="margin-top: 0px; margin-bottom: 0px;"> 
+                               
+                     <li class="nesteditem"> 
+                                   
+                        <p class="initem">Includes client-side validations</p> 
+                                  
+                     </li> 
+                              
+                  </ul> 
+                          
+               </li> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem">Server-side validations</p> 
+                           
+                  <ul style="margin-top: 0px; margin-bottom: 0px;"> 
+                               
+                     <li class="nesteditem"> 
+                                   
+                        <p class="initem"><code>PROCESS PAGE UPDATE FULL</code></p> 
+                                  
+                     </li> 
+                              
+                  </ul> 
+                          
+               </li> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem"><code>DECIDE ON *PAGE-EVENT</code></p> 
+                           
+                  <ul style="margin-top: 0px; margin-bottom: 0px;"> 
+                               
+                     <li class="nesteditem"> 
+                                   
+                        <p class="initem">Event handler 1</p> 
+                                   
+                        <ul style="margin-top: 0px; margin-bottom: 0px;"> 
+                                       
+                           <li class="nesteditem"> 
+                                           
+                              <p class="initem">Processing</p> 
+                                          
+                           </li> 
+                                       
+                           <li class="nesteditem"> 
+                                           
+                              <p class="initem"><code>PROCESS PAGE UPDATE FULL</code> or <code>ESCAPE
+                                    TOP</code></p> 
+                                          
+                           </li> 
+                                      
+                        </ul> 
+                                  
+                     </li> 
+                               
+                     <li class="nesteditem"> 
+                                   
+                        <p class="initem">Event handler 2</p> 
+                                   
+                        <ul style="margin-top: 0px; margin-bottom: 0px;"> 
+                                       
+                           <li class="nesteditem"> 
+                                           
+                              <p class="initem">Processing</p> 
+                                          
+                           </li> 
+                                       
+                           <li class="nesteditem"> 
+                                           
+                              <p class="initem"><code>PROCESS PAGE UPDATE FULL</code> or <code>ESCAPE
+                                    TOP</code></p> 
+                                          
+                           </li> 
+                                      
+                        </ul> 
+                                  
+                     </li> 
+                               
+                     <li class="nesteditem"> 
+                                   
+                        <p class="initem">Event handler <var>n</var></p> 
+                                   
+                        <ul style="margin-top: 0px; margin-bottom: 0px;"> 
+                                       
+                           <li class="nesteditem"> 
+                                           
+                              <p class="initem">Processing</p> 
+                                          
+                           </li> 
+                                       
+                           <li class="nesteditem"> 
+                                           
+                              <p class="initem"><code>ESCAPE BOTTOM</code></p> 
+                                          
+                           </li> 
+                                      
+                        </ul> 
+                                  
+                     </li> 
+                               
+                     <li class="nesteditem"> 
+                                   
+                        <p class="initem">...</p> 
+                                  
+                     </li> 
+                              
+                  </ul> 
+                          
+               </li> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem"><code>END-DECIDE</code></p> 
+                          
+               </li> 
+                      
+            </ul> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"><code>END-REPEAT</code></p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Cleanup</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"><code>END</code></p> 
+                  
+         </li> 
+              
+      </ul> 
+          
+      <div class="noprint">
+         <p><a href="njx-modern-code.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="njx-modern-code-tasks"></a></div> 
+          
+      <h2>Tasks of the Code Conversion</h2> 
+           
+           
+      <p>The code conversion should achieve the following:</p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">It should be minimal invasive.</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">It should not duplicate business code.</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">The converted application should be able to run not only with the new
+                       user interface, but also in a terminal session, in a Natural Web I/O Interface
+                       session and in batch, if it did so before the code conversion.
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>In detail, the code conversion needs to deal with the statements and
+               constructs mentioned below. 
+      </p> 
+          
+      <div class="noprint">
+         <p><a href="njx-modern-code.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="njx-modern-code-definedata"></a></div> 
+          
+      <h2>DEFINE DATA Statement</h2> 
+           
+           
+      <p>The <a href="../sm/defineda.htm"><code>DEFINE
+               DATA</code></a> statement must be extended because the data structures
+               exchanged between a program and map are not fully identical to those exchanged
+               between a program and the corresponding adapter. 
+      </p> 
+           
+      <p>The default conversion rules delivered with the Map Converter perform a
+               data type mapping that tries to ensure that the data elements in the map
+               interface are mapped to data elements of the same type and name in the adapter
+               interface.
+      </p>
+           
+           
+      <p>The Application Designer controls are usually not only bound to business data
+               elements, but also to additional control fields. Which control fields these are
+               depends on the way in which the elements of a map are mapped to Application Designer controls
+               by the Map Converter rules. For instance, a
+               <code>statusprop</code> can be assigned to a field, which
+               results in an additional parameter in the parameter data area of the adapter.
+               An array on a map can have been converted to a grid control with server-side
+               scrolling. In this case, the additional data structures needed to control
+               server-side scrolling need to be added to the <code>DEFINE DATA</code>
+               statement. 
+      </p> 
+          
+      <div><a name="d0e13052"></a></div> 
+           
+      <h3>statusprop</h3> 
+            
+            
+      <p>The <code>statusprop</code> is needed to control the
+                error status or focus of a <a href="field.htm#field">FIELD</a> control
+                dynamically (see <a href="njx-modern-code.htm#njx-modern-code-input-exa3">example
+                   3</a> for the <code>REINPUT</code> statement below where it is used to
+                replace the <code>MARK *<var>field-name</var></code> clause).
+                The default conversion rules contain a rule that creates a
+                <code>statusprop</code> property for each map field that is
+                controlled by a control variable. The adapter generator creates from this
+                property a corresponding status variable and a comment line that identifies the
+                status variable as belonging to the field. 
+      </p> 
+            
+      <h4 class="floating-title">Example</h4> 
+            
+      <p>The parameter data area of the map contains:</p> 
+            <pre class="verbatim">01 LIB-NAME (A8)
+01 LIB-NAME-CV (C)</pre> 
+            <p>The parameter data area of the adapter will then contain:</p> 
+            <pre class="verbatim">* statusprop= STATUS_LIB-NAME-CV
+01 LIB-NAME (A8)
+01 STATUS_LIB-NAME-CV (A) DYNAMIC</pre> 
+            <p>The variable <code>STATUS_LIB-NAME-CV</code> is not
+                yet known to the main program and must be defined there.
+      </p> 
+           
+      <div class="noprint">
+         <p><a href="njx-modern-code.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="njx-modern-code-input"></a></div> 
+          
+      <h2>INPUT Statement</h2> 
+           
+           
+      <p>The replacement for the
+               <a href="../sm/input.htm"><code>INPUT</code></a>
+               statement is the
+               <a href="../sm/processpage.htm#syntax_descr_process_page"><code>PROCESS PAGE</code></a> statement. In its
+               simplest form, the <code>INPUT</code> statement just references the map. In
+               this case, it is just replaced by a <code>PROCESS PAGE</code> statement with
+               the corresponding adapter. 
+      </p> 
+           
+      <h4 class="floating-title">Example 1</h4> 
+           
+      <p>Main program before conversion:</p> 
+           <pre class="verbatim">INPUT USING MAP 'MMENU'</pre> 
+           <p>Main program after conversion:</p> 
+           <pre class="verbatim">IF *BROWSER-IO NE 'RICHGUI'
+  INPUT USING MAP 'MMENU'
+ELSE
+  PROCESS PAGE USING 'AMENU'
+END-IF</pre> 
+           <p>The <code>INPUT</code> statement can come with a message text that is
+               displayed in the status bar. There is no direct replacement for this
+               construction because the <code>PROCESS PAGE</code> statement (in contrast to
+               the <code>PROCESS PAGE UPDATE</code> statement) does not support the <code>SEND
+            EVENT</code> clause.
+      </p> 
+           
+      <h4 class="floating-title">Example 2</h4> 
+           
+      <p>Main program before conversion:</p> 
+           <pre class="verbatim">INPUT WITH TEXT MSG01 USING MAP 'MMENU'</pre> 
+           <p>Main program after conversion (no message will be displayed):</p> 
+           <pre class="verbatim">IF *BROWSER-IO NE 'RICHGUI'
+  INPUT WITH TEXT MSG01 USING MAP 'MMENU'
+ELSE
+  PROCESS PAGE USING 'AMENU'
+END-IF</pre> 
+          <div class="noprint">
+         <p><a href="njx-modern-code.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="njx-modern-code-reinput"></a></div> 
+          
+      <h2>REINPUT Statement</h2> 
+           
+           
+      <p>The replacement for the
+               <a href="../sm/reinput.htm"><code>REINPUT</code></a> statement is the
+               <a href="../sm/processpage.htm#syntax_descr_process_page_update"><code>PROCESS PAGE UPDATE</code></a> statement. In its
+               simplest form, the <code>REINPUT</code> statement comes with a message text
+               that is displayed in the status bar. In the converted code, this is handled by
+               the <code>SEND EVENT</code> clause of the <code>PROCESS PAGE UPDATE</code>
+               statement.
+      </p> 
+           
+      <h4 class="floating-title">Example 1</h4> 
+           
+      <p>Main program before conversion:</p> 
+           <pre class="verbatim">REINPUT [FULL] WITH TEXT MSG01</pre> 
+           <p>Main program after conversion:</p> 
+           <pre class="verbatim">IF *BROWSER-IO NE 'RICHGUI'
+  REINPUT [FULL] WITH TEXT MSG01
+ELSE
+  PROCESS PAGE UPDATE [FULL]
+    AND SEND EVENT 'nat:page.message'
+    WITH PARAMETERS
+      NAME 'type' VALUE 'E'
+      NAME 'short' VALUE MSG01 
+    END-PARAMETERS
+END-IF</pre> 
+           <p>The <code>REINPUT</code> statement can come with a message number and
+               replacements. In this case, the message must be created from number and
+               replacements before it is sent to the status bar with the <code>SEND
+            EVENT</code> clause. 
+      </p> 
+           
+      <h4 class="floating-title">Example 2</h4> 
+           
+      <p>This example uses a subprogram <code>GETMSTXT</code> that builds the
+               message text from number and replacements. 
+      </p> 
+           
+      <p>Main program before conversion:</p> 
+           <pre class="verbatim">REINPUT [FULL] WITH TEXT *MSGNR, REPL1, REPL2</pre> 
+           <p>Main program after conversion:</p> 
+           <pre class="verbatim">IF *BROWSER-IO NE 'RICHGUI'
+  REINPUT [FULL] WITH TEXT *MSGNR, REPL1, REPL2 
+ELSE
+  CALLNAT 'GETMSTXT' MSTEXT MSGNR REPL1 REPL2
+  PROCESS PAGE UPDATE [FULL]
+    AND SEND EVENT 'nat:page.message'
+    WITH PARAMETERS
+      NAME 'type' VALUE 'E'
+      NAME 'short' VALUE MSTEXT
+    END-PARAMETERS
+END-IF</pre> 
+           <div><a name="njx-modern-code-input-exa3"></a></div>
+      <h4 class="floating-title">Example 3</h4>
+           
+           
+      <p>The <code>REINPUT</code> statement can come with a <code>MARK</code>
+               clause in order to put the focus on a field. This case requires that a
+               <code>statusprop</code> property is created for the field
+               during map conversion. The variable bound to the
+               <code>statusprop</code> property is then used before the
+               <code>PROCESS PAGE UPDATE</code> statement to set the <code>FOCUS</code> to the
+               field. 
+      </p> 
+           
+      <p>Main program before conversion:</p> 
+           <pre class="verbatim">REINPUT [FULL] WITH TEXT MSG01 MARK *LIB-NAME</pre> 
+           <p>Main program after conversion:</p> 
+           <pre class="verbatim">01 STATUS_LIB-NAME-CV (A) DYNAMIC
+...
+IF *BROWSER-IO NE 'RICHGUI'
+  REINPUT [FULL] WITH TEXT MSG01 MARK *LIB-NAME
+ELSE
+  STATUS_LIB-NAME-CV := 'FOCUS'
+  PROCESS PAGE UPDATE FULL
+    AND SEND EVENT 'nat:page.message'
+    WITH PARAMETERS
+      NAME 'type' VALUE 'W'
+      NAME 'short' VALUE MSG01 
+    END-PARAMETERS
+END-IF</pre> 
+          <div class="noprint">
+         <p><a href="njx-modern-code.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="njx-modern-code-pfkey"></a></div> 
+          
+      <h2>PF-Key Event Handling</h2> 
+           
+           
+      <p>The original application might contain checks for the content of the
+               system variable <a href="../vari/inout.htm#PF_KEY"><code>*PF-KEY</code></a> at arbitrary
+               places in the code. In order to handle function key events correctly in the
+               converted application, several things need to be achieved: 
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">In response to the function keys, the converted application must
+                       raise events that are named like the possible contents of
+                       <code>*PF-KEY</code>. This can be achieved by using a page
+                       template such as <cite>NATPAGEHOTKEYS_TEMPLATE.xml</cite> which
+                       contains the required hotkey definitions.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">A common local variable must be set up right after the
+                       <code>INPUT</code> or <code>PROCESS PAGE</code> statement that contains either
+                       the value <code>*PF-KEY</code> or
+                       <code>*PAGE-EVENT</code>, depending on the execution
+                       environment. The name of the variable can be freely chosen. In the example
+                       below, the name <code>XEVENT</code> is used. 
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">The event <code>nat:page.end</code> must be handled in such a way so
+                       that the program terminates. This event is raised when the user leaves the page
+                       or closes the browser session.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">A default event handler must be set up that takes care of the values
+                       of <code>*PAGE-EVENT</code> that are not expected by the
+                       original application code. These unexpected events are simply replied with a
+                       <code>PROCESS PAGE UPDATE FULL</code> statement. 
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <h4 class="floating-title">Example</h4> 
+           <pre class="verbatim">01 XEVENT (U) DYNAMIC
+...
+PROCESS PAGE USING ...
+...
+IF *BROWSER-IO = 'RICHGUI'
+  DECIDE FOR FIRST CONDITION
+    WHEN *PAGE-EVENT = 'nat:page.end'
+      STOP
+    WHEN *PAGE-EVENT = MASK ('PF'*) OR = MASK ('PA'*)
+    OR = 'ENTR' OR = 'CLR'
+      XEVENT := *PAGE-EVENT
+    WHEN NONE
+      PROCESS PAGE UPDATE FULL
+  END-DECIDE
+ELSE
+  XEVENT := *PF-KEY
+END-IF</pre> 
+           <p>All references to <code>*PF-KEY</code> in the code must
+               then be replaced by references to <code>XEVENT</code>. 
+      </p> 
+          
+      <div class="noprint">
+         <p><a href="njx-modern-code.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="njx-modern-code-setkey"></a></div> 
+          
+      <h2>SET KEY Statement</h2> 
+           
+           
+      <p> Natural for Ajax provides two controls (<a href="njx_buttonitemlist.htm#njx_buttonitemlist">NJX:BUTTONITEMLIST</a> and
+               <a href="njx_buttonitemlistfix.htm#njx_buttonitemlistfix">NJX:BUTTONITEMLISTFIX</a>)
+               that represent a row of buttons. These controls can be used to replace the
+               visual representation of the function keys from the original application. If
+               the page template <cite>NATPAGEPFKEYS_TEMPLATE.xml</cite> or a similar
+               individually adapted template is used during map conversion, each resulting
+               page will contain a row of function key buttons. The subject of this section is
+               how the converted application can control the labeling and the
+               program-sensitivity of the function keys with only little code changes. 
+      </p> 
+           
+      <p>Natural controls the labeling and program-sensitivity of the function
+               keys in a highly dynamic way. The corresponding application code (<a href="../sm/setkey.htm"><code>SET KEY</code></a> statements) can be
+               distributed across program levels and can be lexically separated from the
+               corresponding <code>INPUT</code> statements. Also, the <code>SET KEY</code>
+               statement has several flavors, some affecting all keys and others affecting
+               only individual keys. As a result, the status of the function keys at a given
+               point in time can only be determined at application runtime. 
+      </p> 
+           
+      <p>Therefore, the following approach is chosen: Natural provides the
+               application programming interface (API) <code>USR4005</code> that reads the
+               current function key naming and program-sensitivity at runtime. During code
+               conversion, a call to this API is inserted after each <code>SET KEY</code>
+               statement or into each round trip. This call reads the function key status and
+               passes it to the user interface. 
+      </p> 
+           
+      <h4 class="floating-title">Example</h4> 
+           
+      <p>Main program before conversion:</p> 
+           <pre class="verbatim">SET KEY ENTR NAMED 'Enter' PF1 NAMED 'F1' PF2 NAMED 'F2'
+PF3 NAMED 'Modify' PF4 NAMED 'Delete' PF5 NAMED 'F5'
+PF6 NAMED 'F6' PF7 NAMED 'Create' PF8 NAMED 'Display'
+PF9 NAMED 'F9' PF10 NAMED 'F10' PF11 NAMED 'F11' PF12 NAMED 'F12'
+*
+INPUT USING MAP "KEYS-M"
+*
+END</pre> 
+           <p>Map before conversion:</p> 
+           
+      <table border="1" cellpadding="5" class="screen">
+         <tr>
+            <td><pre>                                  *** PF-Keys ***
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Enter-PF1---PF2---PF3---PF4---PF5---PF6---PF7---PF8---PF9---PF10--PF11--PF12---
+Enter F1    F2    Modif Delet F5    F6    Creat Displ F9    F10   F11   F12</pre></td>
+         </tr>
+      </table> 
+           
+      <p>Main program after conversion:</p> 
+           <pre class="verbatim">DEFINE DATA LOCAL
+<strong>1 PFKEY (1:*)
+2 METHOD (A) DYNAMIC
+2 NAME (A) DYNAMIC
+2 TITLE (A) DYNAMIC
+2 VISIBLE (L)
+1 METHODS (A4/13) CONST &lt;'ENTR','PF1','PF2','PF3','PF4',
+'PF5','PF6','PF7','PF8','PF9','PF10','PF11','PF12'&gt;</strong>
+END-DEFINE
+*
+SET KEY ENTR NAMED 'Enter' PF1 NAMED 'F1' PF2 NAMED 'F2' 
+PF3 NAMED 'Modify' PF4 NAMED 'Delete' PF5 NAMED 'F5' 
+PF6 NAMED 'F6' PF7 NAMED 'Create' PF8 NAMED 'Display' 
+PF9 NAMED 'F9' PF10 NAMED 'F10' PF11 NAMED 'F11' PF12 NAMED 'F12'
+*
+IF *BROWSER-IO NE "RICHGUI"
+  INPUT USING MAP "KEYS-M"
+ELSE
+  <strong>EXPAND ARRAY PFKEY TO (1:13)
+  METHOD(1:13) := METHODS (*)
+  CALLNAT "GETKEY-N" PFKEY (*)</strong>
+  PROCESS PAGE USING "KEYS-A"
+END-IF
+*
+END</pre> 
+           <p>Page after conversion:</p> 
+           
+      <p><img src="graphics/njx-codeconv-after.png" alt="After conversion" width="600" height="515"></p> 
+           
+      <h4 class="floating-title">Explanation</h4> 
+           
+      <p>The structure <code>PFKEY</code> is generated into the Natural adapter
+               of the page as the application interface to the BUTTONITEMLISTFIX control. 
+      </p>
+           
+           
+      <p>The subprogram <code>GETKEY-N</code> is a convenience wrapper for the
+               API subprogram <code>USR4005</code>. It uses <code>USR4005</code> to determine
+               the labeling and the program-sensitivity status for a given list of function
+               keys. Each function key is identified by the <code>*PF-KEY</code> value it
+               raises. <code>GETKEY-N</code> returns the function key information in a data
+               structure suitable for the application interface of the BUTTONITEMLISTFIX
+               control. The subprogram is delivered in the library <code>SYSEXNJX</code> in
+               source code and can be adapted to the needs of the application. 
+      </p> 
+          
+      <div class="noprint">
+         <p><a href="njx-modern-code.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="njx-modern-code-procrules"></a></div> 
+          
+      <h2>Processing Rules</h2> 
+           
+           
+      <p>The Natural maps in the application to be converted may contain
+               processing rules. In the sense of a Natural for Ajax application, the
+               processing rules are server-side validations because they are executed on the
+               Natural server side of the application. 
+      </p> 
+           
+      <p>In order to extract processing rules from the maps and to turn them
+               into server-side validations in the converted application, the Natural Engineer
+               function "Separate Processing Rules from Maps" can be used.
+      </p> 
+           
+      <p> There is currently no function available that automatically turns
+               processing rules into client-side validations in Application Designer. 
+      </p> 
+          
+      <div class="noprint">
+         <p><a href="njx-modern-code.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="njx-modern-code-sysvar"></a></div> 
+          
+      <h2>System Variables</h2> 
+           
+           
+      <p>If a map displays a system variable (for example,
+               <code>*DATX</code>), a specific default conversion rule takes
+               care that the necessary code for handling the system variable is generated into
+               the Natural adapter of the resulting page layout. 
+      </p> 
+           
+      <h4 class="floating-title">Example 1</h4> 
+           
+      <p>The map displays the contents of the system variables
+               <code>*DATX</code> and <code>*TIMX</code>. The
+               contents of these system variables are not modifiable. 
+      </p> 
+           
+      <p>The <code>DEFINE DATA</code> statement of the adapter will then
+               contain: 
+      </p> 
+           <pre class="verbatim">LOCAL
+01 XDATX (A8)
+01 XTIMX (A8)
+</pre> 
+           <p>The body of the adapter will then contain:</p> 
+           <pre class="verbatim">XDATX := *DATX
+XTIMX := *TIMX
+*
+PROCESS PAGE ... WITH
+PARAMETERS
+...
+ NAME U'XDATX'
+  VALUE XDATX
+ NAME U'XTIMX'
+  VALUE XTIMX
+END-PARAMETERS</pre> 
+           <p>The main program needs no special adaptation.</p> 
+           
+      <h4 class="floating-title">Example 2</h4> 
+           
+      <p>The map displays the content of the system variable
+               <code>*CODEPAGE</code>. The content of this system variables is
+               modifiable. 
+      </p> 
+           
+      <p>The <code>DEFINE DATA</code> statement of the adapter will then
+               contain: 
+      </p> 
+           <pre class="verbatim">LOCAL
+01 XCODEPAGE (A64)</pre> 
+           <p>The body of the adapter will then contain:</p> 
+           <pre class="verbatim">XCODEPAGE := *CODEPAGE
+*
+PROCESS PAGE ... WITH
+PARAMETERS
+...
+ NAME U&#8217;XCODEPAGE&#8217;
+  VALUE XCODEPAGE
+...
+END-PARAMETERS
+*
+*CODEPAGE := XCODEPAGE</pre> 
+           <p>The main program needs no special adaptation.</p> 
+          
+      <div class="noprint">
+         <p><a href="njx-modern-code.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="njx-modern-code-varnames"></a></div> 
+          
+      <h2> Variable Names Containing Special Characters</h2> 
+           
+           
+      <p>A similar procedure applies to special characters contained in variable
+               names. These are the following special characters:
+      </p> 
+           
+      <p class="mini-list"> 
+               +<br> 
+               #<br> 
+               /<br> 
+               @<br> 
+               &sect;<br> 
+               &amp;<br> 
+               $ 
+              
+      </p> 
+           
+      <p class="note"><strong>Note:</strong><br>The hash (#) can occur only as the first character.
+      </p> 
+           
+      <p>Variables names containing these special characters cannot be directly
+               bound to Application Designer control attributes. A specific default conversion rule replaces
+               the names containing these special characters with configurable replacements.
+               The original field name is generated into the parameter data area of the
+               Natural adapter and a corresponding mapping is generated into the <code>PROCESS
+            PAGE</code> statement of the adapter.
+      </p> 
+           
+      <h4 class="floating-title">Example</h4> 
+           
+      <p>The map displays the variables <code>#FIRST</code> and
+               <code>#LAST</code>.
+      </p> 
+           
+      <p>The <code>DEFINE DATA</code> statement of the adapter will then
+               contain: 
+      </p> 
+           <pre class="verbatim">DEFINE DATA PARAMETER
+1 #FIRST (A16)
+1 #LAST (A20)
+</pre> 
+           <p>The body of the adapter will then contain:</p> 
+           <pre class="verbatim">...
+PROCESS PAGE ... WITH
+PARAMETERS
+...
+NAME U'HFIRST'
+  VALUE #FIRST
+ NAME U'HLAST'
+  VALUE #LAST
+...
+END-PARAMETERS</pre> 
+           <p>The main program needs no special adaptation.</p> 
+          
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="njx-modern-code.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../njx/njx-modern-code.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/njx/njx-modern-code.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="njx-modern-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="njx-modern-mapconv-cust.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="workingwithcontrols.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

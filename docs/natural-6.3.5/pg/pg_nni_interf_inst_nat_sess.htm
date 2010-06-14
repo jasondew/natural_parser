@@ -1,0 +1,102 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Interface Instances and Natural Sessions</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="pg_nni_interf_inst_nat_sess"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_nni_interf_inst_nat_sess.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_nni_interf_inst_nat_sess.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_nni-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_nni_interf_acc.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_nni_func-over.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Programming Guide&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> Interface Instances and Natural Sessions </h1>
+      </div> 
+         
+         
+      <p>The function <a href="pg_nni_func-over.htm#pg_nni_get_interface"><code>nni_get_interface</code></a>
+             returns a pointer to an instance of the Natural Native Interface. One interface
+             instance can host one Natural session at a time. An application initializes a
+             Natural session by calling the function <a href="pg_nni_func-over.htm#pg_nni_initialize"><code>nni_initialize</code></a> on a given
+             interface instance. It uninitializes the Natural session by calling
+             <a href="pg_nni_func-over.htm#pg_nni_uninitialize"><code>nni_uninitialize</code></a> on that
+             interface instance. After that it can initialize a new Natural session on the
+             same interface instance.
+      </p> 
+         
+      <p>It is implementation dependent if multiple interface instances and thus
+             multiple Natural sessions can be maintained per process or per thread. In the
+             current implementation of Natural on Windows, UNIX and OpenVMS, one process can
+             host one Natural session at a time. Consequently, every call to
+             <a href="pg_nni_func-over.htm#pg_nni_get_interface"><code>nni_get_interface</code></a> in
+             one process yields the same interface instance. However, this unique interface
+             instance can be used alternating by several concurrently running threads. The
+             thread synchronization is implicitly performed by the interface functions
+             themselves. Optionally it can be performed by the application explicitly. The
+             interface provides the required synchronization functions
+             <a href="pg_nni_func-over.htm#pg_nni_enter"><code>nni_enter</code></a>,
+             <a href="pg_nni_func-over.htm#pg_nni_try_enter"><code>nni_try_enter</code></a> and
+             <a href="pg_nni_func-over.htm#pg_nni_leave"><code>nni_leave</code></a>.
+      </p> 
+         
+       
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="pg_nni_interf_inst_nat_sess.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_nni_interf_inst_nat_sess.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_nni_interf_inst_nat_sess.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_nni-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_nni_interf_acc.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_nni_func-over.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

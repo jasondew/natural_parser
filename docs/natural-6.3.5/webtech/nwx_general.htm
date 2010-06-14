@@ -1,0 +1,404 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Natural Web Server Extensions - Introduction for SYSWEB3</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="nwx_general"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../webtech/nwx_general.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/webtech/nwx_general.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="nwx_adapt.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="nwx_general_old.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="nwx_initfile.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Web Technology&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+         
+      <div class="nospytext">
+         <h1>Natural Web Server Extensions - Introduction for SYSWEB3 
+                <a name="x39"></a> 
+                <a name="x40"></a></h1>
+      </div> 
+          
+          
+      <p>This section covers the following topics:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="nwx_general.htm#nwx_general_general_information">General Information</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nwx_general.htm#nwx_general_installation_rpc">Installation - RPC</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nwx_general.htm#nwx_general_transformations">Transformations</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nwx_general.htm#nwx_general_variables">Variables</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nwx_general.htm#nwx_general_error_logging_and_messages">Error Logging and Messages</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nwx_general.htm#nwx_general_calling_programs">Calling Programs</a></p>
+         </li>
+      </ul> 
+         
+      <hr> 
+         
+      <div><a name="nwx_general_general_information"></a></div> 
+          
+      <h2> General Information </h2> 
+           
+           
+      <p>The Natural Web Server Extensions part is basically a program called
+               from an HTTP server. The Natural Web Server Extensions program takes
+               parameters, given by the HTTP server, repackages them and performs a broker RPC
+               call to the requested Natural program using a standard parameter data area.
+               Calls are transmitted by the EntireX Broker that is included in EntireX
+               Communicator.
+      </p> 
+           
+      <p>As of Natural Version 6.2, three HTTP Server interfaces are
+               supported:
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">Common Gateway Interface (CGI), for supported server and
+                       platforms,
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Internet Server Application Programming Interface (ISAPI) only for
+                       Microsoft Internet Information Server on Windows.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Apache Module (mod) only for Apache Server.</p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+         
+         
+      <div class="noprint">
+         <p><a href="nwx_general.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="nwx_general_installation_rpc"></a></div> 
+          
+      <h2>Installation - RPC  
+              <a name="x41"></a> 
+              <a name="x42"></a></h2> 
+           
+           
+      <p>Each Natural Web Server Extension consists of two files:</p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">an executable and</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">an <a href="nwx_initfile.htm#nwx_initfile">initialization
+                          file</a>.
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>These files can be renamed. The initialization file has the same name
+               as the executable file, but with the extension .ini.
+      </p> 
+           
+      <p>Copy the files to appropriate locations of the web server, or
+               parameterize the web server so that it accesses the files directly.
+      </p> 
+            
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>&nbsp;</th> 
+                        
+               <th align="center">RPC</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th align="center">CGI</th> 
+                        
+               <td align="center"> 
+                  
+                  <p class="mini-list"> 
+                          nww3cgi<br> 
+                              nww3cgi.ini 
+                               
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th align="center">ISAPI</th> 
+                        
+               <td align="center"> 
+                  
+                  <p class="mini-list"> 
+                     nww3isapi.dll<br> 
+                                nww3isapi.ini 
+                               
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th align="center">Parameters</th> 
+                        
+               <td> 
+                  
+                  <p class="mini-list"> 
+                                <code>RPC_ETB_ID_NAME</code> = broker name<br> 
+                                <code>RPC_SERVER_NAME</code> = service name<br> 
+                                <code>NWW_INOUT_LENGTH</code> = amount of transferred
+                                 data 
+                               
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p class="note"><strong>Note:</strong><br>On some HTTP servers (Windows only) executable files without the
+               extension .exe can be used.
+      </p> 
+           
+         
+         
+      <div class="noprint">
+         <p><a href="nwx_general.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="nwx_general_transformations"></a></div> 
+          
+      <h2>Transformations</h2> 
+           
+           
+      <p> Parameters sent by the HTTP server via the interface are given by
+               means of specific variables or a transfer area. User data contained in a
+               transfer area or the variable QUERY_STRING will be recognized and preprocessed.
+               In particular, the encoding of the URL will be undone. 
+      </p> 
+           
+      <p> The design of the Natural Web Server Extensions allows only the
+               transmission of non-binary data, because the data is converted from ASCII to
+               EBCDIC and vice-versa if required. 
+      </p> 
+           
+         
+         
+      <div class="noprint">
+         <p><a href="nwx_general.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="nwx_general_variables"></a></div> 
+          
+      <h2>Variables</h2> 
+           
+           
+      <p> Only variables specified on your HTML page will automatically be
+               transferred to the program called. Other variables available from the HTTP
+               server must be specified. 
+      </p> 
+           
+      <p>Each variable to be transferred requires an entry in the
+               <a href="nwx_initfile.htm#nwx_initfile">initialization file.</a> 
+      </p> 
+           
+      <p>It is also possible to add variables that will be treated as system
+               environment variables.
+      </p> 
+           
+         
+         
+      <div class="noprint">
+         <p><a href="nwx_general.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="nwx_general_error_logging_and_messages"></a></div> 
+          
+      <h2>Error Logging and Messages</h2> 
+           
+           
+      <p>You can set up your own error screen with a specific HTML page.
+               Variables of the environment can be specified in this error page.
+      </p> 
+           
+      <p>The page last transferred can be copied to a file and errors can be
+               written to an error log file.
+      </p> 
+           
+         
+         
+      <div class="noprint">
+         <p><a href="nwx_general.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="nwx_general_calling_programs"></a></div> 
+          
+      <h2>Calling Programs 
+              <a name="x43"></a> 
+              <a name="x44"></a></h2> 
+           
+           
+      <p> To call a program from your browser, you have to specify a uniform
+               resource locator (URL) which contains the name of you HTTP server and the name
+               of a CGI-enabled directory, where the files of the Natural Web Server Extension
+               are located. Then you have to specify the Natural Web Server Extension program
+               name followed by a Natural library and a subprogram name. 
+      </p>
+      
+                  
+           
+      
+                  
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>&nbsp;</th> 
+                        
+               <th align="center">URL for RPC</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>CGI (PC)</th> 
+                        
+               <td>
+                  <code>http://<var>server-name</var>/<var>cgi-library</var>/nww3cgi.exe/<var>your-library</var>/<var>your-program</var></code>
+                            
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th>ISAPI</th> 
+                        
+               <td>
+                  <code>http://<var>server-name</var>/<var>cgi-library</var>/nww3isapi.dll/<var>your-library</var>/<var>your-program</var></code>
+                            
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th>mod</th> 
+                        
+               <td>
+                  <code>http://<var>server-name</var>/nww3/mod/<var>your-library</var>/<var>your-program</var></code>
+                            
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+         
+        
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="nwx_general.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../webtech/nwx_general.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/webtech/nwx_general.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="nwx_adapt.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="nwx_general_old.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="nwx_initfile.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

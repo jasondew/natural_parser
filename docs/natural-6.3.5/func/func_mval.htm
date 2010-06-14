@@ -1,0 +1,1284 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>*MINVAL/*MAXVAL - Evaluate the Minimum/Maximum</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="func_mval" id="7033"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../func/func_mval.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/func/func_mval.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="func_string.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="func_sortk.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="func_transl.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;System Functions&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+         
+      <div class="nospytext">
+         <h1> 
+                <a name="x28"></a> 
+                <a name="x29"></a>*MINVAL/*MAXVAL - Evaluate the Minimum/Maximum
+         </h1>
+      </div> 
+          
+           
+           
+      <table border="0" class="syntax" cellpadding="3"> 
+                
+                
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/cbo2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                       
+               <td align="center"> <a href="func_mval.htm#function_func_mval">
+                      <code class="keyword">*MINVAL</code></a> 
+               </td> 
+                       
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/cbc2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                       
+               <td rowspan="2" nowrap> <code class="keyword">([</code>(<code class="keyword">IR</code>=<a href="func_mval.htm#result_format_length"><var>result-format/length</var></a>)<code class="keyword">]</code> <a href="func_mval.htm#operand"><var>operand</var></a>,...<code class="keyword">)</code> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td align="center"> <a href="func_mval.htm#function_func_mval">
+                      <code class="keyword">*MAXVAL</code></a> 
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>Format/length: Format and length may be specified explicitly using the
+              <code>IR</code> clause or evaluated automatically using the
+              <a href="func_mval.htm#format_length_conv_table">Format/Length Conversion
+            Rule Tables</a> below.
+      </p> 
+          
+      <p>This document covers the following topics:</p>
+          
+      <ul>
+         <li>
+            <p class="initem"><a href="func_mval.htm#function_func_mval">Function</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="func_mval.htm#syntax_descr_mval">Syntax Description</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="func_mval.htm#format_length_conv_table">Resulting Format/Length Conversion Rule Tables</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="func_mval.htm#evaluate_res_format_length">Evaluating the result-format-length</a></p>
+         </li>
+      </ul> 
+         
+      <hr> 
+         
+      <div><a name="function_func_mval"></a></div> 
+          
+      <h2> Function</h2> 
+           
+           
+      <p>The Natural system function <code>*MINVAL</code>/<code>*MAXVAL</code>
+               evaluates the minimum/maximum value of all given operand values. The result is
+               always a scalar value. If an array is specified as operand, the minimum/maximum
+               of all array fields is evaluated.
+      </p> 
+           
+      <p>The <code>*MINVAL</code>/<code>*MAXVAL</code> system function may be
+               specified as an operand in any position of a statement wherever
+               <code>*MINVAL</code>/<code>*MAXVAL</code> is allowed. However,
+               <code>*MINVAL</code>/<code>*MAXVAL</code> must not be used where a target
+               variable is expected.
+      </p> 
+           
+      <p><code>*MINVAL</code>/<code>*MAXVAL</code> may not be nested in a system
+               function.
+      </p> 
+           
+      <p>When using alpha or binary data as an argument, if the data is the same
+               (e.g. <code>*MINVAL('AB','AB')</code>), then the result is the argument with
+               the smallest/largest length value.
+      </p> 
+           
+         
+         
+      <div class="noprint">
+         <p><a href="func_mval.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="syntax_descr_mval"></a></div> 
+          
+      <h2> Syntax Description</h2> 
+           
+           
+      <p><a name="operand_syntax_descr_mval"></a> Operand Definition Table:
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="97%">
+         </colgroup> 
+                 
+                 
+                 
+                 
+                
+                 
+                 
+                 
+                 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>Operand</th> 
+                        
+               <th colspan="5" align="center">Possible
+                  Structure
+               </th> 
+                        
+               <th colspan="13" align="center">Possible
+                  Formats
+               </th> 
+                        
+               <th align="center">Referencing Permitted</th> 
+                        
+               <th align="center">Dynamic Definition</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> <var>operand</var> 
+               </td> 
+                        
+               <td>C</td> 
+                        
+               <td>S</td> 
+                        
+               <td>A</td> 
+                        
+               <td>G</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>A</td> 
+                        
+               <td>U</td> 
+                        
+               <td>N</td> 
+                        
+               <td>P</td> 
+                        
+               <td>I</td> 
+                        
+               <td>F</td> 
+                        
+               <td>B</td> 
+                        
+               <td>D</td> 
+                        
+               <td>T</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">yes</td> 
+                        
+               <td align="center">no</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>Syntax Element Description:</p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>Keyword</th> 
+                        
+               <th>Description</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td nowrap> <a name="minval_syntax"></a><code>
+                     *MINVAL</code> 
+               </td> 
+                        
+               <td> Evaluates the minimum value of all given operand values.
+                  
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td nowrap> <a name="maxval_syntax"></a><code>*MAXVAL</code> 
+               </td> 
+                        
+               <td>Evaluates the maximum value of all given operand
+                  values.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td nowrap> <a name="operand"></a><code><var>operand</var></code> 
+               </td> 
+                        
+               <td>The operand(s) whose minimum/maximum values are to be evaluated
+                  by the <code>*MINVAL</code>/<code>*MAXVAL</code> system function.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td nowrap> <a name="result_format_length"></a>
+                   <code><var>result-format-length</var></code> 
+               </td> 
+                        
+               <td>Intermediate Result clause for <a href="func_mval.htm#explic_spec">explicit specification</a> of the resulting
+                            format/length. See <cite>IR Clause</cite> below.
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+          
+      <div><a name="ir_clause"></a></div> 
+           
+      <h3> IR Clause</h3> 
+            
+            
+      <p>The <code>IR</code> (Intermediate Result) clause may be used in order
+                to specify explicitly the <var>result-format/length</var> of
+                the whole <code>*MINVAL</code>/<code>*MAXVAL</code> system function.
+      </p> 
+            <pre class="verbatim">IR=<var>result-format/length</var></pre> 
+             
+             <table border="0" class="syntax" cellpadding="3"> 
+                  
+                  
+                  
+                  
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <td rowspan="2"> <code class="keyword">IR=</code> 
+               </td> 
+                         
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/cbo4.gif" alt="" width="6" height="100"></p> 
+               </td> 
+                         
+               <td colspan="5" align="left" nowrap>
+                  <a href="func_mval.htm#ir_clause_format_length">
+                                <var>format-length</var></a> 
+               </td> 
+                         
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/cbc4.gif" alt="" width="6" height="100"></p> 
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td align="center" nowrap> <code class="keyword">(</code>
+                    
+               </td> 
+                         
+               <td align="center" nowrap> 
+                  
+                  <p><img src="../graphics/cbo3.gif" alt="" width="6" height="59"></p> 
+               </td> 
+                         
+               <td align="left" nowrap> 
+                  
+                  <p class="mini-list"> 
+                                  <code class="keyword">A</code><br> 
+                                 <code class="keyword">U</code><br> 
+                                 <code class="keyword">B</code> 
+                                
+                  </p> 
+               </td> 
+                         
+               <td align="center" nowrap> 
+                  
+                  <p><img src="../graphics/cbc3.gif" alt="" width="6" height="57"></p> 
+               </td> 
+                         
+               <td align="center" nowrap> <code class="keyword">)</code>
+                    <a href="func_mval.htm#dyn"><code class="keyword">DYNAMIC</code></a>
+                             
+               </td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+      <p>For an assortment of valid result-format/lengths, refer to the
+                <a href="func_mval.htm#format_length_conv_table">Format/Length Conversion
+            Rule Tables</a> below.
+      </p> 
+            
+      <p>Syntax Element Description:</p> 
+             
+             
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                  
+                 
+         <thead align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <th>Keyword</th> 
+                         
+               <th>Description</th> 
+                        
+            </tr> 
+                    
+         </thead> 
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <td nowrap> <a name="ir_clause_format_length"></a><code><var>
+                        format-length</var></code> 
+               </td> 
+                         
+               <td> The compiler tries to determine the resulting format/length
+                  of the whole function. If the compiler cannot determine a format/length in a
+                  way that no loss of precision is guaranteed, the
+                  <var>format-length</var> must be set by the programmer using
+                             the <code>IR</code> operand extension. 
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td nowrap> <a name="a_b"></a><code>A</code>, <code>U</code>
+                    or <code>B</code> 
+               </td> 
+                         
+               <td>Format: Alphanumeric, Unicode or Binary for dynamic
+                  variable.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td nowrap> <a name="dyn"></a><code>DYNAMIC</code>
+                          
+               </td> 
+                         
+               <td> Instead of specifying a fixed format/length, you may specify
+                  an alphanumeric, Unicode or binary format with dynamic length. 
+               </td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+      <p> Example: </p> 
+            <pre class="verbatim">DEFINE DATA LOCAL
+1 #RESULTI       (I4)
+1 #RESULTA       (A20)
+1 #RESULTADYN    (A) DYNAMIC
+1 #A(I4)         CONST &lt;1234&gt;
+1 #B(A20)        CONST &lt;H'30313233'&gt; /* '0123' stored
+1 #C(I2/1:3)     CONST &lt;2000, 2100, 2200&gt;
+END-DEFINE
+*
+#RESULTA     := *MAXVAL((IR=A20)         #A, #B)     /*no error, I4-&gt;A20 is allowed!
+#RESULTADYN  := *MAXVAL((IR=(A)DYNAMIC)  #A, #B)     /*result is (A) dynamic
+/* #RESULTI  := *MAXVAL((IR=I4)          #A, #B)     /*compiler error, because conv. A20-&gt;I4 is not allowed!  
+#RESULTI     := *MAXVAL((IR=I4)          #A, #C(*))  /*maximum of the array is evaluated
+DISPLAY #RESULTA #RESULTADYN (AL=10) #RESULTI
+END</pre> 
+            
+           
+         
+         <div class="noprint">
+         <p><a href="func_mval.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="format_length_conv_table"></a></div> 
+          
+      <h2> Resulting Format/Length Conversion Rule Tables</h2> 
+           
+           
+      <p>There are different ways to define the resulting format/length of the
+               whole <code>*MINVAL</code>/<code>*MAXVAL</code> system function.
+      </p>
+           
+      <ul>
+         <li>
+            <p class="initem"><a href="func_mval.htm#explic_spec">Explicit Specification of the Resulting Format/Length</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="func_mval.htm#implic_spec">Implicit Specification of the Resulting Format/Length</a></p>
+         </li>
+      </ul> 
+          
+      <div><a name="explic_spec"></a></div> 
+           
+      <h3> Explicit Specification of the Resulting Format/Length</h3> 
+            
+            
+      <p>The resulting format/length of the whole
+                <code>*MINVAL</code>/<code>*MAXVAL</code> system function may be specified by
+                the <code>IR</code> clause. All operands specified will be converted into this
+                resulting format/length, if this is possible without any loss of precision.
+                Afterwards the minimum/maximum of all the converted operands will be evaluated
+                and one single scalar value with the evaluated format/length will be set as
+                result of the whole system function.
+      </p> 
+            
+           
+          
+      <div><a name="implic_spec"></a></div> 
+           
+      <h3> Implicit Specification of the Resulting Format/Length</h3> 
+            
+            
+      <p> If no <code>IR</code> clause is used inside the
+                <code>*MINVAL</code>/<code>*MAXVAL</code> system function, the resulting
+                format/length will be evaluated regarding the format/length of all operands
+                specified as arguments inside the <code>*MINVAL</code>/<code>*MAXVAL</code>
+                system function. The format/length of each operand is taken and combined with
+                the format/length of the next following operand of the argument list. The
+                resulting format/length of two single operands are then evaluated using the
+                Format/Length Conversion Rule Tables below.
+      </p> 
+            
+      <p>The Format/Length Conversion Rule Table is separated into two
+                different subtables. All combinations not shown in the two tables below are
+                invalid and must not be applied inside the argument list of the
+                <code>*MINVAL</code>/<code>*MAXVAL</code> system function. The keyword
+                <code>FLF</code> indicates that the <code>IR</code> clause must be used in
+                order to define the resulting format/length, because there otherwise may be a
+                loss of precision.
+      </p> 
+            
+      <h4 class="floating-title">Table 1</h4> 
+            
+      <p>Covers all the numeric combinations of two different operands.</p> 
+             
+             
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                  
+                  
+                   
+                 
+         <thead align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <th rowspan="2">&nbsp;</th> 
+                         
+               <th align="center">&nbsp;</th>
+                         
+               <th colspan="5" align="center">Second
+                  Operand
+               </th> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th align="center">Format- length</th> 
+                         
+               <th align="center">I1</th> 
+                         
+               <th align="center">I2</th> 
+                         
+               <th align="center">I4</th> 
+                         
+               <th align="center">P<var>a.b</var>,
+                     N<var>a.b</var></th> 
+                         
+               <th align="center">F4, F8</th> 
+                        
+            </tr> 
+                    
+         </thead> 
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <th rowspan="5">First Operand</th> 
+                         
+               <th align="center">I1</th> 
+                         
+               <td align="center">I1</td> 
+                         
+               <td align="center">I2</td> 
+                         
+               <td align="center">I4</td> 
+                         
+               <td align="center">Pmax(3,<var>a</var>).<var>b</var></td>
+                         
+                         
+               <td align="center">F8</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th align="center">I2</th> 
+                         
+               <td align="center">I2</td> 
+                         
+               <td align="center">I2</td> 
+                         
+               <td align="center">I4</td> 
+                         
+               <td align="center">Pmax(5,<var>a</var>).<var>b</var></td>
+                         
+                         
+               <td align="center">F8</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th align="center">I4</th> 
+                         
+               <td align="center">I4</td> 
+                         
+               <td align="center">I4</td> 
+                         
+               <td align="center">I4</td> 
+                         
+               <td align="center">Pmax(10,<var>a</var>).<var>b</var></td>
+                         
+                         
+               <td align="center">F8</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th align="center">P<var>x.y</var>,
+                     N<var>x.y</var></th> 
+                         
+               <td align="center">Pmax(3,<var>x</var>).<var>y</var></td>
+                         
+                         
+               <td align="center">Pmax(5,<var>x</var>).<var>y</var></td>
+                         
+                         
+               <td align="center">Pmax(10,<var>x</var>).<var>y</var></td>
+                         
+                         
+               <td align="center" nowrap> 
+                  
+                  <p class="mini-list"> 
+                           if max(<var>x,a</var>) +
+                                  max(<var>y,b</var>) &lt;= 29<br> 
+                                 Pmax(<var>x,a</var>).max(<var>y,b</var>)
+                                  <br> 
+                                 else <code>FLF</code>  
+                                
+                  </p> 
+               </td> 
+                         
+               <td align="center" nowrap> 
+                  
+                  <p class="mini-list"> 
+                               if <var>y</var>=0 and
+                                  <var>x</var> &lt;=15;<br> 
+                                 F8<br> 
+                                 else <code>FLF</code>  
+                                
+                  </p> 
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th align="center">F4, F8</th> 
+                         
+               <td align="center">F8</td> 
+                         
+               <td align="center">F8</td> 
+                         
+               <td align="center">F8</td> 
+                         
+               <td align="center"> 
+                  
+                  <p class="mini-list"> 
+                               if <var>b</var>=0 and
+                                  <var>a</var> &lt;=15<br> 
+                                 F8<br> 
+                                 else <code>FLF</code> 
+                                
+                  </p> 
+               </td> 
+                         
+               <td align="center">F8</td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+      <p>Legend:</p> 
+             
+             
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                  
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <th> FLF </th> 
+                         
+               <td>Format-length declaration forced. The resulting format must be
+                  specified using the <code>IR</code> clause.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th>I<var>x</var></th> 
+                         
+               <td>Format/length is Integer. <var>x</var>
+                  specifies the number of bytes which are used to store the Integer
+                             value.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th>F<var>x</var></th> 
+                         
+               <td>Format/length is Float. <var>x</var> specifies
+                  the number of bytes which are used to store the Float value.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th> 
+                  
+                  <p class="mini-list"> 
+                                 P<var>x.y</var><br> 
+                                 P<var>a,b</var> 
+                                
+                  </p>
+               </th> 
+                         
+               <td>Packed format with corresponding number of digits before the
+                  decimal point (<var>x,a</var>) and the precision
+                             (<var>y,b</var>).
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th> 
+                  
+                  <p class="mini-list"> 
+                              Nx.y<br> 
+                                 Na,b 
+                                
+                  </p>
+               </th> 
+                         
+               <td>Numeric format with corresponding number of digits before the
+                  decimal point (<var>x,a</var>) and the precision
+                             (<var>y,b</var>).
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th>Pmax(<var>c,d</var>).<var>e</var></th>
+                         
+                         
+               <td>The resulting format is packed. The length is evaluated by the
+                  information following. The number of digits before the decimal point is the
+                  maximum value of <var>c</var> and <var>d</var>.
+                             The precision value is <var>e</var>.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th nowrap>Pmax(<var>c,d</var>).max(<var>e,f</var>)
+               </th>
+                         
+                         
+               <td>The resulting format is packed. The length is evaluated by the
+                  information following. The number of digits before the decimal point is the
+                  maximum value of <var>c</var> and <var>d</var>.
+                             The precision value is the maximum value of <var>e</var> and
+                             <var>f</var>.
+               </td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+      <h4 class="floating-title"> Table 2</h4> 
+            
+      <p>Covers all other formats and lengths which may be used for
+                <code>*MINVAL</code>/<code>*MAXVAL</code> system function operands.
+      </p> 
+             
+             
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                  
+                  
+                  
+                 
+         <thead align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <th rowspan="2">&nbsp;</th> 
+                         
+               <th colspan="6" align="center">Second
+                  Operand
+               </th> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th align="center">Format-length</th> 
+                         
+               <th align="center">D</th> 
+                         
+               <th align="center">T</th> 
+                         
+               <th align="center">A<var>a</var>, A
+                  dynamic
+               </th> 
+                         
+               <th align="center">B<var>a</var>, B
+                  dynamic
+               </th> 
+                         
+               <th align="center">U<var>a</var>, U
+                  dynamic
+               </th> 
+                        
+            </tr> 
+                    
+         </thead> 
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <th rowspan="5">First Operand</th> 
+                         
+               <th align="center">D</th> 
+                         
+               <td align="center">D</td> 
+                         
+               <td align="center">T</td> 
+                         
+               <td align="center">NA</td> 
+                         
+               <td align="center">NA</td> 
+                         
+               <td align="center">NA</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th align="center">T</th> 
+                         
+               <td align="center">T</td> 
+                         
+               <td align="center">T</td> 
+                         
+               <td align="center">NA</td> 
+                         
+               <td align="center">NA</td> 
+                         
+               <td align="center">NA</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th align="center" nowrap>A<var>x</var>, A dynamic
+               </th> 
+                         
+               <td align="center">NA</td> 
+                         
+               <td align="center">NA</td> 
+                         
+               <td align="center">A dynamic</td> 
+                         
+               <td align="center">B dynamic</td> 
+                         
+               <td align="center">U dynamic</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th align="center" nowrap>B<var>x</var>, B dynamic
+               </th> 
+                         
+               <td align="center">NA</td> 
+                         
+               <td align="center">NA</td> 
+                         
+               <td align="center">B dynamic</td> 
+                         
+               <td align="center">B dynamic</td> 
+                         
+               <td align="center">U dynamic</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th align="center" nowrap>U<var>x</var>, U dynamic
+               </th> 
+                         
+               <td align="center">NA</td> 
+                         
+               <td align="center">NA</td> 
+                         
+               <td align="center">U dynamic</td> 
+                         
+               <td align="center">U dynamic</td> 
+                         
+               <td align="center">U dynamic</td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+      <p>Legend:</p> 
+             
+             
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                  
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <th>NA</th> 
+                         
+               <td>This combination is not allowed.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th>D</th> 
+                         
+               <td>Date format.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th>T</th> 
+                         
+               <td>Time format.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th>B<var>x</var>,
+                   B<var>a</var></th> 
+                         
+               <td>Binary format with length <var>x,
+                                a</var>.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th>A<var>x</var>,
+                   A<var>a</var></th> 
+                         
+               <td>Alphanumeric format with length <var>x,
+                                a</var>.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th>U<var>x</var>,
+                   U<var>a</var></th> 
+                         
+               <td>Unicode format with length <var>x,
+                                a</var>.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th>B dynamic</th> 
+                         
+               <td>Binary format with dynamic length.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th>A dynamic</th> 
+                         
+               <td>Alphanumeric format with dynamic length.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th>U dynamic</th> 
+                         
+               <td>Unicode format with dynamic length.</td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+           
+         
+         
+      <div class="noprint">
+         <p><a href="func_mval.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="evaluate_res_format_length"></a></div> 
+          
+      <h2> Evaluating the
+              <var>result-format-length</var></h2> 
+           
+           
+      <p>Using the rules described above, the compiler is able to process the
+               source operands by regarding pairs of operands and calculating an intermediate
+               result for each pair. The first pair consists of the first and the second
+               operand, the second pair of the intermediate result and the third operand, etc.
+               After all operands have been processed, the last result shows the comparison of
+               format and length which will be used to compare all operands in order to
+               evaluate the minimum/maximum. When you use this method of format-length
+               evaluation, the operand <var>format-lengths</var> can appear in
+               any order.
+      </p> 
+           
+      <p> Example: </p> 
+           <pre class="verbatim">DEFINE DATA LOCAL
+1 A (I2)      INIT &lt;34&gt;
+1 B (P4.2)    INIT &lt;1234.56&gt;
+1 C (N4.4)    INIT &lt;12.6789&gt;
+1 D (I1)      INIT &lt;100&gt;
+1 E (I4/1:3)  INIT &lt;32, 6745, 456&gt;
+1 #RES-MIN (P10.7)
+1 #RES-MAX (P10.7)
+END-DEFINE
+*
+MOVE *MINVAL(A, B, C, D, E(*)) TO #RES-MIN
+MOVE *MAXVAL(A, B, C, D, E(*)) TO #RES-MAX 
+DISPLAY #RES-MIN #RES-MAX
+END</pre> 
+           <p>Output:</p> <pre class="system-output">         #RES-MIN                      #RES-MAX
+---------------------------  ---------------------------
+
+                 12.6789000                 6745.0000000</pre> 
+           <p>The following table shows the single steps evaluating the format/length
+               of the example automatically. It shows the intermediate result (ir) of all
+               steps and the comparison format/length (cf) which is used as
+               <var>result-format/length</var>.
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>Evaluation Order</th> 
+                        
+               <th>Name of First Operand</th> 
+                        
+               <th>Format/Length of First Operand or Intermediate Result</th> 
+                        
+               <th>Name of Second Operand</th> 
+                        
+               <th>Format/Length of Second Operand or Intermediate Result</th> 
+                        
+               <th>Format/Length of the Intermediate Result (ir)</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td>1.</td> 
+                        
+               <td>A</td> 
+                        
+               <td>I2</td> 
+                        
+               <td>B</td> 
+                        
+               <td>P4.2</td> 
+                        
+               <td>ir1 = P5.2</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>2.</td> 
+                        
+               <td>ir1</td> 
+                        
+               <td>P5.2</td> 
+                        
+               <td>C</td> 
+                        
+               <td>N4.4</td> 
+                        
+               <td>ir2 = P5.4</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>3.</td> 
+                        
+               <td>ir2</td> 
+                        
+               <td>P5.4</td> 
+                        
+               <td>D</td> 
+                        
+               <td>I1</td> 
+                        
+               <td>ir3 = P5.4</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>4.</td> 
+                        
+               <td>ir3</td> 
+                        
+               <td>P5.4</td> 
+                        
+               <td>E</td> 
+                        
+               <td>I4</td> 
+                        
+               <td> <strong>cf = P10.4 </strong></td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>During runtime, all operands are converted into the cf format/length.
+               Then, all converted values are compared, and the corresponding minimum/maximum
+               is evaluated.
+      </p> 
+           
+          
+      <div><a name="d0e4227"></a></div> 
+           
+      <h3>Format/Length Evaluation Order</h3> 
+            
+            
+      <p>The following graphic represents the order in which format and length
+                are evaluated:
+      </p> 
+            
+      <p><img src="graphics/mval.png" alt="" width="280" height="440"></p> 
+            
+      <p>Legend:</p> 
+             
+             
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="10%">
+            <col width="87%">
+         </colgroup> 
+                  
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <th align="left">ir1, ir2, ir3</th> 
+                         
+               <td align="left">Intermediate result 1, 2, 3.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th align="left">cf</th> 
+                         
+               <td align="left">Comparison of format and length.</td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+           
+         
+        
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="func_mval.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../func/func_mval.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/func/func_mval.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="func_string.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="func_sortk.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="func_transl.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

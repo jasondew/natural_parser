@@ -1,0 +1,1344 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Protecting DDMs On UNIX, OpenVMS And Windows</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="nsc_ddmos" id="26057"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../nsc/nsc_ddmos.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/nsc/nsc_ddmos.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc_ddmmf.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc_util.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Natural Security&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x31"></a>Protecting DDMs On UNIX, OpenVMS And Windows
+         </h1>
+      </div> 
+         
+         
+      <p>As explained in the section <a href="nsc_platf.htm#nsc_platf">Natural Security On Different
+            Platforms</a>, the protection of DDMs with Natural Security is
+             different on mainframe computers from that on other platforms. This section
+             describes how to control the use of DDMs under <em>UNIX, OpenVMS</em> and
+             <em>Windows</em>. The control of DDMs on mainframe computers is described in
+             the section <a href="nsc_ddmmf.htm#nsc_ddmmf">Protecting DDMs On
+            Mainframes</a>.
+      </p> 
+         
+      <p>This section covers the following topics:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="nsc_ddmos.htm#Status_of_a_DDM">Status of a DDM</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_ddmos.htm#DDM_Security_Profiles">DDM Security Profiles</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_ddmos.htm#Creating_and_Maintaining_DDM_Security_Profiles">Creating and Maintaining DDM Security Profiles</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_ddmos.htm#Add_DDM_Profile">Add DDM Profile</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_ddmos.htm#Copy_DDM_Profile">Copy DDM Profile</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_ddmos.htm#Modify_DDM_Profile">Modify DDM Profile</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_ddmos.htm#Delete_DDM_Profile">Delete DDM Profile</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_ddmos.htm#Display_DDM_Profile">Display DDM Profile</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_ddmos.htm#Copy_Link_to_All_Special_Links">Copy Link to All Special Links</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_ddmos.htm#Linking_a_Library_to_a_Protected_DDM">Linking a Library to a Protected DDM</a></p>
+         </li>
+      </ul> 
+         
+      <div><a name="fddm-parameter"></a></div>
+      <h4 class="floating-title">FDDM Profile Parameter</h4> 
+         
+      <p>With the Natural profile parameter FDDM, you can specify a system file as
+             central location on which DDMs are to be stored (outside of libraries). If the
+             FDDM parameter is set, DDM security profiles can only be created and maintained
+             for DDMs contained in the library SYSTEM on that system file. Existing security
+             profiles/settings/links for DDMs contained in other libraries are not lost, but
+             they will not be visible within Natural Security and will have no effect.
+      </p> 
+         
+      <p>If a central system file for DDMs is specified with the FDDM parameter,
+             the protection of UNIX, OpenVMS and Windows DDMs and the maintenance of their
+             security profiles is performed in the same way as with the File Maintenance
+             functions for mainframe DDMs described in the section
+             <a href="nsc_ddmmf.htm#nsc_ddmmf">Protecting DDMs On
+            Mainframes</a>.
+      </p>
+      <hr> 
+        
+      <div><a name="Status_of_a_DDM"></a></div> 
+         
+      <h2> Status of a DDM</h2> 
+          
+          
+      <p>Before a DDM can be used under Natural Security, its <em>status</em>
+              must be defined in Natural Security. This status determines if the DDM can be
+              used, that is, referenced in a database access statement (for example,
+              <code>READ</code>, <code>FIND</code>, <code>HISTOGRAM</code>,
+              <code>STORE</code>, <code>UPDATE</code>, <code>DELETE</code>) within a
+              program.
+      </p> 
+          
+      <p class="note"><strong>Note:</strong><br> Program in this context means any type of Natural programming object
+              that can contain database access statements; that is, programs, subprograms,
+              subroutines etc.
+      </p> 
+          
+      <p>A DDM whose status is not defined, cannot be referenced.</p> 
+          
+      <p>For every DDM that is to be used, two status classifications have to be
+              made in Natural Security:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">an <em>internal status</em> and
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">an <em>external status</em>.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+         
+      <div><a name="Internal_Status"></a></div> 
+          
+      <h3> Internal Status</h3> 
+           
+           
+      <p>The internal status controls the use of the DDM
+               <var>within</var> the library in which it is contained.
+      </p> 
+           
+      <p>The internal status of a DDM may be one of the following:</p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th> PUBLIC</th> 
+                        
+               <td>The DDM can be read and updated by all programs within the
+                  library.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th> ACCESS &nbsp;</th> 
+                        
+               <td>The DDM can be read, but not updated, by all programs within
+                  the library.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th> PRIVATE &nbsp;</th> 
+                        
+               <td>The DDM cannot be used by any program within the
+                  library.
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>The internal status only applies within the library in which the DDM is
+               contained.
+      </p> 
+           
+      <p>The check whether a program may use a DDM is made when the program is
+               <em>compiled</em>.
+      </p> 
+           
+      <p>The following diagram shows how the internal status affects the use of
+               a DDM within a library:
+      </p> 
+           
+      <p><img src="graphics/9ddm2.png" alt="" width="600" height="600"></p> 
+           
+          
+         
+      <div><a name="External_Status"></a></div> 
+          
+      <h3> External Status</h3> 
+           
+           
+      <p>The external status controls the use of the DDM <em>by other
+            libraries</em>.
+      </p> 
+           
+      <p>This requires that the library containing the DDM is used as a steplib
+               by these other libraries. Libraries for which the library containing the DDM is
+               not a steplib, cannot use the DDM anyhow.
+      </p> 
+           
+      <p>The external status of a DDM may be one of the following:</p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th> PUBLIC</th> 
+                        
+               <td>The DDM is <em>not</em> protected. It can be used - that is,
+                  read and updated - by any library.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th> ACCESS &nbsp;</th> 
+                        
+               <td>The DDM is protected as far as update is concerned. It can be
+                  read by any library. It may, however, be updated only by libraries which have
+                  been <em>linked</em> to it.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th> PRIVATE &nbsp;</th> 
+                        
+               <td>The DDM is protected. It can be used only by libraries which
+                  have been <em>linked</em> to it. This <var>link</var> may be
+                            defined as "read" (that is, read only) or "update"
+                            (which implies read).
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>The external status of a DDM is only relevant if the library that
+               contains the DDM is used as steplib by other libraries.
+      </p> 
+           
+      <p>To allow a library to use a protected DDM in one of the library's
+               steplibs, you have to define a <var>link</var> between the
+               library and the DDM.
+      </p> 
+           
+      <p>A link to a DDM whose external status is PRIVATE can be defined as
+               "read link" or "update link". A link to a DDM whose
+               external status is ACCESS can only be an "update link".
+      </p> 
+           
+      <p>The possible relationships between libraries and DDMs in a steplib are
+               shown in the following diagram:
+      </p> 
+           
+      <p><img src="graphics/9ddm1.png" alt="" width="600" height="445"></p> 
+           
+      <p class="note"><strong>Note:</strong><br> A link can only be established to a DDM whose external status is
+               ACCESS or PRIVATE, because no link is required to read or update a DDM whose
+               external status is PUBLIC.
+      </p> 
+           
+      <p>The check whether a program may use a DDM in a steplib is made when the
+               program is <em>compiled</em>.
+      </p> 
+           
+      <p>For information on how to link a library to a DDM, see
+               <a href="nsc_ddmos.htm#Linking_a_Library_to_a_Protected_DDM">Linking a Library to
+                  a Protected DDM</a> below.
+      </p> 
+           
+          
+         
+      <div><a name="The_Initial_Status_of_a_DDM"></a></div> 
+          
+      <h3> The Initial Status of a DDM</h3> 
+           
+           
+      <p>The initial internal and external status of a newly generated DDM
+               depends on the option <a href="nsc_lib.htm#Set_Status_of_DDMs">"Set Status
+                  of DDMs"</a>, which is set in the Restrictions window of the
+               library profile (see Components of a Library Profile in the section
+               <cite>Library Maintenance</cite>).
+      </p> 
+           
+      <p>This option affects all DDMs in the library for which no security
+               profiles have been defined.
+      </p> 
+           
+      <p>By default, this option is set to "UNDF"; that is, both
+               the internal and the external status of a new DDM are undefined to start with.
+               Before a new DDM can be used by any program, you have to create a security
+               profile for it and define its internal and external status in the profile.
+      </p> 
+           
+      <p>If you set the option to "PUBL", both the internal and
+               external status of all newly generated DDMs are automatically set to PUBLIC.
+               This means that new DDMs can be used by any program within the same library and
+               in libraries that use the library as steplib. If you do not wish to restrict
+               the use of these DDMs, you need not create security profiles for them or make
+               any further security specifications. If you wish to restrict the use of one of
+               these DDMs, you have to define a security profile for it, and in the profile,
+               change the internal and external status as desired.
+      </p> 
+           
+      <p>If you reset the option "Set status of DDMs" from
+               "PUBL" to "UNDF", the internal and external status of
+               all PUBLIC DDMs without security profiles will be reset to being undefined.
+      </p>
+           
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="nsc_ddmos.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="DDM_Security_Profiles"></a></div> 
+         
+      <h2> DDM Security Profiles</h2> 
+          
+          
+      <p>Unless the <em>initial status</em> of a DDM is automatically set to
+              PUBLIC (see above), you have to define a security profile for every DDM that is
+              to be used.
+      </p> 
+          
+      <p>Apart from the internal and external status of a DDM, you can also
+              specify some other options in a DDM security profile:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">You can restrict maintenance of the DDM itself to specific users (DDM
+                      modifiers).
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">You can restrict maintenance of the DDM security profile to specific
+                      users (owners).
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">You can enter notes on the security profile.</p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>These options are explained below.</p> 
+          
+         
+      <div><a name="Components_of_a_DDM_Security_Profile"></a></div> 
+          
+      <h3> Components of a DDM Security Profile</h3> 
+           
+           
+      <p><img src="graphics/9ddm0.png" alt="" width="600" height="445"></p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="80%">
+         <colgroup>
+            <col width="22%">
+            <col width="58%">
+         </colgroup> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>Field</th> 
+                        
+               <th>Explanation</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> DDM Name (display only)</td> 
+                        
+               <td>The name under which the DDM was generated.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> DBID / FNR (display only)</td> 
+                        
+               <td>The database ID and file number of the database file referenced
+                  by the DDM.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Internal Status / <br>External Status
+               </td> 
+                        
+               <td>
+                  <table border="0" width="100%"> 
+                                
+                               
+                     <tbody align="left" valign="top"> 
+                                   
+                        <tr> 
+                                       
+                           <td colspan="2">See
+                              <a href="nsc_ddmos.htm#Status_of_a_DDM">Status of a DDM</a> above for an
+                              explanation. Possible values are:
+                           </td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td>PUBL</td> 
+                                       
+                           <td>PUBLIC</td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td>ACCE</td> 
+                                       
+                           <td>ACCESS</td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td>PRIV</td> 
+                                       
+                           <td>PRIVATE</td> 
+                                      
+                        </tr> 
+                                   
+                        <tr> 
+                                       
+                           <td colspan="2">When you create a DDM security
+                              profile, the internal and external status will, by default, be set to
+                              "PUBL".
+                           </td> 
+                                      
+                        </tr> 
+                                  
+                     </tbody> 
+                              
+                  </table>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> DDM Modifiers &nbsp;</td> 
+                        
+               <td>You may enter up to eight IDs of users; only these users will
+                  then be allowed to maintain the DDM in Predict (or with Natural's DDM
+                  Services). 
+                  
+                  <p>If you do not specify any DDM modifier, the owners of the security
+                                profile (see <a href="nsc_ddmos.htm#Additional_Options_nsc_ddmos">Additional
+                                   Options</a> below) may maintain the DDM.
+                  </p> 
+                            
+                  <p>If neither DDM modifiers nor owners are specified, maintenance of
+                                the DDM is not restricted.
+                  </p> 
+                            
+                  <p>Next to the ID of each DDM modifier, you may optionally specify a
+                                number from 1 to 3; this number determines how many of the other DDM modifiers
+                                specified must countersign for maintenance permission (the countersignature
+                                logic which applies to DDM maintenance permission is analogous to that of
+                                owners and co-owners; see the section <a href="nsc_count.htm#nsc_count">Countersignatures</a>).
+                  </p>
+               </td>
+                        
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+          
+      <div><a name="Additional_Options_nsc_ddmos"></a></div> 
+           
+      <h4> Additional Options</h4> 
+            
+            
+      <p>If you mark the field "Additional Options" on the basic
+                security profile screen with "Y", a window will be displayed from
+                which you can select the following options:
+      </p> 
+            
+      <ul> 
+                
+         <li> 
+                    
+            <p class="initem">Maintenance Information</p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">Security Notes</p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">Owners</p> 
+                   
+         </li> 
+               
+      </ul> 
+            
+      <p>The options for which something has already been specified or defined
+                are marked with a plus sign (+). You can select one or more items from the
+                window by marking them with any character. For each item selected, an
+                additional window will be displayed:
+      </p> 
+             
+             
+      <table border="1" class="color" cellpadding="3" width="80%">
+         <colgroup>
+            <col width="31%">
+            <col width="49%">
+         </colgroup> 
+                  
+                 
+         <thead align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <th>Additional Option</th> 
+                         
+               <th>Explanation</th> 
+                        
+            </tr> 
+                    
+         </thead> 
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <td> Maintenance Information <br>
+                             (display only)
+               </td> 
+                         
+               <td>In this window, the following information is displayed: 
+                  
+                  <ul> 
+                                 
+                     <li> 
+                                     
+                        <p class="initem">the date and time when the security profile was created, the ID
+                           of the ADMINISTRATOR who created it, and (if applicable) the IDs of the
+                                         co-owners who countersigned for the creation;
+                        </p> 
+                                    
+                     </li> 
+                                 
+                     <li> 
+                                     
+                        <p class="initem">the date and time when the security profile was last modified,
+                                         the ID of the ADMINISTRATOR who made the last modification, and (if applicable)
+                                         the IDs of the co-owners who countersigned for the modification.
+                        </p> 
+                                    
+                     </li> 
+                                
+                  </ul>
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> Security Notes &nbsp;</td> 
+                         
+               <td>In this window, you may enter your notes on the security
+                  profile.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> Owners &nbsp;</td> 
+                         
+               <td>In this window, you may enter up to eight IDs of
+                  ADMINISTRATORs. Only the ADMINISTRATORs specified here will be allowed to
+                  maintain this DDM security profile or link libraries to it. 
+                  
+                  <p>If no owner is specified, any user of type ADMINISTRATOR may
+                                 maintain and link the security profile.
+                  </p> 
+                             
+                  <p>For each owner, the number of co-owners whose countersignatures
+                                 will be required for maintenance/link permission may optionally be specified in
+                                 the field after the ID.
+                  </p> 
+                             
+                  <p>For an explanation of owner and co-owners, see the section
+                                 <a href="nsc_count.htm#nsc_count">Countersignatures</a>.
+                  </p>
+               </td>
+                         
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="nsc_ddmos.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Creating_and_Maintaining_DDM_Security_Profiles"></a></div> 
+         
+      <h2> Creating and Maintaining DDM Security Profiles</h2> 
+          
+          
+      <p class="note"><strong>Note:</strong><br> If the Natural profile parameter FDDM is set, DDM security profiles
+              can only be created and maintained for DDMs contained in the library
+              SYSTEM.
+      </p> 
+          
+      <p>On the Library Maintenance selection list, you mark a library with the
+              code "MD" (or, in the case of a private library - if private
+              libraries are used in private mode - you mark the user with the same ID on the
+              User Maintenance selection list with the code "MD").
+      </p> 
+          
+      <p>A window will be displayed, in which you can enter a start value for the
+              list of DDMs (as described in the section <a href="nsc_way.htm#nsc_way">Finding Your Way In Natural
+            Security</a>).
+      </p> 
+          
+      <p>Then a list of the DDMs contained in the library will be displayed.</p> 
+          
+      <p>For each DDM, the DDM name, the library ID, and the internal and
+              external status are displayed. If a security profile exists for a DDM, this
+              will be indicated in Column P.
+      </p> 
+          
+      <p>The list can be scrolled as described in the section
+              <a href="nsc_way.htm#nsc_way">Finding Your Way In Natural
+            Security</a>.
+      </p> 
+          
+         
+      <div><a name="External_Status_as_Selection_Criterion"></a></div> 
+          
+      <h3> External Status as Selection Criterion</h3> 
+           
+           
+      <p>If you wish to list only DDMs of a specific status, you can specify one
+               of the following selection criteria in the External Status field above the
+               list:
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="80%">
+         <colgroup>
+            <col width="19%">
+            <col width="61%">
+         </colgroup> 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th> PUBL</th> 
+                        
+               <td>All DDMs of status PUBLIC.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th> ACCE &nbsp;</th> 
+                        
+               <td>All DDMs of status ACCESS.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th> PRIV &nbsp;</th> 
+                        
+               <td>All DDMs of status PRIVATE.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th> DEFI &nbsp;</th> 
+                        
+               <td>Defined; that is, all DDMs of status PRIV, ACCE, and PUBL
+                  (*).
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th> UNDF &nbsp;</th> 
+                        
+               <td>Undefined; that is, all DDMs whose status is not PRIV, ACCE or
+                  PUBL (*).
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th> DDM &nbsp;</th> 
+                        
+               <td>All defined and undefined DDMs (*).</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th> NDDM &nbsp;</th> 
+                        
+               <td>DDM security profiles for which no corresponding DDMs exist
+                  (*).
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>* This is not an actual DDM status, but for selection purposes
+               only.
+      </p> 
+           
+      <p>The default status for selection is "DDM"; that is,
+               <em>all</em> DDMs will be listed.
+      </p> 
+           
+          
+         
+      <div><a name="Selecting_a_Function"></a></div> 
+          
+      <h3> Selecting a Function</h3> 
+           
+           
+      <p>From the DDM list, you invoke all functions for creating and
+               maintaining DDM security profiles. The following functions are available
+               (possible code abbreviations are underlined):
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="80%">
+         <colgroup>
+            <col width="28%">
+            <col width="52%">
+         </colgroup> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>Code</th> 
+                        
+               <th>Function</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> <code><u>A</u>D</code></td> 
+                        
+               <td> <a href="nsc_ddmos.htm#Add_DDM_Profile">Add DDM
+                     Profile</a> &nbsp;
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code><u>C</u>O</code></td> 
+                        
+               <td> <a href="nsc_ddmos.htm#Copy_DDM_Profile">Copy DDM
+                     Profile</a> &nbsp;
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code><u>M</u>O</code></td> 
+                        
+               <td> <a href="nsc_ddmos.htm#Modify_DDM_Profile">Modify DDM
+                     Profile</a> &nbsp;
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>DE</code> &nbsp;
+               </td> 
+                        
+               <td> <a href="nsc_ddmos.htm#Delete_DDM_Profile">Delete DDM
+                     Profile</a> &nbsp;
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code><u>D</u>I</code></td> 
+                        
+               <td> <a href="nsc_ddmos.htm#Display_DDM_Profile">Display DDM
+                     Profile</a> &nbsp;
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>CU</code> &nbsp;
+               </td> 
+                        
+               <td> <a href="nsc_ddmos.htm#Copy_Link_to_All_Special_Links">Copy Link
+                     to All Special Links</a> &nbsp;
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>To invoke a specific function for a DDM, mark the DDM with the
+               appropriate function code in column "Co".
+      </p> 
+           
+      <p>You may select various DDMs for various functions at the same time;
+               that is, you can mark several DDMs on the screen with a function code. For each
+               DDM marked, the appropriate processing screen will be displayed, and you can
+               perform for one DDM after another the selected functions.
+      </p> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="nsc_ddmos.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Add_DDM_Profile"></a></div> 
+         
+      <h2> Add DDM Profile</h2> 
+          
+          
+      <p>With this function, you define a DDM to Natural Security, that is,
+              create a new DDM security profile.
+      </p> 
+          
+      <p>On the DDM selection list, enter "UNDF" in the field "Ext.
+              Status".
+      </p> 
+          
+      <p>Only those DDMs in the library which have not yet been defined to
+              Natural Security will be listed. (The list can be scrolled as described in the
+              section <a href="nsc_way.htm#nsc_way">Finding Your Way In Natural
+            Security</a>).
+      </p> 
+          
+      <p>On the list, mark the DDM for which you wish to create a security
+              profile with function code "AD". The Add DDM screen will be
+              displayed.
+      </p> 
+          
+      <p>The individual items you may define on this screen and any additional
+              windows that may be part of a DDM security profile are described under
+              <a href="nsc_ddmos.htm#Components_of_a_DDM_Security_Profile">Components
+            of a DDM Security Profile</a> above.
+      </p> 
+          
+      <p>When you add a DDM, the owners specified in the security profile of the
+              library in which the DDM is contained will automatically be copied into the DDM
+              security profile you are creating.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="nsc_ddmos.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Copy_DDM_Profile"></a></div> 
+         
+      <h2> Copy DDM Profile</h2> 
+          
+          
+      <p>With this function, you can define a DDM to Natural Security by creating
+              a security profile which is identical to an already existing DDM security
+              profile in the same library.
+      </p> 
+          
+         
+      <div><a name="d0e23795"></a></div> 
+          
+      <h3>What is Copied?</h3> 
+           
+           
+      <p>All components of the existing DDM security profile will be copied into
+               the new DDM security profile - except the file number and database ID, and the
+               owners (the owners will be copied from your own user security profile into the
+               new DDM security profile you are creating).
+      </p> 
+           
+      <p>Any links existing to the "old" DDM will <em>not</em> be
+               copied.
+      </p> 
+           
+          
+         
+      <div><a name="d0e23816"></a></div> 
+          
+      <h3>How to Copy</h3> 
+           
+           
+      <p>On the DDM selection list, mark the DDM whose security profile you wish
+               to duplicate with function code "CO".
+      </p> 
+           
+      <p>A window will be displayed. In this window, enter the name of the
+               "new" DDM.
+      </p> 
+           
+      <p>The new DDM security profile will be displayed. The individual items
+               you may define or modify in the profile are described under
+               <a href="nsc_ddmos.htm#Components_of_a_DDM_Security_Profile">Components
+            of a DDM Security Profile</a> above.
+      </p> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="nsc_ddmos.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Modify_DDM_Profile"></a></div> 
+         
+      <h2> Modify DDM Profile</h2> 
+          
+          
+      <p>With this function, you can change an existing DDM security profile.</p>
+          
+          
+      <p>On the DDM selection list, mark the DDM whose security profile you wish
+              to change with function code "MO". The DDM security profile will
+              then be displayed. The individual items you may define or modify are described
+              under <a href="nsc_ddmos.htm#Components_of_a_DDM_Security_Profile">Components of a DDM
+            Security Profile</a> above.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="nsc_ddmos.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Delete_DDM_Profile"></a></div> 
+         
+      <h2> Delete DDM Profile</h2> 
+          
+          
+      <p>With this function, you can delete an existing DDM security profile.</p>
+          
+          
+      <p>On the DDM Maintenance selection list, mark the DDM you wish to delete
+              with function code "DE". A window will be displayed.
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">If you have invoked the Delete DDM function and should then decide
+                      against deleting the given DDM security profile, leave the window by pressing
+                      <span class="key">ENTER</span> without having typed in anything.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">If you wish to delete the given DDM security profile, enter the DDM
+                      name in the window to confirm the deletion.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>When you delete a DDM security profile, all existing links to it will
+              also be deleted.
+      </p> 
+          
+      <p>When you delete a DDM security profile, the DDM itself will not be
+              deleted. The DDM name will remain in the DDM selection list with the internal
+              status set to either "UNDF" (undefined) or "PUBL"
+              (public), depending on the option <a href="nsc_lib.htm#Set_Status_of_DDMs">"Set Status of DDMs"</a> in
+              the library profile (this option is described in the section <cite>Library
+                 Maintenance</cite>).
+      </p> 
+          
+      <p class="note"><strong>Note:</strong><br> When a DDM itself is deleted (in Predict, or with Natural's DDM
+              Services or SYSMAIN utility), the corresponding DDM security profile will not
+              be deleted. To list the DDM profiles without DDMs in a library, you enter
+              "NDDM" as selection criterion for the list of DDM profiles.
+      </p>
+          
+          
+      <p>If you mark more than one DDM with "DE", a window will
+              appear in which you are asked whether you wish to confirm the deletion of each
+              DDM security profile by entering the DDM name, or whether all DDM profiles
+              selected for deletion are to be deleted without this individual confirmation.
+              Be careful not to delete a DDM profile accidentally.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="nsc_ddmos.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Display_DDM_Profile"></a></div> 
+         
+      <h2> Display DDM Profile</h2> 
+          
+          
+      <p>With this function, you can display an existing DDM security
+              profile.
+      </p> 
+          
+      <p>On the DDM selection list, mark the DDM whose security profile you wish
+              to view with function code "DI". The DDM security profile will
+              then be displayed. The individual items that are part of the profile are
+              described under <a href="nsc_ddmos.htm#Components_of_a_DDM_Security_Profile">Components of a DDM
+            Security Profile</a> above.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="nsc_ddmos.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Copy_Link_to_All_Special_Links"></a></div> 
+         
+      <h2> Copy Link to All Special Links</h2> 
+          
+          
+      <p>With this function, you can copy an existing link between a DDM and a
+              people-protected library, so that the same kind of link (read-link or
+              update-link) is simultaneously established between the DDM and all users who
+              have a special link to that library.
+      </p> 
+          
+      <p>On the DDM selection list, mark the DDM whose link you wish to copy with
+              function code "CU". A message will then be displayed stating that
+              the link has been copied.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="nsc_ddmos.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Linking_a_Library_to_a_Protected_DDM"></a></div> 
+         
+      <h2> Linking a Library to a Protected DDM</h2> 
+          
+          
+      <p>If the Natural profile parameter FDDM is not set, you link a library to
+              protected DDMs in a steplib as follows:
+      </p> 
+          
+      <ol> 
+              
+         <li> 
+                  
+            <p class="initem">Invoke the DDM selection list of that library (as described under
+                      <a href="nsc_ddmos.htm#Creating_and_Maintaining_DDM_Security_Profiles">Creating and
+                  Maintaining DDM Security Profiles</a> above).
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">In the Library field above the list, enter an asterisk (*). A window
+                      will be displayed listing all steplibs defined for the library.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Mark the steplib which contains the DDM(s) to which you wish to link
+                      the library. A list of all DDMs in the selected steplib with external status
+                      ACCESS and PRIVATE will be displayed. The list can be scrolled as described in
+                      the section <a href="nsc_way.htm#nsc_way">Finding Your Way In Natural
+                  Security</a> .
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">In the "Co" column of the list, you mark one or more DDMs
+                      with one of the following function codes listed below.
+            </p> 
+                 
+         </li> 
+             
+      </ol> 
+          
+      <p>If the Natural profile parameter FDDM is set, a library can only be
+              linked to protected DDMs contained in the steplib SYSTEM. This is done as
+              follows:
+      </p> 
+          
+      <ol> 
+              
+         <li> 
+                  
+            <p class="initem">Invoke the DDM selection list of that library (as described under
+                      <a href="nsc_ddmos.htm#Creating_and_Maintaining_DDM_Security_Profiles">Creating and
+                  Maintaining DDM Security Profiles</a> above).
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">A list of all DDMs in the steplib SYSTEM with external status ACCESS
+                      and PRIVATE will be displayed. The list can be scrolled as described in the
+                      section <a href="nsc_way.htm#nsc_way">Finding Your Way In Natural
+                  Security</a>.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">In the "Co" column of the list, you mark one or more DDMs
+                      with one of the following function codes:
+            </p> 
+                 
+         </li> 
+             
+      </ol> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="80%">
+         <colgroup>
+            <col width="21%">
+            <col width="59%">
+         </colgroup> 
+                
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th>Code</th> 
+                       
+               <th>Function</th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> <code>RE</code> &nbsp;
+               </td> 
+                       
+               <td> Read-Link - The library thus linked may only read the DDM, but
+                  not update it.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <code>UP</code> &nbsp;
+               </td> 
+                       
+               <td> Update-Link - The library thus linked may read and update the
+                  DDM.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <code>CL</code> &nbsp;
+               </td> 
+                       
+               <td> Cancel - An existing link will be cancelled.</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <code>CU</code> &nbsp;
+               </td> 
+                       
+               <td> Copy - An existing link between a DDM and a people-protected
+                  library will be copied, so that the same kind of link (read-link or
+                  update-link) is simultaneously established between the DDM and all users who
+                  have a special link to that library.
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>A link to a PRIVATE DDM can be specified as read-link (RE) or
+              update-link (UP). A link to an ACCESS DDMs can only be specified as update-link
+              (UP), because no link is required to read an ACCESS DDM.
+      </p> 
+          
+        
+       
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="nsc_ddmos.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../nsc/nsc_ddmos.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/nsc/nsc_ddmos.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc_ddmmf.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc_util.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

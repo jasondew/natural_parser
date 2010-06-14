@@ -1,0 +1,372 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Loops and Labels</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="fs-loop"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../firststeps/fs-loop.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/firststeps/fs-loop.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="fs-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="fs-input.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="fs-inlinesub.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;First Steps&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x29"></a> 
+               <a name="x30"></a>Loops and Labels
+         </h1>
+      </div> 
+         
+      <p>You will now enhance your program by adding loops and labels.</p> 
+         
+      <p>When you have completed the exercises below, your sample application will
+             still consist of the same modules as in the previous document:
+      </p> 
+         
+      <p><img src="graphics/fs-map.png" alt="Application structure" width="460" height="160"></p> 
+         
+      <p>This document contains the following
+             exercises:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="fs-loop.htm#fs-loop-repeat">Allowing Repeated Usage</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="fs-loop.htm#fs-loop-notfound">Displaying a Message Indicating that Information was not Found</a></p>
+         </li>
+      </ul>
+      <hr>
+      <div><a name="fs-loop-repeat"></a></div> 
+         
+      <h2>Allowing Repeated Usage</h2> 
+          
+          
+      <p>As it is now, the program terminates after it has displayed the map and
+              has shown the list. So that the user can display a new employees list
+              immediately, without restarting the program, you will now put the corresponding
+              program code into a <code>REPEAT</code> loop.
+      </p> 
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To define a repeat loop</strong></p>
+      <ol class="steps">
+         <li> 
+                   
+                   
+            <p class="instep">Insert the following below <code>END-DEFINE</code>:
+            </p> 
+                   <pre class="verbatim">RP1. REPEAT</pre> 
+                   <p class="instep"><code>REPEAT</code> defines the start of the repeat loop.
+                       <code>RP1.</code> is a label which is used when leaving the repeat loop (this
+                       is defined below).
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Define the end of the repeat loop by inserting the following before
+                       the <code>END</code> statement:
+            </p> 
+                   <pre class="verbatim">END-REPEAT</pre> 
+                   
+                 </li>
+         <li> 
+                   
+                   
+            <p class="instep">Insert the following below <code>INPUT USING MAP 'MAP01'</code>:
+            </p> 
+                   <pre class="verbatim">IF #NAME-START = '.' THEN
+  ESCAPE BOTTOM (RP1.)
+END-IF</pre> 
+                   <p class="instep">The <code>IF</code> statement, which must be ended with
+                       <code>END-IF</code>, checks the content of the <code>#NAME-START</code> field.
+                       When a dot (.) is entered in this field, the <code>ESCAPE BOTTOM</code>
+                       statement is used to leave the loop. Processing will continue with the first
+                       statement following the loop (which is <code>END</code> in this case).
+            </p> 
+                   
+            <p class="instep">By assigning a label to the loop (here <code>RP1.</code>), you can
+                       refer to this specific loop in the <code>ESCAPE BOTTOM</code> statement. Since
+                       loops may be nested, you should specify which loop you want to leave.
+                       Otherwise, the program will only leave the innermost active loop.
+            </p> 
+                   
+                   
+                   
+            <p class="instep">Your program should now look as follows:</p> 
+                   <pre class="verbatim">DEFINE DATA
+LOCAL
+  1 #NAME-START        (A20)
+  1 #NAME-END          (A20)
+  1 EMPLOYEES-VIEW VIEW OF EMPLOYEES
+    2 FULL-NAME
+      3 NAME (A20)
+    2 DEPT (A6)
+    2 LEAVE-DATA
+      3 LEAVE-DUE (N2)
+END-DEFINE
+*
+RP1. REPEAT
+*
+  INPUT USING MAP 'MAP01'
+*
+  IF #NAME-START = '.' THEN
+    ESCAPE BOTTOM (RP1.)
+  END-IF
+*
+  IF #NAME-END = ' ' THEN
+    MOVE #NAME-START TO #NAME-END
+  END-IF
+*
+  READ EMPLOYEES-VIEW BY NAME
+    STARTING FROM #NAME-START
+    ENDING AT #NAME-END
+*
+    DISPLAY NAME 3X DEPT 3X LEAVE-DUE
+*
+  END-READ
+*
+END-REPEAT
+*
+END</pre> 
+                   <p class="note"><strong>Note:</strong><br>For better readability, the content of the <code>REPEAT</code>
+                       loop has been indented.
+            </p> 
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Run the program.</p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">In the resulting map, enter "JONES" in the
+                       field which prompts for a starting name and press <span class="key">ENTER</span>. 
+            </p> 
+                   
+                   
+            <p class="instep">In the resulting list, the employees with the name
+                       "Jones" are shown. Press <span class="key">ENTER</span>. Due to
+                       the <code>REPEAT</code> loop, the map is shown again. Now you can also see that
+                       "JONES" has been entered as the ending
+                       name.
+            </p> 
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">To leave the map, enter a dot (.) in the field which prompts for a
+                       starting name and press <span class="key">ENTER</span>. Do not forget to delete the remaining
+                       characters of the name which is still shown in this field.
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Stow the program.</p> 
+                   
+                 
+         </li>
+      </ol> 
+         
+      <div class="noprint">
+         <p><a href="fs-loop.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="fs-loop-notfound"></a></div> 
+         
+      <h2>Displaying a Message Indicating that Information was not
+             Found
+      </h2> 
+          
+          
+      <p>You will now define the message that is to be displayed when the user
+              enters a starting name which cannot be found in the database.
+      </p> 
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To define the message that is to be displayed when the specified
+                  employee cannot be found</strong></p>
+      <ol class="steps">
+         <li> 
+                   
+                   
+            <p class="instep">Add the label <code>RD1.</code> to the line containing the
+                       <code>READ</code> statement so that it looks as follows: 
+            </p> 
+                   <pre class="verbatim">RD1. READ EMPLOYEES-VIEW BY NAME</pre> 
+                   
+                 </li>
+         <li> 
+                   
+                   
+            <p class="instep">Insert the following below <code>END-READ</code>:
+            </p> 
+                   <pre class="verbatim">IF *COUNTER (RD1.) = 0 THEN
+   REINPUT 'No employees meet your criteria.'
+END-IF</pre> 
+                   <p class="instep">To check the number of records found in the <code>READ</code> loop,
+                       the system variable <code>*COUNTER</code> is used. If its
+                       contents equals 0 (that is: an employee with the specified name has not been
+                       found), the message defined with the <code>REINPUT</code> statement is
+                       displayed at the bottom of your map.
+            </p> 
+                   
+            <p class="instep">To identify the <code>READ</code> loop, you assign a label to it
+                       (here <code>RD1.</code>). Since a complex database access program can contain
+                       many loops, you have to specify the loop to which you refer.
+            </p> 
+                   
+                   
+            <p class="instep">Your program should now look as follows:</p> 
+                   <pre class="verbatim">DEFINE DATA
+LOCAL
+  1 #NAME-START        (A20)
+  1 #NAME-END          (A20)
+  1 EMPLOYEES-VIEW VIEW OF EMPLOYEES
+    2 FULL-NAME
+      3 NAME (A20)
+    2 DEPT (A6)
+    2 LEAVE-DATA
+      3 LEAVE-DUE (N2)
+END-DEFINE
+*
+RP1. REPEAT
+*
+  INPUT USING MAP 'MAP01'
+*
+  IF #NAME-START = '.' THEN
+    ESCAPE BOTTOM (RP1.)
+  END-IF
+*
+  IF #NAME-END = ' ' THEN
+    MOVE #NAME-START TO #NAME-END
+  END-IF
+*
+  RD1. READ EMPLOYEES-VIEW BY NAME
+    STARTING FROM #NAME-START
+    ENDING AT #NAME-END
+*
+    DISPLAY NAME 3X DEPT 3X LEAVE-DUE
+*
+  END-READ
+*
+  IF *COUNTER (RD1.) = 0 THEN
+    REINPUT 'No employees meet your criteria.'
+  END-IF
+*
+END-REPEAT
+*
+END</pre> 
+                   
+                 </li>
+         <li> 
+                   
+                   
+            <p class="instep">Run the program.</p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">In the resulting map, enter a starting name which is not defined in
+                       the demo database (for example, "XYZ") and press
+                       <span class="key">ENTER</span>.
+            </p> 
+                   
+                   
+            <p class="instep">Your message should now appear in the map.</p> 
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">To leave the map, enter a dot (.) in the field which prompts for a
+                       starting name and press <span class="key">ENTER</span>. Do not forget to delete the remaining
+                       characters of the name which is still shown in this field.
+            </p> 
+                   
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Stow the program.</p> 
+                   
+                 
+         </li>
+      </ol> 
+          
+      <p>You can now proceed with the next exercises:
+              <a href="fs-inlinesub.htm#fs-inlinesub">Inline
+            Subroutines</a>.
+      </p> 
+         
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="fs-loop.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../firststeps/fs-loop.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/firststeps/fs-loop.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="fs-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="fs-input.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="fs-inlinesub.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

@@ -1,0 +1,2676 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Accessing Data in an SQL Database</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="pg_dbms_sqlos"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_dbms_sqlos.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_dbms_sqlos.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_dbms-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_dbms_ada.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_dbms_xml.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Programming Guide&nbsp;&nbsp;&#8212;</span></div>
+      </div>
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x177"></a> Accessing Data in an SQL Database 
+         </h1>
+      </div> 
+         
+         
+      <p>This document describes how to use Natural with SQL
+             databases via Entire Access. For information about installation/configuration,
+             see <a href="../dbms/ap.htm">Natural and Entire
+            Access</a> in the <cite>Database Management System
+                Interfaces</cite> documentation and the separate Entire Access
+             documentation.
+      </p> 
+         
+      <p>This document covers the following topics:</p>
+         
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_dbms_sqlos.htm#sql_ddms">Generating Natural DDMs</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_sqlos.htm#sql_profparms">Setting Natural Profile Parameters</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_sqlos.htm#sql_dml_statem">Natural DML Statements</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_sqlos.htm#sql_sql_statem">Natural SQL Statements</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_sqlos.htm#sql_flex_sql">Flexible SQL</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_sqlos.htm#sql_rdbms_req">RDBMS-Specific Requirements and Restrictions</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_sqlos.htm#sql_data_type_conv">Data-Type Conversion</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_sqlos.htm#sql_date_time_conv">Date/Time Conversion</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_sqlos.htm#sql_diagnostics">Obtaining Diagnostic Information about Database Errors</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_sqlos.htm#sql_authorization">SQL Authorization</a></p>
+         </li>
+      </ul> 
+         
+      <p class="note"><strong>Note:</strong><br> On principle, the features and examples contained in the document
+             <a href="pg_dbms_ada.htm#pg_dbms_ada">Accessing Data in an Adabas
+            Database</a> also apply to the SQL databases supported by
+             Natural. Differences, if any, are described in the documents for the individual
+             database access statements (see the <cite>Statements</cite>
+             documentation) in paragraphs named <cite>Database-Specific
+                Considerations</cite> or in the documents for the individual Natural
+             parameters (see the <a href="../parms/parms-over.htm">Parameter
+            Reference</a>). In addition, Natural offers a specific set of
+             statements to access SQL databasess.
+      </p> 
+        
+      <hr> 
+        
+      <div><a name="sql_ddms"></a></div> 
+         
+      <h2> 
+             <a name="x178"></a>Generating Natural DDMs 
+      </h2> 
+          
+          
+      <p>Entire Access is an application programming interface (API) that
+              supports <a href="../sm/stmt.htm#nat_sql_statements">Natural SQL
+                 statements</a> and most
+              <a href="../sm/stmt.htm#nat_dml_statements">Natural DML
+                 statements</a>.
+      </p> 
+          
+      <p>Natural DML and SQL statements can be used in the same Natural program.
+              At compilation, if a DML statement references a DDM for a data source defined
+              in <cite>NATCONF.CFG</cite> with DBMS type <code>SQL</code>, Natural
+              translates the DML statement into an SQL statement.
+      </p> 
+          
+      <p>Natural converts DML and SQL statements into calls to Entire Access.
+              Entire Access converts the requests to the data formats and SQL dialect
+              required by the target RDBMS and passes the requests to the database
+              driver.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_dbms_sqlos.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="sql_profparms"></a></div> 
+         
+      <h2> Setting Natural Profile Parameters </h2> 
+         
+      <div><a name="d0e21580"></a></div> 
+          
+      <h3>ETEOP Parameter</h3> 
+           
+           
+      <p>This parameter can be set only by Natural administrators.</p> 
+           
+      <p>The Natural profile parameter <a href="../parms/eteop.htm"><code>ETEOP</code></a> controls
+               transaction processing during a Natural session. It is required, for example,
+               if a single logical transaction is to span two or more Natural programs. In
+               this case, Natural must not issue an <code>END TRANSACTION</code> command (that
+               is, not "commit") at the termination of a Natural program.
+      </p> 
+           
+      <p>If the <code>ETEOP</code> parameter is set to:
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td><code>ON</code></td> 
+                        
+               <td> 
+                  
+                  <p>Natural issues an <code>END TRANSACTION</code> statement (that is,
+                     automatically "commits") at the end of a Natural program if the
+                              Natural session is not at ET status.
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><code>OFF</code></td> 
+                        
+               <td> 
+                  
+                  <p>Natural does not issue an <code>END TRANSACTION</code> command
+                     (that is, does not "commit") at the end of a Natural program. This
+                     setting thus enables a single logical transaction to span more than one Natural
+                                program.
+                  </p> 
+                            
+                  <p>This is the default.</p> 
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p class="note"><strong>Note:</strong><br> The <a href="../parms/eteop.htm"><code>ETEOP</code></a> parameter
+               applies to Natural Version 6.1 and above. With previous Natural versions, the
+               Natural profile parameter <a href="../parms/oprb.htm"><code>OPRB</code></a> has to be used
+               instead of <code>ETEOP</code> (<code>ETEOP=ON</code>
+               corresponds to <code>OPRB=OFF</code>,
+               <code>ETEOP=OFF</code> corresponds to
+               <code>ORPB=NOOPEN</code>).
+      </p> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_dbms_sqlos.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="sql_dml_statem"></a></div> 
+         
+      <h2> 
+             <a name="x179"></a> Natural DML Statements 
+      </h2> 
+          
+          
+      <p>The following table shows how Natural translates DML statements into SQL
+              statements:
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th>DML Statement</th> 
+                       
+               <th> SQL Statement </th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> <a href="pg_dbms_sqlos.htm#backout_transaction_dml_statement"><code>BACKOUT
+                        TRANSACTION</code></a> 
+               </td> 
+                       
+               <td> <code>ROLLBACK</code> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a href="pg_dbms_sqlos.htm#delete_dml_statement"><code>DELETE</code></a> 
+               </td> 
+                       
+               <td> <code>DELETE WHERE CURRENT OF
+                      <var>cursor-name</var></code></td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a href="pg_dbms_sqlos.htm#end_transaction_dml_statement"><code>END
+                        TRANSACTION</code></a> 
+               </td> 
+                       
+               <td> <code>COMMIT</code> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>EQUAL ... OR</code></td> 
+                       
+               <td> <code>IN (...) </code></td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>EQUAL ... THRU ...</code></td> 
+                       
+               <td> <code>BETWEEN ... AND ... </code></td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a href="pg_dbms_sqlos.htm#find_dml_statement"><code>FIND
+                        ALL</code></a> 
+               </td> 
+                       
+               <td> <code>SELECT</code> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>FIND NUMBER</code></td> 
+                       
+               <td> <code>SELECT COUNT (*) </code></td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a href="pg_dbms_sqlos.htm#histogram_dml_statement"><code>HISTOGRAM</code></a> 
+               </td> 
+                       
+               <td> <code>SELECT COUNT (*) </code></td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>READ LOGICAL</code></td> 
+                       
+               <td> <code>SELECT ... ORDER BY </code></td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>READ PHYSICAL</code></td> 
+                       
+               <td> <code>SELECT ... ORDER BY</code> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>SORTED BY ... [DESCENDING]</code></td> 
+                       
+               <td> <code>ORDER BY ... [DESCENDING]</code></td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a href="pg_dbms_sqlos.htm#store_dml_statement"><code>STORE</code></a> 
+               </td> 
+                       
+               <td> <code>INSERT</code> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a href="pg_dbms_sqlos.htm#update_dml_statement"><code>UPDATE</code></a> 
+               </td> 
+                       
+               <td> <code>UPDATE WHERE CURRENT of
+                      <var>cursor-name</var></code> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>WITH</code></td> 
+                       
+               <td> <code>WHERE</code> 
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p class="note"><strong>Note:</strong><br> Boolean and relational operators function the same way in DML and
+              SQL statements.
+      </p> 
+          
+      <p>Entire Access does not support the following DML statements and
+              options:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem"><code>CIPHER</code></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"><code>COUPLED</code></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"><code>FIND FIRST</code>, <code>FIND UNIQUE</code>, <code>FIND ...
+                  RETAIN AS</code></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"><code>GET</code>, <code>GET SAME</code>, <code>GET TRANSACTION
+                  DATA</code>, <code>GET RECORD</code></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"><code>PASSWORD</code></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"><code>READ BY ISN</code></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"><code>STORE USING/GIVING NUMBER</code></p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+         
+      <div><a name="backout_transaction_dml_statement"></a></div> 
+          
+      <h3> 
+              <a name="x180"></a> 
+              <a name="x181"></a> BACKOUT TRANSACTION
+      </h3> 
+           
+           
+      <p>Natural translates a <a href="../sm/backout.htm"><code>BACKOUT
+               TRANSACTION</code></a> statement into an SQL <code>ROLLBACK</code>
+               command. This statement reverses all database modifications made after the
+               completion of the last recovery unit. A recovery unit may start at the
+               beginning of a session or after the last <a href="../sm/endtrans.htm"><code>END TRANSACTION</code></a>
+               (<code>COMMIT</code>) or <code>BACKOUT TRANSACTION</code>
+               (<code>ROLLBACK</code>) statement.
+      </p> 
+           
+      <p class="note"><strong>Note:</strong><br> Because all cursors are closed when a logical unit of work ends, do
+               not place a <code>BACKOUT TRANSACTION</code> statement within a database loop;
+               place it outside the loop or after the outermost loop of nested loops.
+      </p> 
+           
+          
+         
+      <div><a name="delete_dml_statement"></a></div> 
+          
+      <h3> 
+              <a name="x182"></a> DELETE 
+      </h3> 
+           
+           
+      <p>The <a href="../sm/delete.htm"><code>DELETE</code></a>
+               statement deletes a row from a database table that has been read with a
+               preceding <a href="../sm/find.htm"><code>FIND</code></a>,
+               <a href="../sm/read.htm"><code>READ</code></a>, or
+               <a href="../sm/select_sql.htm"><code>SELECT</code></a> statement.
+               It corresponds to the SQL statement
+               <a href="../sm/delete_sql.htm#Syntax_2_delete_sql"><code>DELETE WHERE
+               CURRENT OF <var>cursor-name</var></code></a>, which
+               means that only the last row that was read can be deleted.
+      </p> 
+           
+      <h4 class="floating-title"> Example: </h4> 
+           <pre class="verbatim">
+FIND EMPLOYEES WITH NAME = 'SMITH'
+     AND FIRST_NAME = 'ROGER'
+DELETE
+</pre> 
+           <p>Natural translates the Natural statements above into the following SQL
+               statements and assigns a cursor name (for example, <code>CURSOR1</code>). The
+               <code>SELECT</code> statement and the <code>DELETE</code> statement refer to
+               the same cursor.
+      </p> 
+           <pre class="verbatim">
+SELECT FROM EMPLOYEES
+ WHERE NAME = 'SMITH' AND FIRST_NAME = 'ROGER'
+DELETE FROM EMPLOYEES
+ WHERE CURRENT OF CURSOR1
+</pre> 
+           <p>Natural translates a <code>DELETE</code> statement into an SQL
+               <code>DELETE</code> statement the way it translates a <code>FIND</code>
+               statement into an SQL <code>SELECT</code> statement. For details, see the
+               <code>FIND</code> statement description <a href="pg_dbms_sqlos.htm#find_dml_statement">below</a>.
+      </p> 
+           
+      <p class="note"><strong>Note:</strong><br> You cannot delete a row read with a <code>FIND SORTED BY</code> or
+               <code>READ LOGICAL</code> statement. For an explanation, see the
+               <a href="pg_dbms_sqlos.htm#find_dml_statement"><code>FIND</code></a> and
+               <a href="pg_dbms_sqlos.htm#read_dml_statement"><code>READ</code></a> statement
+               descriptions below.
+      </p> 
+           
+          
+         
+      <div><a name="end_transaction_dml_statement"></a></div> 
+          
+      <h3> 
+              <a name="x183"></a> 
+              <a name="x184"></a> END TRANSACTION 
+      </h3> 
+           
+           
+      <p>Natural translates an <a href="../sm/endtrans.htm"><code>END
+               TRANSACTION</code></a> statement into an SQL <code>COMMIT</code>
+               command. The <code>END TRANSACTION</code> statement indicates the end of a
+               logical transaction, commits all modifications to the database, and releases
+               data locked during the transaction.
+      </p> 
+           
+      <p class="notes"><strong>Notes:</strong></p>
+      <ol class="note-list"> 
+               
+         <li>Because all cursors are closed when a logical unit of work ends,
+                   do not place an <code>END TRANSACTION</code> statement within a database loop;
+                   place it outside the loop or after the outermost loop of nested loops.
+         </li> 
+               
+         <li>The <code>END TRANSACTION</code> statement cannot be used to store
+                   transaction (ET) data when used with Entire Access.
+         </li> 
+               
+         <li>Entire Access does not issue a <code>COMMIT</code> automatically
+                   when the Natural program terminates.
+         </li> 
+              
+      </ol> 
+           
+          
+         
+      <div><a name="find_dml_statement"></a></div> 
+          
+      <h3> 
+              <a name="x185"></a> 
+              <a name="x186"></a> FIND
+      </h3> 
+           
+           
+      <p>Natural translates a <a href="../sm/find.htm"><code>FIND</code></a> statement into an SQL
+               <a href="../sm/select_sql.htm"><code>SELECT</code></a> statement.
+               The <code>SELECT</code> statement is executed by an <code>OPEN CURSOR</code>
+               command followed by a <code>FETCH</code> command. The <code>FETCH</code>
+               command is executed repeatedly until all records have been read or the program
+               exits the <code>FIND</code> processing loop. A <code>CLOSE CURSOR</code>
+               command ends the <code>SELECT</code> processing.
+      </p> 
+           
+      <h4 class="floating-title"> Example: </h4> 
+           
+      <p>Natural statements:</p> 
+           <pre class="verbatim">
+FIND EMPLOYEES WITH NAME = 'BLACKMORE'
+   AND AGE EQ 20 THRU 40
+OBTAIN PERSONNEL_ID NAME AGE
+</pre> 
+           <p>Equivalent SQL statement:</p> 
+           <pre class="verbatim">
+SELECT PERSONNEL_ID, NAME, AGE
+  FROM EMPLOYEES
+    WHERE NAME = 'BLACKMORE'
+      AND AGE BETWEEN 20 AND 40
+</pre> 
+           <p>You can use any table column (field) designated as a descriptor to
+               construct search criteria.
+      </p> 
+           
+      <p>Natural translates the <code>WITH</code> clause of a <code>FIND</code>
+               statement into the <code>WHERE</code> clause of an SQL <code>SELECT</code>
+               statement. Natural evaluates the <code>WHERE</code> clause of the
+               <code>FIND</code> statement after the rows have been selected using the
+               <code>WITH</code> clause. View fields may be used in a <code>WITH</code> clause
+               only if they are designated as descriptors.
+      </p> 
+           
+      <p>Natural translates a <code>FIND NUMBER</code> statement into an SQL
+               <code>SELECT</code> statement containing a <code>COUNT(*)</code> clause. When
+               you want to determine whether a record exists for a specific search condition,
+               the <code>FIND NUMBER</code> statement provides better performance than the
+               <code>IF NO RECORDS FOUND</code> clause.
+      </p> 
+           
+      <p class="note"><strong>Note:</strong><br> A row read with a <code>FIND</code> statement containing a
+               <code>SORTED BY</code> clause cannot be updated or deleted. Natural translates
+               the <code>SORTED BY</code> clause of a <code>FIND</code> statement into the
+               <code>ORDER BY</code> clause of an SQL <code>SELECT</code> statement, which
+               produces a read-only result table.
+      </p> 
+           
+          
+         
+      <div><a name="histogram_dml_statement"></a></div> 
+          
+      <h3> 
+              <a name="x187"></a> 
+              <a name="x188"></a> HISTOGRAM
+      </h3> 
+           
+           
+      <p>Natural translates the <a href="../sm/histogra.htm"><code>HISTOGRAM</code></a> statement into an
+               SQL <a href="../sm/select_sql.htm"><code>SELECT</code></a>
+               statement. The <code>HISTOGRAM</code> statement returns the number of rows in a
+               table that have the same value in a specific column. The number of rows is
+               returned in the Natural system variable
+               <code>*NUMBER</code>.
+      </p> 
+           
+      <h4 class="floating-title"> Example: </h4> 
+           
+      <p>Natural statements:</p> 
+           <pre class="verbatim">
+HISTOGRAM EMPLOYEES FOR AGE
+OBTAIN AGE
+</pre> 
+           <p>Equivalent SQL statements:</p> 
+           <pre class="verbatim">
+SELECT AGE, COUNT(*) FROM EMPLOYEES
+  GROUP BY AGE
+  ORDER BY AGE
+</pre> 
+           
+          
+         <div><a name="read_dml_statement"></a></div> 
+          
+      <h3> 
+              <a name="x189"></a> 
+              <a name="x190"></a>READ
+      </h3> 
+           
+           
+      <p>Natural translates a <a href="../sm/read.htm"><code>READ</code></a> statement into an SQL
+               <a href="../sm/select_sql.htm"><code>SELECT</code></a> statement.
+               Both <code>READ PHYSICAL</code> and <code>READ LOGICAL</code> statements can be
+               used.
+      </p> 
+           
+      <p>A row read with a <code>READ LOGICAL</code> statement (Example 1)
+               cannot be updated or deleted. Natural translates a <code>READ LOGICAL</code>
+               statement into the <code>ORDER BY</code> clause of an SQL <code>SELECT</code>
+               statement, which produces a read-only result table.
+      </p> 
+           
+      <p>A <code>READ PHYSICAL</code> statement (Example 2) can be updated or
+               deleted. Natural translates it into a <code>SELECT</code> statement without an
+               <code>ORDER BY</code> clause.
+      </p> 
+           
+      <h4 class="floating-title"> Example 1: </h4> 
+           
+      <p>Natural statements:</p> 
+           <pre class="verbatim">
+READ PERSONNEL BY NAME
+OBTAIN NAME FIRSTNAME DATEOFBIRTH
+</pre> 
+           <p>Equivalent SQL statement:</p> 
+           <pre class="verbatim">
+SELECT NAME, FIRSTNAME, DATEOFBIRTH FROM PERSONNEL
+  WHERE NAME &gt;= ' '
+    ORDER BY NAME
+</pre> 
+           <h4 class="floating-title"> Example 2: </h4> 
+           
+      <p>Natural statements:</p> 
+           <pre class="verbatim">
+READ PERSONNEL PHYSICAL
+OBTAIN NAME
+</pre> 
+           <p>Equivalent SQL statement:</p> 
+           <pre class="verbatim">
+SELECT NAME FROM PERSONNEL
+</pre> 
+           <p>When a <code>READ</code> statement contains a <code>WHERE</code>
+               clause, Natural evaluates the <code>WHERE</code> clause after the rows have
+               been selected according to the search criterion.
+      </p> 
+           
+          
+         
+      <div><a name="store_dml_statement"></a></div> 
+          
+      <h3> 
+              <a name="x191"></a> 
+              <a name="x192"></a> STORE
+      </h3> 
+           
+           
+      <p>The <a href="../sm/store.htm"><code>STORE</code></a>
+               statement adds a row to a database table. It corresponds to the SQL
+               <a href="../sm/insert_sql.htm"><code>INSERT</code></a>
+               statement.
+      </p> 
+           
+      <h4 class="floating-title"> Example: </h4> 
+           
+      <p>Natural statement:</p> 
+           <pre class="verbatim">
+STORE RECORD IN EMPLOYEES
+  WITH PERSONNEL_ID = '2112'
+       NAME         = 'LIFESON'
+       FIRST_NAME   = 'ALEX'
+</pre> 
+           <p>Equivalent SQL statement:</p> 
+           <pre class="verbatim">
+INSERT INTO EMPLOYEES (PERSONNEL_ID, NAME, FIRST_NAME)
+  VALUES ('2112', 'LIFESON', 'ALEX')
+</pre> 
+           
+          
+         <div><a name="update_dml_statement"></a></div> 
+          
+      <h3> 
+              <a name="x193"></a> UPDATE
+      </h3> 
+           
+           
+      <p>The DML <a href="../sm/update.htm"><code>UPDATE</code></a>
+               statement updates a table row that has been read with a preceding
+               <a href="../sm/find.htm"><code>FIND</code></a>,
+               <a href="../sm/read.htm"><code>READ</code></a>, or
+               <a href="../sm/select_sql.htm"><code>SELECT</code></a> statement.
+               Natural translates the DML <code>UPDATE</code> statement into the SQL statement
+               <code>UPDATE WHERE CURRENT OF <var>cursor-name</var></code> (a
+               positioned <code>UPDATE</code> statement), which means that only the last row
+               that was read can be updated. In the case of nested loops, the last row in each
+               nested loop can be updated.
+      </p> 
+           
+          
+      <div><a name="update_2_dml_statement"></a></div> 
+           
+      <h4> UPDATE with FIND/READ </h4> 
+            
+            
+      <p>When a DML <code>UPDATE</code> statement is used after a Natural FIND
+                statement, Natural translates the <code>FIND</code> statement into an SQL
+                <a href="../sm/select_sql.htm"><code>SELECT</code></a> statement
+                with a <code>FOR UPDATE OF</code> clause, and translates the DML
+                <code>UPDATE</code> statement into an <code>UPDATE WHERE CURRENT OF
+            <var>cursor-name</var></code> statement.
+      </p> 
+            
+      <h4 class="floating-title"> Example: </h4> 
+            <pre class="verbatim">
+FIND EMPLOYEES WITH SALARY &lt; 5000
+  ASSIGN SALARY = 6000
+  UPDATE
+</pre> 
+            <p>Natural translates the Natural statements above into the following SQL
+                statements and assigns a cursor name (for example, <code>CURSOR1</code>). The
+                <code>SELECT</code> and <code>UPDATE</code> statements refer to the same
+                cursor.
+      </p> 
+            <pre class="verbatim">
+SELECT SALARY FROM EMPLOYEES WHERE SALARY &lt; 5000
+  FOR UPDATE OF SALARY
+UPDATE EMPLOYEES SET SALARY = 6000
+  WHERE CURRENT OF CURSOR1
+</pre> 
+            <p>You cannot update a row read with a <code>FIND SORTED BY</code> or
+                <code>READ LOGICAL</code> statement. For an explanation, see the
+                <a href="pg_dbms_sqlos.htm#find_dml_statement"><code>FIND</code></a> and
+                <a href="pg_dbms_sqlos.htm#read_dml_statement"><code>READ</code></a> statement
+                descriptions above.
+      </p> 
+            
+      <p>An <code>END TRANSACTION</code> or <code>BACKOUT TRANSACTION</code>
+                statement releases data locked by an <code>UPDATE</code> statement.
+      </p> 
+            
+           
+          
+      <div><a name="update_3_dml_statement"></a></div> 
+           
+      <h4> UPDATE with SELECT</h4> 
+            
+            
+      <p>The DML <code>UPDATE</code> statement can be used after a
+                <code>SELECT</code> statement only in the following case:
+      </p> 
+            <pre class="verbatim">
+SELECT *
+  INTO VIEW <var>view-name</var>
+</pre> 
+            <p>Natural rejects any other form of the <code>SELECT</code> statement
+                used with the DML <code>UPDATE</code> statement. Natural translates the DML
+                <code>UPDATE</code> statement into a non-cursor or "searched" SQL
+                <code>UPDATE</code> statement, which means than only an entire Natural view can
+                be updated; individual columns cannot be updated.
+      </p> 
+            
+      <p>In addition, the DML <code>UPDATE</code> statement can be used after a
+                <code>SELECT</code> statement only in Natural structured mode, which has the
+                following syntax:
+      </p> 
+             
+             
+      <table border="0" class="syntax" cellpadding="3">  
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <td nowrap> <code class="keyword">UPDATE</code> [<code class="keyword">RECORD</code>] [<code class="keyword">IN</code>] [<code class="keyword">STATEMENT</code>] [(<var>r</var>)] 
+               </td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+      <h4 class="floating-title"> Example: </h4> 
+            <pre class="verbatim">
+DEFINE DATA LOCAL
+01 PERS VIEW OF SQL-PERSONNEL
+  02 NAME
+  02 AGE
+END-DEFINE
+SELECT *
+  INTO VIEW PERS
+  FROM SQL-PERSONNEL
+  WHERE NAME LIKE 'S%'
+  OBTAIN NAME
+    IF NAME = 'SMITH'
+      ADD 1 TO AGE
+    UPDATE
+    END-IF
+END-SELECT
+</pre> 
+            <p>In other respects, the DML <code>UPDATE</code> statement works with
+                the <code>SELECT</code> statement the way it works with the Natural
+                <code>FIND</code> statement (see <a href="pg_dbms_sqlos.htm#update_2_dml_statement">UPDATE with
+            FIND/READ</a> above).
+      </p> 
+            
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_dbms_sqlos.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="sql_sql_statem"></a></div> 
+         
+      <h2> 
+             <a name="x194"></a> 
+             <a name="x195"></a>Natural SQL Statements 
+      </h2> 
+          
+          
+      <p>The SQL statements available within the Natural programming language
+              comprise two different sets of statements: the common set and the extended set.
+              On this platform, only the extended set is supported by Natural.
+      </p> 
+          
+      <p>The common set can be handled by each SQL-eligible database system
+              supported by Natural. It basically corresponds to the standard SQL syntax
+              definitions. For a detailed description of the common set of Natural SQL
+              statements, see <a href="../sm/common.htm">Common Set and
+            Extended Set</a> (in the <cite>Statements</cite>
+              documentation).
+      </p> 
+          
+      <p>This section describes considerations and restrictions when using the
+              common set of Natural SQL statements with Entire Access.
+      </p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_dbms_sqlos.htm#delete_sql_statement">DELETE</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_sqlos.htm#insert_sql_statement">INSERT</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_sqlos.htm#process_sql_statement">PROCESS SQL</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_sqlos.htm#select_sql_statement">SELECT</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_sqlos.htm#update_sql_statement">UPDATE</a></p>
+         </li>
+      </ul> 
+          
+         
+      <div><a name="delete_sql_statement"></a></div> 
+          
+      <h3> 
+              <a name="x196"></a> DELETE 
+      </h3> 
+           
+           
+      <p>The Natural SQL <a href="../sm/delete_sql.htm"><code>DELETE</code></a> statement deletes
+               rows in a table without using a cursor.
+      </p> 
+           
+      <p>Whereas Natural translates the DML <code>DELETE</code> statement into a
+               positioned <code>DELETE</code> statement (that is, an SQL
+               <a href="../sm/delete_sql.htm#Syntax_2_delete_sql"><code>DELETE WHERE
+               CURRENT OF <var>cursor-name</var></code></a> statement),
+               the Natural SQL <code>DELETE</code> statement is a non-cursor or searched
+               <code>DELETE</code> statement. A searched <code>DELETE</code> statement is a
+               stand-alone statement unrelated to any <code>SELECT</code> statement.
+      </p> 
+           
+          
+         
+      <div><a name="insert_sql_statement"></a></div> 
+          
+      <h3> 
+              <a name="x197"></a> INSERT 
+      </h3> 
+           
+           
+      <p>The <a href="../sm/insert_sql.htm"><code>INSERT</code></a>
+               statement adds rows to a table; it corresponds to the Natural
+               <a href="../sm/store.htm"><code>STORE</code></a> statement.
+      </p> 
+           
+          
+         
+      <div><a name="process_sql_statement"></a></div> 
+          
+      <h3> 
+              <a name="x198"></a> PROCESS SQL 
+      </h3> 
+           
+           
+      <p>The <a href="../sm/procsql_sql.htm"><code>PROCESS
+               SQL</code></a> statement issues SQL statements in a
+               <var>statement-string</var> to the database identified by a
+               <var>ddm-name</var>.
+      </p> 
+           
+      <p class="note"><strong>Note:</strong><br> It is not possible to run database loops using the <code>PROCESS
+            SQL</code> statement.
+      </p> 
+           
+          
+      <div><a name="process_sql_statement_parms"></a></div> 
+           
+      <h4> Parameters </h4> 
+            
+            
+      <p>Natural supports the <code>INDICATOR</code> and
+                <code>LINDICATOR</code> clauses. As an alternative, the
+                <var>statement-string</var> may include parameters. The syntax
+                item <var>parameter</var> is syntactically defined as
+                follows:
+      </p> 
+             
+             
+      <table border="0" class="syntax" cellpadding="3"> 
+                  
+                  
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <td rowspan="2" nowrap> 
+                  
+                  <p><img src="../graphics/sbo2.gif" alt="" width="5" height="40"></p> 
+               </td> 
+                         
+               <td nowrap> <code class="keyword">:U</code> 
+               </td> 
+                         
+               <td rowspan="2" nowrap> 
+                  
+                  <p><img src="../graphics/sbc2.gif" alt="" width="5" height="40"></p> 
+               </td> 
+                         
+               <td rowspan="2" nowrap>
+                  :<var>host-variable</var> 
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td nowrap> <code class="keyword">:G</code> 
+               </td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+      <p>A <var>host-variable</var> is a Natural program
+                variable referenced in an SQL statement.
+      </p> 
+            
+           
+          
+      <div><a name="process_sql_statement_set"></a></div> 
+           
+      <h4> SET SQLOPTION
+               <var>option</var>=<var>value</var></h4> 
+            
+            
+      <p>With Entire Access, you can also specify <code>SET SQLOPTION
+            <var>option</var>=<var>value</var></code> as
+                <var>statement-string</var>. This can be used to specify
+                various options for accessing SQL databases. The options apply only to the
+                database referenced by the <code>PROCESS SQL</code> statement.
+      </p> 
+            
+      <p>Supported options are:</p> 
+            
+      <ul> 
+                
+         <li> 
+                    
+            <p class="initem"> <a href="pg_dbms_sqlos.htm#process_sql_statement_parms"><code>DATEFORMAT</code></a> 
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem"> <a href="pg_dbms_sqlos.htm#process_sql_statement_dbproc"><code>DBPROCESS</code></a> (for
+                        Sybase only)
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem"> <a href="pg_dbms_sqlos.htm#process_sql_statement_timeout"><code>TIMEOUT</code></a> (for
+                        Sybase only)
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem"> <a href="pg_dbms_sqlos.htm#process_sql_statement_transact"><code>TRANSACTION</code></a>
+                        (for Sybase only)
+            </p> 
+                   
+         </li> 
+               
+      </ul> 
+            
+      <div><a name="process_sql_statement_df"></a></div>
+      <h4 class="floating-title"> DATEFORMAT
+                
+      </h4> 
+            
+      <p>This option specifies the format used to retrieve SQL Date and
+                Datetime information into Natural fields of type A. The option is obsolete if
+                Natural fields of type D or T are used. A subset of the Natural date and time
+                edit masks can be used:
+      </p> 
+             
+             
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                  
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <td><code>YYYY</code></td> 
+                         
+               <td> Year (4 digits) </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td><code>YY</code></td> 
+                         
+               <td> Year (2 digits) </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td><code>MM</code></td> 
+                         
+               <td> Month </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td><code>DD</code></td> 
+                         
+               <td> Day </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td><code>HH</code></td> 
+                         
+               <td> Hour </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td><code>II</code></td> 
+                         
+               <td> Minute </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td><code>SS</code></td> 
+                         
+               <td> Second </td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+      <p>If the date format contains blanks, it must be enclosed in
+                apostrophes.
+      </p> 
+            
+      <h4 class="floating-title"> Examples: </h4> 
+            
+      <p>To use ISO date format, specify</p> 
+            <pre class="verbatim">
+PROCESS SQL <var>sql-ddm</var> &lt;&lt; SET SQLOPTION DATEFORMAT = YYYY-MM-DD &gt;&gt;
+</pre> 
+            <p>To obtain date and time components in ISO format, specify</p> 
+            <pre class="verbatim">
+PROCESS SQL <var>sql-ddm</var> &lt;&lt; SET SQLOPTION DATEFORMAT = 'YYYY-MM-DD HH:II:SS'    &gt;&gt;
+</pre> 
+            <p>The <code>DATEFORMAT</code> is evaluated only if data are retrieved
+                from the database. If data are passed to the database, the conversion is done
+                by the database system. Therefore, the format specified with
+                <code>DATEFORMAT</code> should be a valid date format of the underlying
+                database.
+      </p> 
+            
+      <p>If no <code>DATEFORMAT</code> is specified for Natural fields,
+      </p> 
+            
+      <ul> 
+                
+         <li> 
+                    
+            <p class="initem">the default date format <code>DD-MON-YY</code> is used (where
+                        <code>MON</code> is a 3-letter abbreviation of the English month name) and
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">the following default datetime formats are used:</p> 
+                     
+                     
+            <table border="1" class="color" cellpadding="3" width="97%"> 
+                          
+                         
+               <tbody align="left" valign="top"> 
+                             
+                  <tr> 
+                                 
+                     <th>Adabas D</th> 
+                                 
+                     <td> <code>YYYYMMDDHHIISS</code> 
+                     </td> 
+                                
+                  </tr> 
+                             
+                  <tr> 
+                                 
+                     <th>DB2</th> 
+                                 
+                     <td> <code>YYYY-MM-DD-HH.II.SS</code></td> 
+                                
+                  </tr> 
+                             
+                  <tr> 
+                                 
+                     <th>INFORMIX</th> 
+                                 
+                     <td> <code>YYYY-MM-DD HH:II:SS</code></td> 
+                                
+                  </tr> 
+                             
+                  <tr> 
+                                 
+                     <th>ODBC</th> 
+                                 
+                     <td> <code>YYYY-MM-DD HH:II:SS</code> 
+                     </td> 
+                                
+                  </tr> 
+                             
+                  <tr> 
+                                 
+                     <th>ORACLE</th> 
+                                 
+                     <td> <code>YYYYMMDDHHIISS</code> 
+                     </td> 
+                                
+                  </tr> 
+                             
+                  <tr> 
+                                 
+                     <th>SYBASE DBLIB</th> 
+                                 
+                     <td> <code>YYYYMMDD HH:II:SS</code> 
+                     </td> 
+                                
+                  </tr> 
+                             
+                  <tr> 
+                                 
+                     <th>SYBASE CTLIB</th> 
+                                 
+                     <td> <code>YYYYMMDD HH:II:SS</code> 
+                     </td> 
+                                
+                  </tr> 
+                             
+                  <tr> 
+                                 
+                     <th>Microsoft SQL Server</th> 
+                                 
+                     <td> <code>YYYYMMDD HH:II:SS</code> 
+                     </td> 
+                                
+                  </tr> 
+                             
+                  <tr> 
+                                 
+                     <th>other</th> 
+                                 
+                     <td> <code>DD-MON-YY</code> 
+                     </td> 
+                                
+                  </tr> 
+                            
+               </tbody> 
+                        
+            </table> 
+                     
+                   
+         </li> 
+               
+      </ul> 
+            
+      <div><a name="process_sql_statement_dbproc"></a></div>
+      <h4 class="floating-title"> DBPROCESS
+                
+      </h4> 
+            
+      <p>This option is valid for Sybase and Microsoft SQL Server databases
+                only.
+      </p> 
+            
+      <p>This option is used to influence the allocation of SQL statements to
+                Sybase and Microsoft SQL Server <code>DBPROCESS</code>es.
+                <code>DBPROCESS</code>es are used by Entire Access to emulate database cursors,
+                which are not provided by the Sybase and Microsoft SQL Server DBlib
+                interface.
+      </p> 
+            
+      <p>Two values are possible:</p> 
+             
+             
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                  
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <td nowrap>
+                  <a name="process_sql_statement_dbproc_multiple"></a><code>MULTIPLE</code>
+                             
+               </td> 
+                         
+               <td> With <code>DBPROCESS</code> set to <code>MULTIPLE</code>,
+                             each <a href="../sm/select_sql.htm"><code>SELECT</code></a>
+                             statement uses its own secondary <code>DBPROCESS</code>, whereas all other SQL
+                             statements are executed within the primary <code>DBPROCESS</code>. The value
+                             <code>MULTIPLE</code> therefore enables your application to execute further SQL
+                             statements, even if a database loop is open. It also allows nested database
+                             loops. 
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> <a name="process_sql_statement_dbproc_single"></a><code>SINGLE</code> 
+               </td> 
+                         
+               <td> With <code>DBPROCESS</code> set to <code>SINGLE</code>, all
+                  SQL statements use the same (that is, the primary) <code>DBPROCESS</code>. It
+                  is therefore not possible to execute a new database statement while a database
+                             loop is active, because one <code>DBPROCESS</code> can only execute one SQL
+                             batch at a time. Since all statements are executed in the same (primary)
+                             <code>DBPROCESS</code>, however, this setting enables <code>SELECT</code>ions
+                             from non-shared temporary tables. 
+               </td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+      <p class="notes"><strong>Notes:</strong></p>
+      <ol class="note-list"> 
+                
+         <li>The specified value can only be changed if no database loop is
+                    active.
+         </li> 
+                
+         <li>As the <code>DBPROCESS</code> option only applies to the Sybase
+                    and Microsoft SQL Server DBlib interface, your application should use a central
+                    <a href="../sm/callnat.htm"><code>CALLNAT</code></a> statement to
+                    change the value (at least for <code>SINGLE</code>), so that you can easily
+                    remove these calls once Sybase client libraries are supported. Your application
+                    should also use a central error handling that establishes the default setting
+                    (<code>MULTIPLE</code>).
+         </li> 
+               
+      </ol> 
+            
+      <div><a name="process_sql_statement_timeout"></a></div>
+      <h4 class="floating-title"> TIMEOUT
+                
+      </h4> 
+            
+      <p>This option is valid for Sybase and Microsoft SQL Server databases
+                only.
+      </p> 
+            
+      <p>With Sybase and Microsoft SQL Server, Entire Access uses a timeout
+                technique to detect database-access deadlocks. The default timeout period is 8
+                seconds. With this option, you can change the duration of the timeout period
+                (in seconds).
+      </p> 
+            
+      <p>For example, to set the timeout period to 30 seconds, specify</p> 
+            <pre class="verbatim">
+PROCESS SQL <var>sql-ddm</var> &lt;&lt; SET SQLOPTION TIMEOUT = 30 &gt;&gt;
+</pre> 
+            <div><a name="process_sql_statement_transact"></a></div>
+      <h4 class="floating-title"> TRANSACTION
+                
+      </h4> 
+            
+      <p>This option is valid for Sybase and Microsoft SQL Server databases
+                only.
+      </p> 
+            
+      <p>This option is used to enable or disable transaction mode. It becomes
+                effective after the next <a href="../sm/endtrans.htm"><code>END
+               TRANSACTION</code></a> or <a href="../sm/backout.htm"><code>BACKOUT TRANSACTION</code></a>
+                statement.
+      </p> 
+            
+      <p>If transaction mode is enabled (this is the default), Natural
+                automatically issues all required statements to begin a transaction.
+      </p> 
+            
+      <h4 class="floating-title"> Examples: </h4> 
+            
+      <p>To disable transaction mode, specify</p> 
+            <pre class="verbatim">
+PROCESS SQL <var>sql-ddm</var> &lt;&lt; SET SQLOPTION TRANSACTION = NO &gt;&gt;    
+...    
+END TRANSACTION
+</pre> 
+            <p>To enable transaction mode, specify</p> 
+            <pre class="verbatim">
+PROCESS SQL <var>sql-ddm</var> &lt;&lt; SET SQLOPTION TRANSACTION = YES &gt;&gt;    
+...    
+END TRANSACTION
+</pre> 
+            
+           
+          <div><a name="SQLDISCONNECT"></a></div> 
+           
+      <h4> SQLDISCONNECT </h4> 
+            
+            
+      <p>With Entire Access, you can also specify <code>SQLDISCONNECT</code> as
+                the <var>statement-string</var>. In combination with the
+                <code>SQLCONNECT</code> statement (see <a href="pg_dbms_sqlos.htm#SQLCONNECT">below</a>), this statement can be used to access
+                different databases by one application within the same session, by simply
+                connecting and disconnecting as required.
+      </p> 
+            
+      <p>A successfully performed <code>SQLDISCONNECT</code> statement clears
+                the information previously provided by the <code>SQLCONNECT</code> statement;
+                that is, it disconnects your application from the currently connected SQL
+                database determined by the DBID of the DDM used in the <code>PROCESS SQL</code>
+                statement. If no connection is established, the <code>SQLDISCONNECT</code>
+                statement is ignored. It will fail if a transaction is open.
+      </p> 
+            
+      <p class="note"><strong>Note:</strong><br> If Natural reports an error in the <code>SQLDISCONNECT</code>
+                statement, the connection status does not change. If the database reports an
+                error, the connection status is undefined.
+      </p> 
+            
+           
+          
+      <div><a name="SQLCONNECT"></a></div> 
+           
+      <h4> SQLCONNECT
+               <var>option</var>=<var>value</var> 
+      </h4> 
+            
+            
+      <p>With Entire Access, you can also specify <code>SQLCONNECT
+            <var>option</var>=<var>value</var></code> as
+                the <var>statement-string</var>. This statement can be used to
+                establish a connection to an SQL database according to the DBID specified in
+                the DDM addressed by the <code>PROCESS SQL</code> statement. The
+                <code>SQLCONNECT</code> statement will fail if the specified connection is
+                already established.
+      </p> 
+            
+      <p>Supported options are:</p> 
+            
+      <ul> 
+                
+         <li> 
+                    
+            <p class="initem"> <a href="pg_dbms_sqlos.htm#SQLCONNECT_uid_passw"><code>USERID</code></a> 
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem"> <a href="pg_dbms_sqlos.htm#SQLCONNECT_uid_passw"><code>PASSWORD</code></a> 
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem"> <a href="pg_dbms_sqlos.htm#SQLCONNECT_osuid_ospassw"><code>OS_PASSWORD</code></a> 
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem"> <a href="pg_dbms_sqlos.htm#SQLCONNECT_osuid_ospassw"><code>OS_USERID</code></a> 
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem"> <a href="pg_dbms_sqlos.htm#SQLCONNECT_dbms_parm"><code>DBMS_PARAMETER</code></a> 
+            </p> 
+                   
+         </li> 
+               
+      </ul> 
+            
+      <p class="notes"><strong>Notes:</strong></p>
+      <ol class="note-list"> 
+                
+         <li>If the <code>SQLCONNECT</code> statement fails, the connection
+                    status does not change.
+         </li> 
+                
+         <li>If several options are specified, they must be separated by a
+                    comma.
+         </li> 
+                
+         <li>The specified value can be either a character literal or a
+                    Natural variable of format A.
+         </li> 
+                
+         <li>If Natural performs an implicit reconnect, because the connection
+                    to the database was lost, the values provided by the <code>SQLCONNECT</code>
+                    statement are used.
+         </li> 
+               
+      </ol> 
+            
+      <p>The options are evaluated as described below.</p> 
+            
+           
+          
+      <div><a name="SQLCONNECT_uid_passw"></a></div> 
+           
+      <h4> USERID and PASSWORD</h4> 
+            
+            
+      <p>Specifying <code>USERID</code> and <code>PASSWORD</code> for the
+                database logon suppresses the default logon window and the evaluation of the
+                environment variables <code>SQL_DATABASE_USER</code> and
+                <code>SQL_DATABASE_PASSWORD</code>.
+      </p> 
+            
+      <p>If only <code>USERID</code> is specified, <code>PASSWORD</code> is
+                assumed to be blank, and vice versa.
+      </p> 
+            
+      <p>If neither <code>USERID</code> nor <code>PASSWORD</code> is specified,
+                default logon processing applies.
+      </p> 
+            
+      <p class="note"><strong>Note:</strong><br> With database systems that do not require user ID and password, a
+                blank user ID and password can be specified to suppress the default logon
+                processing.
+      </p> 
+            
+           
+          
+      <div><a name="SQLCONNECT_osuid_ospassw"></a></div> 
+           
+      <h4> OS_USERID and OS_PASSWORD </h4> 
+            
+            
+      <p>Specifying <code>OS_PASSWORD</code> and <code>OS_USERID</code> for the
+                operating system logon suppresses the logon window and the evaluation of the
+                environment variables <code>SQL_OS_USER</code> and
+                <code>SQL_OS_PASSWORD</code>.
+      </p> 
+            
+      <p>If only <code>OS_USERID</code> is specified, <code>OS_PASSWORD</code>
+                is assumed to be blank, and vice versa.
+      </p> 
+            
+      <p>If neither <code>OS_USERID</code> nor <code>OS_PASSWORD</code> is
+                specified, default logon processing applies.
+      </p> 
+            
+      <p class="note"><strong>Note:</strong><br> With operating systems that do not require user ID and password, a
+                blank user ID and password can be specified to suppress the default logon
+                processing.
+      </p> 
+            
+           
+          
+      <div><a name="SQLCONNECT_dbms_parm"></a></div> 
+           
+      <h4> DBMS_PARAMETER </h4> 
+            
+            
+      <p>Specifying <code>DBMS_PARAMETER</code> dynamically overwrites the
+                <a href="../config/cfg-confparm.htm#cfg-cf-glo-dbms-dbmsassign">DBMS
+                   assignment</a> in the Natural
+                <a href="../config/cfg-confparm.htm#cfg-cf-global">global configuration
+                   file</a>.
+      </p> 
+            
+      <h4 class="floating-title"> Examples: </h4> 
+            <pre class="verbatim">
+PROCESS SQL <var>sql-ddm</var> &lt;&lt; SQLCONNECT USERID = 'DBA', PASSWORD = 'SECRET'    &gt;&gt;
+</pre> 
+            <p>This example connects to the database specified in the Natural global
+                configuration file with user ID <code>DBA</code> and password
+                <code>SECRET</code>.
+      </p> 
+            <pre class="verbatim">
+DEFINE DATA LOCAL
+1 #UID (A20) 
+1 #PWD (A20) 
+END-DEFINE
+INPUT 'Please enter ADABAS D user ID and password' / #UID / #PWD
+PROCESS SQL <var>sql-ddm</var> &lt;&lt; SQLCONNECT USERID = : #UID, 
+                       PASSWORD          = : #PWD, 
+                       DBMS_PARAMETER    = 'ADABASD:mydb' 
+                    &gt;&gt;
+</pre> 
+            <p>This example connects to the Adabas D database <code>mydb</code> with
+                the user ID and password taken from the <code>INPUT</code> statement.
+      </p> 
+            <pre class="verbatim">
+PROCESS SQL <var>sql-ddm</var> &lt;&lt; SQLCONNECT USERID = ' ', PASSWORD = ' ',
+                       DBMS_PARAMETER    = 'DB2:EXAMPLE' &gt;&gt;
+</pre> 
+            <p>This example connects to the DB2 database <code>EXAMPLE</code> without
+                specifying user ID and password (since these are not required by DB2 which uses
+                the operating system user ID).
+      </p> 
+            
+           
+          
+         
+      <div><a name="select_sql_statement"></a></div> 
+          
+      <h3> 
+              <a name="x199"></a> SELECT 
+      </h3> 
+           
+           
+      <p>The <code>INTO</code> clause and scalar operators for the
+               <a href="../sm/select_sql.htm"><code>SELECT</code></a> statement
+               either are RDBMS-specific and do not conform to the standard SQL syntax
+               definitions (the Natural common set), or impose restrictions when used with
+               Entire Access.
+      </p> 
+           
+      <p>Entire Access does not support the <code>INDICATOR</code> and
+               <code>LINDICATOR</code> clauses in the <code>INTO</code> clause. Thus, Entire
+               Access requires the following syntax for the <code>INTO</code> clause:
+      </p> 
+            
+            
+      <table border="0" class="syntax" cellpadding="3"> 
+                 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td nowrap> <code class="keyword">INTO</code> 
+               </td> 
+                        
+               <td nowrap> 
+                  
+                  <p><img src="../graphics/sbo2.gif" alt="" width="5" height="40"></p> 
+               </td> 
+                        
+               <td nowrap> 
+                  
+                  <p class="mini-list"> 
+                                <var>parameter, ...</var><br> 
+                                <code class="keyword">VIEW</code>
+                                 {<var>view-name</var>},...  
+                               
+                  </p> 
+               </td> 
+                        
+               <td nowrap> 
+                  
+                  <p><img src="../graphics/sbc2.gif" alt="" width="5" height="40"></p> 
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p class="note"><strong>Note:</strong><br> The concatenation operator (||) does not belong to the common set
+               and is therefore not supported by Entire Access.
+      </p> 
+           
+      <h4 class="floating-title"> SELECT SINGLE </h4> 
+           
+      <p>The <a href="../sm/select_sql.htm#Non_Cursor"><code>SELECT
+               SINGLE</code></a> statement provides the functionality of a non-cursor
+               <code>SELECT</code> operation (singleton <code>SELECT</code>); that is, a
+               <code>SELECT</code> statement that retrieves a maximum of one row without using
+               a cursor.
+      </p> 
+           
+      <p>This statement is similar to the Natural
+               <a href="../sm/find.htm#FIND_UNIQUE"><code>FIND UNIQUE</code></a>
+               statement. However, Natural automatically checks the number of rows returned.
+               If more than one row is selected, Natural returns an error message.
+      </p> 
+           
+      <p>If your RDBMS does not support dynamic execution of a non-cursor
+               <code>SELECT</code> operation, the Natural <code>SELECT SINGLE</code> statement
+               is executed like a set-level <code>SELECT</code> statement, which results in a
+               cursor operation. However, Natural still checks the number of returned rows and
+               issues an error message if more than one row is selected.
+      </p> 
+           
+          
+         
+      <div><a name="update_sql_statement"></a></div> 
+          
+      <h3> 
+              <a name="x200"></a> UPDATE 
+      </h3> 
+           
+           
+      <p>The Natural SQL <a href="../sm/update_sql.htm"><code>UPDATE</code></a> statement updates
+               rows in a table without using a cursor.
+      </p> 
+           
+      <p>Whereas Natural translates the DML <code>UPDATE</code> statement into a
+               positioned <code>UPDATE</code> statement (that is, the SQL
+               <a href="../sm/delete_sql.htm#Syntax_2_delete_sql"><code>DELETE WHERE
+               CURRENT OF <var>cursor-name</var></code></a> statement),
+               the Natural SQL <code>UPDATE</code> statement is a non-cursor or searched
+               <code>UPDATE</code> statement. A searched <code>UPDATE</code> statement is a
+               stand-alone statement unrelated to any <a href="../sm/select_sql.htm"><code>SELECT</code></a> statement.
+      </p> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_dbms_sqlos.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="sql_flex_sql"></a></div> 
+         
+      <h2> 
+             <a name="x201"></a> Flexible SQL 
+      </h2> 
+          
+          
+      <p>Flexible SQL allows you to use arbitrary RDBMS-specific SQL syntax
+              extensions. Flexible SQL can be used as a replacement for any of the following
+              syntactical SQL items:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">atom</p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">column reference</p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">scalar expression</p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">condition</p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>The Natural compiler does not recognize the SQL text used in flexible
+              SQL; it simply copies the SQL text (after substituting values for the host
+              variables, which are Natural program variables referenced in an SQL statement)
+              into the SQL string that it passes to the RDBMS. Syntax errors in flexible SQL
+              text are detected at runtime when the RDBMS executes the string.
+      </p> 
+          
+      <p>Note the following characteristics of flexible SQL:</p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">It is enclosed in <code>&lt;&lt;</code> and <code>&gt;&gt;</code>
+                      characters and can include arbitrary SQL text and host variables.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Host variables must be prefixed by a colon (:).</p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">The SQL string can cover several statement lines; comments are
+                      permitted.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>Flexible SQL can also be used between the clauses of a select
+              expression:
+      </p> 
+          <pre class="verbatim">
+SELECT selection
+  &lt;&lt; ... &gt;&gt;
+  INTO ...
+  FROM ...
+  &lt;&lt; ... &gt;&gt;
+  WHERE ...
+  &lt;&lt; ... &gt;&gt;
+  GROUP BY ...
+  &lt;&lt; ... &gt;&gt;
+  HAVING ...
+  &lt;&lt; ... &gt;&gt;
+  ORDER BY ...
+  &lt;&lt; ... &gt;&gt;
+</pre> 
+          <h4 class="floating-title"> Examples: </h4> 
+          <pre class="verbatim">
+SELECT NAME
+FROM EMPLOYEES
+WHERE &lt;&lt; MONTH (BIRTH) &gt;&gt; = &lt;&lt; MONTH (CURRENT_DATE) &gt;&gt;
+
+SELECT NAME
+FROM EMPLOYEES
+WHERE &lt;&lt; MONTH (BIRTH) = MONTH (CURRENT_DATE) &gt;&gt;
+
+SELECT NAME
+FROM EMPLOYEES
+WHERE SALARY &gt; 50000
+&lt;&lt; INTERSECT
+   SELECT NAME
+   FROM EMPLOYEES
+   WHERE DEPT = 'DEPT10'
+&gt;&gt;
+</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_dbms_sqlos.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="sql_rdbms_req"></a></div> 
+         
+      <h2> 
+             <a name="x202"></a> 
+             <a name="x203"></a> RDBMS-Specific Requirements and Restrictions 
+      </h2> 
+          
+          
+      <p>This section discusses restrictions and special requirements for Natural
+              and some RDBMSs used with Entire Access.
+      </p> 
+          
+      <p>The following topics are covered:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_dbms_sqlos.htm#case_sensitive_dbms">Case-Sensitive Database Systems</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_sqlos.htm#sybase_ms_sql">SYBASE and Microsoft SQL Server</a></p>
+         </li>
+      </ul> 
+          
+         
+      <div><a name="case_sensitive_dbms"></a></div> 
+          
+      <h3> Case-Sensitive Database Systems </h3> 
+           
+           
+      <p>In case-sensitive database systems, use lower-case characters for table
+               and column names, as all names specified in a Natural program are automatically
+               converted to lower-case.
+      </p> 
+           
+      <p class="note"><strong>Note:</strong><br> This restriction does not apply when you use flexible SQL.
+      </p> 
+           
+          
+         
+      <div><a name="sybase_ms_sql"></a></div> 
+          
+      <h3> 
+              <a name="x204"></a> 
+              <a name="x205"></a> SYBASE and Microsoft SQL Server 
+      </h3> 
+           
+           
+      <p>To execute SQL statements against SYBASE and Microsoft SQL Server, you
+               must use one or more <code>DBPROCESS</code> structures. A
+               <code>DBPROCESS</code> can execute SQL command batches.
+      </p> 
+           
+      <p>A command batch is a sequence of SQL statements. Statements must be
+               executed in the sequence in which they are defined in the command batch. If a
+               statement (for example, a <code>SELECT</code> statement) returns a result, you
+               must execute the statement first and then fetch the rows one by one. Once you
+               execute the next statement from the command batch, you can no longer fetch rows
+               from the previous query.
+      </p> 
+           
+      <p>With SYBASE and Microsoft SQL Server, an application can use more than
+               one <code>DBPROCESS</code> structure; therefore, it is possible to have nested
+               queries if you use a separate <code>DBPROCESS</code> for each query. Because
+               SYBASE and Microsoft SQL Server lock data for each <code>DBPROCESS</code>,
+               however, an application that uses more than one <code>DBPROCESS</code> can
+               deadlock itself. Natural times out in case of a deadlock.
+      </p> 
+           
+      <p>The following topics are covered below:</p> 
+      <ul>
+         <li><a href="pg_dbms_sqlos.htm#conv_sm_to_db_calls">How Natural Statements are Converted to Database Calls</a></li>
+         <li><a href="pg_dbms_sqlos.htm#restrictions_sybase_ms">Natural Restrictions with SYBASE and Microsoft SQL Server</a></li>
+      </ul> 
+           
+          
+      <div><a name="conv_sm_to_db_calls"></a></div> 
+           
+      <h4> How Natural Statements are Converted to Database Calls </h4> 
+            
+            
+      <p>Natural uses one <code>DBPROCESS</code> for each open query and
+                another <code>DBPROCESS</code> for all other SQL statements
+                (<code>UPDATE</code>, <code>DELETE</code>, <code>INSERT</code>, ... ).
+      </p> 
+            
+      <p>If a query is referenced by a positioned <code>UPDATE</code> or
+                <code>DELETE</code> statement, Natural automatically appends the <code>FOR
+            BROWSE</code> clause to the generated <code>SELECT</code> statement to allow
+                <code>UPDATE</code>s while rows are being read.
+      </p> 
+            
+      <p>For a positioned <code>UPDATE</code> or <code>DELETE</code> statement,
+                the SYBASE <code>dbqual</code> function is used to generate the following
+                search condition:
+      </p> 
+            <pre class="verbatim">
+WHERE <var>unique-index = value</var> AND tsequal (timestamp,<var>old-timestamp</var>)
+
+</pre> 
+            <p>This search condition can be used to reselect the current row from the
+                query. The <code>tsequal</code> function checks whether the row has been
+                updated by another user.
+      </p> 
+            
+           
+          
+      <div><a name="restrictions_sybase_ms"></a></div> 
+           
+      <h4> Natural Restrictions with SYBASE and Microsoft SQL Server </h4>
+           
+            
+            
+      <p>The following restrictions apply when using Natural with SYBASE and
+                Microsoft SQL Server.
+      </p> 
+            
+      <dl> 
+                 
+                 
+         <dt><a name="d0e24334"><strong> Case-Sensitivity</strong></a></dt>
+         <dd> 
+                     
+            <p class="definition">SYBASE and Microsoft SQL Server are case-sensitive, and Natural
+                         passes parameters in lowercase. Thus, if your SYBASE and Microsoft SQL Server
+                         tables or fields are defined in uppercase or mixed case, you must use database
+                         <code>SYNONYM</code>s or Natural flexible SQL.
+            </p>
+         </dd> 
+                 
+                 
+                 
+         <dt><a name="d0e24347"><strong> Positioned UPDATE and DELETE Statements</strong></a></dt>
+         <dd> 
+                     
+            <p class="definition">To support positioned <code>UPDATE</code> and <code>DELETE</code>
+                         statements, the table to be accessed must have a unique index and a timestamp
+                         column. In addition, the timestamp column must not be included in the select
+                         list of the query.
+            </p>
+         </dd> 
+                 
+                 
+                 
+         <dt><a name="d0e24363"><strong>Querying Rows</strong></a></dt>
+         <dd> 
+                     
+            <p class="definition">SYBASE and Microsoft SQL Server lock pages, and locked pages are
+                         owned by <code>DBPROCESS</code> structures.
+            </p> 
+                     
+            <p class="definition">Pages locked by an active <code>DBPROCESS</code> cannot
+                         subsequently be read (by the same or another <code>DBPROCESS</code>) until the
+                         lock is released by an <code>END TRANSACTION</code> or <code>BACKOUT
+                  TRANSACTION</code> statement.
+            </p> 
+                     
+            <p class="definition">Therefore, if you have updated, inserted, or deleted a row in a
+                         table:
+            </p> 
+                     
+            <ul> 
+                         
+               <li> 
+                             
+                  <p class="initem">Do not start a new <code>SELECT</code> (<code>FIND</code>,
+                                 <code>READ</code>, ...) loop against the same table.
+                  </p> 
+                            
+               </li> 
+                         
+               <li> 
+                             
+                  <p class="initem">Do not fetch additional rows from a query that references the
+                                 same table if the <code>SELECT</code> statement has no <code>FOR BROWSE</code>
+                                 clause.
+                  </p> 
+                            
+               </li> 
+                        
+            </ul> 
+                     
+            <p class="definition">Natural automatically appends the <code>FOR BROWSE</code> clause if
+                         the query is referenced by a positioned <code>UPDATE</code> or
+                         <code>DELETE</code> statement.
+            </p>
+         </dd> 
+                 
+                 
+                 
+         <dt><a name="d0e24436"><strong> Transaction/Non-Transaction Mode</strong></a></dt>
+         <dd> 
+                     
+            <p class="definition">SYBASE and Microsoft SQL Server differentiate between transaction
+                         and non-transaction mode. In transaction mode, Natural connects to the database
+                         allowing <code>INSERT</code>s, <code>UPDATE</code>s and <code>DELETE</code>s to
+                         be issued; thus, commands that run in non-transaction mode, for example,
+                         <code>CREATE TABLE</code>, cannot be issued.
+            </p>
+         </dd> 
+                 
+                 
+                 
+         <dt><a name="d0e24458"><strong> Stored Procedures</strong></a></dt>
+         <dd> 
+                     
+            <p class="definition">It is possible to use stored procedures in SYBASE and Microsoft SQL
+                         Server using the <code>PROCESS SQL</code> statement. However, the stored
+                         procedures must not contain
+            </p> 
+                     
+            <ul> 
+                         
+               <li> 
+                             
+                  <p class="initem">commands that work only in non-transaction mode; or</p> 
+                            
+               </li> 
+                         
+               <li> 
+                             
+                  <p class="initem">return values.</p> 
+                            
+               </li> 
+                        
+            </ul> 
+                    
+         </dd> 
+                 
+               
+      </dl> 
+            
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_dbms_sqlos.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="sql_data_type_conv"></a></div> 
+         
+      <h2> Data-Type Conversion </h2> 
+          
+          
+      <p>When a Natural program accesses data in a relational database, Entire
+              Access converts RDBMS-specific data types to Natural data formats, and vice
+              versa. The RDBMS data types and their corresponding Natural data formats are
+              described in the <cite>Editors</cite> documentation under
+              <a href="../edis/ddm_winux_conv.htm">Data Conversion for
+            RDBMS</a> (in the section <cite>DDM
+                 Services</cite>.
+      </p> 
+          
+      <p>The date/time or datetime format specific to a particular database can
+              be converted into the Natural formats D and T; see below.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_dbms_sqlos.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="sql_date_time_conv"></a></div> 
+         
+      <h2> Date/Time Conversion </h2> 
+          
+          
+      <p>The RDBMS-specific date/time or datetime format can be converted into
+              the Natural formats D and T.
+      </p> 
+          
+      <p>To use this conversion, you first have to edit the Natural DDM to change
+              the date or time field formats from A(lphanumeric) to D(ate) or T(ime). The
+              <code>SQLOPTION DATEFORMAT</code> is obsolete for fields with format D or
+              T.
+      </p> 
+          
+      <p class="note"><strong>Note:</strong><br> Date or time fields converted to Natural D(ate)/T(ime) format may
+              not be mixed with those converted to Natural A(lphanumeric) format.
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">For update commands, Natural converts the Natural Date and Time format
+                      to the database-dependent representation of
+                      <code>DATE</code>/<code>TIME</code>/<code>DATETIME</code> to a precision level
+                      of seconds.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">For retrieval commands, Natural converts the returned
+                      database-dependent character representation to the internal Natural Date or
+                      Time format; see conversion tables below. The date component of Natural Time is
+                      not ignored and is initialized to <code>0000-01-02</code>
+                      (<code>YYYY-MM-DD</code>) if the RDBMS`s time format does not contain a date
+                      component.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">For Natural Date variables, the time portion is ignored and
+                      initialized to zero.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">For Natural Time variables, tenth of seconds are ignored and
+                      initialized to zero.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+         
+      <div><a name="d0e24583"></a></div> 
+          
+      <h3>Conversion Tables</h3> 
+           
+           
+      <h4 class="floating-title"> Adabas D </h4> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="32%">
+            <col width="32%">
+            <col width="32%">
+         </colgroup> 
+                
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>RDBMS Formats</th> 
+                        
+               <th> Natural Date </th> 
+                        
+               <th> Natural Time </th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td><code>DATE</code></td> 
+                        
+               <td> <code>YYYYMMDD</code> 
+               </td> 
+                        
+               <td> &nbsp; </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><code>TIME</code></td> 
+                        
+               <td> &nbsp; </td> 
+                        
+               <td> <code>00HHIISS</code> 
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <h4 class="floating-title"> DB2 </h4> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="32%">
+            <col width="32%">
+            <col width="32%">
+         </colgroup> 
+                
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>RDBMS Formats</th> 
+                        
+               <th> Natural Date </th> 
+                        
+               <th> Natural Time </th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td><code>DATE</code></td> 
+                        
+               <td> <code>YYYY-MM-DD</code> 
+               </td> 
+                        
+               <td> &nbsp; </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><code>TIME</code></td> 
+                        
+               <td> &nbsp; </td> 
+                        
+               <td> <code>HH.II.SS </code></td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <h4 class="floating-title"> INFORMIX </h4> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="32%">
+            <col width="32%">
+            <col width="32%">
+         </colgroup> 
+                
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>RDBMS Formats</th> 
+                        
+               <th> Natural Date </th> 
+                        
+               <th> Natural Time </th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td><code>DATETIME</code>, year to day
+               </td> 
+                        
+               <td> <code>YYYY-MM-DD</code> 
+               </td> 
+                        
+               <td> &nbsp; </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><code>DATETIME</code>, year to second (other formats are not
+                  supported)
+               </td> 
+                        
+               <td> &nbsp; </td> 
+                        
+               <td> <code>YYYY-MM-DD-HH:II:SS*</code> 
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <h4 class="floating-title"> ODBC </h4> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="32%">
+            <col width="32%">
+            <col width="32%">
+         </colgroup> 
+                
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>RDBMS Formats</th> 
+                        
+               <th> Natural Date </th> 
+                        
+               <th> Natural Time </th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td><code>DATE</code></td> 
+                        
+               <td> <code>YYYY-MM-DD</code> 
+               </td> 
+                        
+               <td> &nbsp; </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><code>TIME</code></td> 
+                        
+               <td> &nbsp; </td> 
+                        
+               <td> <code>HH:II:SS</code> 
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <h4 class="floating-title"> ORACLE </h4> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="32%">
+            <col width="32%">
+            <col width="32%">
+         </colgroup> 
+                
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>RDBMS Formats</th> 
+                        
+               <th> Natural Date </th> 
+                        
+               <th> Natural Time </th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td><code>DATE</code> (ORACLE session parameter
+                      <code>NLS_DATE_FORMAT</code> is set to <code>YYYYMMDDHH24MISS</code>)
+               </td> 
+                        
+               <td> <code>YYYYMMDD000000</code> (ORACLE time component is set to
+                  null for update commands and ignored for retrieval commands.) 
+               </td> 
+                        
+               <td> <code>YYYYMMDDHHIISS</code> * 
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <h4 class="floating-title"> SYBASE </h4> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="32%">
+            <col width="32%">
+            <col width="32%">
+         </colgroup> 
+                
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>RDBMS Formats</th> 
+                        
+               <th> Natural Date </th> 
+                        
+               <th> Natural Time </th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td><code>DATETIME</code></td> 
+                        
+               <td> <code>YYYYMMDD</code> 
+               </td> 
+                        
+               <td> <code>YYYYMMDD HH:II:SS</code> * 
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>* When comparing two time values, remember that the date components may
+               have different values.
+      </p> 
+           
+      <h4 class="floating-title"> Microsoft SQL Server </h4> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="32%">
+            <col width="32%">
+            <col width="32%">
+         </colgroup> 
+                
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>RDBMS Formats</th> 
+                        
+               <th> Natural Date </th> 
+                        
+               <th> Natural Time </th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td><code>DATETIME</code></td> 
+                        
+               <td> <code>YYYYMMDD</code> 
+               </td> 
+                        
+               <td> <code>YYYYMMDD HH:II:SS</code> * 
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_dbms_sqlos.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="sql_diagnostics"></a></div> 
+         
+      <h2> Obtaining Diagnostic Information about Database Errors </h2> 
+          
+          
+      <p>If the database returns an error while being accessed, you can call the
+              non-Natural program <code>CMOSQERR</code> to obtain diagnostic information
+              about the error, using the following syntax:
+      </p> 
+           
+           
+      <table border="0" class="syntax" cellpadding="3">  
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td nowrap> <code class="keyword">CALL 'CMOSQERR'</code>
+                           <var>parm1</var> <var>parm2</var> 
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>The parameters are:</p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th>Parameter</th> 
+                       
+               <th> Format/Length </th> 
+                       
+               <th> Description </th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> <code><var>parm1</var></code> 
+               </td> 
+                       
+               <td> I4 </td> 
+                       
+               <td> The number of the error returned by the database. </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <code><var>parm2</var></code> 
+               </td> 
+                       
+               <td> A70 </td> 
+                       
+               <td> The text of the error returned by the database. </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_dbms_sqlos.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="sql_authorization"></a></div> 
+         
+      <h2> SQL Authorization </h2> 
+          
+          
+      <p>The Natural Configuration Utility allows you to add DBID specific
+              settings of user IDs and passwords for automatic login to SQL databases. It
+              distinguishes between operating system authentication and database
+              authentication, depending on the current database system. If the <span class="selectable_label">Auto
+            login</span> flag in the <span class="guilabel">SQL Authorization</span>
+              table is set for an SQL DBID then no interactive login prompt will pop up. The
+              login values will be taken from this table row.
+      </p> 
+          
+      <p>Please refer to
+              <a href="../config/cfg-confparm.htm#cfg-cf-glo-dbms-sqlassign">SQL
+            Assignments</a> in the <cite>Configuration Utility
+                 </cite> documentation for a more detailed description of the SQL
+              Authorization table.
+      </p> 
+          
+        
+       
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="pg_dbms_sqlos.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_dbms_sqlos.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_dbms_sqlos.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_dbms-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_dbms_ada.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_dbms_xml.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

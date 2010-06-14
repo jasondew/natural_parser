@@ -1,0 +1,354 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Defining Application-Independent Variables</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="defineda_aiv"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../sm/defineda_aiv.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/sm/defineda_aiv.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="defineda.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="defineda_pda.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="defineda_cv.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Statements&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x61"></a> 
+               <a name="x62"></a> 
+               <a name="x63"></a>Defining Application-Independent Variables
+         </h1>
+      </div> 
+         
+         
+      <p>General syntax of <code>DEFINE DATA INDEPENDENT</code>:
+      </p> 
+          
+          
+      <table border="0" class="syntax" cellpadding="3">  
+              
+         <tbody align="left" valign="top"> 
+                  
+            <tr> 
+                      
+               <td colspan="NaN">
+                  <a href="defineda_aiv.htm#function_define_data_independent"> <code class="keyword">DEFINE DATA</code></a></td> 
+                     
+            </tr> 
+                  
+            <tr> 
+                      
+               <td> &nbsp;&nbsp; <a href="defineda_aiv.htm#aiv_datdef"><code class="keyword">INDEPENDENT</code>
+                             <var>AIV-data-definition</var></a>... 
+               </td> 
+                     
+            </tr> 
+                  
+            <tr> 
+                      
+               <td colspan="NaN">
+                  <a href="defineda_aiv.htm#end_define_independent"> <code class="keyword">END-DEFINE</code></a></td> 
+                     
+            </tr> 
+                 
+         </tbody> 
+             
+      </table> 
+          
+         
+      <p>This document covers the following topics:</p>
+         
+      <ul>
+         <li>
+            <p class="initem"><a href="defineda_aiv.htm#function_define_data_independent">Function</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="defineda_aiv.htm#syntax_descr_define_data_independent">Syntax Description</a></p>
+         </li>
+      </ul> 
+         
+      <p>For an explanation of the symbols used in the syntax diagrams, see
+             <a href="synsym.htm#Syntax_Symbols">Syntax
+            Symbols</a>.
+      </p> 
+        
+      <hr> 
+        
+      <div><a name="function_define_data_independent"></a></div> 
+         
+      <h2>Function</h2> 
+          
+          
+      <p>The <code>DEFINE DATA INDEPENDENT</code> statement is used to define
+              application-independent variables (AIVs).
+      </p> 
+          
+      <p>An application-independent variable is referenced by its name, and its
+              content is shared by all programming objects executed within one application
+              that refer to that name. The variable is allocated by the first executed
+              programming object that references this variable and is deallocated by the
+              <a href="../syscom/logon.htm"><code>LOGON</code></a>
+              command or a <a href="release.htm#RELEASE_VARIABLES"><code>RELEASE
+               VARIABLES</code></a> statement.
+      </p> 
+          
+      <p>The optional <a href="defineda_vari.htm#vari_INIT"><code>INIT</code></a>
+              clause is evaluated in each executed programming object that contains this
+              clause (not only in the programming object that allocates the variable).
+      </p> 
+          
+      <p class="note"><strong>Note:</strong><br>In an RPC server, application-independent variables (AIVs) are not
+              deallocated implicitly, but stay active across RPC requests, because different
+              clients may have access to the same variables on the RPC server. This means
+              they must be deallocated explicitly using the
+              <a href="release.htm#RELEASE_VARIABLES"><code>RELEASE
+               VARIABLES</code></a> statement. See
+              <a href="../rpc/limits.htm#limits_aivs">Application-Independent
+            Variables</a> in the <cite>Natural Remote Procedure
+                 Call</cite> documentation.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="defineda_aiv.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="syntax_descr_define_data_independent"></a></div> 
+         
+      <h2>Syntax Description</h2> 
+          
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th nowrap>
+                  <a name="aiv_datdef"></a>INDEPENDENT
+                           <var>AIV-data-definition</var></th> 
+                       
+               <td colspan="NaN"> 
+                  
+                  <p>The <code>DEFINE DATA INDEPENDENT</code> statement can be used to
+                     define a single or multiple application-independent variables (AIVs). For each
+                               AIV, the syntax shown <a href="defineda_aiv.htm#aiv_data_def">below</a>
+                               applies.
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th nowrap> <a name="end_define_independent"></a>END-DEFINE
+               </th> 
+                       
+               <td colspan="NaN"> 
+                  
+                  <p>The Natural reserved word <code>END-DEFINE</code> must be used to
+                               end the <code>DEFINE DATA</code> statement.
+                  </p>
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <div><a name="aiv_data_def"></a></div>
+      <h4 class="floating-title">AIV Data Definition</h4> 
+           
+           
+      <table border="0" class="syntax" cellpadding="3"> 
+                
+                
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td rowspan="3" align="center" nowrap>
+                  <a href="defineda_aiv.htm#aiv_level">
+                              <var>level</var></a></td> 
+                       
+               <td rowspan="3" nowrap> 
+                  
+                  <p><img src="../graphics/cbo3.gif" alt="" width="6" height="59"></p>
+               </td> 
+                       
+               <td nowrap> <a href="defineda_aiv.htm#aiv_var_def">
+                      <var>variable-definition</var></a><a href="defineda_aiv.htm#aiv_hndl_def"></a></td> 
+                       
+               <td rowspan="3" nowrap> 
+                  
+                  <p><img src="../graphics/cbc3.gif" alt="" width="6" height="59"></p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td nowrap><a href="defineda_aiv.htm#aiv_redef">
+                     <var>redefinition</var></a></td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td nowrap>
+                  <var>handle-definition</var></td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>Syntax Element Description:</p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th nowrap> <a name="aiv_level"></a><var>level</var></th> 
+                       
+               <td>An application-independent variable must be defined at Level 01.
+                  Other levels are only used in a redefinition.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th nowrap> <a name="aiv_var_def"></a>
+                   <var>variable-definition </var></th> 
+                       
+               <td> 
+                  
+                  <p>A <var>variable definition</var> is used to define
+                     a single field/variable that may be single-valued (scalar) or multi-valued
+                               (array). See <a href="defineda_vari.htm#defineda_vari">Variable
+                                  Definition</a>.
+                  </p> 
+                           
+                  <p class="note"><strong>Note:</strong><br> The name of an application-independent variable must start with
+                               a plus (+) character.
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th nowrap> <a name="aiv_redef"></a>
+                   <var>redefinition</var></th> 
+                       
+               <td> 
+                  
+                  <p>A <var>redefinition</var> may be used to redefine a
+                     group, a view, a DDM field or a single field/variable (that is a scalar or an
+                               array). See <a href="defineda_redef.htm#defineda_redef">Redefinition</a>. 
+                  </p> 
+                           
+                  <p>The fields resulting from the redefinition must not be
+                               application-independent variables, that is their name must not start with a
+                               plus (+). These fields are treated as local variables.
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th nowrap> <a name="aiv_hndl_def"></a><var>handle-definition</var></th>
+                       
+                       
+               <td>A handle identifies a dialog element in code and is stored in
+                  handle variables. See <a href="defineda_hndl.htm#defineda_hndl">Handle
+                              Definition</a>. 
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p class="note"><strong>Note:</strong><br> The first character of the name must be a plus (+). Rules for
+              Natural variable names apply, see
+              <a href="../using/use_rules.htm#use_rules-Variable_Names">Naming
+            Conventions for User-Defined Variables</a> in the
+              <cite>Using Natural</cite>
+              documentation.
+      </p> 
+          
+        
+       
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="defineda_aiv.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../sm/defineda_aiv.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/sm/defineda_aiv.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="defineda.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="defineda_pda.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="defineda_cv.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

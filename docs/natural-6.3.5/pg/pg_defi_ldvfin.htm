@@ -1,0 +1,450 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Introduction to Dynamic Variables and Fields</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="pg_defi_ldvfin"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_defi_ldvfin.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_defi_ldvfin.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_defi-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_defi_funcall.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_defi_ldvfus.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Programming Guide&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x78"></a> Introduction to Dynamic Variables and Fields 
+         </h1>
+      </div> 
+         
+         
+      <p>This document covers the following topics:</p>
+         
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_defi_ldvfin.htm#dynvar_purposes">Purpose of Dynamic Variables</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_ldvfin.htm#Definition_of_Dynamic_Variables">Definition of Dynamic Variables</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_ldvfin.htm#System_Variable_LENGTH_field">Value Space Currently Used for a Dynamic Variable</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_ldvfin.htm#Size_Limitation_Checks">Size Limitation Check</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_ldvfin.htm#Statements_EXPAND_and_REDUCE">Allocating/Freeing Memory Space for a Dynamic Variable</a></p>
+         </li>
+      </ul> 
+        
+      <hr> 
+        
+      <div><a name="dynvar_purposes"></a></div> 
+         
+      <h2> Purpose of Dynamic Variables </h2> 
+          
+          
+      <p>In that the maximum size of large data structures (for example,
+              pictures, sounds, videos) may not exactly be known at application development
+              time,&nbsp; Natural additionally provides for the definition of alphanumeric and
+              binary variables with the attribute <code>DYNAMIC</code>. The value space of
+              variables which are defined with this attribute will be extended dynamically at
+              execution time when it becomes necessary (for example, during an assignment
+              operation: <code>#picture1 := #picture2</code>). This means that large binary
+              and alphanumeric data structures may be processed in Natural without the need
+              to define a limit at development time. The execution-time allocation of dynamic
+              variables is of course subject to available memory restrictions. If the
+              allocation of dynamic variables results in an insufficent memory condition
+              being returned by the underlying operating system, the
+              <a href="../sm/onerror.htm"><code>ON ERROR</code></a> statement
+              can be used to intercept this error condition; otherwise, an error message will
+              be returned by Natural.
+      </p> 
+          
+      <p>The Natural system variable <a href="../vari/appl.htm#LENGTH"><code>*LENGTH</code></a>
+              can be used obtain the length (in terms of code units) of the value space which
+              is currently used for a given dynamic variable. For A and B format, the size of
+              one code unit is 1 byte. For U format, the size of one code unit is 2 bytes
+              (UTF-16). Natural automatically sets <code>*LENGTH</code> to
+              the length of the source operand during assignments in which the dynamic
+              variable is involved.
+              <code>*LENGTH(<var>field</var>)</code>
+              therefore returns the length (in terms of code units) currently used for a
+              dynamic Natural field or variable.
+      </p> 
+          
+      <p>If the dynamic variable space is no longer needed, the
+              <a href="../sm/reduce.htm"><code>REDUCE</code></a> or
+              <a href="../sm/resize.htm"><code>RESIZE</code></a> statements can
+              be used to reduce the space used for the dynamic variable to zero (or any other
+              desired size).&nbsp; If the upper limit of memory usage is known for a specific
+              dynamic variable, the <a href="../sm/expand.htm"><code>EXPAND</code></a> statement can be used to
+              set the space used for the dynamic variable to this specific size.
+      </p> 
+          
+      <p>If a dynamic variable is to be initialized, the
+              <a href="../sm/moveall.htm"><code>MOVE ALL UNTIL</code></a>
+              statement should be used for this purpose.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_defi_ldvfin.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Definition_of_Dynamic_Variables"></a></div> 
+         
+      <h2> Definition of Dynamic Variables </h2> 
+          
+          
+      <p>Because the actual size of large alphanumeric and binary data structures
+              may not be exactly known at application development time, the definition of
+              <em>dynamic</em> variables of Format A, B or U can be used to manage these
+              structures. The dynamic allocation and extension (reallocation) of large
+              variables is transparent to the application programming logic. Dynamic
+              variables are defined without any length. Memory will be either implicitly
+              allocated at execution time when the dynamic variable is used as a target
+              operand, or explicitly with an <a href="../sm/expand.htm"><code>EXPAND</code></a> or
+              <a href="../sm/resize.htm"><code>RESIZE</code></a> statement.
+      </p> 
+          
+      <p>Dynamic variables can only be defined in a
+              <a href="../sm/defineda.htm"><code>DEFINE DATA</code></a>
+              statement using the following syntax:
+      </p> 
+           
+           
+      <table border="0" class="syntax" cellpadding="3">  
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> <var>level variable-name</var> <code>( A )
+                              DYNAMIC</code> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><var>level variable-name</var> <code>( B )
+                              DYNAMIC</code> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><var>level variable-name</var> <code>( U )
+                              DYNAMIC</code> 
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>The following restrictions apply to a dynamic variable:</p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">A redefinition of a dynamic variable is not allowed.</p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">A dynamic variable may not be contained in a <code>REDEFINE</code>
+                      clause.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_defi_ldvfin.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="System_Variable_LENGTH_field"></a></div> 
+         
+      <h2> Value Space Currently Used for a Dynamic Variable </h2> 
+          
+          
+      <p>The length (in terms of code units) of the currently used value space of
+              a dynamic variable can be obtained from the system variable
+              <a href="../vari/appl.htm#LENGTH"><code>*LENGTH</code></a>.
+              <code>*LENGTH</code> is set to the (used) length of the source
+              operand during assignments automatically.
+      </p> 
+          
+      <table border="0" cellspacing="0" width="80%" class="warning">
+         <tr>
+            <td valign="top" width="36"><img src="../graphics/warning.png" alt="" width="28" height="28"></td>
+            <td valign="top"><strong>Warning:<br>Due to performance considerations, the storage area that is
+                       allocated to hold the value of the dynamic variable may be larger than the
+                       value of <code>*LENGTH</code> (used size available to the
+                       programmer). You should not rely on the storage that is allocated beyond the
+                       used length as indicated by <code>*LENGTH</code>: it may be
+                       released at any time, even if the respective dynamic variable is not accessed.
+                       It is not possible for the Natural programmer to obtain information about the
+                       currently allocated size. This is an internal value.</strong></td>
+         </tr>
+      </table> 
+          
+      <p><code>*LENGTH(<var>field</var>)</code>
+              returns the used length (in terms of code units) of a dynamic Natural field or
+              variable. For A and B format, the size of one code unit is 1 byte. For U
+              format, the size of one code unit is 2 bytes (UTF-16).
+              <code>*LENGTH</code> may be used only to get the currently used
+              length for dynamic variables.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_defi_ldvfin.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Size_Limitation_Checks"></a></div> 
+         
+      <h2> Size Limitation Check</h2> 
+          
+          
+      <h4 class="floating-title">Profile Parameter USIZE</h4> 
+          
+      <p>For dynamic variables, a size limitation check at compile time is not
+              possible because no length is defined for dynamic variables. The Size of&nbsp; User
+              Buffer Area (<a href="../parms/usize.htm"><code>USIZE</code></a>) indicates the
+              size of the user buffer in virtual memory. The user buffer contains all data
+              dynamically allocated by Natural. If a dynamic variable is allocated or
+              extended at execution time and the <code>USIZE</code> limitation is
+              exceeded, an error message will be returned.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_defi_ldvfin.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Statements_EXPAND_and_REDUCE"></a></div> 
+         
+      <h2> Allocating/Freeing Memory Space for a Dynamic Variable</h2> 
+          
+          
+      <p>The statements <a href="../sm/expand.htm"><code>EXPAND</code></a>,
+              <a href="../sm/reduce.htm"><code>REDUCE</code></a> and
+              <a href="../sm/resize.htm"><code>RESIZE</code></a> are used to
+              explicitly allocate and free memory space for a dynamic variable.
+      </p> 
+          
+      <h4 class="floating-title"> Syntax:</h4> 
+           
+           
+      <table border="0" class="syntax" cellpadding="3">  
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> <code>EXPAND [SIZE OF] DYNAMIC [VARIABLE]</code>
+                           <var>operand1</var> <code>TO</code>
+                           <var>operand2</var> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>REDUCE [SIZE OF] DYNAMIC [VARIABLE]</code>
+                           <var>operand1</var> <code>TO</code>
+                           <var>operand2</var> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>RESIZE [SIZE OF] DYNAMIC [VARIABLE]</code>
+                           <var>operand1</var> <code>TO</code>
+                           <var>operand2</var> 
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>- where <code><var>operand1</var></code> is a dynamic
+              variable and <code><var>operand2</var></code> is a non-negative
+              numeric size value.
+      </p> 
+          
+         
+      <div><a name="ldvf_expand"></a></div> 
+          
+      <h3> EXPAND </h3> 
+           
+           
+      <h4 class="floating-title"> Function</h4> 
+           
+      <p>The <a href="../sm/expand.htm"><code>EXPAND</code></a>
+               statement is used to increase the allocated length of the dynamic variable
+               (<code><var>operand1</var></code>) to the specified length
+               (<code><var>operand2</var></code>).
+      </p> 
+           
+      <h4 class="floating-title"> Changing the Specified Size </h4> 
+           
+      <p>The length currently used (as indicated by the Natural system variable
+               <a href="../vari/appl.htm#LENGTH"><code>*LENGTH</code></a>,
+               see <a href="pg_defi_ldvfin.htm#System_Variable_LENGTH_field">above</a>) for the
+               dynamic variable is not modified.
+      </p> 
+           
+      <p>If the specified length
+               (<code><var>operand2</var></code>) is less than the allocated
+               length of the dynamic variable, the statement will be ignored. 
+      </p> 
+           
+          
+         
+      <div><a name="ldvf_reduce"></a></div> 
+          
+      <h3> REDUCE </h3> 
+           
+           
+      <h4 class="floating-title"> Function</h4> 
+           
+      <p>The <a href="../sm/reduce.htm"><code>REDUCE</code></a>
+               statement is used to reduce the allocated length of the dynamic variable
+               (<code><var>operand1</var></code>) to the specified length
+               (<code><var>operand2</var></code>).
+      </p> 
+           
+      <p>The storage allocated for the dynamic variable
+               (<code><var>operand1</var></code>) beyond the specified length
+               (<code><var>operand2</var></code>) may be released at any time,
+               when the statement is executed or at a later time.
+      </p> 
+           
+      <h4 class="floating-title"> Changing the Specified Length</h4> 
+           
+      <p>If the length currently used (as indicated by the Natural system
+               variable <a href="../vari/appl.htm#LENGTH"><code>*LENGTH</code></a>,
+               see <a href="pg_defi_ldvfin.htm#System_Variable_LENGTH_field">above</a>) for the
+               dynamic variable is greater than the specified length
+               (<code><var>operand2</var></code>),
+               <code>*LENGTH</code> of this dynamic variable is set to the
+               specified length. The content of the variable is truncated, but not
+               modified.
+      </p> 
+           
+      <p>If the given length is larger than the currently allocated storage of
+               the dynamic variable, the statement will be ignored.
+      </p> 
+           
+          
+         
+      <div><a name="ldvf_resize"></a></div> 
+          
+      <h3> RESIZE </h3> 
+           
+           
+      <h4 class="floating-title"> Function</h4> 
+           
+      <p>The <a href="../sm/resize.htm"><code>RESIZE</code></a>
+               statement adjusts the currently allocated length of the dynamic variable
+               (<code><var>operand1</var></code>) to the specified length
+               (<code><var>operand2</var></code>).
+      </p> 
+           
+      <h4 class="floating-title"> Changing the Specified Length</h4> 
+           
+      <p>If the specified length is smaller then the used length (as indicated
+               by the Natural system variable <a href="../vari/appl.htm#LENGTH"><code>*LENGTH</code></a>,
+               see <a href="pg_defi_ldvfin.htm#System_Variable_LENGTH_field">above</a>) of the
+               dynamic variable, the used length is reduced accordingly.
+      </p> 
+           
+      <p>If the specified length is larger than the currently allocated length
+               of the dynamic variable, the allocated length of the dynamic variable is
+               increased. The currently used length (as indicated by
+               <code>*LENGTH</code>) of the dynamic variable is not affected
+               and remains unchanged.
+      </p> 
+           
+      <p>If the specified length is the same as the currently allocated length
+               of the dynamic variable, the execution of the <code>RESIZE</code> statement has
+               no effect. 
+      </p> 
+           
+          
+        
+       
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="pg_defi_ldvfin.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_defi_ldvfin.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_defi_ldvfin.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_defi-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_defi_funcall.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_defi_ldvfus.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

@@ -1,0 +1,392 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>User Exits</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="nsc_exits"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../nsc/nsc_exits.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/nsc/nsc_exits.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc_transf.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc_iface.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Natural Security&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x72"></a>User Exits
+         </h1>
+      </div> 
+         
+         
+      <p>This section describes the user exits available with Natural Security. It
+             contains information on:
+      </p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="nsc_exits.htm#Logon-Related_User_Exits">Logon-Related User Exits</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_exits.htm#LOGONEX4">RPC-Related User Exit</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_exits.htm#Other_User_Exits">Other User Exits</a></p>
+         </li>
+      </ul> 
+        
+      <hr> 
+        
+      <div><a name="Logon-Related_User_Exits"></a></div> 
+         
+      <h2> 
+             <a name="x73"></a> Logon-Related User Exits
+      </h2> 
+          
+          
+      <p>The following logon-related user exits are available:</p>
+          
+      <ul>
+         <li>
+            <p class="initem"><a href="nsc_exits.htm#LOGONEX1">LOGONEX1</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_exits.htm#LOGONEX2">LOGONEX2</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_exits.htm#LOGONEX3">LOGONEX3</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_exits.htm#LOGONEX5">LOGONEX5</a></p>
+         </li>
+      </ul> 
+          
+      <p class="note"><strong>Note:</strong><br>The user exit LOGONEX4 is not related to Natural Security's regular
+              logon handling, but is only relevant in in conjunction with a logon of an RPC
+              client to a Natural RPC server in an RPC environment. It is described under
+              <a href="nsc_exits.htm#LOGONEX4">RPC-Related User
+            Exit</a> below.
+      </p> 
+          
+      <h4 class="floating-title">General Information on Sources and Objects</h4>
+          
+          
+      <p>LOGONEX1, LOGONEX2, LOGONEX3 and LOGONEX5 are Natural subprograms which
+              have to be stored in the library SYSLIB to be invoked.
+      </p> 
+          
+      <p>The sources and object modules of these user exits are available in the
+              library SYSSEC under the names NOGONEX1, NOGONEX2, NOGONEX3 and NOGONEX5
+              respectively.
+      </p> 
+          
+      <p>You can modify each of the user exits to suit your requirements. To do
+              so, you make a copy of NOGONEX<var>n</var>
+              (<var>n</var> = 1, 2, 3 or 5), store it under the name
+              LOGONEX<var>n</var>, make your adjustments to it, and then copy
+              it into SYSLIB.
+      </p> 
+          
+      <p>To ensure that the user exits are always present in SYSLIB, Natural
+              Security proceeds as follows: The installation procedure, after loading all
+              modules into their respective libraries, checks whether there already is a
+              subprogram LOGONEX<var>n</var> contained in SYSLIB. If there
+              is, it will be left untouched. If there is not, the object module of
+              NOGONEX<var>n</var> will automatically be copied from SYSSEC to
+              SYSLIB and stored there under the name LOGONEX<var>n</var>. At
+              the same time, this ensures that your customized versions of the user exits are
+              not accidentally overwritten by an installation procedure.
+      </p> 
+          
+         
+      <div><a name="LOGONEX1"></a></div> 
+          
+      <h3> LOGONEX1</h3> 
+           
+           
+      <p>LOGONEX1 is <em>always</em> invoked by the Natural Security logon
+               program.
+      </p> 
+           
+      <p>Unless modified, LOGONEX1 invokes the Natural Security logon screen
+               (map LOGONM1 or dialog box GLOGONM1; see
+               <a href="nsc_logon.htm#Logon_Screen_Logon_Dialog_Box">Logon Screen / Logon Dialog
+                  Box</a>).
+      </p> 
+           
+      <p>By modifying LOGONEX1 it is possible to invoke your own logon
+               screens.
+      </p> 
+           
+          
+         
+      <div><a name="LOGONEX2"></a></div> 
+          
+      <h3> LOGONEX2</h3> 
+           
+           
+      <p>LOGONEX2 is invoked by the Natural Security logon program under any of
+               the following conditions:
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">when "#" is entered as the library ID (or is passed from
+                       LOGONEX1 as library ID);
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">when no library ID has been specified for the logon and neither a
+                       default library nor a private library exists which could have been invoked (see
+                       also <a href="nsc_logon.htm#Logon_Without_Library_ID">Logon Without Library
+                          ID</a> in the section <cite>Logging On</cite>).
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>When LOGONEX2 is invoked, the user ID and password have already been
+               checked and found valid by the logon program. At this point, the Natural system
+               variable *USER contains a valid value, which may be used.
+      </p> 
+           
+      <p>Unless modified, LOGONEX2 consists of nothing but an <code>END</code>
+               statement. On return to the logon program, a valid library ID must be passed to
+               the logon program, otherwise the logon will be rejected. Moreover, it is
+               possible to return one of possibly several IDs using which a user is linked to
+               a library.
+      </p> 
+           
+      <p>As the user ID/password check has already established the validity of
+               the user-specific logon data when LOGONEX2 is invoked, LOGONEX2 may be used to
+               implement additional user-specific procedures or to request user-specific data.
+               For example, the application programming interface
+               <a href="nsc_iface.htm#SECNOTE_-_User_Exit_for_Security_Notes">SECNOTE</a>
+               may be invoked to read user security notes.
+      </p> 
+           
+      <p>When the logon program invokes LOGONEX1 or LOGONEX2, it passes the
+               parameters #USERDUMMY1 and #USERDUMMY2 to the subprograms. Both parameters are
+               provided for your use; their format/length is A8. You may assign values to
+               these parameters in LOGONEX1 and subsequently use these values in LOGONEX2, as
+               they are passed without modification from one subprogram to the other.
+      </p> 
+           
+          
+         
+      <div><a name="LOGONEX3"></a></div> 
+          
+      <h3> LOGONEX3</h3> 
+           
+           
+      <p>LOGONEX3 is invoked by the Natural Security logon program under any of
+               the following conditions:
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">if there are mailboxes to be displayed;</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">if at least one of the parameters #USERDUMMY1 or #USERDUMMY2, passed
+                       from LOGONEX1 or LOGONEX2 respectively, is not blank.
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>LOGONEX3 is invoked immediately after a successful logon and before
+               control is passed from the logon program to the library invoked; when LOGONEX3
+               is invoked, logon processing is completed except for the display of the
+               mailboxes.
+      </p> 
+           
+      <p>If LOGONEX3 is left unmodified, it performs the subprogram calls
+               necessary for the display of mailboxes.
+      </p> 
+           
+      <p>You may modify LOGONEX3 for one of the following purposes:</p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">to suppress the display of mailboxes;</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">to have non-library-specific processing to be carried out immediately
+                       after a successful logon but before any library-specific transactions are
+                       executed.
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+          
+         
+      <div><a name="LOGONEX5"></a></div> 
+          
+      <h3>LOGONEX5</h3> 
+           
+           
+      <p>LOGONEX5 is invoked by the Natural Security logon program whenever the
+               system command LOGOFF is executed.
+      </p> 
+          
+        
+      <div class="noprint">
+         <p><a href="nsc_exits.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="LOGONEX4"></a></div> 
+         
+      <h2> RPC-Related User Exit</h2> 
+          
+          
+      <p>The user exit LOGONEX4 is a Natural subprogram which is only used in an
+              RPC environment. It is invoked by the Natural Security RPC logon program after
+              a successful logon of an RPC client to a Natural RPC server.
+      </p> 
+          
+      <p class="note"><strong>Note:</strong><br>The logon of an RPC client to a Natural RPC server does <em>not</em>
+              cause any of the user exits described under
+              <a href="nsc_exits.htm#Logon-Related_User_Exits">Logon-Related User
+            Exits</a> (see above) to be invoked. 
+      </p> 
+          
+      <p>Invoking LOGONEX4 is always the last task performed by the logon program
+              when all other logon processing has been completed, and before an RPC service
+              is performed. At this time, the user ID and password have already been checked
+              and found valid by the logon program, and the Natural system variables *USER
+              and *LIBRARY-ID contain valid values, which may be used.
+      </p> 
+          
+      <p>In conversational mode, the user exit is invoked when the conversation
+              is started.
+      </p> 
+          
+      <p>The input parameters for the user exit are the library ID and subprogram
+              name. The output parameter of the user exit is a return code; this may be used
+              to terminate the RPC logon with a non-zero return code. If this is the case,
+              Natural issues error NAT1696 with reason code 10.
+      </p> 
+          
+      <p>A sample source module for LOGONEX4 is available in the library SYSSEC
+              under the name NOGONEX4. To invoke the user exit, its object module has to be
+              stored under the name LOGONEX4 in the library SYSTEM on the FNAT system file
+              assigned to the RPC server. After copying it to this library, the RPC server
+              has to be restarted.
+      </p> 
+          
+      <p>Once the user exit has been invoked, it remains active until the end of
+              the RPC server session.
+      </p> 
+          
+      <p>To deactivate the user exit, you have to first terminate the RPC server,
+              and then remove the object LOGONEX4 from the library SYSTEM.
+      </p> 
+          
+      <p>Do <var>not</var> remove LOGONEX4 while an RPC server
+              session using that FNAT system file is still active, because this would make
+              the RPC server session inoperable (error NAT0082 would be issued at the next
+              logon to the RPC server).
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="nsc_exits.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Other_User_Exits"></a></div> 
+         
+      <h2> Other User Exits</h2> 
+          
+          
+      <p>The library SYSSEC contains several other user exits called
+              NSC<var>XX</var>EX1 - where <var>XX</var> is
+              the object type: US = user, LI = library, DD = DDM, FI = file, or OB = external
+              object.
+      </p> 
+          
+      <p>The object-type-specific NSC<var>XX</var>EX1 user exit
+              is invoked immediately after a maintenance function for an object of the
+              respective type has been performed.
+      </p> 
+          
+      <p>The parameters of these user exits are not modifiable.</p> 
+          
+      <p>For details, see the source code of user exits themselves.</p> 
+          
+        
+       
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="nsc_exits.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../nsc/nsc_exits.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/nsc/nsc_exits.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc_transf.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc_iface.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

@@ -1,0 +1,241 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>XRef Considerations</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="sysmain_ux_xref"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../utis/sysmain_ux_xref.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/utis/sysmain_ux_xref.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="sysmain_ux-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="sysmain_ux_use_subprogram.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="sysncp.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Tools and Utilities&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1>XRef Considerations</h1>
+      </div> 
+         
+      <p>All cross-reference (XRef) data stored in the Predict system file for a
+             cataloged programming object (not applicable to DDMs) can be processed with
+             SYSMAIN. 
+      </p> 
+         
+      <p>The Predict system file is determined by the value assigned to the
+             profile parameter <code>FDIC</code> (see
+             <a href="../parms/fdic.htm">FDIC - Predict System
+            File</a> in the <cite>Parameter Reference</cite>
+             documentation) in the parameter file or at the start of the Natural
+             session.
+      </p> 
+         
+      <p> You can override the current FDIC settings for the duration of the
+             current SYSMAIN function by replacing the values in the
+             <span class="selectable_label">XREF</span> window (database ID and file number <code>0</code>
+             denote the current FDIC) or by specifying the <code>DIC</code> keyword in the
+             <a href="sysmain_ux_use_subprogram.htm#sysmain_ux_subpgm_where_clause"><var>where-clause</var></a>
+             of a command.
+      </p> 
+         
+      <p>The <span class="selectable_label">XREF</span> field in an object-specification window or
+             the <code>XREF</code> keyword in a command indicates whether SYSMAIN should
+             process XRef data.
+      </p> 
+         
+      <p>If Predict has not been installed, enter <code>N</code> in the
+             <span class="selectable_label">XREF</span> field (or specify <code>XREF=N</code>) to not process
+             XRef data in Predict files. This is the default setting. 
+      </p> 
+         
+      <p>The section below covers the following topics:
+             
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="sysmain_ux_xref.htm#d0e191246">XREF set to N</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="sysmain_ux_xref.htm#d0e191268">XREF set to Y</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="sysmain_ux_xref.htm#sysmain_ux_xref_sec">FDIC File Security</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="sysmain_ux_xref.htm#d0e191327">XRef Processing Errors</a></p>
+         </li>
+      </ul>
+      <hr>
+      <div><a name="d0e191246"></a></div> 
+         
+      <h2>XREF set to N</h2> 
+          
+          
+      <p>No XRef data is processed if the <span class="selectable_label">XREF</span> field
+              contains an <code>N</code> (or <code>XREF=N</code>).
+      </p> 
+          
+      <p>However, regardless of what setting you choose, XRef data is always
+              deleted when a programming object is deleted.
+      </p> 
+         
+      <div class="noprint">
+         <p><a href="sysmain_ux_xref.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="d0e191268"></a></div> 
+         
+      <h2>XREF set to Y</h2> 
+          
+          
+      <p>XRef data is processed if <code>Y</code> is entered in the
+              <span class="selectable_label">XREF</span> field (or <code>XREF=Y</code>). 
+      </p> 
+          
+      <p>If XRef data is to be processed, the following actions are applied
+              during SYSMAIN processing:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">SYSMAIN checks whether XRef data exists in the Predict source system
+                      file for the specified programming object.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">If a programming object is to be deleted from the target environment,
+                      XRef data is deleted from the Predict target system file. 
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">If a programming object is copied to a new environment, the XRef data
+                      of the programming object is copied from the Predict source system file to the
+                      Predict target system file. The library name is changed accordingly and, in the
+                      case of the rename function, the object name is also changed.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">If the move function is executed, the XRef data of the programming
+                      object is deleted from the Predict source system file.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+         
+      <div class="noprint">
+         <p><a href="sysmain_ux_xref.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="sysmain_ux_xref_sec"></a></div> 
+         
+      <h2>FDIC File Security</h2> 
+          
+          
+      <p>If file security has been defined for the FDIC system file, you need to
+              specify a password and a cipher code for the required source and/or target
+              system file before you perform a SYSMAIN function. Otherwise, an appropriate
+              error message appears. You do not have to provide security information for the
+              default system files assigned to you at the start of the SYSMAIN utility.
+      </p> 
+         
+      <div class="noprint">
+         <p><a href="sysmain_ux_xref.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="d0e191327"></a></div> 
+         
+      <h2>XRef Processing Errors</h2> 
+          
+          
+      <p>If any of the following inconsistencies occur during SYSMAIN processing
+              of XRef data, all processing for the object or function is terminated and an
+              error message is displayed: 
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">The value of the XREF option in Natural Security is set to
+                      <code>Y</code> and the <span class="selectable_label">XREF</span> field contains an
+                      <code>N</code> (or <code>XREF=N</code>). 
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">The <span class="selectable_label">XREF</span> field contains a <code>Y</code> (or
+                      <code>XREF=Y)</code> and the FDIC file(s) being used are not valid Predict
+                      files.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+         
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="sysmain_ux_xref.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../utis/sysmain_ux_xref.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/utis/sysmain_ux_xref.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="sysmain_ux-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="sysmain_ux_use_subprogram.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="sysncp.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

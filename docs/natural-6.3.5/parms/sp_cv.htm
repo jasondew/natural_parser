@@ -1,0 +1,202 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>CV - Attribute Control Variable</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="sp_cv" id="1351"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../parms/sp_cv.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/parms/sp_cv.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="parms-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="cpsynin.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="cvmin.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Parameter Reference&nbsp;&nbsp;&#8212;</span></div>
+      </div>
+        
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x71"></a>CV - Attribute Control Variable
+         </h1>
+      </div> 
+         
+         
+      <p>This session parameter is used to reference an attribute control
+             variable. An attribute control variable is defined with Format C (see
+             <a href="../pg/pg_defi_dv.htm#Special_Formats">Special
+            Formats</a> in the <cite>Programming Guide</cite>) and
+             is used to assign field attributes dynamically.
+      </p> 
+          
+          
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+              
+         <tbody align="left" valign="top"> 
+                  
+            <tr> 
+                      
+               <th rowspan="3">Possible settings</th> 
+                      
+               <td><code>B, C, D, I, N, U, V</code></td> 
+                      
+               <td> Field representation attributes (see session parameter
+                  <a href="sp_ad.htm#sp_ad_Field_Representation"><code>AD</code></a>).
+                          
+               </td> 
+                     
+            </tr> 
+                  
+            <tr> 
+                      
+               <td><code>P</code></td> 
+                      
+               <td>Field protection (see session parameter
+                  <a href="sp_ad.htm#sp_ad_Field_Input_-_Output_Characteristics"><code>AD</code></a>).
+               </td>
+                      
+                     
+            </tr> 
+                  
+            <tr> 
+                      
+               <td><code>BL, GR, NE, PI, RE, TU, YE</code></td> 
+                      
+               <td>Color (for an explanation of the color codes, see the session
+                  parameter <a href="sp_cd.htm#sp_cd"><code>CD</code></a>).
+               </td> 
+                     
+            </tr> 
+                  
+            <tr> 
+                      
+               <th>Default setting</th> 
+                      
+               <td colspan="2">none</td> 
+                     
+            </tr> 
+                  
+            <tr> 
+                      
+               <th>Applicable statements:</th> 
+                      
+               <td> 
+                  
+                  <p class="mini-list"> 
+                              <a href="../sm/display.htm"><code>DISPLAY</code></a><br> 
+                              <a href="../sm/input.htm"><code>INPUT</code></a><br> 
+                              <a href="../sm/printsm.htm"><code>PRINT</code></a><br> 
+                              <a href="../sm/write.htm"><code>WRITE</code></a> 
+                             
+                  </p>
+               </td> 
+                      
+               <td colspan="NaN">Parameter may be specified at
+                  statement level and/or at element level.
+               </td> 
+                     
+            </tr> 
+                  
+            <tr> 
+                      
+               <th>Applicable command:</th> 
+                      
+               <td colspan="2">none</td> 
+                     
+            </tr> 
+                 
+         </tbody> 
+             
+      </table> 
+          
+         
+      <h4 class="floating-title">Example:</h4> 
+         <pre class="verbatim">
+DEFINE DATA LOCAL 
+1 #ATTR(C) 
+1 #A   (N5) 
+END-DEFINE 
+... 
+MOVE (AD=I CD=RE) TO #ATTR 
+INPUT #A (CV=#ATTR) 
+   ...
+</pre> 
+         <p>By specifying the <a href="../pg/pg_furth_lcc.htm#Modified_CV"><code>MODIFIED</code>
+                option</a> of the <code>IF</code> statement, the attribute control
+             variable can be used to check whether the contents of a field has been modified
+             during the execution of an <a href="../sm/input.htm"><code>INPUT</code></a> statement:
+      </p> 
+         <pre class="verbatim">
+IF #ATTR MODIFIED ...
+</pre> 
+         <p>A single attribute control variable can be applied to several input
+             fields by specifying it once at statement level or multiple times at element
+             level, in which case the "modified" status indication is set if
+             any of the fields referencing the control variable has been modified. If the
+             <code>CV</code> parameter is specified both at statement level and at
+             field level and the attribute control variable for the individual field is
+             empty, the attribute control variable for the statement will be used for the
+             field.
+      </p> 
+         
+      <p>The attribute control variable can be expanded up to three dimensions,
+             for example, <code>CONTR(*)</code>, <code>CONTR(*,*)</code>,
+             <code>CONTR(*,*,*)</code>, depending on the rank of the corresponding
+             array.
+      </p> 
+        
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="sp_cv.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../parms/sp_cv.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/parms/sp_cv.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="parms-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="cpsynin.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="cvmin.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

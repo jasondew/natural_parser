@@ -1,0 +1,3321 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Accessing Data in an Adabas Database</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="pg_dbms_ada"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_dbms_ada.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_dbms_ada.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_dbms-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_dbms_dbgen.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_dbms_sqlos.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Programming Guide&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x143"></a> Accessing Data in an Adabas Database
+         </h1>
+      </div> 
+         
+         
+      <p>This document describes various aspects of accessing data in an Adabas
+             database with Natural.
+      </p> 
+         
+      <p>The following topics are covered:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_dbms_ada.htm#pg_dbms_ada2">Adabas Database Management Interfaces ADA and ADA2</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_ada.htm#pg_dbms_ddm">Data Definition Modules - DDMs</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_ada.htm#pg_dbms_da">Database Arrays</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_ada.htm#pg_dbms_ddv">DEFINE DATA Views</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_ada.htm#pg_dbms_sdba">Statements for Database Access</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_ada.htm#pg_dbms_mf">Multi-Fetch Clause</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_ada.htm#pg_dbms_dpl">Database Processing Loops</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_ada.htm#pg_dbms_dutp">Database Update - Transaction Processing</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_ada.htm#pg_dbms_sar">Selecting Records Using ACCEPT/REJECT</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_ada.htm#pg_dbms_aes">AT START/END OF DATA Statements</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_ada.htm#pg_dbms_ucode">Unicode Data</a></p>
+         </li>
+      </ul> 
+          
+        
+      <hr> 
+        
+      <div><a name="pg_dbms_ada2"></a></div> 
+         
+      <h2>Adabas Database Management Interfaces ADA and ADA2</h2> 
+          
+          
+      <p>Natural's Adabas database management interfaces ADA and ADA2 are
+              considered distinct database interfaces like, for example, ADA and SQL. 
+      </p> 
+          
+      <p>Database type ADA is Natural's default interface to Adabas databases. It
+              is the appropriate choice if new Adabas functionality as introduced with Adabas
+              Version 6 on Open Systems and Adabas Version 8 on mainframes is not concerned.
+              
+      </p> 
+          
+      <p>Database type ADA2 is provided as an extended interface to Adabas
+              databases as of Version 6 on Open Systems and Adabas as of Version 8 on
+              mainframes. In particular, it supports Adabas LA fields, Adabas large object
+              fields and extended Adabas buffer lengths. The support of Adabas LA and large
+              object fields implies the use of Natural format
+              <a href="pg_defi_ldvfin.htm#Definition_of_Dynamic_Variables"><code>(A)
+               DYNAMIC</code></a> in a view definition, the support of extended Adabas
+              buffer lengths enables the definition of view sizes that exceed 64 KB. For
+              further information, refer to <a href="pg_dbms_ada.htm#db_view_define">Defining a Database
+            View</a>. 
+      </p> 
+          
+      <p>Database type ADA2 does not support <a href="pg_dbms_ada.htm#multi_win_ux">multi-fetch processing</a>. Corresponding global
+              and local definitions are ignored at runtime. 
+      </p>
+          
+      <p>Software AG products which have their own system files require a
+              corresponding physical database of database type ADA. 
+      </p> 
+          
+      <p>Natural objects that were compiled with database type ADA can be
+              executed in an environment where the corresponding Adabas database is defined
+              as database type ADA2. 
+      </p> 
+         
+      <div class="noprint">
+         <p><a href="pg_dbms_ada.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="pg_dbms_ddm"></a></div> 
+         
+      <h2> Data Definition Modules - DDMs 
+             <a name="x144"></a> 
+             <a name="x145"></a></h2> 
+          
+      <p>For Natural to be able to access a database file, a logical definition
+              of the physical database file is required. Such a logical file definition is
+              called a data definition module (DDM).
+      </p> 
+          
+      <p>This section covers the following topics:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_dbms_ada.htm#ddm_use">Use of Data Definition Modules</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_ada.htm#ddm_maint">Maintaining DDMs</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_ada.htm#Displaying_a_DDM">Listing/Displaying DDMs</a></p>
+         </li>
+      </ul> 
+         
+      <div><a name="ddm_use"></a></div> 
+          
+      <h3> 
+              <a name="x146"></a>Use of Data Definition Modules
+      </h3> 
+           
+           
+      <p>The data definition module contains information about the individual
+               fields of the file - information which is relevant for the use of these fields
+               in a Natural program. A DDM constitutes a logical view of a physical database
+               file.
+      </p> 
+           
+      <p>For each physical file of a database, one or more DDMs can be defined.
+               And for each DDM one or more data views can be defined (see
+               <a href="../sm/defineda_view.htm">View
+            Definition</a> in the <a href="../sm/defineda.htm"><code>DEFINE DATA</code></a> statement
+               documentation).
+      </p> 
+           
+      <p><img src="graphics/pgddm1.png" alt="" width="440" height="300"></p> 
+           
+      <p>DDMs are defined by the Natural administrator with Predict (or, if
+               Predict is not available, with the corresponding Natural function).
+      </p> 
+          
+      <div><a name="ddm_maint"></a></div> 
+          
+      <h3>Maintaining DDMs</h3> 
+           
+           
+      <p>Use the system command <code>SYSDDM</code>
+               to invoke the SYSDDM utility. The SYSDDM utility is used to perform all
+               functions needed for the creation and maintenance of Natural data definition
+               modules.
+      </p> 
+           
+      <p>For further information on the SYSDDM utility, see the
+               section <a href="../edis/ddm-over.htm"><cite>DDM
+                     Services</cite></a> in the <cite>Editors</cite>
+               documentation.
+      </p> 
+           
+      <p>For each database field, a DDM contains the database-internal field
+               name as well as the "external" field name, that is, the name of
+               the field as used in a Natural program. Moreover, the formats and lengths of
+               the fields are defined in the DDM, as well as various specifications that are
+               used when the fields are output with a <code>DISPLAY</code> or
+               <code>WRITE</code> statement (column headings, edit masks, etc.).
+      </p> 
+           
+      <p>For the field attributes defined in a DDM, refer to <a href="../edis/ddm_editor_use.htm#ddm_fields_attributes">Using the DDM
+            Editor Screen</a> in the section <cite>DDM
+                  Services</cite> of the <cite>Editors</cite>
+               documentation.
+      </p> 
+          
+      <div><a name="Displaying_a_DDM"></a></div> 
+          
+      <h3> Listing/Displaying DDMs</h3> 
+           
+            
+            
+          
+      <div class="noprint">
+         <p><a href="pg_dbms_ada.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="pg_dbms_da"></a></div> 
+         
+      <h2> 
+             <a name="x147"></a> Database Arrays 
+      </h2> 
+          
+      <p>Adabas supports array structures within the database in the form of
+              multiple-value fields and periodic groups.
+      </p> 
+          
+      <p>This section covers the following topics:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_dbms_ada.htm#Multiple-Value_Fields">Multiple-Value Fields</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_ada.htm#Periodic_Groups">Periodic Groups</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_ada.htm#Referencing_Multiple-Value_Fields_and_Periodic_Groups">Referencing Multiple-Value Fields and Periodic Groups</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_ada.htm#Multiple-Value_Fields_Within_Periodic_Groups">Multiple-Value Fields within Periodic Groups</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_ada.htm#Referencing_Multiple-Value_Fields_Within_Periodic_Groups">Referencing Multiple-Value Fields within Periodic Groups</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_ada.htm#Referencing_the_Internal_Count_of_a_Database_Array">Referencing the Internal Count of a Database Array</a></p>
+         </li>
+      </ul> 
+         
+      <div><a name="Multiple-Value_Fields"></a></div> 
+          
+      <h3> 
+              <a name="x148"></a>Multiple-Value Fields
+      </h3> 
+           
+           
+      <p>A multiple-value field is a field which can have more than one value
+               (up to 65534, depending on the Adabas version and definition of the FDT) within
+               a given record.
+      </p> 
+           
+      <h4 class="floating-title"> Example: </h4> 
+           
+      <p><img src="graphics/pgarrays.png" alt="" width="600" height="330"></p> 
+           
+      <p>Assuming that the above is a record in an employees file, the first
+               field (Name) is an elementary field, which can contain only one value, namely
+               the name of the person; whereas the second field (Languages), which contains
+               the languages spoken by the person, is a multiple-value field, as a person can
+               speak more than one language.
+      </p> 
+          
+      <div><a name="Periodic_Groups"></a></div> 
+          
+      <h3> 
+              <a name="x149"></a>Periodic Groups
+      </h3> 
+           
+           
+      <p>A periodic group is a group of fields (which may be elementary fields
+               and/or multiple-value fields) that may have more than one occurrence (up to
+               65534, depending on the Adabas version and definition of the FDT) within a
+               given record.
+      </p> 
+           
+      <p>The different values of a multiple-value field are usually called
+               "occurrences"; that is, the number of occurrences is the number of
+               values which the field contains, and a specific occurrence means a specific
+               value. Similarly, in the case of periodic groups, occurrences refer to a group
+               of values.
+      </p> 
+           
+      <h4 class="floating-title"> Example: </h4> 
+           
+      <p><img src="graphics/pgpergr1.png" alt="" width="629" height="420"></p> 
+           
+      <p> </p> 
+           
+      <p>Assuming that the above is a record in a vehicles file, the first field
+               (Name) is an elementary field which contains the name of a person; Cars is a
+               periodic group which contains the automobiles owned by that person. The
+               periodic group consists of three fields which contain the registration number,
+               make and model of each automobile. Each occurrence of Cars contains the values
+               for one automobile.
+      </p> 
+          
+      <div><a name="Referencing_Multiple-Value_Fields_and_Periodic_Groups"></a></div> 
+          
+      <h3> Referencing Multiple-Value Fields and Periodic Groups</h3> 
+           
+           
+      <p>To reference one or more occurrences of a multiple-value field or a
+               periodic group, you specify an "index notation" after the field
+               name.
+      </p> 
+           
+      <h4 class="floating-title"> Examples: </h4> 
+           
+      <p>The following examples use the multiple-value field
+               <code>LANGUAGES</code> and the periodic group <code>CARS</code> from the
+               previous examples.
+      </p> 
+           
+      <p>The various values of the multiple-value field <code>LANGUAGES</code>
+               can be referenced as follows.
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th align="left">Example</th> 
+                        
+               <th>Explanation</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> <code>LANGUAGES (1)</code> 
+               </td> 
+                        
+               <td>References the first value (<code>SPANISH</code>).
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>LANGUAGES (X)</code> 
+               </td> 
+                        
+               <td>The value of the variable X determines the value to be
+                  referenced.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>LANGUAGES (1:3)</code> 
+               </td> 
+                        
+               <td>References the first three values (<code>SPANISH</code>,
+                            <code>CATALAN</code> and <code>FRENCH</code>).
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>LANGUAGES (6:10)</code></td> 
+                        
+               <td>References the sixth to tenth values.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>LANGUAGES (X:Y)</code> 
+               </td> 
+                        
+               <td>The values of the variables <code>X</code> and <code>Y</code>
+                  determine the values to be referenced.
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>The various occurrences of the periodic group <code>CARS</code> can be
+               referenced in the same manner:
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th align="left">Example</th> 
+                        
+               <th>Explanation</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> <code>CARS (1)</code></td> 
+                        
+               <td>References the first occurrence
+                  (<code>B-123ABC/SEAT/IBIZA</code>).
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>CARS (X)</code> 
+               </td> 
+                        
+               <td>The value of the variable <code>X</code> determines the
+                  occurrence to be referenced.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>CARS (1:2)</code> 
+               </td> 
+                        
+               <td>References the first two occurrences
+                  (<code>B-123ABC/SEAT/IBIZA</code> and <code>B-999XYZ/VW/GOLF</code>).
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>CARS (4:7)</code> 
+               </td> 
+                        
+               <td>References the fourth to seventh occurrences.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>CARS (X:Y)</code> 
+               </td> 
+                        
+               <td>The values of the variables <code>X</code> and <code>Y</code>
+                  determine the occurrences to be referenced.
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+          
+      <div><a name="Multiple-Value_Fields_Within_Periodic_Groups"></a></div> 
+          
+      <h3>Multiple-Value Fields within Periodic Groups</h3> 
+           
+           
+      <p>An Adabas array can have up to two dimensions: a multiple-value field
+               within a periodic group.
+      </p> 
+           
+      <h4 class="floating-title"> Example: </h4> 
+           
+      <p><img src="graphics/pgpergr2.png" alt="" width="629" height="420"></p> 
+           
+      <p>Assuming that the above is a record in a vehicles file, the first field
+               (Name) is an elementary field which contains the name of a person; Cars is a
+               periodic group which contains the automobiles owned by that person. The
+               periodic group consists of three fields which contain the registration number,
+               servicing dates and make of each automobile. Within the periodic group Cars,
+               the field Servicing is a multiple-value field, containing the different
+               servicing dates for each automobile.
+      </p> 
+          
+      <div><a name="Referencing_Multiple-Value_Fields_Within_Periodic_Groups"></a></div> 
+          
+      <h3>Referencing Multiple-Value Fields within Periodic Groups</h3> 
+           
+           
+      <p>To reference one or more occurrences of a multiple-value field within a
+               periodic group, you specify a "two-dimensional" index notation
+               after the field name.
+      </p> 
+           
+      <h4 class="floating-title"> Examples: </h4> 
+           
+      <p>The following examples use the multiple-value field
+               <code>SERVICING</code> within the periodic group <code>CARS</code> from the
+               example above. The various values of the multiple-value field can be referenced
+               as follows:
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th align="left">Example</th> 
+                        
+               <th>Explanation</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> <code>SERVICING (1,1)</code> 
+               </td> 
+                        
+               <td>References the first value of <code>SERVICING</code> in the
+                            first occurrence of <code>CARS</code> (<code>31-05-97</code>).
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>SERVICING (1:5,1)</code> 
+               </td> 
+                        
+               <td>References the first value of <code>SERVICING</code> in the
+                            first five occurrences of <code>CARS</code>.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>SERVICING (1:5,1:10)</code></td> 
+                        
+               <td>References the first ten values of <code>SERVICING</code> in
+                            the first five occurrences of <code>CARS</code>.
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+          
+      <div><a name="Referencing_the_Internal_Count_of_a_Database_Array"></a></div> 
+          
+      <h3>Referencing the Internal Count of a Database Array</h3> 
+           
+           
+      <p>It is sometimes necessary to reference a multiple-value field or a
+               periodic group without knowing how many values/occurrences exist in a given
+               record. Adabas maintains an internal count of the number of values in each
+               multiple-value field and the number of occurrences of each periodic group. This
+               count may be read in a <a href="../sm/read.htm"><code>READ</code></a> statement by specifying
+               <code>C*</code> immediately before the field name.
+      </p> 
+           
+      <p>The count is returned in format/length N3. See
+               <a href="pg_defi_dv.htm#DB_IC_Reference">Referencing the Internal Count
+            for a Database Array</a> for further details.
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th align="left">Example</th> 
+                        
+               <th>Explanation</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> <code>C*LANGUAGES</code></td> 
+                        
+               <td>Returns the number of values of the multiple-value field
+                  <code>LANGUAGES</code>.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>C*CARS</code></td> 
+                        
+               <td>Returns the number of occurrences of the periodic group
+                  <code>CARS</code>.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>C*SERVICING (1)</code></td> 
+                        
+               <td>Returns the number of values of the multiple-value field
+                  <code>SERVICING</code> in the first occurrence of a periodic group (assuming
+                            that <code>SERVICING</code> is a multiple-value field within a periodic
+                            group.)
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+          
+      <div class="noprint">
+         <p><a href="pg_dbms_ada.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="pg_dbms_ddv" id="16312"></a></div> 
+         
+      <h2> 
+             <a name="x150"></a> 
+             <a name="x151"></a> 
+             <a name="x152"></a>DEFINE DATA Views 
+      </h2> 
+          
+      <p>To be able to use database fields in a Natural program, you must specify
+              the fields in a <em>view</em>.
+      </p> 
+          
+      <p>This section covers the following topics:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_dbms_ada.htm#db_view_use">Use of Database Views</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_ada.htm#db_view_define">Defining a Database View</a></p>
+         </li>
+      </ul> 
+         
+      <div><a name="db_view_use"></a></div> 
+          
+      <h3> 
+              <a name="x153"></a>Use of Database Views
+      </h3> 
+           
+           
+      <p>To be able to use database fields in a Natural program, you must
+               specify the fields in a <em>view</em>.
+      </p> 
+           
+      <p>In the view, you specify</p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">the name of the <a href="pg_dbms_ada.htm#pg_dbms_ddm">data definition
+                          module</a> (DDM) from which the fields are taken, and
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">the <a href="pg_defi-over.htm#pg_defi-over">names of the database
+                          fields</a> themselves (that is, their long names, not their
+                       database-internal short names).
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+          
+      <div><a name="db_view_define"></a></div> 
+          
+      <h3> Defining a Database View</h3> 
+           
+           
+      <p>You define such a database view either</p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">within the <a href="../sm/defineda.htm"><code>DEFINE
+                     DATA</code></a> statement of the program, or
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">in a <a href="../glossary/glossary.htm#LDA">local data
+                          area</a> (LDA) or a <a href="../glossary/glossary.htm#GDA">global
+                          data area</a> (GDA) outside the program, with the <code>DEFINE
+                  DATA</code> statement referencing that data area (as described in the section
+                       <a href="pg_defi-over.htm#pg_defi-over">Defining
+                  Fields</a>.
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>At Level 1, you specify the view name as follows:</p> 
+           <pre class="verbatim">1 <var>view-name</var> VIEW OF <var>ddm-name</var></pre> 
+           <p>where <var>view-name</var> is the name you choose for
+               the view, <var>ddm-name</var> is the name of the DDM from which
+               the fields specified in the view are taken.
+      </p> 
+           
+      <p>At Level 2, you specify the names of the database fields from the
+               DDM.
+      </p> 
+           
+      <p>In the illustration below, the name of the view is <code>ABC</code>,
+               and it comprises the fields <code>NAME</code>, <code>FIRST-NAME</code> and
+               <code>PERSONNEL-ID</code> from the DDM <code>XYZ</code>.
+      </p> 
+           
+      <p><img src="graphics/pgphysic.png" alt="" width="600" height="300"></p> 
+           
+      <p>The format and length of a database field need not be specified in the
+               view, as these are already defined in the underlying DDM.
+      </p> 
+            
+      <p>With databases of type <code>ADA2</code> (specified in the table DBMS
+                Assignments in the Configuration Utility, see
+                <a href="../config/cfg-confparm.htm#cfg-cf-glo-dbms">Database
+            Management System Assignments</a> in the
+                <cite>Configuration Utility</cite> documentation), the following
+                applies: 
+      </p> 
+            
+      <ul> 
+                
+         <li> 
+                    
+            <p class="initem">If large alphanumeric (LA) or large object (LOB) fields (Adabas
+                        LA/LB option) are to be used, these fields can be specified within the view
+                        definition with both fixed format/length, for example, <code>A20</code> or
+                        <code>U20</code>, and dynamic format/length, for example,
+                        <code>(A)DYNAMIC</code> or <code>U(DYNAMIC)</code>. 
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">Length indicator fields <code>L@...</code> can also be specified
+                        within views if they are related to LA or LOB fields.
+            </p> 
+                   
+         </li> 
+               
+      </ul> 
+            
+           
+      <p>The view may comprise an entire DDM or only a subset of it. The order
+               of the fields in the view need not be the same as in the underlying DDM.
+      </p> 
+           
+      <p>The view name is used in database access statements to determine which
+               database is to be accessed, as described in <a href="pg_dbms_ada.htm#pg_dbms_sdba">Statements for Database
+            Access</a>.
+      </p> 
+          
+      <div class="noprint">
+         <p><a href="pg_dbms_ada.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="pg_dbms_sdba"></a></div> 
+         
+      <h2>Statements for Database Access </h2> 
+          
+      <p>To read data from a database, the following statements are
+              available:
+      </p>
+         
+         
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="31%">
+            <col width="66%">
+         </colgroup> 
+                
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th align="left">Statement</th> 
+                       
+               <th>Meaning</th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td align="left"> <a href="pg_dbms_ada.htm#READ_Statement"><code>READ</code></a> 
+               </td> 
+                       
+               <td>Select a range of records from a database in a specified
+                  sequence.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td align="left"> <a href="pg_dbms_ada.htm#FIND_Statement"><code>FIND</code></a> 
+               </td> 
+                       
+               <td>Select from a database those records which meet a specified
+                  search criterion.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td align="left"> <a href="pg_dbms_ada.htm#HISTOGRAM_Statement"><code>HISTOGRAM</code></a> 
+               </td> 
+                       
+               <td>Read only the values of one database field, or determine the
+                  number of records which meet a specified search criterion.
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+         
+      <div><a name="READ_Statement"></a></div> 
+          
+      <h3> 
+              <a name="x154"></a>READ Statement
+      </h3> 
+           
+      <p>The following topics are covered:</p> 
+      <ul>
+         <li><a href="pg_dbms_ada.htm#read_statem_use">Use of READ Statement</a></li>
+         <li><a href="pg_dbms_ada.htm#Syntax_READ">Basic Syntax of READ Statement</a></li>
+         <li><a href="pg_dbms_ada.htm#read_sm_exa">Example of READ Statement</a></li>
+         <li><a href="pg_dbms_ada.htm#Limiting_the_Number_of_Records_to_be_Read">Limiting the Number of Records to be Read</a></li>
+         <li><a href="pg_dbms_ada.htm#STARTING_ENDING_READ">STARTING/ENDING Clauses</a></li>
+         <li><a href="pg_dbms_ada.htm#WHERE_READ">WHERE Clause</a></li>
+         <li><a href="pg_dbms_ada.htm#further_exa_read_pg_dbms_sdba">Further Example of READ Statement</a></li>
+      </ul> 
+          
+      <div><a name="read_statem_use"></a></div> 
+           
+      <h4>Use of READ Statement</h4> 
+            
+            
+      <p>The <a href="../sm/read.htm"><code>READ</code></a>
+                statement is used to read records from a database. The records can be retrieved
+                from the database
+      </p> 
+            
+      <ul> 
+                
+         <li> 
+                    
+            <p class="initem">in the order in which they are physically stored in the database
+                        (<a href="../sm/read.htm#syn1_read"><code>READ IN PHYSICAL
+                     SEQUENCE</code></a>), or
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">in the order of Adabas Internal Sequence Numbers (<a href="../sm/read.htm#BY_ISN"><code>READ BY ISN</code></a>), or
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">in the order of the values of a descriptor field (<a href="../sm/read.htm#LOGICAL"><code>READ IN LOGICAL
+                     SEQUENCE</code></a>).
+            </p> 
+                   
+         </li> 
+               
+      </ul> 
+            
+      <p>In this document, only <code>READ IN LOGICAL SEQUENCE</code> is
+                discussed, as it is the most frequently used form of the <code>READ</code>
+                statement.
+      </p> 
+            
+      <p>For information on the other two options, please refer to the
+                description of the <a href="../sm/read.htm"><code>READ</code></a>
+                statement in the <cite>Statements</cite> documentation.
+      </p> 
+           
+      <div><a name="Syntax_READ"></a></div> 
+           
+      <h4> Basic Syntax of READ Statement</h4> 
+            
+            
+      <p>The basic syntax of the <a href="../sm/read.htm"><code>READ</code></a> statement is:
+      </p> 
+             
+             
+      <table border="0" class="syntax" cellpadding="3">  
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <td> <code class="keyword">READ</code>
+                       <var>view</var> <code class="keyword">IN LOGICAL SEQUENCE
+                                BY</code> <var>descriptor</var> 
+               </td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+      <p>or shorter:</p> 
+             
+             
+      <table border="0" class="syntax" cellpadding="3">  
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <td> <code class="keyword">READ</code>
+                       <var>view</var> <code class="keyword">LOGICAL BY</code>
+                             <var>descriptor</var> 
+               </td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+      <p>- where</p> 
+             
+             
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                  
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <td> <code><var>view</var></code> 
+               </td> 
+                         
+               <td>is the name of a view defined in the
+                  <a href="../sm/defineda.htm"><code>DEFINE DATA</code></a>
+                             statement (as explained in <a href="pg_dbms_ada.htm#pg_dbms_ddv">DEFINE
+                                DATA Views</a>).
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> <code><var>descriptor</var></code> 
+               </td> 
+                         
+               <td>is the name of a database field defined in that view. The
+                  values of this field determine the order in which the records are read from the
+                  database.
+               </td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+      <p>If you specify a descriptor, you need not specify the
+                <a href="pg_keyw.htm#pg_keyw">keyword</a> <code>LOGICAL</code>:
+      </p> 
+             
+             
+      <table border="0" class="syntax" cellpadding="3">  
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <td> <code class="keyword">READ</code>
+                       <var>view</var> <code class="keyword">BY</code>
+                             <var>descriptor</var> 
+               </td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+      <p>If you do not specify a descriptor, the records will be read in the
+                order of values of the field defined as default descriptor (under <code>Default
+            Sequence</code>) in the <a href="pg_dbms_ada.htm#pg_dbms_ddm">DDM</a>.
+                However, if you specify no descriptor, you must specify the
+                <a href="pg_keyw.htm#pg_keyw">keyword</a> <code>LOGICAL</code>:
+      </p> 
+             
+             
+      <table border="0" class="syntax" cellpadding="3">  
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <td> <code class="keyword">READ</code>
+                       <var>view</var> <code class="keyword">LOGICAL</code> 
+               </td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+           
+      <div><a name="read_sm_exa"></a></div> 
+           
+      <h4> Example of READ Statement</h4> 
+            
+            <pre class="verbatim">
+** Example 'READX01': READ
+************************************************************************
+DEFINE DATA LOCAL
+1 MYVIEW VIEW OF EMPLOYEES
+  2 NAME
+  2 PERSONNEL-ID
+  2 JOB-TITLE
+END-DEFINE
+*
+<strong>READ (6) MYVIEW BY NAME
+  DISPLAY NAME PERSONNEL-ID JOB-TITLE
+END-READ</strong>
+END
+</pre> 
+            <p>Output of Program <code>READX01</code>:
+      </p> 
+            
+      <p>With the <a href="../sm/read.htm"><code>READ</code></a>
+                statement in this example, records from the <code>EMPLOYEES</code> file are
+                read in alphabetical order of their last names.
+      </p> 
+            
+      <p>The program will produce the following output, displaying the
+                information of each employee in alphabetical order of the employees' last
+                names.
+      </p> <pre class="system-output">
+Page      1                                                  04-11-11  14:15:54
+                                                                                 
+        NAME         PERSONNEL          CURRENT                                
+                        ID             POSITION                                
+-------------------- --------- -------------------------                       
+                                                                                 
+ABELLAN              60008339  MAQUINISTA                                      
+ACHIESON             30000231  DATA BASE ADMINISTRATOR                         
+ADAM                 50005800  CHEF DE SERVICE                                 
+ADKINSON             20008800  PROGRAMMER                                      
+ADKINSON             20009800  DBA                                             
+ADKINSON             2001100
+</pre> 
+            <p>If you wanted to read the records to create a report with the
+                employees listed in sequential order by date of birth, the appropriate
+                <code>READ</code> statement would be:
+      </p> 
+            <pre class="verbatim">READ MYVIEW BY BIRTH</pre> 
+            <p>You can only specify a field which is defined as a
+                "descriptor" in the underlying <a href="pg_dbms_ada.htm#pg_dbms_ddm">DDM</a> (it can also be a subdescriptor,
+                superdescriptor, hyperdescriptor or phonetic descriptor or a
+                non-descriptor).
+      </p> 
+           
+      <div><a name="Limiting_the_Number_of_Records_to_be_Read"></a></div> 
+           
+      <h4> Limiting the Number of Records to be Read</h4> 
+            
+            
+      <p>As shown in the previous example program, you can limit the number of
+                records to be read by specifying a number in parentheses after the keyword
+                <a href="../sm/read.htm"><code>READ</code></a>:
+      </p> 
+            <pre class="verbatim">READ (6) MYVIEW BY NAME</pre> 
+            <p>In that example, the <code>READ</code> statement would read no more
+                than 6 records.
+      </p> 
+            
+      <p>Without the limit notation, the above <code>READ</code> statement
+                would read <em>all</em> records from the <code>EMPLOYEES</code> file in the
+                order of last names from <code>A</code> to <code>Z</code>.
+      </p> 
+           
+      <div><a name="STARTING_ENDING_READ"></a></div> 
+           
+      <h4> STARTING/ENDING Clauses</h4> 
+            
+            
+      <p>The <a href="../sm/read.htm"><code>READ</code></a>
+                statement also allows you to qualify the selection of records based on the
+                <em>value</em> of a descriptor field. With an
+                <a href="../sm/read.htm#STARTING_FROM_read"><code>EQUAL TO/STARTING
+               FROM</code></a> option in the <a href="../sm/read.htm#BY_ISN"><code>BY</code> or <code>WITH</code></a>
+                clause, you can specify the value at which reading should begin. By adding a
+                <a href="../sm/read.htm#thru_ending_read"><code>THRU/ENDING
+               AT</code></a> option, you can also specify the value in the logical
+                sequence at which reading should end.
+      </p> 
+            
+      <p>For example, if you wanted a list of those employees in the order of
+                job titles starting with <code>TRAINEE</code> and continuing on to
+                <code>Z</code>, you would use one of the following statements:
+      </p> 
+            <pre class="verbatim">
+READ MYVIEW WITH JOB-TITLE = 'TRAINEE' 
+READ MYVIEW WITH JOB-TITLE STARTING from 'TRAINEE' 
+READ MYVIEW BY JOB-TITLE = 'TRAINEE' 
+READ MYVIEW BY JOB-TITLE STARTING from 'TRAINEE'
+</pre> 
+            <p>Note that the value to the right of the equal sign (=) or
+                <a href="../sm/read.htm#STARTING_FROM_read"><code>STARTING
+               FROM</code></a> option must be enclosed in apostrophes. If the value is
+                numeric, this <a href="pg_furth_txtnot.htm#pg_furth_txtnot">text notation</a> is
+                not required.
+      </p> 
+            
+      <p>If a <a href="../sm/read.htm#BY_ISN"><code>BY</code></a>
+                option is used, a <a href="../sm/read.htm#BY_ISN"><code>WITH</code></a> option cannot be used
+                and vice versa.
+      </p> 
+            
+      <p>The sequence of records to be read can be even more closely specified
+                by adding an end limit with a <a href="../sm/read.htm#thru_ending_read"><code>THRU</code> or <code>ENDING
+               AT</code></a> clause.
+      </p> 
+            
+      <p>To read just the records with the job title <code>TRAINEE</code>, you
+                would specify:
+      </p> 
+            <pre class="verbatim">
+READ MYVIEW BY JOB-TITLE STARTING from 'TRAINEE' THRU 'TRAINEE'
+READ MYVIEW WITH JOB-TITLE EQUAL TO 'TRAINEE' 
+                           ENDING AT 'TRAINEE'
+</pre> 
+            <p>To read just the records with job titles that begin with
+                <code>A</code> or <code>B</code>, you would specify:
+      </p> 
+            <pre class="verbatim">
+READ MYVIEW BY JOB-TITLE = 'A' THRU 'C' 
+READ MYVIEW WITH JOB-TITLE STARTING from 'A' ENDING AT 'C'
+</pre> 
+            <p>The values are read up to and including the value specified after
+                <a href="../sm/read.htm#thru_ending_read"><code>THRU/ENDING
+               AT</code></a>. In the two examples above, all records with job titles
+                that begin with <code>A</code> or <code>B</code> are read; if there were a job
+                title <code>C</code>, this would also be read, but not the next higher value
+                <code>CA</code>.
+      </p> 
+           
+      <div><a name="WHERE_READ"></a></div> 
+           
+      <h4> WHERE Clause</h4> 
+            
+            
+      <p>The <a href="../sm/read.htm#WHERE_read"><code>WHERE</code></a> clause may be
+                used to further qualify which records are to be read.
+      </p> 
+            
+      <p>For instance, if you wanted only those employees with job titles
+                starting from <code>TRAINEE</code> who are paid in US currency, you would
+                specify:
+      </p> 
+            <pre class="verbatim">
+READ MYVIEW WITH JOB-TITLE = 'TRAINEE'
+            WHERE CURR-CODE = 'USD'
+</pre> 
+            <p>The <code>WHERE</code> clause can also be used with the
+                <a href="../sm/read.htm#BY_ISN"><code>BY</code></a> clause as
+                follows:
+      </p> 
+            <pre class="verbatim">
+READ MYVIEW BY NAME  
+            WHERE SALARY = 20000
+</pre> 
+            <p>The <code>WHERE</code> clause differs from the
+                <a href="../sm/read.htm#BY_ISN"><code>BY/WITH</code></a> clause in
+                two respects:
+      </p> 
+            
+      <ul> 
+                
+         <li> 
+                    
+            <p class="initem">The field specified in the <code>WHERE</code> clause need not be a
+                        descriptor.
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">The expression following the <code>WHERE</code> option is a logical
+                        condition.
+            </p> 
+                   
+         </li> 
+               
+      </ul> 
+            
+      <p>The following logical operators are possible in a <code>WHERE</code>
+                clause:
+      </p> 
+             
+             
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                   
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <th align="left">EQUAL</th> 
+                         
+               <td>EQ</td> 
+                         
+               <td>=</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th align="left">NOT EQUAL TO</th> 
+                         
+               <td>NE</td> 
+                         
+               <td>&not;=</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th align="left">LESS THAN</th> 
+                         
+               <td>LT</td> 
+                         
+               <td>&lt;</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th align="left">LESS THAN OR EQUAL TO</th> 
+                         
+               <td>LE</td> 
+                         
+               <td>&lt;=</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th align="left">GREATER THAN</th> 
+                         
+               <td>GT</td> 
+                         
+               <td>&gt;</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th align="left">GREATER THAN OR EQUAL TO</th> 
+                         
+               <td>GE</td> 
+                         
+               <td>&gt;=</td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+      <p>The following program illustrates the use of the
+                <a href="../sm/read.htm#STARTING_FROM_read"><code>STARTING FROM</code>,
+                   <code>ENDING AT</code></a> and <a href="../sm/read.htm#WHERE_read"><code>WHERE</code></a> clauses:
+      </p> 
+            <pre class="verbatim">
+** Example 'READX02': READ  (with STARTING, ENDING and WHERE clause)
+************************************************************************
+DEFINE DATA LOCAL
+1 MYVIEW VIEW OF EMPLOYEES
+  2 NAME
+  2 JOB-TITLE
+  2 INCOME     (1:2)
+    3 CURR-CODE
+    3 SALARY
+    3 BONUS    (1:1)
+END-DEFINE
+*
+<strong>READ</strong> (3) MYVIEW WITH  JOB-TITLE
+<strong>STARTING FROM</strong> 'TRAINEE' <strong>ENDING AT</strong> 'TRAINEE'
+                <strong>WHERE</strong> CURR-CODE (*) = 'USD'
+  DISPLAY NOTITLE NAME / JOB-TITLE 5X INCOME (1:2)
+  SKIP 1
+END-READ
+END
+</pre> 
+            <p>Output of Program <code>READX02</code>:
+      </p> <pre class="system-output">
+          NAME                            INCOME
+         CURRENT
+        POSITION              CURRENCY   ANNUAL     BONUS
+                                CODE     SALARY
+-------------------------     -------- ---------- ----------
+ 
+SENKO                         USD           23000          0
+TRAINEE                       USD           21800          0
+ 
+BANGART                       USD           25000          0
+TRAINEE                       USD           23000          0
+ 
+LINCOLN                       USD           24000          0
+TRAINEE                       USD           22000          0
+</pre> 
+           <div><a name="further_exa_read_pg_dbms_sdba"></a></div> 
+           
+      <h4>Further Example of READ Statement</h4> 
+            
+            
+      <p>See the following example program:</p> 
+            
+      <ul> 
+                
+         <li> 
+                    
+            <p class="initem"> <a href="pg_exas.htm#READX03">READX03 - READ
+                  statement</a></p> 
+                   
+         </li> 
+               
+      </ul> 
+           
+      <div><a name="FIND_Statement"></a></div> 
+          
+      <h3> 
+              <a name="x155"></a>FIND Statement
+      </h3> 
+           
+      <p>The following topics are covered:</p> 
+      <ul>
+         <li><a href="pg_dbms_ada.htm#find_statem_use">Use of FIND Statement</a></li>
+         <li><a href="pg_dbms_ada.htm#Syntax_FIND">Basic Syntax of FIND Statement</a></li>
+         <li><a href="pg_dbms_ada.htm#Limiting_the_Number_of_Records_to_be_Processed">Limiting the Number of Records to be Processed</a></li>
+         <li><a href="pg_dbms_ada.htm#WHERE_FIND">WHERE Clause</a></li>
+         <li><a href="pg_dbms_ada.htm#find_where_exa">Example of FIND Statement with WHERE Clause</a></li>
+         <li><a href="pg_dbms_ada.htm#IF_NO_RECORDS_FOUND_Condition">IF NO RECORDS FOUND Condition</a></li>
+         <li><a href="pg_dbms_ada.htm#further_exa_find_pg_dbms_sdba">Further Examples of FIND Statement</a></li>
+      </ul> 
+          
+      <div><a name="find_statem_use"></a></div> 
+           
+      <h4>Use of FIND Statement</h4> 
+            
+            
+      <p>The <a href="../sm/find.htm"><code>FIND</code></a>
+                statement is used to select from a database those records which meet a
+                specified search criterion.
+      </p> 
+           
+      <div><a name="Syntax_FIND"></a></div> 
+           
+      <h4>Basic Syntax of FIND Statement</h4> 
+            
+            
+      <p>The basic syntax of the <code>FIND</code> statement is:
+      </p> 
+             
+             
+      <table border="0" class="syntax" cellpadding="3">  
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <td> <code class="keyword">FIND RECORDS IN</code>
+                             <var>view</var> <code class="keyword">WITH</code>
+                             <var>field</var> = <var>value</var> 
+               </td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+      <p>or shorter:</p> 
+             
+             
+      <table border="0" class="syntax" cellpadding="3">  
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <td> <code class="keyword">FIND</code>
+                       <var>view</var> <code class="keyword">WITH</code>
+                             <var>field</var> = <var>value</var> 
+               </td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+      <p>- where</p> 
+             
+             
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                  
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <th> <var>view</var> 
+               </th> 
+                         
+               <td>is the name of a view defined in the
+                  <a href="../sm/defineda.htm"><code>DEFINE DATA</code></a>
+                             statement (as explained in <a href="pg_dbms_ada.htm#pg_dbms_ddv">DEFINE
+                                DATA Views</a>).
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th> <var>field</var> 
+               </th> 
+                         
+               <td>is the name of a database field defined in that view.</td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+      <p>You can only specify a <var>field</var> which is
+                defined as a "descriptor" in the underlying
+                <a href="pg_dbms_ada.htm#pg_dbms_ddm">DDM</a> (it can also be a
+                subdescriptor, superdescriptor, hyperdescriptor or phonetic descriptor).
+      </p> 
+            
+      <p>For the complete syntax, refer to the <a href="../sm/find.htm"><code>FIND</code></a> statement documentation.
+      </p> 
+           
+      <div><a name="Limiting_the_Number_of_Records_to_be_Processed"></a></div> 
+           
+      <h4> Limiting the Number of Records to be Processed</h4> 
+            
+            
+      <p>In the same way as with the <code>READ</code> statement described
+                <a href="pg_dbms_ada.htm#Limiting_the_Number_of_Records_to_be_Read">above</a>, you can
+                limit the number of records to be processed by specifying a number in
+                parentheses after the keyword <code>FIND</code>:
+      </p> 
+            <pre class="verbatim">FIND (6) RECORDS IN MYVIEW WITH NAME = 'CLEGG'</pre> 
+            <p>In the above example, only the first 6 records that meet the search
+                criterion would be processed.
+      </p> 
+            
+      <p>Without the limit notation, all records that meet the search criterion
+                would be processed.
+      </p> 
+            
+      <p class="note"><strong>Note:</strong><br> If the <code>FIND</code> statement contains a
+                <a href="../sm/find.htm#WHERE-clause"><code>WHERE</code></a>
+                clause (see below), records which are rejected as a result of the
+                <code>WHERE</code> clause are <em>not</em> counted against the limit.
+      </p> 
+           
+      <div><a name="WHERE_FIND"></a></div> 
+           
+      <h4>WHERE Clause</h4> 
+            
+            
+      <p>With the <a href="../sm/find.htm#WHERE-clause"><code>WHERE</code></a> clause of the
+                <a href="../sm/find.htm"><code>FIND</code></a> statement, you can
+                specify an additional selection criterion which is evaluated <em>after</em> a
+                record (selected with the <a href="../sm/find.htm#WITH_Clause"><code>WITH</code></a> clause) has been
+                read and <em>before</em> any processing is performed on the record.
+      </p> 
+           
+      <div><a name="find_where_exa"></a></div> 
+           
+      <h4>Example of FIND Statement with WHERE Clause</h4> 
+            
+            <pre class="verbatim">
+** Example 'FINDX01': FIND (with WHERE)
+************************************************************************
+DEFINE DATA LOCAL
+1 MYVIEW VIEW OF EMPLOYEES
+  2 PERSONNEL-ID
+  2 NAME
+  2 JOB-TITLE
+  2 CITY
+END-DEFINE
+*
+<strong>FIND</strong> MYVIEW <strong>WITH</strong> CITY = 'PARIS'
+            <strong>WHERE</strong> JOB-TITLE = 'INGENIEUR COMMERCIAL'
+  DISPLAY NOTITLE CITY JOB-TITLE PERSONNEL-ID NAME
+END-FIND
+END
+</pre> 
+            <p class="note"><strong>Note:</strong><br>In this example only those records which meet the criteria of the
+                <code>WITH</code> clause <em>and</em> the <code>WHERE</code> clause are
+                processed in the <a href="../sm/display.htm"><code>DISPLAY</code></a> statement.
+      </p> 
+            
+      <p>Output of Program <code>FINDX01</code>:
+      </p> <pre class="system-output">
+        CITY                  CURRENT          PERSONNEL         NAME
+                             POSITION             ID
+-------------------- ------------------------- --------- --------------------
+ 
+PARIS                INGENIEUR COMMERCIAL      50007300  CAHN
+PARIS                INGENIEUR COMMERCIAL      50006500  MAZUY
+PARIS                INGENIEUR COMMERCIAL      50004700  FAURIE
+PARIS                INGENIEUR COMMERCIAL      50004400  VALLY
+PARIS                INGENIEUR COMMERCIAL      50002800  BRETON
+PARIS                INGENIEUR COMMERCIAL      50001000  GIGLEUX
+PARIS                INGENIEUR COMMERCIAL      50000400  KORAB-BRZOZOWSKI
+</pre> 
+           <div><a name="IF_NO_RECORDS_FOUND_Condition"></a></div> 
+           
+      <h4>IF NO RECORDS FOUND Condition</h4> 
+            
+            
+      <p>If no records are found that meet the search criteria specified in the
+                <a href="../sm/find.htm#WITH_Clause"><code>WITH</code></a> and
+                <a href="../sm/find.htm#WHERE-clause"><code>WHERE</code></a>
+                clauses, the statements within the <code>FIND</code> processing loop are not
+                executed (for the previous example, this would mean that the
+                <a href="../sm/display.htm"><code>DISPLAY</code></a> statement
+                would not be executed and consequently no employee data would be
+                displayed).
+      </p> 
+            
+      <p>However, the <code>FIND</code> statement also provides an
+                <a href="../sm/find.htm#IF_NO_RECORDS_FOUND-clause"><code>IF NO RECORDS
+               FOUND</code></a> clause, which allows you to specify processing you wish
+                to be performed in the case that no records meet the search criteria.
+      </p> 
+            
+      <p><a name="if_no_rec_exa"></a> Example: 
+      </p> 
+            <pre class="verbatim">
+** Example 'FINDX02': FIND (with IF NO RECORDS FOUND)
+************************************************************************
+DEFINE DATA LOCAL
+1 MYVIEW VIEW OF EMPLOYEES
+  2 NAME
+  2 FIRST-NAME
+END-DEFINE
+*
+<strong>FIND MYVIEW WITH NAME = 'BLACKSMITH'
+  IF NO RECORDS FOUND
+    WRITE 'NO PERSON FOUND.'
+  END-NOREC
+  DISPLAY NAME FIRST-NAME
+END-FIND</strong>
+END
+</pre> 
+            <p>The above program selects all records in which the field
+                <code>NAME</code> contains the value <code>BLACKSMITH</code>. For each selected
+                record, the name and first name are displayed. If no record with <code>NAME =
+            'BLACKSMITH'</code> is found on the file, the <a href="../sm/write.htm"><code>WRITE</code></a> statement within the
+                <a href="../sm/find.htm#IF_NO_RECORDS_FOUND-clause"><code>IF NO RECORDS
+               FOUND</code></a> clause is executed.
+      </p> 
+            
+      <p>Output of Program <code>FINDX02</code>:
+      </p> <pre class="system-output">
+Page      1                                                  04-11-11  14:15:54
+ 
+        NAME              FIRST-NAME
+-------------------- --------------------
+ 
+NO PERSON FOUND.
+</pre> 
+           <div><a name="further_exa_find_pg_dbms_sdba"></a></div> 
+           
+      <h4> Further Examples of FIND Statement</h4> 
+            
+            
+      <p>See the following example programs:</p> 
+            
+      <ul> 
+                
+         <li> 
+                    
+            <p class="initem"> <a href="pg_exas.htm#FINDX07">FINDX07 - FIND (with several
+                  clauses)</a></p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem"> <a href="pg_exas.htm#FINDX08">FINDX08 - FIND (with
+                  LIMIT)</a></p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem"> <a href="pg_exas.htm#FINDX09">FINDX09 - FIND (using
+                  *NUMBER, *COUNTER, *ISN)</a></p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem"> <a href="pg_exas.htm#FINDX10">FINDX10 - FIND (combined with
+                  READ)</a></p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem"> <a href="pg_exas.htm#FINDX11">FINDX11 - FIND NUMBER (with
+                  *NUMBER)</a></p> 
+                   
+         </li> 
+               
+      </ul> 
+           
+      <div><a name="HISTOGRAM_Statement"></a></div> 
+          
+      <h3> 
+              <a name="x156"></a>HISTOGRAM Statement
+      </h3> 
+           
+      <p>The following topics are covered:</p> 
+      <ul>
+         <li><a href="pg_dbms_ada.htm#histo_statem_use">Use of HISTOGRAM Statement</a></li>
+         <li><a href="pg_dbms_ada.htm#Syntax_HISTOGRAM">Syntax of HISTOGRAM Statement</a></li>
+         <li><a href="pg_dbms_ada.htm#Limiting_the_Number_of_Values_to_be_Read">Limiting the Number of Values to be Read</a></li>
+         <li><a href="pg_dbms_ada.htm#STARTING_ENDING__HISTOGRAM">STARTING/ENDING Clauses</a></li>
+         <li><a href="pg_dbms_ada.htm#WHERE__HISTOGRAM">WHERE Clause</a></li>
+         <li><a href="pg_dbms_ada.htm#histo_statem_exa">Example of HISTOGRAM Statement</a></li>
+      </ul> 
+          
+      <div><a name="histo_statem_use"></a></div> 
+           
+      <h4>Use of HISTOGRAM Statement</h4> 
+            
+            
+      <p>The <a href="../sm/histogra.htm"><code>HISTOGRAM</code></a> statement is used to
+                either read only the values of one database field, or determine the number of
+                records which meet a specified search criterion.
+      </p> 
+            
+      <p>The <code>HISTOGRAM</code> statement does not provide access to any
+                database fields other than the one specified in the <code>HISTOGRAM</code>
+                statement.
+      </p> 
+           
+      <div><a name="Syntax_HISTOGRAM"></a></div> 
+           
+      <h4>Syntax of HISTOGRAM Statement</h4> 
+            
+            
+      <p>The basic syntax of the <code>HISTOGRAM</code> statement is:
+      </p> 
+             
+             
+      <table border="0" class="syntax" cellpadding="3">  
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <td> <code class="keyword">HISTOGRAM VALUE IN</code>
+                             <var>view</var> <code class="keyword">FOR</code>
+                             <var>field</var> 
+               </td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+      <p>or shorter:</p> 
+             
+             
+      <table border="0" class="syntax" cellpadding="3">  
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <td> <code class="keyword">HISTOGRAM</code>
+                            <var>view</var> <code class="keyword">FOR</code>
+                             <var>field</var> 
+               </td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+      <p>- where</p> 
+             
+             
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                  
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <th> <var>view</var> 
+               </th> 
+                         
+               <td>is the name of a view defined in the
+                  <a href="../sm/defineda.htm"><code>DEFINE DATA</code></a>
+                             statement (as explained in <a href="pg_dbms_ada.htm#pg_dbms_ddv">DEFINE
+                                DATA Views</a>).
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th> <var>field</var> 
+               </th> 
+                         
+               <td>is the name of a database field defined in that view.</td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+      <p>For the complete syntax, refer to the
+                <a href="../sm/histogra.htm"><code>HISTOGRAM</code></a> statement
+                documentation.
+      </p> 
+           
+      <div><a name="Limiting_the_Number_of_Values_to_be_Read"></a></div> 
+           
+      <h4>Limiting the Number of Values to be Read</h4> 
+            
+            
+      <p>In the same way as with the
+                <a href="pg_dbms_ada.htm#Limiting_the_Number_of_Records_to_be_Read"><code>READ</code></a>
+                statement, you can limit the number of values to be read by specifying a number
+                in parentheses after the keyword <code>HISTOGRAM</code>:
+      </p> 
+            <pre class="verbatim">HISTOGRAM (6) MYVIEW FOR NAME</pre> 
+            <p>In the above example, only the first 6 values of the field
+                <code>NAME</code> would be read.
+      </p> 
+            
+      <p>Without the limit notation, all values would be read.</p> 
+           
+      <div><a name="STARTING_ENDING__HISTOGRAM"></a></div> 
+           
+      <h4>STARTING/ENDING Clauses</h4> 
+            
+            
+      <p>Like the <a href="pg_dbms_ada.htm#STARTING_ENDING_READ"><code>READ</code></a> statement, the
+                <code>HISTOGRAM</code> statement also provides a
+                <a href="../sm/histogra.htm#STARTING-ENDING-clause"><code>STARTING
+               FROM</code> clause and an <code>ENDING AT (or THRU)</code></a> clause to
+                narrow down the range of values to be read by specifying a starting value and
+                ending value.
+      </p> 
+            
+      <h4 class="floating-title"> Examples: </h4> 
+            <pre class="verbatim">
+HISTOGRAM MYVIEW FOR NAME STARTING from 'BOUCHARD'
+HISTOGRAM MYVIEW FOR NAME STARTING from 'BOUCHARD' ENDING AT 'LANIER' 
+HISTOGRAM MYVIEW FOR NAME from 'BLOOM' THRU 'ROESER'
+</pre> 
+           <div><a name="WHERE__HISTOGRAM"></a></div> 
+           
+      <h4> WHERE Clause</h4> 
+            
+            
+      <p>The <a href="../sm/histogra.htm"><code>HISTOGRAM</code></a> statement also
+                provides a <a href="../sm/histogra.htm#WHERE_histogra"><code>WHERE</code></a> clause
+                which may be used to specify an additional selection criterion that is
+                evaluated <em>after</em> a value has been read and <em>before</em> any
+                processing is performed on the value. The field specified in the
+                <code>WHERE</code> clause must be the same as in the main clause of the
+                <code>HISTOGRAM</code> statement.
+      </p> 
+           
+      <div><a name="histo_statem_exa"></a></div> 
+           
+      <h4>Example of HISTOGRAM Statement</h4> 
+            
+            <pre class="verbatim">** Example 'HISTOX01': HISTOGRAM
+************************************************************************
+DEFINE DATA LOCAL
+1 MYVIEW VIEW OF EMPLOYEES
+  2 CITY
+END-DEFINE
+*
+<strong>LIMIT 8
+HISTOGRAM MYVIEW CITY STARTING FROM 'M'
+  DISPLAY NOTITLE CITY 'NUMBER OF/PERSONS' *NUMBER *COUNTER
+END-HISTOGRAM</strong>
+END</pre> 
+            <p>In this program, the system variables
+                <a href="../vari/appl.htm#NUMBER"><code>*NUMBER</code></a>
+                and <a href="../vari/appl.htm#COUNTER"><code>*COUNTER</code></a>
+                are also evaluated by the <code>HISTOGRAM</code> statement, and output with the
+                <a href="../sm/display.htm"><code>DISPLAY</code></a> statement.
+                <code>*NUMBER</code> contains the number of database records
+                that contain the last value read; <code>*COUNTER</code>
+                contains the total number of values which have been read.
+      </p> 
+            
+      <p>Output of Program <code>HISTOX01</code>:
+      </p> <pre class="system-output">
+        CITY          NUMBER OF     CNT
+                       PERSONS
+-------------------- ----------- -----------
+ 
+MADISON                        3           1
+MADRID                        41           2
+MAILLY LE CAMP                 1           3
+MAMERS                         1           4
+MANSFIELD                      4           5
+MARSEILLE                      2           6
+MATLOCK                        1           7
+MELBOURNE                      2           8
+</pre> 
+           <div class="noprint">
+         <p><a href="pg_dbms_ada.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="pg_dbms_mf"></a></div> 
+         
+      <h2> 
+             <a name="x157"></a> Multi-Fetch Clause 
+      </h2> 
+          
+      <p>This section covers the multi-fetch record retrieval functionality
+              for Adabas databases.
+      </p> 
+          
+      <p>The multi-fetch functionality described in this
+              section is only supported for databases of type <code>ADA</code>, which can
+              be defined in the DBMS Assignments table in the Configuration Utility; see
+              <a href="../config/cfg-confparm.htm#cfg-cf-glo-dbms">Database
+            Management System Assignments</a> in the
+              <cite>Configuration Utility</cite> documentation. With database type
+              ADA2, the multi-fetch clause is not supported.
+      </p> 
+          
+      <p></p> 
+          
+      <p>The following topics are covered:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_dbms_ada.htm#multi_win_ux">Purpose of Multi-Fetch Feature</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_ada.htm#multi_fetch_sm">Statements Supported</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_ada.htm#multi_fetch_usage">Considerations for Multi-Fetch Usage</a></p>
+         </li>
+      </ul> 
+         
+      <div><a name="multi_win_ux"></a></div> 
+          
+      <h3> Purpose of Multi-Fetch Feature</h3> 
+           
+           
+      <p>In standard mode, Natural does not read multiple records with a single
+               database call; it always operates in a one-record-per-fetch mode. This kind of
+               operation is solid and stable, but can take some time if a large number of
+               database records are being processed. To improve the performance of those
+               programs, you can use multi-fetch processing.
+      </p> 
+           
+      <p>By default, Natural uses single-fetch to retrieve data from Adabas
+               databases. This default can be configured using the Natural profile parameter
+               <a href="../parms/mfset.htm"><code>MFSET</code></a>.
+      </p>
+           
+           
+      <p>Values <code>ON</code> (multi-fetch) and <code>OFF</code>
+               (single-fetch) define the default behavior. If <code>MFSET</code> is
+               set to <code>NEVER</code>, Natural always uses single-fetch mode and ignores
+               any settings at statement level.
+      </p> 
+           
+      <p>The default processing mode can also be overridden at statement
+               level.
+      </p> 
+          
+      <div><a name="multi_fetch_sm"></a></div> 
+          
+      <h3>Statements Supported</h3> 
+           
+           
+      <p>Multi-fetch processing is supported for the following statements that
+               do not involve database modification:
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem"> <a href="../sm/find.htm"><code>FIND</code></a></p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"> <a href="../sm/read.htm"><code>READ</code></a></p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"> <a href="../sm/histogra.htm"><code>HISTOGRAM</code></a></p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>For more information on the syntax, see the description of the
+               <code>MULTI-FETCH</code> clause of the
+               <a href="../sm/find.htm#multi_fetch_find"><code>FIND</code></a>,
+               <a href="../sm/read.htm#multi_fetch"><code>READ</code></a> or
+               <a href="../sm/histogra.htm#multi_fetch_histogra"><code>HISTOGRAM</code></a>
+               statements.
+      </p> 
+          
+      <div><a name="multi_fetch_usage"></a></div> 
+          
+      <h3>Considerations for Multi-Fetch Usage</h3> 
+           
+           
+      <p>If nested database loops that refer to the same Adabas file contain
+               <a href="../sm/update.htm"><code>UPDATE</code></a> statements in
+               one of the inner loops, Natural continues processing the outer loops with the
+               updated values. This implies in multi-fetch mode, that an outer logical
+               <code>READ</code> loop has to be repositioned if an inner database loop updates
+               the value of the descriptor that is used for sequence control in the outer
+               loop. If this attempt leads to a conflict for the current descriptor, an error
+               is returned. To avoid this situation, we recommend that you disable multi-fetch
+               in the outer database loops.
+      </p> 
+           
+      <p>In general, multi-fetch mode improves performance when accessing Adabas
+               databases. In some cases, however, it might be advantageous to use single-fetch
+               to enhance performance, especially if database modifications are involved.
+      </p> 
+          
+      <div class="noprint">
+         <p><a href="pg_dbms_ada.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="pg_dbms_dpl"></a></div> 
+         
+      <h2> 
+             <a name="x160"></a> 
+             <a name="x161"></a>Database Processing Loops 
+      </h2> 
+          
+      <p>This section discusses processing loops required to process data that
+              have been selected from a database as a result of a <code>FIND</code>,
+              <code>READ</code> or <code>HISTOGRAM</code> statement.
+      </p> 
+          
+      <p>The following topics are covered:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_dbms_ada.htm#db_loop_creation">Creation of Database Processing Loops</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_ada.htm#Hierarchies_of_Processing_Loops">Hierarchies of Processing Loops</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_ada.htm#nested_find_loops_exa">Example of Nested FIND Loops Accessing the Same File</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_ada.htm#further_exa_nested_find_loops">Further Examples of Nested READ and FIND Statements</a></p>
+         </li>
+      </ul> 
+         
+      <div><a name="db_loop_creation"></a></div> 
+          
+      <h3>Creation of Database Processing Loops</h3> 
+           
+           
+      <p>Natural automatically creates the necessary processing loops which are
+               required to process data that have been selected from a database as a result of
+               a <a href="../sm/find.htm"><code>FIND</code></a>,
+               <a href="../sm/read.htm"><code>READ</code></a> or
+               <a href="../sm/histogra.htm"><code>HISTOGRAM</code></a>
+               statement.
+      </p> 
+           
+      <h4 class="floating-title">Example:</h4> 
+           
+      <p>In the following exampe, the <a href="../sm/find.htm"><code>FIND</code></a> loop selects all records from
+               the <code>EMPLOYEES</code> file in which the field <code>NAME</code> contains
+               the value <code>ADKINSON</code> and processes the selected records. In this
+               example, the processing consists of displaying certain fields from each record
+               selected.
+      </p> 
+           <pre class="verbatim">** Example 'FINDX03': FIND
+************************************************************************
+DEFINE DATA LOCAL
+1 MYVIEW VIEW OF EMPLOYEES
+  2 NAME
+  2 FIRST-NAME
+  2 CITY
+END-DEFINE
+*
+FIND MYVIEW WITH NAME = 'ADKINSON'
+  DISPLAY NAME FIRST-NAME CITY
+END-FIND
+END</pre> 
+           <p>If the <a href="../sm/find.htm"><code>FIND</code></a>
+               statement contained a <a href="../sm/find.htm#WHERE-clause"><code>WHERE</code></a> clause in
+               addition to the <a href="../sm/find.htm#WITH_Clause"><code>WITH</code></a> clause, only
+               those records that were selected as a result of the <code>WITH</code> clause
+               <em>and</em> met the <code>WHERE</code> criteria would be processed.
+      </p> 
+           
+      <p>The following diagram illustrates the flow logic of a database
+               processing loop: 
+      </p> 
+           
+      <p><img src="graphics/pgflow1.png" alt="" width="500" height="550"></p> 
+          
+      <div><a name="Hierarchies_of_Processing_Loops"></a></div> 
+          
+      <h3>Hierarchies of Processing Loops</h3> 
+           
+      <p>The use of multiple <a href="../sm/find.htm"><code>FIND</code></a> and/or
+               <a href="../sm/read.htm"><code>READ</code></a> statements creates
+               a hierarchy of processing loops, as shown in the following
+               example:
+      </p>
+      <div><a name="d0e20270"></a></div> 
+           
+      <h4>Example of Processing Loop Hierarchy</h4> 
+            
+            <pre class="verbatim">** Example 'FINDX04': FIND  (two FIND statements nested)
+************************************************************************
+DEFINE DATA LOCAL
+1 PERSONVIEW VIEW OF EMPLOYEES
+  2 PERSONNEL-ID
+  2 NAME
+1 AUTOVIEW VIEW OF VEHICLES
+  2 PERSONNEL-ID
+  2 MAKE
+  2 MODEL
+END-DEFINE
+*
+EMP. FIND PERSONVIEW WITH NAME = 'ADKINSON'
+  VEH. FIND AUTOVIEW WITH PERSONNEL-ID = PERSONNEL-ID (EMP.)
+    DISPLAY NAME MAKE MODEL
+  END-FIND
+END-FIND
+END</pre> 
+            <p>The above program selects from the <code>EMPLOYEES</code> file all
+                people with the name <code>ADKINSON</code>. Each record (person) selected is
+                then processed as follows:
+      </p> 
+            
+      <ol> 
+                
+         <li> 
+                    
+            <p class="initem">The second <code>FIND</code> statement is executed to select the
+                        automobiles from the <code>VEHICLES</code> file, using as selection criterion
+                        the <code>PERSONNEL-ID</code>s from the records selected from the
+                        <code>EMPLOYEES</code> file with the first <code>FIND</code> statement.
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">The <code>NAME</code> of each person selected is displayed; this
+                        information is obtained from the <code>EMPLOYEES</code> file. The
+                        <code>MAKE</code> and <code>MODEL</code> of each automobile owned by that
+                        person is also displayed; this information is obtained from the
+                        <code>VEHICLES</code> file.
+            </p> 
+                   
+         </li> 
+               
+      </ol> 
+            
+      <p>The second <code>FIND</code> statement creates an inner processing
+                loop within the outer processing loop of the first <code>FIND</code> statement,
+                as shown in the following diagram.
+      </p> 
+            
+      <p>The diagram illustrates the flow logic of the hierarchy of processing
+                loops in the previous example program: 
+      </p> 
+            
+      <p><img src="graphics/pgflow2.png" alt="" width="500" height="675"></p> 
+           
+      <div><a name="nested_find_loops_exa"></a></div> 
+          
+      <h3> Example of Nested FIND Loops Accessing the Same File</h3> 
+           
+           
+      <p>It is also possible to construct a processing loop hierarchy in which
+               the same file is used at both levels of the hierarchy:
+      </p> 
+           <pre class="verbatim">
+** Example 'FINDX05': FIND (two FIND statements on same file nested)
+************************************************************************
+DEFINE DATA LOCAL
+1 PERSONVIEW VIEW OF EMPLOYEES
+  2 NAME
+  2 FIRST-NAME
+  2 CITY
+1 #NAME (A40)
+END-DEFINE
+*
+WRITE TITLE LEFT JUSTIFIED
+  'PEOPLE IN SAME CITY AS:' #NAME / 'CITY:' CITY SKIP 1
+*
+FIND PERSONVIEW WITH NAME = 'JONES'
+                WHERE FIRST-NAME = 'LAUREL'
+  COMPRESS NAME FIRST-NAME INTO #NAME
+  /*
+  FIND PERSONVIEW WITH CITY = CITY
+    DISPLAY NAME FIRST-NAME CITY
+  END-FIND
+END-FIND
+END
+</pre> 
+           <p>The above program first selects all people with name <code>JONES</code>
+               and first name <code>LAUREL</code> from the <code>EMPLOYEES</code> file. Then
+               all who live in the same city are selected from the <code>EMPLOYEES</code> file
+               and a list of these people is created. All field values displayed by the
+               <code>DISPLAY</code> statement are taken from the second <code>FIND</code>
+               statement.
+      </p> 
+           
+      <p>Output of Program <code>FINDX05</code>:
+      </p> <pre class="system-output">
+PEOPLE IN SAME CITY AS: JONES LAUREL
+CITY: BALTIMORE
+
+        NAME              FIRST-NAME              CITY
+-------------------- -------------------- --------------------
+
+JENSON               MARTHA               BALTIMORE
+LAWLER               EDDIE                BALTIMORE
+FORREST              CLARA                BALTIMORE
+ALEXANDER            GIL                  BALTIMORE
+NEEDHAM              SUNNY                BALTIMORE
+ZINN                 CARLOS               BALTIMORE
+JONES                LAUREL               BALTIMORE
+</pre> 
+          <div><a name="further_exa_nested_find_loops"></a></div> 
+          
+      <h3> Further Examples of Nested READ and FIND Statements</h3> 
+           
+           
+      <p>See the following example programs:</p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem"> <a href="pg_exas.htm#READX04_further_exa_nested_read_find">READX04 - READ
+                  statement (in combination with FIND and the system variables *NUMBER and
+                  *COUNTER)</a></p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"> <a href="pg_exas.htm#LIMITX01">LIMITX01 - LIMIT statement
+                  (for READ, FIND loop processing)</a></p> 
+                  
+         </li> 
+              
+      </ul> 
+          
+      <div class="noprint">
+         <p><a href="pg_dbms_ada.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="pg_dbms_dutp"></a></div> 
+         
+      <h2> 
+             <a name="x162"></a> 
+             <a name="x163"></a>Database Update - Transaction Processing 
+      </h2>
+          
+          
+      <p>This section describes how Natural performs database updating
+              operations based on transactions.
+      </p> 
+          
+      <p>The following topics are covered:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_dbms_ada.htm#Logical_Transaction">Logical Transaction</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_ada.htm#Record_Hold_Logic">Record Hold Logic</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_ada.htm#Backing_Out_a_Transaction">Backing Out a Transaction</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_ada.htm#Restarting_a_Transaction">Restarting a Transaction</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_ada.htm#restart_transact_exa">Example of Using Transaction Data to Restart a Transaction</a></p>
+         </li>
+      </ul> 
+         
+      <div><a name="Logical_Transaction"></a></div> 
+          
+      <h3> 
+              <a name="x164"></a>Logical Transaction
+      </h3> 
+           
+           
+      <p>Natural performs database updating operations based on transactions,
+               which means that all database update requests are processed in logical
+               transaction units. A logical transaction is the smallest unit of work (as
+               defined by you) which must be performed in its entirety to ensure that the
+               information contained in the database is logically consistent.
+      </p> 
+           
+      <p>A logical transaction may consist of one or more update statements
+               (<a href="../sm/delete.htm"><code>DELETE</code></a>,
+               <a href="../sm/store.htm"><code>STORE</code></a>,
+               <a href="../sm/update.htm"><code>UPDATE</code></a>) involving one
+               or more database files. A logical transaction may also span multiple Natural
+               programs.
+      </p> 
+           
+      <p>A logical transaction begins when a record is put on
+               "hold"; Natural does this automatically when the record is read
+               for updating, for example, if a <a href="../sm/find.htm"><code>FIND</code></a> loop contains an
+               <code>UPDATE</code> or <code>DELETE</code> statement.
+      </p> 
+           
+      <p>The end of a logical transaction is determined by an
+               <a href="../sm/endtrans.htm"><code>END TRANSACTION</code></a>
+               statement in the program. This statement ensures that all updates within the
+               transaction have been successfully applied, and releases all records that were
+               put on "hold" during the transaction.
+      </p> 
+           
+      <h4 class="floating-title"> Example:</h4> 
+           <pre class="verbatim">
+DEFINE DATA LOCAL 
+1 MYVIEW VIEW OF EMPLOYEES 
+  2 NAME 
+END-DEFINE 
+FIND MYVIEW WITH NAME = 'SMITH' 
+   DELETE 
+   END TRANSACTION 
+END-FIND 
+END
+</pre> 
+           <p>Each record selected would be put on "hold", deleted, and
+               then - when the <a href="../sm/endtrans.htm"><code>END
+               TRANSACTION</code></a> statement is executed - released from
+               "hold".
+      </p> 
+           
+      <p class="note"><strong>Note:</strong><br> The Natural profile parameter <a href="../parms/eteop.htm"><code>ETEOP</code></a>, as set by the
+               Natural administrator, determines whether or not Natural will generate an
+               <code>END TRANSACTION</code> statement at the end of each Natural program. Ask
+               your Natural administrator for details.
+      </p> 
+           
+      <div><a name="store_statem_exa"></a></div>
+      <h4 class="floating-title"> Example of STORE
+               Statement:
+      </h4> 
+           
+      <p>The following example program adds new records to the
+               <code>EMPLOYEES</code> file.
+      </p> 
+           <pre class="verbatim">
+** Example 'STOREX01': STORE  (Add new records to EMPLOYEES file)
+*
+** CAUTION: Executing this example will modify the database records!
+************************************************************************
+DEFINE DATA LOCAL
+1 EMPLOYEE-VIEW VIEW OF EMPLOYEES
+  2 PERSONNEL-ID(A8)
+  2 NAME        (A20)
+  2 FIRST-NAME  (A20)
+  2 MIDDLE-I    (A1)
+  2 SALARY      (P9/2)
+  2 MAR-STAT    (A1)
+  2 BIRTH       (D)
+  2 CITY        (A20)
+  2 COUNTRY     (A3)
+*
+1 #PERSONNEL-ID (A8)
+1 #NAME         (A20)
+1 #FIRST-NAME   (A20)
+1 #INITIAL      (A1)
+1 #MAR-STAT     (A1)
+1 #SALARY       (N9)
+1 #BIRTH        (A8)
+1 #CITY         (A20)
+1 #COUNTRY      (A3)
+1 #CONF         (A1)   INIT &lt;'Y'&gt;
+END-DEFINE
+*
+REPEAT
+  INPUT 'ENTER A PERSONNEL ID AND NAME (OR ''END'' TO END)' //
+        'PERSONNEL-ID : ' #PERSONNEL-ID    //
+        'NAME         : ' #NAME  /
+        'FIRST-NAME   : ' #FIRST-NAME
+  /*********************************************************************
+  /*  validate entered data
+  /*********************************************************************
+  IF #PERSONNEL-ID = 'END' OR #NAME = 'END'
+    STOP
+  END-IF
+  IF #NAME = ' '
+    REINPUT WITH TEXT 'ENTER A LAST-NAME'
+            MARK 2 AND SOUND ALARM
+  END-IF
+  IF #FIRST-NAME = ' '
+    REINPUT WITH TEXT 'ENTER A FIRST-NAME'
+            MARK 3 AND SOUND ALARM
+  END-IF
+  /*********************************************************************
+  /*  ensure person is not already on file
+  /*********************************************************************
+  FIP2. FIND NUMBER EMPLOYEE-VIEW WITH PERSONNEL-ID =  #PERSONNEL-ID
+  /*
+  IF *NUMBER (FIP2.) &gt; 0
+    REINPUT 'PERSON WITH SAME PERSONNEL-ID ALREADY EXISTS'
+             MARK 1 AND SOUND ALARM
+  END-IF
+  /*********************************************************************
+  /*  get further information
+  /*********************************************************************
+  INPUT
+    'ENTER EMPLOYEE DATA'                            ////
+    'PERSONNEL-ID             :' #PERSONNEL-ID (AD=IO) /
+    'NAME                     :' #NAME         (AD=IO) /
+    'FIRST-NAME               :' #FIRST-NAME   (AD=IO) ///
+    'INITIAL                  :' #INITIAL              /
+    'ANNUAL SALARY            :' #SALARY               /
+    'MARITAL STATUS           :' #MAR-STAT             /
+    'DATE OF BIRTH (YYYYMMDD) :' #BIRTH                /
+    'CITY                     :' #CITY                 /
+    'COUNTRY (3 CHARS)        :' #COUNTRY              //
+    'ADD THIS RECORD (Y/N)    :' #CONF         (AD=M)
+  /*********************************************************************
+  /*  ENSURE REQUIRED FIELDS CONTAIN VALID DATA
+  /*********************************************************************
+  IF #SALARY &lt; 10000
+    REINPUT TEXT 'ENTER A PROPER ANNUAL SALARY' MARK 2
+  END-IF
+  IF NOT (#MAR-STAT = 'S'  OR = 'M' OR = 'D' OR = 'W')
+    REINPUT TEXT 'ENTER VALID MARITAL STATUS  S=SINGLE ' -
+                 'M=MARRIED D=DIVORCED W=WIDOWED' MARK 3
+  END-IF
+  IF NOT(#BIRTH = MASK(YYYYMMDD) AND #BIRTH = MASK(1582-2699))
+    REINPUT TEXT 'ENTER CORRECT DATE' MARK 4
+  END-IF
+  IF #CITY  = ' '
+    REINPUT TEXT 'ENTER A CITY NAME' MARK 5
+  END-IF
+  IF #COUNTRY = ' '
+    REINPUT TEXT 'ENTER A COUNTRY CODE' MARK 6
+  END-IF
+  IF NOT (#CONF = 'N' OR= 'Y')
+    REINPUT TEXT 'ENTER Y (YES) OR N (NO)' MARK 7
+  END-IF
+  IF #CONF = 'N'
+    ESCAPE TOP
+  END-IF
+  /*********************************************************************
+  /*  add the record with STORE
+  /*********************************************************************
+  MOVE #PERSONNEL-ID TO EMPLOYEE-VIEW.PERSONNEL-ID
+  MOVE #NAME         TO EMPLOYEE-VIEW.NAME
+  MOVE #FIRST-NAME   TO EMPLOYEE-VIEW.FIRST-NAME
+  MOVE #INITIAL      TO EMPLOYEE-VIEW.MIDDLE-I
+  MOVE #SALARY       TO EMPLOYEE-VIEW.SALARY (1)
+  MOVE #MAR-STAT     TO EMPLOYEE-VIEW.MAR-STAT
+  MOVE EDITED #BIRTH TO EMPLOYEE-VIEW.BIRTH (EM=YYYYMMDD)
+  MOVE #CITY         TO EMPLOYEE-VIEW.CITY
+  MOVE #COUNTRY      TO EMPLOYEE-VIEW.COUNTRY
+  /*
+  STP3. STORE RECORD IN FILE EMPLOYEE-VIEW
+  /*
+  /*********************************************************************
+  /*  mark end of logical transaction
+  /*********************************************************************
+  END OF TRANSACTION
+  RESET INITIAL #CONF
+END-REPEAT
+END
+</pre> 
+           <p>Output of Program <code>STOREX01</code>:
+      </p> <pre class="system-output">
+ENTER A PERSONNEL ID AND NAME (OR 'END' TO END)
+ 
+PERSONNEL ID :  
+ 
+NAME         :
+FIRST NAME   :
+</pre> 
+          <div><a name="Record_Hold_Logic"></a></div> 
+          
+      <h3> 
+              <a name="x165"></a>Record Hold Logic
+      </h3> 
+           
+           
+      <p>If Natural is used with Adabas, any record which is to be updated will
+               be placed in "hold" status until an
+               <a href="../sm/endtrans.htm"><code>END TRANSACTION</code></a> or
+               <a href="../sm/backout.htm"><code>BACKOUT TRANSACTION</code></a>
+               statement is issued or the transaction time limit is exceeded.
+      </p> 
+           
+      <p>When a record is placed in "hold" status for one user, the
+               record is not available for update by another user. Another user who wishes to
+               update the same record will be placed in "wait" status until the
+               record is released from "hold" when the first user ends or backs
+               out his/her transaction.
+      </p> 
+           
+      <p>To prevent users from being placed in wait status, the session
+               parameter <a href="../parms/wh.htm"><code>WH</code></a>
+               (Wait for Record in Hold Status) can be used (see the
+               <a href="../parms/parms-over.htm">Parameter
+            Reference</a>).
+      </p> 
+           
+      <p>When you use update logic in a program, you should consider the
+               following:
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">The maximum time that a record can be in hold status is determined by
+                       the Adabas transaction time limit (Adabas parameter <code>TT</code>).
+                       If this time limit is exceeded, you will receive an error message and all
+                       database modifications done since the last <a href="../sm/endtrans.htm"><code>END TRANSACTION</code></a> will be made
+                       undone.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">The number of records on hold and the transaction time limit are
+                       affected by the size of a transaction, that is, by the placement of the
+                       <code>END TRANSACTION</code> statement in the program. Restart facilities
+                       should be considered when deciding where to issue an <code>END
+                  TRANSACTION</code>. For example, if a majority of records being processed are
+                       <em>not</em> to be updated, the <a href="../sm/get.htm"><code>GET</code></a> statement is an efficient way
+                       of controlling the "holding" of records. This avoids issuing
+                       multiple <code>END TRANSACTION</code> statements and reduces the number of ISNs
+                       on hold. When you process large files, you should bear in mind that the
+                       <code>GET</code> statement requires an additional Adabas call. An example of a
+                       <code>GET</code> statement is shown below.
+            </p> 
+                  
+         </li> 
+                
+              
+      </ul> 
+           
+      <div><a name="get_statem_exa"></a></div>
+      <h4 class="floating-title"> Example of Hold
+               Logic:
+      </h4> 
+           <pre class="verbatim">
+** Example 'GETX01': GET (put single record in hold with UPDATE stmt)  
+**                                                                     
+** CAUTION: Executing this example will modify the database records!
+***********************************************************************
+DEFINE DATA LOCAL                                                      
+1 EMPLOY-VIEW VIEW OF EMPLOYEES                                        
+  2 NAME                                                               
+  2 SALARY (1)                                                         
+END-DEFINE                                                             
+*                                                                      
+RD. READ EMPLOY-VIEW BY NAME                                           
+  DISPLAY EMPLOY-VIEW                                                  
+  IF SALARY (1) &gt; 1500000                                              
+    /*                                                                 
+    GE. GET EMPLOY-VIEW *ISN (RD.)                                     
+    /*                                                                 
+    WRITE '=' (50) 'RECORD IN HOLD:' *ISN(RD.)                         
+    COMPUTE SALARY (1) = SALARY (1) * 1.15                             
+    UPDATE (GE.)
+    END TRANSACTION     
+  END-IF                
+END-READ                
+END
+</pre> 
+          <div><a name="Backing_Out_a_Transaction"></a></div> 
+          
+      <h3> 
+              <a name="x166"></a> 
+              <a name="x167"></a>Backing Out a Transaction
+      </h3> 
+           
+           
+      <p>During an active logical transaction, that is, before the
+               <a href="../sm/endtrans.htm"><code>END TRANSACTION</code></a>
+               statement is issued, you can cancel the transaction by using a
+               <a href="../sm/backout.htm"><code>BACKOUT TRANSACTION</code></a>
+               statement. The execution of this statement removes all updates that have been
+               applied (including all records that have been added or deleted) and releases
+               all records held by the transaction.
+      </p> 
+          
+      <div><a name="Restarting_a_Transaction"></a></div> 
+          
+      <h3> 
+              <a name="x168"></a>Restarting a Transaction
+      </h3> 
+           
+           
+      <p>With the <a href="../sm/endtrans.htm"><code>END
+               TRANSACTION</code></a> statement, you can also store transaction-related
+               information. If processing of the transaction terminates abnormally, you can
+               read this information with a <a href="../sm/gettrans.htm"><code>GET
+               TRANSACTION DATA</code></a> statement to ascertain where to resume
+               processing when you restart the transaction.
+      </p> 
+          
+      <div><a name="restart_transact_exa"></a></div> 
+          
+      <h3>Example of Using Transaction Data to Restart a Transaction</h3> 
+           
+           
+      <p>The following program updates the <code>EMPLOYEES</code> and
+               <code>VEHICLES</code> files. After a restart operation, the user is informed of
+               the last <code>EMPLOYEES</code> record successfully processed. The user can
+               resume processing from that <code>EMPLOYEES</code> record. It would also be
+               possible to set up the restart transaction message to include the last
+               <code>VEHICLES</code> record successfully updated before the restart
+               operation.
+      </p> 
+           <pre class="verbatim">
+** Example 'GETTRX01': GET TRANSACTION
+*
+** CAUTION: Executing this example will modify the database records!
+************************************************************************
+DEFINE DATA LOCAL
+01 PERSON VIEW OF EMPLOYEES
+  02 PERSONNEL-ID      (A8)
+  02 NAME              (A20)
+  02 FIRST-NAME        (A20)
+  02 MIDDLE-I          (A1)
+  02 CITY              (A20)
+01 AUTO VIEW OF VEHICLES
+  02 PERSONNEL-ID      (A8)
+  02 MAKE              (A20)
+  02 MODEL             (A20)
+*
+01 ET-DATA
+  02 #APPL-ID          (A8) INIT &lt;' '&gt;
+  02 #USER-ID          (A8)
+  02 #PROGRAM          (A8)
+  02 #DATE             (A10)
+  02 #TIME             (A8)
+  02 #PERSONNEL-NUMBER (A8)
+END-DEFINE
+*
+GET TRANSACTION DATA #APPL-ID #USER-ID #PROGRAM
+                     #DATE    #TIME    #PERSONNEL-NUMBER
+*
+IF  #APPL-ID NOT = 'NORMAL'     /* if last execution ended abnormally
+AND #APPL-ID NOT = ' '
+  INPUT (AD=OIL)
+    //  20T '*** LAST SUCCESSFUL TRANSACTION ***' (I)
+    /   20T '***********************************'
+    /// 25T      'APPLICATION:' #APPL-ID
+    /   32T             'USER:' #USER-ID
+    /   29T          'PROGRAM:' #PROGRAM
+    /   24T     'COMPLETED ON:' #DATE 'AT' #TIME
+    /   20T 'PERSONNEL NUMBER:' #PERSONNEL-NUMBER
+END-IF
+*
+REPEAT
+  /*
+  INPUT (AD=MIL) // 20T 'ENTER PERSONNEL NUMBER:' #PERSONNEL-NUMBER
+  /*
+  IF #PERSONNEL-NUMBER = '99999999'
+    ESCAPE BOTTOM
+  END-IF
+  /*
+  FIND1. FIND PERSON WITH PERSONNEL-ID = #PERSONNEL-NUMBER
+    IF NO RECORDS FOUND
+      REINPUT 'SPECIFIED NUMBER DOES NOT EXIST; ENTER ANOTHER ONE.'
+    END-NOREC
+    FIND2. FIND AUTO WITH PERSONNEL-ID = #PERSONNEL-NUMBER
+      IF NO RECORDS FOUND
+        WRITE 'PERSON DOES NOT OWN ANY CARS'
+        ESCAPE BOTTOM
+      END-NOREC
+      IF *COUNTER (FIND2.) = 1     /* first pass through the loop
+        INPUT (AD=M)
+          /   20T 'EMPLOYEES/AUTOMOBILE DETAILS' (I)
+          /   20T '----------------------------'
+          /// 20T 'NUMBER:' PERSONNEL-ID (AD=O)
+          /   22T   'NAME:' NAME ' ' FIRST-NAME ' ' MIDDLE-I
+          /   22T   'CITY:' CITY
+          /   22T   'MAKE:' MAKE
+          /   21T  'MODEL:' MODEL
+        UPDATE (FIND1.)            /* update the EMPLOYEES file
+      ELSE                         /* subsequent passes through the loop
+        INPUT NO ERASE (AD=M IP=OFF) //////// 28T MAKE / 28T MODEL
+      END-IF
+      /*
+      UPDATE (FIND2.)              /* update the VEHICLES file
+      /*
+      MOVE *APPLIC-ID TO #APPL-ID
+      MOVE *INIT-USER TO #USER-ID
+      MOVE *PROGRAM   TO #PROGRAM
+      MOVE *DAT4E     TO #DATE
+      MOVE *TIME      TO #TIME
+      /*
+      END TRANSACTION #APPL-ID #USER-ID #PROGRAM
+                     #DATE    #TIME    #PERSONNEL-NUMBER
+      /*
+    END-FIND                  /* for VEHICLES    (FIND2.)
+  END-FIND                    /* for EMPLOYEES   (FIND1.)
+END-REPEAT                    /* for REPEAT
+*
+STOP                          /* Simulate abnormal transaction end
+END TRANSACTION 'NORMAL  '
+END
+</pre> 
+          <div class="noprint">
+         <p><a href="pg_dbms_ada.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="pg_dbms_sar"></a></div> 
+         
+      <h2> 
+             <a name="x169"></a> Selecting Records Using ACCEPT/REJECT 
+      </h2> 
+          
+      <p>This section discusses the statements <code>ACCEPT</code> and
+              <code>REJECT</code> which are used to select records based on user-specified
+              logical criteria.
+      </p> 
+          
+      <p>The following topics are covered:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_dbms_ada.htm#Statements_ACCEPT_and_REJECT">Statements Usable with ACCEPT and REJECT</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_ada.htm#accept_statem_exa">Example of ACCEPT Statement</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_ada.htm#logical_cond_criteria">Logical Condition Criteria in ACCEPT/REJECT Statements</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_ada.htm#accept_statem_and_exa">Example of ACCEPT Statement with AND Operator</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_ada.htm#accept_statem_or_exa">Example of REJECT Statement with OR Operator</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_ada.htm#further_exa_accept">Further Examples of ACCEPT and REJECT Statements</a></p>
+         </li>
+      </ul> 
+         
+      <div><a name="Statements_ACCEPT_and_REJECT"></a></div> 
+          
+      <h3> 
+              <a name="x170"></a> 
+              <a name="x171"></a>Statements Usable with ACCEPT and REJECT
+      </h3> 
+           
+           
+      <p>The statements <a href="../sm/accept.htm"><code>ACCEPT</code></a> and
+               <a href="../sm/reject.htm"><code>REJECT</code></a> can be used in
+               conjunction with the database access statements:
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem"> <a href="../sm/read.htm"><code>READ</code></a></p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"> <a href="../sm/find.htm"><code>FIND</code></a></p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"> <a href="../sm/histogra.htm"><code>HISTOGRAM</code></a></p> 
+                  
+         </li> 
+              
+      </ul> 
+          
+      <div><a name="accept_statem_exa"></a></div> 
+          
+      <h3> Example of ACCEPT Statement</h3> 
+           
+           <pre class="verbatim">
+** Example 'ACCEPX01': ACCEPT IF
+************************************************************************
+DEFINE DATA LOCAL
+1 MYVIEW VIEW OF EMPLOYEES
+  2 NAME
+  2 JOB-TITLE
+  2 CURR-CODE (1:1)
+  2 SALARY    (1:1)
+END-DEFINE
+*
+READ (20) MYVIEW BY NAME WHERE CURR-CODE (1) = 'USD' 
+ACCEPT IF SALARY (1) &gt;= 40000
+  DISPLAY NAME JOB-TITLE SALARY (1)
+END-READ
+END
+</pre> 
+           <p>Output of Program <code>ACCEPX01</code>:
+      </p> <pre class="system-output">
+   Page      1                                                  04-11-11  11:11:11
+                                                                                 
+          NAME                  CURRENT            ANNUAL                  
+                               POSITION            SALARY                  
+  -------------------- ------------------------- ----------                
+                                                                                 
+  ADKINSON             DBA                            46700                
+  ADKINSON             MANAGER                        47000                
+  ADKINSON             MANAGER                        47000                
+  AFANASSIEV           DBA                            42800                
+  ALEXANDER            DIRECTOR                       48000                
+  ANDERSON             MANAGER                        50000                
+  ATHERTON             ANALYST                        43000                
+  ATHERTON             MANAGER                        40000               
+</pre> 
+          <div><a name="logical_cond_criteria"></a></div> 
+          
+      <h3> 
+              <a name="x172"></a>Logical Condition Criteria in ACCEPT/REJECT Statements
+      </h3>
+          
+           
+           
+      <p>The statements <a href="../sm/accept.htm"><code>ACCEPT</code></a> and
+               <a href="../sm/reject.htm"><code>REJECT</code></a> allow you to
+               specify logical conditions in addition to those that were specified in
+               <a href="../sm/read.htm"><code>WITH</code></a> and
+               <a href="../sm/read.htm#WHERE_read"><code>WHERE</code></a> clauses
+               of the <a href="../sm/read.htm"><code>READ</code></a>
+               statement.
+      </p> 
+           
+      <p>The logical condition criteria in the <code>IF</code> clause of an
+               <a href="../sm/accept.htm"><code>ACCEPT</code></a> /
+               <a href="../sm/reject.htm"><code>REJECT</code></a> statement are
+               evaluated <em>after</em> the record has been selected and read.
+      </p> 
+           
+      <p>Logical condition operators include the following (see
+               <a href="pg_furth_lcc.htm#pg_furth_lcc">Logical Condition
+            Criteria</a> for more detailed information):
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                  
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td align="left"><code>EQUAL</code></td> 
+                        
+               <td><code>EQ</code></td> 
+                        
+               <td><code>:=</code></td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td align="left"><code>NOT EQUAL TO</code></td> 
+                        
+               <td><code>NE</code></td> 
+                        
+               <td><code>&not;=</code></td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td align="left"><code>LESS THAN</code></td> 
+                        
+               <td><code>LT</code></td> 
+                        
+               <td><code>&lt;</code></td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td align="left"><code>LESS EQUAL</code></td> 
+                        
+               <td><code>LE</code></td> 
+                        
+               <td><code>&lt;=</code></td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td align="left"><code>GREATER THAN</code></td> 
+                        
+               <td><code>GT</code></td> 
+                        
+               <td><code>&gt;</code></td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td align="left"><code>GREATER EQUAL</code></td> 
+                        
+               <td><code>GE</code></td> 
+                        
+               <td><code>&gt;=</code></td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>Logical condition criteria in <a href="../sm/accept.htm"><code>ACCEPT</code></a> /
+               <a href="../sm/reject.htm"><code>REJECT</code></a> statements may
+               also be connected with the Boolean operators <code>AND</code>, <code>OR</code>,
+               and <code>NOT</code>. Moreover, parentheses may be used to indicate logical
+               grouping; see the following examples.
+      </p> 
+          
+      <div><a name="accept_statem_and_exa"></a></div> 
+          
+      <h3> Example of ACCEPT Statement with AND Operator</h3> 
+           
+           
+      <p>The following program illustrates the use of the Boolean operator
+               <code>AND</code> in an <a href="../sm/accept.htm"><code>ACCEPT</code></a> statement.
+      </p> 
+           <pre class="verbatim">** Example 'ACCEPX02': ACCEPT IF ... AND ...
+************************************************************************
+DEFINE DATA LOCAL
+1 MYVIEW VIEW OF EMPLOYEES
+  2 NAME
+  2 JOB-TITLE
+  2 CURR-CODE (1:1)
+  2 SALARY    (1:1)
+END-DEFINE
+*
+READ (20) MYVIEW BY NAME WHERE CURR-CODE (1) = 'USD'
+ACCEPT IF  SALARY (1) &gt;= 40000
+         AND SALARY (1) &lt;= 45000
+  DISPLAY NAME JOB-TITLE SALARY (1)
+END-READ
+END</pre> 
+           <p>Output of Program <code>ACCEPX02</code>:
+      </p> <pre class="system-output">Page      1                                                  04-12-14  12:22:01
+                                                                               
+        NAME                  CURRENT            ANNUAL                        
+                             POSITION            SALARY                        
+-------------------- ------------------------- ----------                      
+                                                                               
+AFANASSIEV           DBA                            42800                      
+ATHERTON             ANALYST                        43000                      
+ATHERTON             MANAGER                        40000                     </pre> 
+          <div><a name="accept_statem_or_exa"></a></div> 
+          
+      <h3>Example of REJECT Statement with OR Operator</h3> 
+           
+           
+      <p>The following program, which uses the Boolean operator <code>OR</code>
+               in a <a href="../sm/reject.htm"><code>REJECT</code></a> statement,
+               produces the same output as the <code>ACCEPT</code> statement in the example
+               above, as the logical operators are reversed.
+      </p> 
+           <pre class="verbatim">** Example 'ACCEPX03': REJECT IF ... OR ...
+************************************************************************
+DEFINE DATA LOCAL
+1 MYVIEW VIEW OF EMPLOYEES
+  2 NAME
+  2 JOB-TITLE
+  2 CURR-CODE (1:1)
+  2 SALARY    (1:1)
+END-DEFINE
+*
+READ (20) MYVIEW BY NAME WHERE CURR-CODE (1) = 'USD'  
+REJECT IF SALARY (1) &lt; 40000
+         OR SALARY (1) &gt; 45000
+  DISPLAY NAME JOB-TITLE SALARY (1)
+END-READ
+END</pre> 
+           <p>Output of Program <code>ACCEPX03</code>:
+      </p> <pre class="system-output">Page      1                                                  04-12-14  12:26:27
+                                                                               
+        NAME                  CURRENT            ANNUAL                        
+                             POSITION            SALARY                        
+-------------------- ------------------------- ----------                      
+                                                                               
+AFANASSIEV           DBA                            42800                      
+ATHERTON             ANALYST                        43000                      
+ATHERTON             MANAGER                        40000                     </pre> 
+          <div><a name="further_exa_accept"></a></div> 
+          
+      <h3>Further Examples of ACCEPT and REJECT Statements</h3> 
+           
+           
+      <p>See the following example programs:</p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem"> <a href="pg_exas.htm#ACCEPX04">ACCEPX04 - ACCEPT IF ... LESS
+                  THAN ...</a></p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"> <a href="pg_exas.htm#ACCEPX05">ACCEPX05 - ACCEPT IF ... AND
+                  ...</a></p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"> <a href="pg_exas.htm#ACCEPX06">ACCEPX06 - REJECT IF ... OR
+                  ...</a></p> 
+                  
+         </li> 
+              
+      </ul> 
+          
+      <div class="noprint">
+         <p><a href="pg_dbms_ada.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="pg_dbms_aes" id="16329"></a></div> 
+         
+      <h2>AT START/END OF DATA Statements</h2> 
+          
+      <p>This section discusses the use of the statements <code>AT START OF
+            DATA</code> and <code>AT END OF DATA</code>.
+      </p> 
+          
+      <p>The following topics are covered:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_dbms_ada.htm#AT_START_OF_DATA_Statement">AT START OF DATA Statement</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_ada.htm#AT_END_OF_DATA_Statement">AT END OF DATA Statement</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_ada.htm#atstartdata_exa">Example of AT START OF DATA and AT END OF DATA Statements</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_ada.htm#further_atstartdata_exa">Further Examples of AT START OF DATA and AT END OF DATA</a></p>
+         </li>
+      </ul> 
+         
+      <div><a name="AT_START_OF_DATA_Statement"></a></div> 
+          
+      <h3> 
+              <a name="x173"></a>AT START OF DATA Statement
+      </h3> 
+           
+           
+      <p>The <a href="../sm/atstart.htm"><code>AT START OF
+               DATA</code></a> statement is used to specify any processing that is to
+               be performed after the first of a set of records has been read in a database
+               processing loop.
+      </p> 
+           
+      <p>The <code>AT START OF DATA</code> statement must be placed within the
+               processing loop.
+      </p> 
+           
+      <p>If the <code>AT START OF DATA</code> processing produces any output,
+               this will be output <em>before the first field value</em>. By default, this
+               output is displayed left-justified on the page.
+      </p> 
+          
+      <div><a name="AT_END_OF_DATA_Statement"></a></div> 
+          
+      <h3> 
+              <a name="x174"></a>AT END OF DATA Statement 
+      </h3> 
+           
+           
+      <p>The <a href="../sm/atenddat.htm"><code>AT END OF
+               DATA</code></a> statement is used to specify processing that is to be
+               performed after all records for a database processing loop have been
+               processed.
+      </p> 
+           
+      <p>The <code>AT END OF DATA</code> statement must be placed within the
+               processing loop.
+      </p> 
+           
+      <p>If the <code>AT END OF DATA</code> processing produces any output, this
+               will be output <em>after the last field value</em>. By default, this output is
+               displayed left-justified on the page.
+      </p> 
+          
+      <div><a name="atstartdata_exa"></a></div> 
+          
+      <h3> Example of AT START OF DATA and AT END OF DATA Statements</h3> 
+           
+           
+      <p>The following example program illustrates the use of the statements
+               <code>AT START OF DATA</code> and <code>AT END OF DATA</code>.
+      </p> 
+           
+      <p>The Natural system variable
+               <a href="../vari/dtime.htm#TIME_System_Variable"><code>*TIME</code></a>
+               has been incorporated into the <code>AT START OF DATA</code> statement to
+               display the time of day.
+      </p> 
+           
+      <p>The Natural system function <a href="../func/func_sf.htm"><code>OLD</code></a> has been incorporated
+               into the <code>AT END OF DATA</code> statement to display the name of the last
+               person selected.
+      </p> 
+           <pre class="verbatim">** Example 'ATSTAX01': AT START OF DATA
+************************************************************************
+DEFINE DATA LOCAL
+1 MYVIEW VIEW OF EMPLOYEES
+  2 CITY
+  2 NAME
+  2 JOB-TITLE
+  2 INCOME  (1:1)
+    3 CURR-CODE
+    3 SALARY
+    3 BONUS (1:1)
+END-DEFINE
+*
+WRITE TITLE 'XYZ EMPLOYEE ANNUAL SALARY AND BONUS REPORT' / 
+READ (3) MYVIEW BY CITY STARTING FROM 'E'
+  DISPLAY GIVE SYSTEM FUNCTIONS
+          NAME (AL=15) JOB-TITLE (AL=15) INCOME (1)
+  /*
+<strong> AT START OF DATA
+    WRITE 'RUN TIME:' *TIME /
+  END-START
+  AT END OF DATA
+    WRITE / 'LAST PERSON SELECTED:' OLD (NAME) /
+  END-ENDDATA</strong>
+END-READ
+*
+AT END OF PAGE
+  WRITE / 'AVERAGE SALARY:' AVER (SALARY(1))
+END-ENDPAGE
+END</pre> 
+           <p>The program produces the following output:</p> <pre class="system-output">                  XYZ EMPLOYEE ANNUAL SALARY AND BONUS REPORT 
+                                                              
+     NAME           CURRENT                 INCOME            
+                   POSITION                                   
+                                CURRENCY   ANNUAL     BONUS   
+                                  CODE     SALARY             
+--------------- --------------- -------- ---------- ----------
+                                                              
+RUN TIME: 12:43:19.1                                          
+                                                              
+DUYVERMAN       PROGRAMMER      USD           34000          0
+PRATT           SALES PERSON    USD           38000       9000
+MARKUSH         TRAINEE         USD           22000          0
+                                                              
+LAST PERSON SELECTED: MARKUSH                                 
+                                                              
+                                                              
+AVERAGE SALARY:      31333                                   </pre> 
+          <div><a name="further_atstartdata_exa"></a></div> 
+          
+      <h3>Further Examples of AT START OF DATA and AT END OF DATA</h3> 
+           
+           
+      <p>See the following example programs:</p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem"> <a href="pg_exas.htm#ATENDX01">ATENDX01 - AT END OF
+                  DATA</a></p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"> <a href="pg_exas.htm#ATSTAX02">ATSTAX02 - AT START OF
+                  DATA</a></p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"> <a href="pg_exas.htm#WRITEX09_further_exa_atstartdat">WRITEX09 - WRITE (in
+                  combination with AT END OF DATA )</a></p> 
+                  
+         </li> 
+              
+      </ul> 
+          
+      <div class="noprint">
+         <p><a href="pg_dbms_ada.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="pg_dbms_ucode"></a></div> 
+         
+      <h2> 
+             <a name="x175"></a>Unicode Data
+      </h2> 
+          
+      <p>Natural enables users to access wide-character fields (format W) in an
+              Adabas database. 
+      </p> 
+          
+      <p>The following topics are covered:
+              
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_dbms_ada.htm#pg_dbms_ucode_ddm">Data Definition Module</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_ada.htm#pg_dbms_ucode_access_config">Access Configuration</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_ada.htm#pg_dbms_ucode_restrictions">Restrictions</a></p>
+         </li>
+      </ul>
+      <div><a name="pg_dbms_ucode_ddm"></a></div> 
+          
+      <h3>Data Definition Module</h3> 
+           
+           
+      <p>Adabas wide-character fields (W) are mapped to Natural format U
+               (Unicode). 
+      </p> 
+           
+      <p>The length definition for a Natural field of format U corresponds to
+               half the size of the Adabas field of format W. An Adabas wide-character field
+               of length <code>200</code> is, for example, mapped to <code>(U100)</code> in
+               Natural. 
+      </p> 
+          
+      <div><a name="pg_dbms_ucode_access_config"></a></div> 
+          
+      <h3>Access Configuration</h3> 
+           
+           
+      <p>Natural receives data from Adabas and sends data to Adabas using UTF-16
+               as common encoding. 
+      </p> 
+           
+      <p>This encoding is specified with the <a href="../parms/oprb.htm"><code>OPRB</code></a> parameter and
+               sent to Adabas with the open request. It is used for wide-character fields and
+               applies to the entire Adabas user session. 
+      </p> 
+          
+      <div><a name="pg_dbms_ucode_restrictions"></a></div> 
+          
+      <h3>Restrictions</h3> 
+           
+           
+      <p>Wide-character fields (W) of variable length are not
+               supported.
+      </p> 
+           
+      <p>Collating descriptors are not supported. </p> 
+           
+      <p>For further information on Adabas and Unicode support refer to the
+               specific Adabas product documentation. 
+      </p> 
+          
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="pg_dbms_ada.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_dbms_ada.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_dbms_ada.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_dbms-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_dbms_dbgen.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_dbms_sqlos.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

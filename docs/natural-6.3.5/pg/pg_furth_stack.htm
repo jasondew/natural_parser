@@ -1,0 +1,321 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Stack</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="pg_furth_stack"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_furth_stack.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_furth_stack.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_furth-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_furth_vari.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_furth_date.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Programming Guide&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x340"></a> Stack 
+         </h1>
+      </div> 
+         
+         
+      <p>The Natural stack is a kind of "intermediate storage" in
+             which you can store Natural commands, user-defined commands, and input data to
+             be used by an <a href="../sm/input.htm"><code>INPUT</code></a>
+             statement.
+      </p> 
+         
+      <p>This document covers the following topics:</p>
+         
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_furth_stack.htm#stack_use">Use of Natural Stack</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_stack.htm#Stack_Processing">Stack Processing</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_stack.htm#Placing_Data_in_the_Stack">Placing Data on the Stack</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_stack.htm#Clearing_the_Stack">Clearing the Stack</a></p>
+         </li>
+      </ul> 
+        
+      <hr> 
+        
+      <div><a name="stack_use"></a></div> 
+         
+      <h2> Use of Natural Stack </h2> 
+          
+          
+      <p>In the stack you can store a series of functions which are frequently
+              executed one after the other, such as a series of logon commands.
+      </p> 
+          
+      <p>The data/commands stored in the stack are "stacked" on top
+              of one another. You can decide whether to put them on top or at the bottom of
+              the stack. The data/command in the stack can only be processed in the order in
+              which they are stacked, beginning from the top of the stack.
+      </p> 
+          
+      <p>In a program, you may reference the system variable
+              <a href="../vari/appl.htm#DATA"><code>*DATA</code></a> to
+              determine the content of the stack (see the
+              <a href="../vari/vari-over.htm">System
+            Variables</a> documentation for further information).
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_furth_stack.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Stack_Processing"></a></div> 
+         
+      <h2> Stack Processing </h2> 
+          
+          
+      <p>The processing of the commands/data stored in the stack differs
+              depending on the function being performed.
+      </p> 
+          
+      <p>If a command is expected, that is, the NEXT prompt is about to be
+              displayed, Natural first checks if a command is on the top of the stack. If
+              there is, the NEXT prompt is suppressed and the command is read and deleted
+              from the stack; the command is then executed as if it had been entered manually
+              in response to the NEXT prompt.
+      </p> 
+          
+      <p>If an <a href="../sm/input.htm"><code>INPUT</code></a>
+              statement containing input fields is being executed, Natural first checks if
+              there are any input data on the top of the stack. If there are, these data are
+              passed to the <code>INPUT</code> statement (in
+              <a href="../sm/input2.htm#INPUT_Statement_in_Non-Screen_Modes">delimiter
+                 mode</a>); the data read from the stack must be format-compatible with
+              the variables in the <code>INPUT</code> statement; the data are then deleted
+              from the stack. See also
+              <a href="../sm/input2.htm#Processing_Data_from_the_Natural_Stack">Processing
+            Data from the Natural Stack</a> in the <code>INPUT</code>
+              statement description.
+      </p> 
+          
+      <p>If an <code>INPUT</code> statement was executed using data from the
+              stack, and this <code>INPUT</code> statement is re-executed via a
+              <a href="../sm/reinput.htm"><code>REINPUT</code></a> statement,
+              the <code>INPUT</code> statement screen will be re-executed displaying the same
+              data from the stack as when it was executed originally. With the
+              <code>REINPUT</code> statement, no further data are read from the stack.
+      </p> 
+          
+      <p>When a Natural program terminates normally, the stack is flushed
+              beginning from the top until either a command is on the top of the stack or the
+              stack is cleared. When a Natural program is terminated via the terminal command
+              <a href="../tcom/pcpc.htm"><code>%%</code></a> or with an error,
+              the stack is cleared entirely.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_furth_stack.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Placing_Data_in_the_Stack"></a></div> 
+         
+      <h2> 
+             <a name="x341"></a> Placing Data on the Stack 
+      </h2> 
+          
+          
+      <p>The following methods can be used to place data/commands on the
+              stack:
+      </p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_furth_stack.htm#STACK_Parameter">STACK Parameter</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_stack.htm#STACK_Statement">STACK Statement</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_stack.htm#FETCH_and_RUN_Statements">FETCH and RUN Statements</a></p>
+         </li>
+      </ul> 
+          
+         
+      <div><a name="STACK_Parameter"></a></div> 
+          
+      <h3> 
+              <a name="x342"></a>STACK Parameter 
+      </h3> 
+           
+           
+      <p>The Natural profile parameter <a href="../parms/stack.htm"><code>STACK</code></a> may be used to
+               place data/commands on the stack. The <code>STACK</code> parameter
+               (described in the <cite>Parameter Reference</cite>) can be specified by
+               the Natural administrator in the Natural parameter module at the installation
+               of Natural; or you can specify it as a dynamic parameter when you invoke
+               Natural.
+      </p> 
+           
+      <p>When data/commands are to be placed on the stack via the
+               <code>STACK</code> parameter, multiple commands must be separated
+               from one another by a semicolon (;). If a command is to be passed within a
+               sequence of data or command elements, it must be preceded by a semicolon.
+      </p> 
+           
+      <p>Data for multiple <a href="../sm/input.htm"><code>INPUT</code></a> statements must be
+               separated from one another by a colon (:). Data that are to be read by a
+               separate <code>INPUT</code> statement must be preceded by a colon. If a command
+               is to be stacked which requires parameters, no colon is to be placed between
+               the command and the parameters.
+      </p> 
+           
+      <p>Semicolon and colon must not be used within the input data themselves
+               as they will be interpreted as separation characters.
+      </p> 
+           
+          
+         
+      <div><a name="STACK_Statement"></a></div> 
+          
+      <h3> 
+              <a name="x343"></a>STACK Statement 
+      </h3> 
+           
+           
+      <p>The <a href="../sm/stack.htm"><code>STACK</code></a>
+               statement can be used within a program to place data/commands in the stack. The
+               data elements specified in one <code>STACK</code> statement will be used for
+               one <a href="../sm/input.htm"><code>INPUT</code></a> statement,
+               which means that if data for multiple <code>INPUT</code> statements are to be
+               placed on the stack, multiple <code>STACK</code> statements must be used.
+      </p> 
+           
+      <p>Data may be placed on the stack either unformatted or formatted:</p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">If unformatted data are read from the stack, the data string is
+                       interpreted in delimiter mode and the characters specified with the session
+                       parameters <a href="../parms/ia.htm"><code>IA</code></a>
+                       (Input Assignment character) and <a href="../parms/id.htm"><code>ID</code></a> (Input Delimiter
+                       character) are processed as control characters for <a href="pg_keyw.htm#pg_keyw">keyword</a> assignment and data separation.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">If formatted data are placed on the stack, each content of a field
+                       will be separated and passed to one input field in the corresponding
+                       <code>INPUT</code> statement. If the data to be placed on the stack contains
+                       delimiter, control or DBCS characters, it should be placed formatted on the
+                       stack to avoid unintentional interpretation of these characters.
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>See the <cite>Statements</cite> documentation for further
+               information on the <a href="../sm/stack.htm"><code>STACK</code></a> statement.
+      </p> 
+           
+          
+         
+      <div><a name="FETCH_and_RUN_Statements"></a></div> 
+          
+      <h3> FETCH and RUN Statements </h3> 
+           
+           
+      <p>The execution of a <a href="../sm/fetch.htm"><code>FETCH</code></a> or
+               <a href="../sm/run.htm"><code>RUN</code></a> statement that
+               contains parameters to be passed to the invoked program will result in these
+               parameters being placed on top of the stack.
+      </p> 
+           
+          
+        
+        
+        
+      <div class="noprint">
+         <p><a href="pg_furth_stack.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Clearing_the_Stack"></a></div> 
+         
+      <h2> Clearing the Stack </h2> 
+          
+          
+      <p>The contents of the stack can be deleted with the <code>RELEASE</code>
+              statement. See the <cite>Statements</cite> documentation for details on
+              the <a href="../sm/release.htm"><code>RELEASE</code></a>
+              statement.
+      </p> 
+          
+      <p class="note"><strong>Note:</strong><br> When a Natural program is terminated via the terminal command
+              <a href="../tcom/pcpc.htm"><code>%%</code></a> or with an error,
+              the stack is cleared entirely.
+      </p> 
+          
+        
+       
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="pg_furth_stack.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_furth_stack.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_furth_stack.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_furth-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_furth_vari.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_furth_date.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

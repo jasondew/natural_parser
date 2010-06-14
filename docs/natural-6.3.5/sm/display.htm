@@ -1,0 +1,2928 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>DISPLAY</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="display" id="16793"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../sm/display.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/sm/display.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="sm-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="delete.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="divide.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Statements&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> DISPLAY 
+               <a name="x86"></a></h1>
+      </div> 
+         
+          
+          
+      <table border="0" class="syntax" cellpadding="3">  
+              
+         <tbody align="left" valign="top"> 
+                  
+            <tr> 
+                      
+               <td nowrap> <code class="keyword">DISPLAY</code>
+                          <a href="display.htm#rep_display"> [(</a><a href="display.htm#rep_display"> <var>rep</var>)] </a> [<a href="display.htm#options_display"><code><var>options</var></code></a>
+                          ] {[ <a href="display.htm#Slash">/</a>
+                          <img src="../graphics/dot3.gif" alt="" width="12" height="4"> ]
+                          [<a href="display.htm#output-format"><code><var>output-format</var></code></a>
+                          ] <a href="display.htm#output-element">
+                             <code><var>output-element</var></code></a>}
+                          <img src="../graphics/dot3.gif" alt="" width="12" height="4">
+                          
+               </td> 
+                     
+            </tr> 
+                 
+         </tbody> 
+             
+      </table> 
+          
+         
+      <p>This document covers the following topics:</p>
+         
+      <ul>
+         <li>
+            <p class="initem"><a href="display.htm#Function_display">Function</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="display.htm#syntax_descr_display">Syntax Description</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="display.htm#Defaults">Defaults Applicable for a DISPLAY Statement</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="display.htm#display_exa">Examples</a></p>
+         </li>
+      </ul> 
+         
+      <p>For an explanation of the symbols used in the syntax diagram, see
+             <a href="synsym.htm#Syntax_Symbols">Syntax
+            Symbols</a>.
+      </p> 
+         
+      <p>Related Statements: <a href="atendpag.htm#atendpag">AT END OF
+                PAGE</a> | <a href="attoppag.htm#attoppag">AT TOP OF PAGE</a> |
+             <a href="closepri.htm#closepri">CLOSE PRINTER</a> | <a href="definepr_uw.htm#definepr_uw">DEFINE PRINTER</a>
+             <a href="eject.htm#eject">EJECT</a> | <a href="format.htm#format">FORMAT</a> | <a href="newpage.htm#newpage">NEWPAGE</a> | <a href="printsm.htm#printsm">PRINT</a> | <a href="skip.htm#skip">SKIP</a>
+             | <a href="suspend.htm#suspend">SUSPEND IDENTICAL SUPPRESS</a> |
+             <a href="write.htm#write">WRITE</a> | <a href="writeti.htm#writeti">WRITE TITLE</a> | <a href="writetra.htm#writetra">WRITE
+                TRAILER</a> 
+      </p> 
+         
+      <p>Belongs to Function Group:
+             <a href="stmt.htm#Creation_of_Output_Reports">Creation of Output
+            Reports</a></p> 
+        
+      <hr> 
+        
+      <div><a name="Function_display"></a></div> 
+         
+      <h2> Function </h2> 
+          
+          
+      <p>The <code>DISPLAY</code> statement is used to specify the fields to be
+              output on a report in column format. A column is created for each field and a
+              field header is placed over the column.
+      </p> 
+          
+      <p class="note"><strong>Note:</strong><br> The statements <a href="write.htm#write"><code>WRITE</code></a> and <a href="printsm.htm#printsm"><code>PRINT</code></a> can be used to produce output
+              in free (non-column) format.
+      </p> 
+          
+      <p>See also the following topics (in the <cite>Programming
+                 Guide</cite>):
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../pg/pg_output-over.htm">Controlling Data
+                  Output</a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../pg/pg_output_display.htm">Statements
+                  DISPLAY and WRITE</a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../pg/pg_output_index.htm">Index Notation for
+                  Multiple-Value Fields and Periodic Groups</a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../pg/pg_output_headers.htm">Column
+                  Headers</a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../pg/pg_output_layout.htm">Layout of an
+                  Output Page</a></p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="display.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="syntax_descr_display"></a></div> 
+         
+      <h2> Syntax Description</h2> 
+          
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th nowrap>(<a name="rep_display"></a><var>rep</var>)
+               </th> 
+                       
+               <td> 
+                  
+                  <div><strong class="floating-title">Report Specification: </strong></div> 
+                           
+                  <p>The <a href="../pg/pg_output_rep.htm">notation
+                                  <code>(<var>rep</var>)</code></a> may be used to specify
+                               the identification of the report for which the <code>DISPLAY</code> statement
+                               is applicable.
+                  </p> 
+                           
+                  <p>As report identification, a value in the range 0 - 31 or a logical
+                               name which has been assigned using the <a href="definepr_uw.htm#definepr_uw"><code>DEFINE PRINTER</code></a>
+                               statement may be specified.
+                  </p> 
+                           
+                  <p>If <code>(<var>rep</var>)</code> is not specified,
+                               the statement will apply to the first report (Report 0).
+                  </p> 
+                           
+                  <p>If this printer file is defined to Natural as PC, the report will
+                               be downloaded to the PC, see <a href="display.htm#Example_8_display">Example 8</a>.
+                  </p> 
+                           
+                  <p>For information on how to control the format of an output report
+                               created with Natural, see <a href="../pg/pg_output-over.htm">Controlling Data
+                                  Output</a> (in the <cite>Programming
+                                  Guide</cite>).
+                  </p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th nowrap> <a name="options_display"></a>
+                   <var>options</var> 
+               </th> 
+                       
+               <td> 
+                  
+                  <div><strong class="floating-title">Display Options: </strong></div> 
+                           
+                  <p>For details, see <a href="display.htm#display_options">Display Options</a>
+                               below.
+                  </p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th nowrap> <a name="output-format"></a>
+                   <var>output-format</var> 
+               </th> 
+                       
+               <td> 
+                  
+                  <div><strong class="floating-title">Output Format Definitions: </strong></div> 
+                           
+                  <p>For details, see <a href="display.htm#output_format">Output
+                                  Format Definitions</a> below.
+                  </p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th nowrap> <a name="Slash"></a>/
+                   
+               </th> 
+                       
+               <td> 
+                  
+                  <div><strong class="floating-title">Line Advance - Slash Notation:</strong></div> 
+                           
+                  <p>When specified within a text element, a slash (/) causes a line
+                               advance for the text displayed.
+                  </p> 
+                           
+                  <p>When specified between output elements, it causes the output
+                     element specified by the slash (/) to be placed vertically within the same
+                               column. The header for this column will be constructed by placing the headers
+                               of the vertically displayed elements vertically above the column.
+                  </p> 
+                           
+                  <p>See also the following topics (in the <cite>Programming
+                                  Guide</cite>):
+                  </p> 
+                           
+                  <ul> 
+                               
+                     <li> 
+                                   
+                        <p class="initem"> <a href="../pg/pg_output_display.htm#line_advance">Line Advance - Slash
+                                          Notation</a></p> 
+                                  
+                     </li> 
+                               
+                     <li> 
+                                   
+                        <p class="initem"> <a href="../pg/pg_output_display.htm#line_adv_display_exa"> Example 1 -
+                                          Line Advance in DISPLAY Statement</a></p> 
+                                  
+                     </li> 
+                               
+                     <li> 
+                                   
+                        <p class="initem"> <a href="../pg/pg_output_headers.htm#col_header_suppr">Suppressing Column
+                                          Headers - Slash Notation</a> 
+                        </p> 
+                                  
+                     </li> 
+                              
+                  </ul> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th nowrap> <a name="output-element"></a>
+                   <var>output-element</var> 
+               </th> 
+                       
+               <td> 
+                  
+                  <div><strong class="floating-title"> Output Element:</strong></div> 
+                           
+                  <p>For details, see <a href="display.htm#output_element">Output Element</a>
+                               (below).
+                  </p> 
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+         
+      <div><a name="display_options"></a></div> 
+          
+      <h3> Display Options </h3> 
+           
+            
+            
+      <table border="0" class="syntax" cellpadding="3"> 
+                 
+                  
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td nowrap> [<a href="display.htm#NOTITLE_display"><code class="keyword">NOTITLE</code></a>]
+                          [<a href="display.htm#NOHDR_display"><code class="keyword">NOHDR</code></a>] 
+               </td> 
+                        
+               <td> 
+                  
+                  <p><img src="../graphics/sbo2.gif" alt="" width="5" height="40"></p> 
+               </td> 
+                        
+               <td nowrap> [<code class="keyword">AND</code>] [<a href="display.htm#GIVE_SF"><code class="keyword">GIVE</code>] [<code class="keyword">SYSTEM</code>] <code class="keyword">FUNCTIONS</code></a></td> 
+                        
+               <td> 
+                  
+                  <p><img src="../graphics/sbc2.gif" alt="" width="5" height="40"></p> 
+               </td> 
+                        
+               <td nowrap> [(<a href="display.htm#statement-parameters_display"><code><var>statement-parameters</var></code></a>)]
+                            
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>Syntax Element Description:</p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th nowrap> <a name="NOTITLE_display"></a>NOTITLE 
+               </th> 
+                        
+               <td> 
+                  
+                  <div><strong class="floating-title"> Default Page Title Suppression: </strong></div> 
+                            
+                  <p>By default, Natural generates a single title line for each page
+                                resulting from a <code>DISPLAY</code> statement. This title contains the page
+                     number, the time of day, and the date. Time of day is set at the beginning of
+                                the program execution or at the beginning of
+                                the job (batch mode). The default title line may be overridden by using a
+                                <a href="writeti.htm#writeti"><code>WRITE TITLE</code></a> statement, or
+                                it may be suppressed by specifying the keyword <code>NOTITLE</code> in the
+                                <code>DISPLAY</code> statement.
+                  </p> 
+                            
+                  <p> Examples:</p> 
+                            
+                  <ul> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">Default title will be produced: </p> 
+                                    <pre class="verbatim">DISPLAY NAME</pre> 
+                                   </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">User title will be produced: </p> 
+                                    <pre class="verbatim">DISPLAY NAME WRITE TITLE '<var>user-title</var>'</pre> 
+                                   </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">No title will be produced: </p> 
+                                    <pre class="verbatim">DISPLAY NOTITLE NAME</pre> 
+                                   </li> 
+                               
+                  </ul> 
+                            
+                  <p class="note"><strong>Note:</strong><br> If the <code>NOTITLE</code> option is used, it applies to all
+                                <code>DISPLAY</code>, <code>PRINT</code> and <code>WRITE</code> statements
+                                within the same object which write data to the same report.
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th nowrap> <a name="NOHDR_display"></a>NOHDR 
+               </th> 
+                        
+               <td> 
+                  
+                  <div><strong class="floating-title"> Column Headers: </strong></div> 
+                            
+                  <p>Column headers are produced for each field specified in the
+                                <code>DISPLAY</code> statement using the following rules:
+                  </p> 
+                            
+                  <ul> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">The header text may be explicitly specified in the
+                                        <code>DISPLAY</code> statement before the field name. For example: 
+                        </p> 
+                                    <pre class="verbatim">DISPLAY 'EMPLOYEE' NAME 'SALARY' SALARY</pre> 
+                                   </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">If you do not specify an explicit header for a field, the
+                                        <a href="defineda_parms.htm#defineda_parms">header</a> as defined in the
+                                        <a href="defineda.htm#defineda"><code>DEFINE DATA</code></a> statement
+                                        will be used.
+                        </p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">If for a database field no header is defined in the <code>DEFINE
+                                           DATA</code> statement, the default header as defined in the
+                                        <a href="../pg/pg_dbms_ada.htm#pg_dbms_ddm">DDM</a> will be
+                                        used.
+                        </p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">If no default header is defined in the
+                                        <a href="../pg/pg_dbms_ada.htm#pg_dbms_ddm">DDM</a>, the field
+                                        name will be used as header.
+                        </p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">If for a user-defined variable no header is defined in the
+                                        <code>DEFINE DATA</code> statement, the variable name will be used as header.
+                                        See also the <code>DEFINE DATA</code> statement for
+                                        <a href="defineda_parms.htm#defineda_parms">header definition</a>. 
+                        </p> 
+                                    <pre class="verbatim">DISPLAY NAME SALARY #NEW-SALARY</pre> 
+                                   </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">Natural always underlines column headings and generates one
+                                        blank line between the underlining and the data being displayed.
+                        </p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">If there are multiple <code>DISPLAY</code> statements in a
+                                        program, the first <code>DISPLAY</code> statement determines the column
+                                        header(s) to be used; this is evaluated at compilation time.
+                        </p> 
+                                   
+                     </li> 
+                               
+                  </ul> 
+                            
+                  <div><strong class="floating-title">Column Header Suppression:</strong></div> 
+                            
+                  <p> To suppress the column header for a single field</p> 
+                            
+                  <ul> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">Specify the following characters (apostrophe-slash-apostrophe)
+                                        before the field name:
+                        </p> 
+                                    <pre class="verbatim">'/'</pre> 
+                                    <p class="initem">For example: </p> 
+                                    <pre class="verbatim">DISPLAY '/' NAME 'SALARY' SALARY</pre> 
+                                   </li> 
+                               
+                  </ul> 
+                            
+                  <div><strong class="floating-title"> To suppress all column headers</strong></div> 
+                            
+                  <ul> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">Specify the keyword <code>NOHDR</code>: 
+                        </p> 
+                                    <pre class="verbatim">DISPLAY NOHDR NAME SALARY</pre> 
+                                   </li> 
+                               
+                  </ul> 
+                            
+                  <p class="notes"><strong>Notes:</strong></p>
+                  <ol class="note-list"> 
+                                
+                     <li><code>NOHDR</code> only takes effect for the first
+                                    <code>DISPLAY</code> statement, as subsequent <code>DISPLAY</code> statements
+                                    cannot create column headers anyhow.
+                     </li> 
+                                
+                     <li>If both <code>NOTITLE</code> and <code>NOHDR</code> are used,
+                                    they must be specified in the following order: <code>DISPLAY NOTITLE NOHDR NAME
+                                       SALARY</code></li> 
+                               
+                  </ol> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th> <a name="GIVE_SF"></a>GIVE SYSTEM
+                  FUNCTIONS 
+               </th> 
+                        
+               <td> 
+                  
+                  <div><strong class="floating-title"> System Function Usage: </strong></div> 
+                            
+                  <p>The <code>GIVE SYSTEM FUNCTIONS</code> clause is used to make
+                                available the following <a href="../func/func_sf.htm">Natural system
+                                   functions</a>: <a href="../func/func_sf.htm#AVER"><code>AVER</code></a>,
+                                <a href="../func/func_sf.htm#COUNT"><code>COUNT</code></a>,
+                                <a href="../func/func_sf.htm#MAX_System_Function"><code>MAX</code></a>,
+                                <a href="../func/func_sf.htm#MIN_System_Function"><code>MIN</code></a>,
+                                <a href="../func/func_sf.htm#NAVER"><code>NAVER</code></a>,
+                                <a href="../func/func_sf.htm#NCOUNT"><code>NCOUNT</code></a>,
+                                <a href="../func/func_sf.htm#NMIN"><code>NMIN</code></a>,
+                                <a href="../func/func_sf.htm#SUM"><code>SUM</code></a>,
+                                <a href="../func/func_sf.htm#TOTAL"><code>TOTAL</code></a>. These
+                                are evaluated when the <code>DISPLAY</code> statement containing the <code>GIVE
+                                   SYSTEM FUNCTIONS</code> clause is executed.
+                  </p> 
+                            
+                  <p>These functions may then be referred to in a statement executed as
+                                a result of an end-of-page condition.
+                  </p> 
+                            
+                  <p class="notes"><strong>Notes:</strong></p>
+                  <ol class="note-list"> 
+                                
+                     <li>Only one <code>DISPLAY</code> statement per report may
+                                    contain a <code>GIVE SYSTEM FUNCTIONS</code> clause. When system functions are
+                                    evaluated from a <code>DISPLAY</code> statement, they are evaluated on a page
+                                    basis, which means that all functions (except
+                                    <a href="../func/func_sf.htm#TOTAL"><code>TOTAL</code></a>) are
+                                    reset to zero when a new page is initiated.
+                     </li> 
+                                
+                     <li>When system functions are used within a <code>DISPLAY</code>
+                                    statement within a subroutine, the end-of-page processing must occur within the
+                                    same routine.
+                     </li> 
+                               
+                  </ol> 
+                            
+                  <p>See also <a href="display.htm#Example_2_display">Example 2
+                                   - DISPLAY Statement Using GIVE SYSTEM FUNCTIONS
+                                   Clause</a>.
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th nowrap>
+                  <a name="statement-parameters_display"></a>
+                            <var>statement-parameters</var> 
+               </th> 
+                        
+               <td> 
+                  
+                  <div><strong class="floating-title"> Parameter Definition at Statement Level:
+                                   </strong></div> 
+                            
+                  <p>One or more parameters, enclosed within parentheses, may be
+                          specified at statement level, that is, immediately after the
+                                <code>DISPLAY</code> statement.
+                  </p> 
+                            
+                  <p>Each parameter specified will override the corresponding parameter
+                                previously specified in a <a href="../syscom/globals.htm"><code>GLOBALS</code></a>
+                                command, <a href="setgloba.htm#setgloba"><code>SET GLOBALS</code></a>
+                                (Reporting Mode only) or <a href="format.htm#format"><code>FORMAT</code></a> statement.
+                  </p> 
+                            
+                  <p>If more than one parameter is specified, they must be separated by
+                                one or more blanks from one another. Each parameter specification must not be
+                                split between two statement lines.
+                  </p> 
+                            
+                  <p class="note"><strong>Note:</strong><br> The parameter settings applied here will only be regarded for
+                                variable fields, but they have no effect on text-constants. If you would like
+                                to set field attributes for a text-constant, they have to be set explicitly for
+                                this element, see <a href="display.htm#parameters">Parameter Definition
+                                   at Element (Field) Level</a>.
+                  </p> 
+                            
+                  <p>See also:</p> 
+                            
+                  <ul> 
+                                
+                     <li> 
+                                    
+                        <p class="initem"> <a href="display.htm#statement_parms_display">List of
+                                           Parameters</a> 
+                        </p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem"> <a href="display.htm#parm_usage_exa">Example of Parameter Usage
+                                           at Statement and Element (Field) Level</a></p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem"> <a href="display.htm#Example_7_display">Example 7 - DISPLAY
+                                           Statement Using Parameters on Statement/Element Level</a></p> 
+                                   
+                     </li> 
+                               
+                  </ul> 
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+          
+         
+      <div><a name="statement_parms_display"></a></div> 
+          
+      <h3> List of Parameters </h3> 
+           
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                  
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th colspan="2"> Parameters that can be specified
+                  with the DISPLAY statement 
+               </th> 
+                        
+               <th> Specification (S = at statement level, E = at element
+                  level)
+               </th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> <a href="../parms/sp_ad.htm">AD</a> 
+               </td> 
+                        
+               <td>Attribute Definition</td> 
+                        
+               <td align="center">SE</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a href="../parms/sp_al.htm">AL</a> 
+               </td> 
+                        
+               <td>Alphanumeric Length for Output</td> 
+                        
+               <td align="center">SE</td> 
+                       
+            </tr> 
+                     
+                    
+            <tr> 
+                        
+               <td> <a href="../parms/sp_cd.htm">CD</a> 
+               </td> 
+                        
+               <td>Color Definition</td> 
+                        
+               <td align="center">SE</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a href="../parms/sp_cv.htm">CV</a> 
+               </td> 
+                        
+               <td>Control Variable</td> 
+                        
+               <td align="center">SE</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a href="../parms/sp_df.htm">DF</a> 
+               </td> 
+                        
+               <td>Date Format</td> 
+                        
+               <td align="center">SE</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><a href="../parms/sp_dl.htm">DL</a></td> 
+                        
+               <td>Display Length for Output</td> 
+                        
+               <td align="center">SE</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a href="../parms/sp_dy.htm">DY</a> 
+               </td> 
+                        
+               <td>Dynamic Attributes</td> 
+                        
+               <td align="center">SE</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a href="../parms/sp_em.htm">EM</a> 
+               </td> 
+                        
+               <td>Edit Mask</td> 
+                        
+               <td align="center">SE</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><a href="../parms/sp_emu.htm">EMU</a></td> 
+                        
+               <td>Unicode Edit Mask</td> 
+                        
+               <td align="center">E</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a href="../parms/sp_es.htm">ES</a> 
+               </td> 
+                        
+               <td>Empty Line Suppression</td> 
+                        
+               <td align="center">S</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a href="../parms/sp_fc.htm">FC</a> 
+               </td> 
+                        
+               <td>Filler Character</td> 
+                        
+               <td align="center">SE</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a href="../parms/sp_fl.htm">FL</a> 
+               </td> 
+                        
+               <td>Floating Point Mantissa Length</td> 
+                        
+               <td align="center">SE</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a href="../parms/sp_gc.htm">GC</a> 
+               </td> 
+                        
+               <td>Filler Character for Group Headers</td> 
+                        
+               <td align="center">SE</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a href="../parms/sp_hc.htm">HC</a> 
+               </td> 
+                        
+               <td>Header Centering</td> 
+                        
+               <td align="center">SE</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a href="../parms/sp_hw.htm">HW</a> 
+               </td> 
+                        
+               <td>Heading Width</td> 
+                        
+               <td align="center">SE</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a href="../parms/sp_ic.htm">IC</a> 
+               </td> 
+                        
+               <td>Insertion Character</td> 
+                        
+               <td align="center">SE</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a href="../parms/sp_is.htm">IS</a> 
+               </td> 
+                        
+               <td>Identical Suppress</td> 
+                        
+               <td align="center">SE</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a href="../parms/sp_lc.htm">LC</a> 
+               </td> 
+                        
+               <td>Leading Characters</td> 
+                        
+               <td align="center">SE</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a href="../parms/ls.htm">LS</a> 
+               </td> 
+                        
+               <td>Line Size</td> 
+                        
+               <td align="center">S</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a href="../parms/sp_mc.htm">MC</a> 
+               </td> 
+                        
+               <td>Multiple-Value Field Count</td> 
+                        
+               <td align="center">S</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a href="../parms/mp.htm">MP</a> 
+               </td> 
+                        
+               <td>Maximum Number of Pages of a Report</td> 
+                        
+               <td align="center">S</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a href="../parms/sp_nl.htm">NL</a> 
+               </td> 
+                        
+               <td>Numeric Length for Output</td> 
+                        
+               <td align="center">SE</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a href="../parms/sp_pc.htm">PC</a> 
+               </td> 
+                        
+               <td>Periodic Group Count</td> 
+                        
+               <td align="center">S</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a href="../parms/pm.htm">PM</a> 
+               </td> 
+                        
+               <td>Print Mode</td> 
+                        
+               <td align="center">SE</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a href="../parms/ps.htm">PS</a> 
+               </td> 
+                        
+               <td>Page Size</td> 
+                        
+               <td align="center">S</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a href="../parms/sf.htm">SF</a> 
+               </td> 
+                        
+               <td>Spacing Factor</td> 
+                        
+               <td align="center">SE</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a href="../parms/sp_sg.htm">SG</a> 
+               </td> 
+                        
+               <td>Sign Position</td> 
+                        
+               <td align="center">SE</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a href="../parms/sp_tc.htm">TC</a> 
+               </td> 
+                        
+               <td>Trailing Characters</td> 
+                        
+               <td align="center">SE</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a href="../parms/sp_uc.htm">UC</a> 
+               </td> 
+                        
+               <td>Underlining Character</td> 
+                        
+               <td align="center">SE</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a href="../parms/zp.htm">ZP</a> 
+               </td> 
+                        
+               <td>Zero Printing</td> 
+                        
+               <td align="center">SE</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>The individual parameters are described in the <cite>Parameter
+                  Reference</cite> (session parameters).
+      </p> 
+           
+      <p>See also the following topics (in the <cite>Programming
+                  Guide</cite>):
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem"> <a href="../pg/pg_output_headers.htm#col_header_cent">Centering of Column
+                  Headers - HC Parameter</a></p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"> <a href="../pg/pg_output_headers.htm#col_header_width">Width of Column
+                  Headers - HW Parameter</a></p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"> <a href="../pg/pg_output_headers.htm#header_fill_char">Filler Characters
+                  for Headers - Parameters FC and GC</a></p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"> <a href="../pg/pg_output_headers.htm#title_header_underline">Underlining
+                  Character for Titles and Headers - UC Parameter</a></p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+          
+         
+      <div><a name="parm_usage_exa"></a></div> 
+          
+      <h3> Example of Parameter Usage at Statement and Element (Field) Level
+              
+      </h3> 
+           
+            
+            
+            <pre class="verbatim">DEFINE DATA LOCAL
+1 VARI (A4)     INIT &lt;'1234'&gt;                              /*     Output 
+END-DEFINE                                                 /*    Produced
+*                                                          /*    ---------  
+DISPLAY NOHDR           'Text'         '='   VARI          /*    Text 1234
+DISPLAY NOHDR (AD=U)    'Text'         '='   VARI          /*    Text <u>1234</u>
+DISPLAY NOHDR           'Text' (AD=U)  '='   VARI (AD=U)   /*    <u>Text</u> <u>1234</u>
+DISPLAY NOHDR           'Text' (AD=U)  '='   VARI          /*    <u>Text</u> 1234
+END</pre> 
+           
+          
+         <div><a name="output_format"></a></div> 
+          
+      <h3> Output Format Definitions</h3> 
+           
+            
+            
+      <table border="0" class="syntax" cellpadding="3"> 
+                 
+                 
+                 
+                  
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td rowspan="5"> 
+                  
+                  <p><img src="../graphics/sbo5.gif" alt="" width="4" height="138"></p> 
+               </td> 
+                        
+               <td align="left"> <a href="display.htm#nX_display">
+                      <var>n</var><code class="keyword">X</code></a> 
+               </td> 
+                        
+               <td rowspan="5"> 
+                  
+                  <p><img src="../graphics/sbc5.gif" alt="" width="4" height="138"></p> 
+               </td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td align="left">&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td align="left"> <a href="display.htm#nT_display">
+                      <var>n</var><code class="keyword">T</code></a> 
+               </td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td align="left">&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td align="left"> <a href="display.htm#x_y_display">
+                      <code><var>x/y</var></code> </a> 
+               </td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/sbo2.gif" alt="" width="5" height="40"></p> 
+               </td> 
+                        
+               <td align="left"> <a href="display.htm#text_display">
+                      <code><var>'text'</var></code> </a>
+                            <a href="display.htm#attributes_display">
+                               [(<code><var>attributes</var></code>)] </a> &nbsp; 
+               </td> 
+                        
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/sbc2.gif" alt="" width="5" height="40"></p> 
+               </td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td align="left"> <a href="display.htm#T_field-name_display"><code class="keyword">T*</code><code><var>field-name</var></code></a></td>
+                        
+                        
+               <td>&nbsp;</td> 
+                        
+               <td align="left"> <a href="display.htm#c_n_display">
+                      <var>'c'</var>
+                               (<code><var>n</var></code>)</a> &nbsp;
+                            <a href="display.htm#attributes_display">
+                               [(<code><var>attributes</var></code>)]&nbsp; </a> 
+               </td> 
+                        
+               <td> 
+                  
+                  <p><img src="../graphics/dot3.gif" alt="" width="12" height="4"></p> 
+               </td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td align="left"> <a href="display.htm#P_field-name_display">
+                      <code class="keyword">P*</code></a><a href="display.htm#P_field-name_display"><code><var>field-name</var></code></a></td>
+                        
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td align="left">&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td align="left">&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td align="left">&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td rowspan="3"> 
+                  
+                  <p><img src="../graphics/sbo3.gif" alt="" width="5" height="61"></p> 
+               </td> 
+                        
+               <td rowspan="2" align="left">
+                  <a href="display.htm#Vertical_Horizontal_Display"><code class="keyword"><u>VERT</u>ICALLY </code></a> 
+               </td> 
+                        
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/sbo2.gif" alt="" width="5" height="40"></p> 
+               </td> 
+                        
+               <td rowspan="2"> <code class="keyword">AS</code> 
+               </td> 
+                        
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/cbo2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                        
+               <td align="left" nowrap><a href="display.htm#text_display"><code><var>'text'</var></code>
+                           </a> <a href="display.htm#attributes_display"> [(</a><a href="display.htm#attributes_display"><code><var>attributes</var></code>)]
+                               </a> [<code class="keyword"><u>CAPT</u>IONED</code>]
+                            
+               </td> 
+                        
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/cbc2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                        
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/sbc2.gif" alt="" width="5" height="40"></p> 
+               </td> 
+                        
+               <td rowspan="2" nowrap> [/
+                  <img src="../graphics/dot3.gif" alt="" width="12" height="4">]
+                            
+               </td> 
+                        
+               <td rowspan="3"> 
+                  
+                  <p><img src="../graphics/sbc3.gif" alt="" width="5" height="61"></p> 
+               </td> 
+                        
+               <td>&nbsp;</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td align="left"> [<code class="keyword"><u>CAPT</u>IONED</code>] 
+               </td> 
+                        
+               <td>&nbsp;</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td align="left"> [<a href="display.htm#Vertical_Horizontal_Display"><code class="keyword"><u>HORIZ</u>ONTALLY</code></a>] 
+               </td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td align="left">&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <h4 class="floating-title"> Field Positioning Notations </h4> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th nowrap> <a name="nX_display"></a>
+                   <var>n</var>X 
+               </th> 
+                        
+               <td> 
+                  
+                  <div><strong class="floating-title"> Column Spacing: </strong></div> 
+                            
+                  <p>This notation inserts <var>n</var> spaces between
+                                columns.
+                  </p> 
+                            
+                  <p> Example:</p> 
+                            <pre class="verbatim">DISPLAY NAME 5X SALARY</pre> 
+                            <p>See also:</p> 
+                            
+                  <ul> 
+                                
+                     <li> 
+                                    
+                        <p class="initem"> <a href="display.htm#Example_1_display">Example 1 -
+                                           DISPLAY Statement Using <var>n</var>X and
+                                           <var>n</var>T Notation</a> (below)
+                        </p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem"> <a href="../pg/pg_output_display.htm#col_spacing">Column
+                                           Spacing - SF Parameter and <var>n</var>X Notation</a>
+                                        (in the <cite>Programming Guide</cite>)
+                        </p> 
+                                   
+                     </li> 
+                               
+                  </ul> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th nowrap> <a name="nT_display"></a>
+                   <var>n</var>T 
+               </th> 
+                        
+               <td> 
+                  
+                  <div><strong class="floating-title"> Tab Setting: </strong></div> 
+                            
+                  <p>The <code><var>n</var>T</code> notation causes
+                     positioning (tabulation) to display position <var>n</var>.
+                                Backward positioning is not permitted.
+                  </p> 
+                            
+                  <p>In the following example, <code>NAME</code> is displayed beginning
+                                in position 25, and <code>SALARY</code> beginning in position 50:
+                  </p> 
+                            <pre class="verbatim">DISPLAY 25T NAME 50T SALARY</pre> 
+                            <p>See also:</p> 
+                            
+                  <ul> 
+                                
+                     <li> 
+                                    
+                        <p class="initem"> <a href="display.htm#Example_1_display">Example 1 -
+                                           DISPLAY Statement Using <var>n</var>X and
+                                           <var>n</var>T Notation</a> (below)
+                        </p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem"> <a href="../pg/pg_output_display.htm#tab_setting">Tab Setting -
+                                           <var>n</var>T Notation</a> (in the
+                                        <cite>Programming Guide</cite>)
+                        </p> 
+                                   
+                     </li> 
+                               
+                  </ul> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th nowrap> <a name="x_y_display"></a><var>x/y</var> 
+               </th> 
+                        
+               <td> 
+                  
+                  <div><strong class="floating-title"> x/y Positioning:</strong></div> 
+                            
+                  <p>The <code><var>x/y</var></code> notation causes
+                                the next element to be placed <var>x</var> lines below the
+                                output of the last statement, beginning in column <var>y</var>.
+                                <var>y</var> must not be zero. Backward positioning is not
+                                permitted.
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th nowrap> <a name="T_field-name_display"></a>
+                  T*<var>field-name</var> 
+               </th> 
+                        
+               <td> 
+                  
+                  <div><strong class="floating-title"> Field Related Positioning: </strong></div> 
+                            
+                  <p>The <code>T*</code> notation is used to position to a specific
+                                print position of a field used in a previous <code>DISPLAY</code> statement.
+                                Backward positioning is not permitted.
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th nowrap> <a name="P_field-name_display"></a>
+                  P*<var>field-name</var> 
+               </th> 
+                        
+               <td> 
+                  
+                  <div><strong class="floating-title"> Field and Line Related Positioning:
+                                   </strong></div> 
+                            
+                  <p>The <code>P*</code> notation is used to position to a specific
+                                print position and line of a field used in a previous <code>DISPLAY</code>
+                                statement. It is most often used in conjunction with vertical display mode.
+                                Backward positioning is not permitted.
+                  </p> 
+                            
+                  <p>See also:</p> 
+                            
+                  <ul> 
+                                
+                     <li> 
+                                    
+                        <p class="initem"> <a href="display.htm#Example_3_display">Example 3 -
+                                           DISPLAY Statement Using P* Notation</a> (below)
+                        </p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem"> <a href="../pg/pg_output_vdispl.htm#Tab_Notation_P_field">Tab Notation
+                                           P*<var>field</var></a> (in the
+                                        <cite>Programming Guide</cite>)
+                        </p> 
+                                   
+                     </li> 
+                               
+                  </ul> 
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <h4 class="floating-title"> Override Column Heading Assignment</h4> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th> <a name="text_display"></a>
+                  '<var>text</var>' &nbsp; 
+                            
+                  <p>'/' </p>
+               </th> 
+                        
+               <td> 
+                  
+                  <div><strong class="floating-title"> Text Assignment: </strong></div> 
+                            
+                  <p>If placed immediately before a field, the text enclosed by single
+                           quotes overrides the column heading.
+                  </p> 
+                            
+                  <p>The slash character <code>'/'</code> before a field causes the
+                                header for the field to be suppressed.
+                  </p> 
+                            <pre class="verbatim">DISPLAY 'EMPLOYEE' NAME 'MARITAL/STATUS' MAR-STAT</pre> 
+                            <p>If multiple <code>'<var>text</var>'</code>
+                                elements are specified before a field name, the <em>last</em>
+                                <code>'<var>text</var>'</code> element will be used as the
+                                column header and the other text elements will be placed before the value of
+                                the field within the column.
+                  </p> 
+                            
+                  <p>See also:</p> 
+                            
+                  <ul> 
+                                
+                     <li> 
+                                    
+                        <p class="initem"> <a href="../pg/pg_output_headers.htm#col_headers_define">Define Your Own
+                                           Column Headers</a> (in the <cite>Programming
+                                           Guide</cite>)
+                        </p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem"> <a href="../pg/pg_furth_txtnot.htm">Text
+                                           Notation</a>,
+                                        <a href="../pg/pg_furth_txtnot.htm#text_notation">Defining a
+                                           Text to Be Used with a Statement</a> (in the
+                                        <cite>Programming Guide</cite>)
+                        </p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem"> <a href="display.htm#Example_4_display">Example 4 -
+                                           DISPLAY Statement Using '<var>text</var>',
+                                           '<var>c</var>(<var>n</var>)' and Attribute
+                                           Notation</a> (below)
+                        </p> 
+                                   
+                     </li> 
+                               
+                  </ul> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th nowrap> <a name="c_n_display"></a>'<var>c</var>'<var>(n)</var>
+                         
+               </th> 
+                        
+               <td> 
+                  
+                  <div><strong class="floating-title"> Character Repetition: </strong></div> 
+                            
+                  <p>The character enclosed by single quotes is displayed
+                                <var>n</var> times immediately before the field value. For
+                                example:
+                  </p> 
+                            <pre class="verbatim">DISPLAY '*' (5) '=' NAME</pre> 
+                            <p> results in </p><pre class="system-output">***** SMITH</pre> 
+                            <p> See also:</p> 
+                            
+                  <ul> 
+                                
+                     <li> 
+                                    
+                        <p class="initem"> <a href="../pg/pg_furth_txtnot.htm">Text
+                                           Notation</a>,
+                                        <a href="../pg/pg_furth_txtnot.htm#c_n_notation">Defining a
+                                           Character to Be Displayed <var>n</var> Times before a Field
+                                           Value</a> (in the <cite>Programming Guide</cite>)
+                        </p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem"> <a href="display.htm#Example_4_display">Example 4 -
+                                           DISPLAY Statement Using '<var>text</var>',
+                                           '<var>c</var>(<var>n</var>)' and Attribute
+                                           Notation</a> (below)
+                        </p> 
+                                   
+                     </li> 
+                               
+                  </ul> 
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+            
+      <div><a name="attributes_display"></a></div>
+      <h4 class="floating-title"> Output Attributes
+                
+      </h4> 
+            
+      <p> <var>attributes</var> indicates the output attributes
+                to be used for text display. Attributes may be:
+      </p> 
+             
+             
+      <table border="0" class="syntax" cellpadding="3"> 
+                  
+                   
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <td rowspan="2" nowrap> 
+                  
+                  <p><img src="../graphics/cbo6.gif" alt="" width="8" height="115"></p> 
+               </td> 
+                         
+               <td nowrap> 
+                  
+                  <p><img src="../graphics/cbo3b.gif" alt="" width="6" height="80"></p> 
+               </td> 
+                         
+               <td nowrap> 
+                  
+                  <p class="mini-list"> 
+                                 <code class="keyword">AD</code>=<var>AD-value</var>
+                                  <img src="../graphics/dot3.gif" alt="" width="12" height="4"><br> 
+                                  
+                                 <code class="keyword">CD</code>=<var>CD-value</var>
+                                  <img src="../graphics/dot3.gif" alt="" width="12" height="4"><br> 
+                                 <code class="keyword">PM</code>=<var>PM-value</var>
+                                  <img src="../graphics/dot3.gif" alt="" width="12" height="4"> 
+                                
+                  </p>
+               </td> 
+                         
+               <td nowrap>
+                  <img src="../graphics/cbc3b.gif" alt="" width="6" height="80">
+                             <img src="../graphics/dot3.gif" alt="" width="12" height="4">
+                             
+               </td> 
+                         
+               <td rowspan="2" nowrap> 
+                  
+                  <p><img src="../graphics/cbc6a.gif" alt="" width="5" height="115"></p> 
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td nowrap> 
+                  
+                  <p><img src="../graphics/cbo2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                         
+               <td nowrap> 
+                  
+                  <p class="mini-list"> 
+                                 <var>AD-value</var>
+                                  <img src="../graphics/dot3.gif" alt="" width="12" height="4"><br> 
+                                 <var>CD-value</var>
+                                  <img src="../graphics/dot3.gif" alt="" width="12" height="4">
+                                   
+                                
+                  </p> 
+               </td> 
+                         
+               <td nowrap>
+                  <img src="../graphics/cbc2.gif" alt="" width="6" height="38">
+                             <img src="../graphics/dot3.gif" alt="" width="12" height="4">
+                             
+               </td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+      <p>For the possible session parameter values, refer to the corresponding
+                sections in the <cite>Parameter Reference</cite> documentation:
+      </p> 
+            
+      <ul> 
+                
+         <li> 
+                    
+            <p class="initem"><a href="../parms/sp_ad.htm">AD - Attribute
+                  Definition</a>, section
+                        <a href="../parms/sp_ad.htm#sp_ad_Field_Representation">Field
+                  Representation</a></p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem"><a href="../parms/sp_cd.htm"> CD - Color
+                  Definition</a></p> 
+                   
+         </li> 
+                 
+                
+         <li> 
+                    
+            <p class="initem"><a href="../parms/pm.htm">PM - Print
+                  Mode</a></p> 
+                   
+         </li> 
+               
+      </ul> 
+            
+      <p class="note"><strong>Note:</strong><br> The compiler actually accepts more than one attribute value for an
+                output field. For example, you may specify: <code>AD=BDI</code>. In such a
+                case, however, only the last value applies. In the given example, only the
+                value <code>I</code> will become effective and the output field will be
+                displayed intensified.
+      </p> 
+            
+           
+      <div><a name="Vertical_Horizontal_Display"></a></div>
+      <h4 class="floating-title"> Vertical/Horizontal
+               Display
+      </h4> 
+           
+      <p>The <code>VERT</code> clause may be used to cause multiple field values
+               to be positioned underneath one another in the same column. In vertical mode, a
+               new column may be initiated by specifying the keyword <code>VERT</code> or
+               <code>HORIZ</code>.
+      </p> 
+           
+      <p>The column heading in vertical mode is controlled using the entry or
+               entries specified with the AS clause as described below.
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th nowrap> <a name="display_vertically"></a>VERTICALLY 
+               </th> 
+                        
+               <td>Vertical column orientation. No column heading is produced if
+                  the <code>AS</code> clause is omitted. 
+                            <pre class="verbatim">DISPLAY VERT NAME SALARY</pre> 
+                            <p>For an example, see
+                                <a href="../pg/pg_output_vdispl.htm#DISPLAY_VERT_without_AS_Clause">DISPLAY
+                                   VERT without AS Clause</a> (in the <cite>Programming
+                                   Guide</cite>).
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th nowrap> <a name="display_as_text"></a>AS
+                  '<var>text</var>' 
+               </th> 
+                        
+               <td>Vertical column orientation. If <code>AS
+                               '<var>text</var>'</code> is specified, the text enclosed by
+                  single quotes is used as the column heading. 
+                            
+                  <p>For an example, see
+                                <a href="../pg/pg_output_vdispl.htm#DISPLAY_VERT_AS_text">DISPLAY VERT AS
+                                   '<var>text</var>'</a> (in the
+                                <cite>Programming Guide</cite>). 
+                  </p> 
+                            
+                  <p> The slash character / in the character string of
+                                <code>'<var>text</var>'</code> will cause multiple lines of
+                                column headings. 
+                  </p> 
+                            <pre class="verbatim">DISPLAY VERT AS 'LAST/NAME' NAME</pre> </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th nowrap>
+                  <a name="display_as_text_captioned"></a>AS '<var>text</var>'
+                           CAPTIONED 
+               </th> 
+                        
+               <td>Vertical column orientation. If <code>AS
+                               '<var>text</var>' CAPTIONED</code> is specified,
+                            <code>'<var>text</var>'</code> is used as the column heading
+                  and the standard heading text or field name is inserted immediately before the
+                            field value in each detail display line. 
+                            <pre class="verbatim">DISPLAY VERT AS 'PERSONS/SELECTED' CAPTIONED NAME FIRST-NAME </pre> 
+                            <p>For an example, see
+                                <a href="../pg/pg_output_vdispl.htm#DISPLAY_VERT_AS_text_CAPTIONED">DISPLAY
+                                   VERT AS '<var>text</var>' CAPTIONED</a> (in
+                                the <cite>Programming Guide</cite>).
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th nowrap> <a name="display_as_captioned"></a>AS CAPTIONED 
+               </th> 
+                        
+               <td>Vertical column orientation. If <code>AS CAPTIONED</code> is
+                  specified, the standard heading text for the field (either heading text or the
+                  field name) will be used as the column heading. 
+                            <pre class="verbatim">DISPLAY VERT AS CAPTIONED NAME FIRST-NAME</pre></td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th nowrap>HORIZONTALLY</th> 
+                        
+               <td>Horizontal column orientation. This is the default display
+                  mode.
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>Vertical and horizontal column orientation may be intermixed by using
+               the respective keyword.
+      </p> 
+           
+      <p>To suspend vertical display for a single output element, you may place
+               a dash (-) in front of the element. For example:
+      </p> 
+           <pre class="verbatim">DISPLAY VERT NAME - FIRST-NAME SALARY</pre> 
+           <p>In the above example, <code>FIRST-NAME</code> will be output
+               horizontally next to <code>NAME</code>, while <code>SALARY</code> will be
+               output vertically again, i.e. below <code>NAME</code>.
+      </p> 
+           
+      <p>The standard display mode is horizontal. A column is constructed for
+               each field to be displayed.
+      </p> 
+           
+      <p>Column headings are obtained and used by Natural according to the
+               following priority:
+      </p> 
+           
+      <ol> 
+               
+         <li> 
+                   
+            <p class="initem">heading <code>'<var>text</var>'</code> supplied in
+                       the <code>DISPLAY</code> statement;
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">the default heading defined in the
+                       <a href="../pg/pg_dbms_ada.htm#pg_dbms_ddm">DDM</a> (database
+                       fields), or the name of a user-defined variable;
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">the field name as defined in the DDM (if no heading text was defined
+                       for the database field).
+            </p> 
+                  
+         </li> 
+              
+      </ol> 
+           
+      <p>For group names, a group heading is produced for the entire group. When
+               specifying a group, only the heading for the entire group may be overridden by
+               a user-specified heading.
+      </p> 
+           
+      <p>The maximum number of column header lines is 15.</p> 
+           
+      <p>Line size overflow is not permitted for output resulting from a
+               <code>DISPLAY</code> statement. If a line overflow occurs, an error message is
+               issued.
+      </p> 
+           
+      <p>For more information about vertical/horizontal display usage, see:</p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem"> <a href="display.htm#Example_5_display">Example 5 - DISPLAY
+                  Statement Using Horizontal Display</a></p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"> <a href="display.htm#Example_6_display">Example 6 - DISPLAY
+                  Statement Using Vertical and Horizontal Display</a></p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">
+                       <a href="../pg/pg_output_vdispl.htm#DISPLAY_VERT_AS_CAPTIONED_and_HORIZ">DISPLAY
+                  VERT AS CAPTIONED and HORIZ</a> (in the <cite>Programming
+                          Guide</cite>)
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+          
+         
+      <div><a name="output_element"></a></div> 
+          
+      <h3> Output Element </h3> 
+           
+            
+            
+      <table border="0" class="syntax" cellpadding="3"> 
+                 
+                 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td rowspan="5"> 
+                  
+                  <p><img src="../graphics/sbo5.gif" alt="" width="4" height="138"></p> 
+               </td> 
+                        
+               <td rowspan="2" align="center"> 
+                  
+                  <p><img src="../graphics/cbo2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                        
+               <td align="left" nowrap> '<a href="display.htm#text_display"><code><var>text'</var></code>
+                            </a> <a href="display.htm#attributes_display">
+                               [(<code><var>attributes</var></code>)] </a>
+                            <code class="keyword">&nbsp;</code> 
+               </td> 
+                        
+               <td rowspan="2" align="center">
+                  <img src="../graphics/cbc2.gif" alt="" width="6" height="38">
+                            <img src="../graphics/dot3.gif" alt="" width="12" height="4">
+                            
+               </td> 
+                        
+               <td rowspan="5"> 
+                  
+                  <p><img src="../graphics/sbc5.gif" alt="" width="4" height="138"></p> 
+               </td> 
+                        
+               <td nowrap>&nbsp;</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td align="left" nowrap> '<a href="display.htm#c_n_display"><code><var>c'</var></code></a><a href="display.htm#c_n_display">(<var>n</var>)</a> &nbsp;
+                         <a href="display.htm#attributes_display">
+                               [(<code><var>attributes</var></code>)]&nbsp; </a> 
+               </td> 
+                        
+               <td nowrap>&nbsp;</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="left" nowrap> <a href="display.htm#nX_display">
+                      <code><var>n</var></code></a><a href="display.htm#nX_display"><code class="keyword">X</code> </a> 
+               </td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td nowrap> <a href="display.htm#equal_sign_display">
+                     [<code>'='</code></a>] {<a href="display.htm#operand1_display"><code><var>operand1</var></code>
+                               </a> [(<a href="display.htm#parameters"><code><var>parameters</var></code></a>)]}
+               </td>
+                        
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="left" nowrap> <a href="display.htm#nT_display">
+                      <code><var>n</var></code></a><a href="display.htm#nT_display"><code class="keyword">T</code> </a> 
+               </td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td nowrap>&nbsp;</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="left" nowrap> <a href="display.htm#x_y_display">
+                      <code> <var>x/y</var> </code> </a> 
+               </td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td nowrap>&nbsp;</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>Operand Definition Table:</p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                  
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>Operand</th> 
+                        
+               <th colspan="5" align="center">
+                  <a href="synsym.htm#statem_poss_struct">Possible Structure</a> 
+               </th> 
+                        
+               <th colspan="12" align="center">
+                  <a href="synsym.htm#statem_poss_form">Possible Formats</a> 
+               </th> 
+                        
+               <th align="center"> <a href="synsym.htm#statem_ref_perm">Referencing Permitted</a> 
+               </th> 
+                        
+               <th align="center"> <a href="synsym.htm#statem_dyn_def">Dynamic
+                     Definition</a> 
+               </th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> <a href="display.htm#operand1_display">
+                      <var>operand1</var> </a> 
+               </td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>S</td> 
+                        
+               <td>A</td> 
+                        
+               <td>G</td> 
+                        
+               <td>N</td> 
+                        
+               <td>A</td> 
+                        
+               <td>N</td> 
+                        
+               <td>P</td> 
+                        
+               <td>I</td> 
+                        
+               <td>F</td> 
+                        
+               <td>B</td> 
+                        
+               <td>D</td> 
+                        
+               <td>T</td> 
+                        
+               <td>L</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td align="center">G</td> 
+                        
+               <td align="center">O</td> 
+                        
+               <td align="center">yes</td> 
+                        
+               <td align="center">no</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>Syntax Element Description</p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th> <var>n</var>X
+                    
+               </th> 
+                        
+               <td> 
+                  
+                  <div><strong class="floating-title"> Column Spacing: </strong></div> 
+                            
+                  <p>This is the same as under <cite>Output Format
+                                   Definitions</cite> (<a href="display.htm#nX_display">see
+                                   above</a>).
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th> <var>n</var>T
+                    
+               </th> 
+                        
+               <td> 
+                  
+                  <div><strong class="floating-title"> Tab Setting: </strong></div> 
+                            
+                  <p>This is the same as under <cite>Output Format
+                                   Definitions</cite> (<a href="display.htm#nT_display">see
+                                   above</a>).
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th> <var>x/y</var>
+                      
+               </th> 
+                        
+               <td> 
+                  
+                  <div><strong class="floating-title"> x/y Positioning: </strong></div> 
+                            
+                  <p>This is the same as under <cite>Output Format
+                                   Definitions</cite> (<a href="display.htm#x_y_display">see
+                                   above</a>).
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th>'<var>text</var>'
+               </th> 
+                        
+               <td> 
+                  
+                  <div><strong class="floating-title"> Text Assignment: </strong></div> 
+                            
+                  <p>This is the same as under <cite>Output Format
+                                   Definitions</cite> (<a href="display.htm#text_display">see
+                                   above</a>).
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th>'<var>c</var>'<var>(n)</var>
+                        
+               </th> 
+                        
+               <td> 
+                  
+                  <div><strong class="floating-title"> Character Repetition: </strong></div> 
+                            
+                  <p>This is the same as under <cite>Output Format
+                                   Definitions</cite> <var></var> (<a href="display.htm#c_n_display">see
+                                   above</a>).
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th> <a name="equal_sign_display"></a>'<var>text</var>' '<strong>=</strong>' 
+                            
+                  <p>'<var>c</var>'
+                                <var>(n)</var> '<strong>=</strong>'
+                                
+                  </p>
+               </th> 
+                        
+               <td>If <code>'<var>text</var>' '='</code> is placed
+                  immediately before the field, <var>text</var> is output
+                  immediately before the field value. This applies analogously with
+                            <code>'<var>c</var>' <var>(n)</var> '<strong>=</strong>'</code>. 
+                            <pre class="verbatim">DISPLAY '*****' '=' NAME</pre> </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th> <var>attributes</var>
+                            
+               </th> 
+                        
+               <td> 
+                  
+                  <div><strong class="floating-title"> Output Attributes:</strong></div> 
+                            
+                  <p>This is the same as under <cite>Output Format
+                                   Definitions</cite> (<a href="display.htm#attributes_display">see
+                                   above</a>).
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th> <a name="operand1_display"></a><var>operand1</var> 
+               </th> 
+                        
+               <td>The field to be displayed. 
+                  
+                  
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th> <a name="parameters"></a>
+                   <var>parameters</var> 
+               </th> 
+                        
+               <td> 
+                  
+                  <div><strong class="floating-title"> Parameter Definition at Element (Field) Level:
+                                   </strong></div> 
+                            
+                  <p>One or more parameters, enclosed within parentheses, may be
+                              specified at element (field) level, that is, immediately after
+                                <var>operand1</var>. Each parameter specified in this manner
+                                will override the corresponding parameter previously specified
+                                <a href="display.htm#statement-parameters_display">at statement level</a>
+                                or in a <a href="../syscom/globals.htm"><code>GLOBALS</code></a>
+                                command, <a href="setgloba.htm#setgloba"><code>SET GLOBALS</code></a> (in
+                                Reporting Mode only) or <a href="format.htm#format"><code>FORMAT</code></a> statement.
+                  </p> 
+                            
+                  <p>If more than one parameter is specified, one or more blanks must
+                                be placed between each entry. An entry must not be split between two statement
+                                lines.
+                  </p> 
+                            
+                  <p>See also:</p> 
+                            
+                  <ul> 
+                                
+                     <li> 
+                                    
+                        <p class="initem"> <a href="display.htm#statement_parms_display">List of
+                                           Parameters</a></p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem"> <a href="display.htm#parm_usage_exa">Example of
+                                           Parameter Usage at Statement and Element (Field) Level</a></p>
+                                    
+                                   
+                     </li> 
+                               
+                  </ul> 
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="display.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Defaults"></a></div> 
+         
+      <h2> Defaults Applicable for a DISPLAY Statement </h2> 
+          
+          
+      <p>The following defaults are applicable for a <code>DISPLAY</code>
+              statement:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                   
+                  
+            <p class="initem"><strong>Report Width</strong><br> The width of the report defaults to the value set when Natural is
+                      installed. This default value is normally 132 in batch mode or the line length
+                      of the terminal in TP mode. It may be overridden with the session parameter
+                      <a href="../parms/ls.htm"><code>LS</code></a>. In TP
+                      mode, line size (<a href="../parms/ls.htm"><code>LS</code></a>) and page size
+                      (<a href="../parms/ps.htm"><code>PS</code></a>)
+                      parameters are set by Natural based on the physical characteristics of the
+                      terminal type in use.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                   
+                  
+            <p class="initem"><strong>Terminal Screen Output</strong><br> When the <code>DISPLAY</code> output is displayed on a terminal
+                      (emulation) screen, the output begins in physical Column 2 (because Column 1
+                      must be reserved for possible use as an attribute position on a 3270-type
+                      terminal).
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                   
+                  
+            <p class="initem"><strong>Printout on Paper</strong><br> When the <code>DISPLAY</code> output is printed on paper, the
+                      printout begins in the leftmost column (Column 1).
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                   
+                  
+            <p class="initem"><strong>Spacing Factor</strong><br> The default spacing factor between elements is one position. There is
+                      a minimum of one space between columns (reserved for terminal attributes). This
+                      default may be overridden with the session parameter
+                      <a href="../parms/sf.htm"><code>SF</code></a>.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                   
+                  
+            <p class="initem"><strong>Field Output</strong><br> The length of the field or the field heading, whichever is greater,
+                      determines the column width for the report (unless the
+                      <a href="../parms/sp_hw.htm"><code>HW</code></a>
+                      parameter is used). 
+            </p> 
+                  
+            <ul style="margin-top: 0px; margin-bottom: 0px;"> 
+                      
+               <li class="nesteditem"> 
+                          
+                  <p class="initem">If the field is longer than the heading, the heading will be
+                              centered over the column unless the <a href="../parms/sp_hc.htm"><code>HC=L</code></a> or
+                              <a href="../parms/sp_hc.htm"><code>HC=R</code></a>
+                              parameter is used to produce a left-justified or right-justified heading.
+                  </p> 
+                         
+               </li> 
+                      
+               <li class="nesteditem"> 
+                          
+                  <p class="initem">If the heading is longer than the field, the field will be
+                              left-justified under the heading.
+                  </p> 
+                         
+               </li> 
+                      
+               <li class="nesteditem"> 
+                          
+                  <p class="initem">The values contained in the field are left-justified for
+                              alphanumeric fields and right-justified for numeric fields.
+                  </p> 
+                         
+               </li> 
+                      
+               <li class="nesteditem"> 
+                          
+                  <p class="initem">Numeric fields may be displayed left-justified by specifying
+                              <a href="../parms/sp_ad.htm"><code>AD=L</code></a>.
+                  </p> 
+                         
+               </li> 
+                      
+               <li class="nesteditem"> 
+                          
+                  <p class="initem">Alphanumeric fields may be displayed right-justified by specifying
+                              <a href="../parms/sp_ad.htm"><code>AD=R</code></a>.
+                  </p> 
+                         
+               </li> 
+                      
+               <li class="nesteditem"> 
+                          
+                  <p class="initem">In a vertical display, the longest data value or heading among all
+                              fields determines the column width (unless the
+                              <a href="../parms/sp_hw.htm"><code>HW</code></a>
+                              parameter is used).
+                  </p> 
+                         
+               </li> 
+                     
+            </ul> 
+                 
+         </li> 
+              
+         <li> 
+                   
+                  
+            <p class="initem"><strong>Sign</strong><br> One extra high-order print position is reserved for a sign when
+                      printing a numeric field. The session parameter
+                      <a href="../parms/sp_sg.htm"><code>SG</code></a> may be
+                      used to suppress the sign position.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                   
+                  
+            <p class="initem"><strong>Page Overflow</strong><br> Page overflow is checked before execution of a <code>DISPLAY</code>
+                      statement. No new page title or trailer information is generated during the
+                      execution of a <code>DISPLAY</code> statement.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="display.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="display_exa"></a></div> 
+         
+      <h2> Examples </h2>
+      <ul>
+         <li>
+            <p class="initem"><a href="display.htm#Example_1_display">Example 1 - DISPLAY Statement Using nX and nT Notation</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="display.htm#Example_2_display">Example 2 - DISPLAY Statement Using GIVE SYSTEM FUNCTIONS Clause</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="display.htm#Example_3_display">Example 3 - DISPLAY Statement Using P* Notation</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="display.htm#Example_4_display">Example 4 - DISPLAY Statement Using 'text ', 'c(n)' and Attribute Notation</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="display.htm#Example_5_display">Example 5 - DISPLAY Statement Using Horizontal Display</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="display.htm#Example_6_display">Example 6 - DISPLAY Statement Using Vertical and Horizontal Display</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="display.htm#Example_7_display">Example 7 - DISPLAY Statement Using Parameters on Statement/Element Level</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="display.htm#Example_8_display">Example 8 - Report Specification with Output File Defined to Natural as PC</a></p>
+         </li>
+      </ul> 
+         
+      <div><a name="Example_1_display"></a></div> 
+          
+      <h3>Example 1 - DISPLAY Statement Using <var>n</var>X
+              and <var>n</var>T Notation
+      </h3> 
+           
+           <pre class="verbatim">** Example 'DISEX1': DISPLAY (with nX, nT notation)                     
+************************************************************************
+DEFINE DATA LOCAL                                                       
+1 EMPL-VIEW VIEW OF EMPLOYEES                                           
+  2 NAME                                                                
+  2 JOB-TITLE                                                           
+END-DEFINE                                                              
+*                                                                       
+LIMIT 4                                                                 
+READ EMPL-VIEW BY NAME                                                  
+  <strong>DISPLAY NOTITLE 5X NAME 50T JOB-TITLE</strong>
+END-READ                                                                
+*                                                                       
+END                                                                    </pre> 
+           <h4 class="floating-title">Output of Program DISEX1:</h4> <pre class="system-output">        NAME                                         CURRENT         
+                                                    POSITION         
+--------------------                        -------------------------
+                                                                     
+ABELLAN                                     MAQUINISTA               
+ACHIESON                                    DATA BASE ADMINISTRATOR  
+ADAM                                        CHEF DE SERVICE          
+ADKINSON                                    PROGRAMMER              </pre> 
+           
+         <div><a name="Example_2_display"></a></div> 
+          
+      <h3>Example 2 - DISPLAY Statement Using GIVE SYSTEM FUNCTIONS
+              Clause
+      </h3> 
+           
+           <pre class="verbatim">** Example 'DISEX2': DISPLAY (with GIVE SYSTEM FUNCTIONS)               
+************************************************************************
+DEFINE DATA LOCAL                                                       
+1 EMPLOY-VIEW VIEW OF EMPLOYEES                                         
+  2 PERSONNEL-ID                                                        
+  2 NAME                                                                
+  2 FIRST-NAME                                                          
+  2 SALARY    (1)                                                       
+  2 CURR-CODE (1)                                                       
+END-DEFINE                                                              
+*                                                                       
+LIMIT 15                                                                
+FORMAT PS=15                                                            
+*                                                                       
+READ EMPLOY-VIEW                                                        
+  <strong>DISPLAY GIVE SYSTEM FUNCTIONS                                         
+          PERSONNEL-ID NAME FIRST-NAME SALARY (1) CURR-CODE (1)</strong>
+  AT END OF PAGE                                                        
+    WRITE /    'SALARY STATISTICS:'                                     
+          / 7X 'MAXIMUM:' MAX(SALARY(1))  CURR-CODE (1)
+          / 7X 'MINIMUM:' MIN(SALARY(1))  CURR-CODE (1)
+          / 7X 'AVERAGE:' AVER(SALARY(1)) CURR-CODE (1)
+  END-ENDPAGE                                          
+END-READ                                               
+*                                                      
+END</pre> 
+           <h4 class="floating-title">Output of Program DISEX2:</h4> <pre class="system-output">Page      1                                                  05-01-12  09:47:48
+                                                                               
+PERSONNEL         NAME              FIRST-NAME        ANNUAL   CURRENCY        
+   ID                                                 SALARY     CODE          
+--------- -------------------- -------------------- ---------- --------        
+                                                                               
+50005500  BLOND                ALEXANDRE                172000 FRA             
+50005300  MAIZIERE             ELISABETH                166900 FRA             
+50004900  CAOUDAL              ALBERT                   167350 FRA             
+50004600  VERDIE               BERNARD                  170100 FRA             
+50004200  VAUZELLE             BERNARD                  159790 FRA             
+50004100  CHAPUIS              ROBERT                   169900 FRA             
+50003800  JOUSSELIN            DANIEL                   171990 FRA             
+50006900  BAILLET              PATRICK                  188000 FRA             
+50007600  MARX                 JEAN-MARIE               365700 FRA             
+                                                                               
+SALARY STATISTICS:                                                             
+       MAXIMUM:     365700 FRA                                                 
+       MINIMUM:     159790 FRA                                                 
+       AVERAGE:     192414 FRA                                                </pre> 
+           
+         <div><a name="Example_3_display"></a></div> 
+          
+      <h3>Example 3 - DISPLAY Statement Using P* Notation</h3> 
+           
+           <pre class="verbatim">** Example 'DISEX3': DISPLAY (with P* notation)                         
+************************************************************************
+DEFINE DATA LOCAL                                                       
+1 EMPL-VIEW VIEW OF EMPLOYEES                                           
+  2 NAME                                                                
+  2 SALARY (1)                                                          
+  2 BIRTH                                                               
+  2 CITY                                                                
+END-DEFINE                                                              
+*                                                                       
+LIMIT 2                                                                 
+READ EMPL-VIEW BY CITY FROM 'N'                                         
+<strong> DISPLAY NOTITLE NAME CITY                                             
+          VERT AS 'BIRTH/SALARY' BIRTH (EM=YYYY-MM-DD) SALARY (1)</strong>
+  SKIP 1                                                                
+  AT BREAK OF CITY                                                          
+    <strong>DISPLAY P*SALARY (1) AVER(SALARY (1))</strong>                         
+    SKIP 1                                                              
+  END-BREAK                                                             
+END-READ
+END    </pre> 
+           <h4 class="floating-title">Output of Program DISEX3:</h4> <pre class="system-output">        NAME                 CITY           BIRTH   
+                                            SALARY  
+-------------------- -------------------- ----------
+                                                    
+WILCOX               NASHVILLE            1970-01-01
+                                               38000
+                                                    
+MORRISON             NASHVILLE            1949-07-10
+                                               36000
+                                                    
+                                                    
+                                               37000</pre> 
+           
+         <div><a name="Example_4_display"></a></div> 
+          
+      <h3>Example 4 - DISPLAY Statement Using '<var>text</var>
+              ', 'c(<var>n</var>)' and Attribute Notation
+      </h3> 
+           
+           <pre class="verbatim">** Example 'DISEX4': DISPLAY (with 'c(n)' notation and attribute)       
+************************************************************************
+DEFINE DATA LOCAL                                                       
+1 EMPL-VIEW VIEW OF EMPLOYEES                                           
+  2 DEPT                                                                
+  2 LEAVE-DUE                                                           
+  2 NAME                                                                
+END-DEFINE                                                              
+*                                                                       
+LIMIT 4                                                                 
+READ EMPL-VIEW BY DEPT FROM 'T'                                         
+  IF LEAVE-DUE GT 40                                                    
+<strong>   DISPLAY NOTITLE                                                     
+           'EMPLOYEE' NAME                /* OVERRIDE STANDARD HEADER   
+           'LEAVE ACCUMULATED' LEAVE-DUE  /* OVERRIDE STANDARD HEADER   
+           '*'(10)(I)                     /* DISPLAY 10 '*' INTENSIFIED 
+</strong>
+  ELSE                                                                  
+    <strong>DISPLAY NAME LEAVE-DUE</strong>                                         
+  END-IF                                                                
+END-READ
+*       
+END    </pre> 
+           <h4 class="floating-title">Output of Program DISEX4:</h4> <pre class="system-output">      EMPLOYEE       LEAVE ACCUMULATED           
+-------------------- -----------------           
+                                                 
+LAVENDA               33                         
+BOYER                 33                         
+CORREARD              45               **********
+BOUVIER               19                        </pre> 
+          <div><a name="Example_5_display"></a></div> 
+          
+      <h3>Example 5 - DISPLAY Statement Using Horizontal Display</h3> 
+           
+           <pre class="verbatim">** Example 'DISEX5': DISPLAY (horizontal display)                       
+************************************************************************
+DEFINE DATA LOCAL                                                       
+1 EMPL-VIEW VIEW OF EMPLOYEES                                           
+  2 NAME                                                                
+  2 JOB-TITLE                                                           
+  2 SALARY    (1:2)                                                     
+  2 CURR-CODE (1:2)                                                     
+END-DEFINE                                                              
+*                                                                       
+LIMIT 4                                                                 
+READ EMPL-VIEW BY NAME                                                  
+<strong> DISPLAY NOTITLE NAME JOB-TITLE SALARY (1:2) CURR-CODE (1:2)</strong>    
+  SKIP 1                                                                
+END-READ                                                                
+*                                                                       
+END                                                                    </pre> 
+           <h4 class="floating-title">Output of Program DISEX5:</h4> <pre class="system-output">        NAME                  CURRENT            ANNUAL   CURRENCY
+                             POSITION            SALARY     CODE  
+-------------------- ------------------------- ---------- --------
+                                                                  
+ABELLAN              MAQUINISTA                   1450000 PTA     
+                                                  1392000 PTA     
+                                                                  
+ACHIESON             DATA BASE ADMINISTRATOR        11300 UKL     
+                                                    10500 UKL     
+                                                                  
+ADAM                 CHEF DE SERVICE               159980 FRA     
+                                                        0         
+                                                                  
+ADKINSON             PROGRAMMER                     34500 USD     
+                                                    31700 USD    </pre> 
+           
+         <div><a name="Example_6_display"></a></div> 
+          
+      <h3>Example 6 - DISPLAY Statement Using Vertical and Horizontal
+              Display
+      </h3> 
+           
+           <pre class="verbatim">** Example 'DISEX6': DISPLAY (vertical and horizontal display)          
+************************************************************************
+DEFINE DATA LOCAL                                                       
+1 EMPL-VIEW VIEW OF EMPLOYEES                                           
+  2 NAME                                                                
+  2 CITY                                                                
+  2 JOB-TITLE                                                           
+  2 SALARY    (1:2)                                                     
+  2 CURR-CODE (1:2)                                                     
+END-DEFINE                                                              
+*                                                                       
+LIMIT 1                                                                 
+READ EMPL-VIEW BY NAME                                                  
+<strong> DISPLAY NOTITLE VERT AS CAPTIONED                                     
+          NAME CITY 'POSITION' JOB-TITLE                                
+          HORIZ 'SALARY' SALARY (1:2) 'CURRENCY' CURR-CODE (1:2)</strong>
+  /*                                                                    
+  SKIP 1                                                                
+END-READ 
+END</pre> 
+           <h4 class="floating-title">Output of Program DISEX6:</h4> <pre class="system-output">          NAME              SALARY   CURRENCY
+          CITY                               
+        POSITION                             
+------------------------- ---------- --------
+                                             
+ABELLAN                      1450000 PTA     
+MADRID                       1392000 PTA     
+MAQUINISTA                                  </pre> 
+           
+         <div><a name="Example_7_display"></a></div> 
+          
+      <h3>Example 7 - DISPLAY Statement Using Parameters on Statement/Element
+              Level
+      </h3> 
+           
+           <pre class="verbatim">** Example 'DISEX7': DISPLAY (with parameters for statement/element)    
+************************************************************************
+DEFINE DATA LOCAL                                                       
+1 EMPL-VIEW VIEW OF EMPLOYEES                                           
+  2 NAME                                                                
+  2 PERSONNEL-ID                                                        
+  2 TELEPHONE                                                           
+    3 AREA-CODE                                                         
+    3 PHONE                                                             
+END-DEFINE                                                              
+*                                                                       
+LIMIT 3                                                                 
+READ EMPL-VIEW BY NAME                                                  
+<strong> DISPLAY NOTITLE (AL=16 GC=+ NL=8 SF=3 UC==)                           
+          PERSONNEL-ID NAME TELEPHONE (LC=&lt; TC=&gt;)</strong>                 
+END-READ                                                                
+END                                                                    </pre> 
+           <h4 class="floating-title">Output of Program DISEX7:</h4> <pre class="system-output">   PERSONNEL             NAME         +++++++++++++++TELEPHONE+++++++++++++++
+       ID                                                                    
+                                             AREA              TELEPHONE     
+                                             CODE                            
+================   ================   ==================   ==================
+                                                                             
+60008339           ABELLAN            &lt;1     &gt;             &lt;4356726        &gt; 
+30000231           ACHIESON           &lt;0332  &gt;             &lt;523341         &gt; 
+50005800           ADAM               &lt;1033  &gt;             &lt;44864858       &gt;</pre> 
+           
+         <div><a name="Example_8_display"></a></div> 
+          
+      <h3>Example 8 - Report Specification with Output File Defined to Natural
+              as PC
+      </h3> 
+           
+           <pre class="verbatim">** Example 'PCDIEX1': DISPLAY and WRITE to PC                           
+**                                                                      
+** NOTE: Example requires that Natural Connection is installed.         
+************************************************************************
+DEFINE DATA LOCAL                                                       
+01 PERS VIEW OF EMPLOYEES                                               
+  02 PERSONNEL-ID                                                       
+  02 NAME                                                               
+  02 CITY                                                               
+END-DEFINE                                                              
+*                                                                       
+FIND PERS WITH CITY = 'NEW YORK'               /* Data selection        
+  WRITE (7) TITLE LEFT 'List of employees in New York' /                
+  <strong>DISPLAY (7)          /* (7) designates the output file (here the PC).</strong>
+    'Location'  CITY                                                    
+    'Surname'   NAME                                                    
+    'ID'        PERSONNEL-ID                                            
+END-FIND                                                                
+END</pre> 
+           
+        
+       <div class="noprint">
+         <div class="nospy">
+            <p><a href="display.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../sm/display.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/sm/display.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="sm-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="delete.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="divide.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

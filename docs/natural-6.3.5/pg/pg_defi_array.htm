@@ -1,0 +1,1533 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Arrays</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="pg_defi_array"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_defi_array.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_defi_array.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_defi-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_defi_redef.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_defi_xarry.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Programming Guide&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x118"></a> Arrays 
+         </h1>
+      </div> 
+         
+         
+      <p>Natural supports the processing of arrays. Arrays are multi-dimensional
+             tables, that is, two or more logically related elements identified under a
+             single name. Arrays can consist of single data elements of multiple dimensions
+             or hierarchical data structures which contain repetitive structures or
+             individual elements.
+      </p> 
+         
+      <p>This document covers the following topics:</p>
+         
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_defi_array.htm#Defining_Arrays">Defining Arrays</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_array.htm#Initial_Values_for_Arrays">Initial Values for Arrays</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_array.htm#Assigning_Initial_Values_to_One-Dimensional_Arrays">Assigning Initial Values to One-Dimensional Arrays</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_array.htm#Assigning_Initial_Values_to_Two-Dimensional_Arrays">Assigning Initial Values to Two-Dimensional Arrays</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_array.htm#A_Three-Dimensional_Array">A Three-Dimensional Array</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_array.htm#Arrays_as_Part_of_a_Larger_Data_Structure">Arrays as Part of a Larger Data Structure</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_array.htm#Database_Arrays">Database Arrays</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_array.htm#Using_Arithmetic_Expressions_in_Index_Notation">Using Arithmetic Expressions in Index Notation</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_array.htm#Arithmetic_Support_for_Arrays">Arithmetic Support for Arrays</a></p>
+         </li>
+      </ul> 
+        
+      <hr> 
+        
+      <div><a name="Defining_Arrays"></a></div> 
+         
+      <h2> Defining Arrays </h2> 
+          
+          
+      <p>In Natural, an array can be one-, two- or three-dimensional. It can be
+              an independent variable, part of a larger data structure or part of a database
+              view.
+      </p> 
+          
+      <p class="important"><strong>Important:</strong><br>Dynamic variables are not allowed in an array
+              definition.
+      </p> 
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong> To define a one-dimensional array </strong></p>
+      <ul>
+         <li> 
+                   
+                   
+            <p class="instep">After the format and length, specify a slash followed by a so-called
+                       "index notation", that is, the number of occurrences of the
+                       array.
+            </p> 
+                   
+            <p class="instep">For example, the following one-dimensional array has three
+                       occurrences, each occurrence being of format/length A10:
+            </p> 
+                   <pre class="verbatim">
+DEFINE DATA LOCAL 
+1 #ARRAY (A10/1:3) 
+END-DEFINE 
+...
+</pre> 
+                   
+                 </li>
+      </ul> 
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong> To define a two-dimensional array </strong></p>
+      <ul>
+         <li> 
+                   
+                   
+            <p class="instep">Specify an index notation for both dimensions:</p> 
+                   <pre class="verbatim">
+DEFINE DATA LOCAL 
+1 #ARRAY (A10/1:3,1:4) 
+END-DEFINE 
+...
+</pre> 
+                   <p class="instep">A two-dimensional array can be visualized as a table. The array
+                       defined in the example above would be a table that consists of 3
+                       "rows" and 4 "columns":
+            </p> 
+                    
+                    
+            <table border="1" class="color" cellpadding="3" width="50%"> 
+                         
+                         
+                        
+               <tbody align="left" valign="top"> 
+                            
+                  <tr> 
+                                
+                     <td>&nbsp;</td> 
+                                
+                     <td>&nbsp;</td> 
+                                
+                     <td>&nbsp;</td> 
+                                
+                     <td>&nbsp;</td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td>&nbsp;</td> 
+                                
+                     <td>&nbsp;</td> 
+                                
+                     <td>&nbsp;</td> 
+                                
+                     <td>&nbsp;</td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td>&nbsp;</td> 
+                                
+                     <td>&nbsp;</td> 
+                                
+                     <td>&nbsp;</td> 
+                                
+                     <td>&nbsp;</td> 
+                               
+                  </tr> 
+                           
+               </tbody> 
+                       
+            </table> 
+                    
+                   
+                 
+         </li>
+      </ul> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_defi_array.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Initial_Values_for_Arrays"></a></div> 
+         
+      <h2> 
+             <a name="x119"></a> Initial Values for Arrays 
+      </h2> 
+          
+          
+      <p>To assign initial values to one or more occurrences of an array, you use
+              an <code>INIT</code> specification, similar to that for
+              <a href="pg_defi_init.htm#pg_defi_init">"ordinary" variables</a>,
+              as shown in the following examples.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_defi_array.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Assigning_Initial_Values_to_One-Dimensional_Arrays"></a></div> 
+         
+      <h2> Assigning Initial Values to One-Dimensional Arrays </h2> 
+          
+          
+      <p>The following examples illustrate how initial values are assigned to a
+              one-dimensional array.
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">To assign an initial value to one occurrence, you specify:</p> 
+                  <pre class="verbatim">1 #ARRAY (A1/1:3) INIT (2) &lt;'A'&gt;</pre> 
+                  <p class="initem"><code>A</code> is assigned to the second occurrence.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">To assign the same initial value to all occurrences, you specify:</p> 
+                  <pre class="verbatim">1 #ARRAY (A1/1:3) INIT ALL &lt;'A'&gt;</pre> 
+                  <p class="initem"><code>A</code> is assigned to every occurrence. Alternatively, you
+                      could specify:
+            </p> 
+                  <pre class="verbatim">1 #ARRAY (A1/1:3) INIT (*) &lt;'A'&gt;</pre> 
+                 </li> 
+              
+         <li> 
+                  
+            <p class="initem">To assign the same initial value to a range of several occurrences,
+                      you specify:
+            </p> 
+                  <pre class="verbatim">1 #ARRAY (A1/1:3) INIT (2:3) &lt;'A'&gt;</pre> 
+                  <p class="initem"><code>A</code> is assigned to the second to third occurrence.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">To assign a different initial value to every occurrence, you
+                      specify:
+            </p> 
+                  <pre class="verbatim">1 #ARRAY (A1/1:3) INIT &lt;'A','B','C'&gt;</pre> 
+                  <p class="initem"><code>A</code> is assigned to the first occurrence, <code>B</code> to
+                      the second, and <code>C</code> to the third.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">To assign different initial values to some (but not all) occurrences,
+                      you specify:
+            </p> 
+                  <pre class="verbatim">1 #ARRAY (A1/1:3) INIT (1) &lt;'A'&gt; (3) &lt;'C'&gt;</pre> 
+                  <p class="initem"><code>A</code> is assigned to the first occurrence, and <code>C</code>
+                      to the third; no value is assigned to the second occurrence.
+            </p> 
+                  
+            <p class="initem">Alternatively, you could specify:</p> 
+                  <pre class="verbatim">1 #ARRAY (A1/1:3) INIT &lt;'A',,'C'&gt;</pre> 
+                 </li> 
+              
+         <li> 
+                  
+            <p class="initem">If fewer initial values are specified than there are occurrences, the
+                      last occurrences remain empty:
+            </p> 
+                  <pre class="verbatim">1 #ARRAY (A1/1:3) INIT &lt;'A','B'&gt;</pre> 
+                  <p class="initem"><code>A</code> is assigned to the first occurrence, and <code>B</code>
+                      to the second; no value is assigned to the third occurrence.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_defi_array.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Assigning_Initial_Values_to_Two-Dimensional_Arrays"></a></div> 
+         
+      <h2> Assigning Initial Values to Two-Dimensional Arrays </h2> 
+          
+          
+      <p>This section illustrates how initial values are assigned to a
+              two-dimensional array. The following topics are covered:
+      </p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_defi_array.htm#prelim_info">Preliminary Information</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_array.htm#Assigning_the_Same_Value">Assigning the Same Value</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_defi_array.htm#Assigning_Different_Values">Assigning Different Values</a></p>
+         </li>
+      </ul> 
+          
+         
+      <div><a name="prelim_info"></a></div> 
+          
+      <h3> Preliminary Information </h3> 
+           
+           
+      <p>For the examples shown in this section, let us assume a two-dimensional
+               array with three occurrences in the first dimension ("rows") and
+               four occurrences in the second dimension ("columns"):
+      </p> 
+           <pre class="verbatim">1 #ARRAY (A1/1:3,1:4)</pre> 
+           <h4 class="floating-title"> Vertical: First Dimension (1:3), Horizontal: Second
+               Dimension (1:4): 
+      </h4> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="50%"> 
+                 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td align="center">(1,1)</td> 
+                        
+               <td align="center">(1,2)</td> 
+                        
+               <td align="center">(1,3)</td> 
+                        
+               <td align="center">(1,4)</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td align="center">(2,1)</td> 
+                        
+               <td align="center">(2,2)</td> 
+                        
+               <td align="center">(2,3)</td> 
+                        
+               <td align="center">(2,4)</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td align="center">(3,1)</td> 
+                        
+               <td align="center">(3,2)</td> 
+                        
+               <td align="center">(3,3)</td> 
+                        
+               <td align="center">(3,4)</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>The first set of examples illustrates how the <em>same</em> initial
+               value is assigned to occurrences of a two-dimensional array; the second set of
+               examples illustrates how <em>different</em> initial values are assigned.
+      </p> 
+           
+      <p>In the examples, please note in particular the usage of the notations
+               <code>*</code> and <code>V</code>. Both notations refer to <em>all</em>
+               occurrences of the dimension concerned: <code>*</code> indicates that all
+               occurrences in that dimension are initialized with the <em>same</em> value,
+               while <code>V</code> indicates that all occurrences in that dimension are
+               initialized with <em>different</em> values.
+      </p> 
+           
+          
+         
+      <div><a name="Assigning_the_Same_Value"></a></div> 
+          
+      <h3> Assigning the Same Value </h3> 
+           
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">To assign an initial value to one occurrence, you specify: </p> 
+                   <pre class="verbatim">1 #ARRAY (A1/1:3,1:4) INIT (2,3) &lt;'A'&gt;</pre> 
+                    
+                    <table border="1" class="color" cellpadding="3" width="50%"> 
+                         
+                         
+                        
+               <tbody align="left" valign="top"> 
+                            
+                  <tr> 
+                                
+                     <td align="center">&nbsp;</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td align="center">&nbsp;</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                                
+                     <td align="center">A</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td align="center">&nbsp;</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                               
+                  </tr> 
+                           
+               </tbody> 
+                       
+            </table> 
+                    
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">To assign the same initial value to one occurrence in the second
+                       dimension - in all occurrences of the first dimension - you specify:
+            </p> 
+                   <pre class="verbatim">1 #ARRAY (A1/1:3,1:4) INIT (*,3) &lt;'A'&gt;</pre> 
+                    
+                    <table border="1" class="color" cellpadding="3" width="50%"> 
+                         
+                         
+                        
+               <tbody align="left" valign="top"> 
+                            
+                  <tr> 
+                                
+                     <td align="center">&nbsp;</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                                
+                     <td align="center">A</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td align="center">&nbsp;</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                                
+                     <td align="center">A</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td align="center">&nbsp;</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                                
+                     <td align="center">A</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                               
+                  </tr> 
+                           
+               </tbody> 
+                       
+            </table> 
+                    
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">To assign the same initial value to a range of occurrences in the
+                       first dimension - in all occurrences of the second dimension - you specify:
+            </p>
+                   
+                   <pre class="verbatim">1 #ARRAY (A1/1:3,1:4) INIT (2:3,*) &lt;'A'&gt;</pre> 
+                    
+                    <table border="1" class="color" cellpadding="3" width="50%"> 
+                         
+                         
+                        
+               <tbody align="left" valign="top"> 
+                            
+                  <tr> 
+                                
+                     <td align="center">&nbsp;</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td align="center">A</td> 
+                                
+                     <td align="center">A</td> 
+                                
+                     <td align="center">A</td> 
+                                
+                     <td align="center">A</td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td align="center">A</td> 
+                                
+                     <td align="center">A</td> 
+                                
+                     <td align="center">A</td> 
+                                
+                     <td align="center">A</td> 
+                               
+                  </tr> 
+                           
+               </tbody> 
+                       
+            </table> 
+                    
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">To assign the same initial value to a range of occurrences in each
+                       dimension, you specify:
+            </p> 
+                   <pre class="verbatim">1 #ARRAY (A1/1:3,1:4) INIT (2:3,1:2) &lt;'A'&gt;</pre> 
+                    
+                    <table border="1" class="color" cellpadding="3" width="50%"> 
+                         
+                         
+                        
+               <tbody align="left" valign="top"> 
+                            
+                  <tr> 
+                                
+                     <td align="center">&nbsp;</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td align="center">A</td> 
+                                
+                     <td align="center">A</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td align="center">A</td> 
+                                
+                     <td align="center">A</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                               
+                  </tr> 
+                           
+               </tbody> 
+                       
+            </table> 
+                    
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">To assign the same initial value to all occurrences (in both
+                       dimensions), you specify:
+            </p> 
+                   <pre class="verbatim">1 #ARRAY (A1/1:3,1:4) INIT ALL &lt;'A'&gt;</pre> 
+                    
+                    <table border="1" class="color" cellpadding="3" width="50%"> 
+                         
+                         
+                        
+               <tbody align="left" valign="top"> 
+                            
+                  <tr> 
+                                
+                     <td align="center">A</td> 
+                                
+                     <td align="center">A</td> 
+                                
+                     <td align="center">A</td> 
+                                
+                     <td align="center">A</td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td align="center">A</td> 
+                                
+                     <td align="center">A</td> 
+                                
+                     <td align="center">A</td> 
+                                
+                     <td align="center">A</td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td align="center">A</td> 
+                                
+                     <td align="center">A</td> 
+                                
+                     <td align="center">A</td> 
+                                
+                     <td align="center">A</td> 
+                               
+                  </tr> 
+                           
+               </tbody> 
+                       
+            </table> 
+                    
+                   
+            <p class="initem">Alternatively, you could specify:</p> 
+                   <pre class="verbatim">1 #ARRAY (A1/1:3,1:4) INIT (*,*) &lt;'A'&gt;</pre> 
+                  </li> 
+              
+      </ul> 
+           
+          
+         
+      <div><a name="Assigning_Different_Values"></a></div> 
+          
+      <h3> Assigning Different Values </h3> 
+           
+           
+      <ul> 
+               
+         <li> 
+                   <pre class="verbatim">1 #ARRAY (A1/1:3,1:4) INIT (V,2) &lt;'A','B','C'&gt;</pre> 
+                    
+                    <table border="1" class="color" cellpadding="3" width="50%"> 
+                         
+                         
+                        
+               <tbody align="left" valign="top"> 
+                            
+                  <tr> 
+                                
+                     <td align="center">&nbsp;</td> 
+                                
+                     <td align="center">A</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td align="center">&nbsp;</td> 
+                                
+                     <td align="center">B</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td align="center">&nbsp;</td> 
+                                
+                     <td align="center">C</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                               
+                  </tr> 
+                           
+               </tbody> 
+                       
+            </table> 
+                    
+                  
+         </li> 
+               
+         <li> 
+                   <pre class="verbatim">1 #ARRAY (A1/1:3,1:4) INIT (V,2:3) &lt;'A','B','C'&gt;</pre> 
+                    
+                    <table border="1" class="color" cellpadding="3" width="50%"> 
+                         
+                         
+                        
+               <tbody align="left" valign="top"> 
+                            
+                  <tr> 
+                                
+                     <td align="center">&nbsp;</td> 
+                                
+                     <td align="center">A</td> 
+                                
+                     <td align="center">A</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td align="center">&nbsp;</td> 
+                                
+                     <td align="center">B</td> 
+                                
+                     <td align="center">B</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td align="center">&nbsp;</td> 
+                                
+                     <td align="center">C</td> 
+                                
+                     <td align="center">C</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                               
+                  </tr> 
+                           
+               </tbody> 
+                       
+            </table> 
+                    
+                  
+         </li> 
+               
+         <li> 
+                   <pre class="verbatim">1 #ARRAY (A1/1:3,1:4) INIT (V,*) &lt;'A','B','C'&gt;</pre> 
+                    
+                    <table border="1" class="color" cellpadding="3" width="50%"> 
+                         
+                         
+                        
+               <tbody align="left" valign="top"> 
+                            
+                  <tr> 
+                                
+                     <td align="center">A</td> 
+                                
+                     <td align="center">A</td> 
+                                
+                     <td align="center">A</td> 
+                                
+                     <td align="center">A</td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td align="center">B</td> 
+                                
+                     <td align="center">B</td> 
+                                
+                     <td align="center">B</td> 
+                                
+                     <td align="center">B</td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td align="center">C</td> 
+                                
+                     <td align="center">C</td> 
+                                
+                     <td align="center">C</td> 
+                                
+                     <td align="center">C</td> 
+                               
+                  </tr> 
+                           
+               </tbody> 
+                       
+            </table> 
+                    
+                  
+         </li> 
+               
+         <li> 
+                   <pre class="verbatim">1 #ARRAY (A1/1:3,1:4) INIT (V,*) &lt;'A',,'C'&gt;</pre> 
+                    
+                    <table border="1" class="color" cellpadding="3" width="50%"> 
+                         
+                         
+                        
+               <tbody align="left" valign="top"> 
+                            
+                  <tr> 
+                                
+                     <td align="center">A</td> 
+                                
+                     <td align="center">A</td> 
+                                
+                     <td align="center">A</td> 
+                                
+                     <td align="center">A</td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td align="center">&nbsp;</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td align="center">C</td> 
+                                
+                     <td align="center">C</td> 
+                                
+                     <td align="center">C</td> 
+                                
+                     <td align="center">C</td> 
+                               
+                  </tr> 
+                           
+               </tbody> 
+                       
+            </table> 
+                    
+                  
+         </li> 
+               
+         <li> 
+                   <pre class="verbatim">1 #ARRAY (A1/1:3,1:4) INIT (V,*) &lt;'A','B'&gt;</pre> 
+                    
+                    <table border="1" class="color" cellpadding="3" width="50%"> 
+                         
+                         
+                        
+               <tbody align="left" valign="top"> 
+                            
+                  <tr> 
+                                
+                     <td align="center">A</td> 
+                                
+                     <td align="center">A</td> 
+                                
+                     <td align="center">A</td> 
+                                
+                     <td align="center">A</td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td align="center">B</td> 
+                                
+                     <td align="center">B</td> 
+                                
+                     <td align="center">B</td> 
+                                
+                     <td align="center">B</td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td align="center">&nbsp;</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                               
+                  </tr> 
+                           
+               </tbody> 
+                       
+            </table> 
+                    
+                  
+         </li> 
+               
+         <li> 
+                   <pre class="verbatim">1 #ARRAY (A1/1:3,1:4) INIT (V,1) &lt;'A','B','C'&gt; (V,3) &lt;'D','E','F'&gt;</pre> 
+                    
+                    <table border="1" class="color" cellpadding="3" width="50%"> 
+                         
+                         
+                        
+               <tbody align="left" valign="top"> 
+                            
+                  <tr> 
+                                
+                     <td align="center">A</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                                
+                     <td align="center">D</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td align="center">B</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                                
+                     <td align="center">E</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td align="center">C</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                                
+                     <td align="center">F</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                               
+                  </tr> 
+                           
+               </tbody> 
+                       
+            </table> 
+                    
+                  
+         </li> 
+               
+         <li> 
+                   <pre class="verbatim">1 #ARRAY (A1/1:3,1:4) INIT (3,V) &lt;'A','B','C','D'&gt;</pre> 
+                    
+                    <table border="1" class="color" cellpadding="3" width="50%"> 
+                         
+                         
+                        
+               <tbody align="left" valign="top"> 
+                            
+                  <tr> 
+                                
+                     <td align="center">&nbsp;</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td align="center">&nbsp;</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td align="center">A</td> 
+                                
+                     <td align="center">B</td> 
+                                
+                     <td align="center">C</td> 
+                                
+                     <td align="center">D</td> 
+                               
+                  </tr> 
+                           
+               </tbody> 
+                       
+            </table> 
+                    
+                  
+         </li> 
+               
+         <li> 
+                   <pre class="verbatim">1 #ARRAY (A1/1:3,1:4) INIT (*,V) &lt;'A','B','C','D'&gt;</pre> 
+                    
+                    <table border="1" class="color" cellpadding="3" width="50%"> 
+                         
+                         
+                        
+               <tbody align="left" valign="top"> 
+                            
+                  <tr> 
+                                
+                     <td align="center">A</td> 
+                                
+                     <td align="center">B</td> 
+                                
+                     <td align="center">C</td> 
+                                
+                     <td align="center">D</td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td align="center">A</td> 
+                                
+                     <td align="center">B</td> 
+                                
+                     <td align="center">C</td> 
+                                
+                     <td align="center">D</td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td align="center">A</td> 
+                                
+                     <td align="center">B</td> 
+                                
+                     <td align="center">C</td> 
+                                
+                     <td align="center">D</td> 
+                               
+                  </tr> 
+                           
+               </tbody> 
+                       
+            </table> 
+                    
+                  
+         </li> 
+               
+         <li> 
+                   <pre class="verbatim">1 #ARRAY (A1/1:3,1:4) INIT (2,1) &lt;'A'&gt; (*,2) &lt;'B'&gt; (3,3) &lt;'C'&gt; (3,4) &lt;'D'&gt;</pre> 
+                    
+                    <table border="1" class="color" cellpadding="3" width="50%"> 
+                         
+                         
+                        
+               <tbody align="left" valign="top"> 
+                            
+                  <tr> 
+                                
+                     <td align="center">&nbsp;</td> 
+                                
+                     <td align="center">B</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td align="center">A</td> 
+                                
+                     <td align="center">B</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td align="center">&nbsp;</td> 
+                                
+                     <td align="center">B</td> 
+                                
+                     <td align="center">C</td> 
+                                
+                     <td align="center">D</td> 
+                               
+                  </tr> 
+                           
+               </tbody> 
+                       
+            </table> 
+                    
+                  
+         </li> 
+               
+         <li> 
+                   <pre class="verbatim">1 #ARRAY (A1/1:3,1:4) INIT (2,1) &lt;'A'&gt; (V,2) &lt;'B',C',D'&gt; (3,3) &lt;'E'&gt; (3,4) &lt;'F'&gt;</pre> 
+                    
+                    <table border="1" class="color" cellpadding="3" width="50%"> 
+                         
+                         
+                        
+               <tbody align="left" valign="top"> 
+                            
+                  <tr> 
+                                
+                     <td align="center">&nbsp;</td> 
+                                
+                     <td align="center">B</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td align="center">A</td> 
+                                
+                     <td align="center">C</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                                
+                     <td align="center">&nbsp;</td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td align="center">&nbsp;</td> 
+                                
+                     <td align="center">D</td> 
+                                
+                     <td align="center">E</td> 
+                                
+                     <td align="center">F</td> 
+                               
+                  </tr> 
+                           
+               </tbody> 
+                       
+            </table> 
+                    
+                  
+         </li> 
+              
+      </ul> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_defi_array.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="A_Three-Dimensional_Array"></a></div> 
+         
+      <h2> 
+             <a name="x120"></a> A Three-Dimensional Array 
+      </h2> 
+          
+          
+      <p>A three-dimensional array could be visualized as follows: </p> 
+          
+      <p><img src="graphics/pgcube.png" alt="" width="400" height="350"></p> 
+          
+      <p>The array illustrated here would be defined as follows (at the same time
+              assigning an initial value to the highlighted field in Row 1, Column 2, Plane
+              2):
+      </p> 
+          <pre class="verbatim">
+DEFINE DATA LOCAL  
+1 #ARRAY2  
+  2 #ROW (1:4) 
+    3 #COLUMN (1:3) 
+      4 #PLANE (1:3)  
+        5 #FIELD2 (P3) INIT (1,2,2) &lt;100&gt; 
+END-DEFINE 
+...
+</pre> 
+          <p>If defined as a local data area in the data area editor, the same array
+              would look as follows:
+      </p> 
+          <pre class="verbatim">I T L Name                             F Leng Index/Init/EM/Name/Comment       
+- - - -------------------------------- - ---- ---------------------------------
+    1 #ARRAY2                                                                  
+    2 #ROW                                    (1:4)                            
+    3 #COLUMN                                 (1:3)                            
+    4 #PLANE                                  (1:3)                            
+I   5 #FIELD2                          P    3                    </pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_defi_array.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Arrays_as_Part_of_a_Larger_Data_Structure"></a></div> 
+         
+      <h2> Arrays as Part of a Larger Data Structure </h2> 
+          
+          
+      <p>The multiple dimensions of an array make it possible to define data
+              structures analogous to COBOL or PL1 structures.
+      </p> 
+          
+      <h4 class="floating-title"> Example: </h4> 
+          <pre class="verbatim">
+DEFINE DATA LOCAL  
+1 #AREA 
+  2 #FIELD1 (A10) 
+  2 #GROUP1 (1:10)  
+    3 #FIELD2 (P2)  
+    3 #FIELD3 (N1/1:4)  
+END-DEFINE 
+...
+</pre> 
+          <p>In this example, the data area <code>#AREA</code> has a total size
+              of:
+      </p> 
+          
+      <p>10 + (10 * (2 + (1 * 4))) bytes = 70 bytes</p> 
+          
+      <p><code>#FIELD1</code> is alphanumeric and 10 bytes long.
+              <code>#GROUP1</code> is the name of a sub-area within <code>#AREA</code> which
+              consists of 2 fields and has 10 occurrences. <code>#FIELD2</code> is packed
+              numeric, length 2. <code>#FIELD3</code> is the second field of
+              <code>#GROUP1</code> with four occurrences, and is numeric, length 1.
+      </p> 
+          
+      <p>To reference a particular occurrence of <code>#FIELD3</code>, two
+              indices are required: first, the occurrence of <code>#GROUP1</code> must be
+              specified, and second, the particular occurrence of <code>#FIELD3</code> must
+              also be specified. For example, in an <code>ADD</code> statement later in the
+              same program, <code>#FIELD3</code> would be referenced as follows:
+      </p> 
+          <pre class="verbatim">ADD 2 TO #FIELD3 (3,2)</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_defi_array.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Database_Arrays"></a></div> 
+         
+      <h2> 
+             <a name="x121"></a> Database Arrays 
+      </h2> 
+          
+          
+      <p>Adabas supports array structures within the database in the form of
+              <a href="pg_dbms_ada.htm#Multiple-Value_Fields">multiple-value fields</a> and
+              <a href="pg_dbms_ada.htm#Periodic_Groups">periodic groups</a>. These are
+              described under <a href="pg_dbms_ada.htm#pg_dbms_da">Database
+            Arrays</a>.
+      </p> 
+          
+      <p>The following example shows a <a href="../sm/defineda.htm"><code>DEFINE DATA</code></a> view containing a
+              multiple-value field:
+      </p> 
+          <pre class="verbatim">
+DEFINE DATA LOCAL  
+1 EMPLOYEES-VIEW VIEW OF EMPLOYEES  
+  2 NAME 
+  2 ADDRESS-LINE (1:10) /* &lt;--- MULTIPLE-VALUE FIELD 
+END-DEFINE 
+...
+</pre> 
+          <p>The same view in a local data area would look as follows:</p> 
+          <pre class="verbatim">I T L Name                             F Leng Index/Init/EM/Name/Comment       
+- - - -------------------------------- - ---- ---------------------------------
+  V 1 EMPLOYEES-VIEW                          EMPLOYEES                        
+    2 NAME                             A   20                                  
+  M 2 ADDRESS-LINE                     A   20 (1:10) /* MU-FIELD</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_defi_array.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Using_Arithmetic_Expressions_in_Index_Notation"></a></div> 
+         
+      <h2> Using Arithmetic Expressions in Index Notation </h2> 
+          
+          
+      <p>A simple arithmetic expression may also be used to express a range of
+              occurrences in an array.
+      </p> 
+          
+      <p> Examples:</p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="16%">
+            <col width="81%">
+         </colgroup> 
+                
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> <code>MA (I:I+5)</code> 
+               </td> 
+                       
+               <td>Values of the field <code>MA</code> are referenced, beginning
+                           with value <code>I</code> and ending with value <code>I+5</code>.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td nowrap> <code>MA (I+2:J-3) </code></td> 
+                       
+               <td>Values of the field <code>MA</code> are referenced, beginning
+                           with value <code>I+2</code> and ending with value <code>J-3</code>.
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>Only the arithmetic operators plus (+) and minus (-) may be used in
+              index expressions.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_defi_array.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Arithmetic_Support_for_Arrays"></a></div> 
+         
+      <h2> Arithmetic Support for Arrays </h2> 
+          
+          
+      <p>Arithmetic support for arrays include operations at array level, at
+              row/column level, and at individual element level.
+      </p> 
+          
+      <p>Only simple arithmetic expressions are permitted with array variables,
+              with only one or two operands and an optional third variable as the receiving
+              field.
+      </p> 
+          
+      <p>Only the arithmetic operators plus (+) and minus (-) are allowed for
+              expressions defining index ranges.
+      </p> 
+          
+         
+      <div><a name="d0e14402"></a></div> 
+          
+      <h3>Examples of Array Arithmetics</h3> 
+           
+           
+      <p>The following examples assume the following field definitions:</p> 
+           <pre class="verbatim">
+DEFINE DATA LOCAL 
+01 #A (N5/1:10,1:10) 
+01 #B (N5/1:10,1:10) 
+01 #C (N5) 
+END-DEFINE 
+...
+</pre> 
+           <ol> 
+               
+         <li> 
+                   <pre class="verbatim">ADD #A(*,*) TO #B(*,*)</pre> 
+                   <p class="initem"> The result operand, array <code>#B</code>, contains the addition,
+                       element by element, of the array <code>#A</code> and the original value of
+                       array <code>#B</code>.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   <pre class="verbatim">ADD 4 TO #A(*,2)</pre> 
+                   <p class="initem"> The second column of the array <code>#A</code> is replaced by its
+                       original value plus 4.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   <pre class="verbatim">ADD 2 TO #A(2,*)</pre> 
+                   <p class="initem"> The second row of the array <code>#A</code> is replaced by its
+                       original value plus 2.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   <pre class="verbatim">ADD #A(2,*) TO #B(4,*)</pre> 
+                   <p class="initem"> The value of the second row of array <code>#A</code> is added to the
+                       fourth row of array <code>#B</code>.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   <pre class="verbatim">ADD #A(2,*) TO #B(*,2)</pre> 
+                   <p class="initem"> This is an illegal operation and will result in a syntax error. Rows
+                       may only be added to rows and columns to columns.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   <pre class="verbatim">ADD #A(2,*) TO #C</pre> 
+                   <p class="initem"> All values in the second row of the array <code>#A</code> are added
+                       to the scalar value <code>#C</code>.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   <pre class="verbatim">ADD #A(2,5:7) TO #C</pre> 
+                   <p class="initem"> The fifth, sixth, and seventh column values of the second row of
+                       array <code>#A</code> are added to the scalar value <code>#C</code>.
+            </p> 
+                  
+         </li> 
+              
+      </ol> 
+           
+          
+        
+       
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="pg_defi_array.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_defi_array.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_defi_array.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_defi-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_defi_redef.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_defi_xarry.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

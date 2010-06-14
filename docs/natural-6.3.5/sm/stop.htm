@@ -1,0 +1,193 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>STOP</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="stop" id="16868"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../sm/stop.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/sm/stop.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="sm-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="stack.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="store.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Statements&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> STOP 
+               <a name="x164"></a></h1>
+      </div> 
+         
+          
+          
+      <table border="0" class="syntax" cellpadding="3">  
+              
+         <tbody align="left" valign="top"> 
+                  
+            <tr> 
+                      
+               <td> <code class="keyword">STOP</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+               </td> 
+                     
+            </tr> 
+                 
+         </tbody> 
+             
+      </table> 
+          
+         
+      <p>This document covers the following topics:</p>
+         
+      <ul>
+         <li>
+            <p class="initem"><a href="stop.htm#Function_stop">Function</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="stop.htm#Example_stop">Example</a></p>
+         </li>
+      </ul> 
+        
+      <hr> 
+        
+      <div><a name="Function_stop"></a></div> 
+         
+      <h2> Function </h2> 
+          
+          
+      <p>The <code>STOP</code> statement is used to terminate the execution of a
+              program and return to the command input prompt.
+      </p> 
+          
+      <p>One or more <code>STOP</code> statements may be inserted anywhere within
+              a Natural program.
+      </p> 
+          
+      <p>The <code>STOP</code> statement will terminate the execution of the
+              program immediately. Independent of the positioning of a <code>STOP</code>
+              statement in a subroutine, any end-page condition specified in the main program
+              will be invoked for final end-page processing during execution of the
+              <code>STOP</code> statement.
+      </p> 
+           
+      <p>The <code>STOP</code> statement behaves in the same way as the
+               <a href="escape.htm#ESCAPE_ROUTINE"><code>ESCAPE
+               ROUTINE</code></a> statement during method execution. Method execution
+               is terminated immediately without producing any return vale.
+      </p> 
+          
+      <p> For Natural RPC: See
+              <a href="../rpc/limits.htm#limits_notes_on_statements">Notes on
+            Natural Statements on the Server</a> in the <cite>Natural
+                 Remote Procedure Call (RPC)</cite> documentation.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="stop.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Example_stop"></a></div> 
+         
+      <h2> Example</h2> 
+          
+          <pre class="verbatim">** Example 'STPEX1': STOP                                               
+************************************************************************
+DEFINE DATA LOCAL                                                       
+1 #CODE (A1)                                                            
+END-DEFINE                                                              
+*                                                                       
+INPUT //                                                                
+  10X 'PLEASE SELECT COMMAND' //                                        
+  10X 'LIST VIEW      (V)' /                                            
+  10X 'LIST PROGRAM * (P)' /                                            
+  10X 'TECH INFO      (T)' /                                            
+  10X 'STOP           (.)' //                                           
+  20X 'CODE:' #CODE                                                     
+*                                                                       
+*                                                                       
+DECIDE ON FIRST #CODE                                                   
+  VALUE 'V'                                                             
+    STACK TOP DATA    'VIEW'                                            
+    STACK TOP COMMAND 'LIST'                                            
+  VALUE 'P'                           
+    STACK TOP COMMAND 'LIST PROGRAM *'
+  VALUE 'T'                           
+    STACK TOP COMMAND 'LAST *'        
+    STACK TOP COMMAND 'TECH'          
+    STACK TOP COMMAND 'SYSPROD'       
+  VALUE '.'                           
+    <strong>STOP</strong>                         
+  NONE                                
+    REINPUT 'PLEASE ENTER VALID CODE' 
+END-DECIDE                            
+*                                     
+*                                     
+END </pre> 
+          <h4 class="floating-title">Output of Program STPEX1:</h4> <pre class="system-output">
+PLEASE SELECT COMMAND
+                     
+LIST VIEW      (V)   
+LIST PROGRAM * (P)   
+TECH INFO      (T)   
+STOP           (.)   
+                     
+          CODE:     
+</pre> 
+          
+        
+       <div class="noprint">
+         <div class="nospy">
+            <p><a href="stop.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../sm/stop.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/sm/stop.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="sm-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="stack.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="store.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

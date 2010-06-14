@@ -1,0 +1,814 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>ROWTABLEAREA2 - The Flexible Control Grid</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="rowtablearea2theflexiblecontrolgrid"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../njx/rowtablearea2theflexiblecontrolgrid.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/njx/rowtablearea2theflexiblecontrolgrid.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="workingwithgrids.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="textgridsss2textgrid2withserversidescrolling.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="flexline.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Natural for Ajax&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x107"></a>ROWTABLEAREA2 - The Flexible Control Grid
+         </h1>
+      </div> 
+         
+         
+      <p>The ROWTABLEAREA2 is a container control that allows other controls to be
+             arranged inside its grid management.
+      </p> 
+         
+      <p>The ROWTABLEAREA2 control supports server-side scrolling
+             and sorting. This concept is explained in <a href="njx-sss.htm">Server-Side Scrolling and
+            Sorting</a>. An example for the usage of server-side scrolling
+             and sorting with the ROWTABLEAREA2 control is contained in the example library
+             <code>SYSEXNJX</code>.
+      </p> 
+         
+      <p>This document covers the following
+             topics:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="rowtablearea2theflexiblecontrolgrid.htm#rowtablearea2-exa">Example</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="rowtablearea2theflexiblecontrolgrid.htm#rowtablearea2-njxadapter">Adapter Interface</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="rowtablearea2theflexiblecontrolgrid.htm#rowtablearea2-njxevents">Built-in Events</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="rowtablearea2theflexiblecontrolgrid.htm#rowtablearea2-gridlook">Making Grids Look like Grids</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="rowtablearea2theflexiblecontrolgrid.htm#rowtablearea2-props">ROWTABLEAREA2 Properties</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="rowtablearea2theflexiblecontrolgrid.htm#str-attr">STR Properties</a></p>
+         </li>
+      </ul> 
+        
+      <hr> 
+        
+      <div><a name="rowtablearea2-exa"></a></div> 
+         
+      <h2>Example</h2> 
+          
+          
+      <p>There is a grid that contains a header row and 10 lines. Each line
+              contains one check box and two fields. Some of the lines are highlighted.
+      </p> 
+          
+      <p><img src="graphics/image129.png" alt="graphics/image129.png"></p> 
+          
+      <p>The XML layout definition is:</p> 
+          <pre class="verbatim">&lt;rowarea name="Grid"&gt;
+    &lt;rowtablearea2 griddataprop="lines" rowcount="10" width="100%" withborder="true"&gt;
+        &lt;tr&gt;
+            &lt;hdist&gt;
+            &lt;/hdist&gt;
+            &lt;label name="First Name" asheadline="true"&gt;
+            &lt;/label&gt;
+            &lt;label name="Last Name" asheadline="true"&gt;
+            &lt;/label&gt;
+        &lt;/tr&gt;
+        &lt;repeat&gt;
+            &lt;str valueprop="selected"&gt;
+                &lt;checkbox valueprop="selected" flush="screen" width="30"&gt;
+                &lt;/checkbox&gt;
+                &lt;field valueprop="firstname" width="50%"&gt;
+                &lt;/field&gt;
+                &lt;field valueprop="lastname" width="50%"&gt;
+                &lt;/field&gt;
+            &lt;/str&gt;
+        &lt;/repeat&gt;
+    &lt;/rowtablearea2&gt;
+    &lt;vdist height="10"&gt;
+    &lt;/vdist&gt;
+    &lt;itr&gt;
+        &lt;button name="Add new Line" method="onAddLine"&gt;
+        &lt;/button&gt;
+        &lt;hdist&gt;
+        &lt;/hdist&gt;
+        &lt;button name="Remove selected Lines" method="onRemoveLines"&gt;
+        &lt;/button&gt;
+    &lt;/itr&gt;
+&lt;/rowarea&gt;</pre> 
+          <p>Note the following:</p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">There is a ROWTABLEAREA2 definition with the property
+                      <code>griddataprop="lines"</code>. There is a
+                      <code>rowcount</code> definition of
+                      "10". This is the same as for the text grid
+                      processing: the grid container is bound to a server-side collection. Similar to
+                      the TEXTGRIDSSS2 definition, there is a row count that defines the number of
+                      lines.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Inside the ROWTABLEAREA2 definition, there is first the definition of
+                      a normal table row (TR) in which a distance and two labels are defined. The
+                      labels are rendered with <code>asheadline="true"</code>.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Inside the REPEAT definition, there is a special table row definition
+                      "STR" (selectable table row) that itself contains
+                      one CHECKBOX and two FIELD definitions. CHECKBOX and FIELDs are bound to
+                      properties themselves.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">After the ROWTABLEAREA2 definition, there is a vertical distance and a
+                      row that contains two buttons with which a user can manipulate the grid.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>The content of the REPEAT block is repeated as many times as defined
+              inside the <code>rowcount</code> definition of ROWTABLEAREA2.
+              The content holds a table row (STR) - therefore the result is a grid.
+      </p> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="rowtablearea2theflexiblecontrolgrid.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="rowtablearea2-njxadapter"></a></div> 
+         
+      <h2>Adapter Interface</h2> 
+          
+          
+      <p>In the parameter data area of the adapter, the grid data is represented
+              by the following data structure:
+      </p> 
+          <pre class="verbatim">DEFINE DATA PARAMETER
+1 LINES (1:*)
+2 FIRSTNAME (U) DYNAMIC
+2 LASTNAME (U) DYNAMIC
+2 SELECTED (L)
+END-DEFINE</pre> 
+          <p>If the grid has been configured for server-side scrolling and sorting,
+              the data structure contains additional fields that control server-side
+              scrolling and sorting (see below). In order to use server-side scrolling and
+              sorting, set the property <code>natsss</code> in NATPAGE to
+              "true". 
+      </p> 
+          <pre class="verbatim">DEFINE DATA PARAMETER
+1 LINES (1:*)
+2 FIRSTNAME (U) DYNAMIC
+2 LASTNAME (U) DYNAMIC
+2 SELECTED (L)
+1 LINESINFO 
+2 ROWCOUNT (I4)
+2 SIZE (I4)
+2 SORTPROPS (1:*)
+3 ASCENDING (L)
+3 PROPNAME (U) DYNAMIC
+2 TOPINDEX (I4) 
+END-DEFINE</pre> 
+         <div class="noprint">
+         <p><a href="rowtablearea2theflexiblecontrolgrid.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="rowtablearea2-njxevents"></a></div> 
+         
+      <h2>Built-in Events</h2> 
+          
+          
+      <p class="mini-list"> 
+              <var>value-of-griddataprop</var>.onCtrlSelect<br>
+              
+              <var>value-of-griddataprop</var>.onSelect<br> 
+              <var>value-of-griddataprop</var>.onShiftSelect<br>
+              
+              <var>value-of-griddataprop</var>.onSort<br> 
+              <var>value-of-griddataprop</var>.onTopindexChanged
+              
+             
+      </p> 
+         
+        
+      <div class="noprint">
+         <p><a href="rowtablearea2theflexiblecontrolgrid.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="rowtablearea2-gridlook"></a></div> 
+         
+      <h2>Making Grids Look like Grids</h2> 
+          
+          
+      <p>Fields typically contain a high number of FIELD controls. Typically, a
+              FIELD control has a certain rendering that renders a field with a border and
+              with a certain background color.
+      </p> 
+          
+      <p>Be aware that inside the FIELD definition, there are two important
+              properties:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem"><code>noborder</code> - if set to
+                      "true", no border will be drawn
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"><code>transparentbackground</code> - if set to
+                      "true", the field will always take over the
+                      background of the controls in which it is positioned (e.g. STR row).
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>Have a look at the difference between the following screens. One screen
+              uses the properties, the other screen does not use them.
+      </p> 
+          
+      <p>This is a grid:</p>
+      <p><img src="graphics/image130.png" alt="graphics/image130.png"></p> 
+          
+      <p>This is collection of fields:</p>
+      <p><img src="graphics/image131.png" alt="graphics/image131.png"></p> 
+           
+          
+        
+        
+        
+      <div class="noprint">
+         <p><a href="rowtablearea2theflexiblecontrolgrid.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="rowtablearea2-props"></a></div> 
+         
+      <h2>ROWTABLEAREA2 Properties</h2> 
+               
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="14%">
+            <col width="55%">
+            <col width="14%">
+            <col width="14%">
+         </colgroup>      
+         <tbody align="left" valign="top">       
+            <tr>        
+               <td colspan="4">Basic</td>      
+            </tr>
+            <tr>        
+               <td align="left" valign="top">griddataprop</td>        
+               <td align="left" valign="top">
+                  <p>Name of the adapter parameter that represents the control in the adapter.</p>
+               </td>        
+               <td align="left" valign="top">Obligatory</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">rowcount</td>        
+               <td align="left" valign="top">
+                  <p>Number of rows that is renderes inside the control.</p>
+                  <p></p>
+                  <p>There are two ways of using this property - dependent on whether you in addition define the HEIGHT property:</p>
+                  <p></p>
+                  <p>If you do NOT define the HEIGHT property then the control is rendered with exactly the number of rows that is defined as ROWCOUNT
+                     value.
+                  </p>
+                  <p></p>
+                  <p>If a HEIGHT value is defined an addition (e.g. as percentage value "100%") then the number of rows depends on the actual height
+                     of the control. The ROWCOUNT value in this case indicates the maximum number of rows that is picked from the server. You should
+                     define this value in a way that it is not too low - otherwise your grid will not be fully filled. On the other hand it should
+                     not be defined too high ("100") because this causes more communication traffic and more rendering effort inside the browser.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">height</td>        
+               <td align="left" valign="top">
+                  <p>Height of the control.</p>
+                  <p></p>
+                  <p>There are three possibilities to define the height:</p>
+                  <p></p>
+                  <p>(A) You do not define a height at all. As consequence the control will be rendered with its default height. If the control
+                     is a container control (containing) other controls then the height of the control will follow the height of its content.
+                  </p>
+                  <p>(B) Pixel sizing: just input a number value (e.g. "20").</p>
+                  <p>(C) Percentage sizing: input a percantage value (e.g. "50%"). Pay attention: percentage sizing will only bring up correct
+                     results if the parent element of the control properly defines a height this control can reference. If you specify this control
+                     to have a height of 50% then the parent element (e.g. an ITR-row) may itself define a height of "100%". If the parent element
+                     does not specify a width then the rendering result may not represent what you expect.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>100</p>
+                  <p>150</p>
+                  <p>200</p>
+                  <p>250</p>
+                  <p>300</p>
+                  <p>250</p>
+                  <p>400</p>
+                  <p>50%</p>
+                  <p>100%</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">width</td>        
+               <td align="left" valign="top">
+                  <p>Width of the control.</p>
+                  <p></p>
+                  <p>There are three possibilities to define the width:</p>
+                  <p></p>
+                  <p>(A) You do not define a width at all. In this case the width of the control will either be a default width or - in case of
+                     container controls - it will follow the width that is occupied by its content.
+                  </p>
+                  <p>(B) Pixel sizing: just input a number value (e.g. "100").</p>
+                  <p>(C) Percentage sizing: input a percantage value (e.g. "50%"). Pay attention: percentage sizing will only bring up correct
+                     results if the parent element of the control properly defines a width this control can reference. If you specify this control
+                     to have a width of 50% then the parent element (e.g. an ITR-row) may itself define a width of "100%". If the parent element
+                     does not specify a width then the rendering result may not represent what you expect.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Sometimes obligatory</td>        
+               <td align="left" valign="top">
+                  <p>100</p>
+                  <p>120</p>
+                  <p>140</p>
+                  <p>160</p>
+                  <p>180</p>
+                  <p>200</p>
+                  <p>50%</p>
+                  <p>100%</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">firstrowcolwidths</td>        
+               <td align="left" valign="top">
+                  <p>If set to "true" then the grid is sized according to its first row. This first row typically is a header-TR-row in which GRIDCOLHEADER
+                     controls are used as column headers for the subsequent rows.
+                  </p>
+                  <p></p>
+                  <p>Default is "false", i.e. the grid is sized according to its "whole content".</p>
+                  <p></p>
+                  <p>Please note: when using the GRIDCOLHEADER control within the header-TR-row this property must be set to "true" - otherwise
+                     column resizing (by drag and drop) does not work correctly.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Sometimes obligatory</td>        
+               <td align="left" valign="top">
+                  <p>true</p>
+                  <p>false</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">comment</td>        
+               <td align="left" valign="top">
+                  <p>Comment without any effect on rendering and behaviour. The comment is shown in the layout editor's tree view.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td colspan="4">Appearance</td>      
+            </tr>
+            <tr>        
+               <td align="left" valign="top">withborder</td>        
+               <td align="left" valign="top">
+                  <p>If set to "false" then no thin border is drawn around the controls that are contained in the grid.</p>
+                  <p></p>
+                  <p>Default is "true".</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>true</p>
+                  <p>false</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">hscroll</td>        
+               <td align="left" valign="top">
+                  <p>Indicates if to show a horizontal scrollbar ("true") or not ("false").</p>
+                  <p></p>
+                  <p>If no scrollbar is shown then the control occupies the horizontal space that is required by its content.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>true</p>
+                  <p>false</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">vscroll</td>        
+               <td align="left" valign="top">
+                  <p>Definition of the vertical scrollbar's appearance.</p>
+                  <p></p>
+                  <p>You can define that scrollbars only are shown if the content is exceeding the control's area ("auto"). Or scrollbars can be
+                     shown always ("scroll"). Or scrollbars are never shown - and the content is cut ("hidden").
+                  </p>
+                  <p></p>
+                  <p>Default is "auto".</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>auto</p>
+                  <p>scroll</p>
+                  <p>hidden</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">firstrowcolwidths</td>        
+               <td align="left" valign="top">(already explained above)</td>        
+               <td align="left" valign="top">&nbsp;</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">clipboardaccess</td>        
+               <td align="left" valign="top">
+                  <p>If switched to true then the content of the grid can be selected and exported into the client's clipboard.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>true</p>
+                  <p>false</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">withblockscrolling</td>        
+               <td align="left" valign="top">
+                  <p>If switched to "true" then the grid will show small scroll icons by which the user can scroll the grid's content. Scrolling
+                     typically is done by using the grid's scrollbar - the scroll icons that are switched on by this property are an additional
+                     possibility to scroll.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>true</p>
+                  <p>false</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">touchpadinput</td>        
+               <td align="left" valign="top">
+                  <p>If set to "true" then touch screen icons for scrolling are displayed in addition.</p>
+                  <p></p>
+                  <p>Default is "false".</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>true</p>
+                  <p>false</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">requiredheight</td>        
+               <td align="left" valign="top">
+                  <p>Minimum height of the control in pixels. Use this property to ensure a minimum height if the overall control's height is a
+                     percentage of the available space - i.e. if value of property HEIGHT is a percentage (e.g. 100%).
+                  </p>
+                  <p></p>
+                  <p>Please note:You must not use FIXLAYOUT at the surrounding row container (ITR and ROWAREA). Otherwise: if the available space
+                     is less than the required height the end of the control is just cut off.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>1</p>
+                  <p>2</p>
+                  <p>3</p>
+                  <p>int-value</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">tablestyle</td>        
+               <td align="left" valign="top">
+                  <p>CSS style definition that is directly passed into this control.</p>
+                  <p></p>
+                  <p>With the style you can individually influence the rendering of the control. You can specify any style sheet expressions. Examples
+                     are:
+                  </p>
+                  <p></p>
+                  <p>border: 1px solid #FF0000</p>
+                  <p>background-color: #808080</p>
+                  <p></p>
+                  <p>You can combine expressions by appending and separating them with a semicolon.</p>
+                  <p></p>
+                  <p>Sometimes it is useful to have a look into the generated HTML code in order to know where direct style definitions are applied.
+                     Press right mouse-button in your browser and select the "View source" or "View frame's source" function.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>background-color: #FF0000</p>
+                  <p>color: #0000FF</p>
+                  <p>font-weight: bold</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">darkbackground</td>        
+               <td align="left" valign="top">
+                  <p>Normally the background is in light colour but the CIS style sheets also have a dark(er) grey colour to be used.</p>
+                  <p></p>
+                  <p>If DARKBACKGROUND is set to true then the darker background colour is chosen. This property typically is used to integrate
+                     light coloured controls into darker container areas.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>true</p>
+                  <p>false</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td colspan="4">Binding</td>      
+            </tr>
+            <tr>        
+               <td align="left" valign="top">oncontextmenumethod</td>        
+               <td align="left" valign="top">
+                  <p>Name of the event that is sent to the adapter when the user presses the right mouse button in the grid, but not on an existing
+                     row, but in an empty area of the grid.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">fwdtabkeymethod</td>        
+               <td align="left" valign="top">
+                  <p>Name of the event that is sent to the adapter when the user presses the TAB key within the very last cell of the grid (last
+                     cell within the last line). Use property FWDTABKEYFILTER to associate this call with a grid column.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">fwdtabkeyfilter</td>        
+               <td align="left" valign="top">
+                  <p>By default the FWDTABKEYMETHOD is called if the user presses the TAB key within the veryfirst cell of the grid. Input the
+                     name of a cell's VALUEPROP to associate the method call with any other column.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">bwdtabkeymethod</td>        
+               <td align="left" valign="top">
+                  <p>Name of the event that is sent to the adapter when the user presses SHIFT and TAB keys within the first cell of a grid line.
+                     Use property BWDTABKEYFILTER to associate this call with a cell of choice.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">bwdtabkeyfilter</td>        
+               <td align="left" valign="top">
+                  <p>By default the BWDTABKEYMETHOD is called if the user presses the SHIFT and TAB keys within the very first cell of the grid.
+                     Input the name of a cell's VALUEPROP to associate the method call with any other column.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td colspan="4">Hot Keys</td>      
+            </tr>
+            <tr>        
+               <td align="left" valign="top">hotkeys</td>        
+               <td align="left" valign="top">
+                  <p>Comma separated list of hot keys. A hotkey consists of a list of keys and a method name. Separate the keys by "-" and the
+                     method name again with a comma
+                  </p>
+                  <p></p>
+                  <p>Example:</p>
+                  <p>ctrl-alt-65;onCtrlAltA;13;onEnter ...defines two hot keys. Method onCtrlAltA is invoked if the user presses Ctrl-Alt-A. Method
+                     "onEnter" is called if the user presses the ENTER key.
+                  </p>
+                  <p></p>
+                  <p>Use the popup help within the Layout Painter to input hot keys.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>      
+         </tbody>     
+      </table>     
+          
+        
+        
+      <div class="noprint">
+         <p><a href="rowtablearea2theflexiblecontrolgrid.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="str-attr"></a></div> 
+         
+      <h2> 
+             <a name="x108"></a>STR Properties
+      </h2> 
+          
+          
+      <p>STR (selectable table row) is a normal table row (TR) that highlights
+              its background depending on an adapter property.
+      </p>      
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="14%">
+            <col width="55%">
+            <col width="14%">
+            <col width="14%">
+         </colgroup>      
+         <tbody align="left" valign="top">       
+            <tr>        
+               <td colspan="4">Basic</td>      
+            </tr>
+            <tr>        
+               <td align="left" valign="top">valueprop</td>        
+               <td align="left" valign="top">
+                  <p>Name of the adapter parameter that defines if the row is selected or not.</p>
+               </td>        
+               <td align="left" valign="top">Obligatory</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">withalterbackground</td>        
+               <td align="left" valign="top">
+                  <p>Flag that indicates if the grid line shows alternating background color (like rows within a textgrids). Default is false.
+                     Please note: controls inside the row must have transparent background. In case of the FIELD control simply set property TRANSPARENTBACKGROUND
+                     to true.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>true</p>
+                  <p>false</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">showifempty</td>        
+               <td align="left" valign="top">
+                  <p>Flag that indicates if an unused row is visible. Example: if set to false a grid with rowcount ten and a server side collection
+                     size of seven will hide the three remaining rows.
+                  </p>
+                  <p></p>
+                  <p>Default is false.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>true</p>
+                  <p>false</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">comment</td>        
+               <td align="left" valign="top">
+                  <p>Comment without any effect on rendering and behaviour. The comment is shown in the layout editor's tree view.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td colspan="4">Binding</td>      
+            </tr>
+            <tr>        
+               <td align="left" valign="top">valueprop</td>        
+               <td align="left" valign="top">(already explained above)</td>        
+               <td align="left" valign="top">&nbsp;</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">onclickmethod</td>        
+               <td align="left" valign="top">
+                  <p>Name of the event that is sent to the adapter when the user clicks a line.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">ondblclickmethod</td>        
+               <td align="left" valign="top">
+                  <p>Name of the event that is sent to the adapter when the user double clicks a line.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">proprefprop</td>        
+               <td align="left" valign="top">
+                  <p>Name of the adapter parameter that is filled when the user clicks a FIELD control. The VALUEPROP of the clicked field control
+                     will passed.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">backgroundcolorprop</td>        
+               <td align="left" valign="top">
+                  <p>Name of the adapter parameter that provides the background color of the control.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>      
+         </tbody>     
+      </table>     
+           
+          
+        
+       
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="rowtablearea2theflexiblecontrolgrid.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../njx/rowtablearea2theflexiblecontrolgrid.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/njx/rowtablearea2theflexiblecontrolgrid.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="workingwithgrids.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="textgridsss2textgrid2withserversidescrolling.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="flexline.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

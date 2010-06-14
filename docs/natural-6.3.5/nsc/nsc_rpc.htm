@@ -1,0 +1,2348 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Protecting Natural RPC Servers and Services</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="nsc_rpc"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../nsc/nsc_rpc.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/nsc/nsc_rpc.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc_appl.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc_extobj.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Natural Security&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x48"></a>Protecting Natural RPC Servers and Services
+         </h1>
+      </div> 
+         
+         
+      <p>This section describes the various aspects of Natural remote procedure
+             call protection; it covers the following topics:
+      </p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="nsc_rpc.htm#RPCserviceRequests">RPC Service Requests</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_rpc.htm#NatServerSettings">RPC Server Settings in Natural</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_rpc.htm#NSCserverSettings">RPC Server Settings in Natural Security</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_rpc.htm#ExecService">Validation of an RPC Service Request</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_rpc.htm#RPCprofiles">Security Profiles for Natural RPC Servers</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_rpc.htm#ServerComponents">Components of an RPC Server Profile</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_rpc.htm#ServerMaint">Creating and Maintaining RPC Server Profiles</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_rpc.htm#IAFsupport">IAF Support</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_rpc.htm#OtherRPC">Other RPC-Related Features</a></p>
+         </li>
+      </ul> 
+         
+      <p>For general information about Natural remote procedure calls, please
+             refer to the <a href="../rpc/rpc-over.htm">Natural Remote
+            Procedure Call</a> documentation.
+      </p> 
+        
+      <hr> 
+        
+      <div><a name="RPCserviceRequests"></a></div> 
+         
+      <h2> RPC Service Requests</h2> 
+          
+          
+      <p>In a client/server environment, you can use Natural Security to protect
+              the use of Natural remote procedure calls. You can protect Natural RPC servers
+              as well as the way in which Natural RPC service requests issued by clients are
+              handled.
+      </p> 
+          
+      <p>An RPC service request is a request from a client to a Natural RPC
+              server for a Natural subprogram to be invoked which is located in a library on
+              the server.
+      </p> 
+          
+      <p>When a remote <code>CALLNAT</code> is executed, and the Natural RPC
+              Logon Option is set on the client, the following data are passed to the Natural
+              RPC server for validation:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">the name of the subprogram to be invoked;</p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">the ID of the library on the server which contains the subprogram to
+                      be invoked;
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">the Natural RPC user ID and password (that is, the Natural user ID and
+                      password supplied with the Natural RPC service request);
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">the EntireX user ID (validation depends on Logon Option; see
+                      below).
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>See also the section <a href="../rpc/securi.htm#securi">Using Security</a> in
+              the <cite>Natural Remote Procedure Call</cite> documentation.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="nsc_rpc.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="NatServerSettings"></a></div> 
+         
+      <h2> RPC Server Settings in Natural</h2> 
+          
+          
+      <p>The following Natural profile parameters on a Natural RPC server should
+              be reviewed if the server is to be protected by Natural Security:
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th align="left">Profile Parameter</th> 
+                       
+               <th align="left">Explanation</th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> RPC</td> 
+                       
+               <td> 
+                  
+                  <p>The settings for a Natural session which is started as a Natural
+                     RPC server are determined by the Natural profile parameter RPC. For a server to
+                     be protected by Natural Security, two subparameters of the RPC profile
+                     parameter are of particular relevance: SRVNAME and LOGONRQ.
+                  </p> 
+                           
+                  <p>SRVNAME specifies the name of the server. This is the name which
+                               has to be used as the ID for a corresponding security profile.
+                  </p> 
+                           
+                  <p>LOGONRQ determines whether the server is to accept only secured
+                               service requests or both public and secured service requests:
+                  </p> 
+                           
+                  <ul> 
+                               
+                     <li> 
+                                   
+                        <p class="initem">A public request is a service request whose Natural RPC user ID
+                                       and password are <em>not</em> validated; instead, the user ID which was used to
+                                       start the server session (as contained in the Natural system variable *USER)
+                                       will be used for the service request.
+                        </p> 
+                                  
+                     </li> 
+                               
+                     <li> 
+                                   
+                        <p class="initem">A secured request is s service request whose Natural RPC user ID
+                                       and password are validated.
+                        </p> 
+                                  
+                     </li> 
+                              
+                  </ul> 
+                           
+                  <p>For a server to be protected by Natural Security so that only
+                               secured requests are accepted, set the LOGONRQ subparameter to
+                               "ON".
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> FSEC</td> 
+                       
+               <td> 
+                  
+                  <p>With the profile parameter FSEC, you determine the FSEC system file
+                     to be associated with the Natural RPC server.
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>ETID</td> 
+                       
+               <td> 
+                  
+                  <p>If you start the server session and specify an actual value with
+                     the profile parameter ETID, all service requests to the server will use the
+                     same specified ETID.
+                  </p> 
+                           
+                  <p>If you start the server session with the profile parameter ETID=' '
+                               (blank), no ETID can be supplied by Natural Security.
+                  </p> 
+                           
+                  <p>If you start the server session with the profile parameter
+                               ETID=OFF, the ETIDs to be used by the service requests will be determined by
+                               the setting of the "Time-Stamp-Related ETID" in the security
+                               profile of the RPC server (see <a href="nsc_rpc.htm#ServerComponents">Components
+                                  of an RPC Server Profile</a> below). By setting this option to
+                               "Y", you can ensure an ETID handling, with appropriate database
+                               open/close processing, which allows you to uniquely identify each service
+                               request's database transactions.
+                  </p> 
+                           
+                  <p>If you start a server with replicas, the ETID parameter must be set
+                               to OFF or ' ' (blank).
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> AUTO</td> 
+                       
+               <td> 
+                  
+                  <p>The profile parameter AUTO (automatic logon) is only evaluated when
+                     the server session is started. For subsequent service requests to the running
+                     server, the AUTO parameter is ignored.
+                  </p> 
+                           
+                  <p>If you start the server session with AUTO=OFF, you should assign a
+                               library via the profile parameter STACK=(LOGON <em>library-ID</em> ,...)
+                  </p>
+                           
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="nsc_rpc.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="NSCserverSettings"></a></div> 
+         
+      <h2> RPC Server Settings in Natural Security</h2> 
+          
+          
+      <p>Generally, the Natural Security user profiles and library profiles on
+              the FSEC system file assigned to the Natural RPC server session determine the
+              access rights to the requested library on the server.
+      </p> 
+          
+      <p>Specifically for the protection of Natural RPC servers, Natural Security
+              provides the following options:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">In the security profile of a library, you can set various options
+                      which apply when the library is accessed via a Natural RPC service request.
+                      These options are described under <a href="nsc_lib.htm#nat_rpc_restr">Natural RPC Restrictions</a>
+                      in the section <cite>Library Maintenance</cite>.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">You can define security profiles for Natural RPC servers, as described
+                      below in the section <a href="nsc_rpc.htm#RPCprofiles">Security
+                  Profiles for Natural RPC Servers</a>.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">In the <a href="nsc_admin.htm#Set_Library_and_User_Defaults">Library and
+                         User Preset Values</a> section of Administrator Services, you can set
+                      various "Natural RPC Server Session Options", which control the
+                      logon to libraries via Natural RPC service requests.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="nsc_rpc.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="ExecService"></a></div> 
+         
+      <h2> Validation of an RPC Service Request</h2> 
+          
+          
+      <p>This section covers the following
+              topics:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="nsc_rpc.htm#d0e32939">Supported RPC Server Situations</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_rpc.htm#d0e32970">Security Data to Be Supplied by the Client</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_rpc.htm#d0e33045">Integrated Authentication Framework (IAF)</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_rpc.htm#Impersonation">Impersonation</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_rpc.htm#ValidationOnServer">Validation on the Natural RPC Server</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_rpc.htm#LogonMode">Logon Mode</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_rpc.htm#d0e33389">Summary of Checks Based on Settings in Security Profiles</a></p>
+         </li>
+      </ul> 
+         
+      <div><a name="d0e32939"></a></div> 
+          
+      <h3>Supported RPC Server Situations</h3> 
+           
+           
+      <p>The following situations are supported by Natural Security:</p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">Natural RPC server protected by Natural Security only: The Natural
+                       RPC user ID is validated.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Natural RPC server protected by Natural Security and EntireX
+                       Security: The Natural RPC user ID and the EntireX user ID are validated.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Natural RPC server protected by Natural Security and EntireX
+                       Security, and using the Integrated Authentication Framework (IAF): The IAF
+                       token is validated (see below).
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+          
+      <div><a name="d0e32970"></a></div> 
+          
+      <h3>Security Data to Be Supplied by the
+              Client
+      </h3>
+      <ul>
+         <li><a href="nsc_rpc.htm#d0e32976">Natural Clients</a></li>
+         <li><a href="nsc_rpc.htm#d0e33014">Non-Natural Clients</a></li>
+      </ul>
+      <div><a name="d0e32976"></a></div> 
+           
+      <h4>Natural Clients</h4> 
+            
+            
+      <p>Security data are supplied by the Natural client if the Natural RPC
+                Logon Option is set. In this case the following applies: 
+      </p> 
+            
+      <ul> 
+                
+         <li> 
+                    
+            <p class="initem">The Natural RPC user ID and password to be used for the service
+                        request have to be specified via the Natural application programming interface
+                        USR1071 (contained in the library SYSEXT). To ensure that this user ID and
+                        password are available when needed, executing USR1071 should be one of the
+                        first tasks performed by an application on the client. If USR1071 is not
+                        executed and the client runs under Natural Security, the user ID and password
+                        from the Natural Security logon on the client are used instead.
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">The EntireX user ID is supplied via the Natural application
+                        programming interface USR2071.
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">The library ID to be used for the service request has to be
+                        specified via the Natural application programming interface USR4008 (contained
+                        in the library SYSEXT). If USR4008 is not executed, the ID of the client
+                        library in which the <code>CALLNAT</code> statement was executed is used
+                        instead.
+            </p> 
+                   
+         </li> 
+               
+      </ul> 
+            
+      <p class="note"><strong>Note:</strong><br>If the Natural RPC passwords used for a service request may contain
+                special characters, make sure that the Natural character translation tables
+                NTTABA1 and NTTABA2 on the Natural RPC server have been adjusted
+                accordingly.
+      </p> 
+            
+          
+      <div><a name="d0e33014"></a></div> 
+           
+      <h4>Non-Natural Clients</h4> 
+            
+            
+      <p>Please refer to the client's remote procedure call documentation for
+                information on how to supply the required security data with an RPC service
+                request issued by a non-Natural client to a
+      </p> 
+            
+      <ul> 
+                
+         <li> 
+                    
+            <p class="initem">Natural RPC server protected by Natural Security;</p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem"> Natural RPC server protected by Natural Security and EntireX
+                        Security;
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">Natural RPC server protected by Natural Security and EntireX
+                        Security, and using the Integrated Authentication Framework (IAF).
+            </p> 
+                   
+         </li> 
+               
+      </ul> 
+           
+      <div><a name="d0e33045"></a></div> 
+          
+      <h3>Integrated Authentication Framework (IAF)</h3> 
+           
+           
+      <p> If a Natural RPC server is embedded in the token-based infrastructure
+               provided by the Integrated Authentication Framework (IAF), the validation of
+               the token which is attached to a service request passed to the Natural RPC
+               server is performed by EntireX Security. Instead of the Natural RPC user ID and
+               password, the IAF token - which contains the EntireX user ID - is validated
+               during the logon to the Natural RPC server. The EntireX user ID and password
+               are verified by EntireX Security.
+      </p> 
+           
+      <p>Natural Security receives a successfully verified EntireX user ID.
+               Natural Security then also uses this EntireX user ID as the Natural RPC user ID
+               (replacing the Natural RPC user ID supplied by the client as described above).
+               This ensures that both IDs are identical. After this point, this user ID used
+               is considered a "trusted" Natural RPC user ID by the Natural RPC server, and is
+               used accordingly for subsequent security checks and access authorizations.
+      </p> 
+           
+      <p>For further information, see the section
+               <a href="nsc_rpc.htm#IAFsupport">IAF Support</a>
+               below. 
+      </p> 
+           
+      <p>For general information on IAF, see <cite>Integrated Authentication
+                  Framework</cite> in the EntireX Communicator
+               documentation. See also the section <a href="../rpc/securi.htm#rpc-iaf">Using the Integrated Authentication
+            Framework</a> in the <cite>Natural Remote Procedure
+                  Call</cite> documentation.
+      </p> 
+          
+      <div><a name="Impersonation"></a></div> 
+          
+      <h3>Impersonation</h3> 
+           
+           
+      <p>For user authentication on the Natural RPC server, two modes are
+               possible: 
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">validation with impersonation,</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">validation without impersonation.</p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>Impersonation assumes that access to the operating system on which a
+               Natural RPC server is running is controlled by an SAF-compliant external
+               security system. User authentication (verification of the Natural RPC user ID
+               and password) is performed by this external security system. Impersonation
+               means that after the authentication has been successful and the user's identity
+               is established, any subsequent authorization checks will be performed based on
+               this identity. This includes authorization checks for access to external
+               resources (for example, databases or work files).
+      </p> 
+           
+      <p>Impersonation is only possible if the Natural RPC server runs under the
+               operating system z/OS in batch mode. Impersonation can be used if an
+               SAF-compliant external security system is used, and user authentication is to
+               be performed by this external security system.
+      </p> 
+           
+      <p>Impersonation is activated by the "Impersonation" setting in the
+               security profile of the Natural RPC server (see
+               <a href="nsc_rpc.htm#ServerComponents">Components of an RPC Server
+            Profile</a> below).
+      </p> 
+            
+            
+            
+            
+            
+          
+      <div><a name="ValidationOnServer"></a></div> 
+          
+      <h3>Validation on the Natural RPC Server</h3> 
+          
+      <div><a name="d0e33252"></a></div> 
+           
+      <h4>Validation Without Impersonation</h4> 
+            
+            
+      <p>If impersonation is not active for the Natural RPC server, Natural
+                Security will perform a logon to the requested library, using the Natural RPC
+                user ID. The logon is performed according to the Natural Security logon rules
+                and the security settings defined on the FSEC system file associated with the
+                server.
+      </p> 
+            
+      <ul> 
+                
+         <li> 
+                     
+                    
+            <p class="initem"><strong>With IAF:</strong><br>If the Natural RPC server is embedded in the Integrated
+                        Authentication Framework (IAF), the password has been verified by EntireX, and
+                        the EntireX user ID is considered a "trusted" user ID after that point. Natural
+                        Security will replace the Natural RPC user ID with this EntireX user ID. No
+                        further password verification will be performed for this user ID.
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                     
+                    
+            <p class="initem"><strong>Without IAF:</strong><br>One check performed during the logon is based on the evaluation of
+                        the Natural RPC Restrictions &gt; <a href="nsc_lib.htm#RPCLogonOption">Logon
+                           Option</a> in the security profile of the requested library. This option
+                        determines whether only the Natural RPC user ID or both the user ID and the
+                        password are to be verified by the Natural Security logon procedure:
+            </p> 
+                    
+            <ul style="margin-top: 0px; margin-bottom: 0px;"> 
+                        
+               <li class="nesteditem"> 
+                            
+                  <p class="initem">If the Logon Option is set to "N" or "E", both the user ID and the
+                                password are verified.
+                  </p> 
+                           
+               </li> 
+                        
+               <li class="nesteditem"> 
+                            
+                  <p class="initem">If the Logon Option is set to "A" or "S", only the user ID is
+                                verified - assuming that the password has already been verified (similiar to
+                                the Natural profile parameter AUTO=ON).
+                  </p> 
+                           
+               </li> 
+                        
+               <li class="nesteditem"> 
+                            
+                  <p class="initem">In addition, if the Logon Option is set to "E" or "S", Natural
+                                Security checks if the Natural RPC user ID is identical to the EntireX user ID.
+                                If both IDs are not identical, the service request will be rejected.
+                  </p> 
+                           
+               </li> 
+                       
+            </ul> 
+                   
+         </li> 
+               
+      </ul> 
+            
+      <p>After a successful logon, the requested subprogram will be
+                executed.
+      </p> 
+            
+      <p>If the processing of the service request includes an access to an
+                external resource (for example, a database or work file), the external user ID
+                which was used to start the Natural RPC server will be used to check the
+                authorization for such an access.
+      </p> 
+            
+           
+          
+      <div><a name="d0e33315"></a></div> 
+           
+      <h4>Validation With Impersonation</h4> 
+            
+            
+      <p>Impersonation is only possible if the Natural RPC server runs under
+                the operating system z/OS in batch mode. Impersonation can be used if an
+                SAF-compliant external security system is used, and user authentication is to
+                be performed by this external security system.
+      </p> 
+            
+      <ul> 
+                
+         <li> 
+                     
+                    
+            <p class="initem"><strong>With IAF:</strong><br>If the Natural RPC server is embedded in the Integrated
+                        Authentication Framework (IAF), the Natural server front-end passes the EntireX
+                        user ID, which in this case is identical to the Natural RPC user ID, to the
+                        external security system for verification.
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                     
+                    
+            <p class="initem"><strong>Without IAF:</strong><br>If impersonation is active for the Natural RPC server, the Natural
+                        server front-end passes the Natural RPC user ID and password to the external
+                        security system for verification.
+            </p> 
+                   
+         </li> 
+               
+      </ul> 
+            
+      <p>After a successful user authentication by the external security
+                system, Natural Security will perform a logon to the requested library. For
+                this logon, Natural Security uses the Natural RPC user ID, but will not perform
+                any password verification for this user. The logon is performed according to
+                the Natural Security logon rules and the security settings defined on the FSEC
+                system file associated with the server.
+      </p> 
+            
+      <p>One check performed during the logon is based on the evaluation of the
+                Natural RPC Restrictions &gt; <a href="nsc_lib.htm#RPCLogonOption">Logon
+                   Option</a> in the security profile of the requested library: If the
+                Logon Option is set to "E" or "S", Natural Security checks if the Natural RPC
+                user ID is identical to the EntireX user ID. If both IDs are not identical, the
+                RPC service request will be rejected.
+      </p> 
+            
+      <p>After a successful logon, the requested subprogram will be
+                executed.
+      </p> 
+            
+      <p>If the processing of the service request includes an access to an
+                external resource (for example, a database or work file), the Natural RPC user
+                ID will be used to check the authorization for such an access.
+      </p> 
+            
+           
+          
+         
+      <div><a name="LogonMode"></a></div> 
+          
+      <h3>Logon Mode</h3> 
+           
+           
+      <p>If you use a Natural RPC server which provides services performed by
+               subprograms contained in a single library, you can use the
+               <a href="nsc_rpc.htm#ServerComponents">Logon Mode</a> option in the
+               security profile of the Natural RPC server to improve performance. This reduces
+               the number of database accesses to the Natural Security system file FSEC. 
+      </p> 
+           
+      <p>The library on the server is set at the start of the server session,
+               and will remain unchanged until the end of the server session. Service requests
+               for any other library will be rejected. If the library is unprotected
+               (People-protected = N), the user's authorization to access the library is not
+               checked. If the library is protected (People-protected=Y), the user's
+               authorization to access the library is checked. After a successful check, the
+               user's conditions of use of the library are determined by the library profile.
+               Even if a special link exists between the user and the library, any settings in
+               the special link profile will be ignored.
+      </p> 
+           
+      <p></p> 
+           
+      <p class="note"><strong>Note:</strong><br>When you set Logon Mode to "S" to improve performance, please be
+               aware that other Natural Security settings also influence performance, in
+               particular the "Logon recorded" option in user and library
+               profiles. Morever, the performance of ETID-triggered handling of database
+               transactions cannot be optimized.
+      </p> 
+          
+      <div><a name="d0e33389"></a></div> 
+          
+      <h3>Summary of Checks Based on Settings in Security Profiles</h3> 
+           
+           
+      <p>This section summarizes the checks which are performed by Natural
+               Security depending on settings in security profiles when a service request is
+               issued to a Natural RPC server. The following steps are performed:
+      </p> 
+           
+      <ol> 
+               
+         <li> 
+                   
+            <p class="initem">If an IAF server is used (RPC server profile &gt; IAF Support), token
+                       validation is performed via this IAF server (see the section
+                       <a href="nsc_rpc.htm#IAFsupport">IAF Support</a>
+                       below). 
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">User authentication is performed (see the section
+                       <a href="nsc_rpc.htm#ValidationOnServer">Validation on the
+                  Server</a> above).
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">RPC server profile &gt; the <a href="nsc_rpc.htm#ServerComponents">Logon Mode</a> option is evaluated at the
+                       start of the Natural RPC server session (see the section
+                       <a href="nsc_rpc.htm#LogonMode">Logon Mode</a>
+                       above).
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Library profile &gt; General Options &gt; the
+                       <a href="nsc_lib.htm#General_Options">People-protected</a> option is
+                       evaluated.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">If no IAF server is used: Library profile &gt; Natural RPC
+                       Restrictions &gt; the <a href="nsc_lib.htm#RPCLogonOption">Logon
+                          Option</a> is evaluated (see the section
+                       <a href="nsc_rpc.htm#ValidationOnServer">Validation on the
+                  Server</a> above): Depending on its setting, it is checked
+                       whether the Natural RPC user ID is identical to the EntireX user ID.
+            </p> 
+                  
+         </li> 
+              
+      </ol> 
+          
+        
+      <div class="noprint">
+         <p><a href="nsc_rpc.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="RPCprofiles"></a></div> 
+         
+      <h2> 
+             <a name="x49"></a>Security Profiles for Natural RPC Servers
+      </h2> 
+         
+      <div><a name="d0e33470"></a></div> 
+          
+      <h3>Default Profile</h3> 
+           
+           
+      <p>The installation procedure of Natural Security automatically creates a
+               default security profile with the server ID "*". This profile
+               applies to all Natural RPC servers for which no individual security profiles
+               are defined. You can change the settings in this default profile to suit your
+               requirements.
+      </p> 
+           
+      <p class="note"><strong>Note:</strong><br> Should there be no default RPC server profile "*" in
+               your FSEC system file (this may be the case because the file was not available
+               at the installation), execute the program NSCRPCAC in the library SYSSEC. This
+               program creates the default server profile.
+      </p> 
+           
+          
+         
+      <div><a name="d0e33491"></a></div> 
+          
+      <h3>Asterisk Notation for Server IDs</h3> 
+           
+           
+      <p>If you do not wish to define a security profile for every single
+               server, you can use asterisk notation for the server ID: If you create a server
+               security profile an choose as server ID a character string followed by an
+               asterisk (*), the profile will apply to all servers whose IDs begin with that
+               character string. For an individual server within such a range, you may still
+               define an individual security profile.
+      </p> 
+           
+      <p>For example, if you defined a server security profile with the ID
+               "A*", it would apply to all servers whose IDs begin with
+               "A" (such a "ARPC1", "AA01",
+               "ABC", "ADE" etc.). A profile with the ID
+               "ABC*" would in turn apply to, for example, "ABCA",
+               "ABCXYZ" etc.
+      </p> 
+           
+          
+         
+      <div><a name="d0e33533"></a></div> 
+          
+      <h3>Server Profile Components and Functions</h3> 
+           
+           
+      <p>The <a href="nsc_rpc.htm#ServerComponents">components</a> of
+               server security profiles and the <a href="nsc_rpc.htm#ServerMaint">functions</a> used to create and maintain them
+               are described below.
+      </p> 
+           
+      <p>Some Natural Security functions use the code "RP" to
+               represent the object type "Natural RPC servers".
+      </p> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="nsc_rpc.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="ServerComponents"></a></div> 
+         
+      <h2> 
+             <a name="x50"></a> Components of an RPC Server Profile
+      </h2> 
+          
+          
+      <p>The following type of screen is the primary profile screen which appears
+              when you invoke one of the functions Add, Copy, Modify, Display for the
+              security profile of a Natural RPC server:
+      </p> 
+          
+      <table border="1" cellpadding="5" class="screen">
+         <tr>
+            <td><pre>
+11:55:00                    *** NATURAL SECURITY ***                 2008-10-31
+                           - Modify Nat. RPC Server -                        
+                                                                             
+                                             Modified .. 2008-09-30 by SAG
+                                                                               
+Nat. RPC Server ... RPCS01
+
+           
+--------------- Options -------------                          
+Impersonation .............. (N,Y): Y  
+Lock User ................ (N,X,*): X
+Time-Stamp-Related ETID .... (N,Y): Y     
+Logon Mode ................. (N,S): S 
+IAF Support ............. .. (N,Y): N  
+                  
+             
+          
+              
+                  
+                            
+Additional Options ... N                       
+                                                                               
+                                        
+Enter-PF1---PF2---PF3---PF4---PF5---PF6---PF7---PF8---PF9---PF10--PF11--PF12---
+      Help  PrevM Exit  AddOp       Flip              IAF               Canc
+</pre></td>
+         </tr>
+      </table> 
+          
+      <p>The individual items you may define as part of a Natural RPC server's
+              security profile are explained below.
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="80%">
+         <colgroup>
+            <col width="15%">
+            <col width="9%">
+            <col width="56%">
+         </colgroup> 
+                
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th align="left">Field</th> 
+                       
+               <th colspan="2" align="left">Explanation</th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td rowspan="4">Impersonation</td> 
+                       
+               <td colspan="2">Impersonation is only relevant if
+                  an SAF-compliant external security system is used for user authentication.
+                  Impersonation is described above under <a href="nsc_rpc.htm#ExecService">Validation of an RPC Service
+                              Request</a>. This option activates impersonation for the
+                           server:
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>N &nbsp;</td> 
+                       
+               <td>Impersonation is not active.</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>Y &nbsp;</td> 
+                       
+               <td>Impersonation is active.</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td colspan="2">Impersonation is only possible if
+                  the server runs under the z/OS operating system in batch mode. If it does not,
+                  the setting of this option will be ignored.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td rowspan="5">Lock User</td> 
+                       
+               <td colspan="2">This option only applies to
+                  libraries in whose security profiles the Lock User option (in the
+                  <a href="nsc_lib.htm#nat_rpc_restr">Natural RPC
+                              Restrictions</a> section of the library profile) is set to
+                  "*". For these libraries, it controls the locking of users when they attempt to
+                           access these libraries on the server via Natural RPC service calls:
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>N</td> 
+                       
+               <td>The Lock User feature is not active.</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>X</td> 
+                       
+               <td>The Lock User feature is active for access
+                  attempts to libraries on the server via Natural RPC service calls. Once a user
+                  has reached the <a href="nsc_admin.htm#Maximum_Number_of_Logon_Attempts">maximum
+                              number of logon attempts</a> without supplying the correct password,
+                  he/she will be locked, that is, the user ID will be made
+                  "invalid". Natural Security "remembers" unsuccessful
+                  attempts across sessions: The error counters for the client user IDs which were
+                  tried out unsuccessfully are kept for access attempts in subsequent sessions,
+                           thus reducing the number of subsequent attempts with these IDs. The error
+                           counter for a user ID is only reset after a successful logon.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>*</td> 
+                       
+               <td>The value of the "Lock user option"
+                  in the <a href="nsc_admin.htm#Set_Library_and_User_Defaults">Library And
+                              User Preset Values</a> of Administrator Services determines
+                  whether or not the Lock User feature is active for access attempts to libraries
+                           via Natural RPC service calls.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td colspan="2">For details on the Lock User
+                  feature, see also the <a href="nsc_admin.htm#nsc_admin">Lock User
+                              Option</a> in the General Options section of
+                           <cite>Administrator Services</cite>.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td rowspan="5">Time-Stamp-Related ETID</td> 
+                       
+               <td colspan="2"> 
+                  
+                  <p>This option only applies to secured service requests passed from
+                     Natural clients to the Natural RPC server. It determines which ETIDs are to be
+                     used for these clients during the server session:
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>N</td> 
+                       
+               <td> 
+                  
+                  <p>The "Default ETID" as defined in the user security
+                     profile of the Natural client determines the ETID to be used.
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>Y</td> 
+                       
+               <td> 
+                  
+                  <p>A time-stamp-related ETID will be generated for every service
+                     request that accesses the Natural RPC server under the control of Natural
+                     Security. The ETID is generated when the server is accessed, and will remain in
+                     effect until the service request has been processed. 
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>*</td> 
+                       
+               <td> 
+                  
+                  <p>The setting of the <a href="nsc_admin.htm#ETID">ETID</a> option
+                               in the <cite>Library And User Preset Values</cite>, which applies to the
+                               user security profile, will determine the ETID to be used.
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td colspan="2"> 
+                  
+                  <p>If this option is set to "Y" or "*", it
+                     is recommended that the RPC server session be started with the Natural profile
+                     parameter ETID=OFF.
+                  </p> 
+                           
+                  <p>For public service requests, this option has no effect; for them,
+                               the ETID of the Natural RPC server, as established at the start of the server
+                               session, is used.
+                  </p> 
+                           
+                  <p>For information on time-stamp-related ETIDs, see also
+                               <a href="nsc_admin.htm#ETID">ETID</a> under <cite>Library And User
+                                  Preset Values</cite> in the <cite>Administrator Services</cite>
+                               section.
+                  </p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td rowspan="4">Logon Mode</td> 
+                       
+               <td colspan="2"> This option can be used if only
+                  one library on the Natural RPC server is accessed:
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>N</td> 
+                       
+               <td> 
+                  
+                  <p>No special logon mode applies. </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>S</td> 
+                       
+               <td> 
+                  
+                  <p> Static Mode applies: The library on the Natural RPC server is set
+                     at the start of the server session. It will remain unchanged until the end of
+                     the server session. The server will only process service requests for this one
+                     library. Any service request with a different library ID will be rejected.
+                  </p> 
+                           
+                  <p>If this option is set, the conditions of use of the library are
+                               determined by the library profile. Even if a special link exists between the
+                               user and the library, any special link profile will be ignored.
+                  </p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td colspan="2"> 
+                  
+                  <p>Provided that the Natural RPC server provides services performed by
+                     subprograms contained in a single library, you can use this option to improve
+                     performance.
+                  </p> 
+                           
+                  <p>See also <a href="nsc_rpc.htm#ExecService">Validation of an
+                                  RPC Service Request</a> above.
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td rowspan="4">IAF Support</td> 
+                       
+               <td colspan="2"> This option is used to activate
+                  the support of the Integrated Authentication Framework (IAF) for the server:
+                  
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>N</td> 
+                       
+               <td>IAF support is not active.</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>Y</td> 
+                       
+               <td>IAF support is active: The RPC server will use an
+                  IAF server for token validation. 
+                  
+                  <p>When you set this option to "Y", you will be prompted to select the
+                     IAF server to be used. If only one IAF server is defined to Natural Security or
+                     one of the IAF servers is defined as default server, this server will be used
+                               without your being prompted. The name of the IAF server assigned is
+                               displayed.
+                  </p> 
+                           
+                  <p>To change the assignment, you press <span class="key">PF9</span> to select
+                               another IAF server.
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td colspan="2"> See the section
+                  <a href="nsc_rpc.htm#IAFsupport">IAF Support</a> below
+                           for further information.
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+         
+      <div><a name="d0e33897"></a></div> 
+          
+      <h3>Additional Options</h3> 
+           
+           
+      <p>If you either mark the field "Additional Options" with
+               "Y" or press <span class="key">PF4</span>, a window will be displayed from which
+               you can select the following options:
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">Maintenance Information</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Security Notes</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Owners</p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>The options for which something has already been specified or defined
+               are marked with a plus sign (+).
+      </p> 
+           
+      <p>You can select one or more items from the window by marking them with
+               any character. For each item selected, an additional window will be
+               displayed:
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th align="left">Additional Option</th> 
+                        
+               <th align="left">Explanation</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> <a name="MaintInfo"></a> Maintenance Information <br>
+                            (display only)
+               </td> 
+                        
+               <td>In this window, the following information is displayed: 
+                  
+                  <ul> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">the date and time when the security profile was created, the ID
+                           of the ADMINISTRATOR who created it, and (if applicable) the IDs of the
+                                        co-owners who countersigned for the creation;
+                        </p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">the date and time when the security profile was last modified,
+                                        the ID of the ADMINISTRATOR who made the last modification, and (if applicable)
+                                        the IDs of the co-owners who countersigned for the modification.
+                        </p> 
+                                   
+                     </li> 
+                               
+                  </ul>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a name="SecNotes"></a> Security Notes &nbsp;
+               </td> 
+                        
+               <td>In this window, you may enter your notes on the security
+                  profile.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a name="Owners"></a> Owners &nbsp;
+               </td> 
+                        
+               <td>In this window, you may enter up to eight IDs of
+                  ADMINISTRATORs. Only the ADMINISTRATORs specified here will be allowed to
+                  maintain this server security profile. 
+                  
+                  <p>If no owner is specified, any user of type ADMINISTRATOR may
+                                maintain the security profile.
+                  </p> 
+                            
+                  <p>For each owner, the number of co-owners whose countersignatures
+                                will be required for maintenance permission may optionally be specified in the
+                                field after the ID.
+                  </p> 
+                            
+                  <p>For information on owners and co-owners, see the section
+                                <a href="nsc_count.htm#nsc_count">Countersignatures</a>.
+                  </p>
+               </td>
+                        
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="nsc_rpc.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="ServerMaint"></a></div> 
+         
+      <h2> 
+             <a name="x51"></a> Creating and Maintaining RPC Server Profiles
+      </h2> 
+          
+          
+      <p>This section describes the functions used to create and maintain
+              security profiles for Natural RPC servers. It covers the following topics:
+      </p>
+          
+      <ul>
+         <li>
+            <p class="initem"><a href="nsc_rpc.htm#InvokeServerMaint">Invoking Maintenance for Natural RPC Servers</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_rpc.htm#AddServer">Adding a New Server Profile</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_rpc.htm#SelectServer">Selecting Existing Server Profiles for Processing</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_rpc.htm#CopyServer">Copying a Server Profile</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_rpc.htm#ModifyServer">Modifying a Server Profile</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_rpc.htm#RenameServer">Renaming a Server Profile</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_rpc.htm#DeleteServer">Deleting a Server Profile</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_rpc.htm#DisplayServer">Displaying a Server Profile</a></p>
+         </li>
+      </ul> 
+          
+         
+      <div><a name="InvokeServerMaint"></a></div> 
+          
+      <h3> Invoking Maintenance for Natural RPC Servers</h3> 
+           
+           
+      <p>On the Main Menu, enter code "M" for
+               "Maintenance". A window will be displayed.
+      </p> 
+           
+      <p>In the window, mark object type "Natural RPC Server" with
+               a character or with the cursor. The Natural RPC Server Maintenance selection
+               list will be displayed.
+      </p> 
+           
+      <p>From this selection list, you invoke all Natural RPC server maintenance
+               functions as described below.
+      </p> 
+           
+          
+         
+      <div><a name="AddServer"></a></div> 
+          
+      <h3> Adding a New Server Profile</h3> 
+           
+           
+      <p>To define a Natural RPC server to Natural Security, you create a
+               security profile for it.
+      </p> 
+           
+      <p>In the command line of the Natural RPC Server Maintenance selection
+               list, enter the command <code>ADD</code> .
+      </p> 
+           
+      <p>A window will be displayed. In this window, enter an <em>ID</em> for
+               the server. This ID corresponds to the server name as specified with the
+               Natural profile parameter RPC (see <a href="nsc_rpc.htm#NatServerSettings">RPC
+                  Server Settings in Natural</a> above), and must conform to the naming
+               conventions for Natural RPC servers. Asterisk notation for the server ID is
+               possible, as described under <a href="nsc_rpc.htm#RPCprofiles">Security
+            Profiles for Natural RPC Servers</a> above.
+      </p> 
+           
+      <p>After you have entered a valid ID, the Add Natural RPC Server screen
+               will be displayed.
+      </p> 
+           
+      <p>The individual items you may define on this screen and any additional
+               windows that may be part of a server security profile are described under
+               <a href="nsc_rpc.htm#ServerComponents">Components of an RPC Server
+            Profile</a> above.
+      </p> 
+           
+      <p>When you add a new server profile, the owners specified in your own
+               user security profile will automatically be copied into the server security
+               profile you are creating.
+      </p> 
+           
+          
+         
+      <div><a name="SelectServer"></a></div> 
+          
+      <h3> Selecting Existing Server Profiles for Processing</h3> 
+           
+           
+      <p>When you invoke Natural RPC Server Maintenance, a list of all Natural
+               RPC server profiles that have been defined to Natural Security will be
+               displayed.
+      </p> 
+           
+      <p>If you do not want a list of all existing profiles, but wish only
+               certain servers to be listed, you may use the Start Value option as described
+               in the section <a href="nsc_way.htm#nsc_way">Finding Your Way In
+            Natural Security</a>.
+      </p> 
+           
+      <p>On the Main Menu, enter code "M" for
+               "Maintenance". A window will be displayed. In the window, mark
+               object type "Natural RPC Server" with a character or with the
+               cursor (and, if desired, enter a start value). The Natural RPC Server
+               Maintenance selection list will be displayed:
+      </p> 
+           
+      <table border="1" cellpadding="5" class="screen">
+         <tr>
+            <td><pre>
+14:49:01                    *** NATURAL SECURITY ***                 2008-10-31
+                        - Nat. RPC Server Maintenance -
+ 
+ Co Nat. RPC Server                                       Message
+ __ _____________________________________________________ _____________________
+ __ *                                
+ __ ASERV                                
+ __ RPC*
+ __ RPCABC01                         
+ __ RPCABC02                         
+ __ RPSRV2112               
+                
+                            
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+Command ===&gt;
+Enter-PF1---PF2---PF3---PF4---PF5---PF6---PF7---PF8---PF9---PF10--PF11--PF12---
+Help        Exit              Flip  -     +                       Canc   
+</pre></td>
+         </tr>
+      </table> 
+           
+      <p>For each server, the server ID is displayed.</p> 
+           
+      <p>The list can be scrolled as described in the section
+               <a href="nsc_way.htm#nsc_way">Finding Your Way In Natural
+            Security</a>.
+      </p> 
+           
+          
+      <div><a name="d0e34171"></a></div> 
+           
+      <h4>Selecting a Function</h4> 
+            
+            
+      <p>The following maintenance functions are available for Natural RPC
+                server profiles (possible code abbreviations are underlined):
+      </p> 
+             
+             
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                  
+                 
+         <thead align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <th align="left">Code</th> 
+                         
+               <th align="left">Function</th> 
+                        
+            </tr> 
+                    
+         </thead> 
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <td> <code><u>C</u>O</code></td> 
+                         
+               <td> <a href="nsc_rpc.htm#CopyServer">Copy server
+                     profile</a></td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> <code><u>M</u>O</code></td> 
+                         
+               <td> <a href="nsc_rpc.htm#ModifyServer">Modify server
+                     profile</a></td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> <code>RE</code></td> 
+                         
+               <td> <a href="nsc_rpc.htm#RenameServer">Rename server
+                     profile</a></td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> <code>DE</code></td> 
+                         
+               <td> <a href="nsc_rpc.htm#DeleteServer">Delete server
+                     profile</a></td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> <code><u>D</u>I</code></td> 
+                         
+               <td> <a href="nsc_rpc.htm#DisplayServer">Display server
+                     profile</a></td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+      <p>To invoke a function for a server profile, mark the server with the
+                appropriate function code in column "Co".
+      </p> 
+            
+      <p>You may select various server profiles for various functions at the
+                same time; that is, you can mark several servers on the screen with a function
+                code. For each server marked, the appropriate processing screen will be
+                displayed. You may then perform the selected functions for one server profile
+                after another.
+      </p> 
+            
+           
+          
+         
+      <div><a name="CopyServer"></a></div> 
+          
+      <h3> Copying a Server Profile</h3> 
+           
+           
+      <p>The Copy Server Profile function is used to define a new Natural RPC
+               server to Natural Security by creating a security profile which is identical to
+               an already existing Natural RPC server security profile.
+      </p> 
+           
+          
+      <div><a name="d0e34300"></a></div> 
+           
+      <h4>What is Copied?</h4> 
+            
+            
+      <p>All components of the existing security profile will be copied into
+                the new security profile - except the owners (these will be copied from your
+                own user security profile into the new server security profile you are
+                creating).
+      </p> 
+            
+      <p>Any <em>links</em> from users to the existing server will <em>not</em>
+                be copied.
+      </p> 
+            
+           
+          
+      <div><a name="d0e34321"></a></div> 
+           
+      <h4>How to Copy</h4> 
+            
+            
+      <p>On the Maintenance selection list, mark the server whose security
+                profile you wish to duplicate with function code "CO".
+      </p> 
+            
+      <p>A window will be displayed. In the window, enter the ID of the new
+                server. The ID corresponds to the server name as specified with the Natural
+                profile parameter RPC (see <a href="nsc_rpc.htm#NatServerSettings">RPC Server
+                   Settings in Natural</a> above), and must conform to the naming
+                conventions for Natural RPC servers. Asterisk notation for the server ID is
+                possible, as described under <a href="nsc_rpc.htm#RPCprofiles">Security
+            Profiles for Natural RPC Servers</a> above.
+      </p> 
+            
+      <p>After you have entered a valid ID, the new security profile will be
+                displayed.
+      </p> 
+            
+      <p>The individual components of the security profile you may define or
+                modify are described under <a href="nsc_rpc.htm#ServerComponents">Components of an RPC Server
+            Profile</a> above.
+      </p> 
+            
+           
+          
+         
+      <div><a name="ModifyServer"></a></div> 
+          
+      <h3> Modifying a Server Profile</h3> 
+           
+           
+      <p>The Modify Server Profile function is used to change an existing
+               Natural RPC server security profile.
+      </p> 
+           
+      <p>On the Natural RPC Server Maintenance selection list, you mark the
+               server whose security profile you wish to change with function code
+               "MO". The security profile of the selected server will be
+               displayed.
+      </p> 
+           
+      <p>The individual components of the security profile you may define or
+               modify are described under <a href="nsc_rpc.htm#ServerComponents">Components of an RPC Server
+            Profile</a> above.
+      </p> 
+           
+          
+         
+      <div><a name="RenameServer"></a></div> 
+          
+      <h3> Renaming a Server Profile</h3> 
+           
+           
+      <p>The Rename function allows you to change the server ID of an existing
+               Natural RPC server security profile.
+      </p> 
+           
+      <p>On the Natural RPC Server Maintenance selection list, you mark the
+               server whose ID you wish to change with function code "RE". A
+               window will be displayed in which you can enter a new ID for the server
+               profile.
+      </p> 
+           
+      <p>The ID corresponds to the server name as specified with the Natural
+               profile parameter RPC (see <a href="nsc_rpc.htm#NatServerSettings">RPC Server
+                  Settings in Natural</a> above), and must conform to the naming
+               conventions for Natural RPC servers. Asterisk notation for the server ID is
+               possible, as described under <a href="nsc_rpc.htm#RPCprofiles">Security
+            Profiles for Natural RPC Servers</a> above.
+      </p> 
+           
+          
+         
+      <div><a name="DeleteServer"></a></div> 
+          
+      <h3> Deleting a Server Profile</h3> 
+           
+           
+      <p>The Delete Server Profile function is used to delete an existing
+               Natural RPC server security profile.
+      </p> 
+           
+      <p>On the Natural RPC Server Maintenance selection list, you mark the
+               server whose profile you wish to delete with function code "DE". A
+               window will be displayed.
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">If you have invoked the Delete function and should then decide
+                       against deleting the given server security profile, leave the Delete Server
+                       Profile window by pressing <span class="key">ENTER</span> without having typed in
+                       anything.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">If you wish to delete the given server security profile, enter the
+                       server ID in the window to confirm the deletion.
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>If you mark more than one server profile with "DE", a
+               window will appear in which you are asked whether you wish to confirm the
+               deletion of each server security profile with entering the server ID, or
+               whether all server profiles selected for deletion are to be deleted without
+               this individual confirmation. Be careful not to delete a server profile
+               accidentally.
+      </p> 
+           
+          
+         
+      <div><a name="DisplayServer"></a></div> 
+          
+      <h3> Displaying a Server Profile</h3> 
+           
+           
+      <p>The Display Server Profile function is used to display an existing
+               Natural RPC server security profile.
+      </p> 
+           
+      <p>On the Natural RPC Server Maintenance selection list, you mark the
+               server whose security profile you wish to view with function code
+               "DI". The security profile of the selected server will be
+               displayed.
+      </p> 
+           
+      <p>The individual components of the security profile are explained under
+               <a href="nsc_rpc.htm#ServerComponents">Components of an RPC Server
+            Profile</a> above.
+      </p> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="nsc_rpc.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="IAFsupport"></a></div> 
+         
+      <h2>IAF Support</h2> 
+          
+      <p>This section describes the support of the Integrated
+         Authentication Framework (IAF), which is a component of
+              EntireX. It covers the following
+              topics:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="nsc_rpc.htm#d0e34509">Using IAF Servers</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_rpc.htm#d0e34531">Creating and Maintaining IAF Server Security Profiles</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_rpc.htm#d0e34632">Components of an IAF Server Security Profile</a></p>
+         </li>
+      </ul> 
+          
+      <p>For details of IAF, see <cite>Introduction to the Integrated
+                 Authentication Framework</cite> in the EntireX
+         Communicator documentation. See also the section
+              <a href="../rpc/securi.htm#rpc-iaf">Using the Integrated
+            Authentication Framework</a> in the <cite>Natural Remote
+                 Procedure Call</cite> documentation.
+      </p>
+      <div><a name="d0e34509"></a></div> 
+          
+      <h3>Using IAF Servers</h3> 
+           
+           
+      <p>If IAF is installed, a Natural RPC server can use an IAF server for
+               token validation.
+      </p> 
+           
+      <p>An IAF server which to be used has to be defined to Natural Security,
+               that is, a security profile has to be created for it, as described below under
+               <cite>Creating and Maintaining IAF Server Security Profiles</cite>. 
+      </p> 
+           
+      <p>In the security profile of the Natural RPC server, you activate IAF
+               support by setting the option <a href="nsc_rpc.htm#ServerComponents">IAF
+                  Support</a> to "Y". When you do so, you will be prompted to select the
+               IAF server to be used by the RPC server. If only one IAF server is defined to
+               Natural Security or one of the IAF servers is defined as default server, this
+               one will be used without your being prompted.
+      </p> 
+          
+      <div><a name="d0e34531"></a></div> 
+          
+      <h3>Creating and Maintaining IAF Server Security Profiles</h3> 
+           
+           
+      <p>If you press <span class="key">PF10</span> on the Administrator Services &gt; General
+               Options screen, a list of all IAF servers for which security profiles have been
+               defined will be displayed. From the list, you can select an existing IAF server
+               profile for modification or deletion, or create a new security profile for an
+               IAF server. 
+      </p> 
+           
+      <p>To create a new IAF server security profile, you press <span class="key">PF4</span>
+               on the IAF server selection list. The Add IAF Server screen will be displayed.
+               The items you can define on this screen as part of an IAF server security
+               profile are described below under <cite>Components of an IAF Server Security
+                  Profile</cite>. 
+      </p> 
+           
+      <p>If no IAF server profiles have been defined yet, pressing
+               <span class="key">PF10</span> on the General Options screen will invoke the Add IAF Server
+               screen directly for you to define the first IAF server profile. 
+      </p> 
+           
+      <p>If only one IAF server profile has been defined, pressing
+               <span class="key">PF10</span> on the General Options screen will invoke this profile directly
+               for modification.
+      </p> 
+           
+      <p>The following functions are available (possible code abbreviations are
+               underlined) on the IAF Server Maintenance selection list:
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th align="left">Code</th> 
+                        
+               <th align="left">Function</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> <code><u>M</u>O</code></td> 
+                        
+               <td> Modify IAF server profile.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>DE</code></td> 
+                        
+               <td> Delete IAF server profile.</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>To invoke a function for an IAF server profile, mark the daemon with
+               the appropriate function code in column "Co".
+      </p> 
+           
+      <p>You may select various profiles for various functions at the same time;
+               that is, you can mark several IAF servers on the screen with a function code.
+               For each server marked, the appropriate processing screen will be displayed.
+               You can then perform the selected functions for one profile after another.
+      </p> 
+           
+      <p>To reset all fields in an IAF server security profile, you press
+               <span class="key">PF9</span> on the security profile screen.
+      </p> 
+          
+      <div><a name="d0e34632"></a></div> 
+          
+      <h3>Components of an IAF Server Security Profile</h3> 
+           
+           
+      <p>The individual items you can define as part of an IAF server security
+               profile are described below.
+      </p> 
+           
+      <p>The items correspond to appropriate settings in EntireX, which are
+               described in detail in the EntireX Communicator
+               documentation.
+      </p> 
+           
+      <h4 class="floating-title">IAF Server Identification</h4> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th align="left">Field</th> 
+                        
+               <th align="left">Explanation</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td>NSC ID of IAF server</td> 
+                        
+               <td>In this field, you specify the Natural Security ID of the IAF
+                  server. This is the ID by which the IAF server is assigned to a Natural RPC
+                  server in the RPC server profile (see IAF Support under
+                  <a href="nsc_rpc.htm#ServerComponents">Components of an RPC Server
+                               Profile</a> above). 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>Default</td> 
+                        
+               <td>If you mark this field with "X", this IAF server
+                  will be used by all Natural RPC servers, unless you change the IAF server
+                  assignment in individual Natural RPC server profiles.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Description</td> 
+                        
+               <td>In this field, you can enter a descriptive name for the IAF
+                  server.
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <h4 class="floating-title">IAF Configuration</h4> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th align="left">Field</th> 
+                        
+               <th align="left">Explanation</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td>Operating system</td> 
+                        
+               <td>In this field, you specify the operating system
+                  of the IAF server: 1 = z/OS, 2 = UNIX/Windows.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>Transport method</td> 
+                        
+               <td> In this field, you specify the transport method of the IAF
+                  server: 1 = SSL, 2 = SVC.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Host name</td> 
+                        
+               <td> 
+                  
+                  <p>In this field, you specify the host name of the IAF server. </p> 
+                            
+                  <p>For SSL, this is the IP address or the DNS name. </p> 
+                            
+                  <p>For SVC, this is the NODE specified in the attribute file of the
+                                IAF server.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>Port/SVC number</td> 
+                        
+               <td> 
+                  
+                  <p>If the server type is SSL, you specify the port number.</p> 
+                            
+                  <p>If the server type is SVC, you specify the SVC number.</p>
+               </td>
+                        
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>Verify server (Y/N)</td> 
+                        
+               <td>If this field is set to "Y", the subject name in the
+                  certificate of the IAF server must match the host name of the IAF
+                  server.
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <h4 class="floating-title">SSL Parameters for z/OS (Operating system =
+               1)
+      </h4> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th align="left">Field</th> 
+                        
+               <th align="left">Explanation</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td>Trust store</td> 
+                        
+               <td> 
+                  
+                  <p>In this field, you specify the location of the store containing
+                     certificates of trusted Certificate Authorities (CA certificates).
+                  </p> 
+                            
+                  <p>You specify the RACF keyring which contains the CA certificate as
+                                follows: <var>user-ID/keyring-name</var>. If you omit the
+                                <var>user-ID</var>, the keyring will be associated with RACF
+                                user ID under which the Natural RPC server is started.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Key label</td> 
+                        
+               <td>In this field, you specify the label of the user certificate in
+                  the the RACF keyring which is used to authenticate the RACF user ID of the
+                  Natural RPC server to the IAF server. This value has to be specified only if
+                  VERIFY-CLIENT=YES is specified in the attribute file of the IAF server.
+               </td>
+                        
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <h4 class="floating-title">SSL Parameters for UNIX and Windows (Operating system =
+               2)
+      </h4> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th align="left">Field</th> 
+                        
+               <th align="left">Explanation</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td>Trust store</td> 
+                        
+               <td> In this field, you specify the file name location of the CA
+                  certificate store. 
+                  
+                  <p> Example: C:/Certs/ExxCACert.pem</p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>Key store</td> 
+                        
+               <td>In this field, you specify the SSL certificate;
+                  it may contain the private key. 
+                  
+                  <p> Example: MyAppCert.pem</p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>Key file</td> 
+                        
+               <td>In this field, you specify the file which
+                  contains the EntireX Broker's private key, if it is not contained in the key
+                  store. 
+                  
+                  <p> Example: MyAppKey.pem</p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Key password</td> 
+                        
+               <td> In this field, you specify the password which is used to
+                  protect the private key and to unlock the key file (e.g. MyAppKey.pem).
+                  
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+          
+      <div class="noprint">
+         <p><a href="nsc_rpc.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="OtherRPC"></a></div> 
+         
+      <h2> Other RPC-Related Features</h2> 
+         
+      <div><a name="d0e34925"></a></div> 
+          
+      <h3>User Exit LOGONEX4</h3> 
+           
+           
+      <p>The Natural Security user exit LOGONEX4 is invoked by the Natural
+               Security RPC logon program after a successful logon of a Natural RPC client to
+               a Natural RPC server. For details, see <a href="nsc_exits.htm#LOGONEX4">RPC-Related User Exit</a> in the
+               section <cite>User Exits</cite>.
+      </p> 
+           
+          
+         
+      <div><a name="d0e34944"></a></div> 
+          
+      <h3>Password Change via RPC Service Request - User Exit USR2074</h3> 
+           
+           
+      <p>The Natural user exit USR2074, contained in the library SYSEXT, allows
+               you to change the user password via a Natural RPC service request.
+      </p> 
+           
+          
+        
+       
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="nsc_rpc.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../nsc/nsc_rpc.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/nsc/nsc_rpc.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc_appl.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc_extobj.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

@@ -1,0 +1,1901 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Using the Debugger</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="debug-remuse" id="5003"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../debug/debug-remuse.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/debug/debug-remuse.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="debug-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="debug-geninfo.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="debug-over.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Debugger&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1>Using the Debugger</h1>
+      </div>
+         
+         
+         
+      <p>This document covers the following
+             topics:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="debug-remuse.htm#debug-remuse-prep">Preparing Natural Objects</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="debug-remuse.htm#debug-remuse-start">Starting the Debugger</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="debug-remuse.htm#debug-remuse-leave">Leaving the Debugger</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="debug-remuse.htm#debug-remuse-op">Operating the Debugger</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="debug-remuse.htm#debug-remuse-src">Debugger Source Window</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="debug-remuse.htm#debug-remuse-watchvarbar">Watchvariables Control Bar</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="debug-remuse.htm#debug-remuse-varbar">Variables Control Bar</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="debug-remuse.htm#debug-remuse-watchbreakbar">Watchpoints and Breakpoints Control Bar</a></p>
+         </li>
+      </ul> 
+        
+      <hr>
+      <div><a name="debug-remuse-prep"></a></div> 
+         
+      <h2>Preparing Natural Objects</h2> 
+          
+          
+      <p>To exploit the full functional scope of the Natural debugger, you must
+              specify the following Natural profile parameter either dynamically or in your
+              Natural parameter file: 
+      </p> 
+          
+      <p><a href="../parms/symgen.htm"><code>SYMGEN</code></a> set to
+              "ON" 
+      </p> 
+          
+      <p>When an object is cataloged or stowed and <code>SYMGEN</code>
+              is set to "ON", a symbol table is generated as part
+              of the generated program. Since this table contains the information relevant to
+              the variables active for this object, variables cannot be accessed without
+              <code>SYMGEN</code> being specified, although it is still possible to
+              debug the object. 
+      </p> 
+         
+      <div class="noprint">
+         <p><a href="debug-remuse.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="debug-remuse-start"></a></div> 
+         
+      <h2>Starting the Debugger</h2> 
+          
+          
+      <p>The debugger can be applied to stowed or cataloged Natural programs and
+              dialogs only. 
+      </p> 
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To start the debugger</strong></p>
+      <ul>
+         <li> 
+                   
+                   
+            <p class="instep">Enter the following Natural command:</p> <pre class="command-input">DEBUG <var>objectname</var></pre> 
+                   <p class="instep"> where <var>objectname</var> is the name of the
+                       Natural object you wish to debug. 
+            </p> 
+                   
+                 
+         </li>
+      </ul> 
+          
+      <p>The title bar shows one of the following:</p> 
+          
+      <ul> 
+              
+         <li> 
+                   
+                  
+            <p class="initem"><strong>[break]</strong><br>When "[break]" is shown in the title bar,
+                      the debugger has control.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                   
+                  
+            <p class="initem"><strong>[waiting]</strong><br>When "[waiting]" is shown in the title bar,
+                      the Natural application currently being debugged has control.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>When the remote debugger becomes active on the Windows operating system,
+              the following information is shown in the title bar: "Debugging
+              remote Natural client
+              (\\<var>nodename::username::process-id</var>)",
+              where <var>nodename</var> is the name of the computer where
+              Natural is running, <var>username</var> is the name of the
+              Natural user and <var>process-id</var> is the Natural process
+              ID. 
+      </p> 
+          
+      <p>The debugger window contains a child window with a source listing of the
+              specified object that is to be debugged.
+      </p> 
+          
+      <p>In conjunction with this object source following information are
+              displayed using control bars:
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th>Control Bar </th> 
+                       
+               <th>Function</th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td>Breakpoints and Watchpoints</td> 
+                       
+               <td>This control bar consists of two tab areas. One
+                  maintains breakpoints whereas the other one maintains watchpoints. 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>Variables</td> 
+                       
+               <td>This control bar displays the active variables
+                  and their actual content. These variables are displayed under the following
+                  categories: Locals, Globals, Systems, AIVs and Contexts. 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>Watchvariables</td> 
+                       
+               <td>This control bar displays the user-selected
+                  variables of any category available in the variables control bar.
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>The individual control bars are described in more detail in the
+              remainder of this section.
+      </p> 
+         
+      <div class="noprint">
+         <p><a href="debug-remuse.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="debug-remuse-leave"></a></div> 
+         
+      <h2>Leaving the Debugger</h2> 
+          
+      <p>You can leave the debugger from any point within an application by
+              choosing either <span class="guimenuitem">Exit</span> (see below) or the
+              corresponding toolbar button. 
+      </p> 
+          
+      <p>The debugger is also terminated if the application ends without an
+              error; the trace cursor is then placed on the source code line last executed.
+              
+      </p> 
+          
+      <p>In the case of an error, the corresponding source is displayed in the
+              source window and the trace cursor is placed on the line which caused the
+              error. A message window appears with the appropriate error message and a choice
+              to either continue or end the debugging session. Continuing the debugging
+              session may be useful if, for example: 
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">your application contains any error processing (including error
+                      transactions); 
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">you want to display any variables before you end your debugging
+                      session. 
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>When you leave the debugger, your breakpoint, watchpoint and
+              watchvariable settings are automatically saved together with the window and
+              toolbar settings. All these settings will be restored the next time you invoke
+              the debugger again. 
+      </p> 
+          
+      <p class="note"><strong>Note:</strong><br>When, in the case of remote development, you leave the debugger on a
+              remote system, the program execution will continue, but the debugging control
+              of the program execution will stop. 
+      </p>
+      <div><a name="debug-remuse-exit"></a></div> 
+          
+      <h3>Exit Command</h3> 
+           
+           
+      <p><span class="guimenuitem">Exit</span> terminates the debugging session and
+               returns control to Natural. The <span class="guimenuitem">Exit</span> command is
+               available on the first menu in the main window of each of the five debugger
+               main facilities. 
+      </p> 
+          
+      <div class="noprint">
+         <p><a href="debug-remuse.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="debug-remuse-op"></a></div> 
+         
+      <h2>Operating the Debugger</h2> 
+          
+      <p>Before going into detail about the debugger's source window and other
+              main facilities, this section provides you with general information on the
+              debugger. 
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="debug-remuse.htm#debug-remuse-op-windows">Windows and Menus</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="debug-remuse.htm#debug-remuse-op-toolbar">Toolbar Buttons</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="debug-remuse.htm#debug-remuse-op-shortcut">Shortcut Keys</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="debug-remuse.htm#debug-remuse-op-watchbreak">Watchpoints and Breakpoints</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="debug-remuse.htm#debug-remuse-op-restart">Restarting the Debugging Session</a></p>
+         </li>
+      </ul>
+      <div><a name="debug-remuse-op-windows"></a></div> 
+          
+      <h3>Windows and Menus</h3> 
+           
+           
+      <p>The debugger provides various windows, control bars, toolbars and
+               menus. 
+      </p> 
+           
+      <p>Menu commands which are assumed to be used very often, are also
+               available as <a href="debug-remuse.htm#debug-remuse-op-toolbar">toolbar
+                  buttons</a> in the corresponding toolbars. 
+      </p> 
+           
+      <p>Instead of using the menus, you can choose toolbar buttons or use
+               <a href="debug-remuse.htm#debug-remuse-op-shortcut">shortcut keys</a>. 
+      </p> 
+           
+      <p>In contrast to Natural itself:</p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">the debugger has no command line. </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">the debugger's <span class="guimenu">Tools</span> menu contains the following
+                       options: 
+            </p> 
+                   
+            <ul style="margin-top: 0px; margin-bottom: 0px;"> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem"><span class="guimenuitem">Customize</span>, which allows you to modify
+                               your menu and toolbar appearance as well as define shortcuts for frequently
+                               used commands; 
+                  </p> 
+                          
+               </li> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem"><span class="guimenuitem">Fonts</span>, which allows you to modify the
+                               font of the source window; 
+                  </p> 
+                          
+               </li> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem"><span class="guimenuitem">Warning messages</span>, which allows you to
+                               decide whether warning messages on missing source code or symbolic information
+                               are to be displayed or not. A message that informs you whether the currently
+                               displayed source code is newer than the corresponding generated program is also
+                               affected. 
+                  </p> 
+                          
+               </li> 
+                      
+            </ul> 
+                  
+         </li> 
+              
+      </ul> 
+          
+      <div><a name="debug-remuse-op-toolbar"></a></div> 
+          
+      <h3>Toolbar Buttons</h3> 
+           
+           
+      <p>The toolbars provide you with fast access to frequently used commands.
+               To display a short description of a command, place the mouse pointer over the
+               corresponding button. The description appears in the status bar at the bottom
+               of the debugger's main window. If a command is currently not applicable, the
+               button is disabled. 
+      </p> 
+          
+      <div><a name="debug-remuse-op-shortcut"></a></div> 
+          
+      <h3>Shortcut Keys</h3> 
+           
+           
+      <p>A further way to execute a debugger command is by entering a
+               corresponding shortcut by using the keyboard. By default the following
+               shortcuts are defined: 
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>Menu</th> 
+                        
+               <th>Shortcut</th> 
+                        
+               <th>Function</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td>File</td> 
+                        
+               <td>Ctrl+O</td> 
+                        
+               <td>Open</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td rowspan="2">Edit</td> 
+                        
+               <td>Ctrl+F</td> 
+                        
+               <td>Find</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>F3</td> 
+                        
+               <td>Find Next </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td rowspan="8">Debug</td> 
+                        
+               <td>F4</td> 
+                        
+               <td>Close</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>F5</td> 
+                        
+               <td>Go</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>F6</td> 
+                        
+               <td>Step Over </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>F7</td> 
+                        
+               <td>Step In</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>Ctrl+F7</td> 
+                        
+               <td>Step Out</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>Ctrl+F6</td> 
+                        
+               <td>Run To Cursor</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>Alt+*</td> 
+                        
+               <td>Show Trace Position</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>F9 </td> 
+                        
+               <td>Toggle Breakpoint </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td rowspan="4">Variables</td> 
+                        
+               <td>Ctrl+M</td> 
+                        
+               <td>Modify Variable</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>Ctrl+D</td> 
+                        
+               <td>Display Variable</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>Ctrl+V </td> 
+                        
+               <td>Add to Watchvariables</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>Ctrl+W</td> 
+                        
+               <td>Add to Watchpoints</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+          
+      <div><a name="debug-remuse-op-watchbreak"></a></div> 
+          
+      <h3>Watchpoints and Breakpoints</h3> 
+           
+           
+      <p>Two types of entries can be defined in a program for debugging
+               purposes: <a href="debug-remuse.htm#debug-remuse-watchbreakbar-watch">watchpoints</a> and
+               <a href="debug-remuse.htm#debug-remuse-watchbreakbar-break">breakpoints</a>.
+               Each watchpoint or breakpoint is displayed in its corresponding control bar.
+               For each watchpoint, a name is assigned that corresponds to the name of the
+               variable it belongs to. 
+      </p> 
+           
+      <p>Each watchpoint or breakpoint can be activated or deactivated at any
+               time during a debugging session using its corresponding check box. 
+      </p> 
+           
+      <p>Every watchpoint or breakpoint has an event count, which increases
+               every time the debug entry is passed. The number of executions of a debug
+               entry, however, can be restricted in two ways: 
+      </p> 
+           
+      <ol> 
+               
+         <li> 
+                   
+            <p class="initem">A number of skips can be specified before the watchpoint or
+                       breakpoint is executed. The debug entry is then ignored until the event count
+                       is higher than the number of skips specified. 
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">A maximum number of executions can be specified, so that the
+                       watchpoint or breakpoint is ignored as soon as the event count exceeds the
+                       specified number of executions. 
+            </p> 
+                  
+         </li> 
+              
+      </ol> 
+          
+      <div><a name="debug-remuse-op-restart"></a></div> 
+          
+      <h3>Restarting the Debugging Session</h3> 
+           
+           
+      <p>When you restart your debugging session, the debugger repositions to
+               the beginning of the application while all your current settings (for example,
+               watchpoints or breakpoints) are kept and all counters as well as the
+               <a href="debug-remuse.htm#debug-remuse-src-debugmenu-calls">calls</a> history
+               are newly initialized. Thus, restarting a debugging session is useful if want
+               to rerun your application without having to specify the settings relevant for
+               debugging again. You can restart your debugging session from any point within
+               an application by choosing either the "Restart" command or the corresponding
+               toolbar icon. The <span class="guimenuitem">Restart</span> command is available in
+               the debug menu. 
+      </p> 
+           
+      <p class="note"><strong>Note:</strong><br>If you are running a debugging session in a remote environment, the
+               <span class="guimenuitem">Restart</span> command is not available, and if you are
+               debugging a DCOM or RPC server, the <span class="guimenuitem">Restart</span> command
+               restarts the called method or subprogram. 
+      </p> 
+          
+      <div class="noprint">
+         <p><a href="debug-remuse.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="debug-remuse-src" id="5000"></a></div> 
+         
+      <h2>Debugger Source Window</h2>
+          
+          
+      <p>When the debugger is invoked, it receives control of the specified
+              Natural object and displays the corresponding source in the source window. When
+              the source is not available, the window remains empty. The trace cursor is
+              placed on the first executable source code line. 
+      </p> 
+          
+      <p>When a user opens a new object or when a watchpoint or breakpoint is hit
+              inside another object but the currently active one, a new source window is
+              opened displaying the source of this new object. 
+      </p> 
+          
+      <p>The following topics are covered
+              below:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="debug-remuse.htm#debug-remuse-src-debugmenu">Debug Menu</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="debug-remuse.htm#debug-remuse-src-varmenu">Variables Menu</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="debug-remuse.htm#debug-remuse-src-dialogs">Dialog Boxes</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="debug-remuse.htm#debug-remuse-src-selectvar">Selecting Variables</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="debug-remuse.htm#debug-remuse-src-marktext">Marking Text in the Source Window</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="debug-remuse.htm#debug-remuse-src-display">Display</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="debug-remuse.htm#debug-remuse-src-modify">Modify</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="debug-remuse.htm#debug-remuse-src-quickwatch">Quick Watch</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="debug-remuse.htm#debug-remuse-src-addwatch">Add Watch</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="debug-remuse.htm#debug-remuse-src-addwatchpoint">Add Watchpoint</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="debug-remuse.htm#debug-remuse-src-filemenu">File Menu</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="debug-remuse.htm#debug-remuse-src-editmenu">Edit Menu</a></p>
+         </li>
+      </ul>
+      <div><a name="debug-remuse-src-debugmenu"></a></div>
+          
+          
+      <h3>Debug Menu</h3> 
+           
+           
+      <p>The following commands of the <span class="guimenu">Debug</span> menu are
+               available in conjunction with the source window:
+      </p> 
+           
+      <dl> 
+                
+                
+         <dt><a name="d0e5296"><strong>Step Into</strong></a></dt>
+         <dd> 
+                    
+            <p class="definition">When you choose the <span class="guimenuitem">Step Into</span> command,
+                        the next program step is executed and the trace cursor is placed on the
+                        corresponding source code line. 
+            </p> 
+                    
+            <p class="definition">If this source code line invokes or includes a further Natural
+                        object, the debugger steps into this object. 
+            </p>
+         </dd> 
+                
+                
+                
+         <dt><a name="d0e5312"><strong>Step Over</strong></a></dt>
+         <dd> 
+                    
+            <p class="definition">When you choose the <span class="guimenuitem">Step Over</span> command,
+                        the next program step is executed and the trace cursor is placed on the
+                        corresponding source code line. This time, however, the debugger steps over any
+                        invoked or included Natural object, but stops if this object contains
+                        watchpoints or breakpoints.
+            </p>
+         </dd> 
+                
+                
+                
+         <dt><a name="d0e5325"><strong>Step Out</strong></a></dt>
+         <dd> 
+                    
+            <p class="definition">When you choose the <span class="guimenuitem">Step Out</span> command, the
+                        debugger returns to the previous program level, but stops if it finds a
+                        watchpoint or breakpoint before this previous level is reached.
+                        
+            </p>
+         </dd> 
+                
+                
+                
+         <dt><a name="d0e5338"><strong>Animated Step Into</strong></a></dt>
+         <dd> 
+                    
+            <p class="definition">When you choose the <span class="guimenuitem">Animated Step Into</span>
+                        command, the program is automatically executed step by step until the end of
+                        the program. The debugger steps into any Natural object invoked or included.
+                        
+            </p>
+         </dd> 
+                
+                
+                
+         <dt><a name="d0e5351"><strong>Animated Step Over</strong></a></dt>
+         <dd> 
+                    
+            <p class="definition">When you choose the <span class="guimenuitem">Animated Step Over</span>
+                        command, the program is automatically executed step by step until the end of
+                        the program. The debugger steps over any invoked or included Natural object; if
+                        a watchpoint or breakpoint is set, it jumps to the corresponding statement line
+                        and continues animation. 
+            </p>
+         </dd> 
+                
+                
+                
+         <dt><a name="d0e5364"><strong>Go</strong></a></dt>
+         <dd> 
+                    
+            <p class="definition">When you choose the <span class="guimenuitem">Go</span> command, the
+                        program is executed until the next active watchpoint or breakpoint, and the
+                        trace cursor is placed on the corresponding source code line. 
+            </p>
+         </dd>
+                
+                
+                
+                
+         <dt><a name="d0e5377"><strong>Go Until Next Event</strong></a></dt>
+         <dd> 
+                    
+            <p class="definition">When you choose the <span class="guimenuitem">Go Until Next Event</span>
+                        command, this will have the same effect as the <span class="guimenuitem">Go</span>
+                        command in a non-event driven application. In an event-driven application,
+                        however, the object is executed until the next event is sent to the
+                        application; it stops if an active watchpoint or breakpoint occurs before the
+                        next event is sent. 
+            </p>
+         </dd> 
+                
+                
+                
+         <dt><a name="d0e5393"><strong>Run to Cursor</strong></a></dt>
+         <dd> 
+                    
+            <p class="definition">When you choose the <span class="guimenuitem">Run to Cursor</span>
+                        command, the program is executed until the source line at the current cursor
+                        position is reached. 
+            </p>
+         </dd> 
+                
+                
+                
+         <dt><a name="d0e5406"><strong>Show Trace Position</strong></a></dt>
+         <dd> 
+                    
+            <p class="definition">When you choose the <span class="guimenuitem">Show Trace Position</span>
+                        command, the current trace cursor will be displayed.
+            </p>
+         </dd> 
+                
+                
+                
+         <dt><a name="d0e5419"><strong>Toggle Breakpoint</strong></a></dt>
+         <dd> 
+                    
+            <p class="definition">When you choose the <span class="guimenuitem">Toggle Breakpoint</span>
+                        command, a breakpoint for the current trace position is added to the
+                        breakpoints control bar. If a breakpoint already exists for this cursor
+                        position, it will be removed from the breakpoints control bar.
+                        
+            </p>
+         </dd> 
+                
+                
+                
+         <dt><a name="debug-remuse-src-debugmenu-calls"><strong>Calls</strong></a></dt>
+         <dd> 
+                    
+            <p class="definition">The <span class="guimenu">Calls</span> submenu provides you with a list
+                        (history) of the most recently called Natural objects including copycodes and
+                        inline subroutines. Up to 20 objects can be listed; the most recently called
+                        object appears at the top of the list. 
+            </p> 
+                    
+            <p class="definition">The objects list consists of the following information: </p> 
+                    
+            <ul> 
+                        
+               <li> 
+                            
+                  <p class="initem">The program level of the called object without counting copycodes
+                                and inline subroutines. 
+                  </p> 
+                           
+               </li> 
+                        
+               <li> 
+                            
+                  <p class="initem">The program level of the called object counting copycodes and
+                                inline subroutines. 
+                  </p> 
+                           
+               </li> 
+                        
+               <li> 
+                            
+                  <p class="initem">The name of the called object. </p> 
+                           
+               </li> 
+                        
+               <li> 
+                            
+                  <p class="initem">The type of the called object. </p> 
+                           
+               </li> 
+                        
+               <li> 
+                            
+                  <p class="initem">The event and control handle of the event handler to be processed
+                                (with event-driven applications only). 
+                  </p> 
+                           
+               </li> 
+                       
+            </ul> 
+                    
+            <p class="definition">The status bar at the bottom of the debugger's main window displays
+                        additional information on the called object:
+            </p> 
+                    
+            <ul> 
+                        
+               <li> 
+                            
+                  <p class="initem">The name of the calling object: </p> 
+                            
+                  <p class="initem">"Natural" is displayed as the calling
+                                object if the called object is the application start-up program or a program
+                                activated from the Natural stack (including error transaction programs and
+                                programs activated by a <a href="../sm/run.htm"><code>RUN</code></a> statement from inside the
+                                application). 
+                  </p> 
+                           
+               </li> 
+                        
+               <li> 
+                            
+                  <p class="initem">The source code line in which the object was called: </p> 
+                            
+                  <p class="initem">If you select an object from the list, except with
+                                "Natural", the source of the calling program is
+                                displayed in the middle of the source window with the cursor placed at the
+                                beginning of the line in which the call occurred.
+                  </p> 
+                           
+               </li> 
+                       
+            </ul>
+         </dd> 
+                
+              
+      </dl> 
+          
+      <div><a name="debug-remuse-src-varmenu"></a></div> 
+          
+      <h3>Variables Menu</h3> 
+           
+           
+      <p>The <span class="guimenu">Variables</span> menu is used to:
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">Display the contents of selected variables.</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Modify the contents of selected variables.</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Quick watch the contents of the variable at the current trace
+                       position.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Add variables to the watchvariables control bar. </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Add variables to the watchpoints control bar. </p> 
+                  
+         </li> 
+              
+      </ul> 
+          
+      <div><a name="debug-remuse-src-dialogs"></a></div> 
+          
+      <h3>Dialog Boxes</h3> 
+           
+           
+      <p>When you choose the, <span class="guimenuitem">Display</span>,
+               <span class="guimenuitem">Modify</span>, <span class="guimenuitem">Add Watch</span> or
+               <span class="guimenuitem">Add Watchpoint</span> command, a dialog box is appears,
+               which displays a list of all local, global, AIV or system variables active in
+               the current debugging context. The following controls are part of this dialog
+               box: 
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">The <span class="selectable_label">Variable</span> text box, which shows the currently
+                       selected variable. 
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">The <span class="selectable_label">Line Reference</span> or <span class="selectable_label">Context
+                  ID</span> box, which shows the source code line number of the variable or
+                       context variable currently contained in the <span class="selectable_label">Variable</span> text
+                       box. 
+            </p> 
+                   
+            <p class="initem">The <span class="selectable_label">Line Reference</span> box is only displayed if the
+                       line reference is needed to make the variable selection unambiguous. This is
+                       the case if: 
+            </p> 
+                   
+            <ul style="margin-top: 0px; margin-bottom: 0px;"> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem">the variable belongs to a map; then the box contains the source
+                               code line number of the corresponding <code>RULEVAR</code> syntax element
+                               generated by the map editor; 
+                  </p> 
+                          
+               </li> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem">the variable is either a database variable (reporting mode only) or
+                               one of the following variables: <a href="../vari/appl.htm#ISN"><code>*ISN</code></a>,
+                               <a href="../vari/appl.htm#COUNTER"><code>*COUNTER</code></a>,
+                               <a href="../vari/appl.htm#NUMBER"><code>*NUMBER</code></a>;
+                               then the box contains the source code line number of the corresponding database
+                               loop or access statement; 
+                  </p> 
+                          
+               </li> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem">the variable is defined in reporting mode, but without a
+                               <a href="../sm/defineda.htm"><code>DEFINE DATA</code></a>
+                               statement. 
+                  </p> 
+                          
+               </li> 
+                      
+            </ul> 
+                   
+            <p class="initem">The <span class="selectable_label">Context ID</span> box is only displayed if the
+                       variable is a context variable; then the box contains the "ctx-Id"
+                       (context ID). 
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">The <span class="selectable_label">History List</span> list box
+                       (<span class="guimenuitem">Display</span> command only), which contains the most
+                       recently selected variables (up to 20) using a first-in first-out mechanism.
+                       
+            </p> 
+                   
+            <p class="initem">The history list helps you to quickly locate a variable that has been
+                       already selected before. Variables can be selected from the history list in the
+                       same way as from the variable list. 
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">The <span class="selectable_label">Variable</span> list box, which contains the
+                       corresponding variable listing.
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+          
+      <div><a name="debug-remuse-src-selectvar"></a></div> 
+          
+      <h3>Selecting Variables</h3> 
+           
+           
+      <p>When you choose a variable in the variable list of a dialog box, it is
+               shown in the corresponding <span class="selectable_label">Variable</span> text box. 
+      </p> 
+           
+      <p>When you choose a variable in the variable list of a dialog box, a
+               further dialog box is displayed (except with the
+               <span class="guimenuitem">Watch</span> command). 
+      </p> 
+           
+      <p>When you choose an array or variable group: </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">the individual array or group elements are displayed in the second
+                       dialog box (display), 
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">the array is displayed in the second dialog box for modification;
+                       groups cannot be modified (modify), 
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">a corresponding error message is displayed (watchpoint). </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>You can also choose a variable by first marking it directly in the
+               source window and then select the <span class="guimenuitem">Display</span>,
+               <span class="guimenuitem">Modify</span>, <span class="guimenuitem">Add Watch</span> or
+               <span class="guimenuitem">Add Watchpoint</span> command respectively. Then, the
+               <span class="selectable_label">Variable</span> text box of the corresponding dialog box exactly
+               shows the piece of source code you have marked, which then can be modified.
+               
+      </p> 
+          
+      <div><a name="debug-remuse-src-marktext"></a></div> 
+          
+      <h3>Marking Text in the Source Window</h3> 
+           
+           
+      <p>In the source window, you can mark variables or character strings for
+               selection with either the mouse or the keyboard. 
+      </p> 
+           
+      <p>When marking text using the mouse, place the mouse pointer on the first
+               character to be selected, drag the pointer to the last character you want to
+               select, and release the mouse button. To cancel a selection, choose anywhere in
+               the document. 
+      </p> 
+           
+      <p>When using the keyboard to mark text, cursor movement keys are used.
+               First place the cursor on a character by using an arrow key, then press and
+               hold down the <span class="key">SHIFT</span> key and use the following keys for text
+               selection: 
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">the <span class="key">LEFT-ARROW</span> key to mark the area to the left of your
+                       cursor position, 
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">the <span class="key">RIGHT-ARROW</span> key to mark the area to the right of your
+                       cursor position, 
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">the <span class="key">END</span> key to mark the area until the end of the source
+                       code line, 
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">the <span class="key">HOME</span> key to mark the area until the beginning of the
+                       source code line. 
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+          
+      <div><a name="debug-remuse-src-display"></a></div> 
+          
+      <h3>Display</h3> 
+           
+           
+      <p>With this command, a variable can be selected from the listing in the
+               dialog box for display along with its current content in a second
+               <span class="selectable_label">Display Variable</span> dialog box, where you can choose between
+               alphanumeric and binary representation of the variable value. 
+      </p> 
+           
+      <p>When you select an array, a handle variable or a group of variables,
+               the individual elements and their values are listed in the second dialog box.
+               With arrays, any variable index expression is evaluated. 
+      </p> 
+           
+      <p>The element listing can be expanded or contracted by choosing the
+               <span class="guibutton">Expand/Contract</span> button. Whenever the number of arrays,
+               groups or dialog element on the list exceeds a certain display limit, a
+               "More" line appears, which can be used to display
+               further objects. Alternatively, the <span class="guimenuitem">Expand</span> command
+               can also be used. 
+      </p> 
+           
+      <p>A variable, array or group of variables can also be selected for
+               display in the <span class="selectable_label">Display Variable</span> dialog box by choosing it
+               with the left mouse button directly in the source window.
+      </p> 
+          
+      <div><a name="debug-remuse-src-modify" id="5015"></a></div> 
+          
+      <h3>Modify</h3> 
+          
+           
+           
+      <p>With this command, a variable can be selected from the listing in the
+               dialog box for display together with its current value in a second
+               <span class="selectable_label">Modify Variable</span> dialog box, where its value can be
+               modified. 
+      </p> 
+           
+      <p>If you want to modify a system variable, only system variables which
+               can be modified are displayed in the first dialog box. 
+      </p> 
+           
+      <p>If you want to modify an array, only its name but no values are
+               displayed in the second dialog box. The value you enter will then be valid for
+               all array elements. 
+      </p> 
+           
+      <p>Groups of variables cannot be selected for modification. </p> 
+          
+      <div><a name="debug-remuse-src-quickwatch" id="5016"></a></div> 
+          
+      <h3>Quick Watch</h3> 
+          
+           
+           
+      <p>With this command, a dialog box appears displaying the contents of the
+               variable at the current cursor position.
+      </p> 
+          
+      <div><a name="debug-remuse-src-addwatch"></a></div> 
+          
+      <h3>Add Watch</h3> 
+           
+           
+      <p>With this command, variables, arrays or groups of variables can be
+               selected from the list in the dialog box in order to add them to the
+               watchvariables control bar. 
+      </p> 
+          
+      <div><a name="debug-remuse-src-addwatchpoint" id="5017"></a></div> 
+          
+      <h3>Add Watchpoint</h3> 
+          
+           
+           
+      <p>With this command, single variables and individual group or array
+               elements can be selected from the listing in the dialog box for the definition
+               of a watchpoint in a second <span class="selectable_label">Set Watchpoint</span> dialog box;
+               arrays and groups of variables cannot be selected. 
+      </p> 
+           
+      <p>The second <span class="selectable_label">Set Watchpoint</span>
+               <a href="debug-remuse.htm#debug-remuse-src-dialogs">dialog box</a> displays
+               the name of the watchpoint (which corresponds to the name of the selected
+               variable) together with its line reference (if applicable), and the names of
+               the corresponding Natural object and library. 
+      </p> 
+           
+      <p class="note"><strong>Note:</strong><br>With system variables, the corresponding watchpoint is not attached
+               to a specific library and object; therefore, the object and library name will
+               always be <code>SYSTEM</code>. 
+      </p> 
+           
+      <p>To define a watchpoint, you specify the following items in the
+               corresponding boxes: 
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">the state of the watchpoint, </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">a condition for the watchpoint to be activated (optional), </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">the number of skips before execution of the watchpoint, </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">the maximum number of executions of the watchpoint. </p> 
+                  
+         </li> 
+              
+      </ul> 
+          
+      <div><a name="debug-remuse-src-filemenu"></a></div> 
+          
+      <h3>File Menu</h3> 
+           
+           
+      <p>The following commands of the <span class="guimenu">File</span> menu are
+               available in conjunction with the source window:
+      </p> 
+           
+      <dl> 
+                
+                
+                
+         <dt><a name="debug-remuse-src-filemenu-open" id="5019"><strong>Open</strong></a></dt>
+         <dd> 
+                    
+            <p class="definition">With the <span class="guimenuitem">Open</span> command you can specify a
+                        further source program to be loaded into the source window. The <span class="selectable_label">Open
+                  Source</span> dialog box appears, in which you specify the program name and
+                        the appropriate library name if the program is not contained in the current
+                        library (default). 
+            </p> 
+                    
+            <p class="definition">You can also select a character string for being placed into the
+                        <span class="selectable_label">Open Source</span> dialog box by
+                        <a href="debug-remuse.htm#debug-remuse-src-marktext">marking</a> its name in
+                        the source window and then choosing the <span class="guimenuitem">Open</span>
+                        command. 
+            </p>
+         </dd> 
+                
+                
+                
+         <dt><a name="d0e5993"><strong>Close</strong></a></dt>
+         <dd> 
+                    
+            <p class="definition">The <span class="guimenuitem">Close</span> command will close the
+                        currently active source window. If the source window you are about to close
+                        contains the trace bar, the window will be iconized. 
+            </p>
+         </dd> 
+                
+                
+                
+                
+         <dt><a name="debug-remuse-src-filemenu-exit" id="5020"><strong>Exit</strong></a></dt>
+         <dd> 
+                    
+            <p class="definition">The <span class="guimenuitem">Exit</span> command will exit the debugger
+                        and end the current program execution.
+            </p>
+         </dd> 
+                
+              
+      </dl> 
+          
+      <div><a name="debug-remuse-src-editmenu"></a></div> 
+          
+      <h3>Edit Menu</h3> 
+           
+           
+      <p>The following commands of the Edit menu are available in conjunction
+               with the source window:
+      </p> 
+           
+      <dl> 
+                
+                
+         <dt><a name="d0e6034"><strong>Find</strong></a></dt>
+         <dd> 
+                    
+            <p class="definition">With the <span class="guimenuitem">Find</span> command, you can search up
+                        or down through the active window to locate each occurrence of a specified word
+                        or character string. 
+            </p> 
+                    
+            <p class="definition">The <span class="selectable_label">Find</span> dialog box appears, where you can
+                        enter the text to be located in the <span class="selectable_label">Find</span> text box. In
+                        addition, you can turn the <span class="selectable_label">Match Upper/Lower Case</span> and
+                        <span class="selectable_label">Whole Words Only</span> options on or off. 
+            </p> 
+                    
+            <p class="definition">If found, the first occurrence of the specified text is highlighted
+                        (selected), whereas a message lets you know if the text could not be found.
+                        
+            </p> 
+                    
+            <p class="definition">With the <span class="selectable_label">Match Upper/Lower Case</span> option, you can
+                        specify whether the find operation is to look for an exact match (ON) or for
+                        the same characters only, regardless of case (OFF). 
+            </p> 
+                    
+            <p class="definition">With the <span class="selectable_label">Whole Words Only</span> option, you can
+                        specify whether the find operation is to look for occurrences that are whole
+                        words only, not part of a character string (ON), or for all occurrences of the
+                        specified text, whole words and parts of a character string (OFF). 
+            </p> 
+                    
+            <p class="definition">To change the direction of the find, choose the
+                        <span class="guibutton">Up</span> button to search upwards, to the top of the text, or
+                        the <span class="guibutton">Down</span> button to search downwards, to the bottom of
+                        the text; <span class="guibutton">Down</span> is the default. 
+            </p> 
+                    
+            <p class="definition">If the find does not start at the top (or bottom) of the text, and
+                        the specified text cannot be found, a dialog appears. You can choose
+                        <span class="guibutton">Yes</span> to continue the find at the top (or bottom) of the
+                        text or <span class="guibutton">No</span> to cancel the search. 
+            </p> 
+                    
+            <p class="definition">You can also select a character string to be placed into the
+                        <span class="selectable_label">Find</span> text box by
+                        <a href="debug-remuse.htm#debug-remuse-src-marktext">marking</a> it directly
+                        in the source window and then choosing the <span class="guimenuitem">Find</span>
+                        command. 
+            </p>
+         </dd> 
+                
+                
+                
+         <dt><a name="d0e6110"><strong>Find Next</strong></a></dt>
+         <dd> 
+                    
+            <p class="definition">With this command, you can repeat the previous find operation and
+                        locate the next occurrence of the text specified with the
+                        <span class="guimenuitem">Find</span> command. 
+            </p>
+         </dd> 
+                
+              
+      </dl> 
+          
+      <div class="noprint">
+         <p><a href="debug-remuse.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="debug-remuse-watchvarbar"></a></div> 
+         
+      <h2>Watchvariables Control Bar</h2> 
+          
+          
+      <p>The watchvariables control bar is primarily intended to display
+              previously selected variables for closer and permanent observation of their
+              content. 
+      </p> 
+          
+      <p>It offers a context menu which either displays the commands which can be
+              used in combination with the entire control bar or displays the commands which
+              can be used with each individual watchvariable.
+      </p> 
+          
+      <p> To open the context menu, choose with the right mouse button either on
+              the control bars caption or on a particular watchvariable. 
+      </p> 
+         
+      <div class="noprint">
+         <p><a href="debug-remuse.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="debug-remuse-varbar"></a></div> 
+         
+      <h2>Variables Control Bar</h2> 
+          
+          
+      <p>The variables control bar displays all variables which are available at
+              current state of the program execution. All variables are grouped in different
+              categories. These categories are <span class="selectable_label">Locals</span>,
+              <span class="selectable_label">Globals</span>, <span class="selectable_label">Systems</span>,
+              <span class="selectable_label">AIVs</span> and <span class="selectable_label">Contexts</span>. You can switch
+              between these categories by choosing the corresponding tab at the bottom of the
+              control bar. In order to modify the content, select the content field of a
+              particular variable. Some system variables are read-only and therefore cannot
+              be modified. 
+      </p> 
+          
+      <p>The Variables control bar offers a context menu which either displays
+              the commands which can be used in combination with the entire control bar or
+              displays the commands which can be used with each individual variable. 
+      </p> 
+          
+      <p>To open the context menu, choose with the right mouse button on either
+              the control bars caption or on a particular variable. 
+      </p> 
+         
+      <div class="noprint">
+         <p><a href="debug-remuse.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="debug-remuse-watchbreakbar"></a></div> 
+         
+      <h2>Watchpoints and Breakpoints Control Bar</h2> 
+          
+      <p>The Watchpoints and Breakpoints control bar is used to add and maintain
+              watchpoints and breakpoints. You can switch between the watchpoints and
+              breakpoint by choosing the corresponding tab at the bottom of the control bar.
+              
+      </p>
+      <div><a name="debug-remuse-watchbreakbar-watch"></a></div> 
+          
+      <h3>Watchpoints</h3> 
+           
+      <p>Using watchpoints, you can rapidly detect "illegal"
+               alterations to Natural variables by objects that contain errors. 
+      </p> 
+           
+      <p>By default, watchpoints are used to instruct the debugger to interrupt
+               the execution of Natural objects when the contents of a variable change.
+               However, by specifying a certain value to the variable together with a
+               watchpoint operator when setting a watchpoint, a condition can be set which
+               only activates the watchpoint when condition becomes true. 
+      </p> 
+           
+      <p>A variable is considered to have changed either when its current value
+               differs from the value recorded when the watchpoint was last triggered or when
+               it differs from the initial value. 
+      </p> 
+           
+      <p>In order to deactivate a watchpoint temporarily, remove the check mark
+               from the check box of the corresponding watchpoint entry. 
+      </p> 
+           
+      <p>The watchpoint tab of this control bar offers a context menu which
+               either displays the commands which can be used in combination with the entire
+               tab or displays the commands which can be used with each individual watchpoint.
+               
+      </p> 
+           
+      <p>To open the context menu, choose with the right mouse button on either
+               the tabs caption or on a particular watchpoint. 
+      </p>
+      <div><a name="debug-remuse-watchbreakbar-addwatch" id="5027"></a></div> 
+           
+      <h4>Add Watchpoint</h4> 
+            
+            
+            
+      <p>A new watchpoint can be added either by selecting the <span class="guimenuitem">Add
+            Watchpoint</span> command from the variables menu or by selecting the
+                command <span class="guimenuitem">Add</span> from the context menu of the
+                watchvariables tab.
+      </p> 
+            
+      <p> The <span class="selectable_label">Add Watchpoint</span> dialog box allows you to
+                select single variables, arrays and individual group elements from the list of
+                available variables. Closing the dialog with the <span class="guibutton">OK</span>
+                button will open the <span class="selectable_label">Set Watchpoint</span> dialog box which
+                allows you specify a condition for this watchpoint. 
+      </p> 
+            
+      <p class="note"><strong>Note:</strong><br>With system variables, the corresponding watchpoint is not attached
+                to a specific library and object; therefore, the object and library name will
+                always be <code>SYSTEM</code>. 
+      </p> 
+           
+      <div><a name="debug-remuse-watchbreakbar-setwatch" id="5030"></a></div> 
+           
+      <h4><span class="selectable_label">Set Watchpoint</span> Dialog Box
+      </h4> 
+            
+            
+            
+      <p>The <span class="selectable_label">Set Watchpoint</span> dialog box displays the name
+                of the watchpoint (which corresponds to the name of the selected variable)
+                together with its line reference/context ID (if applicable) and the names of
+                the corresponding Natural object and library. 
+      </p> 
+            
+      <p class="note"><strong>Note:</strong><br>With system variables, the corresponding watchpoint is not attached
+                to a specific library and object; therefore, the object and library name will
+                always be <code>SYSTEM</code>. 
+      </p> 
+            
+      <p>To define a watchpoint, you can specify the following items in the
+                corresponding boxes: 
+      </p> 
+            
+      <ul> 
+                
+         <li> 
+                    
+            <p class="initem">The state of the watchpoint to be set; valid states are
+                        "active" (default) and
+                        "pending". 
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">A condition for the watchpoint to be activated (optional). </p> 
+                   
+         </li> 
+               
+      </ul> 
+            
+      <p>You can specify an appropriate value and watchpoint operator; if no
+                operator and value (that is, condition) is specified, the default setting (MOD)
+                applies (for a description of the individual watchpoint operators, see below).
+                
+      </p> 
+            
+      <ul> 
+                
+         <li> 
+                    
+            <p class="initem">The number of skips before execution of the watchpoint if it is not
+                        to be executed until the program has run a certain number of times; the default
+                        is 0. 
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">The maximum number of executions of the watchpoint; the default is
+                        0. 
+            </p> 
+                   
+         </li> 
+               
+      </ul> 
+            
+      <p>A watchpoint will not be set until you either choose the
+                <span class="guibutton">OK</span> button or press <span class="key">ENTER</span>. If you choose the
+                <span class="guibutton">Cancel</span> button or press <span class="key">ESC</span>, no watchpoint
+                will be set. 
+      </p> 
+            
+      <p>Once a watchpoint has been specified, it remains until you delete it
+                explicitly. 
+      </p> 
+           
+      <div><a name="debug-remuse-watchbreakbar-watchops"></a></div> 
+          
+      <h3>Watchpoint Operators</h3> 
+           
+           
+      <p>Watchpoint operators are set via option buttons; the available
+               watchpoint operators are:
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="13%">
+            <col width="13%">
+            <col width="71%">
+         </colgroup> 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>Operator</th> 
+                        
+               <th>Stands for</th> 
+                        
+               <th>Description</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td>MOD</td> 
+                        
+               <td>Modification</td> 
+                        
+               <td> The watchpoint is activated each time a
+                  modification of the variable occurs. Default.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>LT</td> 
+                        
+               <td>Less Than </td> 
+                        
+               <td>The watchpoint is activated only when the
+                  current value of the variable is less than the specified value. 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>LE</td> 
+                        
+               <td>Less or Equal</td> 
+                        
+               <td>The watchpoint is activated only when the
+                  current value of the variable is less than or equal to the specified value.
+                  
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>GT</td> 
+                        
+               <td>Greater Than </td> 
+                        
+               <td>The watchpoint is activated only when the
+                  current value of the variable is greater than the specified value. 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>GE</td> 
+                        
+               <td>Greater or Equal</td> 
+                        
+               <td>The watchpoint is activated only when the
+                  current value of the variable is greater than or equal to the specified value.
+                  
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>EQ</td> 
+                        
+               <td>Equal</td> 
+                        
+               <td>The watchpoint is activated only when the
+                  current value of the variable is equal to the specified value. 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>NE</td> 
+                        
+               <td>Not Equal</td> 
+                        
+               <td>The watchpoint is activated only when the
+                  current value of the variable is not equal to the specified value. 
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+          
+      <div><a name="debug-remuse-watchbreakbar-break"></a></div> 
+          
+      <h3>Breakpoints</h3> 
+           
+      <p>A breakpoint is a point at which control is returned to the user while
+               a Natural object is executing. 
+      </p> 
+           
+      <p>In order to deactivate a breakpoint temporarily, remove the check mark
+               from the check box of the corresponding breakpoint entry. 
+      </p> 
+           
+      <p>The breakpoint tab of this control bar offers a context menu which
+               either displays the commands which can be used in combination with the entire
+               tab or displays the commands which can be used with each individual breakpoint.
+               
+      </p> 
+           
+      <p>To open the context menu, choose with the right mouse button on either
+               the tabs caption or on a particular breakpoint. 
+      </p>
+      <div><a name="debug-remuse-watchbreakbar-addbreak" id="5047"></a></div> 
+           
+      <h4>Add Breakpoint</h4> 
+           
+            
+            
+      <p>With the <span class="guimenuitem">Add</span> command, you can define a new
+                breakpoint. The <span class="selectable_label">Add Breakpoint</span> dialog box is displayed,
+                where you define the breakpoint by specifying the following items in the
+                corresponding boxes: 
+      </p> 
+            
+      <ul> 
+                
+         <li> 
+                    
+            <p class="initem">The state of the breakpoint to be set; valid states are
+                        "active" (default) and
+                        "pending". 
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">The name of the Natural object to contain the breakpoint; the
+                        default object name is the name of the object currently in the source window.
+                        
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">The name of the Natural library that contains the object with the
+                        breakpoint; the default library name is the name of the library which contains
+                        the object currently in the source window. 
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">The line number of the object's source code where the breakpoint is
+                        to be executed. 
+            </p> 
+                   
+         </li> 
+               
+      </ul> 
+            
+      <p><span class="selectable_label">Begin</span> means that the breakpoint is to be set at
+                the first executable line of code of the specified object;
+                <span class="selectable_label">End</span> means that the breakpoint is to be set at the last
+                executable line of code of the specified object. 
+      </p> 
+            
+      <ul> 
+                
+         <li> 
+                    
+            <p class="initem">The number of skips before execution of the breakpoint if it is not
+                        to be executed until the program has run a certain number of times; the default
+                        is 0. 
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">The maximum number of executions of the breakpoint; the default is
+                        0. 
+            </p> 
+                   
+         </li> 
+               
+      </ul> 
+            
+      <p>A breakpoint will not be set until you either choose the
+                <span class="guibutton">OK</span> button or press <span class="key">ENTER</span>. If you choose the
+                <span class="guibutton">Cancel</span> button or press <span class="key">ESC</span>, no breakpoint
+                will be set. 
+      </p> 
+            
+      <p>Breakpoints can also be set directly in the program currently
+                contained in the source window by double-clicking the appropriate statement
+                line with the right mouse button. This way, a breakpoint is defined
+                with all default values and the corresponding source code line number. It can
+                be displayed and/or modified by using the corresponding functions.
+      </p> 
+            
+      <p> Breakpoints cannot be set on comment lines or on any statement line
+                other than the first one if a single statement occupies more than one line.
+                
+      </p> 
+            
+      <p>Once a breakpoint has been defined, it remains until you delete it
+                explicitly. 
+      </p> 
+           
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="debug-remuse.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../debug/debug-remuse.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/debug/debug-remuse.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="debug-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="debug-geninfo.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="debug-over.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

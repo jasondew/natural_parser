@@ -1,0 +1,1518 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>User Input</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="fs-input"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../firststeps/fs-input.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/firststeps/fs-input.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="fs-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="fs-dbaccess.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="fs-loop.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;First Steps&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1>User Input</h1>
+      </div> 
+         
+      <p>You will now learn how to prompt the user for data, that is: a starting
+             name and an ending name for the output.
+      </p> 
+         
+      <p>When you have completed the exercises below, your sample application will
+             consist of the following modules:
+      </p> 
+         
+      <p><img src="graphics/fs-map.png" alt="Application structure" width="460" height="160"></p> 
+         
+      <p>This document contains the following
+             exercises:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="fs-input.htm#fs-input-allow">Allowing for User Input</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="fs-input.htm#fs-input-map">Designing a Map for User Input</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="fs-input.htm#fs-input-invokemap">Invoking the Map from Your Program</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="fs-input.htm#fs-input-endname">Ensuring that an Ending Name is Always Used</a></p>
+         </li>
+      </ul>
+      <hr>
+      <div><a name="fs-input-allow"></a></div> 
+         
+      <h2>Allowing for User Input</h2> 
+          
+          
+      <p>You will now modify your program so that input fields for the starting
+              name and ending name will be shown in the output. This is done using the
+              <code>INPUT</code> statement.
+      </p> 
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To define input fields</strong></p>
+      <ol class="steps">
+         <li> 
+                   
+                   
+            <p class="instep">Insert the following below <code>END-DEFINE</code>:
+            </p> 
+                   <pre class="verbatim">INPUT (AD=MT)
+  "Start:" #NAME-START /
+  "End:  " #NAME-END</pre> 
+                   <p class="instep">The session parameter <code>AD</code> stands for
+                       "attribute definition", its value "M"
+                       stands for "modifiable output field", and the value
+                       "T" stands for "translate lowercase to
+                       uppercase".
+            </p> 
+                   
+            <p class="instep">The "M" value in
+                       <code>AD=MT</code> means that the default values defined with
+                       <code>INIT</code> (that is: "ADKINSON" and
+                       "BENNETT") will be shown in the input fields.
+                       Different values may be entered by the user. When the
+                       "M" value is omitted, the input fields will be empty
+                       even though default values have been defined.
+            </p> 
+                   
+            <p class="instep">The "T" value in
+                       <code>AD=MT</code> means that all lowercase input is translated to
+                       uppercase before further processing. This is important since the names in the
+                       demo database file have been defined completely in uppercase letters. When the
+                       "T" value is omitted, you have to enter all names
+                       completely in uppercase letters. Otherwise, the specified name will not be
+                       found.
+            </p> 
+                   
+            <p class="instep"><code>"Start:"</code> and <code>"End:"</code> are text fields
+                       (labels). They are specified in quotation marks.
+            </p> 
+                   
+            <p class="instep"><code>#NAME-START</code> and <code>#NAME-END</code> are data fields
+                       (input fields) in which the user can enter the desired starting name and ending
+                       name.
+            </p> 
+                   
+            <p class="instep">The slash (/) means that the subsequent fields are to be shown in a
+                       new line.
+            </p> 
+                   
+                   
+                   
+            <p class="instep">Your program should now look as follows:</p> 
+                   <pre class="verbatim">DEFINE DATA
+LOCAL
+  1 #NAME-START        (A20) INIT &lt;"ADKINSON"&gt;
+  1 #NAME-END          (A20) INIT &lt;"BENNETT"&gt;
+  1 EMPLOYEES-VIEW VIEW OF EMPLOYEES
+    2 FULL-NAME
+      3 NAME (A20)
+    2 DEPT (A6)
+    2 LEAVE-DATA
+      3 LEAVE-DUE (N2)
+END-DEFINE
+*
+INPUT (AD=MT)
+  "Start:" #NAME-START /
+  "End:  " #NAME-END
+*
+READ EMPLOYEES-VIEW BY NAME
+  STARTING FROM #NAME-START
+  ENDING AT #NAME-END
+*
+  DISPLAY NAME 3X DEPT 3X LEAVE-DUE
+*
+END-READ
+*
+END</pre> 
+                   
+                 </li>
+         <li> 
+                   
+                   
+            <p class="instep">Run the program.</p> 
+                   
+                   
+            <p class="instep">The output shows the fields you have just defined.</p> 
+                   <pre class="system-output">Start: ADKINSON                                                                
+End:   BENNETT</pre> 
+                 </li>
+         <li> 
+                   
+                   
+            <p class="instep">Use the default names and press <span class="key">ENTER</span>.
+            </p> 
+                   
+                   
+            <p class="instep">The list of employees is now shown.</p> 
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep"> Press <span class="key">ENTER</span> repeatedly until you return to the program
+                       editor, or enter <code>EDIT</code> at the <code>MORE</code>
+                       prompt.
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Stow the program.</p> 
+                   
+                 
+         </li>
+      </ol> 
+         
+      <div class="noprint">
+         <p><a href="fs-input.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="fs-input-map"></a></div> 
+         
+      <h2> 
+             <a name="x27"></a>Designing a Map for User Input
+      </h2> 
+          
+      <p>You are now introduced to a different way of prompting the user for
+              input. You will use the map editor to create a map which contains the same
+              fields that you have previously defined in your program. A map is a separate
+              object and is used to separate the user interface layout from the business
+              logic of an application.
+      </p> 
+          
+      <p>The map you will create now will look as follows:</p> 
+           
+          
+           
+          
+      <table border="1" cellpadding="5" class="screen">
+         <tr>
+            <td><pre>XXXXXXXXXX                                                           TT:TT:TT 
+                                                                              
+                                                                              
+                         Start XXXXXXXXXXXXXXXXXXXX                           
+
+                           End XXXXXXXXXXXXXXXXXXXX                           
+                                                                              
+                                                                              
+
+
+
+</pre></td>
+         </tr>
+      </table>
+          
+      <p>The first line of the map contains system variables for the current date
+              and time. There are two data fields (input fields) in which the user can
+              specify a starting name and an ending name. The data fields are preceeded by
+              text fields (labels).
+      </p> 
+           
+           
+          
+      <p>The following steps are required for the above
+              map:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="fs-input.htm#fs-input-newmap">Creating a Map</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="fs-input.htm#fs-input-textfield">Defining Text Fields</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="fs-input.htm#fs-input-datafield">Defining Data Fields</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="fs-input.htm#fs-input-datafieldname">Specifying Names for Data Fields</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="fs-input.htm#fs-input-sysvar">Adding System Variables</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="fs-input.htm#d0e6649">Repositioning Fields</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="fs-input.htm#fs-input-testmap">Testing a Map</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="fs-input.htm#fs-input-stowmap">Stowing a Map</a></p>
+         </li>
+      </ul>
+      <div><a name="fs-input-newmap"></a></div> 
+          
+      <h3>Creating a Map</h3> 
+           
+           
+      <p>You will now invoke the map editor in which you will design your map.
+               
+      </p> 
+            
+            
+            
+            
+           
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To create a map</strong></p>
+      <ul>
+         <li> 
+                    
+                    
+            <p class="instep">In the program editor's command line, enter one of the
+                        following:
+            </p> <pre class="command-input">EDIT MAP</pre> <pre class="command-input">E M</pre> 
+                    
+                    <p class="instep">The <span class="selectable_label">Natural Map Editor</span> menu
+                        appears.
+            </p> 
+                    
+            <table border="1" cellpadding="5" class="screen">
+               <tr>
+                  <td><pre>+------------------------------------------------------------------------------+
+&brvbar;                    NATURAL MAP EDITOR (Esc to select field)                  &brvbar;
+&brvbar;Create   Modify    Erase     Drag      Info OFF  Lines     Ops. Map  Quit     &brvbar;
++------------------------------------------------------------------------------+
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+ Create a new field definition   </pre></td>
+               </tr>
+            </table> 
+                  
+         </li>
+      </ul> 
+          
+      <div><a name="fs-input-textfield"></a></div> 
+          
+      <h3>Defining Text Fields</h3> 
+           
+           
+      <p>You will now add two text fields (also called constants or labels) to
+               the map.
+      </p> 
+            
+            
+           
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To define the text fields</strong></p>
+      <ol class="steps">
+         <li> 
+                    
+                    
+            <p class="instep">On the <span class="selectable_label">Natural Map Editor</span> menu,
+                        select <span class="guimenu">Create</span> and press <span class="key">ENTER</span>.
+            </p> 
+                    
+                    
+            <p class="instep">A window appears listing all items that you can create.</p> 
+                    
+            <table border="1" cellpadding="5" class="screen">
+               <tr>
+                  <td><pre>+------------------------------------------------------------------------------+
+&brvbar;                    NATURAL MAP EDITOR (Esc to select field)                  &brvbar;
+&brvbar;Create   Modify    Erase     Drag      Info OFF  Lines     Ops. Map  Quit     &brvbar;
+++-----------------------+-----------------------------------------------------+
+ &brvbar; A Parameter Data Area &brvbar;                                                      
+ &brvbar; G Global Data Area    &brvbar;                                                      
+ &brvbar; H Help Routine        &brvbar;                                                      
+ &brvbar; L Local Data Area     &brvbar;                                                      
+ &brvbar; M Map                 &brvbar;                                                      
+ &brvbar; N Subprogram          &brvbar;                                                      
+ &brvbar; P Program             &brvbar;                                                      
+ &brvbar; S Subroutine          &brvbar;                                                      
+ &brvbar; T Text Constant       &brvbar;                                                      
+ &brvbar; U User Defined        &brvbar;                                                      
+ &brvbar; V View Defined        &brvbar;                                                      
+ &brvbar; 1 Parm Defined        &brvbar;                                                      
+ &brvbar; 2 Local Defined       &brvbar;                                                      
+ +-----------------------+                                                      
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+ Take variable definition from parameter data area </pre></td>
+               </tr>
+            </table> 
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">Use the arrow keys to select <span class="guimenuitem">Text
+                  Constant</span> and press <span class="key">ENTER</span>.
+            </p> 
+                    
+                    
+                    
+            <p class="instep">Or:<br>Press <span class="key">T</span>.
+            </p> 
+                    
+                    
+            <p class="instep">An empty screen appears. A message prompts you to position the
+                        cursor and to enter text.
+            </p> 
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">Move the cursor to the first position of the fourth line (line and
+                        column number are shown at the bottom of the screen) and type in the
+                        following:
+            </p> 
+                    <pre class="verbatim">Start</pre> 
+                    <p class="instep">Do not yet press <span class="key">ENTER</span>.
+            </p> 
+                    
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">Press <span class="key">PF2</span>.
+            </p> 
+                    
+                    
+            <p class="instep">A window appears in which you can set the attributes for this text
+                        field.
+            </p> 
+                    
+            <table border="1" cellpadding="5" class="screen">
+               <tr>
+                  <td><pre>
+                                                                              
+                                                                              
+                                                                              
+Start                                                                         
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
++-Text Attribute/Color Definition: --------------+                            
+&brvbar; Attribute: &lt;No Attribute&gt; Color: &lt;No Color&gt;    &brvbar;                
++------------------------------------------------+                            
+ MAP0083: Use cursor keys (UP, DOWN) for Attribute. (Esc=Cancel, Enter=OK)</pre></td>
+               </tr>
+            </table> 
+                    
+            <p class="instep">The <span class="selectable_label">Attribute</span> field is automatically
+                        selected.
+            </p> 
+                    
+            <p class="note"><strong>Note:</strong><br> Using <span class="key">LEFT-ARROW</span> and <span class="key">RIGHT-ARROW</span>, you can
+                        toggle between the fields for attribute and color definition. This tutorial
+                        does not use colors.
+            </p> 
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">Use <span class="key">UP-ARROW</span> or <span class="key">DOWN-ARROW</span> to scroll through
+                        the available attributes. When "Default" is shown in
+                        the window, press <span class="key">ENTER</span>. "Default" means
+                        that the field is neither intensified nor in any way highlighted.
+            </p> 
+                    
+                    
+            <p class="instep">The field is now selected in the screen. This is indicated by a
+                        highlighted background.
+            </p> 
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">Press <span class="key">ESC</span> to redisplay the menu.
+            </p> 
+                    
+                    
+            <p class="instep"><span class="key">ESC</span> is used as a toggle to display and hide the menu. The
+                        text field you have just defined is no longer shown. It has not been deleted.
+                        It has just disappeared behind the menu. When you press <span class="key">ESC</span> once
+                        more, the menu disappears and your field is shown again.
+            </p> 
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">Add a second text field in the same way as you have added the first
+                        text field (that is: define a second text constant and set the
+                        <span class="selectable_label">Default</span> attribute). Place it in the line below the
+                        <span class="selectable_label">Start</span> field (that is in line 5) and name it as
+                        follows:
+            </p> 
+                    <pre class="verbatim">End</pre> 
+                    
+                  </li>
+         <li> 
+                    
+                    
+            <p class="instep">When you have added the second text field, press <span class="key">ESC</span> to
+                        redisplay the menu.
+            </p> 
+                    
+                    
+            <p class="instep"> You should now see the new <span class="selectable_label">End</span> field right
+                        below the menu.
+            </p> 
+                  
+         </li>
+      </ol> 
+          
+      <div><a name="fs-input-datafield"></a></div> 
+          
+      <h3>Defining Data Fields</h3> 
+           
+           
+      <p>You will now add two data fields to the map. These are the input fields
+               in which the user can specify the starting name and ending name.
+      </p> 
+            
+            
+            
+            
+            
+           
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To define the data fields</strong></p>
+      <ol class="steps">
+         <li> 
+                    
+                    
+            <p class="instep">From the <span class="guimenu">Create</span> menu, choose <span class="guimenuitem">User
+                  Defined</span>.
+            </p> 
+                    
+                    
+            <p class="instep">The <span class="selectable_label">Extended Field Editing</span> window appears:
+            </p> 
+                    
+            <table border="1" cellpadding="5" class="screen">
+               <tr>
+                  <td><pre>
+                                                                                
+                                                                                
+                                                                                
+Start                                                                           
+End                                                                             
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
++-Extended Field Editing-------------------------------------------------------+
+&brvbar;Field :                                                                       &brvbar;
+&brvbar;Format: A Len:            AL:             PM:                  ZP: N  SG: N   &brvbar;
+&brvbar;Rules : 0 Rule Editing: N Array:          Array Editing: N     Mode:          &brvbar;
+&brvbar;AD:            CD:        CV:                                  DY: N  HE: N   &brvbar;
+&brvbar;EM:                                                                           &brvbar;
++------------------------------------------------------------------------------+
+                                                                                
+ MAP0079: Position cursor and press Enter or format char.(Esc=Cancel) (012,019)</pre></td>
+               </tr>
+            </table> 
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">Position the cursor behind the <span class="selectable_label">Start</span> field
+                        (leave a blank space between text field and data field) and press
+                        <span class="key">ENTER</span>.
+            </p> 
+                    
+                    
+            <p class="instep">The following window appears.</p> 
+                    
+            <table border="1" cellpadding="5" class="screen">
+               <tr>
+                  <td><pre>+---------------------+
+&brvbar; A Alphanumeric      &brvbar;
+&brvbar; B Binary            &brvbar;
+&brvbar; D Date              &brvbar;
+&brvbar; F Floating Point    &brvbar;
+&brvbar; I Integer           &brvbar;
+&brvbar; L Logical           &brvbar;
+&brvbar; N Numeric           &brvbar;
+&brvbar; P Packed Numeric    &brvbar;
+&brvbar; T Time              &brvbar;
+&brvbar; * System            &brvbar;
++---------------------+</pre></td>
+               </tr>
+            </table> 
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">Choose <span class="guilistitem">A Alphanumeric</span>.
+            </p> 
+                    
+                    
+            <p class="instep">The selected format is shown in the <span class="selectable_label">Format</span>
+                        field of the <span class="selectable_label">Extended Field Editing</span> window. The cursor is
+                        automatically positioned in the <span class="selectable_label">AL</span> field.
+            </p> 
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">Enter "20" in the <span class="selectable_label">AL</span>
+                        field.
+            </p> 
+                    
+            <p class="instep">This means that the data field is defined with a length of 20
+                        characters. 
+            </p> 
+                    
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">Press <span class="key">TAB</span>.
+            </p> 
+                    
+                    
+            <p class="instep">In the map, the length of the field is now indicated by
+                        "X" characters.
+            </p> 
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">Press <span class="key">TAB</span> repeatedly until the <span class="selectable_label">AD</span>
+                        field is highlighted.
+            </p> 
+                    
+            <p class="instep">You will now define the I/O characteristics and the filler
+                        character. The following attribute definition characters are currently shown in
+                        the <span class="selectable_label">AD</span> field:
+            </p> 
+                    <pre class="verbatim">ILMFHT'_'</pre> 
+                    <p class="instep">The I/O characteristics are indicated by the letter
+                        "M". The filler character is indicated by
+                        <code>'_'</code>. This tutorial uses these default settings. The following
+                        steps are just provided to illustrate the usage of this function. At this
+                        point, you can also close the <span class="selectable_label">Attribute Definition</span> window
+                        and the <span class="selectable_label">Extended Field Editing</span> window as described further
+                        below.
+            </p> 
+                    
+            <p class="note"><strong>Note:</strong><br>The sequence in which the attribute definition characters are
+                        arranged in the <span class="selectable_label">AD</span> field may change, that is: an attribute
+                        may occur in a different position. 
+            </p> 
+                    
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">Press <span class="key">PF2</span> to edit the attribute definitions.
+            </p> 
+                    
+                    
+            <p class="instep">The <span class="selectable_label">Attribute Definition</span> window appears.
+            </p> 
+                    
+            <table border="1" cellpadding="5" class="screen">
+               <tr>
+                  <td><pre>+-Attribute Definition--+
+&brvbar;Representation         &brvbar;
+&brvbar;Alignment              &brvbar;
+&brvbar;I/O Characteristics    &brvbar;
+&brvbar;Mandatory Characters   &brvbar;
+&brvbar;Length Characteristics &brvbar;
+&brvbar;Upper/Lower Case       &brvbar;
+&brvbar;Filler Character       &brvbar;
++-----------------------+</pre></td>
+               </tr>
+            </table> 
+                    
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">Choose <span class="guilistitem">I/O Characteristics</span>.
+            </p> 
+                    
+                    
+            <p class="instep">The following window appears.</p> 
+                    
+            <table border="1" cellpadding="5" class="screen">
+               <tr>
+                  <td><pre>+------------------------+
+&brvbar; A Input, non_protected &brvbar;
+&brvbar; M Output, modifiable   &brvbar;
+&brvbar; O Output, protected    &brvbar;
++-Esc=Quit, Enter=Toggle-+</pre></td>
+               </tr>
+            </table> 
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">When the character "M" is already shown
+                        in the <span class="selectable_label">AD</span> field, press the <span class="key">ESC</span> key to leave
+                        this window. 
+            </p> 
+                    
+                    
+                    
+            <p class="instep">Or:<br>When the character "M" is not shown in
+                        the <span class="selectable_label">AD</span> field, choose <span class="guilistitem">M Output,
+                  modifiable</span>.
+            </p> 
+                    
+            <p class="note"><strong>Note:</strong><br>When you choose the same attribute several times, a toggle effect
+                        occurs: the attribute is then either defined or removed.
+            </p> 
+                    
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">In the <span class="selectable_label">Attribute Definition</span> window, choose
+                        <span class="guilistitem">Filler Character</span>.
+            </p> 
+                    
+                    
+            <p class="instep">You are prompted to enter a new filler character.</p> 
+                    
+            <p class="instep">The filler character is used to fill any empty positions in input
+                        fields in the map, allowing the user to see the exact position and length of a
+                        field when entering input. 
+            </p> 
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">Enter an underscore (_) at the current cursor position.</p> 
+                    
+                    
+            <p class="instep">It is not necessary to press <span class="key">ENTER</span>. The message
+                        disappears immediately after you have entered the underscore
+                        character.
+            </p> 
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">Press <span class="key">ESC</span> to close the <span class="selectable_label">Attribute
+                  Definition</span> window.
+            </p> 
+                    
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">Press <span class="key">ENTER</span> to close the <span class="selectable_label">Extended Field
+                  Editing</span> window and to store the field in the map.
+            </p> 
+                    
+            <p class="caution"><strong>Caution:</strong><br>When you press <span class="key">ESC</span> instead of <span class="key">ENTER</span>,
+                        your definitions for the new data field are not saved and the field is not
+                        stored in the map.
+            </p> 
+                    
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">Add a second data field in the same way as described in the above
+                        steps: place it next to the <span class="selectable_label">End</span> field, define a length of
+                        20 characters and define the same attribute definition characters as described
+                        above.
+            </p> 
+                    
+                  
+         </li>
+      </ol> 
+          
+      <div><a name="fs-input-datafieldname"></a></div> 
+          
+      <h3>Specifying Names for Data
+              Fields
+      </h3> 
+           
+           
+      <p>When you create a new data field for a user-defined variable, Natural
+               assigns a field name to it. This field name contains a number. You have to
+               adjust the names of the newly created fields to the variable names defined in
+               your program.
+      </p> 
+           
+      <p>You will now make sure that the same names are used as in your program:
+               <code>#NAME-START</code> and <code>#NAME-END</code>. The output of these fields
+               (that is: the user input) will be passed to the corresponding user-defined
+               variables in your program.
+      </p> 
+            
+            
+            
+           
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To define names for the data fields</strong></p>
+      <ol class="steps">
+         <li> 
+                    
+                    
+            <p class="instep">Use the arrow keys to select the data field for the starting
+                        name.
+            </p> 
+                    
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">Press <span class="key">ESC</span> to redisplay the menu.
+            </p> 
+                    
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">In the menu, choose <span class="guimenu">Modify</span>. 
+            </p> 
+                    
+                    
+            <p class="instep">The <span class="selectable_label">Extended Field Editing</span> window appears.
+            </p> 
+                    
+            <table border="1" cellpadding="5" class="screen">
+               <tr>
+                  <td><pre>+-Extended Field Editing-------------------------------------------------------+
+&brvbar;Field : #1                                                                    &brvbar;
+&brvbar;Format: A Len: 20         AL: 20          PM:                  ZP: N  SG: N   &brvbar;
+&brvbar;Rules : 0 Rule Editing: N Array: None     Array Editing: N     Mode:  Undef   &brvbar;
+&brvbar;AD: ILMFHT'_'  CD:        CV:                                  DY: N  HE: N   &brvbar;
+&brvbar;EM:                                                                           &brvbar;
++------------------------------------------------------------------------------+</pre></td>
+               </tr>
+            </table> 
+                    
+            <p class="instep">The <span class="selectable_label">Field</span> field contains the field name that
+                        has been assigned by Natural: "#1".
+            </p> 
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">In the <span class="selectable_label">Field</span> field, enter
+                        "#NAME-START".
+            </p> 
+                    
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">Press <span class="key">ENTER</span>.
+            </p> 
+                    
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">Repeat the above steps for the data field for the ending name and
+                        enter "#NAME-END" as the field name. 
+            </p> 
+                    
+                  
+         </li>
+      </ol> 
+          
+      <div><a name="fs-input-sysvar"></a></div> 
+          
+      <h3>Adding System Variables</h3> 
+           
+           
+      <p>Natural system variables contain information about the current Natural
+               session, such as the current library, user, or date and time. They may be
+               referenced at any point within a Natural program. All system variables begin
+               with an asterisk (*).
+      </p> 
+           
+      <p>You will now add system variables for the date and time to the map.
+               When the program is run, the current date and time will be displayed in the
+               map.
+      </p> 
+            
+            
+           
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To add system variables</strong></p>
+      <ol class="steps">
+         <li> 
+                    
+                    
+            <p class="instep">Press <span class="key">ESC</span> to redisplay the menu.
+            </p> 
+                    
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">From the <span class="guimenu">Create</span> menu, choose <span class="guimenuitem">User
+                  Defined</span>.
+            </p> 
+                    
+                    
+            <p class="instep">The <span class="selectable_label">Extended Field Editing</span> window
+                        appears.
+            </p> 
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">Position the cursor in the top left corner of the screen (row 001,
+                        column 001) and press <span class="key">ENTER</span>.
+            </p> 
+                    
+                    
+            <p class="instep">The following window appears.</p> 
+                    
+            <table border="1" cellpadding="5" class="screen">
+               <tr>
+                  <td><pre>+---------------------+
+&brvbar; A Alphanumeric      &brvbar;
+&brvbar; B Binary            &brvbar;
+&brvbar; D Date              &brvbar;
+&brvbar; F Floating Point    &brvbar;
+&brvbar; I Integer           &brvbar;
+&brvbar; L Logical           &brvbar;
+&brvbar; N Numeric           &brvbar;
+&brvbar; P Packed Numeric    &brvbar;
+&brvbar; T Time              &brvbar;
+&brvbar; * System            &brvbar;
++---------------------+</pre></td>
+               </tr>
+            </table> 
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">Choose <span class="guilistitem">* System</span>.
+            </p> 
+                    
+                    
+            <p class="instep">The following window appears.</p> 
+                    
+            <table border="1" cellpadding="5" class="screen">
+               <tr>
+                  <td><pre>+-----------------------------+
+&brvbar; *APPLIC-ID           A8     &brvbar;
+&brvbar; *APPLIC-NAME         A32    &brvbar;
+&brvbar; *COM                 A128   &brvbar;
+&brvbar; *CONVID              I4     &brvbar;
+&brvbar; *CPU-TIME            I4     &brvbar;
+&brvbar; *CURRENT-UNIT        A32    &brvbar;
+&brvbar; *CURSOR              N6     &brvbar;
+&brvbar; *CURS-COL            P3     &brvbar;
+&brvbar; *CURS-LINE           P3     &brvbar;
+&brvbar; *DAT4D               A10    &brvbar;
+&brvbar; *DAT4E               A10    &brvbar;
+&brvbar; *DAT4I               A10    &brvbar;
+&brvbar; *DAT4J               A7     &brvbar;
+&brvbar; *DAT4U               A10    &brvbar;
++-----------------------------+</pre></td>
+               </tr>
+            </table> 
+                    
+            <p class="instep">You can use <span class="key">DOWN-ARROW</span> and <span class="key">UP-ARROW</span> to scroll
+                        through the list of system variables.
+            </p> 
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">Select <span class="guilistitem">*DAT4I</span> and press
+                        <span class="key">ENTER</span>.
+            </p> 
+                    
+                    
+            <p class="instep">A number of "X" characters is now shown.</p>
+                   
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">Press <span class="key">ENTER</span> to close the <span class="selectable_label">Extended Field
+                  Editing</span> window.
+            </p> 
+                    
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">Repeat the above steps and add the system variable
+                        <span class="guilistitem">*TIMX</span>. Place it in the top right corner of the
+                        screen (row 001, column 070). <span class="selectable_label">TT:TT:TT</span> will be shown for
+                        this system variable. Do not forget to press <span class="key">ENTER</span> to close the
+                        <span class="selectable_label">Extended Field Editing</span> window.
+            </p> 
+                    
+                  
+         </li>
+      </ol> 
+          
+      <div><a name="d0e6649"></a></div> 
+          
+      <h3>Repositioning Fields</h3> 
+           
+           
+      <p>You will now reposition the fields you have added.</p> 
+            
+            
+            
+            
+           
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To move a field</strong></p>
+      <ol class="steps">
+         <li> 
+                    
+                    
+            <p class="instep">When the menu is currently shown, press <span class="key">ESC</span> to hide
+                        it.
+            </p> 
+                    
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">Use the arrow keys to select the data field for the starting name
+                        (which is indicated by "X" characters).
+            </p> 
+                    
+                    
+            <p class="instep">The data field is now highlighted.</p> 
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">Press <span class="key">ESC</span> to redisplay the menu.
+            </p> 
+                    
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">Choose <span class="guimenu">Drag</span>.
+            </p> 
+                    
+                    
+            <p class="instep">The menu disappears.</p> 
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">Use the arrow keys to move the highlighted field to the middle of
+                        the line.
+            </p> 
+                    
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">Press <span class="key">ENTER</span> to end drag mode.
+            </p> 
+                    
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">Move the remaining text and data fields for the starting and ending
+                        names to the middle of the line as described above. Leave an empty line between
+                        the fields for the starting and ending names.
+            </p> 
+                    
+                    
+            <p class="instep">The map should now look as shown at the beginning of this
+                        section.
+            </p> 
+                  
+         </li>
+      </ol> 
+          
+      <div><a name="fs-input-testmap"></a></div> 
+          
+      <h3>Testing a Map</h3> 
+           
+           
+      <p>You will now test your map to check whether it works as intended.</p> 
+           
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To test the map</strong></p>
+      <ol class="steps">
+         <li> 
+                    
+                     
+                     
+                    
+            <p class="instep">Press <span class="key">ESC</span> to redisplay the menu, and from the
+                        <span class="guimenu">Ops. Map</span> menu, choose <span class="guimenuitem">Test
+                  Map</span>.
+            </p> 
+                    
+                    
+                    
+                    
+            <p class="instep">The following output is shown.</p> 
+                     
+                    
+            <table border="1" cellpadding="5" class="screen">
+               <tr>
+                  <td><pre>2007-03-20                                                          13:39:55
+                                                                            
+                                                                            
+                           Start  ____________________                      
+                                                                            
+                             End  ____________________                      
+                                                                            
+                                                                            
+                                                                            
+                                                                            
+                                                                            
+                                                                            
+                                                                            
+                                                                            
+                                                                            
+                                                                            
+                                                                            
+                                                                            
+                                                                            
+                                                                            
+                                                                            
+                                                                            
+                                                                            
+                                                                            </pre></td>
+               </tr>
+            </table> 
+                     
+                    
+            <p class="instep">The input field for the starting name is automatically selected
+                        since it is the first input field in the map. Both input fields contain the
+                        filler character. 
+            </p> 
+                    
+            <p class="note"><strong>Note:</strong><br>When working in insert mode, the user has to delete the filler
+                        characters before it is possible to enter text. This is not necessary in
+                        overwrite mode which is the default.
+            </p> 
+                    
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">Press <span class="key">ENTER</span> to return to the map editor.
+            </p> 
+                    
+                  
+         </li>
+      </ol> 
+          
+      <div><a name="fs-input-stowmap"></a></div> 
+          
+      <h3>Stowing a Map</h3> 
+           
+           
+      <p>When the map has successfully been tested, you have to stow it so that
+               it can be found by your program.
+      </p> 
+            
+            
+           
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To stow the map</strong></p>
+      <ol class="steps">
+         <li> 
+                    
+                    
+            <p class="instep">Press <span class="key">ESC</span> to redisplay the menu.
+            </p> 
+                    
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">From the <span class="guimenu">Ops. Map</span> menu, choose <span class="guimenuitem">Stow
+                  Map</span>.
+            </p> 
+                    
+                    
+            <p class="instep">The following window appears.</p> 
+                    
+            <table border="1" cellpadding="5" class="screen">
+               <tr>
+                  <td><pre> +--Stow Map As: ---+ 
+ &brvbar;Name...:          &brvbar; 
+ &brvbar;Library: TUTORIAL &brvbar; 
+ +------------------+ </pre></td>
+               </tr>
+            </table> 
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">Enter "MAP01" as the name of the map and
+                        press <span class="key">ENTER</span>.
+            </p> 
+                    
+                  
+         </li>
+      </ol> 
+          
+      <div class="noprint">
+         <p><a href="fs-input.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="fs-input-invokemap"></a></div> 
+         
+      <h2> 
+             <a name="x28"></a>Invoking the Map from Your Program
+      </h2> 
+          
+          
+      <p>Once a map has been stowed, it can be invoked by a Natural program using
+              a <code>WRITE</code> or <code>INPUT</code> statement. 
+      </p> 
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To invoke the map from your program</strong></p>
+      <ol class="steps">
+         <li> 
+                   
+                   
+            <p class="instep">Press <span class="key">ESC</span> to redisplay the menu and choose
+                       <span class="guimenuitem">Quit</span>.
+            </p> 
+                   
+                   
+            <p class="instep">Natural's main menu is shown again with the <span class="selectable_label">Direct
+                  Command</span> window prompting for input.
+            </p> 
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Return to the program editor by entering one of
+                       the following.
+            </p> <pre class="command-input">EDIT PGM01</pre> <pre class="command-input">E PGM01</pre> 
+                    
+                    
+                   
+                 </li>
+         <li> 
+                   
+                   
+            <p class="instep">Replace the previously defined <code>INPUT</code> lines with the
+                       following line:
+            </p> 
+                   <pre class="verbatim">INPUT USING MAP 'MAP01'</pre> 
+                   <p class="instep">This will invoke the map you have just designed.</p> 
+                   
+            <p class="instep">The map name must be enclosed in single quotation marks to
+                       distinguish the map from a user-defined variable.
+            </p> 
+                   
+                   
+                   
+            <p class="instep">Your program should now look as follows:</p> 
+                   <pre class="verbatim">DEFINE DATA
+LOCAL
+  1 #NAME-START        (A20) INIT &lt;"ADKINSON"&gt;
+  1 #NAME-END          (A20) INIT &lt;"BENNETT"&gt;
+  1 EMPLOYEES-VIEW VIEW OF EMPLOYEES
+    2 FULL-NAME
+      3 NAME (A20)
+    2 DEPT (A6)
+    2 LEAVE-DATA
+      3 LEAVE-DUE (N2)
+END-DEFINE
+*
+INPUT USING MAP 'MAP01'
+*
+READ EMPLOYEES-VIEW BY NAME
+  STARTING FROM #NAME-START
+  ENDING AT #NAME-END
+*
+  DISPLAY NAME 3X DEPT 3X LEAVE-DUE
+*
+END-READ
+*
+END</pre> 
+                   
+                 </li>
+         <li> 
+                   
+                   
+            <p class="instep">Run the program.</p> 
+                   
+                   
+            <p class="instep">Your map is now shown.</p> 
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep"> Press <span class="key">ENTER</span> repeatedly until you return to the program
+                       editor, or enter <code>EDIT</code> at the <code>MORE</code>
+                       prompt.
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Stow the program.</p> 
+                   
+                 
+         </li>
+      </ol> 
+         
+      <div class="noprint">
+         <p><a href="fs-input.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="fs-input-endname"></a></div> 
+         
+      <h2>Ensuring that an Ending Name is Always Used</h2> 
+          
+          
+      <p>As your program is coded now, no data will not be found if an ending
+              name is not specified.
+      </p> 
+          
+      <p>You will now remove the initial values for the starting name and ending
+              name; then the user always has to specify these names. To ensure that an ending
+              name is always used, even if it has not been specified by the user, you will
+              add a corresponding statement.
+      </p> 
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To use the ending name</strong></p>
+      <ol class="steps">
+         <li> 
+                   
+                   
+            <p class="instep">In the <code>DEFINE DATA</code> block, remove the default values
+                       (<code>INIT</code>) for the fields <code>#NAME-START</code> and
+                       <code>#NAME-END</code> so that the corresponding lines look as follows:
+            </p> 
+                   <pre class="verbatim">1 #NAME-START        (A20)
+1 #NAME-END          (A20)</pre> 
+                   
+                 </li>
+         <li> 
+                   
+                   
+            <p class="instep">Insert the following below <code>INPUT USING MAP 'MAP01'</code>:
+            </p> 
+                   <pre class="verbatim">IF #NAME-END = ' ' THEN
+    MOVE #NAME-START TO #NAME-END
+END-IF</pre> 
+                   <p class="instep">When the <code>#NAME-END</code> field is blank (that is: when an
+                       ending name has not been entered by the user), the starting name is
+                       automatically used as the ending name.
+            </p> 
+                   
+            <p class="note"><strong>Note:</strong><br>Instead of using the statement <code>MOVE #NAME-START TO
+                  #NAME-END</code> it is also possible to use the following variant of the
+                       <code>ASSIGN</code> or <code>COMPUTE</code> statement: <code>#NAME-END :=
+                  #NAME-START</code>. 
+            </p> 
+                   
+                   
+            <p class="instep">Your program should now look as follows:</p> 
+                   <pre class="verbatim">DEFINE DATA
+LOCAL
+  1 #NAME-START        (A20)
+  1 #NAME-END          (A20)
+  1 EMPLOYEES-VIEW VIEW OF EMPLOYEES
+    2 FULL-NAME
+      3 NAME (A20)
+    2 DEPT (A6)
+    2 LEAVE-DATA
+      3 LEAVE-DUE (N2)
+END-DEFINE
+*
+INPUT USING MAP 'MAP01'
+*
+IF #NAME-END = ' ' THEN
+  MOVE #NAME-START TO #NAME-END
+END-IF
+*
+READ EMPLOYEES-VIEW BY NAME
+  STARTING FROM #NAME-START
+  ENDING AT #NAME-END
+*
+  DISPLAY NAME 3X DEPT 3X LEAVE-DUE
+*
+END-READ
+*
+END</pre> 
+                   
+                 </li>
+         <li> 
+                   
+                   
+            <p class="instep">Run the program.</p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">In the resulting map, enter "JONES" in the
+                       field which prompts for a starting name and press <span class="key">ENTER</span>.
+            </p> 
+                    
+                   
+                   
+            <p class="instep">In the resulting list, only the employees with the name
+                       "Jones" are now shown.
+            </p> 
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Press <span class="key">ENTER</span> to return to the program editor.
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Stow the program.</p> 
+                   
+                 
+         </li>
+      </ol> 
+          
+      <p>You can now proceed with the next exercises:
+              <a href="fs-loop.htm#fs-loop">Loops and
+            Labels</a>.
+      </p> 
+         
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="fs-input.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../firststeps/fs-input.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/firststeps/fs-input.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="fs-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="fs-dbaccess.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="fs-loop.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

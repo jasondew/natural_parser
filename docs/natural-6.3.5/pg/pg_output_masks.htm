@@ -1,0 +1,813 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Edit Masks - EM Parameter</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="pg_output_masks"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_output_masks.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_output_masks.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_output-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_output_parms.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_output_umasks.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Programming Guide&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x283"></a> 
+               <a name="x284"></a> Edit Masks - EM Parameter
+         </h1>
+      </div> 
+         
+         
+      <p>This document describes how you can specify an edit mask for an
+             alphanumeric or numeric field.
+      </p> 
+         
+      <p>The following topics are covered:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_output_masks.htm#em_pam_use">Use of EM Parameter</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_masks.htm#Edit_Masks_for_Numeric_Fields">Edit Masks for Numeric Fields</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_masks.htm#Edit_Masks_for_Alphanumeric_Fields">Edit Masks for Alphanumeric Fields</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_masks.htm#Length_of_Fields">Length of Fields</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_masks.htm#Edit_Masks_for_Date_and_Time_Fields_pg_output_masks">Edit Masks for Date and Time Fields</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_masks.htm#dc_thsepch">Customizing Separator Character Displays</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_masks.htm#Examples_of_Edit_Masks">Examples of Edit Masks</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_masks.htm#further_edit_masks">Further Examples of Edit Masks</a></p>
+         </li>
+      </ul> 
+        
+      <hr> 
+        
+      <div><a name="em_pam_use"></a></div> 
+         
+      <h2> Use of EM Parameter </h2> 
+          
+          
+      <p>With the session parameter <a href="../parms/sp_em.htm"><code>EM</code></a> you can specify
+              an edit mask for an alphanumeric or numeric field, that is, determine character
+              by character the format in which the field values are to be output.
+              Using the session parameter
+              <a href="../parms/sp_emu.htm"><code>EMU</code></a>, you
+              can define edit masks with Unicode characters in the same way as described
+              below for the <code>EM</code> session parameter.
+      </p> 
+          
+      <p>Example:</p> 
+          <pre class="verbatim">DISPLAY NAME (EM=X^X^X^X^X^X^X^X^X^X)</pre> 
+          <p>In this example, each <code>X</code> represents one character of an
+              alphanumeric field value to be displayed, and each <code>^</code> represents a
+              blank. If displayed via the <a href="pg_output_display.htm#pg_output_display"><code>DISPLAY</code></a> statement, the
+              name <code>JOHNSON</code> would appear as follows:
+      </p> 
+      <pre class="system-output">J O H N S O N</pre> 
+          <p>You can specify the session parameter <a href="../parms/sp_em.htm"><code>EM</code></a></p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">at report level (in a <code>FORMAT</code> statement),
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">at statement level (in a <a href="../sm/display.htm"><code>DISPLAY</code></a>,
+                      <a href="../sm/write.htm"><code>WRITE</code></a>,
+                      <code>INPUT</code>, <code>MOVE EDITED</code> or <code>PRINT</code> statement)
+                      or
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">at element level (in a <code>DISPLAY</code>,
+                      <a href="../sm/write.htm"><code>WRITE</code></a> or
+                      <code>INPUT</code> statement).
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>An edit mask specified with the session parameter
+              <code>EM</code> will override a default edit mask specified for a
+              field in the <a href="pg_dbms_ada.htm#pg_dbms_ddm">DDM</a>; see
+              <a href="../edis/ddm_editor_use.htm#ddm_fields_attributes">Using the DDM
+            Editor Screen</a>,
+              <a href="../edis/ddm_editor_use.htm#ddm_extended_field_edit">Specifying
+            Extended Field Attributes</a>.
+      </p> 
+          
+      <p>If <code>EM=OFF</code> is specified, no edit mask at all will
+              be used.
+      </p> 
+          
+      <p>An edit mask specified at statement level will override an edit mask
+              specified at report level.
+      </p> 
+          
+      <p>An edit mask specified at element level will override an edit mask
+              specified at statement level.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_output_masks.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Edit_Masks_for_Numeric_Fields"></a></div> 
+         
+      <h2> 
+             <a name="x285"></a>Edit Masks for Numeric Fields 
+      </h2> 
+          
+          
+      <p>Edit masks for numeric fields (formats N, I, P, F) must include a
+              <code>9</code> for each output position you want filled with a number (even if
+              it is zero).
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">A <code>Z</code> is used to indicate that the output position will be
+                      filled only if the available number is not zero.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">A decimal point is indicated with a period (.).</p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>To the right of the decimal point, a <code>Z</code> must not be
+              specified. Leading, trailing, and insertion characters - for example, sign
+              indicators - can be added.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_output_masks.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Edit_Masks_for_Alphanumeric_Fields"></a></div> 
+         
+      <h2> 
+             <a name="x286"></a> Edit Masks for Alphanumeric Fields 
+      </h2> 
+          
+          
+      <p>Edit masks for alphanumeric fields must include an <code>X</code> for
+              each alphanumeric character that is to be output.
+      </p> 
+          
+      <p>With a few exceptions, you may add leading, trailing and insertion
+              characters (with or without enclosing them in apostrophes).
+      </p> 
+          
+      <p>The circumflex character (^) is used to insert blanks in edit mask for
+              both numeric and alphanumeric fields.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_output_masks.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Length_of_Fields"></a></div> 
+         
+      <h2> Length of Fields </h2> 
+          
+          
+      <p>It is important to be aware of the length of the field to which you
+              assign an edit mask.
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">If the edit mask is longer than the field, this will yield unexpected
+                      results.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">If the edit mask is shorter than the field, the field output will be
+                      truncated to just those positions specified in the edit mask.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <h4 class="floating-title"> Examples: </h4> 
+          
+      <p>Assuming an alphanumeric field that is 12 characters long and the field
+              value to be output is <code>JOHNSON</code>, the following edit masks will yield
+              the following results:
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="49%">
+            <col width="49%">
+         </colgroup> 
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th>Edit Mask</th> 
+                       
+               <th>Output</th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> 
+                  <pre class="verbatim">
+EM=X.X.X.X.X
+</pre></td> 
+                       
+               <td> 
+                  <pre class="verbatim">
+J.O.H.N.S
+</pre></td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> 
+                  <pre class="verbatim">
+EM=****XXXXXX****
+</pre></td> 
+                       
+               <td> 
+                  <pre class="verbatim">
+****JOHNSO**
+</pre></td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_output_masks.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Edit_Masks_for_Date_and_Time_Fields_pg_output_masks"></a></div> 
+         
+      <h2> 
+             <a name="x287"></a> 
+             <a name="x288"></a> Edit Masks for Date and Time Fields 
+      </h2> 
+          
+          
+      <p>Edit masks for date fields can include the characters <code>D</code>
+              (day), <code>M</code> (month) and <code>Y</code> (year) in various
+              combinations.
+      </p> 
+          
+      <p>Edit masks for time fields can include the characters <code>H</code>
+              (hour), <code>I</code> (minute), <code>S</code> (second) and <code>T</code>
+              (tenth of a second) in various combinations.
+      </p> 
+          
+      <p>In conjunction with edit masks for date and time fields, see also the
+              <a href="../vari/dtime.htm">date and time system
+                 variables</a>.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_output_masks.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="dc_thsepch"></a></div> 
+         
+      <h2> 
+             <a name="x289"></a> Customizing Separator Character Displays 
+      </h2> 
+          
+          
+      <p>Natural programs are used in business applications all over the world.
+              Depending on the local conventions, it is usual to present numeric data fields
+              and those with a date or time content in a special output style, when displayed
+              in I/O statements. The different appearance should not be realized by alternate
+              program coding that is processed selectively as a function of the locale where
+              the program is being executed, but should be carried out with the same program
+              image in conjunction with a set of runtime parameters to specify the decimal
+              point character and the "thousands separator character".
+      </p> 
+          
+      <p>The following topics are covered below:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_output_masks.htm#d0e31447">Decimal Character</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_masks.htm#d0e31471">Dynamic Thousands Separator</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_masks.htm#d0e31561">Examples</a></p>
+         </li>
+      </ul> 
+          
+         
+      <div><a name="d0e31447"></a></div> 
+          
+      <h3> 
+              <a name="x290"></a> Decimal Character
+      </h3> 
+           
+           
+      <p>The Natural parameter <a href="../parms/dc.htm"><code>DC</code></a> (Decimal Character)
+               is available to specify the character to be inserted in place of any characters
+               used to represent the decimal separator (also called "radix"
+               character) in edit masks. This parameter enables the users of a Natural program
+               or application to choose any (special) character to separate the integer
+               positions from the decimal positions of a numeric data item and enables, for
+               example, U.S. shops to use the decimal point (.) and European shops to use the
+               comma (,).
+      </p> 
+          
+      <div><a name="d0e31471"></a></div> 
+          
+      <h3> 
+              <a name="x291"></a>Dynamic Thousands Separator
+      </h3> 
+           
+           
+      <p>To structure the output of a large integer values, it is common
+               practice to insert separators between every three digits of an integer to
+               separate groups of thousands. This separator is called a "thousands
+               separator". For example, in the United States they generally use a comma
+               for this purpose (e.g. 1,000,000), whereas in Germany they use the period
+               (1.000.000), in France a space (1 000 000), etc. 
+      </p> 
+           
+      <p>In a Natural edit mask, a "dynamic thousands separator" is
+               a comma (or period) indicating the position where thousands separator
+               characters (defined with the <a href="../parms/thsepch.htm"><code>THSEPCH</code></a> parameter)
+               are inserted at runtime. At compile time, the Natural
+               profile parameter <a href="../parms/thsep.htm"><code>THSEP</code></a> or the option
+               <code>THSEP</code> of system command
+               <a href="../syscom/compopt.htm"><code>COMPOPT</code></a>
+               enables or disables the interpretation of the comma (or period) as dynamic
+               thousands separator. 
+      </p> 
+           
+      <p>If <code>THSEP</code> is set to <code>OFF</code> (default),
+               any character used as thousands separator in the edit mask is treated as
+               literal and displayed unchanged at runtime. This setting retains downwards
+               compatibility. 
+      </p> 
+           
+      <p>If <code>THSEP</code> is set to <code>ON</code>, any comma
+               (or period) in the edit mask is interpreted as dynamic thousands separators. In
+               general, the dynamic thousands separator is a comma, but if the comma is
+               already in use as decimal character (<code>DC</code>), the period is
+               used as dynamic thousands separator. 
+      </p> 
+           
+      <p>At runtime the dynamic thousands separators are replaced by the current
+               value of the <a href="../parms/thsepch.htm"><code>THSEPCH</code></a> parameter
+               (thousands separator character). 
+      </p> 
+          
+      <div><a name="d0e31561"></a></div> 
+          
+      <h3>Examples</h3> 
+           
+           
+      <p>A Natural program that is cataloged with parameter settings
+               <code>DC='.'</code> and <code>THSEP=ON</code> uses the edit mask
+               (<code>EM=ZZ,ZZZ,ZZ9.99</code>).
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="49%">
+            <col width="49%">
+         </colgroup> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>Parameter Settings at Runtime</th> 
+                        
+               <th>Displays as</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td>DC='.' and THSEPCH=','</td> 
+                        
+               <td>1,234,567.89</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>DC=',' and THSEPCH='.'</td> 
+                        
+               <td>1.234.567,89</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>DC=',' and THSEPCH='/'</td> 
+                        
+               <td>1/234/567,89</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>DC=',' and THSEPCH=' '</td> 
+                        
+               <td>1 234 567,89</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>DC=',' and THSEPCH=''''</td> 
+                        
+               <td>1'234'567,89</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+          
+        
+      <div class="noprint">
+         <p><a href="pg_output_masks.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Examples_of_Edit_Masks"></a></div> 
+         
+      <h2> Examples of Edit Masks</h2> 
+          
+          
+      <p>Some examples of edit masks, along with possible output they produce,
+              are provided below.
+      </p> 
+          
+      <p>In addition, the abbreviated notation for each edit mask is given. You
+              can use either the abbreviated or the long notation.
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+                
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th align="left"> Edit Mask </th> 
+                       
+               <th align="left"> Abbreviation </th> 
+                       
+               <th align="left"> Output A </th> 
+                       
+               <th align="left"> Output B </th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td>EM=999.99</td> 
+                       
+               <td>EM=9(3).9(2)</td> 
+                       
+               <td>367.32</td> 
+                       
+               <td>005.40</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>EM=ZZZZZ9</td> 
+                       
+               <td>EM=Z(5)9(1)</td> 
+                       
+               <td>0</td> 
+                       
+               <td>579</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>EM=X^XXXXX</td> 
+                       
+               <td>EM=X(1)^X(5)</td> 
+                       
+               <td>B LUE</td> 
+                       
+               <td>A 19379</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>EM=XXX...XX</td> 
+                       
+               <td>EM=X(3)...X(2)</td> 
+                       
+               <td>BLU...E</td> 
+                       
+               <td>AAB...01</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>EM=MM.DD.YY</td> 
+                       
+               <td>*</td> 
+                       
+               <td>01.05.87</td> 
+                       
+               <td>12.22.86</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>EM=HH.II.SS.T</td> 
+                       
+               <td>**</td> 
+                       
+               <td>08.54.12.7</td> 
+                       
+               <td>14.32.54.3</td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p><sup>*</sup> Use a date system variable.
+      </p> 
+          
+      <p><sup>**</sup> Use a time system variable.
+      </p> 
+          
+      <p>For further information about edit masks, see the session parameter
+              <a href="../parms/sp_em.htm"><code>EM</code></a> in the
+              <cite>Parameter Reference</cite>.
+      </p> 
+          
+         
+      <div><a name="exa_wo_em"></a></div> 
+          
+      <h3> Example Program without EM Parameters </h3> 
+           
+           <pre class="verbatim">
+** Example 'EDITMX01': Edit mask (using default edit masks)
+************************************************************************
+DEFINE DATA LOCAL
+1 VIEWEMP VIEW OF EMPLOYEES
+  2 NAME
+  2 JOB-TITLE
+  2 SALARY (1:3)
+  2 CITY
+END-DEFINE
+*
+READ (3) VIEWEMP BY NAME STARTING FROM 'JONES'
+  DISPLAY 'N A M E'    NAME         /
+          'OCCUPATION' JOB-TITLE
+          'SALARY'     SALARY (1:3)
+          'LOCATION'   CITY
+  SKIP 1
+END-READ
+END
+</pre> 
+           <p>Output of Program EDITMX01:</p> 
+           
+      <p>The output of this program shows the default edit masks available.</p> <pre class="system-output">
+Page      1                                                  04-11-11  14:15:54
+ 
+         N A M E            SALARY         LOCATION
+       OCCUPATION
+------------------------- ---------- --------------------
+ 
+JONES                          46000 TULSA
+MANAGER                        42300
+                               39300
+ 
+JONES                          50000 MOBILE
+DIRECTOR                       46000
+                               42700
+ 
+JONES                          31000 MILWAUKEE
+PROGRAMMER                     29400
+                               27600
+</pre> 
+           
+          
+         <div><a name="d0e31831"></a></div> 
+          
+      <h3>Example Program with EM Parameters</h3> 
+           
+           <pre class="verbatim">
+** Example 'EDITMX02': Edit mask (using EM)
+************************************************************************
+DEFINE DATA LOCAL
+1 VIEWEMP VIEW OF EMPLOYEES
+  2 NAME
+  2 FIRST-NAME
+  2 JOB-TITLE
+  2 SALARY (1:3)
+END-DEFINE
+*
+READ (3) VIEWEMP BY NAME STARTING FROM 'JONES'
+ <strong>DISPLAY 'N A M E'    NAME         (EM=X^X^X^X^X^X^X^X^X^X^X^X^X^X^X) /
+                       FIRST-NAME   (EM=...X(10)...)
+          'OCCUPATION' JOB-TITLE    (EM=' ___ 'X(12))
+          'SALARY'     SALARY (1:3) (EM=' USD 'ZZZ,999)</strong>
+  SKIP 1
+END-READ
+END
+</pre> 
+           <p>Output of Program EDITMX02:</p> 
+           
+      <p>Compare the output with that of the previous program (<a href="pg_output_masks.htm#exa_wo_em">Example Program without EM
+            Parameters</a>) to see how the <code>EM</code>
+               specifications affect the way the fields are displayed.
+      </p> <pre class="system-output">
+Page      1                                                  04-11-11  14:15:54
+ 
+           N A M E               OCCUPATION      SALARY
+         FIRST-NAME
+----------------------------- ---------------- -----------
+ 
+J O N E S                     ___ MANAGER      USD  46,000
+..VIRGINIA  ...                                USD  42,300
+                                               USD  39,300
+ 
+J O N E S                     ___ DIRECTOR     USD  50,000
+..MARSHA    ...                                USD  46,000
+                                               USD  42,700
+ 
+J O N E S                     ___ PROGRAMMER   USD  31,000
+..ROBERT    ...                                USD  29,400
+                                               USD  27,600
+</pre> 
+           
+          
+        
+        <div class="noprint">
+         <p><a href="pg_output_masks.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="further_edit_masks"></a></div> 
+         
+      <h2> Further Examples of Edit Masks </h2> 
+          
+          
+      <p>See the following example programs:</p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="pg_exas.htm#EDITMX03">EDITMX03 - Edit mask
+                  (different EM for alpha-numeric fields)</a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="pg_exas.htm#EDITMX04">EDITMX04 - Edit mask
+                  (different EM for numeric fields)</a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="pg_exas.htm#EDITMX05_further_exa_masks">EDITMX05 -
+                  Edit mask (EM for date and time system variables)</a></p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+        
+       
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="pg_output_masks.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_output_masks.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_output_masks.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_output-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_output_parms.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_output_umasks.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

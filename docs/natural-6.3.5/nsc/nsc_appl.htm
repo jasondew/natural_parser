@@ -1,0 +1,3279 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Protecting the Natural Development Server Environment and Applications</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="nsc_appl"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../nsc/nsc_appl.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/nsc/nsc_appl.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc_util.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc_rpc.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Natural Security&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x46"></a> 
+               <a name="x47"></a>Protecting the Natural Development Server Environment and
+               Applications
+         </h1>
+      </div> 
+         
+         
+      <p>This section covers the following topics:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="nsc_appl.htm#ndvEnvironment">Protecting the Natural Development Server Environment</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_appl.htm#ndvApplications">Protecting Natural Development Server Applications</a></p>
+         </li>
+      </ul> 
+        
+      <hr> 
+        
+      <div><a name="ndvEnvironment"></a></div> 
+         
+      <h2> Protecting the Natural Development Server Environment</h2> 
+          
+          
+      <p>This section describes how to protect the Natural Development Server
+              environment with Natural Security, and how the security definitions on the FSEC
+              system file attached to the server environment affect actions on the server. It
+              covers the following topics:
+      </p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="nsc_appl.htm#clientServerActions">Client and Server Actions</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_appl.htm#MapEnvironment">Map Environment and Library Selection</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_appl.htm#protectableFunctions">Protectable Functions in the Mapped Environment</a></p>
+         </li>
+      </ul> 
+          
+         
+      <div><a name="clientServerActions"></a></div> 
+          
+      <h3> Client and Server Actions</h3> 
+           
+           
+      <p>Generally, you have to distinguish between:</p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">Natural actions which are processed in the server environment,</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Natural actions which are only processed in the client
+                       environment.
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>When a Natural Development Server runs under control of Natural
+               Security, only actions on the server can be protected by Natural Security. The
+               conditions of use established by Natural Security which apply to a user's
+               session on the <em>server</em> are <em>not</em> transferred to a
+               <var>client</var> session.
+      </p> 
+           
+      <p>Also, remember that some actions performed on a Natural Development
+               Server client (mapped environment) generate a call to the Natural Development
+               Server server, while others do not. Only if a client action causes an action on
+               the Natural Development Server, this resulting server action will come under
+               the control of Natural Security.
+      </p> 
+           
+          
+         
+      <div><a name="MapEnvironment"></a></div> 
+          
+      <h3> Map Environment and Library Selection</h3> 
+           
+           
+      <p>The function "Map Environment" is controlled by the
+               Natural Security settings that apply to the FNAT system file on which this
+               function is executed. When the function is executed, Natural Security performs
+               a logon, according to the rules as described in the section
+               <a href="nsc_logon.htm#Logon_Procedure">Logon
+            Procedure</a>. The logon will be to the user's default
+               library, therefore the security settings have to be such that the user is able
+               to log on to his/her default library.
+      </p> 
+           
+      <p>Once the environment has been mapped, the tree view in the mapped
+               environment lists all non-empty libraries on the system file (FUSER/FNAT)
+               assigned to the mapped environment which are accessible by the user.
+      </p> 
+           
+      <p>When the user selects one of these libraries from the tree view, a
+               logon to this library is performed - according to the rules as described in the
+               section <a href="nsc_logon.htm#Logon_Procedure">Logon
+            Procedure</a>. Thus it may be possible, for example, that a
+               startup transaction is executed. The user can only select a library from the
+               tree view; any other library selection (for example, via the system command
+               "LOGON *") is not possible.
+      </p> 
+           
+      <p>Within a library in the mapped environment, some functions can be
+               protected by Natural Security, others cannot be protected. Which functions
+               these are is described below.
+      </p> 
+           
+          
+         
+      <div><a name="protectableFunctions"></a></div> 
+          
+      <h3> Protectable Functions in the Mapped Environment</h3> 
+           
+           
+      <p>The use of the following functions in a library within the mapped
+               environment can be protected as follows:
+      </p> 
+      <ul>
+         <li><a href="nsc_appl.htm#treeviewActions">Tree-View Actions</a></li>
+         <li><a href="nsc_appl.htm#transferOperations">Transfer Operations</a></li>
+         <li><a href="nsc_appl.htm#commandlineActions">Command-Line Actions</a></li>
+         <li><a href="nsc_appl.htm#systemcmds">System Commands</a></li>
+         <li><a href="nsc_appl.htm#ListEditDDM">Commands LIST DDM and EDIT DDM</a></li>
+         <li><a href="nsc_appl.htm#toolbarFunctions">Menu-Bar Functions</a></li>
+      </ul> 
+           
+          
+      <div><a name="treeviewActions"></a></div> 
+           
+      <h4> Tree-View Actions</h4> 
+            
+            
+      <p class="note"><strong>Note:</strong><br> Several of the tree-view actions listed below are controlled by
+                SYSMAIN utility profiles. If, however, no utility profiles for SYSMAIN are
+                defined, these actions are controlled by the
+                <a href="nsc_lib.htm#Maintenance_with_Natural_Utilities">Utilities</a>
+                option in the library profile of the library processed.
+      </p> 
+             
+             
+      <table border="1" class="color" cellpadding="3" width="80%"> 
+                   
+                 
+         <thead align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <th>Location in Tree View</th> 
+                         
+               <th>Action</th> 
+                         
+               <th align="left">Controlled by</th> 
+                        
+            </tr> 
+                    
+         </thead> 
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <td rowspan="2"> System-file node</td> 
+                         
+               <td> List library</td> 
+                         
+               <td>The action as such is always allowed and cannot be disallowed.
+                  <br>
+                  For what is listed, see "Map Environment and Library
+                             Selection" above.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> Find object</td> 
+                         
+               <td> <var>Client action not validated by the
+                     server.</var></td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td rowspan="10"> Library node</td> 
+                         
+               <td> Open source</td> 
+                         
+               <td>Command Restrictions (LIST command) in library security
+                  profile*.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>New source</td> 
+                         
+               <td>Command Restrictions (EDIT command) and Editing Restrictions
+                  in library security profile*.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>Catall</td> 
+                         
+               <td>Command Restrictions in library security profile*.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>Find object</td> 
+                         
+               <td>Command Restrictions (SCAN command) in library security
+                  profile*.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>Rename **</td> 
+                         
+               <td>The action as such is always allowed and cannot be disallowed.
+                  <br>
+                  However, a library security profile for the library of the new name
+                  must exist (unless the general option Transition Period Logon is set to
+                  "Y"). Also, for the library contents to be transferred, the option
+                  "Mo" (Move) "from library" and "to
+                  library" for all object types must be allowed in the SYSMAIN utility
+                             profile.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>Delete **</td> 
+                         
+               <td>Option "De" (Delete) for object type in SYSMAIN
+                  utility profile.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>Cut</td> 
+                         
+               <td>Option "Mo" (Move) "from library"
+                  for object type in SYSMAIN utility profile.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>Copy</td> 
+                         
+               <td>Option "Co" (Copy) "from library"
+                  for object type in SYSMAIN utility profile.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>Drag</td> 
+                         
+               <td>Option "Co" (Copy) or "Mo" (Move)
+                  "from library" for object type in SYSMAIN utility profile.
+               </td>
+                         
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>Paste / Drop</td> 
+                         
+               <td>Option "Co" (Copy) or "Mo" (Move)
+                  "to library" for object type in SYSMAIN utility profile.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td rowspan="9">Group node</td> 
+                         
+               <td>Open</td> 
+                         
+               <td>Command Restrictions (LIST command) in library security
+                  profile*.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>New</td> 
+                         
+               <td>Editing Restrictions in library security profile*.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>Catall</td> 
+                         
+               <td>Command Restrictions in library security profile*.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>Find</td> 
+                         
+               <td>Command Restrictions (SCAN command) in library security
+                  profile*.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>Delete</td> 
+                         
+               <td>Command Restrictions in library security profile*.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>Cut</td> 
+                         
+               <td>Option "Mo" (Move) "from library"
+                  for object type in SYSMAIN utility profile.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>Copy</td> 
+                         
+               <td>Option "Co" (Copy) "from library"
+                  for object type in SYSMAIN utility profile.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>Drag</td> 
+                         
+               <td>Option "Co" (Copy) or "Mo" (Move)
+                  "from library" for object type in SYSMAIN utility profile.
+               </td>
+                         
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>Paste / Drop</td> 
+                         
+               <td>Option "Co" (Copy) or "Mo" (Move)
+                  "to library" for object type in SYSMAIN utility profile.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td rowspan="13">Object node</td> 
+                         
+               <td>Open</td> 
+                         
+               <td>Editing Restrictions in library security profile*.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>List</td> 
+                         
+               <td>Command Restrictions in library security profile*.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>Catalog</td> 
+                         
+               <td>Command Restrictions in library security profile*.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>Stow</td> 
+                         
+               <td>Command Restrictions in library security profile*.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>Execute</td> 
+                         
+               <td>Command Restrictions in library security profile*.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>Debug</td> 
+                         
+               <td>Command Restrictions in library security profile*.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>Find</td> 
+                         
+               <td>Command Restrictions (SCAN command) in library security
+                  profile*.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>Rename</td> 
+                         
+               <td>Command Restrictions in library security profile*.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>Delete</td> 
+                         
+               <td>Command Restrictions in library security profile*.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>Cut</td> 
+                         
+               <td>Option "Mo" (Move) "from library"
+                  for object type in SYSMAIN utility profile.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>Copy</td> 
+                         
+               <td>Option "Co" (Copy) "from library"
+                  for object type in SYSMAIN utility profile.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>Drag</td> 
+                         
+               <td>Option "Co" (Copy) or "Mo" (Move)
+                  "from library" for object type in SYSMAIN utility profile.
+               </td>
+                         
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>Paste / Drop</td> 
+                         
+               <td>Option "Co" (Copy) or "Mo" (Move)
+                  "to library" for object type in SYSMAIN utility profile.
+               </td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+      <p>* or special link security profile</p> 
+            
+      <p>** These actions can be made unavailable in the context menu of the
+                library node by the option "<a href="nsc_admin.htm#DisableRenameDelete">Disable
+                   Rename and Delete of Library Node</a>" (described in the section
+                <cite>Administrator Services</cite>).
+      </p> 
+             
+             
+      <table border="1" class="color" cellpadding="3" width="80%"> 
+                   
+                 
+         <thead align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <th>Location in Tree View</th> 
+                         
+               <th>Action</th> 
+                         
+               <th align="left">Controlled by</th> 
+                        
+            </tr> 
+                    
+         </thead> 
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <td rowspan="5">DDM node</td> 
+                         
+               <td> Open</td> 
+                         
+               <td>Option "List" in SYSDDM utility profile.
+                  (*)
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>New</td> 
+                         
+               <td>Option "Gen" in SYSDDM utility profile.
+                  (*)
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>Cut</td> 
+                         
+               <td>Option "Mo" (Move) "from library"
+                  for DDM in SYSMAIN utility profile.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>Copy</td> 
+                         
+               <td>Option "Co" (Copy) "from library"
+                  for DDM in SYSMAIN utility profile.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>Paste</td> 
+                         
+               <td>Option "Co" (Copy) or "Mo" (Move)
+                  "to library" for DDM in SYSMAIN utility profile.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td rowspan="3">Object node</td> 
+                         
+               <td>Open</td> 
+                         
+               <td>Option "Edit" in SYSDDM utility profile.
+                  (*)
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>Stow</td> 
+                         
+               <td>Option "Cat" in SYSDDM utility profile.
+                  (*)
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>Cat</td> 
+                         
+               <td>Option "Cat" in SYSDDM utility profile.
+                  (*)
+               </td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+      <p>(*) If no SYSDDM utility profile is defined, the Command Restrictions
+                in the SYSDDM <em>library</em> profile apply.
+      </p> 
+            
+           
+          
+      <div><a name="transferOperations"></a></div> 
+           
+      <h4> Transfer Operations</h4> 
+            
+            
+      <p>Transfer operations (for example, "Move",
+                "Copy") and delete operations of any supported Natural object are
+                controlled by the SYSMAIN utility profiles (unless no utility profiles for
+                SYSMAIN are defined, in which case they are controlled by the
+                <a href="nsc_lib.htm#Maintenance_with_Natural_Utilities">Utilities</a>
+                option in the library profile of the library processed). Exception: the
+                transfer of DDMs is controlled by the SYSDDM utility profiles.
+      </p> 
+            
+      <p>The following actions are controlled by the following
+                <a href="nsc_util.htm#Default_Profile_for_SYSMAIN_Utility">SYSMAIN utility
+                   profile</a> options and are validated by the server (except as
+                indicated):
+      </p> 
+             
+             
+      <table border="1" class="color" cellpadding="3" width="80%"> 
+                   
+                 
+         <thead align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <th align="left">Action</th> 
+                         
+               <th align="left">Option in SYSMAIN Utility Profile</th> 
+                         
+               <th align="left">Corresponding Item in Context Menu</th> 
+                        
+            </tr> 
+                    
+         </thead> 
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <td> List</td> 
+                         
+               <td> Li</td> 
+                         
+               <td>-</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> Find</td> 
+                         
+               <td> <em>Client action not validated by the server.</em></td> 
+                         
+               <td>-</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> Copy &nbsp;</td> 
+                         
+               <td> Co</td> 
+                         
+               <td> Copy</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> Move</td> 
+                         
+               <td> Mo</td> 
+                         
+               <td> Cut and Paste</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> Delete</td> 
+                         
+               <td> De</td> 
+                         
+               <td> Delete</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> Rename</td> 
+                         
+               <td> Ren</td> 
+                         
+               <td>-</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> Import</td> 
+                         
+               <td> <em>Client action not validated by the server.</em></td> 
+                         
+               <td> -</td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+      <p>These options can be allowed/disallowed for each type of object
+                individually.
+      </p> 
+            
+           
+          
+      <div><a name="commandlineActions"></a></div> 
+           
+      <h4> Command-Line Actions</h4> 
+            
+            
+      <p class="note"><strong>Note:</strong><br> Some of the command-line actions listed below are controlled by
+                SYSMAIN utility profiles. If, however, no utility profiles for SYSMAIN are
+                defined, these actions are controlled by the
+                <a href="nsc_lib.htm#Maintenance_with_Natural_Utilities">Utilities</a>
+                option in the library profile of the library processed.
+      </p> 
+            
+      <p>The following actions, when entered in the Natural Studio command
+                line, are controlled by the following Natural Security settings and are
+                validated by the server (except as indicated):
+      </p> 
+             
+             
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                  
+                 
+         <thead align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <th align="left">Action</th> 
+                         
+               <th align="left">Controlled by</th> 
+                        
+            </tr> 
+                    
+         </thead> 
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <td> Edit object</td> 
+                         
+               <td>Editing Restrictions in library security profile*.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> List object</td> 
+                         
+               <td>Command Restrictions in library security profile*.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> Scratch</td> 
+                         
+               <td>Option "De" (Delete) for object type in SYSMAIN
+                  utility profile.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> Uncat</td> 
+                         
+               <td>Option "De" (Delete) for object type in SYSMAIN
+                  utility profile.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> Purge</td> 
+                         
+               <td>Option "De" (Delete) for object type in SYSMAIN
+                  utility profile.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> Save</td> 
+                         
+               <td>Command Restrictions in library security profile*.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> Cat</td> 
+                         
+               <td>Command Restrictions in library security profile*.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> Stow</td> 
+                         
+               <td>Command Restrictions in library security profile*.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> Compopt</td> 
+                         
+               <td>Command Restrictions in library security profile*.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> Scan</td> 
+                         
+               <td>Command Restrictions in library security profile*.</td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+      <p>* or special link security profile</p> 
+            
+           
+          
+      <div><a name="systemcmds"></a></div> 
+           
+      <h4> System Commands</h4> 
+            
+            
+      <p>Only Natural system commands which are processed on the server can be
+                protected by Natural Security. Their use is controlled by the Command
+                Restrictions in the library security profile (or special link security
+                profile). This comprises the following system commands: AIV, CATALL, CATALOG,
+                CHECK, CLEAR, COMPOPT, EXECUTE, GLOBALS, HELP, LIST, MAIL, PROFILE, READ,
+                REGISTER, RETURN, RUN, SAVE, SCAN, SETUP, STOW, TEST, UNREGISTER, UPDATE,
+                XREF.
+      </p> 
+            
+           
+          
+      <div><a name="ListEditDDM"></a></div> 
+           
+      <h4> Commands LIST DDM and EDIT DDM</h4> 
+            
+            
+      <p>If DDMs are stored on a system file specified with the Natural profile
+                parameter FDIC or FDDM, the following applies: In the Natural Studio, the
+                command EDIT DDM is also available from within a user-created library. This
+                means that it is not necessary to expand the DDM node in the tree view to be
+                able to edit a specific DDM. However, the use of the commands LIST DDM and EDIT
+                DDM in a server environment can only be restricted via the security profile of
+                the Natural <a href="nsc_util.htm#Default_Profile_for_SYSDDM_Utility">SYSDDM
+                   utility</a>.
+      </p> 
+            
+           
+          
+      <div><a name="toolbarFunctions"></a></div> 
+           
+      <h4> Menu-Bar Functions</h4> 
+            
+            
+      <p>The use of the function "Development Tools &gt; Error
+                Messages", invoked from the menu bar, is controlled by the SYSERR
+                utility profiles.
+      </p> 
+            
+      <p>The use of the function "Development Tools &gt; Object
+                Handler", invoked from the menu bar, is controlled by the SYSOBJH
+                utility profiles.
+      </p> 
+            
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="nsc_appl.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="ndvApplications"></a></div> 
+         
+      <h2> Protecting Natural Development Server Applications</h2> 
+          
+          
+      <p>This section describes how you can control access to base applications
+              and compound applications with Natural Security. It covers the following
+              topics:
+      </p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="nsc_appl.htm#Appl_Prot_Prerequ_Concept">Application Protection</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_appl.htm#Components_of_Appl_Sec_Prof">Components of an Application Profile</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_appl.htm#Invoke_Appl_Maint">Invoking Application Maintenance</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_appl.htm#Selecting_Existing_Applications_for_Processing">Selecting an Application for Processing</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_appl.htm#Adding_New_Appl">Adding a New Application Profile</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_appl.htm#Copying_an_Application">Copying an Application Profile</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_appl.htm#Modifying_an_Application">Modifying an Application Profile</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_appl.htm#Renaming_an_Application">Renaming an Application Profile</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_appl.htm#Deleting_an_Application">Deleting an Application Profile</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_appl.htm#Displaying_an_Application">Displaying an Application Profile</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_appl.htm#Linking_Users_to_Applications">Linking Users to Applications</a></p>
+         </li>
+      </ul> 
+          
+         
+      <div><a name="Appl_Prot_Prerequ_Concept"></a></div> 
+          
+      <h3> Application Protection</h3> 
+           
+           
+      <p>This section covers the following topics:</p> 
+      <ul>
+         <li><a href="nsc_appl.htm#Applications_nsc_appl">What are Applications?</a></li>
+         <li><a href="nsc_appl.htm#ApplProtPrerequ">Prerequisites</a></li>
+         <li><a href="nsc_appl.htm#ApplProtConcept">General Concept</a></li>
+         <li><a href="nsc_appl.htm#Application_IDs">Naming Conventions</a></li>
+         <li><a href="nsc_appl.htm#HierarchiesOfApplProf">Hierarchies of Application Profiles</a></li>
+         <li><a href="nsc_appl.htm#PredictUsers">Information for Predict Users</a></li>
+         <li><a href="nsc_appl.htm#DefiningApplSec">Defining and Activating Application Security</a></li>
+      </ul> 
+           
+          
+      <div><a name="Applications_nsc_appl"></a></div> 
+           
+      <h4> What are Applications?</h4> 
+            
+            
+      <p>Applications are <em>base applications</em> and <em>compound
+            applications</em> which are created and maintained in the Natural Studio's
+                application workspace and used in conjunction with the Natural Development
+                Server.
+      </p> 
+            
+      <p>For information on base and compound applications, please refer to the
+                <cite>Natural Development Server</cite> documentation.
+      </p> 
+            
+      <p>Unless otherwise indicated, the term "application" within
+                the Natural Security documentation comprises both base applications and
+                compound applications.
+      </p> 
+            
+           
+          
+      <div><a name="ApplProtPrerequ"></a></div> 
+           
+      <h4> Prerequisites</h4> 
+            
+            
+      <p>For the protection of applications on the development server file, the
+                following prerequisites must be met:
+      </p> 
+            
+      <ul> 
+                
+         <li> 
+                    
+            <p class="initem">The Natural Development Server must be installed at your site (as
+                        described in the <cite>Natural Development Server</cite> installation
+                        documentation).
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">A development server file must be defined; this definition is part
+                        of the Natural Development Server installation procedure.
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">The FSEC system file used must contain the application profiles
+                        "* Base Application *" and "* Compound Application
+                        *"; these two profiles are automatically created and stored on the FSEC
+                        file by both the Natural Security installation procedure and the Natural
+                        Development Server installation procedure.
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">The current Natural Security session must use a development server
+                        file.
+            </p> 
+                   
+         </li> 
+               
+      </ul> 
+            
+           
+          
+      <div><a name="ApplProtConcept"></a></div> 
+           
+      <h4> General Concept</h4> 
+            
+            
+      <p>The protection of applications is only relevant in conjunction with
+                the Natural Development Server. If you do not use the Natural Development
+                Server, you need not concern yourself with application protection in Natural
+                Security.
+      </p> 
+            
+      <p>If you use the Natural Development Server, you should use Natural
+                Security to control the access to applications on the development server
+                file.
+      </p> 
+            
+      <p>By protecting an application, you control users' access to it; that
+                is, you control whether users are allowed to read, add, modify or delete the
+                application in the Natural Studio's application workspace. These access rights
+                are defined in an application security profile.
+      </p> 
+            
+      <p>Application protection in Natural Security only affects access to an
+                application as such; it has no effect on access to the Natural programming
+                objects contained in the libraries that may be part of the application.
+      </p> 
+            
+           
+          
+      <div><a name="Application_IDs"></a></div> 
+           
+      <h4> Naming Conventions</h4> 
+            
+            
+      <p>Application IDs in Natural Security must conform to the application
+                naming conventions which are defined in the Natural Development Server. Natural
+                Security will check if they do.
+      </p> 
+            
+           
+          
+      <div><a name="HierarchiesOfApplProf"></a></div> 
+           
+      <h4> Hierarchies of Application Profiles</h4> 
+            
+            
+      <p>The installation procedures of both Natural Security and the Natural
+                Development Server automatically create two application security profiles with
+                the application IDs "* Base Application *" and "* Compound
+                Application *". These are the basic security profiles which apply to all
+                base applications and compound applications respectively for which no
+                individual security profiles are defined. The default access settings in the
+                two basic profiles are all preset to "N"; you can change them to
+                suit your requirements.
+      </p> 
+            
+      <p>The Natural Development Server naming conventions allow you to set up
+                a hierarchy of application profiles: If you create an application security
+                profile for an application whose ID is a certain character string, the profile
+                will apply to all applications whose IDs begin with that character string.
+                Thus, you need not define a profile for every single application.
+      </p> 
+            
+      <p>For example, if you defined a base application security profile with
+                the ID "A", it would apply to all base applications whose IDs
+                begin with "A" (such a "APPLX", "AA01",
+                "ABC", "ADE" etc.). A profile with the ID
+                "ABC" would in turn apply to, for example, "ABCA",
+                "ABCXYZ" etc.
+      </p> 
+            
+      <h4 class="floating-title">Asterisk as Default Access</h4> 
+            
+      <p>Such a profile hierarchy can be employed to allow/disallow at
+                different levels the individual <a href="nsc_appl.htm#Default_Access_nsc_appl">default access</a> methods (see
+                below) to be defined within the application profiles. If a default access in an
+                application profile is set to "*", the setting in the profile at
+                the next higher level applies for this access method.
+      </p> 
+            
+      <p>For example, let us assume the following base application profiles
+                with the following settings:
+      </p> 
+             
+             
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                  
+                   
+                 
+         <thead align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <th>ID</th> 
+                         
+               <th colspan="4">Settings in Profile</th> 
+                        
+            </tr> 
+                    
+         </thead> 
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <td>* Base Application *</td> 
+                         
+               <td>Read=Y</td> 
+                         
+               <td>Add=Y</td> 
+                         
+               <td>Modify=Y</td> 
+                         
+               <td>Delete=N</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>A</td> 
+                         
+               <td>Read=*</td> 
+                         
+               <td>Add=N</td> 
+                         
+               <td>Modify=*</td> 
+                         
+               <td>Delete=Y</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>ABC</td> 
+                         
+               <td>Read=*</td> 
+                         
+               <td>Add=*</td> 
+                         
+               <td>Modify=N</td> 
+                         
+               <td>Delete=*</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>ABCXYZ</td> 
+                         
+               <td>Read=*</td> 
+                         
+               <td>Add=N</td> 
+                         
+               <td>Modify=*</td> 
+                         
+               <td>Delete=N</td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+      <p>The following settings would apply:</p> 
+             
+             
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                   
+                 
+         <thead align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <th> ID</th> 
+                         
+               <th>Applicable Settings</th> 
+                         
+               <th align="left">Explanation</th> 
+                        
+            </tr> 
+                    
+         </thead> 
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <td rowspan="4"> ABCXYZ</td> 
+                         
+               <td> Read is allowed.</td> 
+                         
+               <td> The Read setting is determined by "* Base Application
+                  *".
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> Add is not allowed. </td> 
+                         
+               <td> The Add setting is determined by "ABCXYZ" itself.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>Modify is not allowed. </td> 
+                         
+               <td> The Modify setting is determined at the next higher level by
+                  "ABC".
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>Delete ist not allowed.</td> 
+                         
+               <td> The Delete setting is determined by "ABCXYZ" itself.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td rowspan="4"> ABC</td> 
+                         
+               <td> Read is allowed. </td> 
+                         
+               <td> The Read setting is determined by "* Base Application
+                  *".
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>Add is not allowed.</td> 
+                         
+               <td> The Add setting is determined at the next higher level by
+                  "A".
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> Modify is not allowed.</td> 
+                         
+               <td> The Modify setting is determined by "ABC" itself.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> Delete is allowed.</td> 
+                         
+               <td> The Delete setting is determined at the next higher level by
+                  "A".
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td rowspan="4">ADE</td> 
+                         
+               <td> Read is allowed.</td> 
+                         
+               <td rowspan="4">As no security profile is defined for this
+                  application, its settings are determined by the application defined at the next
+                  higher level, that is, by "A".
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> Add is not allowed.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> Modify is allowed.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> Delete is allowed.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td rowspan="4">A</td> 
+                         
+               <td> Read is allowed. </td> 
+                         
+               <td> The Read setting is determined by "* Base Application
+                  *".
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>Add is not allowed.</td> 
+                         
+               <td> The Add setting is determined by "A" itself.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> Modify is allowed.</td> 
+                         
+               <td> The Modify setting is determined by "* Base Application
+                  *".
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> Delete is allowed.</td> 
+                         
+               <td> The Delete setting is determined by "A" itself.</td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+           
+          
+      <div><a name="PredictUsers"></a></div> 
+           
+      <h4> Information for Predict Users</h4> 
+            
+            
+      <p>The hierarchy described above corresponds to the hierarchy you can set
+                up for Predict documentation objects. In fact, base and compound applications
+                correspond to Predict documentation objects of type "system",
+                subtypes "-B" and "-O" respectively (as described in
+                the Predict documentation).
+      </p> 
+            
+      <p>Base and compound applications also appear as Predict documentation
+                objects types "SY-B" and "SY-O" in Natural Security's
+                subsystem for <a href="nsc_extobj.htm#nsc_extobj">external objects</a>. It
+                is therefore possible to maintain application profiles either in the external
+                objects maintenance subsystem or in the application maintenance subsystem.
+                However, it is strongly recommended that you only use the application subsystem
+                - but not the external objects subsystem - to maintain application
+                profiles.
+      </p> 
+            
+           
+          
+      <div><a name="DefiningApplSec"></a></div> 
+           
+      <h4> Defining and Activating Application Security</h4> 
+            
+            
+      <p>Within Natural Security, application protection is performed in two
+                steps:
+      </p> 
+            
+      <ul> 
+                
+         <li> 
+                    
+            <p class="initem">the definition of the necessary security profiles and links,</p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">the activation of these profiles and links.</p> 
+                   
+         </li> 
+               
+      </ul> 
+            
+      <h4 class="floating-title">Definition of Security Profiles and
+                Links
+      </h4> 
+            
+      <p>To control access to an application, you would define the following
+                security profiles and links:
+      </p> 
+            
+      <ul> 
+                
+         <li> 
+                    
+            <p class="initem">You have to create a security profile for the <em>library
+                  SYSDIC</em> (if not already defined). In the library security profile of
+                        SYSDIC, the option "People-protected" must be set to
+                        "Y".
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">You create a <em>security profile for the application</em>, and in
+                        the profile define the access rights that are to apply to most users.
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">You create a <em>group security profile</em> for all users who are
+                        to have access to applications, and add all these users to the group.
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">You <em>link</em> the group <em>to the library SYSDIC</em>. Without
+                        this link, access to applications is not possible. The ID of this link is also
+                        used as session profile ID by the Natural Development Server.
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">If some users are to have restricted or extended access rights, you
+                        create another group security profile for each group of users who are to have
+                        the same access rights, and add the users to the groups accordingly.
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">You then <em>link</em> these other groups <em>to the
+                  application</em>, defining their access rights in the link profile.
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">You also have to <em>link</em> each of these groups <em>to the
+                  library SYSDIC</em>.
+            </p> 
+                   
+         </li> 
+               
+      </ul> 
+            
+      <h4 class="floating-title">Activation of Security Profiles and
+                Links
+      </h4> 
+            
+      <p>To activate the application profiles (and related link profiles) and
+                the protection mechanisms involved, you set the option
+                <a href="nsc_admin.htm#Appl_Sec_Active">"Activate Security for Development
+                   Server File"</a> to "Y" (Administrator Services Menu
+                &gt; General Options). As long as this option is set to "N",
+                applications on the development server file are not protected against
+                unauthorized access. It is recommended that you first create all the
+                application profiles, group profiles and links you need, before you set this
+                option to "Y".
+      </p> 
+            
+           
+          
+         
+      <div><a name="Components_of_Appl_Sec_Prof"></a></div> 
+          
+      <h3> Components of an Application Profile</h3> 
+          
+      <div><a name="ComponentsBase"></a></div> 
+           
+      <h4> Components of a Base Application Profile</h4> 
+            
+            
+      <p>The following type of screen is the "basic" profile
+                screen which appears when you invoke one of the functions Add, Copy, Modify,
+                Display for a base application security profile:
+      </p> 
+            
+      <table border="1" cellpadding="5" class="screen">
+         <tr>
+            <td><pre>
+14:15:03                    *** NATURAL SECURITY ***                 2008-10-31
+                           -Modify Base Application -                         
+                                                                             
+                                             Modified .. 2008-08-15 by SAG
+                                                                               
+Base Application ... XYZ-BASE                                             
+                                                                               
+                                                                               
+------ Default Access -------                          Library  DBID  FNR  NSC
+Y R Read                                               LIBA       123   10  N 
+* A Add                                                LIBB       123   11  P
+Y M Modify                                             LIBC       345   33  P
+N D Delete                                                                     
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+Additional Options ... N                                                     
+                                                                               
+                                                                               
+Enter-PF1---PF2---PF3---PF4---PF5---PF6---PF7---PF8---PF9---PF10--PF11--PF12---
+      Help  PrevM Exit  AddOp MaLib Flip                                Canc
+</pre></td>
+         </tr>
+      </table> 
+            
+      <p>The individual items you may define as part of a base application
+                security profile are explained below.
+      </p> 
+             
+             
+      <table border="1" class="color" cellpadding="3" width="80%"> 
+                  
+                 
+         <thead align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <th align="left">Field</th> 
+                         
+               <th align="left">Explanation</th> 
+                        
+            </tr> 
+                    
+         </thead> 
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <td> <a name="Default_Access_nsc_appl"></a> Default Access
+                   
+               </td> 
+                         
+               <td>
+                  <table border="0" width="100%"> 
+                                 
+                                
+                     <tbody align="left" valign="top"> 
+                                    
+                        <tr> 
+                                        
+                           <td colspan="2">In this column, you can
+                              allow/disallow access methods for the application object in the Natural
+                              Development Server. The possible access methods are:
+                           </td> 
+                                       
+                        </tr> 
+                                    
+                        <tr> 
+                                        
+                           <th> R</th> 
+                                        
+                           <td>Read the application.</td> 
+                                       
+                        </tr> 
+                                    
+                        <tr> 
+                                        
+                           <th> A</th> 
+                                        
+                           <td>Add the application.</td> 
+                                       
+                        </tr> 
+                                    
+                        <tr> 
+                                        
+                           <th> M</th> 
+                                        
+                           <td>Modify the application.</td> 
+                                       
+                        </tr> 
+                                    
+                        <tr> 
+                                        
+                           <th> D</th> 
+                                        
+                           <td>Delete the application.</td> 
+                                       
+                        </tr> 
+                                    
+                        <tr> 
+                                        
+                           <td colspan="2">For each access method, you
+                              can specify one of the following values:
+                           </td> 
+                                       
+                        </tr> 
+                                    
+                        <tr> 
+                                        
+                           <th> Y</th> 
+                                        
+                           <td>The access method is allowed.</td> 
+                                       
+                        </tr> 
+                                    
+                        <tr> 
+                                        
+                           <th> N</th> 
+                                        
+                           <td>The access method is not allowed.</td> 
+                                       
+                        </tr> 
+                                    
+                        <tr> 
+                                        
+                           <th valign="top"> *</th> 
+                                        
+                           <td>The setting in the application security profile at the next
+                              higher level in the hierarchy (see <a href="nsc_appl.htm#HierarchiesOfApplProf">Hierarchies of Application Profiles</a>
+                                            above) determines whether the access method is allowed or not.
+                           </td> 
+                                       
+                        </tr> 
+                                    
+                        <tr> 
+                                        
+                           <td colspan="2"> 
+                              
+                              <p>If you set Read access to "N", Add, Modify and
+                                 Delete access will automatically be set to "N".
+                              </p> 
+                                            
+                              <p>If you set Add, Modify or Delete access to "Y",
+                                                Read access will automatically be set to "Y".
+                              </p> 
+                                            
+                              <p>If you set Read access to "*", you can only set
+                                                Add, Modify and Delete access to "N" or "*", but not
+                                                to "Y".
+                              </p> 
+                                            
+                              <p>The access methods allowed/disallowed in the application
+                                                profile will apply to all users for which no special access is defined via a
+                                                link (for information on links, see
+                                                <a href="nsc_appl.htm#Linking_Users_to_Applications">Linking Users to
+                                                   Applications</a> below).
+                              </p>
+                           </td> 
+                                       
+                        </tr> 
+                                   
+                     </tbody> 
+                               
+                  </table>
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> Library <br>(display only)
+               </td> 
+                         
+               <td> 
+                  
+                  <p>The IDs of the libraries which are linked to the application in
+                     the Natural Development Server.
+                  </p> 
+                             
+                  <p>Up to 10 libraries are displayed at a time. If there are more,
+                                 you can use <span class="key">PF7</span> and <span class="key">PF8</span> to scroll within the list of
+                                 libraries.
+                  </p> 
+                             
+                  <p>By pressing <span class="key">PF5</span>, you can invoke
+                                 <a href="nsc_lib.htm#nsc_lib">Library Maintenance</a> for the libraries
+                                 displayed. (When you invoke Library Maintenance from here, it comprises only
+                                 those functions relevant for the maintenance of the libraries linked to the
+                                 application, and you can only maintain these libraries.)
+                  </p> 
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> DBID / FNR <br>(display only)&nbsp;
+               </td> 
+                         
+               <td>For each library, the database ID and file number of its FUSER
+                  system file are displayed.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> NSC <br>(display only)
+               </td> 
+                         
+               <td>
+                  <table border="0" width="100%"> 
+                                 
+                                
+                     <tbody align="left" valign="top"> 
+                                    
+                        <tr> 
+                                        
+                           <td colspan="2">For each library, information
+                              on its Natural Security definition is displayed:
+                           </td> 
+                                       
+                        </tr> 
+                                    
+                        <tr> 
+                                        
+                           <th valign="top"> <em>blank</em></th> 
+                                        
+                           <td>The library is not defined in Natural Security.</td> 
+                                       
+                        </tr> 
+                                    
+                        <tr> 
+                                        
+                           <th valign="top"> N</th> 
+                                        
+                           <td>The library is defined as not protected (that is, neither
+                              people-protected nor terminal-protected).
+                           </td> 
+                                       
+                        </tr> 
+                                    
+                        <tr> 
+                                        
+                           <th> P</th> 
+                                        
+                           <td>The library is defined as people-protected or
+                              terminal-protected, or both.
+                           </td> 
+                                       
+                        </tr> 
+                                    
+                        <tr> 
+                                        
+                           <th valign="top"> U</th> 
+                                        
+                           <td>The library is a user's private library.</td> 
+                                       
+                        </tr> 
+                                    
+                        <tr> 
+                                        
+                           <th valign="top"> ?</th> 
+                                        
+                           <td>The library is defined in Natural Security, but the FUSER
+                              DBID/FNR specification in the library security profile does not match the one
+                              defined in the application security profile.
+                           </td> 
+                                       
+                        </tr> 
+                                   
+                     </tbody> 
+                               
+                  </table>
+               </td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+           
+          
+      <div><a name="ComponentsCompound"></a></div> 
+           
+      <h4> Components of a Compound Application Profile</h4> 
+            
+            
+      <p>The following type of screen is the "basic" profile
+                screen which appears when you invoke one of the functions Add, Copy, Modify,
+                Display for a compound application security profile:
+      </p> 
+            
+      <table border="1" cellpadding="5" class="screen">
+         <tr>
+            <td><pre>
+14:16:05                    *** NATURAL SECURITY ***                 2008-10-31
+                        - Modify Compound Application -                        
+                                                                             
+                                             Modified .. 2008-08-15 by SAG
+                                                                               
+Compound Application ... XYZ-COMP                                             
+                                                                               
+                                                                               
+------ Default Access -------              Base Application                NSC
+Y R Read                                   ABCB0012-BASE-APPL               X  
+* A Add                                    ABCB0015-BASE-APPL    
+Y M Modify                                 ABCB0019A01                      X 
+N D Delete                                                                     
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+Additional Options ... N                                                     
+                                                                               
+                                                                               
+Enter-PF1---PF2---PF3---PF4---PF5---PF6---PF7---PF8---PF9---PF10--PF11--PF12---
+      Help  PrevM Exit  AddOp MaBAp Flip                                Canc
+</pre></td>
+         </tr>
+      </table> 
+            
+      <p>The individual items you may define as part of a compound application
+                security profile are explained below.
+      </p> 
+             
+             
+      <table border="1" class="color" cellpadding="3" width="80%">
+         <colgroup>
+            <col width="25%">
+            <col width="55%">
+         </colgroup> 
+                  
+                 
+         <thead align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <th align="left">Field</th> 
+                         
+               <th align="left">Explanation</th> 
+                        
+            </tr> 
+                    
+         </thead> 
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <td>Default Access</td> 
+               				
+                         
+               <td>
+                  <table border="0" width="100%">
+                     <colgroup>
+                        <col width="13%">
+                        <col width="87%">
+                     </colgroup> 
+                                
+                     <tbody align="left" valign="top"> 
+                                    
+                        <tr> 
+                                        
+                           <td colspan="2">In this column, you can
+                              allow/disallow access methods for the application object in the Natural
+                              Development Server. The possible access methods are:
+                           </td> 
+                                       
+                        </tr> 
+                                    
+                        <tr> 
+                                        
+                           <th>R</th> 
+                                        
+                           <td>Read the application.</td> 
+                                       
+                        </tr> 
+                                    
+                        <tr> 
+                                        
+                           <th>A</th> 
+                                        
+                           <td>Add the application.</td> 
+                                       
+                        </tr> 
+                                    
+                        <tr> 
+                                        
+                           <th>M</th> 
+                                        
+                           <td>Modify the application.</td> 
+                                       
+                        </tr> 
+                                    
+                        <tr> 
+                                        
+                           <th>D</th> 
+                                        
+                           <td>Delete the application.</td> 
+                                       
+                        </tr> 
+                                    
+                        <tr> 
+                                        
+                           <td colspan="2">For each access method, you
+                              can specify one of the following values:
+                           </td> 
+                                       
+                        </tr> 
+                                    
+                        <tr> 
+                                        
+                           <th>Y</th> 
+                                        
+                           <td>The access method is allowed.</td> 
+                                       
+                        </tr> 
+                                    
+                        <tr> 
+                                        
+                           <th>N</th> 
+                                        
+                           <td>The access method is not allowed.</td> 
+                                       
+                        </tr> 
+                                    
+                        <tr> 
+                                        
+                           <th valign="top">*</th> 
+                                        
+                           <td>The setting in the application security
+                              profile at the next higher level in the hierarchy (see
+                              <a href="nsc_appl.htm#HierarchiesOfApplProf">Hierarchies of Application
+                                               Profiles</a> above) determines whether the access method is allowed or
+                                            not.
+                           </td> 
+                                       
+                        </tr> 
+                                    
+                        <tr> 
+                                        
+                           <td colspan="2" valign="top"> 
+                              
+                              <p>If you set Read access to "N", Add, Modify and
+                                 Delete access will automatically be set to "N".
+                              </p> 
+                                            
+                              <p>If you set Add, Modify or Delete access to "Y",
+                                                Read access will automatically be set to "Y".
+                              </p> 
+                                            
+                              <p>If you set Read access to "*", you can only set
+                                                Add, Modify and Delete access to "N" or "*", but not
+                                                to "Y".
+                              </p> 
+                                            
+                              <p>The access methods allowed/disallowed in the application
+                                                profile will apply to all users for which no special access is defined via a
+                                                link (for information on links, see
+                                                <a href="nsc_appl.htm#Linking_Users_to_Applications">Linking Users to
+                                                   Applications</a> below).
+                              </p>
+                           </td> 
+                                       
+                        </tr> 
+                                   
+                     </tbody> 
+                               
+                  </table>
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> Base Application <br>
+                      (display only)
+               </td> 
+                         
+               <td> 
+                  
+                  <p>The IDs of the base applications which are contained in the
+                     compound application.
+                  </p> 
+                             
+                  <p>Up to 10 base applications are displayed at a time. If there are
+                                 more, you can use <span class="key">PF7</span> and <span class="key">PF8</span> to scroll within the list
+                                 of base applications.
+                  </p> 
+                             
+                  <p>By pressing <span class="key">PF5</span>, you can invoke Application
+                                 Maintenance for these base applications.
+                  </p>
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>NSC <br>
+                  (display only)
+               </td> 
+                         
+               <td>
+                  <table border="0" width="100%"> 
+                                
+                     <tbody align="left" valign="top"> 
+                                    
+                        <tr> 
+                                        
+                           <th>X &nbsp;</th> 
+                                        
+                           <td>The base application is defined in Natural
+                              Security.
+                           </td> 
+                                       
+                        </tr> 
+                                    
+                        <tr> 
+                                        
+                           <th><em>blank</em></th> 
+                                        
+                           <td>The base application is not defined in
+                              Natural Security.
+                           </td> 
+                                       
+                        </tr> 
+                                   
+                     </tbody> 
+                               
+                  </table>
+               </td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+           
+          
+      <div><a name="d0e31456"></a></div> 
+           
+      <h4>Additional Options</h4> 
+            
+            
+      <p>If you mark the field "Additional Options" on the basic security
+                profile screen with "Y", a window will be displayed from which you
+                can select the following options:
+      </p> 
+            
+      <ul> 
+                
+         <li> 
+                    
+            <p class="initem">Maintenance Information</p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">Security Notes</p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">Owners</p> 
+                   
+         </li> 
+               
+      </ul> 
+            
+      <p>The options for which something has already been specified or defined
+                are marked with a plus sign (+).
+      </p> 
+            
+      <p>You can select one or more items from the window by marking them with
+                any character. For each item selected, an additional window will be
+                displayed:
+      </p> 
+             
+             
+      <table border="1" class="color" cellpadding="3" width="80%"> 
+                  
+                 
+         <thead align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <th align="left">Additional Option</th> 
+                         
+               <th align="left">Explanation</th> 
+                        
+            </tr> 
+                    
+         </thead> 
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <td> Maintenance Information <br>
+                             (display only)
+               </td> 
+                         
+               <td>The following information is displayed: 
+                  
+                  <ul> 
+                                 
+                     <li> 
+                                     
+                        <p class="initem">the date and time when the security profile was created, the ID
+                           of the ADMINISTRATOR who created it, and (if applicable) the IDs of the
+                                         co-owners who countersigned for the creation;
+                        </p> 
+                                    
+                     </li> 
+                                 
+                     <li> 
+                                     
+                        <p class="initem">the date and time when the security profile was last modified,
+                                         the ID of the ADMINISTRATOR who made the last modification, and (if applicable)
+                                         the IDs of the co-owners who countersigned for the modification.
+                        </p> 
+                                    
+                     </li> 
+                                
+                  </ul>
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> Security Notes &nbsp;</td> 
+                         
+               <td>You may enter your notes on the security profile.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> Owners &nbsp;</td> 
+                         
+               <td>You may enter up to eight IDs of ADMINISTRATORs. Only the
+                  ADMINISTRATORs specified here will be allowed to maintain the security profile.
+                  
+                  
+                  <p>If no owner is specified, any user of type ADMINISTRATOR may
+                                 maintain the security profile.
+                  </p> 
+                             
+                  <p>For each owner, the number of co-owners whose countersignatures
+                                 will be required for maintenance permission may optionally be specified in the
+                                 field after the ID.
+                  </p> 
+                             
+                  <p>For an explanation of owners and co-owners, see the section
+                                 <a href="nsc_count.htm#nsc_count">Countersignatures</a>.
+                  </p>
+               </td>
+                         
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+           
+          
+         
+      <div><a name="Invoke_Appl_Maint"></a></div> 
+          
+      <h3> Invoking Application Maintenance</h3> 
+           
+           
+      <p>Application maintenance can only be invoked if the
+               <a href="nsc_appl.htm#ApplProtPrerequ">prerequisites</a> described above
+               are met.
+      </p> 
+           
+      <p>On the Main Menu, enter code "M" for
+               "Maintenance". A window will be displayed.
+      </p> 
+           
+      <p>In the window, mark object type "Application" with a
+               character or with the cursor. The Application Maintenance selection list will
+               be displayed.
+      </p> 
+           
+      <p>From this selection list, you invoke all application maintenance
+               functions as described below.
+      </p> 
+           
+          
+         
+      <div><a name="Selecting_Existing_Applications_for_Processing"></a></div> 
+          
+      <h3> Selecting an Application for Processing</h3> 
+           
+           
+      <p>When you invoke Application Maintenance, a list of all application
+               profiles that have been defined to Natural Security will be displayed.
+      </p> 
+           
+      <p>If you do not wish to get a list of all existing application profiles,
+               but would like only certain applications to be listed, you may use the Start
+               Value and Type/Status options as described in the section
+               <a href="nsc_way.htm#nsc_way">Finding Your Way In Natural
+            Security</a>.
+      </p> 
+           
+      <p>On the Main Menu, enter code "M" for
+               "Maintenance". A window will be displayed. In the window, mark
+               object type "Application" with a character or with the cursor
+               (and, if desired, enter a start value and/or application type). The Application
+               Maintenance selection list will be displayed:
+      </p> 
+           
+      <table border="1" cellpadding="5" class="screen">
+         <tr>
+            <td><pre>
+14:49:01                    *** NATURAL SECURITY ***                 2008-10-31
+                          - Application Maintenance -
+ 
+ Co Application                      Type Status Access  Message
+ __ ________________________________ ____  ____ ________ ______________________
+ __ * Base Application *             Base  NApp RAM
+ __ A                                Base  Defi * *D
+ __ ABC                              Base  Defi ** *
+ __ ABCB0014-BASE-APPL               Base  Defi RAMD
+ __ ABCB0015-BASE-APPL               Base  NApp RA
+ __ ABCB0016-BASE-APPL               Base  Defi RAMD
+ __ ABCB0017-BASE-APPL               Base  NApp RAM
+ __ ABCXYZ                           Base  Defi * *
+ __ ABCXYZ1                          Base  Defi RA
+ __ ABCXYZ2                          Base  Defi R***
+ __ * Compound Application *         Comp  NApp R
+ __ COMP                             Comp  Defi RAMD
+ __ COMP-APPLIC                      Comp  Defi R**
+ __ COMP-APPLIC-DEP                  Comp  Defi RAM*
+
+
+Command ===&gt;
+Enter-PF1---PF2---PF3---PF4---PF5---PF6---PF7---PF8---PF9---PF10--PF11--PF12---
+Help        Exit              Flip  -     +                       Canc   
+</pre></td>
+         </tr>
+      </table> 
+           
+      <p>For each application, the application ID, Type ("Base" or
+               "Comp"(ound)), Status and Default Access Definition are
+               displayed.
+      </p> 
+           
+      <p>The list can be scrolled as described in the section
+               <a href="nsc_way.htm#nsc_way">Finding Your Way In Natural
+            Security</a>.
+      </p> 
+           
+          
+      <div><a name="d0e31661"></a></div> 
+           
+      <h4>Status as Selection Criterion</h4> 
+            
+            
+      <p>If you wish to list only certain applications, you can specify one of
+                the following selection criteria in the Status field above the list (possible
+                abbreviations are underlined):
+      </p> 
+             
+             
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                  
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <td> <var>blank</var></td> 
+                         
+               <td>All application security profiles - regardless of whether or
+                  not a corresponding application exists.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> <code><u>A</u>LL</code></td> 
+                         
+               <td>All applications - regardless of whether or or not a
+                  corresponding security profile has been defined.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> <code><u>D</u>EFI</code></td> 
+                         
+               <td>Defined; that is, applications for which security profiles
+                  have been defined.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> <code><u>U</u>NDF</code></td> 
+                         
+               <td>Undefined; that is, applications for which no security
+                  profiles have been defined.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> <code><u>N</u>APP</code></td> 
+                         
+               <td>No application; that is, application security profiles for
+                  which no corresponding applications exist.
+               </td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+      <p>The default is <var>blank</var>; that is, all
+                application security profiles will be listed.
+      </p> 
+            
+           
+          
+      <div><a name="d0e31755"></a></div> 
+           
+      <h4>Selecting a Function</h4> 
+            
+            
+      <p>The following application maintenance functions are available
+                (possible code abbreviations are underlined):
+      </p> 
+             
+             
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                  
+                 
+         <thead align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <th align="left">Code</th> 
+                         
+               <th align="left">Function</th> 
+                        
+            </tr> 
+                    
+         </thead> 
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <td> <code><u>A</u>D</code></td> 
+                         
+               <td> <a href="nsc_appl.htm#Add_Appl_Existing">Add
+                     application</a></td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> <code><u>C</u>O</code></td> 
+                         
+               <td> <a href="nsc_appl.htm#Copying_an_Application">Copy
+                     application</a></td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> <code><u>M</u>O</code></td> 
+                         
+               <td> <a href="nsc_appl.htm#Modifying_an_Application">Modify
+                     application</a></td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> <code>RE</code> &nbsp;
+               </td> 
+                         
+               <td> <a href="nsc_appl.htm#Renaming_an_Application">Rename
+                     application</a></td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> <code>DE</code> &nbsp;
+               </td> 
+                         
+               <td> <a href="nsc_appl.htm#Deleting_an_Application">Delete
+                     application</a></td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> <code><u>D</u>I</code></td> 
+                         
+               <td> <a href="nsc_appl.htm#Displaying_an_Application">Display
+                     application</a></td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> <code>LU</code> &nbsp;
+               </td> 
+                         
+               <td> <a href="nsc_appl.htm#Linking_Users_to_Applications">Link users
+                     to application</a></td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+      <p>To invoke a function for an application, mark the application with the
+                appropriate function code in column "Co".
+      </p> 
+            
+      <p>You may select various objects for various functions at the same time;
+                that is, you can mark several applications on the screen with a function code.
+                For each application marked, the appropriate processing screen will be
+                displayed. You may then perform for one application after another the selected
+                functions.
+      </p> 
+            
+           
+          
+         
+      <div><a name="Adding_New_Appl"></a></div> 
+          
+      <h3> Adding a New Application Profile</h3> 
+           
+           
+      <p>To define an application to Natural Security, you create a security
+               profile for it. You can create security profiles for:
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">applications which already exist on the development server file,</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">applications which do not yet exist on the development server
+                       file.
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+          
+      <div><a name="Add_Appl_Existing"></a></div> 
+           
+      <h4> Adding a Profile for an Existing Application</h4> 
+            
+            
+      <p>On the Application Maintenance selection list, enter
+                "UNDF" in the field "Status".
+      </p> 
+            
+      <p>Only those applications which have not yet been defined to Natural
+                Security will be listed. (The list can be scrolled as described in the section
+                <a href="nsc_way.htm#nsc_way">Finding Your Way In Natural
+            Security</a>.) The application IDs displayed are those by
+                which the applications are defined in on the development server file.
+      </p> 
+            
+      <p>On the list, mark the application for which you wish to create a
+                security profile with function code "AD". The Add Application
+                screen will be displayed.
+      </p> 
+            
+      <p>The individual items you may define on this screen and any additional
+                windows that may be part of an application security profile are described under
+                <a href="nsc_appl.htm#Components_of_Appl_Sec_Prof">Components of an
+            Application Profile</a> above.
+      </p> 
+            
+      <p>When you add a new application profile, the owners specified in your
+                own user security profile will automatically be copied into the application
+                security profile you are creating.
+      </p> 
+            
+           
+          
+      <div><a name="Add_Appl_Nonexisting"></a></div> 
+           
+      <h4> Adding a Profile for a Non-Existing Application</h4> 
+            
+            
+      <p>It is possible to create application security profiles before the
+                corresponding applications themselves are defined on the development server
+                file.
+      </p> 
+            
+      <p>In the command line of the Application Maintenance selection list,
+                enter the command <code>ADD</code>.
+      </p> 
+            
+      <p>A window will be displayed. In this window, enter an <em>ID</em> for
+                the application. This ID must conform to the naming conventions for
+                applications which are defined in the Natural Development Server. Natural
+                Security will check if the ID conforms to these naming conventions. Depending
+                on where you have invoked the window from, you may also have to specify the
+                desired type of application (base or compound).
+      </p> 
+            
+      <p>After you have entered a valid ID (and specified the application
+                type), the Add Application screen will be displayed.
+      </p> 
+            
+      <p>The individual items you may define on this screen and any additional
+                windows that may be part of an application security profile are described under
+                <a href="nsc_appl.htm#Components_of_Appl_Sec_Prof">Components of an
+            Application Profile</a> above.
+      </p> 
+            
+      <p>When you add a new application profile, the owners specified in your
+                own user security profile will automatically be copied into the application
+                security profile you are creating.
+      </p> 
+            
+           
+          
+         
+      <div><a name="Copying_an_Application"></a></div> 
+          
+      <h3> Copying an Application Profile</h3> 
+           
+           
+      <p>The Copy Application function is used to define a new application to
+               Natural Security by creating a security profile which is identical to an
+               already existing application security profile.
+      </p> 
+           
+          
+      <div><a name="What_is_Copied_nsc_appl"></a></div> 
+           
+      <h4> What is Copied?</h4> 
+            
+            
+      <p>All components of the existing security profile will be copied into
+                the new security profile - except the owners (these will be copied from your
+                own user security profile into the new application security profile you are
+                creating).
+      </p> 
+            
+      <p>Any <em>links</em> from users to the existing application will
+                <em>not</em> be copied.
+      </p> 
+            
+           
+          
+      <div><a name="How_to_Copy_nsc_appl"></a></div> 
+           
+      <h4> How to Copy</h4> 
+            
+            
+      <p>On the Maintenance selection list, mark the application whose security
+                profile you wish to duplicate with function code "CO".
+      </p> 
+            
+      <p>A window will be displayed. In the window, enter the ID of the new
+                application. The ID must conform to Natural Development Server naming
+                conventions.
+      </p> 
+            
+      <p>After you have entered a valid ID, the new security profile will be
+                displayed.
+      </p> 
+            
+      <p>The individual components of the security profile you may define or
+                modify are described under <a href="nsc_appl.htm#Components_of_Appl_Sec_Prof">Components of an Application
+            Profile</a> above.
+      </p> 
+            
+           
+          
+         
+      <div><a name="Modifying_an_Application"></a></div> 
+          
+      <h3> Modifying an Application Profile</h3> 
+           
+           
+      <p>The Modify Application function is used to change an existing
+               application security profile.
+      </p> 
+           
+      <p>On the Application Maintenance selection list, you mark the application
+               whose security profile you wish to change with function code "MO".
+               The security profile of the selected application will be displayed.
+      </p> 
+           
+      <p>The individual components of the security profile you may define or
+               modify are described under <a href="nsc_appl.htm#Components_of_Appl_Sec_Prof">Components of an Application
+            Profile</a> above.
+      </p> 
+           
+          
+         
+      <div><a name="Renaming_an_Application"></a></div> 
+          
+      <h3> Renaming an Application Profile</h3> 
+           
+           
+      <p>The Rename Application function allows you to change the application ID
+               of an existing application security profile.
+      </p> 
+           
+      <p>On the Application Maintenance selection list, you mark the application
+               whose ID you wish to change with function code "RE". A window will
+               be displayed in which you can enter a new ID for the application profile.
+      </p> 
+           
+      <p>The ID must conform to Natural Development Server naming
+               conventions.
+      </p> 
+           
+      <p>When you rename an application security profile, the application itself
+               will not be renamed.
+      </p> 
+           
+          
+         
+      <div><a name="Deleting_an_Application"></a></div> 
+          
+      <h3> Deleting an Application Profile</h3> 
+           
+           
+      <p>The Delete Application function is used to delete an existing
+               application security profile.
+      </p> 
+           
+      <p>On the Application Maintenance selection list, you mark the application
+               whose profile you wish to delete with function code "DE". A window
+               will be displayed.
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">If you have invoked the Delete Application function and should then
+                       decide against deleting the given application security profile, leave the
+                       Delete Application window by pressing <span class="key">ENTER</span> without having typed in
+                       anything.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">If you wish to delete the given application security profile, enter
+                       the application's ID in the window to confirm the deletion.
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>When you delete an application profile, all existing links to the
+               application profile will also be deleted.
+      </p> 
+           
+      <p>When you delete an application security profile, the application itself
+               will not be deleted. The application ID will remain in the Application
+               Maintenance selection list with the Status set to "UNDF"
+               (undefined).
+      </p> 
+           
+      <p>If you mark more than one application with "DE", a window
+               will appear in which you are asked whether you wish to confirm the deletion of
+               each application security profile with entering the application's ID, or
+               whether all applications selected for deletion are to be deleted without this
+               individual confirmation. Be careful not to delete an application
+               accidentally.
+      </p> 
+           
+      <p class="note"><strong>Note:</strong><br> If an application is deleted in the Natural Development Server, the
+               corresponding Natural Security application profile will not be deleted, but its
+               Status will be set to "NAPP" (no application).
+      </p> 
+           
+          
+         
+      <div><a name="Displaying_an_Application"></a></div> 
+          
+      <h3> Displaying an Application Profile</h3> 
+           
+           
+      <p>The Display Application function is used to display an existing
+               application security profile.
+      </p> 
+           
+      <p>On the Application Maintenance selection list, you mark the application
+               whose security profile you wish to view with function code "DI".
+               The security profile of the selected application will be displayed.
+      </p> 
+           
+      <p>The individual components of the security profile are explained under
+               <a href="nsc_appl.htm#Components_of_Appl_Sec_Prof">Components of an
+            Application Profile</a> above.
+      </p> 
+           
+          
+         
+      <div><a name="Linking_Users_to_Applications"></a></div> 
+          
+      <h3> Linking Users to Applications</h3> 
+           
+           
+      <p>The access methods allowed/disallowed in an application security
+               profile apply to all users who are not linked to the application. If you wish
+               to allow an individual user more or less access methods, you can <em>link</em>
+               the user to the application and in the link's security profile define which
+               access methods are to be available for this particular user. This means that by
+               using links you may define for different users different access rights to the
+               same application.
+      </p> 
+           
+      <p><img src="graphics/nscappl1.jpg" alt="" width="400" height="300"></p> 
+           
+      <p>Only users of types "Administrator", "Person"
+               and "Group" can be linked to an application. Administrators and
+               Persons can be linked to an application either directly or via a Group.
+               "Members" and "Terminals" can be linked to an
+               application only via a Group; that is, they must be assigned to a Group, and
+               the Group be linked to the application.
+      </p> 
+           
+      <p>There are two functions available to establish and maintain links
+               between users and applications:
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">To link <em>one user</em> to <em>various applications</em>, use the
+                       function "Link user to applications" (which is invoked from the
+                       User Maintenance selection list).
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">To link <em>various users</em> to <em>one application</em>, use the
+                       function "Link users to application" (which is invoked from the
+                       Application Maintenance selection list).
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>Both functions are described below.</p> 
+           
+          
+      <div><a name="Link_Single_User_to_Appl"></a></div> 
+           
+      <h4> Linking a Single User to Applications</h4> 
+            
+            
+      <p>The function "Link user to applications" is used to link
+                one user to one or more applications.
+      </p> 
+            
+      <p>On the User Maintenance selection list, you mark the user you wish to
+                link with function code "LA".
+      </p> 
+            
+      <p>A window will be displayed. In this window, you can select the type of
+                applications (base, compound, or both) to which you wish to link the user. In
+                addition, the window provides the following options:
+      </p> 
+            
+      <ul> 
+                
+         <li> 
+                    
+            <p class="initem"><span class="selectable_label">Start value</span> - Here you can enter a start value
+                        (as described in the section <a href="nsc_way.htm#nsc_way">Finding Your
+                  Way in Natural Security</a>) for the list of applications to
+                        be displayed.
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem"><span class="selectable_label">Selection criterion</span> - N = none: all
+                        applications will be listed; L = linked: only applications to which the user is
+                        already linked will be listed; U = unlinked: only applications to which the
+                        user is not yet linked will be listed.
+            </p> 
+                   
+         </li> 
+               
+      </ul> 
+            
+      <p>Then, the Link User To Applications selection list will be displayed,
+                showing the list of applications.
+      </p> 
+            
+      <p>The list can be scrolled as described in the section
+                <a href="nsc_way.htm#nsc_way">Finding Your Way In Natural
+            Security</a>.
+      </p> 
+            
+      <p>On the list, you mark the applications to which you wish to link the
+                user.
+      </p> 
+            
+      <p>In the "Co" column, you may mark each application with
+                one of the following function codes (possible code abbreviations are
+                underlined):
+      </p> 
+             
+             
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                  
+                 
+         <thead align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <th align="left">Code</th> 
+                         
+               <th align="left">Function</th> 
+                        
+            </tr> 
+                    
+         </thead> 
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <td> <code>LK</code> &nbsp;
+               </td> 
+                         
+               <td> Link - The user may use the application with a special
+                  security profile to be defined for the link; the link profile will take
+                  precedence over the application profile (see below). 
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> <code>CL</code> &nbsp;
+               </td> 
+                         
+               <td> Cancel - An existing link will be cancelled. </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> <code><u>D</u>I</code></td> 
+                         
+               <td> Display Application - The application security profile will
+                  be displayed. 
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> <code>DL &nbsp;</code></td> 
+                         
+               <td> Display Link - The link security profile will be displayed.
+                  
+               </td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+      <p>You can mark one or more applications on the screen with a function
+                code. For each object marked, the selected functions will then be executed one
+                after another. When processing is completed, a message will be displayed
+                stating the link situation now in effect between the user and each
+                application.
+      </p> 
+            
+      <h4 class="floating-title">Creating a Link Security Profile</h4> 
+            
+      <p>If you mark an application with "LK", you may define the
+                security profile for this link on the screen which will be displayed. The
+                default settings which will appear in the link security profile are taken from
+                the security profile of the application.
+      </p> 
+            
+      <p>The items you may define as part of a link security profile correspond
+                with the items you may define as part of an application security profile (see
+                <a href="nsc_appl.htm#Components_of_Appl_Sec_Prof">Components of an Application
+                   Profile</a> above).
+      </p> 
+            
+      <p>Instead of allowing/disallowing the access methods in the link
+                security profile, you can also enter/delete the corresponding letters (R, A, M,
+                D) in the appropriate positions in the Access column of the Link User To
+                Applications selection list.
+      </p> 
+            
+      <p>Moreover, you have the option to set "Activation Dates"
+                in the link security profile; these are in analogy to the Activation Dates in a
+                user security profile (as explained under
+                <a href="nsc_user.htm#Components_of_a_User_Profile">Components of a User
+            Profile</a> in the section <cite>User
+                   Maintenance</cite>).
+      </p> 
+            
+      <h4 class="floating-title">Modifying a Link Security Profile</h4> 
+            
+      <p>To modify an existing link security profile, you mark the respective
+                application with "LK" again on the Link User To Applications
+                screen to invoke the link security profile screen.
+      </p> 
+            
+           
+          
+      <div><a name="Link_Multiple_Users_to_Appl"></a></div> 
+           
+      <h4> Linking Multiple Users to an Application</h4> 
+            
+            
+      <p>The function "Link users to application" is used to link
+                one or more users to one application.
+      </p> 
+            
+      <p>On the Application Maintenance selection list, you mark the
+                application to which you wish to link users with code "LU".
+      </p> 
+            
+      <p>A window will be displayed, providing the following options:</p> 
+            
+      <ul> 
+                
+         <li> 
+                    
+            <p class="initem"><span class="selectable_label">Start value</span> - Here you can enter a start value
+                        (as described in the section <a href="nsc_way.htm#nsc_way">Finding Your
+                  Way in Natural Security</a>) for the list of users to be
+                        displayed.
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem"><span class="selectable_label">Selection criterion</span> - N = none: all users will
+                        be listed; L = linked: only users which are already linked to the application
+                        will be listed; U = unlinked: only users which are not yet linked to the
+                        application will be listed.
+            </p> 
+                   
+         </li> 
+               
+      </ul> 
+            
+      <p>Then, the Link Users To Application selection list will be displayed,
+                showing the list of users.
+      </p> 
+            
+      <p>The list includes all users of types "Group",
+                "Administrator" and "Person".
+      </p> 
+            
+      <p>The list can be scrolled as described in the section
+                <a href="nsc_way.htm#nsc_way">Finding Your Way In Natural
+            Security</a>.
+      </p> 
+            
+      <p>On the list, you mark the users you wish to be linked to the
+                application.
+      </p> 
+            
+      <p>In the "Co" column, you may mark each user with one of
+                the following function codes (possible code abbreviations are underlined):
+      </p> 
+             
+             
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                  
+                 
+         <thead align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <th align="left">Code</th> 
+                         
+               <th align="left">Function</th> 
+                        
+            </tr> 
+                    
+         </thead> 
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <td> <code>LK</code> &nbsp;
+               </td> 
+                         
+               <td> Link - The user may use the application with a special
+                  security profile to be defined for the link; the link profile will take
+                  precedence over the application profile (see below). 
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> <code>CL</code> &nbsp;
+               </td> 
+                         
+               <td> Cancel - An existing link will be cancelled. </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> <code><u>D</u>I</code></td> 
+                         
+               <td> Display User - The user security profile will be displayed.
+                  
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> <code>DL</code> &nbsp;
+               </td> 
+                         
+               <td> Display Link - The link security profile will be displayed.
+                  
+               </td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+      <p>You can mark one or more users on the screen with a function code. For
+                each user marked, the selected functions will then be executed one after
+                another. When processing is completed, a message will be displayed stating the
+                link situation now in effect between each user and the application.
+      </p> 
+            
+      <h4 class="floating-title">Creating a Link Security Profile</h4> 
+            
+      <p>If you mark a user with "LK", you may define the security
+                profile for this link on the screen which will be displayed. The default
+                settings which will appear in the link security profile are taken from the
+                security profile of the application.
+      </p> 
+            
+      <p>The items you may define as part of a link security profile correspond
+                with the items you may define as part of an application security profile (see
+                <a href="nsc_appl.htm#Components_of_Appl_Sec_Prof">Components of an Application
+                   Profile</a> above).
+      </p> 
+            
+      <p>Instead of allowing/disallowing the access methods in the link
+                security profile, you can also enter/delete the corresponding letters (R, A, M,
+                D) in the appropriate positions in the Access column of the Link Users To
+                Application selection list.
+      </p> 
+            
+      <p>Moreover, you have the option to set "Activation Dates"
+                in the link security profile; these are in analogy to the Activation Dates in a
+                user security profile (as explained under
+                <a href="nsc_user.htm#Components_of_a_User_Profile">Components of a User
+            Profile</a> in the section <cite>User
+                   Maintenance</cite>).
+      </p> 
+            
+      <h4 class="floating-title">Modifying a Link Security Profile</h4> 
+            
+      <p>To modify an existing link security profile, you mark the respective
+                user with "LK" again on the Link Users To Application screen to
+                invoke the link security profile screen.
+      </p> 
+            
+           
+          
+        
+       
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="nsc_appl.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../nsc/nsc_appl.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/nsc/nsc_appl.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc_util.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc_rpc.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

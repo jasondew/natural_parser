@@ -1,0 +1,194 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Modifying the Field Attributes (J2EE only)</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="clientcfg-field"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../webio/clientcfg-field.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/webio/clientcfg-field.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="clientcfg-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="clientcfg-css.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="clientcfg-themes.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Natural Web I/O Interface&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x35"></a> 
+               <a name="x36"></a>Modifying the Field Attributes (J2EE only)
+         </h1>
+      </div>
+         
+         
+      <p>The information in this document applies only to a J2EE server.</p> 
+         
+      <p>In the Natural Web I/O Interface client and in Natural for Ajax, the
+             rendering of several Natural field attributes is controlled by an XSLT file.
+             
+      </p> 
+         
+      <p>The following XSLT files are available in the
+             <cite><var>&lt;installdir&gt;</var>/WEB-INF</cite>
+             directory:
+      </p> 
+         
+      <ul> 
+             
+         <li> 
+                 
+            <p class="initem"><cite>transuni.xsl</cite> for Internet Explorer.
+            </p> 
+                
+         </li> 
+             
+         <li> 
+                 
+            <p class="initem"><cite>transuni-ff.xsl</cite> for Mozilla Firefox.
+            </p> 
+                
+         </li> 
+            
+      </ul> 
+         
+      <p>The information in this document applies to both XSLT files. The XSLT
+             files are only read once when the server is started. Therefore, when you make
+             changes to these files, you have to restart the server so that your changes
+             become effective.
+      </p> 
+         
+      <p> This document covers the following
+             topics:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="clientcfg-field.htm#clientcfg-field-under">Setting the Underline and Blinking Attributes</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="clientcfg-field.htm#clientcfg-field-cursive">Setting the Cursive/Italic Attribute</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="clientcfg-field.htm#clientcfg-field-intens">Setting the Intensified Attribute</a></p>
+         </li>
+      </ul>
+      <hr>
+      <div><a name="clientcfg-field-under"></a></div> 
+         
+      <h2> 
+             <a name="x37"></a> 
+             <a name="x38"></a>Setting the Underline and Blinking Attributes
+      </h2> 
+          
+          
+      <p>The field attributes for underlined and blinking text are set in the
+              following section of the XSLT file:
+      </p> 
+          <pre class="verbatim">&lt;!-- Set underline and blinking attributes    --&gt; 
+&lt;xsl:variable name="TextDecoStyle"&gt;
+  &lt;xsl:choose&gt;
+      &lt;xsl:when test="<strong>@underline</strong>='True'"&gt;text-decoration:underline;&lt;/xsl:when&gt;
+      &lt;xsl:when test="<strong>@blinking</strong>='True'"&gt;text-decoration:blink;&lt;/xsl:when&gt;
+      &lt;xsl:otherwise&gt;text-decoration:normal;&lt;/xsl:otherwise&gt;
+  &lt;/xsl:choose&gt;
+&lt;/xsl:variable&gt;</pre> 
+          <p>The field attribute for blinking text is not supported by the Internet
+              Explorer.
+      </p> 
+         
+      <div class="noprint">
+         <p><a href="clientcfg-field.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="clientcfg-field-cursive"></a></div> 
+         
+      <h2> 
+             <a name="x39"></a> 
+             <a name="x40"></a>Setting the Cursive/Italic Attribute
+      </h2> 
+          
+          
+      <p>The field attribute for cursive/italic text is set in the following
+              section of the XSLT file:
+      </p> 
+          <pre class="verbatim">&lt;!-- Set cursive attribute    --&gt;
+&lt;xsl:variable name="FontStyle"&gt;
+  &lt;xsl:choose&gt;
+      &lt;xsl:when test="<strong>@italic</strong>='True'"&gt;font-style:italic;&lt;/xsl:when&gt;
+      &lt;xsl:otherwise&gt;font-style:normal;&lt;/xsl:otherwise&gt;
+  &lt;/xsl:choose&gt;
+&lt;/xsl:variable&gt;</pre> 
+         <div class="noprint">
+         <p><a href="clientcfg-field.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="clientcfg-field-intens"></a></div> 
+         
+      <h2> 
+             <a name="x41"></a>Setting the Intensified Attribute
+      </h2> 
+          
+          
+      <p>The field attribute for intensified text is set in the following section
+              of the XSLT file:
+      </p> 
+          <pre class="verbatim">&lt;!-- Set intensified attribute - draw text as bold    --&gt;
+&lt;xsl:variable name="FontWeight"&gt;
+  &lt;xsl:choose&gt;
+      &lt;xsl:when test="<strong>@intensified</strong>='True'"&gt;font-weight:bolder&lt;/xsl:when&gt;
+      &lt;xsl:otherwise&gt;font-weight:normal;&lt;/xsl:otherwise&gt;
+  &lt;/xsl:choose&gt;
+&lt;/xsl:variable&gt;</pre> 
+         <div class="noprint">
+         <div class="nospy">
+            <p><a href="clientcfg-field.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../webio/clientcfg-field.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/webio/clientcfg-field.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="clientcfg-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="clientcfg-css.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="clientcfg-themes.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

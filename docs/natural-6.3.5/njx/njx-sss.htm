@@ -1,0 +1,463 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Server-Side Scrolling and Sorting</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="njx-sss"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../njx/njx-sss.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/njx/njx-sss.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="njx-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="njx-rtl.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="njx-modern-over.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Natural for Ajax&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+         
+      <div class="nospytext">
+         <h1>Server-Side Scrolling and Sorting</h1>
+      </div> 
+          
+      <p>This document covers the following
+              topics:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="njx-sss.htm#njx-sss-geninfo">General Information</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="njx-sss.htm#njx-sss-variants">Variants of Server-Side Scrolling and Sorting</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="njx-sss.htm#njx-sss-controls">Controls that Support Server-Side Scrolling and Sorting</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="njx-sss.htm#njx-sss-datastruct">Data Structures for Server-Side Scrolling and Sorting</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="njx-sss.htm#njx-sss-tree">Server-Side Scrolling and Sorting in Trees</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="njx-sss.htm#njx-sss-events">Events for Server-Side Scrolling and Sorting</a></p>
+         </li>
+      </ul>
+      <hr>
+      <div><a name="njx-sss-geninfo"></a></div> 
+          
+      <h2>General Information</h2> 
+           
+           
+      <p>It is often the case that a web application has to display an arbitrary
+               amount of data in a grid control, for instance, the records from a database
+               table. In these cases, it is mostly not efficient to send all data as a whole
+               to the web client. Instead, it will be intended to display a certain amount of
+               data to begin with and to send more data as the user scrolls through the page.
+               To support this, the grid controls in Natural for Ajax support the concept of
+               server-side scrolling and sorting.
+      </p> 
+          
+      <div class="noprint">
+         <p><a href="njx-sss.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="njx-sss-variants"></a></div> 
+          
+      <h2>Variants of Server-Side Scrolling and Sorting</h2> 
+           
+      <p>The following graphic illustrates the different types of server-side
+               scrolling and sorting that are supported by Natural for Ajax.
+      </p> 
+           
+      <p><img src="graphics/njx-sss-variants.png" alt="Variants" width="600" height="240"></p> 
+           
+      <p>With respect to server-side scrolling and sorting, the following
+               options can be used:
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                    
+                   
+            <p class="initem"><strong>No Server-Side Scrolling and Sorting</strong><br>The Natural application sends the grid data to the web server as a
+                       whole. The web server sends the grid data to the web client (browser) as a
+                       whole. 
+            </p> 
+                   
+            <p class="initem">Advantage: Neither the web server nor the Natural application are
+                       involved in the process of scrolling and sorting. As long as the user only
+                       scrolls and sorts, no round trip from the web client to the web server or to
+                       the Natural server is necessary.
+            </p> 
+                   
+            <p class="initem">Disadvantage: A round trip between web server and Natural server that
+                       is triggered by other user actions transports the entire grid data. 
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                    
+                   
+            <p class="initem"><strong>Web Server-Side Scrolling and Sorting (SSS_W)</strong><br>The Natural application sends the grid data to the web server as a
+                       whole. The web server sends the grid data to the web client (browser) in
+                       portions. 
+            </p> 
+                   
+            <p class="initem">Advantage: The Natural application is not involved in the process of
+                       scrolling and sorting. As long as the user only scrolls and sorts, no round
+                       trip from the web server to the Natural server is necessary. 
+            </p> 
+                   
+            <p class="initem">Disadvantage: A round trip between web server and Natural server that
+                       is triggered by other user actions transports the entire grid data. 
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                    
+                   
+            <p class="initem"><strong>Natural Server-Side Scrolling and Sorting (SSS_N)</strong><br>The Natural application sends the grid data to the web server in
+                       portions. The web server sends the grid data to the web client (browser) in
+                       portions. 
+            </p> 
+                   
+            <p class="initem">Advantage: A round trip between web server and Natural application
+                       passes only the visible data portion. 
+            </p> 
+                   
+            <p class="initem">Disadvantage: The Natural application must support the process of
+                       scrolling and sorting with a specific application logic.
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>The decision between these options will often depend on the expected
+               data volume. The application can decide dynamically at runtime which option to
+               use.
+      </p> 
+           
+      <p>The following topics show the difference between these three
+               options
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="njx-sss.htm#d0e9486">No Server-Side Scrolling and Sorting</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="njx-sss.htm#d0e9506">Web Server-Side Scrolling and Sorting</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="njx-sss.htm#d0e9526">Natural Server-Side Scrolling and Sorting</a></p>
+         </li>
+      </ul>
+      <div><a name="d0e9486"></a></div> 
+           
+      <h3>No Server-Side Scrolling and Sorting</h3> 
+            
+            
+      <p>Step 1: The grid is configured at design time to a row count of
+                twenty. The Natural application sends twenty rows and indicates that no further
+                rows are to be expected (<code>SIZE=0</code>).
+      </p> 
+            
+      <p><img src="graphics/njx-no-sss-1.png" alt="Step 1" width="600" height="200"></p> 
+            
+      <p>Step 2: When you scroll up and down, no server round trips to the web
+                server or to the Natural application are performed.
+      </p> 
+            
+      <p><img src="graphics/njx-no-sss-2.png" alt="Step 2" width="600" height="200"></p> 
+           
+      <div><a name="d0e9506"></a></div> 
+           
+      <h3>Web Server-Side Scrolling and Sorting</h3> 
+            
+            
+      <p>Step 1: The grid is configured at design time to a row count of five.
+                The Natural application sends twenty rows and indicates that no further rows
+                are to be expected (<code>SIZE=0</code>).
+      </p> 
+            
+      <p><img src="graphics/njx-sss_w-only-1.png" alt="Step 1" width="600" height="200"></p> 
+            
+      <p>Step 2: When you scroll up and down, the web browser requests
+                additional records from the web server There are no server round trips to
+                Natural.
+      </p> 
+            
+      <p><img src="graphics/njx-sss_w-only-2.png" alt="Step 2" width="600" height="200"></p> 
+           
+      <div><a name="d0e9526"></a></div> 
+           
+      <h3>Natural Server-Side Scrolling and Sorting</h3> 
+            
+            
+      <p>Step 1: The grid is configured at design time to a row count of five.
+                The Natural application sends five rows and indicates that further rows are to
+                be expected (<code>SIZE=20</code>).
+      </p> 
+            
+      <p><img src="graphics/njx-sss_w-and-sss_n-1.png" alt="Step 1" width="600" height="200"></p> 
+            
+      <p>Step 2: When you scroll up and down, the web browser requests
+                additional records from the web server. The web server requests additional
+                records from the Natural application.
+      </p> 
+            
+      <p><img src="graphics/njx-sss_w-and-sss_n-2.png" alt="Step 2" width="600" height="200"></p> 
+            
+      <p>The Natural application can dynamically decide at runtime which option
+                of server-side scrolling and sorting it wants to use. This can depend on the
+                number of records contained in a search result. 
+      </p> 
+            
+      <ul> 
+                
+         <li> 
+                    
+            <p class="initem">If the application does not want to use server-side scrolling and
+                        sorting at all, it sends as many rows to the web browser as the grid is
+                        configured to hold, or it sends fewer rows.
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem"> If the application wants to use web server-side scrolling and
+                        sorting, it sends all available rows and sets the <code>SIZE</code>
+                        parameter to zero in the data structure that represents the grid in the
+                        application.
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem"> If the application wants to use Natural server-side scrolling and
+                        sorting, it sends only part of the available rows and indicates in the
+                        <code>SIZE</code> parameter how many rows are to be expected
+                        altogether.
+            </p> 
+                   
+         </li> 
+               
+      </ul> 
+           
+      <div class="noprint">
+         <p><a href="njx-sss.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="njx-sss-controls"></a></div> 
+          
+      <h2>Controls that Support Server-Side Scrolling and Sorting</h2> 
+           
+           
+      <p>The following controls support server-side scrolling and sorting: </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem"><a href="textgridsss2textgrid2withserversidescrolling.htm#textgridsss2textgrid2withserversidescrolling">TEXTGRIDSSS2</a></p>
+                   
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"><a href="rowtablearea2theflexiblecontrolgrid.htm#rowtablearea2theflexiblecontrolgrid">ROWTABLEAREA2</a></p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"><a href="mgdgrid.htm#mgdgrid">MGDGRID</a></p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p class="note"><strong>Note:</strong><br>For compatibility reasons with earlier versions of Natural for Ajax,
+               you have to set the <code>natsss</code> property of NATPAGE to
+               true in order to activate server-side scrolling and sorting for the controls
+               ROWTABLEAREA2 and MGDGRID. If this property is set to true, for all instances
+               of these grid controls on a page, the necessary data structures are generated
+               into the Natural adapter interface. 
+      </p> 
+          
+      <div class="noprint">
+         <p><a href="njx-sss.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="njx-sss-datastruct"></a></div> 
+          
+      <h2>Data Structures for Server-Side Scrolling and Sorting</h2> 
+           
+           
+      <p>If you use the TEXTGRIDSSS2 control or if you use the ROWTABLEAREA2 or
+               MGDGRID control and have set the property <code>natsss</code>
+               to true for the page, the following additional data structure is generated into
+               the adapter interface for each instance of these controls. This data structure
+               is used to control the scroll and sort behavior at runtime.
+      </p> 
+           <pre class="verbatim">1 LINESINFO
+2 ROWCOUNT (I4)
+2 SIZE (I4)
+2 SORTPROPS (1:*)
+3 ASCENDING (L)
+3 PROPNAME (U) DYNAMIC
+2 TOPINDEX (I4)</pre> 
+           <p>The name of the data structure is derived from the name of the variable
+               that is bound to the grid. In this example, the variable
+               <code>LINES</code> had been bound to the grid. Therefore, the
+               name <code>LINESINFO</code> was generated. 
+      </p> 
+           
+      <p>With each event that is related to scrolling and sorting, the
+               application receives the information how many rows it should deliver at least
+               (<code>ROWCOUNT</code>) and the index of the first record to be delivered
+               (<code>TOPINDEX</code>). 
+      </p> 
+           
+      <p>In <code>SORTPROPS</code>, the application receives the information in
+               which sort sequence the records should be delivered and by which columns the
+               records should be sorted. 
+      </p> 
+           
+      <p>In <code>SIZE</code>, the application can indicate whether the
+               delivered amount of rows represents all available data (<code>SIZE=0</code>, no
+               Natural server-side scrolling), or whether there are more rows to come
+               (<code>SIZE=<var>total-number-of-records</var></code>, Natural
+               server-side scrolling). 
+      </p> 
+           
+      <p>When Natural server-side scrolling is used, the application will, for
+               instance, hold the available rows (mostly the result of a database search) in
+               an X-array, sort this X-array as requested and deliver the requested portion of
+               rows. However, other implementations and optimizations are possible, depending
+               on the needs and possibilities of the application.
+      </p> 
+          
+      <div class="noprint">
+         <p><a href="njx-sss.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="njx-sss-tree"></a></div> 
+          
+      <h2>Server-Side Scrolling and Sorting in Trees</h2> 
+           
+           
+      <p>The ROWTABLEAREA2 control can also be configured as a tree control,
+               where each row represents a tree node. In this case, the data structure that
+               supports server-side scrolling contains one more field,
+               <code>DSPINDEXFIRST</code>. 
+      </p> 
+           <pre class="verbatim">1 LINESINFO
+<strong>2 DSPINDEXFIRST (I4)</strong>
+2 ROWCOUNT (I4)
+2 SIZE (I4)
+2 SORTPROPS (1:*)
+3 ASCENDING (L)
+3 PROPNAME (U) DYNAMIC
+2 TOPINDEX (I4)</pre> 
+           <p>The need for this additional control field comes from the fact that a
+               tree can contain hidden items. 
+      </p> 
+           
+      <p>The rows sent by the Natural application must always start with an item
+               at level one. The additional field <code>DSPINDEXFIRST</code> is provided
+               because the visible part of the tree can start at a node with a level greater
+               than one (a subnode). In <code>DSPINDEXFIRST</code>, the application must
+               indicate the index of the first visible row within the rows sent from
+               Natural.
+      </p> 
+           
+      <h4 class="floating-title">Example</h4> 
+           
+      <p><img src="graphics/njx-sss-treenode1.png" alt="Example" width="600" height="106"></p> 
+           
+      <p>The top nodes of the tree are open and the user scrolls down as shown
+               below:
+      </p> 
+           
+      <p><img src="graphics/njx-sss-treenode2.png" alt="Example" width="600" height="105"></p> 
+           
+      <p>The Natural application is supposed to send data starting with a top
+               node. In our example, this is the node named
+               <span class="guilistitem">toptext_0</span>. But the first visible child node would be
+               <span class="guilistitem">childtext_0.2</span>. This means that among the sent items,
+               the first three items are hidden. The application sets the value for
+               <code>DSPINDEXFIRST</code> to "3" when sending the
+               data.
+      </p> 
+          
+      <div class="noprint">
+         <p><a href="njx-sss.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="njx-sss-events"></a></div> 
+          
+      <h2>Events for Server-Side Scrolling and Sorting</h2> 
+           
+           
+      <p>In order to support server-side scrolling and sorting, an application
+               must handle a number of related events properly. The events are described with
+               the corresponding controls. Examples on how to handle the events are provided
+               in the library <code>SYSEXNJX</code>.
+      </p> 
+          
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="njx-sss.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../njx/njx-sss.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/njx/njx-sss.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="njx-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="njx-rtl.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="njx-modern-over.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

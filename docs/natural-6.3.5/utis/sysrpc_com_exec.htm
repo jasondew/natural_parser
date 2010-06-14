@@ -1,0 +1,572 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Server Command Execution</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="sysrpc_com_exec" id="16718"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../utis/sysrpc_com_exec.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/utis/sysrpc_com_exec.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="sysrpc-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="sysrpc_parm_cui.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="sysrpc_rm_cui.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Tools and Utilities&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x227"></a> 
+               <a name="x228"></a> 
+               <a name="x229"></a>Server Command Execution 
+         </h1>
+      </div> 
+         
+      <p>The SYSRPC utility provides the server execution commands ping and
+             terminate. They are used to control active servers that have been defined in
+             the service directory. The ping command sends an internal message to the server
+             to verify a server connection. Terminate either sends an internal message to
+             the server requesting termination of a single server task, or issues a command
+             to EntireX Broker requesting termination of all server tasks associated with an
+             EntireX Broker service.
+      </p>
+      <p>The server execution commands reference the service directory in the library that is defined with the   <a href="../parms/rpcsdir.htm"><code>RPCSDIR</code></a> profile parameter (see the <cite>Parameter Reference</cite> documentation). If <code>RPCSDIR</code> is not set (this is the default),  the library  where you are currently logged on is used. The name of the library is indicated
+         in the upper right corner of the <span class="selectable_label">Server Command Execution</span>  screen shown in the following section.
+      </p> 
+          
+          
+         
+      <p>This section covers the following topics:</p>
+         
+      <ul>
+         <li>
+            <p class="initem"><a href="sysrpc_com_exec.htm#sysrpc_com_exec_Invoke_Com">Using Server Command Execution</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="sysrpc_com_exec.htm#sysrpc_com_exec_Pinging_a_Server">Pinging a Server</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="sysrpc_com_exec.htm#sysrpc_com_exec_Terminating_a_Server">Terminating a Server</a></p>
+         </li>
+      </ul> 
+        
+      <hr>
+      <div><a name="sysrpc_com_exec_Invoke_Com"></a></div> 
+         
+      <h2> Using Server Command Execution </h2> 
+          
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong> To use Server Command Execution </strong></p>
+      <ol class="steps">
+         <li> 
+                   
+                   
+            <p class="instep">In the <span class="selectable_label">Code</span> field of the <span class="selectable_label">Client
+                  Maintenance</span> menu, enter the following command: 
+            </p> <pre class="command-input">XC</pre> 
+                   
+                 </li>
+         <li> 
+                   
+                   
+            <p class="instep"><a name="sysrpc_com_exec_Example_Standard_View"></a>Choose
+                       <span class="key">ENTER</span>.
+            </p> 
+                   
+                   
+                   
+            <p class="instep">The standard view of the <span class="selectable_label">Server Command
+                  Execution</span> screen appears similar to the following example:
+            </p> 
+                   
+            <table border="1" cellpadding="5" class="screen">
+               <tr>
+                  <td><pre>
+ 14:09:38            *** NATURAL  Remote Procedure Call ***         2006-01-27 
+                            Server Command Execution                  SYSRPC   
+                                                                               
+        Node                           Server                         Message  
+ 1      ETB045                                                                 
+ 2                                     NRPC001                        Natural  
+ 3                                     NRPC002                                 
+ 4      *LOCTRAN                                                               
+ 5                                     NRPC001-LOGICAL                         
+ 6      LOGBROKER=NODE                                                         
+ 7                                     NRPC002                                 
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+ ______________________________________________________________________________
+                                                                               
+Enter-PF1---PF2---PF3---PF4---PF5---PF6---PF7---PF8---PF9---PF10--PF11--PF12---
+      Help  ERR   Exit  &lt;     -H    +H    -P    +P    TOP   BOT   &gt;     Canc   
+</pre></td>
+               </tr>
+            </table> 
+                   
+            <p class="instep">The standard view displays the columns <span class="selectable_label">Node</span>,
+                       <span class="selectable_label">Server</span> and <span class="selectable_label">Message</span>. The fields under
+                       the column <span class="selectable_label">Message</span> are truncated and display a maximum of
+                       8 characters.
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep"><a name="sysrpc_com_exec_Example_Extended_View"></a> If you choose
+                       <span class="key">PF4</span> or enter the less than (&lt;) sign in the command line at the
+                       bottom of the screen, the extended message view of the <span class="selectable_label">Server Command
+                  Execution</span> screen is displayed similar to the following example:
+            </p> 
+                   
+            <table border="1" cellpadding="5" class="screen">
+               <tr>
+                  <td><pre>
+ 14:14:08            *** NATURAL  Remote Procedure Call ***          2006-01-27
+                            Server Command Execution                   SYSRPC  
+                                                                               
+         Server            Message                                             
+ 1                                                                             
+ 2       NRPC001           Natural RPC Server 6.3.1.0 on WNT-x86           
+ 3       NRPC002                                                               
+ 4                                                                             
+ 5       NRPC001-LOGICAL                                                       
+ 6                                                                             
+ 7       NRPC002                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+ ______________________________________________________________________________
+                                                                               
+Enter-PF1---PF2---PF3---PF4---PF5---PF6---PF7---PF8---PF9---PF10--PF11--PF12---
+      Help  ERR   Exit  &lt;     -H    +H    -P    +P    TOP   BOT   &gt;     Canc
+</pre></td>
+               </tr>
+            </table> 
+                   
+            <p class="instep"> The extended view allows you to display a maximum of 50 characters
+                       of message text in the <span class="selectable_label">Message</span> column. This view does not
+                       display the <span class="selectable_label">Node</span> column and the fields under the
+                       <span class="selectable_label">Server</span> column are truncated and display a maximum of 16
+                       characters (the standard view shows 30 characters).
+            </p> 
+                   
+            <p class="instep">If you choose <span class="key">PF11</span> or enter the greater than (&gt;) sign
+                       in the command line, the standard view of the <span class="selectable_label">Server Command
+                  Execution</span> screen is displayed as shown in
+                       <a href="sysrpc_com_exec.htm#sysrpc_com_exec_Example_Standard_View">Example of
+                  a Standard View</a>. 
+            </p> 
+                   
+                 
+         </li>
+      </ol> 
+         
+      <div class="noprint">
+         <p><a href="sysrpc_com_exec.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="sysrpc_com_exec_Pinging_a_Server"></a></div> 
+         
+      <h2> Pinging a Server</h2> 
+          
+          
+      <p>You can ping a server from the standard or extended message view of the
+              <span class="selectable_label">Server Command Execution</span> screen.
+      </p> 
+          
+      <p>The following instructions are an example of how to ping a server from
+              the standard view.
+      </p> 
+          
+      <p>For an alternative method of pinging an RPC server, see Application
+              Programming Interface <a href="../rpc/end.htm#end_using_usr2073n">USR2073N</a> described in the
+              <cite>Natural Remote Procedure Call (RPC)</cite> documentation.
+      </p> 
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong> To ping a server </strong></p>
+      <ol class="steps">
+         <li> 
+                   
+                   
+            <p class="instep">In the <span class="selectable_label">Code</span> field of the <span class="selectable_label">Client
+                  Maintenance</span> menu, enter the following command: 
+            </p> <pre class="command-input">XC</pre> 
+                   
+                 </li>
+         <li> 
+                   
+                   
+            <p class="instep">Choose <span class="key">ENTER</span>.
+            </p> 
+                   
+                   
+                   
+            <p class="instep">The standard view of the <span class="selectable_label">Server Command
+                  Execution</span> screen is displayed.
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">In the empty column between the sequence number and the
+                       <span class="selectable_label">Node</span> column, in the line(s) which belong to the server(s)
+                       to be pinged, enter the following command: 
+            </p> <pre class="command-input">PI</pre> 
+                   <p class="instep">as shown in the <a name="sysrpc_com_exec_Example_3"></a>example below:
+            </p> 
+                   
+            <table border="1" cellpadding="5" class="screen">
+               <tr>
+                  <td><pre>
+09:49:41            *** NATURAL  Remote Procedure Call ***         2006-01-27
+                           Server Command Execution                  SYSRPC  
+                                                                             
+       Node                           Server                         Message 
+1      ETB045                                                                
+2   <strong>PI</strong>                                NRPC001                                
+3                                     NRPC002                                
+4      *LOCTRAN                                                              
+5   <strong>PI</strong>                                NRPC001-LOGICAL                        
+6      LOGBROKER=NODE                                                        
+7                                     NRPC002
+</pre></td>
+               </tr>
+            </table> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Choose <span class="key">ENTER</span>. The server(s) return the message:
+            </p> <pre class="system-output"><var>Server</var> <var>V.R.S.PL</var> on <var>operating system</var></pre> 
+                   <p class="instep">where</p> 
+                   
+            <p class="instep"><var>Server</var> denotes the type of server;
+                       <var>V.R.S.PL</var> denotes the 1-digit version
+                       <var>V</var>, the 1-digit release <var>R</var>,
+                       the 1-digit system maintenance level <var>S</var> and the 1- or
+                       2-digit patch level <var>PL</var> of the server;
+                       <var>operating system</var> denotes on which operating system
+                       the server runs.
+            </p> 
+                   
+            <p class="instep">Example message:</p> <pre class="system-output">Natural RPC Server 6.3.1.0 on WNT-x86</pre> 
+                   <p class="instep">If pinging the server fails and an error occurs instead, you can
+                       choose <span class="key">PF2</span> (ERR) to display RPC-related Natural and EntireX Broker
+                       messages as described in <a href="../rpc/oper.htm#oper_Using_RPCERR">Using the RPCERR
+                  Program</a> (<cite>Monitoring the Status of an RPC
+                          Session</cite>, <cite>Natural Remote Procedure Call (RPC)</cite>
+                       documentation).
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">To display more of the message text which appears truncated in the
+                       standard view of the <span class="selectable_label">Server Command Execution</span> screen (see
+                       also <a href="sysrpc_com_exec.htm#sysrpc_com_exec_Example_Extended_View">Example of a Standard
+                  View</a>) proceed as follows:
+            </p> 
+                   
+            <p class="instep">Choose <span class="key">PF4</span>.
+            </p> 
+                   
+                   
+                   
+            <p class="instep">Or:<br>In the command line, enter the less than (&lt;) sign.
+            </p> 
+                   
+                 
+         </li>
+      </ol> 
+         
+      <div class="noprint">
+         <p><a href="sysrpc_com_exec.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="sysrpc_com_exec_Terminating_a_Server"></a></div> 
+         
+      <h2> Terminating a Server</h2> 
+          
+          
+      <p>The SYSRPC utility provides two commands to terminate a server:
+              <code>TE</code> (Terminate Server) and
+              <code>TS</code> (Terminate EntireX Broker Service). 
+      </p> 
+          
+      <p><code>TE</code> terminates a single server task by sending
+              an internal message to the server. If a server is associated with multiple
+              server tasks (including replicas on mainframe platforms), you can either
+              terminate each server task separately by using <code>TE</code>,
+              or terminate all server tasks in one go by using the
+              <code>TS</code> command.
+      </p> 
+          
+      <p> <code>TS</code> terminates all server tasks associated
+              with an EntireX Broker service by calling EntireX Broker's Command and
+              Information Services (ETBCIS; for details, see the EntireX documentation). The
+              term <code>service</code> here summarizes all server tasks that run with the
+              same server name on the same or on different platforms.
+      </p> 
+          
+      <p>You can terminate server tasks from the standard or extended message
+              view of the <span class="selectable_label">Server Command Execution</span> screen. 
+      </p> 
+          
+      <p>The following section provides instructions for terminating a single
+              server task or an EntireX Broker service from the standard view.
+      </p> 
+          
+      <p>For alternative methods of terminating servers, see
+              <a href="../rpc/end.htm">Terminating a Natural RPC
+            Server</a> and the Application Programming Interface
+              <a href="../rpc/end.htm#end_using_usr2073n">USR2073N</a>, and
+              <a href="../rpc/terminate_exx_broker_service.htm">Terminating
+            the EntireX Broker Service</a> and the Application Programming
+              Interface
+              <a href="../rpc/terminate_exx_broker_service.htm#terminate_exx_broker_service_usr2075n">USR2075N</a>
+              described in the <cite>Natural Remote Procedure Call (RPC)</cite>
+              documentation.
+      </p> 
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong> To terminate a single server task</strong></p>
+      <ol class="steps">
+         <li> 
+                   
+                   
+            <p class="instep">In the <span class="selectable_label">Code</span> field of the <span class="selectable_label">Client
+                  Maintenance</span> menu, enter the following command: 
+            </p> <pre class="command-input">XC</pre> 
+                   <p class="instep">The standard view of the <span class="selectable_label">Server Command
+                  Execution</span> screen is displayed.
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">In the empty column between sequence number and
+                       <span class="selectable_label">Node</span> column, in the line which belong to the server to be
+                       terminated, enter the following command: 
+            </p> <pre class="command-input">TE</pre> 
+                   <p class="instep">(This is similar to entering the command
+                       <code>PI</code> as show in the
+                       <a href="sysrpc_com_exec.htm#sysrpc_com_exec_Example_3">example</a> of pinging a
+                       server.)
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Choose <span class="key">ENTER</span>.
+            </p> 
+                   
+                   
+                   
+            <p class="instep">The server returns the message:</p> <pre class="system-output">Terminating <var>Server</var> <var>V.R.S.PL</var> on <var>operating system</var></pre> 
+                   <p class="instep">where</p> 
+                   
+            <p class="instep"> <var>Server</var> denotes the type of server;
+                       <var>V.R.S.PL</var> denotes the 1-digit version
+                       <var>V</var>, the 1-digit release <var>R</var>,
+                       the 1-digit system maintenance level <var>S</var>, and the 1-
+                       or 2-digit patch level <var>PL</var> of the server;
+                       <var>operating system</var> denotes on which operating system
+                       the server runs.
+            </p> 
+                   
+            <p class="instep">Example message:</p> <pre class="system-output">Terminating Natural RPC Server 6.3.1.0 on WNT-x86</pre> 
+                   <p class="instep">If terminating the server fails and an error occurs instead, you can
+                       choose <span class="key">PF2</span> (ERR) to display RPC-related Natural and EntireX Broker
+                       messages as described in <a href="../rpc/oper.htm#oper_Using_RPCERR">Using the RPCERR
+                  Program</a> (<cite>Monitoring the Status of an RPC
+                          Session</cite>, <cite>Natural Remote Procedure Call (RPC)</cite>
+                       documentation).
+            </p> 
+                   
+            <p class="instep">To display more of the message text which appears truncated in the
+                       standard view of the <span class="selectable_label">Server Command Execution</span> screen: 
+            </p>
+                   
+                   
+            <p class="instep">Choose <span class="key">PF4</span>.
+            </p> 
+                   
+            <p class="instep">Or:<br> In the command line, enter the less than (&lt;)
+                       sign.
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep"> If the <a href="sysrpc_sm.htm#sysrpc_sm_LOGON_mfux"><span class="selectable_label">Logon</span></a> option is
+                       set in the service directory, logon data (user ID, password and library name)
+                       is sent to the server with the <code>TE</code> command, as is
+                       usual for remote <code>CALLNAT</code> execution. The <span class="selectable_label">Security Token
+                  Data</span> window pops up and requests input of user ID and password if no
+                       Natural Security is installed on the client side and no logon data is set with
+                       the Application Programming Interface USR1071N for the current Natural session.
+                       See also <a href="../rpc/securi.htm#securi_USR1071">USR1071N</a>
+                       described in <cite>Using Security</cite>, <cite>Using Natural RPC with
+                          Natural Security</cite>, in the <cite>Natural Remote Procedure Call
+                          (RPC)</cite> documentation.
+            </p> 
+                   
+            <p class="instep">If <code>LOGONRQ=ON</code> (see also
+                       <a href="../rpc/securi.htm#securi_Using_Natural_RPC_with_Natural_Security">Using
+                  Security</a> in the <cite>Natural Remote Procedure Call
+                          (RPC)</cite> documentation) has been set on the server side, logon data
+                       must be sent from the client with the <code>TE</code>
+                       command.
+            </p> 
+                   
+            <p class="instep">If Natural Security is installed on the server, the logon data
+                       transferred must enable a logon to the Natural system library SYSRPC.
+            </p> 
+                   
+                 
+         </li>
+      </ol> 
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong> To terminate an EntireX Broker service</strong></p>
+      <ol class="steps">
+         <li> 
+                   
+                   
+            <p class="instep">In the <span class="selectable_label">Code</span> field of the <span class="selectable_label">Client
+                  Maintenance</span> menu, enter the following command: 
+            </p> <pre class="command-input">XC</pre> 
+                   <p class="instep">The standard view of the <span class="selectable_label">Server Command
+                  Execution</span> screen is displayed.
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">In the empty column between sequence number and
+                       <span class="selectable_label">Node</span> column, in the line which belong to the server to be
+                       terminated, enter the following command: 
+            </p> <pre class="command-input">TS</pre> 
+                   <p class="instep">(This is similar to entering the command
+                       <code>PI</code> as show in the
+                       <a href="sysrpc_com_exec.htm#sysrpc_com_exec_Example_3">example</a> of pinging a
+                       server.)
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Choose <span class="key">ENTER</span>.
+            </p> 
+                   
+                   
+                   
+            <p class="instep"> The <span class="selectable_label">SYSRPC - Terminating EntireX Broker Service</span>
+                       window appears.
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">If required for the logon, enter the appropriate user ID and password
+                       for EntireX Broker.
+            </p> 
+                   
+            <p class="instep">If you want to terminate server tasks that are involved in a
+                       conversation, in the <span class="selectable_label">Terminate immediately</span> field, enter a
+                       <code>Y</code> to request immediate termination. If you enter an <code>N</code>
+                       (this is the default setting), all server tasks involved in a conversation
+                       remain operational.
+            </p> 
+                   
+            <p class="instep">If you do not want this window to appear repeatedly during the
+                       current SYSRPC session, choose <span class="selectable_label">Do not show this window
+                  again</span>.
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Choose <span class="key">ENTER</span> to terminate the EntireX Broker service.
+            </p> 
+                   
+                 
+         </li>
+      </ol> 
+         
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="sysrpc_com_exec.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../utis/sysrpc_com_exec.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/utis/sysrpc_com_exec.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="sysrpc-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="sysrpc_parm_cui.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="sysrpc_rm_cui.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

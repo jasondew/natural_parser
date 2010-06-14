@@ -1,0 +1,1034 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Natural System Functions for Use in Processing Loops</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="func_sf"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../func/func_sf.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/func/func_sf.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="func-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="func-over.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="func_math.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;System Functions&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+         
+      <div class="nospytext">
+         <h1> Natural System Functions for Use in Processing Loops</h1>
+      </div> 
+          
+          
+      <p>This document describes those Natural system functions which can be
+              used in a program loop context.
+      </p> 
+          
+      <p>It covers the following topics:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="func_sf.htm#General_Information">Using System Functions in Processing Loops</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="func_sf.htm#AVER">AVER(r)(field)</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="func_sf.htm#COUNT">COUNT(r)(field)</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="func_sf.htm#MAX_System_Function">MAX(r)(field)</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="func_sf.htm#MIN_System_Function">MIN(r)(field)</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="func_sf.htm#NAVER">NAVER(r)(field)</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="func_sf.htm#NCOUNT">NCOUNT(r)(field)</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="func_sf.htm#NMIN">NMIN(r)(field)</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="func_sf.htm#OLD">OLD(r)(field)</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="func_sf.htm#SUM">SUM(r)(field)</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="func_sf.htm#TOTAL">TOTAL(r)(field)</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="func_sf.htm#sysfunc_exa">Examples</a></p>
+         </li>
+      </ul> 
+         
+      <hr> 
+         
+      <div><a name="General_Information"></a></div> 
+          
+      <h2> Using System Functions in Processing Loops</h2> 
+           
+           
+      <p>The following topics are covered:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="func_sf.htm#sys_func_usage">Specification/Evaluation</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="func_sf.htm#SGFS_Sys_Func">Use in SORT GIVE Statement</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="func_sf.htm#AVERNAVERSUMTOTAL_AO">Arithmetic Overflows in AVER, NAVER, SUM or TOTAL</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="func_sf.htm#Stat_Ref_r">Statement Referencing (r)</a></p>
+         </li>
+      </ul> 
+           
+          
+      <div><a name="sys_func_usage"></a></div> 
+           
+      <h3> Specification/Evaluation</h3> 
+            
+            
+      <p>Natural system functions may be specified in</p> 
+            
+      <ul> 
+                
+         <li> 
+                    
+            <p class="initem">assignment and arithmetic statements:</p> 
+                    
+            <ul style="margin-top: 0px; margin-bottom: 0px;"> 
+                        
+               <li class="nesteditem"> 
+                            
+                  <p class="initem"> <a href="../sm/move.htm"><code>MOVE</code></a></p> 
+                           
+               </li> 
+                        
+               <li class="nesteditem"> 
+                            
+                  <p class="initem"> <a href="../sm/assign.htm"><code>ASSIGN</code></a></p> 
+                           
+               </li> 
+                        
+               <li class="nesteditem"> 
+                            
+                  <p class="initem"> <a href="../sm/compute.htm"><code>COMPUTE</code></a></p> 
+                           
+               </li> 
+                        
+               <li class="nesteditem"> 
+                            
+                  <p class="initem"> <a href="../sm/add.htm"><code>ADD</code></a></p> 
+                           
+               </li> 
+                        
+               <li class="nesteditem"> 
+                            
+                  <p class="initem"> <a href="../sm/subtract.htm"><code>SUBTRACT</code></a></p> 
+                           
+               </li> 
+                        
+               <li class="nesteditem"> 
+                            
+                  <p class="initem"> <a href="../sm/multiply.htm"><code>MULTIPLY</code></a></p> 
+                           
+               </li> 
+                        
+               <li class="nesteditem"> 
+                            
+                  <p class="initem"> <a href="../sm/divide.htm"><code>DIVIDE</code></a></p> 
+                           
+               </li> 
+                       
+            </ul> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">input/output statements:</p> 
+                    
+            <ul style="margin-top: 0px; margin-bottom: 0px;"> 
+                        
+               <li class="nesteditem"> 
+                            
+                  <p class="initem"> <a href="../sm/display.htm"><code>DISPLAY</code></a></p> 
+                           
+               </li> 
+                        
+               <li class="nesteditem"> 
+                            
+                  <p class="initem"> <a href="../sm/printsm.htm"><code>PRINT</code></a></p> 
+                           
+               </li> 
+                        
+               <li class="nesteditem"> 
+                            
+                  <p class="initem"> <a href="../sm/write.htm"><code>WRITE</code></a></p>
+                            
+                           
+               </li> 
+                       
+            </ul> 
+                   
+         </li> 
+               
+      </ul> 
+            
+      <p>that are used within any of the following statement blocks:</p> 
+            
+      <ul> 
+                
+         <li> 
+                    
+            <p class="initem"> <a href="../sm/atbreak.htm"><code>AT
+                     BREAK</code></a></p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem"> <a href="../sm/atenddat.htm"><code>AT END OF
+                     DATA</code></a> 
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem"> <a href="../sm/atendpag.htm"><code>AT END OF
+                     PAGE</code></a> 
+            </p> 
+                   
+         </li> 
+               
+      </ul> 
+            
+      <p>that is, for all <a href="../sm/find.htm"><code>FIND</code></a>,
+                <a href="../sm/read.htm"><code>READ</code></a>,
+                <a href="../sm/histogra.htm"><code>HISTOGRAM</code></a>,
+                <a href="../sm/sort.htm"><code>SORT</code></a> or
+                <a href="../sm/readwork.htm"><code>READ WORK FILE</code></a>
+                processing loops.
+      </p> 
+            
+      <p>If a system function is used within an
+                <a href="../sm/atendpag.htm"><code>AT END OF PAGE</code></a>
+                statement, the corresponding <code>DISPLAY</code> statement must include the
+                <a href="../sm/display.htm#GIVE_SF"><code>GIVE SYSTEM
+               FUNCTIONS</code></a> clause.
+      </p> 
+            
+      <p>Records rejected by a <code>WHERE</code> clause are not evaluated by a
+                system function.
+      </p> 
+            
+      <p>If system functions are evaluated from database fields which
+                originated from different levels of processing loops initiated with a
+                <code>FIND</code>, <code>READ</code>, <code>HISTOGRAM</code> or
+                <code>SORT</code> statement, the values are always processed according to their
+                position in the loop hierarchy. For example, values for an outer loop will only
+                be processed when new data values have been obtained for that loop.
+      </p> 
+            
+      <p>If system functions are evaluated from user-defined variables, the
+                processing is dependent on the position in the loop hierarchy where the
+                user-defined variable was introduced in reporting mode. If the user-defined
+                variable is defined before any processing loop is initiated, it will be
+                evaluated for system functions in the loop where the <code>AT BREAK</code>,
+                <code>AT END OF DATA</code> or <code>AT END OF PAGE</code> statement is
+                defined. If a user-defined variable is introduced within a processing loop it
+                will be processed the same as a database field from that processing.
+      </p> 
+            
+      <p>For selective referencing of system function evaluation for
+                user-defined variables it is recommended to specify a loop reference with the
+                user-defined variable to indicate in which loop the value is to be processed.
+                The loop reference may be specified as a statement label or source code line
+                number.
+      </p> 
+            
+           
+          
+      <div><a name="SGFS_Sys_Func"></a></div> 
+           
+      <h3> Use in SORT GIVE Statement</h3> 
+            
+            
+      <p>System functions may also be referenced when they have been evaluated
+                in a <a href="../sm/sort.htm#GIVE_clause"><code>GIVE</code></a>
+                clause of a <code>SORT</code> statement.
+      </p> 
+            
+      <p>For a reference to a system function evaluated with a <code>SORT
+            GIVE</code> statement, the name of the system function must be prefixed with an
+                asterisk (*).
+      </p> 
+            
+           
+          
+      <div><a name="AVERNAVERSUMTOTAL_AO"></a></div> 
+           
+      <h3> Arithmetic Overflows in AVER, NAVER, SUM or TOTAL</h3> 
+            
+            
+      <p>Fields to which the system functions <a href="func_sf.htm#AVER"><code>AVER</code></a>, <a href="func_sf.htm#NAVER"><code>NAVER</code></a>, <a href="func_sf.htm#SUM"><code>SUM</code></a> and <a href="func_sf.htm#TOTAL"><code>TOTAL</code></a> are to be applied must be long
+                enough (either by default or user-specified) to hold any overflow digits. If
+                any arithmetic overflow occurs, an error message will be issued.
+      </p> 
+            
+      <p>Normally, the length is the same as that of the field to which the
+                system function is applied; if this is not long enough, use the
+                <a href="../sm/sort.htm#NL_nn"><code>NL</code></a> option of the
+                <a href="../sm/sort.htm#GIVE_clause"><code>SORT GIVE</code></a>
+                statement to increase the output length as follows:
+      </p> 
+            <pre class="verbatim">SUM(<var>field</var>)(NL=<var>nn</var>)</pre> 
+            <p>This will not only increase the output length but also causes the
+                field to be made longer internally.
+      </p> 
+            
+           
+          
+      <div><a name="Stat_Ref_r"></a></div> 
+           
+      <h3> Statement Referencing (<var>r</var>)
+      </h3> 
+            
+            
+      <p>Statement referencing is also available for system functions (see also
+                <a href="../pg/pg_defi_dv.htm#SR_Notation_r">Referencing of
+            Database Fields Using (<var>r</var>)
+                   Notation</a> in the section
+                <a href="../pg/pg_defi_dv.htm">User-Defined
+            Variables</a> of the <cite>Programming
+                   Guide</cite>).
+      </p> 
+            
+      <p>By using a statement label or the source-code line number
+                (<var>r</var>) you can determine in which processing loop the
+                system function is to be evaluated for the specified field.
+      </p> 
+            
+           
+         
+         
+      <div class="noprint">
+         <p><a href="func_sf.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="AVER" id="12763"></a></div> 
+          
+      <h2> 
+              <a name="x2"></a>
+              AVER(<var>r</var>)(<var>field</var>)
+      </h2> 
+           
+            
+            
+      <table class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="12%">
+            <col width="85%">
+         </colgroup> 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td>Format/length:</td> 
+                        
+               <td>Same as field. 
+                  
+                  <p>Exception: for a field of format N,
+                                <code>AVER<var>(field)</var></code> will be of format P (with
+                                the same length as the field).
+                  </p>
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>This system function contains the average of all values encountered for
+               the field specified with <code>AVER</code>. <code>AVER</code> is updated when
+               the condition under which <code>AVER</code> was requested is true.
+      </p> 
+          
+      <div class="noprint">
+         <p><a href="func_sf.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="COUNT" id="12764"></a></div> 
+          
+      <h2> 
+              <a name="x3"></a>
+              COUNT(<var>r</var>)(<var>field</var>)
+      </h2> 
+           
+            
+            
+      <table class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="12%">
+            <col width="85%">
+         </colgroup> 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td>Format/length:</td> 
+                        
+               <td>P7</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p><code>COUNT</code> is incremented by 1 on each pass through the
+               processing loop in which it is located. <code>COUNT</code> is incremented
+               regardless of the value of the field specified with <code>COUNT</code>.
+      </p> 
+          
+      <div class="noprint">
+         <p><a href="func_sf.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="MAX_System_Function" id="12765"></a></div> 
+          
+      <h2> 
+              <a name="x4"></a>
+              MAX(<var>r</var>)(<var>field</var>)
+      </h2> 
+           
+            
+            
+      <table class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="11%">
+            <col width="86%">
+         </colgroup> 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td>Format/length:</td> 
+                        
+               <td>Same as field.</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>This system function contains the maximum value encountered for the
+               field specified with <code>MAX</code>. <code>MAX</code> is updated (if
+               appropriate) each time the processing loop in which it is contained is
+               executed.
+      </p> 
+          
+      <div class="noprint">
+         <p><a href="func_sf.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="MIN_System_Function" id="12766"></a></div> 
+          
+      <h2> 
+              <a name="x5"></a>
+              MIN(<var>r</var>)(<var>field</var>)
+      </h2> 
+           
+            
+            
+      <table class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="10%">
+            <col width="87%">
+         </colgroup> 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td>Format/length:</td> 
+                        
+               <td>Same as field.</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>This system function contains the minimum value encountered for the
+               field specified with <code>MIN</code>. <code>MIN</code> is updated (if
+               appropriate) each time the processing loop in which it is located is
+               executed.
+      </p> 
+          
+      <div class="noprint">
+         <p><a href="func_sf.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="NAVER" id="12767"></a></div> 
+          
+      <h2> 
+              <a name="x6"></a>NAVER(<var>r</var>)(<var>field</var>)
+      </h2>
+          
+           
+            
+            
+      <table class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="12%">
+            <col width="85%">
+         </colgroup> 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td>Format/length:</td> 
+                        
+               <td>Same as field. 
+                  
+                  <p>Exception: for a field of format N,
+                                <code>NAVER<var>(field)</var></code> will be of format P (with
+                                the same length as the field).
+                  </p>
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>This system function contains the average of all values - excluding
+               null values - encountered for the field specified with <code>NAVER</code>.
+               <code>NAVER</code> is updated when the condition under which <code>NAVER</code>
+               was requested is true.
+      </p> 
+          
+      <div class="noprint">
+         <p><a href="func_sf.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="NCOUNT" id="12768"></a></div> 
+          
+      <h2> 
+              <a name="x7"></a>
+              NCOUNT(<var>r</var>)(<var>field</var>)
+      </h2> 
+           
+            
+            
+      <table class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="11%">
+            <col width="86%">
+         </colgroup> 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td>Format/length:</td> 
+                        
+               <td>P7</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p><code>NCOUNT</code> is incremented by 1 on each pass through the
+               processing loop in which it is located unless the value of the field specified
+               with <code>NCOUNT</code> is a null value.
+      </p> 
+           
+      <p>Whether the result of <code>NCOUNT</code> is an array or a scalar value
+               depends on its argument (field). The number of the resulting occurrences is the
+               same as of field.
+      </p> 
+          
+      <div class="noprint">
+         <p><a href="func_sf.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="NMIN" id="12769"></a></div> 
+          
+      <h2> 
+              <a name="x8"></a>
+              NMIN(<var>r</var>)(<var>field</var>)
+      </h2> 
+           
+            
+            
+      <table class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="10%">
+            <col width="87%">
+         </colgroup> 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td>Format/length:</td> 
+                        
+               <td>Same as field.</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>This system function contains the minimum value encountered - excluding
+               null values - for the field specified with <code>NMIN</code>. <code>NMIN</code>
+               is updated (if appropriate) each time the processing loop in which it is
+               located is executed.
+      </p> 
+          
+      <div class="noprint">
+         <p><a href="func_sf.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="OLD" id="12770"></a></div> 
+          
+      <h2> 
+              <a name="x9"></a>
+              OLD(<var>r</var>)(<var>field</var>)
+      </h2> 
+           
+            
+            
+      <table class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="10%">
+            <col width="87%">
+         </colgroup> 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td>Format/length:</td> 
+                        
+               <td>Same as field.</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>This system function contains the value which the field specified with
+               <code>OLD</code> contained prior to a control break as specified in an <code>AT
+            BREAK</code> condition, or prior to the end-of-page or end-of-data
+               condition.
+      </p> 
+          
+      <div class="noprint">
+         <p><a href="func_sf.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="SUM" id="12771"></a></div> 
+          
+      <h2> 
+              <a name="x10"></a>
+              SUM(<var>r</var>)(<var>field</var>)
+      </h2> 
+           
+            
+            
+      <table class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="11%">
+            <col width="86%">
+         </colgroup> 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td>Format/length:</td> 
+                        
+               <td>Same as field. 
+                  
+                  <p>Exception: for a field of format N,
+                                <code>SUM<var>(field)</var></code> will be of format P (with
+                                the same length as the field).
+                  </p>
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>This system function contains the sum of all values encountered for the
+               field specified with <code>SUM</code>. <code>SUM</code> is updated each time
+               the loop in which it is located is executed. When <code>SUM</code> is used
+               following an <code>AT BREAK</code> condition, it is reset after each value
+               break. Only values that occur between breaks are added.
+      </p> 
+          
+      <div class="noprint">
+         <p><a href="func_sf.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="TOTAL" id="12772"></a></div> 
+          
+      <h2> 
+              <a name="x11"></a>
+              TOTAL(<var>r</var>)(<var>field</var>)
+      </h2> 
+           
+            
+            
+      <table class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="11%">
+            <col width="86%">
+         </colgroup> 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td>Format/length:</td> 
+                        
+               <td>Same as field. 
+                  
+                  <p>Exception: for a field of format N,
+                                <code>TOTAL<var>(field)</var></code> will be of format P (with
+                                the same length as the field).
+                  </p>
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>This system function contains the sum of all values encountered for the
+               field specified with <code>TOTAL</code> in all open processing loops in which
+               <code>TOTAL</code> is located.
+      </p> 
+          
+         
+      <div class="noprint">
+         <p><a href="func_sf.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="sysfunc_exa"></a></div> 
+          
+      <h2> Examples</h2> 
+           
+           
+      <p>The following examples are provided
+               below:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="func_sf.htm#func_sf_exa1">Example 1 - AT BREAK Statement with Natural System Functions OLD, MIN, AVER, MAX, SUM, COUNT</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="func_sf.htm#func_sf_exa2">Example 2 - AT BREAK Statement with Natural System Function AVER</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="func_sf.htm#func_sf_exa3">Example 3 - AT END OF DATA Statement with System Functions MAX, MIN, AVER</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="func_sf.htm#func_sf_exa4">Example 4 - AT END OF PAGE Statement with System Function AVER</a></p>
+         </li>
+      </ul>
+      <div><a name="func_sf_exa1"></a></div> 
+           
+      <h3>Example 1 - AT BREAK Statement with Natural System Functions OLD,
+               MIN, AVER, MAX, SUM, COUNT
+      </h3> 
+            
+            <pre class="verbatim">** Example 'ATBEX3': AT BREAK  (with Natural system functions)          
+************************************************************************
+DEFINE DATA LOCAL                                                       
+1 EMPLOY-VIEW VIEW OF EMPLOYEES                                         
+  2 NAME                                                                
+  2 CITY                                                                
+  2 SALARY    (1)                                                       
+  2 CURR-CODE (1)                                                       
+END-DEFINE                                                              
+*                                                                       
+LIMIT 3                                                                 
+READ EMPLOY-VIEW LOGICAL BY CITY = 'SALT LAKE CITY'                     
+  DISPLAY NOTITLE CITY NAME 'SALARY' SALARY(1) 'CURRENCY' CURR-CODE(1)  
+  /*                                                                    
+  <strong>AT BREAK OF CITY</strong>                                                      
+    WRITE /  OLD(CITY) (EM=X^X^X^X^X^X^X^X^X^X^X^X^X^X^X)               
+      31T '   MINIMUM:' MIN(SALARY(1))  CURR-CODE(1) /                  
+      31T '   AVERAGE:' AVER(SALARY(1)) CURR-CODE(1) /                  
+      31T '   MAXIMUM:' MAX(SALARY(1))  CURR-CODE(1) /                  
+      31T '       SUM:' SUM(SALARY(1))  CURR-CODE(1) /
+      35T COUNT(SALARY(1)) 'RECORDS FOUND' /          
+  <strong>END-BREAK</strong>                                           
+  /*                                                  
+  AT END OF DATA                                      
+    WRITE 22T 'TOTAL (ALL RECORDS):'                  
+              T*SALARY TOTAL(SALARY(1))  CURR-CODE(1) 
+  END-ENDDATA                                         
+END-READ                                              
+*                                                     
+END      </pre> 
+            <p>Output of program <code>ATBEX3</code>:
+      </p> <pre class="system-output">        CITY                 NAME           SALARY   CURRENCY
+-------------------- -------------------- ---------- --------
+                                                             
+SALT LAKE CITY       ANDERSON                  50000 USD     
+SALT LAKE CITY       SAMUELSON                 24000 USD     
+                                                             
+S A L T   L A K E   C I T Y      MINIMUM:      24000 USD     
+                                 AVERAGE:      37000 USD     
+                                 MAXIMUM:      50000 USD     
+                                     SUM:      74000 USD     
+                                         2 RECORDS FOUND     
+                                                             
+SAN DIEGO            GEE                       60000 USD     
+                                                             
+S A N   D I E G O                MINIMUM:      60000 USD     
+                                 AVERAGE:      60000 USD     
+                                 MAXIMUM:      60000 USD     
+                                     SUM:      60000 USD     
+                                         1 RECORDS FOUND     
+                                                             
+                     TOTAL (ALL RECORDS):     134000 USD </pre> 
+           <div><a name="func_sf_exa2"></a></div> 
+           
+      <h3> Example 2 - AT BREAK Statement with Natural System Function
+               AVER
+      </h3> 
+            
+            <pre class="verbatim">** Example 'ATBEX4': AT BREAK  (with Natural system functions)          
+************************************************************************
+DEFINE DATA LOCAL                                                       
+1 EMPLOY-VIEW VIEW OF EMPLOYEES                                         
+  2 NAME                                                                
+  2 CITY                                                                
+  2 SALARY    (2)                                                       
+*                                                                       
+1 #INC-SALARY (P11)                                                     
+END-DEFINE                                                              
+*                                                                       
+LIMIT 4                                                                 
+EMPL. READ EMPLOY-VIEW BY CITY STARTING FROM 'ALBU'                     
+  COMPUTE #INC-SALARY = SALARY (1) + SALARY (2)                         
+  DISPLAY NAME CITY SALARY (1:2) 'CUMULATIVE' #INC-SALARY               
+  SKIP 1                                                                
+  /*                                                                    
+  <strong>AT BREAK CITY</strong>                                                         
+    WRITE NOTITLE                                                       
+      'AVERAGE:'            T*SALARY (1)  AVER(SALARY(1)) /       
+      'AVERAGE CUMULATIVE:' T*#INC-SALARY AVER(EMPL.) (#INC-SALARY)
+  <strong>END-BREAK</strong>                                                        
+END-READ                                                           
+*                                                                  
+END                                                       </pre> 
+            <p>Output of program <code>ATBEX4</code>:
+      </p> <pre class="system-output">NAME                 CITY           ANNUAL    CUMULATIVE 
+                                            SALARY               
+-------------------- -------------------- ---------- ------------
+                                                                 
+HAMMOND              ALBUQUERQUE               22000        42200
+                                               20200             
+                                                                 
+ROLLING              ALBUQUERQUE               34000        65200
+                                               31200             
+                                                                 
+FREEMAN              ALBUQUERQUE               34000        65200
+                                               31200             
+                                                                 
+LINCOLN              ALBUQUERQUE               41000        78700
+                                               37700             
+                                                                 
+AVERAGE:                                       32750             
+AVERAGE CUMULATIVE:                                         62825
+</pre> 
+           <div><a name="func_sf_exa3"></a></div> 
+           
+      <h3> Example 3 - AT END OF DATA Statement with System Functions MAX,
+               MIN, AVER
+      </h3> 
+            
+            <pre class="verbatim">** Example 'AEDEX1S': AT END OF DATA                                    
+************************************************************************
+DEFINE DATA LOCAL                                                       
+1 EMPLOY-VIEW VIEW OF EMPLOYEES                                         
+  2 PERSONNEL-ID                                                        
+  2 NAME                                                                
+  2 FIRST-NAME                                                          
+  2 SALARY    (1)                                                       
+  2 CURR-CODE (1)                                                       
+END-DEFINE                                                              
+*                                                                       
+LIMIT 5                                                                 
+EMP. FIND EMPLOY-VIEW WITH CITY = 'STUTTGART'                           
+  IF NO RECORDS FOUND                                                   
+    ENTER                                                               
+  END-NOREC                                                             
+  DISPLAY PERSONNEL-ID NAME FIRST-NAME                                  
+          SALARY (1) CURR-CODE (1)                                      
+  /*                                                                    
+  <strong>AT END OF DATA</strong>                                               
+    IF *COUNTER (EMP.) = 0                                     
+      WRITE 'NO RECORDS FOUND'                                 
+      ESCAPE BOTTOM                                            
+    END-IF                                                     
+    WRITE NOTITLE / 'SALARY STATISTICS:'                       
+                  / 7X 'MAXIMUM:' MAX(SALARY(1))  CURR-CODE (1)
+                  / 7X 'MINIMUM:' MIN(SALARY(1))  CURR-CODE (1)
+                  / 7X 'AVERAGE:' AVER(SALARY(1)) CURR-CODE (1)
+  <strong>END-ENDDATA</strong>                                                  
+  /*                                                           
+END-FIND                                                       
+*                                                              
+END                                                         </pre> 
+            <p>Output of program <code>AEDEX1S</code>:
+      </p> <pre class="system-output">PERSONNEL         NAME              FIRST-NAME        ANNUAL   CURRENCY
+   ID                                                 SALARY     CODE  
+--------- -------------------- -------------------- ---------- --------
+                                                                       
+11100328  BERGHAUS             ROSE                      70800 DM      
+11100329  BARTHEL              PETER                     42000 DM      
+11300313  AECKERLE             SUSANNE                   55200 DM      
+11300316  KANTE                GABRIELE                  61200 DM      
+11500304  KLUGE                ELKE                      49200 DM      
+                                                                       
+SALARY STATISTICS:                                                     
+       MAXIMUM:      70800 DM                                          
+       MINIMUM:      42000 DM                                          
+       AVERAGE:      55680 DM                                         
+</pre> 
+           <div><a name="func_sf_exa4"></a></div> 
+           
+      <h3> Example 4 - AT END OF PAGE Statement with System Function
+               AVER
+      </h3> 
+            
+            <pre class="verbatim">** Example 'AEPEX1S': AT END OF PAGE (structured mode)                  
+************************************************************************
+DEFINE DATA LOCAL                                                       
+1 EMPLOY-VIEW VIEW OF EMPLOYEES                                         
+  2 PERSONNEL-ID                                                        
+  2 NAME                                                                
+  2 JOB-TITLE                                                           
+  2 SALARY    (1)                                                       
+  2 CURR-CODE (1)                                                       
+END-DEFINE                                                              
+*                                                                       
+FORMAT PS=10                                                            
+LIMIT 10                                                                
+READ EMPLOY-VIEW BY PERSONNEL-ID FROM '20017000'                        
+  DISPLAY NOTITLE GIVE SYSTEM FUNCTIONS                                 
+          NAME JOB-TITLE 'SALARY' SALARY(1) CURR-CODE (1)               
+  /*                                                                    
+  <strong>AT END OF PAGE</strong>                                                        
+    WRITE / 28T 'AVERAGE SALARY: ...' AVER(SALARY(1)) CURR-CODE (1) 
+  <strong>END-ENDPAGE</strong>
+END-READ     
+*            
+END      
+</pre> 
+            <p>Output of program <code>AEPEX1S</code>:
+      </p> <pre class="system-output">        NAME                  CURRENT            SALARY   CURRENCY
+                             POSITION                       CODE  
+-------------------- ------------------------- ---------- --------
+                                                                  
+CREMER               ANALYST                        34000 USD     
+MARKUSH              TRAINEE                        22000 USD     
+GEE                  MANAGER                        39500 USD     
+KUNEY                DBA                            40200 USD     
+NEEDHAM              PROGRAMMER                     32500 USD     
+JACKSON              PROGRAMMER                     33000 USD     
+                                                                  
+                           AVERAGE SALARY: ...      33533 USD</pre> 
+           
+        <div class="noprint">
+         <div class="nospy">
+            <p><a href="func_sf.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../func/func_sf.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/func/func_sf.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="func-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="func-over.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="func_math.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

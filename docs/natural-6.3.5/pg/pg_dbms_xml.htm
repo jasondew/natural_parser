@@ -1,0 +1,844 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Accessing Data in a Tamino Database</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="pg_dbms_xml"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_dbms_xml.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_dbms_xml.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_dbms-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_dbms_sqlos.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_output-over.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Programming Guide&nbsp;&nbsp;&#8212;</span></div>
+      </div>
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x208"></a> Accessing Data in a Tamino Database
+         </h1>
+      </div> 
+         
+         
+      <p>This document describes the different aspects of
+             accessing a Tamino database with the Natural data manipulation language
+             (DML).
+      </p> 
+         
+      <p>The following topics are covered:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_dbms_xml.htm#tamino_acc_prereq">Prerequisite</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_xml.htm#DDM_VIEW_def">DDM and View Definitions with Natural for Tamino</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_xml.htm#nstda">Natural Statements for Tamino Database Access</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_xml.htm#ntr">Natural for Tamino Restrictions</a></p>
+         </li>
+      </ul> 
+         
+      <p>For information about how to configure Natural to work with Tamino, see
+             <a href="../dbms/nta.htm">Natural for
+            Tamino</a> in the <cite>Database Management System
+                Interfaces</cite> documentation.
+      </p> 
+        
+      <hr> 
+        
+      <div><a name="tamino_acc_prereq"></a></div> 
+         
+      <h2> Prerequisite</h2> 
+          
+          
+      <p>Tamino stores structured data-oriented XML documents in containers
+              called doctypes. The doctypes are grouped logically together in so-called
+              collections. Collections are stored in a Tamino database, which is the physical
+              container of data.
+      </p> 
+          
+      <p>The kind of data that can be stored in Tamino and that is to be accessed
+              by Natural for Tamino must be defined in a Tamino XML Schema.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_dbms_xml.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="DDM_VIEW_def"></a></div> 
+         
+      <h2> 
+             <a name="x209"></a> 
+             <a name="x210"></a> DDM and View Definitions with Natural for Tamino 
+      </h2> 
+          
+          
+      <p>This section describes the basic concepts of the Tamino XML schema
+              language, Natural DDMs and view definitions and how they interact with Natural
+              for Tamino.
+      </p> 
+          
+      <p>The following topics are covered:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_dbms_xml.htm#Introduction">Introducing Tamino XML Schema Language</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_xml.htm#DDMS_nattam">DDMs from Tamino</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_xml.htm#nattam_arrays">Arrays in DDMs from Tamino</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_xml.htm#nattam_ddm_exa">Example of a DDM</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_dbms_xml.htm#nattam_view_def">Definition of Views</a></p>
+         </li>
+      </ul> 
+          
+         
+      <div><a name="Introduction"></a></div> 
+          
+      <h3> Introducing Tamino XML Schema Language </h3> 
+           
+           
+      <p>The Tamino XML schema language is used to define a data type-oriented
+               description of the structure of XML documents. In Tamino, a doctype represents
+               a container for XML documents with the same root element and the same structure
+               within a collection.
+      </p> 
+           
+      <p>In Tamino, a collection is a container for a set of varying doctypes,
+               so that a collection can be seen as the logical grouping of doctypes that
+               belong together.
+      </p> 
+           
+      <p>In a Tamino XML schema definition, a doctype is defined together with
+               the collection in which it is contained. One Tamino XML schema can define more
+               than one doctype and it can also define doctypes for more than one
+               collection.
+      </p> 
+           
+      <p>For more information on the Tamino XML schema language, refer to the
+               Tamino documentation.
+      </p> 
+           
+          
+         
+      <div><a name="DDMS_nattam"></a></div> 
+          
+      <h3> DDMs from Tamino</h3> 
+           
+           
+      <p>For Natural to be able to access a Tamino database, a logical
+               connection between a Tamino doctype and the Natural data structures must be
+               provided. Such a logical connection is called a DDM (data definition
+               module).
+      </p> 
+      <p><img src="graphics/daft.png" alt="" width="500" height="300"></p>
+           
+           
+      <p>A Natural DDM generated from a Tamino database is a representation of
+               one doctype defined in one schema. The DDM contains information about the type
+               of each data field and all the necessary structural information as defined in
+               the corresponding Tamino XML schema. To generate a new DDM, the doctype must be
+               selected from a list of all doctypes available in a given collection. Since one
+               collection is bound to one Natural database ID (DBID), it is necessary to use a
+               second DBID if a doctype from another collection is to be accessed.
+      </p> 
+           
+      <p>A Tamino XML schema describes data and data structures in a very
+               different way than with Natural data definitions. Therefore, specific mappings
+               are introduced to derive a Natural data format from a Tamino XML schema data
+               type.
+      </p> 
+           
+      <p>You define DDMs with Natural DDM Services. For more
+               information about Tamino XML schema mapping, refer to
+               <a href="../edis/ddm_winux_conv_tam.htm">Data Conversion for
+            Tamino</a> in the <cite>DDM
+                  Services</cite> section of the <cite>Editors</cite>
+               documentation.
+      </p> 
+           
+      <p>For the field attributes defined in a DDM, refer to the
+               <cite>DDM Editor</cite>,
+               <a href="../edis/ddm_editor_use.htm#ddm_editor_use">Using the
+            DDM Editor Window</a><cite>DDM
+                  Services</cite>, <a href="../edis/ddm_editor_use.htm#ddm_editor_use">Using the DDM Editor
+            Screen</a> section in the
+               <cite>Editors</cite> documentation.
+      </p> 
+           
+          
+         
+      <div><a name="nattam_arrays"></a></div> 
+          
+      <h3> Arrays in DDMs from Tamino </h3> 
+           
+           
+      <p>If you define an XML element with a
+               <code>maxOccurs</code> value greater than one in the Tamino
+               XML Schema, then this element can occur as often as this value indicates. Such
+               a construction is mapped either on a Natural static array definition or on a
+               Natural X-Array definition. Depending on the type of the XML element you are
+               dealing with, the following situations may occur:
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">If the XML element is a <code>complexType</code> with
+                       <code>complexContent</code> (i.e. it is an element containing other elements)
+                       then the generated corresponding Natural group will be an indexed group.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">If the XML element is a <code>simpleType</code> (i.e. the element is
+                       holding data only) or a <code>complexType</code> with
+                       <code>simpleContent</code> (i.e. the element has only data and attributes but
+                       no other elements) then the generated Natural data field will be an array.
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>For further information about mapping
+               <code>maxOccurs</code> definitions onto Natural arrays, see
+               <a href="../edis/ddm_winux_conv_tam.htm">Data Conversion for
+            Tamino</a> in the <cite>DDM
+                  Services</cite> section of the <cite>Editors</cite>
+               documentation. The array boundaries or the kind of the array (static array or
+               X-Array) can be adapted in a corresponding view definition as usual.
+      </p> 
+           
+          
+         
+      <div><a name="nattam_ddm_exa"></a></div> 
+          
+      <h3> Example of a DDM </h3> 
+           
+           
+      <p>This is an example of an <code>EMPLOYEES</code> DDM generated from a
+               Tamino XML Schema definition.
+      </p> 
+           
+      <p>The schema can, for example, be defined with the Natural demo
+               application <code>SYSEXDB</code>:
+      </p> <pre class="system-output">
+DB: 00250 FILE: 00001  - EMPLOYEES-XML
+TYPE: XML
+COLLECTION: NATDemoData
+SCHEMA: Employee
+DOCTYPE: Employee
+NAMESPACE-PREFIX: xs
+NAMESPACE-URI: http://www.w3.org/2001/XMLSchema
+T L  Name                             F Leng       D Remark
+- -- -------------------------------- - ---------- - -----------
+G  1 EMPLOYEE     
+     FLAGS=MULT_REQUIRED,MULT_ONCE     
+     TAG=Employee     
+     XPATH=/Employee
+G  2 GROUP$1
+     FLAGS=GROUP_ATTRIBUTES
+   3 PERSONNEL-ID                     A          8 D xs:string
+     FLAGS=ATTR_REQUIRED
+     TAG=@Personnel-ID
+     XPATH=/Employee/@Personnel-ID
+G  2 GROUP$2
+     FLAGS=GROUP_SEQUENCE,MULT_REQUIRED,MULT_ONCE
+G  3 FULL-NAME
+     FLAGS=MULT_OPTIONAL
+     TAG=Full-Name
+     XPATH=/Employee/Full-Name
+G  4 GROUP$3
+     FLAGS=GROUP_SEQUENCE,MULT_REQUIRED,MULT_ONCE
+   5 FIRST-NAME                       A         20 D xs:string
+     FLAGS=MULT_OPTIONAL
+     TAG=First-Name
+     XPATH=/Employee/Full-Name/First-Name
+   5 MIDDLE-NAME                      A         20 D xs:string
+     FLAGS=MULT_OPTIONAL
+     TAG=Middle-Name
+     XPATH=/Employee/Full-Name/Middle-Name
+   5 MIDDLE-I                         A         20 D xs:string
+     FLAGS=MULT_OPTIONAL
+     TAG=Middle-I
+     XPATH=/Employee/Full-Name/Middle-I
+   5 NAME                             A         20 D xs:string
+     FLAGS=MULT_OPTIONAL
+     TAG=Name
+     XPATH=/Employee/Full-Name/Name
+       . . .
+   3 LANG                             A          3   xs:string
+     FLAGS=ARRAY,MULT_OPTIONAL
+     OCC=1:4
+     TAG=Lang
+     XPATH=/Employee/Lang   
+</pre> 
+           
+          
+         <div><a name="nattam_view_def"></a></div> 
+          
+      <h3> Definition of Views </h3> 
+           
+           
+      <p>In order to work with Tamino database fields in a Natural program, you
+               must specify the required fields of the DDM in a Natural
+               <var>view-definition</var> (see the
+               <a href="../sm/defineda.htm"><code>DEFINE DATA</code></a>
+               statement). Normally, a view is a special subset of the complete data structure
+               as defined in the DDM.
+      </p> 
+           
+      <p>Tamino XML Schema-&gt;Natural for Tamino DDM-&gt;Natural
+               <var>view-definition</var></p> 
+           
+      <p>If the view is used to store XML objects, it has to contain all fields
+               that are required to a generate documents that are valid according to the
+               corresponding Tamino XML schema definition.
+      </p> 
+           
+      <p>A view for the <code>EMPLOYEES-XML</code> DDM, where one of the view
+               fields is a static array, might look like this:
+      </p> 
+           <pre class="verbatim">
+DEFINE DATA LOCAL
+01 VW VIEW OF EMPLOYEES-XML
+02 NAME
+02 CITY
+02 LANG (1:4)
+END-DEFINE
+</pre> 
+           
+          
+        
+        <div class="noprint">
+         <p><a href="pg_dbms_xml.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="nstda"></a></div> 
+         
+      <h2> Natural Statements for Tamino Database Access </h2> 
+          
+          
+      <p>The Natural DML statements which are provided for Tamino access can be
+              subdivided into two categories:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">pure retrieval statements;</p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">database modification statements.</p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>The Natural system variable <code>*ISN</code> is mapped
+              on the Tamino <code>ino:id</code>.
+      </p> 
+          
+         
+      <div><a name="d0e25591"></a></div> 
+          
+      <h3>Natural for Tamino Retrieval Statements</h3> 
+           
+           
+      <p>The following Natural statements can be used for database
+               retrieval:
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem"> <a href="../sm/find.htm"><code>FIND</code></a></p> 
+                   
+            <p class="initem">This statement is used to select those records from a database which
+                       meet a specified search criterion.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"> <a href="../sm/get.htm"><code>GET</code></a></p> 
+                   
+            <p class="initem">This statement is used to select one special record with its unique
+                       id from the database.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"> <a href="../sm/read.htm"><code>READ</code></a></p> 
+                   
+            <p class="initem">This statement is used to select a range of records from a database
+                       in a specified sequence.
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>Not all of the possible options and all of the possible clauses of the
+               retrieval statements can be used for Tamino access. Please read the appropriate
+               section in the <cite>Statements</cite> documentation for a detailed
+               description.
+      </p> 
+           
+      <p>All statements are internally realized with the Tamino
+               <code>_xquery</code> command verb. Statement clauses are mapped to
+               corresponding Tamino XQuery expressions, e.g. search criteria are mapped to
+               Tamino XQuery comparison expressions, sequence specifications are mapped to
+               Tamino XQuery ordering expressions with sort direction.
+      </p> 
+           
+      <p>The result set for the <code>FIND</code> and <code>READ</code>
+               statements is determined at start of the loop and remains unchanged throughout
+               the loop.
+      </p> 
+           
+      <p>The following is an example of reading a set of employee records from a
+               Tamino database where one view field is an array:
+      </p> 
+           <pre class="verbatim">
+* READ 5 RECORDS DESCENDING CONTAINING A
+* STATIC ARRAY IN THE VIEW DEFINE DATA LOCAL
+01 VW VIEW OF EMPLOYEES-TAMINO
+02 NAME
+02 CITY
+02 LANG (1:4)
+END-DEFINE
+*
+READ(5) VW DESCENDING BY NAME = 'MAYER'
+  DISPLAY NAME CITY LANG(*)
+END-READ
+*
+END
+</pre> 
+           
+          
+         <div><a name="d0e25669"></a></div> 
+          
+      <h3>Natural for Tamino Database Modification Statements</h3> 
+           
+           
+      <p>The following database modification statements are provided for use
+               with Natural for Tamino:
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem"> <a href="../sm/store.htm"><code>STORE</code></a> 
+            </p> 
+                   
+            <p class="initem">This statement is used for inserting a new XML document into the
+                       database.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"> <a href="../sm/delete.htm"><code>DELETE</code></a> 
+            </p>
+                   
+                   
+            <p class="initem">This statement is used for deleting a document from the database. The
+                       <code>DELETE</code> statement implements a positioned delete.
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>For a detailed description of the statements, see the appropriate
+               sections of the <cite>Statements</cite> documentation.
+      </p> 
+           
+      <p>The <code>DELETE</code> statement is internally realized with the
+               Tamino <code>_delete</code> command verb using the current <code>ino:id</code>,
+               and the <code>STORE</code> statement is implemented with the
+               <code>_process</code> command verb.
+      </p> 
+           
+      <h4 class="floating-title"> Example: </h4> 
+           
+      <p>The following example program stores a new employee record with some
+               data in the database:
+      </p> 
+           <pre class="verbatim">
+* STORE NEW EMPLOYEE
+DEFINE DATA LOCAL
+01 VW VIEW OF EMPLOYEES-TAMINO
+02 PERSONNEL-ID
+02 NAME
+02 CITY
+02 LANG (1:3)
+END-DEFINE
+*
+* FILL VIEW
+PERSONNEL-ID := '1230815'
+NAME         := 'KENT'
+CITY         := 'ROME'
+LANG(1)      := 'ENG'
+LANG(2)      := 'GER'
+LANG(3)      := 'SPA'
+*
+* STORE VIEW
+STORE RECORD IN VW
+*
+COMMIT
+*
+END
+</pre> 
+           <p>If the Tamino XML Schema defines data structures for a doctype as being
+               mandatory, then these data structures must also be filled in the view before a
+               <code>STORE</code> statement is issued, otherwise this will result in a Tamino
+               error.
+      </p> 
+           
+          
+         
+      <div><a name="d0e25752"></a></div> 
+          
+      <h3>Natural for Tamino Logical Transaction Handling</h3> 
+           
+           
+      <p>Natural performs database modification operations based on
+               transactions, which means that all database modification requests are processed
+               in logical transaction units. A logical transaction is the smallest unit of
+               work (as defined by you) which must be performed in its entirety to ensure that
+               the information contained in the database is logically consistent.
+      </p> 
+           
+      <p>A logical transaction may consist of one or more modification
+               statements (<a href="../sm/delete.htm"><code>DELETE</code></a>,
+               <a href="../sm/store.htm"><code>STORE</code></a>) involving one or
+               more doctypes in the database. A logical transaction may also span multiple
+               Natural programs.
+      </p> 
+           
+      <p>A logical transaction begins when a database modification statement is
+               issued. Natural does this automatically. For example, if a <code>FIND</code>
+               loop contains a <code>DELETE</code> statement. The end of a logical transaction
+               is determined by an <code>END TRANSACTION</code> statement in the program. This
+               statement ensures that all modifications within the transaction have been
+               successfully applied.
+      </p> 
+           
+          
+         
+      <div><a name="d0e25787"></a></div> 
+          
+      <h3>Natural for Tamino Error Handling</h3> 
+           
+           
+      <p>In addition to Natural's standard error messages there are two special
+               error codes which provide additional information via a sub-error code.
+      </p> 
+           
+      <h4 class="floating-title">Error Message NAT8400</h4><pre class="system-output">NAT8400 Tamino error ... occurred</pre> 
+           <p>For this special error an additional sub-code number is shown. This
+               number refers to a Tamino error message. Please see the Tamino
+               <cite>Messages and Codes</cite> documentation. The user exit USR6007 in
+               library SYSEXT is provided for obtaining diagnostic information in case a
+               NAT8400 error occurs. 
+      </p> 
+           
+      <p>Here is an example of usage:</p> 
+           <pre class="verbatim">
+DEFINE DATA LOCAL 
+ 01 VW VIEW OF EMPLOYEES-TAMINO 
+  02 NAME 
+  02 CITY 
+ 01 TAMINO_PARMS   
+  02 TAMINO_ERROR_NUM        (I4)   /* Error number of Tamino error   
+  02 TAMINO_ERROR_TEXT       (A70)  /* Tamino error text   
+  02 TAMINO_ERROR_LINE       (A253) /* Tamino error message line 
+END-DEFINE 
+* 
+NAME := 'MEYER' 
+CITY := 'BOSTON' 
+STORE VW 
+* 
+ON ERROR   
+ IF *ERROR EQ 8400     /* in case of error 8400 obtain diagnostic information     
+  CALLNAT 'USR6007N' TAMINO_PARMS     
+  PRINT 'Error 8400 occurred:'     
+  PRINT 'Error Number:' TAMINO_ERROR_NUM     
+  PRINT 'Error Text  :' TAMINO_ERROR_TEXT     
+  PRINT 'Error Line  :' TAMINO_ERROR_LINE   
+ END-IF 
+END-ERROR 
+* 
+END
+</pre> 
+           <h4 class="floating-title">Error Message NAT8411</h4><pre class="system-output">NAT8411 HTTP request failed with response code...</pre> 
+           <p>The error code from the HTTP server is delivered as additional
+               information. See also <a href="../sm/reqdocu.htm"><code>REQUEST
+               DOCUMENT</code></a> statement,
+               <a href="../sm/reqdocu.htm#response_nos">Overview of Response
+            Numbers for HTTP/HTTPs Requests</a>.
+      </p> 
+           
+          
+         
+      <div><a name="d0e25832"></a></div> 
+          
+      <h3>Example of Natural for Tamino Interacting with a SQL
+              Database
+      </h3> 
+           
+           
+      <p>This is a more sophisticated example of Natural for Tamino interacting
+               with an SQL database; it retrieves data from a Tamino database and inserts or
+               updates the corresponding row in an appropriate table in a SQL database.
+      </p> 
+           <pre class="verbatim">
+*
+* TAMINO DB --&gt; SQL RDBMS EXAMPLE
+*
+DEFINE DATA LOCAL
+* DEFINE VIEW FOR TAMINO
+01 VW-TAMINO VIEW OF EMPLOYEES-TAMINO
+02 PERSONNEL-ID
+02 NAME
+02 CITY
+* DEFINE VIEW FOR SQL DATABASE
+01 VW-SQL VIEW OF EMPLOYEES-SQL
+02 PERSONNEL_ID
+02 NAME
+02 CITY
+END-DEFINE
+*
+* OPEN A TAMINO LOGICAL READ LOOP
+*
+TAMINO. READ VW-TAMINO BY NAME
+*
+* SEARCH RECORD IN SQL DATABASE AND
+* INSERT A NEW RECORD IF NOT FOUND OR
+* UPDATE THE EXISTING ONE WITH THE DATA
+* FROM TAMINO DB
+SQL. FIND(1) VW-SQL WITH PERSONNEL_ID = PERSONNEL-ID (TAMINO.)
+       IF NO RECORDS FOUND
+         PERSONNEL_ID := PERSONNEL-ID (TAMINO.)
+         NAME         := NAME         (TAMINO.)
+         CITY         := CITY         (TAMINO.)
+         STORE VW-SQL
+         ESCAPE BOTTOM
+       END-NOREC
+       PERSONNEL_ID := PERSONNEL-ID (TAMINO.)
+       NAME         := NAME         (TAMINO.)
+       CITY         := CITY         (TAMINO.)
+       UPDATE
+     END-FIND
+*
+END-READ
+*
+END TRANSACTION
+*
+END
+</pre> 
+           
+          
+        
+        <div class="noprint">
+         <p><a href="pg_dbms_xml.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="ntr"></a></div> 
+         
+      <h2> Natural for Tamino Restrictions </h2> 
+          
+          
+      <p>There are restrictions concerning the scope of the Tamino XML Schema
+              language that can be used for creating schemas for Natural for Tamino DDM
+              generation:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">Only Tamino XML Schema language constructors and attributes (as
+                      mentioned in
+                      <a href="../edis/ddm_winux_conv_tam.htm#ddm_winux_conv_tam_Constructors">Tamino
+                  XML Schema Constructors</a> in the <cite>DDM
+                         Services</cite> section of the <cite>Editors</cite>
+                      documentation) are supported by Natural for Tamino. Other constructors such as
+                      <code>xs:any</code>, <code>xs:anyAttribute</code> cannot be applied in Tamino
+                      XML Schemas if you wish to use them together with Natural for Tamino.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">The functionality of <code>xs:import</code> is not supported by
+                      Natural for Tamino. This means that external schema components must not be
+                      referenced in a Tamino XML Schema suitable for usage together with Natural. In
+                      other words, a doctype definition in a Tamino XML Schema must resolve all
+                      references within this Tamino XML Schema itself if you are planning to use it
+                      together with Natural for Tamino.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">The attribute <code>mixed</code> of the constructor
+                      <code>xs:complexType</code> is only supported with its default value
+                      <code>false</code>. Natural for Tamino does not support mixed-content document
+                      definitions (as set with the specification <code>mixed="true"</code>). Using
+                      <code>mixed="true"</code> will result in an error during DDM generation.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">The level of nested structures in a Natural for Tamino DDM is limited
+                      to 99. A new DDM level is generated whenever one of the following constructors
+                      occurs in the Tamino XML Schema:
+            </p> 
+                  
+            <p class="mini-list"> 
+                      <code> xs:element</code><br> 
+                      <code>xs:attribute</code><br> 
+                      <code>xs:choice</code><br> 
+                      <code>xs:all</code><br> 
+                      <code>xs:sequence</code> 
+                     
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Recursively defined structures in a Tamino XML Schema cannot be used
+                      together with Natural for Tamino.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">The Tamino XML Schema language constructor <code>xs:choice</code> is
+                      mapped on a Natural group containing all alternatives of the choice. To
+                      restrict processing to one particular choice, an appropriate view with the
+                      required choice has to be created.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Natural for Tamino only supports "closed content validation
+                      mode". Tamino XML Schemas with "open content validation
+                      mode" cannot be used together with Natural for Tamino.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">For the Tamino XML Schema language constructors
+                      <code>xs:choice</code>, <code>xs:sequence</code> and <code>xs:all</code>, a
+                      value greater than 1 of the attribute <code>maxOccurs</code>
+                      cannot be handled in the Natural data structures. Hence a value greater than 1
+                      will always lead to an error during DDM generation.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Natural for Tamino can handle only Tamino objects that are defined
+                      with a Tamino XML Schema as a subset of the W3C schema. Especially Natural for
+                      Tamino does not support non-XML (<code>tsd:nonXML</code>) data or instances
+                      without a defined schema (<code>ino:etc</code>).
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+        
+       
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="pg_dbms_xml.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_dbms_xml.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_dbms_xml.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_dbms-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_dbms_sqlos.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_output-over.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

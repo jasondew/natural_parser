@@ -1,0 +1,906 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>%W - Window Processing</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="pcw"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../tcom/pcw.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/tcom/pcw.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="tcom-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pcv.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pcx.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Terminal Commands&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x64"></a>%W - Window Processing
+         </h1>
+      </div> 
+         
+          
+          
+      <table border="0" class="syntax" cellpadding="3">  
+              
+         <tbody align="left" valign="top"> 
+                  
+            <tr> 
+                      
+               <td> <code class="keyword">%W</code> 
+               </td> 
+                     
+            </tr> 
+                 
+         </tbody> 
+             
+      </table> 
+          
+         
+      <p class="note"><strong>Note:</strong><br> You are strongly recommended to use the
+             <a href="../sm/definewi.htm"><code>DEFINE WINDOW</code></a>
+             statement instead of the <code>%W</code> command.
+      </p> 
+         
+      <p>A Natural window is that segment of a logical page, built by a Natural
+             program, which is displayed on the terminal screen.
+      </p> 
+         
+      <p>The <code>%W</code> command controls the processing of this
+             window.
+      </p> 
+         
+      <p>The command must always be specified with parameters for the various
+             functions as described hereafter. Multiple parameters may be specified with one
+             <code>%W</code> command; they must be specified consecutively
+             without any delimiter characters.
+      </p> 
+         
+      <p>There is always a window present, although you may not be aware of its
+             existence: unless specified differently (with a <code>%W</code>
+             command or <code>DEFINE WINDOW</code> statement), the size of the window is
+             identical to the physical size of your terminal screen.
+      </p> 
+         
+      <p>See also the <a href="../sm/definewi.htm"><code>DEFINE
+               WINDOW</code></a> statement in the <cite>Statements</cite>
+             documentation for information on window processing.
+      </p> 
+         
+      <p>There are two types of window commands:</p> 
+         
+      <ul> 
+             
+         <li> 
+                 
+            <p class="initem">commands to control the size and position of the window on the physical
+                     screen;
+            </p> 
+                
+         </li> 
+             
+         <li> 
+                 
+            <p class="initem">commands to control the position of the window on the logical page
+                     created by the program.
+            </p> 
+                
+         </li> 
+            
+      </ul> 
+         
+      <p>This document covers the following topics:</p>
+         
+      <ul>
+         <li>
+            <p class="initem"><a href="pcw.htm#Window_SP_PS">Window Size and Position on the Physical Screen</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pcw.htm#Window_Position_LP">Window Position on a Logical Page</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pcw.htm#WA_WZ_SSIBW">%WA and %WZ - Save Screen Image before Window</a></p>
+         </li>
+      </ul> 
+        
+      <hr> 
+        
+      <div><a name="Window_SP_PS"></a></div> 
+         
+      <h2> Window Size and Position on the Physical Screen</h2> 
+          
+          
+      <p>The following window commands control the size and position of the
+              window on the physical screen.
+      </p> 
+          
+      <p>When you change the position of the window on the physical screen, the
+              position of the window on the logical page will remain unchanged:
+      </p> 
+          
+      <p><img src="graphics/pgdesign-physicalscreen.png" alt="Physical screen" width="500" height="300"></p> 
+          
+      <p>For information on possible window sizes, see the
+              <a href="../sm/definewi.htm"><code>DEFINE WINDOW</code></a>
+              statement.
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th align="left">Command</th> 
+                       
+               <th align="left">Function</th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> <code>%WB</code> 
+               </td> 
+                       
+               <td>The window size (excluding frame) will be set to physical screen
+                  size. If a frame is defined, it will not be visible.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>
+                  <code>%WB<var>lll</var>/<var>ccc</var></code></td>
+                       
+                       
+               <td>The top left corner of the window will be positioned to line
+                  number <var>lll</var>, column number
+                           <var>ccc</var> (lines and columns are counted on the physical
+                  screen). The window size will remain unchanged. If the window is too large to
+                        be placed at the specified position, it will be placed as close as possible to
+                           that position.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td nowrap> <code>%WB0</code> 
+               </td> 
+                       
+               <td>The window will be positioned to the top left corner of the
+                  screen. The window size will remain unchanged.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <code>%W#</code> 
+               </td> 
+                       
+               <td>The top left corner of the window will be positioned to the
+                  cursor position. The window size will remain unchanged. If the window is too
+                  large to be placed at the specified position, it will be placed as close as
+                  possible to that position.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <code>%W?</code> 
+               </td> 
+                       
+               <td>The bottom right corner of the window will be set to the cursor
+                  position. The top left corner of the window will remain unchanged, and the size
+                  of the window will be adjusted accordingly.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <code>%WL<var>nn</var></code>
+                        
+               </td> 
+                       
+               <td>The line size (horizontal extension) of the window (including
+                  frame, if specified) will be set to <var>nn</var>. 
+                           
+                  <p>If <var>nn</var> is omitted or specified larger
+                     than would fit on the screen, the line size will be set to the maximum possible
+                               (that is, to the right edge of the screen).
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <code>%WC<var>nn</var></code>
+                        
+               </td> 
+                       
+               <td>The column size (vertical extension) of the window (including
+                  frame, if specified) will be set to <var>nn</var>. 
+                           
+                  <p>If <var>nn</var> is omitted or specified larger
+                     than would fit on the screen, the column size will be set to the maximum
+                               possible (that is, to the bottom of the screen).
+                  </p>
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>Column size and line size specifications refer to the overall physical
+              size of the window (including frame, if specified), not to the size of what is
+              logically visible inside the window.
+      </p> 
+          
+      <p>Any incorrect/impossible size or positioning commands will either be
+              ignored or adjusted to the physical possibilities.
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th align="left">Command</th> 
+                       
+               <th align="left">Function</th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> <code>%WF</code> 
+               </td> 
+                       
+               <td>Switch on framing. The boundaries of the window will be
+                  indicated by a frame. 
+                  
+                  <p>If the window size is smaller than 4 lines by
+                               12 columns, the
+                               frame will not be visible.
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td nowrap> <code>%WM</code> 
+               </td> 
+                       
+               <td>Switch off framing. The boundaries of the window will not be
+                  indicated by a frame. 
+                  
+                  <p>Switching off the frame does not change the size of the window
+                               (only the size of the page segment visible inside the window).
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <code>%WO</code> 
+               </td> 
+                       
+               <td>Suppress display of PF-key lines, message line and statistics
+                  line. This command only applies if the screen is a "real" window
+                  (that is, smaller than the physical screen). 
+                  
+                  <p>To cancel the effect of <code>%WO</code>, you issue
+                               <code>%WO</code> again (or
+                               <code>%WD</code>).
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <code>%WP</code> 
+               </td> 
+                       
+               <td>By default, the PF-key lines, the message line and the
+                  statistics line are displayed within a window. To display them on the screen
+                  outside the window, use <code>%WP</code>. 
+                           
+                  <p>To cancel the effect of <code>%WP</code>, you use
+                               <code>%WD</code>.
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <code>%WD</code> 
+               </td> 
+                       
+               <td>Cancels the effects of <code>%WF</code>,
+                           <code>%WO</code> and <code>%WP</code> (and of the
+                           <a href="../sm/definewi.htm#operand5_definewi"><code>TITLE</code></a> option
+                           of the <code>DEFINE WINDOW</code> statement).
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <code>%WX</code> 
+               </td> 
+                       
+               <td>If there is a <a href="../vari/appl.htm#COM"><code>*COM</code></a> field
+                  outside the window, this field is normally not write-protected. With
+                           <code>%WX</code> you can make it write-protected.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <code>%WY</code> 
+               </td> 
+                       
+               <td>Cancels the effect of <code>%WX</code>.
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pcw.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Window_Position_LP"></a></div> 
+         
+      <h2> Window Position on a Logical Page</h2> 
+          
+          
+      <p>The following window commands control the positioning of the window on
+              the current logical page, that is, the current report/map produced by the
+              Natural program for display. This logical page may be larger in size than the
+              physical screen.
+      </p> 
+          
+      <p>When you change the position of the window on the logical page, the size
+              and position of the window on the physical screen will remain unchanged. In
+              other words, the window is not moved over the page, but the page is moved
+              "underneath" the window:
+      </p> 
+          
+      <p><img src="graphics/pgdesign-logicalpage.png" alt="Logical page" width="500" height="300"></p> 
+          
+      <p>Unless specified differently by one of the following commands, the
+              window will be placed at the top left corner of the logical page.
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th align="left">Command</th> 
+                       
+               <th align="left">Function</th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> <code>%W*</code> 
+               </td> 
+                       
+               <td>The position marked on the page by the cursor will be shifted to
+                  the top left corner of the window.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>
+                  <code>%W<var>lll</var>,<var>ccc</var></code>
+                           
+               </td> 
+                       
+               <td>The position of the logical page determined by line number
+                  <var>lll</var>, column number <var>ccc</var>
+                  will be shifted to the top left corner of the window. Lines and columns are
+                           counted on the logical page.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <code>%W&lt;</code> 
+               </td> 
+                       
+               <td>Shift window left. The number of positions shifted is equal to
+                  the line size (horizontal extension) of the window.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <code>%W&lt;&lt;</code> 
+               </td> 
+                       
+               <td>Shift window to leftmost position of page.</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <code>%W&lt;<var>n</var></code>
+                       
+               </td> 
+                       
+               <td>Shift window left <var>n</var> positions (0
+                           =&lt; <var>n</var> =&lt; logical line size).
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <code>%W&gt;</code> 
+               </td> 
+                       
+               <td>Shift window right. The number of positions shifted is equal to
+                  the line size (horizontal extension) of the window.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td nowrap> <code>%W&gt;&gt;</code> 
+               </td> 
+                       
+               <td>Shift window to rightmost position of page.</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <code>%W&gt;<var>n</var></code>
+                       
+               </td> 
+                       
+               <td>Shift window right <var>n</var> positions (0
+                           =&lt; <var>n</var> =&lt; logical line size).
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <code>%W+</code> 
+               </td> 
+                       
+               <td>Shift window down. The number of lines shifted is equal to the
+                  number of lines in the window. (*)
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <code>%W++</code> 
+               </td> 
+                       
+               <td>Shift window to bottom of page. (*)</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <code>%W+<var>n</var></code>
+                       
+               </td> 
+                       
+               <td>Shift window down <var>n</var> lines (0 =&lt;
+                           <var>n</var> =&lt; logical page size). (*)
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <code>%W-</code> 
+               </td> 
+                       
+               <td>Shift window up. The number of lines shifted is equal to the
+                  number of lines in the window.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <code>%W--</code> 
+               </td> 
+                       
+               <td>Shift window to top of page.</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <code>%W-<var>n</var></code>
+                       
+               </td> 
+                       
+               <td>Shift window up <var>n</var> lines (0 =&lt;
+                           <var>n</var> =&lt; logical page size).
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <code>%WH</code> 
+               </td> 
+                       
+               <td>By default, the position of the window on the logical page is
+                  reset to <em>top left corner</em> after a screen I/O.
+                           <code>%WH</code> prevents the window position from being reset by
+                           the next I/O, that is, the set window position will be retained.
+                           <code>%WH</code> only applies to the next I/O.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <code>%WS</code> 
+               </td> 
+                       
+               <td>Switch on the <code>STAY</code> option; that is, control will
+                  "stay" on the current page until the end of the page. 
+                           
+                  <p>If a page is not yet completely shown in vertical direction, a
+                               string of <code>VVVV</code> will appear in the message line. The window will be
+                               scrolled downward with every <span class="key">ENTER</span> until the end of the logical page
+                               is reached. The next <span class="key">ENTER</span> will cause control to be returned to the
+                               program. (This does not apply to pages created by an
+                               <a href="../sm/input.htm"><code>INPUT</code></a> statement with
+                               input fields (session parameter <a href="../parms/sp_ad.htm"><code>AD=A</code></a> or
+                               <code>AD=M</code>).) 
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <code>%WN</code> 
+               </td> 
+                       
+               <td>Switch off the <code>STAY</code> option. When you press
+                           <span class="key">ENTER</span>, control is returned to the program.
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p><sup>*</sup> The window can be shifted to the last non-blank line of the
+              page at most.
+      </p> 
+          
+      <p class="notes"><strong>Notes:</strong></p>
+      <ol class="note-list"> 
+              
+         <li>If you wish to use one of the above commands within a program to
+                  shift the window, assign the command to a function key (with a
+                  <a href="../sm/setkey.htm"><code>SET KEY</code></a>
+                  statement).
+         </li> 
+              
+         <li>If you wish to specify it with a <a href="../sm/setcontr.htm"><code>SET CONTROL</code></a> statement, this
+                  statement must be followed by a <a href="../sm/reinput.htm"><code>REINPUT</code></a> statement (that is, it
+                  must be placed between the <code>REINPUT</code> statement and corresponding
+                  <code>INPUT</code> statement); otherwise Natural will not be able to uniquely
+                  identify the window to which the command is to be applied (and will ignore
+                  it).
+         </li> 
+              
+         <li>As a rule, however, no <code>SET CONTROL 'W'</code> statement
+                  should be placed between an <code>INPUT</code> statement with
+                  <code>WINDOW='<var>window-name</var>'</code> option and the
+                  corresponding <code>REINPUT</code> statement.
+         </li> 
+             
+      </ol> 
+          
+      <h4 class="floating-title"> Examples of Command Combinations</h4> 
+          
+      <p>The various parameters to be specified with the
+              <code>%W</code> command may also be combined with one another;
+              for example:
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th> <code>%W&lt;&lt;--</code> 
+               </th> 
+                       
+               <td>Position window to top left corner of page.</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> <code>%W&gt;&gt;++</code> 
+               </th> 
+                       
+               <td>Position window to bottom right corner of page.</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> <code>%W++-</code> 
+               </th> 
+                       
+               <td>Display the next to last window segment of the page.</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> <code>%W+3&gt;6</code> 
+               </th> 
+                       
+               <td>Position window 3 lines down and 6 positions right on the
+                  page.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> <code>%W10+&gt;</code> 
+               </th> 
+                       
+               <td>Position window to line 10 of the page, then 1 window down and 1
+                  window right.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> <code>%WL40C10++-3</code> 
+               </th> 
+                       
+               <td>Define the window with a line size of 40 positions and a page
+                  size of 10 lines, move that window to the bottom of the page, then move it up 3
+                  lines on the page.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th>
+                  <code>%WL30C10B3/15--&lt;&lt;</code> 
+               </th> 
+                       
+               <td>Define the window with a line size of 30 positions, page size of
+                  10 lines, position the window at line 3 column 15 on the physical screen and
+                  move this window to the top left corner of the page.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> <code>%WFS</code> 
+               </th> 
+                       
+               <td>Generate a frame around the window and set the <code>STAY</code>
+                           option on.
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+           
+          
+      <p>The parameters are evaluated in the sequence in which they are
+              specified, so that different sequences of the same parameters may lead to
+              different results.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pcw.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="WA_WZ_SSIBW"></a></div> 
+         
+      <h2> %WA and %WZ - Save Screen Image before Window</h2> 
+          
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th align="left">Command</th> 
+                       
+               <th align="left">Function</th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> <code>%WA</code> 
+               </td> 
+                       
+               <td> 
+                  
+                  <p>With <code>%WA</code>, you activate a "save
+                     screen image before window" feature. When this feature is activated and
+                     a window is to be opened, all active screen data that will be overlaid by the
+                     window are saved. When the same window is moved, the saved screen image is
+                     reconstructed before the window is built up at the new location on the screen.
+                     In addition, it is possible to rebuild the saved images of multiple dependent
+                     windows whenever the calling window becomes active again.
+                  </p> 
+                           
+                  <p>When the current <a href="../sm/input.htm"><code>INPUT</code></a> statement uses a window,
+                               the screen image is stored before the window is output. Whenever the same
+                               <code>INPUT</code> statement is repeated, the current or all subsequent stored
+                               screen images are recovered and are written back to the screen.
+                  </p> 
+                           
+                  <p>This feature makes it possible, for example, to use windows in a
+                               PC-like manner. For a given window, any number of dependent windows can be
+                               written to the screen. All these windows will disappear from the screen when
+                               the main input window is re-executed.
+                  </p> 
+                           
+                  <p>The buffer contents (screen images) are deleted whenever Natural
+                               performs a full-screen I/O, when Natural returns to command mode
+                               (<code>NEXT</code>), after a <code>LOGON</code> command, or after
+                               the <span class="key">CLEAR</span> key has been pressed.
+                  </p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <code>%WZ</code> 
+               </td> 
+                       
+               <td>With <code>%WZ</code>, you deactivate a previously
+                  entered <code>%WA</code> command.
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+        
+       
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="pcw.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../tcom/pcw.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/tcom/pcw.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="tcom-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pcv.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pcx.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

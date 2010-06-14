@@ -1,0 +1,304 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Parameter Description Structure</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="pg_nni_para_des_struc"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_nni_para_des_struc.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_nni_para_des_struc.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_nni-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_nni_func-over.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_nni_nat_dat_typ.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Programming Guide&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x603"></a>Parameter Description Structure 
+         </h1>
+      </div> 
+         
+         
+      <p>The interface provides information about the parameters of a Natural
+             subprogram or method in a structure named
+             <code>parameter_description</code>. The structure is defined in the
+             header file <cite>natuser.h</cite>. This file is contained in the
+             directory <cite>$NATDIR/$NATVERS/samples/sysexnni</cite>.
+      </p> 
+         
+      <p>An array of <code>parameter_description</code> structures is
+             passed to the interface with each call to <a href="pg_nni_func-over.htm#pg_nni_callnat"><code>nni_callnat</code></a> and similar
+             functions. A <code>parameter_description</code> structure is created
+             from a parameter in a parameter set using the function
+             <a href="pg_nni_func-over.htm#pg_nni_get_parm_info"><code>nni_get_parm_info</code></a>.
+      </p> 
+         
+      <p>The relevant elements of the structure contain the following information.
+             All elements not listed in this table are for internal use only.
+      </p> 
+          
+          
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+              
+         <thead align="left" valign="top"> 
+                  
+            <tr> 
+                      
+               <th>Format</th> 
+                      
+               <th>Element Name</th> 
+                      
+               <th>Content</th> 
+                     
+            </tr> 
+                 
+         </thead> 
+              
+         <tbody align="left" valign="top"> 
+                  
+            <tr> 
+                      
+               <td>void*</td> 
+                      
+               <td>address</td> 
+                      
+               <td>Address of the parameter value. Must not be reallocated or freed.
+                  The address element is a null pointer for arrays of dynamic variables and for
+                  x-arrays. In these cases, the array data cannot be accessed as a whole, but can
+                  only be accessed elementwise through the parameter access function
+                  <a href="pg_nni_func-over.htm#pg_nni_get_parm"><code>nni_get_parm</code></a>.
+               </td> 
+                     
+            </tr> 
+                  
+            <tr> 
+                      
+               <td>int</td> 
+                      
+               <td>format</td> 
+                      
+               <td>Natural data type of the parameter. Refer to
+                  <a href="pg_nni_nat_dat_typ.htm#pg_nni_nat_dat_typ">Natural Data
+                             Types</a> for further information.
+               </td> 
+                     
+            </tr> 
+                  
+            <tr> 
+                      
+               <td>int</td> 
+                      
+               <td>length</td> 
+                      
+               <td>Natural length of the parameter value. In the case of the data
+                  types <code>NNI_TYPE_ALPHA</code> and <code>NNI_TYPE_UNICODE</code>, the number
+                          of characters. In the case of the data types <code>NNI_TYPE_PACK</code> and
+                          <code>NNI_TYPE_NUM</code>, the number of digits before the decimal character.
+                  In the case of an array, the length of a single occurrence. In the case of an
+                          array of dynamic variables, the length is indicated with 0. The length of an
+                          individual occurrence must then be determined with the function
+                          <a href="pg_nni_func-over.htm#pg_nni_get_parm_array_length"><code>nni_get_parm_array_length</code></a>.
+               </td>
+                      
+                     
+            </tr> 
+                  
+            <tr> 
+                      
+               <td>int</td> 
+                      
+               <td>precision</td> 
+                      
+               <td>In the case of the data types <code>NNI_TYPE_PACK</code> and
+                          <code>NNI_TYPE_NUM</code> the number of digits after the decimal character, 0
+                          otherwise.
+               </td> 
+                     
+            </tr> 
+                  
+            <tr> 
+                      
+               <td>int</td> 
+                      
+               <td>byte_length</td> 
+                      
+               <td>Length of the parameter value in bytes. In the case of an array
+                  the byte length of a single occurrence. In the case of an array of dynamic
+                  variables the byte length is indicated with 0. The length of an individual
+                  occurrence must then be determined with the function
+                  <a href="pg_nni_func-over.htm#pg_nni_get_parm_array_length"><code>nni_get_parm_array_length</code></a>.
+               </td>
+                      
+                     
+            </tr> 
+                  
+            <tr> 
+                      
+               <td>int</td> 
+                      
+               <td>dimensions</td> 
+                      
+               <td>Number of dimensions. 0 in the case of a scalar. The maximum
+                  number of dimensions is 3.
+               </td> 
+                     
+            </tr> 
+                  
+            <tr> 
+                      
+               <td>int</td> 
+                      
+               <td>length_all</td> 
+                      
+               <td>Total length of the parameter value in bytes. In the case of an
+                  array the byte length of the whole array. In the case of an array of dynamic
+                  variables the total length is indicated with 0. The length of an individual
+                  occurrence must then be determined with the function
+                  <a href="pg_nni_func-over.htm#pg_nni_get_parm_array_length"><code>nni_get_parm_array_length</code></a>.
+               </td>
+                      
+                     
+            </tr> 
+                  
+            <tr> 
+                      
+               <td>int</td> 
+                      
+               <td>flags</td> 
+                      
+               <td>Parameter flags, see <a href="pg_nni_flags.htm#pg_nni_flags">Flags</a>.
+               </td> 
+                     
+            </tr> 
+                  
+            <tr> 
+                      
+               <td>int</td> 
+                      
+               <td>occurrences[10]</td> 
+                      
+               <td>Number of occurrences in each dimension. Only the first three
+                  occurrences are used.
+               </td> 
+                     
+            </tr> 
+                  
+            <tr> 
+                      
+               <td>int</td> 
+                      
+               <td>indexfactors[10]</td> 
+                      
+               <td>Array indexfactors for each dimension. Only the first three
+                  occurrences are used.
+               </td> 
+                     
+            </tr> 
+                 
+         </tbody> 
+             
+      </table> 
+          
+         
+      <p>In the case of arrays with fixed bounds of variables with fixed length,
+             the array contents can be accessed directly using the structure element
+             <code>address</code>. In these cases the following applies:
+      </p> 
+         
+      <ul> 
+             
+         <li> 
+                 
+            <p class="initem">The address of the element (i,j,k) of a three dimensional array is
+                     computed as follows: 
+            </p> 
+                 
+            <p class="initem">elementaddress = address + i * indexfactors[0] + j * indexfactors[1] +
+                     k * indexfactors[2]
+            </p> 
+                
+         </li> 
+             
+         <li> 
+                 
+            <p class="initem">The address of the element (i,j) of a two dimensional array is computed
+                     as follows: 
+            </p> 
+                 
+            <p class="initem">elementaddress = address + i * indexfactors[0] + j *
+                     indexfactors[1]
+            </p> 
+                
+         </li> 
+             
+         <li> 
+                 
+            <p class="initem">The address of the element (i) of a one dimensional array is computed
+                     as follows: 
+            </p> 
+                 
+            <p class="initem">elementaddress = address + i * indexfactors[0]</p> 
+                
+         </li> 
+            
+      </ul> 
+         
+       
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="pg_nni_para_des_struc.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_nni_para_des_struc.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_nni_para_des_struc.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_nni-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_nni_func-over.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_nni_nat_dat_typ.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

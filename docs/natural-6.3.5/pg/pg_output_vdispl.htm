@@ -1,0 +1,701 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Vertical Displays</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="pg_output_vdispl"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_output_vdispl.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_output_vdispl.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_output-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_output_umasks.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_furth-over.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Programming Guide&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x294"></a>Vertical Displays 
+         </h1>
+      </div> 
+         
+         
+      <p>This document describes how you can combine the features of the
+             statements <a href="../sm/display.htm"><code>DISPLAY</code></a>
+             and <a href="../sm/write.htm"><code>WRITE</code></a> to produce
+             vertical displays of field values.
+      </p> 
+         
+      <p>The following topics are covered: </p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_output_vdispl.htm#create_vdispl">Creating Vertical Displays</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_vdispl.htm#Combining_DISPLAY_and_WRITE">Combining DISPLAY and WRITE</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_vdispl.htm#Tab_Notation_T_field">Tab Notation - T*field</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_vdispl.htm#Positioning_Notation_x_y">Positioning Notation x/y</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_vdispl.htm#DISPLAY_VERT_Statement">DISPLAY VERT Statement</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_vdispl.htm#further_exa_displ_wri">Further Example of DISPLAY VERT with WRITE Statement</a></p>
+         </li>
+      </ul> 
+        
+      <hr> 
+        
+      <div><a name="create_vdispl"></a></div> 
+         
+      <h2> Creating Vertical Displays </h2> 
+          
+          
+      <p>There are two ways of creating vertical displays:</p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">You can use a combination of the statements
+                      <a href="../sm/display.htm"><code>DISPLAY</code></a> and
+                      <a href="../sm/write.htm"><code>WRITE</code></a>.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">You can use the <code>VERT</code> option of the
+                      <a href="../sm/display.htm"><code>DISPLAY</code></a>
+                      statement.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_output_vdispl.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Combining_DISPLAY_and_WRITE"></a></div> 
+         
+      <h2> 
+             <a name="x295"></a> 
+             <a name="x296"></a>Combining DISPLAY and WRITE 
+      </h2> 
+          
+          
+      <p>As described in <a href="pg_output_display.htm#pg_output_display">Statements DISPLAY and
+            WRITE</a>, the <a href="../sm/display.htm"><code>DISPLAY</code></a> statement normally
+              presents the data in columns with default headers, while the
+              <a href="../sm/write.htm"><code>WRITE</code></a> statement
+              presents data horizontally without headers.
+      </p> 
+          
+      <p>You can combine the features of the two statements to produce vertical
+              displays of field values.
+      </p> 
+          
+      <p>The <code>DISPLAY</code> statement produces the values of different
+              fields for the same record across the page with a column for each field. The
+              field values for each record are displayed below the values for the previous
+              record.
+      </p> 
+          
+      <p>By using a <code>WRITE</code> statement after a <code>DISPLAY</code>
+              statement, you can insert text and/or field values specified in the
+              <code>WRITE</code> statement between records displayed via the
+              <code>DISPLAY</code> statement.
+      </p> 
+          
+      <p>The following program illustrates the combination of
+              <code>DISPLAY</code> and <code>WRITE</code>:
+      </p> 
+          <pre class="verbatim">
+** Example 'WRITEX04': WRITE (in combination with DISPLAY)
+************************************************************************
+DEFINE DATA LOCAL
+1 VIEWEMP VIEW OF EMPLOYEES
+  2 NAME
+  2 JOB-TITLE
+  2 CITY
+  2 DEPT
+END-DEFINE
+*
+READ (3) VIEWEMP BY CITY STARTING FROM 'SAN FRANCISCO'
+  <strong>DISPLAY NAME JOB-TITLE
+  WRITE 22T 'DEPT:' DEPT</strong>
+  SKIP 1
+END-READ
+END
+</pre> 
+          <p>Output of Program WRITEX04:</p> <pre class="system-output">
+Page      1                                                  04-11-11  14:15:55
+ 
+        NAME                  CURRENT
+                             POSITION
+-------------------- -------------------------
+ 
+KOLENCE              MANAGER
+                     DEPT: TECH05
+ 
+GOSDEN               ANALYST
+                     DEPT: TECH10
+ 
+WALLACE              SALES PERSON
+                     DEPT: SALE20
+</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_output_vdispl.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Tab_Notation_T_field"></a></div> 
+         
+      <h2> 
+             <a name="x297"></a> 
+             <a name="x298"></a>Tab Notation - T*<var>field</var></h2> 
+         
+          
+          
+      <p>In the previous example, the position of the field <code>DEPT</code> is
+              determined by the tab notation <code><var>n</var>T</code> (in
+              this case <code>20T</code>, which means that the display begins in column 20 on
+              the screen).
+      </p> 
+          
+      <p>Field values specified in a <a href="../sm/write.htm"><code>WRITE</code></a> statement can be lined up
+              automatically with field values specified in the first
+              <a href="../sm/display.htm"><code>DISPLAY</code></a> statement of
+              the program by using the tab notation
+              <code>T*<var>field</var></code> (where
+              <var>field</var> is the name of the field to which the field is
+              to be aligned).
+      </p> 
+          
+      <p>In the following program, the output produced by the <code>WRITE</code>
+              statement is aligned to the field <code>JOB-TITLE</code> by using the notation
+              <code>T*JOB-TITLE</code>:
+      </p> 
+          <pre class="verbatim">
+** Example 'WRITEX05': WRITE  (in combination with DISPLAY)
+************************************************************************
+DEFINE DATA LOCAL
+1 VIEWEMP VIEW OF EMPLOYEES
+  2 NAME
+  2 JOB-TITLE
+  2 DEPT
+  2 CITY
+END-DEFINE
+*
+READ (3) VIEWEMP BY CITY STARTING FROM 'SAN FRANCISCO'
+  <strong>DISPLAY NAME JOB-TITLE
+  WRITE T*JOB-TITLE 'DEPT:' DEPT</strong>
+  SKIP 1
+END-READ
+END
+</pre> 
+          <p>Output of Program WRITEX05:</p> <pre class="system-output">
+Page      1                                                  04-11-11  14:15:55
+ 
+        NAME                  CURRENT
+                             POSITION
+-------------------- -------------------------
+
+KOLENCE              MANAGER
+                     DEPT: TECH05
+  
+GOSDEN               ANALYST
+                     DEPT: TECH10             
+                                                     
+WALLACE              SALES PERSON                 
+                     DEPT: SALE20
+</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_output_vdispl.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Positioning_Notation_x_y"></a></div> 
+         
+      <h2> 
+             <a name="x299"></a> 
+             <a name="x300"></a>Positioning Notation
+             <var>x</var>/<var>y</var> 
+      </h2> 
+         
+          
+          
+      <p>When you use the <a href="../sm/display.htm"><code>DISPLAY</code></a> and
+              <a href="../sm/write.htm"><code>WRITE</code></a> statements in
+              sequence and multiple lines are to be produced by the <code>WRITE</code>
+              statement, you can use the notation
+              <code><var>x</var>/<var>y</var></code>
+              (number-slash-number) to determine in which row/column something is to be
+              displayed. The positioning notation causes the next element in the
+              <code>DISPLAY</code> or <code>WRITE</code> statement to be placed
+              <var>x</var> lines below the last output, beginning in column
+              <var>y</var> of the output.
+      </p> 
+          
+      <p>The following program illustrates the use of this notation:</p> 
+          <pre class="verbatim">
+** Example 'WRITEX06': WRITE  (with n/n)
+************************************************************************
+DEFINE DATA LOCAL
+1 VIEWEMP VIEW OF EMPLOYEES
+  2 NAME
+  2 FIRST-NAME
+  2 MIDDLE-I
+  2 ADDRESS-LINE (1:1)
+  2 CITY
+  2 ZIP
+END-DEFINE
+*
+READ (3) VIEWEMP BY CITY STARTING FROM 'NEW YORK'
+  <strong>DISPLAY 'NAME AND ADDRESS' NAME
+  WRITE   1/5  FIRST-NAME
+          1/30 MIDDLE-I
+          2/5  ADDRESS-LINE (1:1)
+          3/5  CITY
+          3/30 ZIP /</strong>
+END-READ
+END
+</pre> 
+          <p>Output of Program WRITEX06:</p> <pre class="system-output">
+Page      1                                                  04-11-11  14:15:55
+ 
+  NAME AND ADDRESS
+--------------------
+ 
+RUBIN
+    SYLVIA                   L
+    2003 SARAZEN PLACE
+    NEW YORK                 10036
+ 
+WALLACE
+    MARY                     P
+    12248 LAUREL GLADE C
+    NEW YORK                 10036
+ 
+KELLOGG
+    HENRIETTA                S
+    1001 JEFF RYAN DR.
+    NEWARK                   19711
+</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_output_vdispl.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="DISPLAY_VERT_Statement"></a></div> 
+         
+      <h2> 
+             <a name="x301"></a>DISPLAY VERT Statement 
+      </h2> 
+          
+          
+      <p>The standard display mode in Natural is horizontal.</p> 
+          
+      <p>With the <a href="../sm/display.htm#Vertical_Horizontal_Display"><code>VERT</code></a>
+              clause option of the <a href="../sm/display.htm"><code>DISPLAY</code></a> statement, you can
+              override the standard display and produce a vertical field display.
+      </p> 
+          
+      <p>The <a href="../sm/display.htm#Vertical_Horizontal_Display"><code>HORIZ</code></a>
+              clause option, which can be used in the same <code>DISPLAY</code> statement,
+              re-activates the standard horizontal display mode.
+      </p> 
+          
+      <p>Column headings in vertical mode are controlled with various forms of
+              the <a href="../sm/display.htm#Vertical_Horizontal_Display"><code>AS</code></a>
+              clause. The following example programs illustrate the use of the
+              <a href="../sm/display.htm#Vertical_Horizontal_Display"><code>DISPLAY
+               VERT</code></a> statement:
+      </p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_output_vdispl.htm#DISPLAY_VERT_without_AS_Clause">DISPLAY VERT without AS Clause</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_vdispl.htm#DISPLAY_VERT_AS_CAPTIONED_and_HORIZ">DISPLAY VERT AS CAPTIONED and HORIZ</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_vdispl.htm#DISPLAY_VERT_AS_text">DISPLAY VERT AS 'text'</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_vdispl.htm#DISPLAY_VERT_AS_text_CAPTIONED">DISPLAY VERT AS 'text' CAPTIONED</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_output_vdispl.htm#Tab_Notation_P_field">Tab Notation P*field</a></p>
+         </li>
+      </ul> 
+         
+      <div><a name="DISPLAY_VERT_without_AS_Clause"></a></div> 
+          
+      <h3> DISPLAY VERT without AS Clause </h3> 
+           
+           
+      <p>The following program has no
+               <a href="../sm/display.htm#Vertical_Horizontal_Display"><code>AS</code></a>
+               clause, which means that no column headings are output.
+      </p> 
+           <pre class="verbatim">
+** Example 'DISPLX09': DISPLAY  (without column title)
+************************************************************************
+DEFINE DATA LOCAL
+1 VIEWEMP VIEW OF EMPLOYEES
+  2 NAME
+  2 FIRST-NAME
+  2 CITY
+END-DEFINE
+*
+READ (3) VIEWEMP BY CITY STARTING FROM 'NEW YORK'
+  <strong>DISPLAY VERT NAME FIRST-NAME / CITY</strong>
+  SKIP 2
+END-READ
+END
+</pre> 
+           <p>Output of Program DISPLX09:</p> 
+           
+      <p>Note that all field values are displayed vertically underneath one
+               another.
+      </p> <pre class="system-output">
+Page      1                                                  04-11-11  14:15:54
+
+
+RUBIN
+SYLVIA
+
+NEW YORK
+
+
+WALLACE
+MARY
+
+NEW YORK
+
+
+KELLOGG
+HENRIETTA
+
+NEWARK
+</pre> 
+           
+          
+         <div><a name="DISPLAY_VERT_AS_CAPTIONED_and_HORIZ"></a></div> 
+          
+      <h3> DISPLAY VERT AS CAPTIONED and HORIZ </h3> 
+           
+           
+      <p>The following program contains a
+               <a href="../sm/display.htm#Vertical_Horizontal_Display"><code>VERT</code></a>
+               and a <a href="../sm/display.htm#Vertical_Horizontal_Display"><code>HORIZ</code></a>
+               clause, which causes some column values to be output vertically and others
+               horizontally; moreover <code>AS CAPTIONED</code> causes the default column
+               headers to be displayed.
+      </p> 
+           <pre class="verbatim">
+** Example 'DISPLX10': DISPLAY (with VERT as CAPTIONED and HORIZ clause)
+************************************************************************
+DEFINE DATA LOCAL
+1 VIEWEMP VIEW OF EMPLOYEES
+  2 NAME
+  2 FIRST-NAME
+  2 CITY
+  2 JOB-TITLE
+  2 SALARY (1:1)
+END-DEFINE
+*
+READ (3) VIEWEMP BY CITY STARTING FROM 'NEW YORK'
+  <strong>DISPLAY VERT AS CAPTIONED NAME FIRST-NAME
+          HORIZ JOB-TITLE SALARY (1:1)</strong>
+  SKIP 1
+END-READ
+END
+</pre> 
+           <p>Output of Program DISPLX10:</p> <pre class="system-output">
+Page      1                                                  04-11-11  14:15:54
+ 
+        NAME                  CURRENT            ANNUAL
+     FIRST-NAME              POSITION            SALARY
+-------------------- ------------------------- ----------
+ 
+RUBIN                SECRETARY                      17000
+SYLVIA
+ 
+WALLACE              ANALYST                        38000
+MARY
+ 
+KELLOGG              DIRECTOR                       52000
+HENRIETTA
+</pre> 
+           
+          
+         <div><a name="DISPLAY_VERT_AS_text"></a></div> 
+          
+      <h3> DISPLAY VERT AS '<var>text</var>'
+      </h3> 
+           
+           
+      <p>The following program contains an <code>AS
+            '<var>text</var>'</code> clause, which displays the specified
+               <code>'<var>text</var>'</code> as column header.
+      </p> 
+           
+      <p class="note"><strong>Note:</strong><br>A slash (/) within the text element in a <code>DISPLAY</code>
+               statement causes a line advance.
+      </p> 
+           <pre class="verbatim">
+** Example 'DISPLX11': DISPLAY  (with VERT AS 'text' clause)
+************************************************************************
+DEFINE DATA LOCAL
+1 VIEWEMP VIEW OF EMPLOYEES
+  2 NAME
+  2 FIRST-NAME
+  2 CITY
+  2 JOB-TITLE
+  2 SALARY (1:1)
+END-DEFINE
+*
+READ (3) VIEWEMP BY CITY STARTING FROM 'NEW YORK'
+  <strong>DISPLAY VERT AS 'EMPLOYEES' NAME FIRST-NAME
+          HORIZ JOB-TITLE SALARY (1:1)</strong>
+  SKIP 1
+END-READ
+END
+</pre> 
+           <p>Output of Program DISPLX11:</p> <pre class="system-output">
+Page      1                                                  04-11-11  14:15:54
+ 
+     EMPLOYEES                CURRENT            ANNUAL
+                             POSITION            SALARY
+-------------------- ------------------------- ----------
+ 
+RUBIN                SECRETARY                      17000
+SYLVIA
+ 
+WALLACE              ANALYST                        38000
+MARY
+ 
+KELLOGG              DIRECTOR                       52000
+HENRIETTA
+</pre> 
+           
+          
+         <div><a name="DISPLAY_VERT_AS_text_CAPTIONED"></a></div> 
+          
+      <h3> DISPLAY VERT AS '<var>text</var>' CAPTIONED
+      </h3>
+          
+           
+           
+      <p>The <code>AS '<var>text</var>' CAPTIONED</code> clause
+               causes the specified text to be displayed as column heading, and the default
+               column headings to be displayed immediately before the field value in each line
+               that is output. 
+      </p> 
+           
+      <p>The following program contains an <code>AS
+            '<var>text</var>' CAPTIONED</code> clause.
+      </p> 
+           <pre class="verbatim">
+** Example 'DISPLX12': DISPLAY (with VERT AS 'text' CAPTIONED clause)
+************************************************************************
+DEFINE DATA LOCAL
+1 VIEWEMP VIEW OF EMPLOYEES
+  2 NAME
+  2 FIRST-NAME
+  2 CITY
+  2 JOB-TITLE
+  2 SALARY (1:1)
+END-DEFINE
+*
+READ (3) VIEWEMP BY CITY STARTING FROM 'NEW YORK'
+  <strong>DISPLAY VERT AS 'EMPLOYEES' CAPTIONED NAME FIRST-NAME
+          HORIZ JOB-TITLE SALARY (1:1)</strong>
+  SKIP 1
+END-READ
+END
+</pre> 
+           <p>Output of Program DISPLX12:</p> 
+           
+      <p>This clause causes the default column headers (<code>NAME</code> and
+               <code>FIRST-NAME</code>) to be placed before the field values:
+      </p> <pre class="system-output">
+Page      1                                                  04-11-11  14:15:54
+ 
+           EMPLOYEES                     CURRENT            ANNUAL
+                                        POSITION            SALARY
+------------------------------- ------------------------- ----------
+ 
+NAME RUBIN                      SECRETARY                      17000
+FIRST-NAME SYLVIA
+ 
+NAME WALLACE                    ANALYST                        38000
+FIRST-NAME MARY
+ 
+NAME KELLOGG                    DIRECTOR                       52000
+FIRST-NAME HENRIETTA
+</pre> 
+           
+          
+         <div><a name="Tab_Notation_P_field"></a></div> 
+          
+      <h3> 
+              <a name="x302"></a> 
+              <a name="x303"></a>Tab Notation P*<var>field</var></h3> 
+          
+           
+           
+      <p>If you use a combination of
+               <a href="../sm/display.htm#Vertical_Horizontal_Display"><code>DISPLAY
+               VERT</code></a> statement and subsequent <a href="../sm/write.htm"><code>WRITE</code></a> statement, you can use the
+               tab notation <a href="../sm/write.htm#P_field-name_write"><code>P*<var>field-name</var></code></a>
+               in the <code>WRITE</code> statement to align the position of a field to the
+               column <em>and</em> line position of a particular field specified in the
+               <code>DISPLAY VERT</code> statement.
+      </p> 
+           
+      <p>In the following program, the fields <code>SALARY</code> and
+               <code>BONUS</code> are displayed in the same column, <code>SALARY</code> in
+               every first line, <code>BONUS</code> in every second line. The text
+               <code>***SALARY PLUS BONUS***</code> is aligned to <code>SALARY</code>, which
+               means that it is displayed in the same column as <code>SALARY</code> and in the
+               first line, whereas the text <code>(IN US DOLLARS)</code> is aligned to
+               <code>BONUS</code> and therefore displayed in the same column as
+               <code>BONUS</code> and in the second line.
+      </p> 
+           <pre class="verbatim">
+** Example 'WRITEX07': WRITE  (with P*field)
+************************************************************************
+DEFINE DATA LOCAL
+1 VIEWEMP VIEW OF EMPLOYEES
+  2 CITY
+  2 NAME
+  2 JOB-TITLE
+  2 SALARY (1:1)
+  2 BONUS  (1:1,1:1)
+END-DEFINE
+*
+READ (3) VIEWEMP BY CITY STARTING FROM 'LOS ANGELES'
+  <strong>DISPLAY NAME JOB-TITLE
+          VERT AS 'INCOME' SALARY (1) BONUS (1,1)
+  WRITE P*SALARY '***SALARY PLUS BONUS***'
+        P*BONUS  '(IN US DOLLARS)'</strong>
+  SKIP 1
+END-READ
+END
+</pre> 
+           <p>Output of Program WRITEX07:</p> <pre class="system-output">
+Page      1                                                  04-11-11  14:15:55
+ 
+        NAME                  CURRENT            INCOME
+                             POSITION
+-------------------- ------------------------- ----------
+ 
+SMITH                                                   0
+                                                        0
+                                               ***SALARY PLUS BONUS***
+                                               (IN US DOLLARS)
+ 
+POORE JR             SECRETARY                      25000
+                                                        0
+                                               ***SALARY PLUS BONUS***
+                                               (IN US DOLLARS)
+ 
+PREPARATA            MANAGER                        46000
+                                                     9000
+                                               ***SALARY PLUS BONUS***
+                                               (IN US DOLLARS)
+</pre> 
+           
+          
+        
+        <div class="noprint">
+         <p><a href="pg_output_vdispl.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="further_exa_displ_wri"></a></div> 
+         
+      <h2> Further Example of DISPLAY VERT with WRITE Statement </h2> 
+          
+          
+      <p>See the following example program:</p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="pg_exas.htm#WRITEX10">WRITEX10 - WRITE (with
+                  <var>n</var>T, T*<var>field</var> and
+                         P*<var>field</var>)</a></p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+        
+       
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="pg_output_vdispl.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_output_vdispl.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_output_vdispl.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_output-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_output_umasks.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_furth-over.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

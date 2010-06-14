@@ -1,0 +1,208 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>About this Tutorial</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="fs-about"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../njx/fs-about.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/njx/fs-about.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="fs-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="fs-over.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="fs-start.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Natural for Ajax&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+       
+      <div class="nospytext">
+         <h1>About this Tutorial</h1>
+      </div> 
+        
+        
+      <p>This tutorial provides an introduction to working with
+            Natural for
+            Ajax. It explains how to create a "Hello World!"
+            application. This covers all basic steps you have to perform when creating
+            pages with Natural
+            for Ajax: you create a layout file, you create an adapter
+            and a main
+            program, and you run the application. 
+      </p> 
+        
+      <p>When you have completed all steps of this tutorial, the page for your
+            "Hello World!" application will look as follows:
+      </p> 
+        
+      <p><img src="graphics/fs-helloworld-finished.png" alt="Hello World!" width="467" height="443"></p> 
+        
+        
+      <p>Your application will act in the following way: When you enter a name in
+            the <span class="selectable_label">Your Name</span> field and choose the <span class="guibutton">Say
+            Hello</span> button, the <span class="selectable_label">Result</span> field displays
+            "Hello World" and the name you have entered.
+      </p> 
+        
+      <p>To reach this goal, you will proceed as follows:</p> 
+        
+      <ol> 
+            
+         <li> 
+                
+            <p class="initem">You will first create a new Application Designer project.</p> 
+               
+         </li> 
+            
+         <li> 
+                
+            <p class="initem">You will then use Application Designer's Layout Painter to create the following layout:</p> 
+                 
+                
+            <p><img src="graphics/fs-layout-finished-natpage.png" alt="Layout" width="466" height="365"></p>
+                
+            <p class="initem"><a name="fs-about-xml"></a>This corresponds to the following XML layout:
+            </p> 
+                <pre class="verbatim">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;natpage natsource="HELLO-A"&gt;
+    &lt;titlebar name="Hello World!"&gt;
+    &lt;/titlebar&gt;
+    &lt;header withdistance="false"&gt;
+        &lt;button name="Say Hello" method="sayHello"&gt;
+        &lt;/button&gt;
+    &lt;/header&gt;
+    &lt;pagebody&gt;
+        &lt;itr takefullwidth="true"&gt;
+            &lt;hdist width="100%"&gt;
+            &lt;/hdist&gt;
+            &lt;icon image="../cisdemos/images/hello.gif"&gt;
+            &lt;/icon&gt;
+        &lt;/itr&gt;
+        &lt;rowarea name="Input Area"&gt;
+            &lt;itr&gt;
+                &lt;label name="Your name" width="100"&gt;
+                &lt;/label&gt;
+                &lt;field valueprop="name" width="200"&gt;
+                &lt;/field&gt;
+            &lt;/itr&gt;
+        &lt;/rowarea&gt;
+        &lt;rowarea name="Output Area"&gt;
+            &lt;itr&gt;
+                &lt;label name="Result" width="100"&gt;
+                &lt;/label&gt;
+                &lt;field valueprop="result" width="200" displayonly="true"&gt;
+                &lt;/field&gt;
+            &lt;/itr&gt;
+        &lt;/rowarea&gt;
+        &lt;vdist pixelheight="100"&gt;
+        &lt;/vdist&gt;
+        &lt;itr&gt;
+            &lt;label name="Input your name and press the &amp;apos;Say Hello&amp;apos; button." asplaintext="true"&gt;
+            &lt;/label&gt;
+        &lt;/itr&gt;
+    &lt;/pagebody&gt;
+    &lt;statusbar withdistance="false"&gt;
+    &lt;/statusbar&gt;
+&lt;/natpage&gt;</pre> 
+               </li> 
+            
+         <li> 
+                 
+                
+            <p class="initem">When you save your layout for the first time, an
+                    intelligent HTML page and the Natural adapter for this page are generated.
+            </p> 
+               
+         </li> 
+            
+         <li> 
+                 
+                
+            <p class="initem">Before you can start coding, you have to make specific
+                    definitions in your development environment (this tutorial assumes that you are
+                    using Natural Studio as your development environment).
+            </p> 
+               
+         </li> 
+            
+         <li> 
+                 
+                
+            <p class="initem">You will import the generated Natural adapter into your
+                    Natural library
+            </p> 
+               
+         </li> 
+            
+         <li> 
+                 
+                
+            <p class="initem">You will then create the main program which will use the
+                    adapter to display the page and which will handle the events that occur on the
+                    page, for example, when you choose the <span class="guibutton">Say Hello</span> button
+                    of your application.
+            </p> 
+               
+         </li> 
+           
+      </ol> 
+        
+      <p>You can now proceed with your first exercise:
+            <a href="fs-start.htm#fs-start">Starting the Development
+            Workplace</a>.
+      </p> 
+        
+      
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="fs-about.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../njx/fs-about.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/njx/fs-about.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="fs-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="fs-over.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="fs-start.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

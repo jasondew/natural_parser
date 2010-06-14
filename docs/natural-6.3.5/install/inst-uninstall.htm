@@ -1,0 +1,441 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Uninstalling Natural on UNIX</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="inst-uninstall"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../install/inst-uninstall.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/install/inst-uninstall.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="inst-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="inst-after.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="inst-over.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Installation on UNIX&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x14"></a>Uninstalling Natural on UNIX
+         </h1>
+      </div> 
+         
+      <p>To uninstall Natural on UNIX platforms, you are recommended to perform
+             several steps in the sequence given below. These steps are described in detail
+             in the section <a href="inst-uninstall.htm#inst-uninstall-guidelines">Guidelines for
+            Uninstalling</a> below.
+      </p> 
+         
+      <ol> 
+             
+         <li> 
+                 
+            <p class="initem">Terminate the Natural Development Servers, if there are active
+                     ones.
+            </p> 
+                
+         </li> 
+             
+         <li> 
+                 
+            <p class="initem">Shut down the Natural buffer pools, if there are active ones.</p> 
+                
+         </li> 
+             
+         <li> 
+                 
+            <p class="initem">Use the <code>SAGRM</code> utility to remove the Natural files (which
+                     have been extracted from the installation medium to your machine) and the
+                     Natural product entry in the <cite>SAGInst.xml</cite> installation
+                     catalog. 
+            </p> 
+                
+         </li> 
+             
+         <li> 
+                 
+            <p class="initem">Delete the directory <cite>$NATDIR</cite> to remove the
+                     remaining Natural files which have been created by Natural during the
+                     installation, or delete the directory <cite>$NATDIR/$NATVERS</cite> to
+                     remove only one Natural update package or patch level and keep another update
+                     package or patch level. 
+            </p> 
+                
+         </li> 
+             
+         <li> 
+                 
+            <p class="initem">Remove other Natural components: </p> 
+                 
+            <ul style="margin-top: 0px; margin-bottom: 0px;"> 
+                     
+               <li class="nesteditem"> 
+                         
+                  <p class="initem">if installed, runlevel scripts for starting/stopping the buffer pool
+                             and NDV server,
+                  </p> 
+                        
+               </li> 
+                     
+               <li class="nesteditem"> 
+                         
+                  <p class="initem">obsolete system file definitions from
+                             <cite>NATCONF.CFG</cite>,
+                  </p> 
+                        
+               </li> 
+                     
+               <li class="nesteditem"> 
+                         
+                  <p class="initem">obsolete environment settings in remaining scripts like
+                             <cite>sagenv</cite>.
+                  </p> 
+                        
+               </li> 
+                     
+               <li class="nesteditem"> 
+                         
+                  <p class="initem">if set, the link from <cite>/opt/softwareag</cite> to your
+                             <cite>$SAG</cite> directory. 
+                  </p> 
+                        
+               </li> 
+                    
+            </ul> 
+                
+         </li> 
+            
+      </ol> 
+        
+      <hr>
+      <div><a name="inst-uninstall-guidelines"></a></div> 
+         
+      <h2>Guidelines for Uninstalling</h2> 
+          
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To terminate the Natural Development Servers</strong></p>
+      <ol class="steps">
+         <li> 
+                   
+                   
+            <p class="instep">Check if there are active Natural Development Servers. To to so, you
+                       can use the following command (as "sag" user):
+            </p><pre class="command-input">ps -ef | grep natdvsrv</pre> 
+                   
+                 </li>
+         <li> 
+                   
+                   
+            <p class="instep">Terminate a NDV server with <cite>natdvsrv</cite> by
+                       specifying the port:
+            </p><pre class="command-input">natdvsrv -t=<var>port</var></pre> 
+                   
+                 </li>
+      </ol> 
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To shut down Natural buffer pools</strong></p>
+      <ol class="steps">
+         <li> 
+                   
+                   
+            <p class="instep">Stop the Natural buffer pool "NATBP" with
+                       the <a href="../ops/ops-natbpmon.htm"><code>NATBPMON</code> utility</a>: 
+            </p><pre class="command-input">natbpmon shutdown</pre> 
+                   <p class="instep">or any other buffer pool with:</p><pre class="command-input">natbpmon bp=<var>buffer-pool-name</var> shutdown</pre> 
+                   <p class="instep">No new users are allowed to use the buffer pool after the
+                       <code>shutdown</code> command. The buffer pool will be shut down,
+                       when the last user stopped using it.
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Clear the ipc resources used by the buffer pool
+                       "NATBP" with the
+                       <a href="../ops/ops-natbpmon.htm"><code>NATBPMON</code>
+                          utility</a>:
+            </p><pre class="command-input">natbpmon ipcrm</pre> 
+                   <p class="instep">or any other buffer pool with:</p><pre class="command-input">natbpmon bp=<var>buffer-pool-name</var> ipcrm</pre> 
+                   
+                 </li>
+      </ol> 
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To remove the Natural files (which have been extracted from the
+                  installation medium to your machine) and the Natural product entry in the
+                  <cite>SAGInst.xml</cite> installation catalog</strong></p>
+      <ol class="steps">
+         <li> 
+                   
+                   
+            <p class="instep">Start the <code>SAGRM</code> utility from the
+                       <cite>$SAG</cite> directory or a directory above it by issuing the
+                       following command:
+            </p><pre class="command-input">SAGRM</pre> 
+                   
+                 </li>
+         <li> 
+                   
+                   
+            <p class="instep">Select the Natural version you want to deinstall and proceed with the
+                       deinstallation.
+            </p> 
+                   
+                   
+            <p class="instep">All files which have been extracted from the installation medium are
+                       now removed and the selected product is removed from the
+                       <cite>SAGInst.xml</cite> installation catalog. 
+            </p> 
+                   
+            <p class="instep">All files which have been created by Natural in batch during the
+                       installation (for example, the <code>FNAT</code> system file) are still
+                       there.
+            </p> 
+                 
+         </li>
+      </ol> 
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To remove the remaining Natural files (which have been created by
+                  Natural during the installation)</strong></p>
+      <ul>
+         <li> 
+                   
+                   
+            <p class="instep">Remove all Natural versions by removing the
+                       <cite>$NATDIR</cite> directory. Go to the <cite>$SAG</cite>
+                       directory and issue the following command:
+            </p><pre class="command-input">rm -rf nat/</pre> 
+                   <p class="instep">or remove one of several Natural versions by removing the
+                       corresponding <cite>$NATVERS</cite> directory located in the
+                       <cite>$NATDIR</cite> directory. Go to the <cite>$SAG</cite>
+                       directory and issue the following command:
+            </p><pre class="command-input">rm -rf nat/v<var>version</var></pre> 
+                   
+                 </li>
+      </ul> 
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To remove other Natural components</strong></p>
+      <ol class="steps">
+         <li> 
+                   
+                   
+            <p class="instep">To remove start/stop procedures, go to the platform-specific
+                       directory and delete the scripts for starting/stopping the buffer pool and the
+                       Natural Development Server. For further details on the procedures and
+                       directories, refer to <a href="inst-bp.htm#inst-bp">Activating the
+                  Natural Buffer Pool on UNIX</a> and
+                       <a href="inst-ndv.htm#inst-ndv">Activating the Natural Development
+                  Server on UNIX</a>.
+            </p> 
+                   
+            <p class="instep">Examples for Solaris:</p> 
+                    
+                    
+            <table border="1" class="color" cellpadding="3" width="97%">
+               <colgroup>
+                  <col width="34%">
+                  <col width="63%">
+               </colgroup> 
+                        
+               <tbody align="left" valign="top"> 
+                            
+                  <tr> 
+                                
+                     <td>Go to the following directory:</td> 
+                                
+                     <td><pre class="command-input">cd /etc/init.d</pre></td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td>Remove script for buffer pool:</td> 
+                                
+                     <td><pre class="command-input">rm sag1nat63bp</pre>
+                                   </td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td>Remove script for Natural Development
+                        Server:
+                     </td> 
+                                
+                     <td><pre class="command-input">rm sag1ndv22srv</pre>
+                                   </td> 
+                               
+                  </tr> 
+                           
+               </tbody> 
+                       
+            </table> 
+                    
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">To remove the links to the start/stop scripts for the runlevels, go
+                       to the relevant directories and delete the links for starting/stopping the
+                       buffer pool and the Natural Development Server. For further details on the
+                       procedures and directories, refer to <a href="inst-bp.htm#inst-bp">Activating the Natural Buffer Pool on
+                  UNIX</a> and <a href="inst-ndv.htm#inst-ndv">Activating
+                  the Natural Development Server on UNIX</a>. 
+            </p> 
+                   
+            <p class="instep">Examples for Solaris:</p> 
+                    
+                    
+            <table border="1" class="color" cellpadding="3" width="97%">
+               <colgroup>
+                  <col width="34%">
+                  <col width="63%">
+               </colgroup> 
+                        
+               <tbody align="left" valign="top"> 
+                            
+                  <tr> 
+                                
+                     <td>Go to the following directory:</td> 
+                                
+                     <td><pre class="command-input">cd /etc/rc3.d</pre></td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td>Remove link for buffer pool:</td> 
+                                
+                     <td><pre class="command-input">rm K36sag1nat63bp@ S64sag1nat63bp@
+</pre>
+                                   </td> 
+                               
+                  </tr> 
+                            
+                  <tr> 
+                                
+                     <td>Remove link for Natural Development
+                        Server:
+                     </td> 
+                                
+                     <td><pre class="command-input">rm K35sag1ndv22srv@ S65sag1ndv22srv@</pre>
+                                   </td> 
+                               
+                  </tr> 
+                           
+               </tbody> 
+                       
+            </table> 
+                    
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">If you removed one Natural version only and you have one or more
+                       other Natural versions left, you may have system files defined in your global
+                       configuration file which do no longer exist (for example, the <code>FNAT</code>
+                       of the just removed Natural version). You may delete the relevant entries using
+                       the <a href="../config/cfg-over.htm">Configuration
+                          Utility</a>. 
+            </p> 
+                   
+            <p class="instep">Enter the following command to invoke the Configuration Utility:</p><pre class="command-input">natparm</pre> 
+                   <p class="instep">From the <span class="guimenu">Configuration</span> menu of the Configuration
+                       Utility, choose <span class="guimenuitem">Global Configuration File</span> and then
+                       choose the category <span class="guimenuitem">System Files</span>. You can now delete
+                       the relevant entries.
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">By default, the script <cite>sagenv.new</cite> will be
+                       generated to set up the environments for all Software AG products. If you use
+                       this script, any copy of this script or any other script to set up your Natural
+                       environment, remove the instructions which set up the Natural environment. 
+            </p>
+                   
+                   
+            <p class="instep">Example - remove an instruction such as the following:</p> 
+                   <pre class="verbatim"># Natural
+if [ -f "$SAG"/nat/v6320/INSTALL/natenv ]; then
+. "$SAG"/nat/v6320/INSTALL/natenv
+fi</pre>
+                   
+                   
+                 </li>
+         <li> 
+                   
+                   
+            <p class="instep">If you use a symbolic link from the
+                       <cite>/opt/softwareag</cite> directory to your
+                       <cite>$SAG</cite> directory to find dynamically linked executables in a
+                       shared library and if you do not need this link for other purposes, you may
+                       remove it with the following command: 
+            </p> <pre class="command-input">rm softwareag</pre> 
+                   
+                 </li>
+      </ol> 
+         
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="inst-uninstall.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../install/inst-uninstall.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/install/inst-uninstall.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="inst-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="inst-after.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="inst-over.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

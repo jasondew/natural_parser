@@ -1,0 +1,529 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>*TRIM - Remove Leading and/or Trailing Blanks</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="func_trim" id="7036"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../func/func_trim.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/func/func_trim.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="func_string.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="func_transl.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="func-over.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;System Functions&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+         
+      <div class="nospytext">
+         <h1> 
+                <a name="x31"></a>*TRIM - Remove Leading and/or Trailing Blanks
+         </h1>
+      </div> 
+          
+           
+           
+      <table border="0" class="syntax" cellpadding="3"> 
+                
+                
+                
+                
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td rowspan="2"> <a href="func_trim.htm#function_func_trim">
+                      <code class="keyword">*TRIM</code></a> <code class="keyword">(</code><a href="func_trim.htm#nokeyword"><var>operand</var></a> 
+               </td> 
+                       
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/sbo2.gif" alt="" width="5" height="40"></p> 
+               </td> 
+                       
+               <td rowspan="2">,</td> 
+                       
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/cbo2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                       
+               <td> <a href="func_trim.htm#leading"> <code class="keyword">LEADING</code></a> 
+               </td> 
+                       
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/cbc2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                       
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/sbc2.gif" alt="" width="5" height="40"></p> 
+               </td> 
+                       
+               <td rowspan="2"> <code class="keyword">)</code> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a href="func_trim.htm#trailing"> <code class="keyword">TRAILING</code></a> 
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>Format/length: same as <var>operand</var> (A or
+              B)/DYNAMIC.
+      </p> 
+          
+      <p>This document covers the following topics:</p>
+          
+      <ul>
+         <li>
+            <p class="initem"><a href="func_trim.htm#function_func_trim">Function</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="func_trim.htm#syntax_descr_trim">Syntax Description</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="func_trim.htm#example_func_trim">Examples</a></p>
+         </li>
+      </ul> 
+         
+      <hr> 
+         
+      <div><a name="function_func_trim"></a></div> 
+          
+      <h2> Function</h2> 
+           
+           
+      <p>The Natural system function <code>*TRIM</code> removes all leading
+               and/or trailing blanks from an alphanumeric or a binary string. The content of
+               <var>operand</var> is not modified. When using a dynamic
+               variable as <var>operand</var>, the length of this variable is
+               adapted according to the result.
+      </p> 
+           
+      <p>The <code>*TRIM</code> system function may be specified as an
+               <var>operand</var> in any position of a statement wherever an
+               <var>operand</var> of format A or B is allowed.
+      </p> 
+           
+      <p>However, <code>*TRIM</code> must not be used where a target variable is
+               expected. You may not nest <code>*TRIM</code> in a system function.
+      </p> 
+           
+         
+         
+      <div class="noprint">
+         <p><a href="func_trim.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="syntax_descr_trim"></a></div> 
+          
+      <h2> Syntax Description</h2> 
+           
+           
+      <p><a name="operand1"></a> Operand Definition Table:
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                 
+                 
+                 
+                
+                 
+                 
+                 
+                
+                  
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>Operand</th> 
+                        
+               <th colspan="5" align="center">
+                  <a href="../sm/synsym.htm#statem_poss_struct">Possible
+                       Structure</a> 
+               </th> 
+                        
+               <th colspan="13" align="center">
+                  <a href="../sm/synsym.htm#statem_poss_form">Possible Formats</a>
+                            
+               </th> 
+                        
+               <th align="center">
+                  <a href="../sm/synsym.htm#statem_ref_perm">Referencing
+                       Permitted</a> 
+               </th> 
+                        
+               <th align="center">
+                  <a href="../sm/synsym.htm#statem_dyn_def">Dynamic Definition</a>
+                            
+               </th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> <var>operand</var> 
+               </td> 
+                        
+               <td>C</td> 
+                        
+               <td>S</td> 
+                        
+               <td>A</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>A</td> 
+                        
+               <td>U</td> 
+                        
+               <td>B</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">&nbsp;</td> 
+                        
+               <td align="center">yes</td> 
+                        
+               <td align="center">no</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>Syntax Element Description:</p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>Keyword</th> 
+                        
+               <th>Description</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td><a name="leading"></a><code>LEADING</code></td> 
+                        
+               <td>Removes leading blanks from
+                  <var>operand</var>, when using the keyword <code>LEADING</code>
+                            as a second argument. 
+                            <pre class="verbatim">*TRIM(..., LEADING)</pre></td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><a name="trailing"></a><code>TRAILING</code></td> 
+                        
+               <td>Removes trailing blanks from
+                  <var>operand</var>, when using the keyword
+                            <code>TRAILING</code> as a second argument. 
+                            <pre class="verbatim">*TRIM(..., TRAILING)</pre></td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><a name="nokeyword"></a>
+                  <code><var>operand</var></code></td> 
+                        
+               <td>If operand is not followed by a keyword: 
+                  
+                  <p><code>TRIM</code> removes leading and trailing blanks from
+                                <var>operand</var>, when not using a keyword as a second
+                                argument. 
+                  </p> 
+                            <pre class="verbatim">*TRIM(...)</pre> 
+                            <p class="note"><strong>Note:</strong><br><var>operand</var> behaves differently when
+                                removing trailing blanks depending on whether it used as a static or dynamic
+                                variable. If <var>operand</var> is a static variable, it is not
+                                possible to remove trailing blanks using <code>*TRIM</code>. This is because
+                                for static variables, the remaining trailing positions of the variable memory
+                                are filled with space characters. However, it is possible to remove trailing
+                                blanks when using dynamic variables.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+         
+         
+      <div class="noprint">
+         <p><a href="func_trim.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="example_func_trim"></a></div> 
+          
+      <h2> Examples</h2> 
+           
+           
+      <p>The following examples are provided
+               below:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="func_trim.htm#trim_exa1">Example 1 - Using an Alphanumeric Argument</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="func_trim.htm#trim_exa2">Example 2 - Using a Binary Argument</a></p>
+         </li>
+      </ul>
+      <div><a name="trim_exa1"></a></div> 
+           
+      <h3>Example 1 - Using an Alphanumeric Argument</h3> 
+            
+            <pre class="verbatim">DEFINE DATA LOCAL
+/*******************************
+/* STATIC VARIABLE DEFINITIONS
+/*******************************
+1 #SRC  (A15) INIT &lt;'  ab  CD  '&gt;
+1 #DEST (A15)
+
+/* FOR PRINT OUT WITH DELIMITERS
+1 #SRC-PRN  (A20)
+1 #DEST-PRN (A20)
+
+/*******************************
+/* DYNAMIC VARIABLE DEFINITIONS
+/*******************************
+1 #DYN-SRC (A)DYNAMIC INIT &lt;'  ab  CD  '&gt;
+1 #DYN-DEST (A)DYNAMIC
+
+/* FOR PRINT OUT WITH DELIMITERS
+1 #DYN-SRC-PRN  (A)DYNAMIC
+1 #DYN-DEST-PRN (A)DYNAMIC
+
+END-DEFINE
+
+PRINT 'static variable definition:'
+PRINT '---------------------------'
+COMPRESS FULL ':' #SRC ':' TO #SRC-PRN LEAVING NO SPACE
+PRINT ' '
+PRINT ' 123456789012345      123456789012345'
+
+MOVE *TRIM(#SRC, LEADING) TO #DEST
+COMPRESS FULL ':' #DEST ':' TO #DEST-PRN LEAVING NO SPACE
+DISPLAY #SRC-PRN #DEST-PRN '*TRIM(#SRC, LEADING)'
+
+MOVE *TRIM(#SRC, TRAILING) TO #DEST
+COMPRESS FULL ':' #DEST ':' TO #DEST-PRN LEAVING NO SPACE
+DISPLAY #SRC-PRN #DEST-PRN '*TRIM(#SRC, TRAILING)'
+
+MOVE *TRIM(#SRC) TO #DEST
+COMPRESS FULL ':' #DEST ':' TO #DEST-PRN LEAVING NO SPACE
+DISPLAY #SRC-PRN #DEST-PRN '*TRIM(#SRC)'
+
+PRINT ' '
+PRINT 'dynamic variable definition:'
+PRINT '----------------------------'
+COMPRESS FULL ':' #DYN-SRC ':' TO #DYN-SRC-PRN LEAVING NO SPACE
+PRINT ' '
+PRINT ' 1234567890           12345678'
+
+MOVE *TRIM(#DYN-SRC, LEADING) TO #DYN-DEST
+COMPRESS FULL ':' #DYN-DEST ':' TO #DYN-DEST-PRN LEAVING NO SPACE
+DISPLAY (AL=20) #DYN-SRC-PRN #DYN-DEST-PRN '*TRIM(#SRC, LEADING)'
+
+MOVE *TRIM(#DYN-SRC, TRAILING) TO #DYN-DEST
+COMPRESS FULL ':' #DYN-DEST ':' TO #DYN-DEST-PRN LEAVING NO SPACE
+DISPLAY (AL=20) #DYN-SRC-PRN #DYN-DEST-PRN '*TRIM(#SRC, TRAILING)'
+
+MOVE *TRIM(#DYN-SRC) TO #DYN-DEST
+COMPRESS FULL ':' #DYN-DEST ':' TO #DYN-DEST-PRN LEAVING NO SPACE
+DISPLAY (AL=20) #DYN-SRC-PRN #DYN-DEST-PRN '*TRIM(#SRC)'
+
+PRINT ' '
+PRINT '":" := delimiter character to show the start and ending of a string!'
+END</pre> 
+            <p>Output of example 1:</p> <pre class="system-output">#SRC-PRN             #DEST-PRN
+-------------------- -----------------------
+
+static variable definition:
+----------------------------
+
+ 123456789012345         123456789012345
+:  ab  CD       :       :ab  CD         :     *TRIM(#SRC, LEADING)
+:  ab  CD       :       :  ab  CD       :     *TRIM(#SRC, TRAILING)
+:  ab  CD       :       :ab  CD         :     *TRIM(#SRC)
+
+dynamic variable definition:
+----------------------------
+
+ 1234567890              12345678
+:  ab  CD  :            :ab  CD  :            *TRIM(#SRC, LEADING)
+:  ab  CD  :            :  ab  CD:            *TRIM(#SRC, TRAILING)
+:  ab  CD  :            :ab  CD:              *TRIM(#SRC)
+
+':' := delimiter character to show the start and ending of a string!</pre> 
+           <div><a name="trim_exa2"></a></div> 
+           
+      <h3> Example 2 - Using a Binary Argument</h3> 
+            
+            <pre class="verbatim">DEFINE DATA LOCAL
+/*******************************
+/* STATIC VARIABLE DEFINITIONS
+/*******************************
+1 #SRC  (B10) INIT &lt;H'2020FFFF2020FFFF2020'&gt;
+1 #DEST (B10)
+
+/*******************************
+/* DYNAMIC VARIABLE DEFINITIONS
+/*******************************
+1 #DYN-SRC (B)DYNAMIC INIT &lt;H'2020FFFF2020FFFF2020'&gt;
+1 #DYN-DEST (B)DYNAMIC
+END-DEFINE
+
+FORMAT LS=100
+
+PRINT 'static variable definition:
+PRINT '---------------------------'
+MOVE *TRIM(#SRC, LEADING) TO #DEST
+PRINT #SRC #DEST '*TRIM(#SRC, LEADING)'
+
+MOVE *TRIM(#SRC, TRAILING) TO #DEST
+PRINT #SRC #DEST '*TRIM(#SRC, TRAILING)'
+
+MOVE *TRIM(#SRC) TO #DEST
+PRINT #SRC #DEST '*TRIM(#SRC)'
+
+PRINT ' '
+PRINT 'dynamic variable definition:'
+PRINT '----------------------------'
+
+MOVE *TRIM(#DYN-SRC, LEADING) TO #DYN-DEST
+PRINT #DYN-SRC #DYN-DEST '    *TRIM(#SRC, LEADING)'
+
+MOVE *TRIM(#DYN-SRC, TRAILING) TO #DYN-DEST
+PRINT #DYN-SRC #DYN-DEST '    *TRIM(#SRC, TRAILING)'
+
+MOVE *TRIM(#DYN-SRC) TO #DYN-DEST
+PRINT #DYN-SRC #DYN-DEST '        *TRIM(#SRC)'
+
+PRINT ' '
+
+PRINT 'hex."20" := space character'
+END</pre> 
+            <p>Output of example 2:</p> <pre class="system-output">static variable definition:
+----------------------------
+
+2020FFFF2020FFFF2020 0000FFFF2020FFFF2020     *TRIM(#src, leading)
+2020FFFF2020FFFF2020 00002020FFFF2020FFFF     *TRIM(#src, trailing)
+2020FFFF2020FFFF2020 00000000FFFF2020FFFF     *TRIM(#src)
+
+dynamic variable definition:
+----------------------------
+
+2020FFFF2020FFFF2020 FFFF2020FFFF2020         *TRIM(#src, leading)
+2020FFFF2020FFFF2020 2020FFFF2020FFFF         *TRIM(#src, trailing)
+2020FFFF2020FFFF2020 FFFF2020FFFF             *TRIM(#src)
+
+hex.'20' := space character</pre> 
+           
+        <div class="noprint">
+         <div class="nospy">
+            <p><a href="func_trim.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../func/func_trim.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/func/func_trim.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="func_string.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="func_transl.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="func-over.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

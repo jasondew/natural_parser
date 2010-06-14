@@ -1,0 +1,514 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>SCHEDULELINE</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="scheduleline"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../njx/scheduleline.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/njx/scheduleline.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="workingwithcontrols.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="radiobutton.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="slider.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Natural for Ajax&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x79"></a>SCHEDULELINE
+         </h1>
+      </div> 
+         
+         
+      <p>The SCHEDULELINE control is used to define screens like the
+             following:
+      </p> 
+      <p><img src="graphics/image099.png" alt="graphics/image099.png" width="618" height="294"></p> 
+         
+      <p>You can display a certain sequence of items, each item holding a text, a
+             color value, a size and an identifier. When clicking on an item, a certain
+             event is sent to your adapter and the ID of the selected
+             item is returned to perform activities in your program.
+      </p> 
+         
+      <p>The following topics are covered
+             below:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="scheduleline.htm#scheduleline-props">Properties</a></p>
+         </li>
+      </ul>
+      <hr> 
+        
+        
+      <div><a name="scheduleline-props"></a></div> 
+         
+      <h2>Properties</h2> 
+               
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="14%">
+            <col width="55%">
+            <col width="14%">
+            <col width="14%">
+         </colgroup>      
+         <tbody align="left" valign="top">       
+            <tr>        
+               <td colspan="4">Basic</td>      
+            </tr>
+            <tr>        
+               <td align="left" valign="top">valueprop</td>        
+               <td align="left" valign="top">
+                  <p>Name of the adapter parameter that represents the control in the adapter.</p>
+                  <p></p>
+                  <p>It returns a semicolon separated list of schedule items. Each item is represented by a color, a width, a text and a selection
+                     id. The width is not a pixel width but represents a "portion" that this schedule item represents.
+                  </p>
+                  <p></p>
+                  <p>Example: #FF0000\"1000;Text 1;1;#00FF00;500;Text 2;2</p>
+                  <p></p>
+                  <p>The total "logical width" is 1500. The firts item occupies 2/3 of the width, the right item occupies 1/3 of the width.</p>
+                  <p></p>
+                  <p>The selection is required in case you want to react on user selections. If a user clicks onto one schedule item then the adapter
+                     is notified by a certain event - the id of the schedule item is passed as reference. Please have a look into the corresponding
+                     property descriptions.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Obligatory</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">width</td>        
+               <td align="left" valign="top">
+                  <p>Width of the control.</p>
+                  <p></p>
+                  <p>There are three possibilities to define the width:</p>
+                  <p></p>
+                  <p>(A) You do not define a width at all. In this case the width of the control will either be a default width or - in case of
+                     container controls - it will follow the width that is occupied by its content.
+                  </p>
+                  <p>(B) Pixel sizing: just input a number value (e.g. "100").</p>
+                  <p>(C) Percentage sizing: input a percantage value (e.g. "50%"). Pay attention: percentage sizing will only bring up correct
+                     results if the parent element of the control properly defines a width this control can reference. If you specify this control
+                     to have a width of 50% then the parent element (e.g. an ITR-row) may itself define a width of "100%". If the parent element
+                     does not specify a width then the rendering result may not represent what you expect.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Obligatory</td>        
+               <td align="left" valign="top">
+                  <p>100</p>
+                  <p>120</p>
+                  <p>140</p>
+                  <p>160</p>
+                  <p>180</p>
+                  <p>200</p>
+                  <p>50%</p>
+                  <p>100%</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">pixelheight</td>        
+               <td align="left" valign="top">
+                  <p>Height of the control in pixels.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">comment</td>        
+               <td align="left" valign="top">
+                  <p>Comment without any effect on rendering and behaviour. The comment is shown in the layout editor's tree view.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td colspan="4">Appearance</td>      
+            </tr>
+            <tr>        
+               <td align="left" valign="top">width</td>        
+               <td align="left" valign="top">(already explained above)</td>        
+               <td align="left" valign="top">&nbsp;</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">pixelheight</td>        
+               <td align="left" valign="top">(already explained above)</td>        
+               <td align="left" valign="top">&nbsp;</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">pixelsizemode</td>        
+               <td align="left" valign="top">
+                  <p>A schedule line consists of sections, each one rendered with a certain width. By default the width does not represent a pixel
+                     value but represents a logical size. The width of the section depends on the logical size of one section compared with the
+                     logical size of the other sections.
+                  </p>
+                  <p></p>
+                  <p>When switching this property to "true" then the size of the sections are interpreted as real pixel values.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>true</p>
+                  <p>false</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">cellalign</td>        
+               <td align="left" valign="top">
+                  <p>Horizontal alignment of the text inside the control's schedule items.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>left</p>
+                  <p>center</p>
+                  <p>right</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">cellvalign</td>        
+               <td align="left" valign="top">
+                  <p>Vertical alignement of the text inside the control's schedule items.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>top</p>
+                  <p>middle</p>
+                  <p>bottom</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">cellstyle</td>        
+               <td align="left" valign="top">
+                  <p>Style that is used inside the schedule item cells. Can be any CSS style.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>background-color: #FF0000</p>
+                  <p>color: #0000FF</p>
+                  <p>font-weight: bold</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">cellnowrap</td>        
+               <td align="left" valign="top">
+                  <p>If switched to "true" then the text inside the schedule item cells is not broken if exceeding the size of the control - the
+                     text is cut instead.
+                  </p>
+                  <p></p>
+                  <p>Default is "false".</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>true</p>
+                  <p>false</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">valign</td>        
+               <td align="left" valign="top">
+                  <p>Vertical alignment of control in its column.</p>
+                  <p></p>
+                  <p>Each control is "packaged" into a column. The column itself is part of a row (e.g. ITR or TR). Sometimtes the size of the
+                     column is bigger than the size of the control. In this case the "align" property specify the position of the control inside
+                     the column.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>top</p>
+                  <p>middle</p>
+                  <p>bottom</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">colspan</td>        
+               <td align="left" valign="top">
+                  <p>Column spanning of control.</p>
+                  <p></p>
+                  <p>If you use TR table rows then you may sometimes want to control the number of columns your control occupies. By default it
+                     is "1" - but you may want to define the control to span over more than one columns.
+                  </p>
+                  <p></p>
+                  <p>The property only makes sense in table rows that are snychronized within one container (i.e. TR, STR table rows). It does
+                     not make sense in ITR rows, because these rows are explicitly not synched.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>1</p>
+                  <p>2</p>
+                  <p>3</p>
+                  <p>4</p>
+                  <p>5</p>
+                  <p>50</p>
+                  <p>int-value</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">rowspan</td>        
+               <td align="left" valign="top">
+                  <p>Row spanning of control.</p>
+                  <p></p>
+                  <p>If you use TR table rows then you may sometimes want to control the number of rows your control occupies. By default it is
+                     "1" - but you may want to define the control two span over more than one columns.
+                  </p>
+                  <p></p>
+                  <p>The property only makes sense in table rows that are snychronized within one container (i.e. TR, STR table rows). It does
+                     not make sense in ITR rows, because these rows are explicitly not synched.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>1</p>
+                  <p>2</p>
+                  <p>3</p>
+                  <p>4</p>
+                  <p>5</p>
+                  <p>50</p>
+                  <p>int-value</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">crosslineids</td>        
+               <td align="left" valign="top">
+                  <p>Flag (true | false) that indicates that cells of different lines (within ROWTABLEAREA2) does not have same ids. If set to
+                     false the control is able to detect and skip unnecessary re-draws (performance).
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>true</p>
+                  <p>false</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">tablestyle</td>        
+               <td align="left" valign="top">
+                  <p>CSS style definition that is directly passed into this control.</p>
+                  <p></p>
+                  <p>With the style you can individually influence the rendering of the control. You can specify any style sheet expressions. Examples
+                     are:
+                  </p>
+                  <p></p>
+                  <p>border: 1px solid #FF0000</p>
+                  <p>background-color: #808080</p>
+                  <p></p>
+                  <p>You can combine expressions by appending and separating them with a semicolon.</p>
+                  <p></p>
+                  <p>Sometimes it is useful to have a look into the generated HTML code in order to know where direct style definitions are applied.
+                     Press right mouse-button in your browser and select the "View source" or "View frame's source" function.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>background-color: #FF0000</p>
+                  <p>color: #0000FF</p>
+                  <p>font-weight: bold</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td colspan="4">Binding</td>      
+            </tr>
+            <tr>        
+               <td align="left" valign="top">valueprop</td>        
+               <td align="left" valign="top">(already explained above)</td>        
+               <td align="left" valign="top">&nbsp;</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">selectmethod</td>        
+               <td align="left" valign="top">
+                  <p>Name of the event that is sent to the adapter when the user selects one schedule item with the mouse.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">selscheduleprop</td>        
+               <td align="left" valign="top">
+                  <p>Name of an adapter parameter in which the id of the selected schedule item is passed.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">seltypeprop</td>        
+               <td align="left" valign="top">
+                  <p>Name of an adapter parameter that is used in the following way:</p>
+                  <p></p>
+                  <p>If the user selects an item it can also be determined, if the item is selected by the left or by the right mouse button. In
+                     case the user uses the left mouse button, the value LEFT is passed into the property, which is referenced by the SELTYPEPROP
+                     property. In case the user uses the right mouse button, the value RIGHT is passed.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">preselectmode</td>        
+               <td align="left" valign="top">
+                  <p>If set to "true" then schedule items holding an id can be "preselected": the user can click on a schedule item and it is "grayed"
+                     as consequence - without directly calling the selection method. The selection method is called when double clicking onto the
+                     schedule item.
+                  </p>
+                  <p></p>
+                  <p>Default is "false". </p>
+                  <p></p>
+                  <p>The reaction of the control when clicking with the right mouse button remains untouched: still the selection method is called
+                     by a single right mouse button click.
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>true</p>
+                  <p>false</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td colspan="4">Vertical</td>      
+            </tr>
+            <tr>        
+               <td align="left" valign="top">verticalschedule</td>        
+               <td align="left" valign="top">
+                  <p>Flag that indicates if the line is rendered vertically. Default is false.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>true</p>
+                  <p>false</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">tooltipprop</td>        
+               <td align="left" valign="top">
+                  <p>Name of an adapter parameter that contains the comma separated list of help texts that are displayed on mouse over (tooltip).</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">imageprop</td>        
+               <td align="left" valign="top">
+                  <p>Name of an adapter parameter that returns a comma separated string of image URLs. An URL either is an absolute URL or a relative
+                     URL. If using a relative URL then be aware of that the generated page is located directly inside your project's directory.
+                  </p>
+                  <p>Example: "images/green.gif;;red.gif"</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">imageorientation</td>        
+               <td align="left" valign="top">
+                  <p>Flag that indicates to render the image at the left or right hand of the text.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">
+                  <p>left</p>
+                  <p>right</p>
+                  <p></p>
+               </td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">dropinfoprop</td>        
+               <td align="left" valign="top">
+                  <p>Name of the adapter parameter to that the id of the dragged cell is set. Do not use this property if you do not want to support
+                     drag and drop within the SCHEDULELINE. The server side property needs to be of type "String".
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">onmovemethod</td>        
+               <td align="left" valign="top">
+                  <p>Name of the event that is sent to the adapter on drop of one cell (source) over another cell (target). Use property DROPINFOPROP
+                     to get the id of the dragged cell (source). Use SELSCHEDULEPROP to get the id of the cell that got the drop (target).
+                  </p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>
+            <tr>        
+               <td align="left" valign="top">controlkeyprop</td>        
+               <td align="left" valign="top">
+                  <p>Name of an adapter parameter to that the information is set whether the user pressed the CTRL key when selecting a cell.</p>
+               </td>        
+               <td align="left" valign="top">Optional</td>        
+               <td align="left" valign="top">&nbsp;</td>       
+            </tr>      
+         </tbody>     
+      </table>     
+          
+        
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="scheduleline.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../njx/scheduleline.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/njx/scheduleline.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="workingwithcontrols.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="radiobutton.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="slider.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

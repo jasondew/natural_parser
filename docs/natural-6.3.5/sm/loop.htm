@@ -1,0 +1,248 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>LOOP</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="loop" id="16823"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../sm/loop.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/sm/loop.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="sm-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="limit.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="method.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Statements&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> LOOP 
+               <a name="x117"></a></h1>
+      </div> 
+         
+          
+          
+      <table border="0" class="syntax" cellpadding="3">  
+              
+         <tbody align="left" valign="top"> 
+                  
+            <tr> 
+                      
+               <td> [<code class="keyword">CLOSE</code>]&nbsp;<code class="keyword">LOOP</code>&nbsp;[<a href="loop.htm#r_loop">(<var>r</var>)</a>] &nbsp;&nbsp;&nbsp; 
+               </td> 
+                     
+            </tr> 
+                 
+         </tbody> 
+             
+      </table> 
+          
+         
+      <p>This document covers the following topics:</p>
+         
+      <ul>
+         <li>
+            <p class="initem"><a href="loop.htm#Function_loop">Function</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="loop.htm#Restrictions_loop">Restriction</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="loop.htm#syntax_descr_loop">Syntax Description</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="loop.htm#loop_exa">Examples</a></p>
+         </li>
+      </ul> 
+        
+      <hr> 
+        
+      <div><a name="Function_loop"></a></div> 
+         
+      <h2> Function </h2> 
+          
+          
+      <p>The <code>LOOP</code> statement is used to close a processing loop. It
+              causes processing of the current pass through the loop to be terminated and
+              control to be returned to the beginning of the processing loop.
+      </p> 
+          
+      <p>When the processing loop for which the <code>LOOP</code> statement is
+              issued is terminated (that is, when all records have been processed or
+              iterations have been performed), execution continues with the statement after
+              the <code>LOOP</code> statement.
+      </p> 
+          
+         
+      <div><a name="Database_Variable_References"></a></div> 
+          
+      <h3> Database Variable References </h3> 
+           
+           
+      <p>A <code>LOOP</code> statement, in addition to closing a processing
+               loop, will eliminate all field references to <a href="find.htm#find"><code>FIND</code></a>, <a href="find.htm#FIND_FIRST"><code>FIND FIRST</code></a>,
+               <a href="find.htm#FIND_FIRST"><code>FIND UNIQUE</code></a>,
+               <a href="read.htm#read"><code>READ</code></a> and
+               <a href="get.htm#get"><code>GET</code></a> statements contained
+               within the loop.
+      </p> 
+           
+      <p>A field within a view may be referenced outside the processing loop by
+               using the view name as a qualifier.
+      </p> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="loop.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Restrictions_loop"></a></div> 
+         
+      <h2> Restriction </h2> 
+          
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">This statement is for reporting mode only.</p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">A <code>LOOP</code> statement may not be specified based on a
+                      conditional statement such as <a href="if.htm#if"><code>IF</code></a> or <a href="atbreak.htm#atbreak"><code>AT BREAK</code></a>.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="loop.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="syntax_descr_loop"></a></div> 
+         
+      <h2>Syntax Description</h2> 
+          
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th nowrap>LOOP <a name="r_loop"></a>(<var>r</var>) 
+               </th> 
+                       
+               <td> 
+                  
+                  <div><strong class="floating-title"> Statement Reference Notation: </strong></div> 
+                           
+                  <p>The <code>LOOP</code> statement may be specified with a statement
+                               label or reference number (<a href="../pg/pg_defi_dv.htm#SR_Notation_r">notation
+                                  <code>(<var>r</var>)</code></a>), in which case all
+                     inner loops up to and including the loop initiated by the statement referenced
+                               will be closed. If no statement reference is specified, the innermost active
+                               processing loop will be closed.
+                  </p> 
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p class="note"><strong>Note:</strong><br>In reporting mode, any processing loop which is currently active,
+              that is, which has not explicitly been closed with a <code>LOOP</code>
+              statement, will be closed automatically by an <a href="end.htm#end"><code>END</code></a> statement.
+      </p>
+          
+        
+        
+      <div class="noprint">
+         <p><a href="loop.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="loop_exa"></a></div> 
+         
+      <h2> Examples </h2> 
+          
+          
+      <div><a name="Example_1_loop"></a></div>
+      <h4 class="floating-title"> Example 1 </h4> 
+          <pre class="verbatim">FIND ...
+  READ ...
+    READ ...
+LOOP (0010)    /* closes all loops</pre> 
+          <div><a name="Example_2_loop"></a></div>
+      <h4 class="floating-title"> Example 2 </h4> 
+          <pre class="verbatim">FIND ...
+  READ ...
+    READ ...
+    LOOP       /* closes loop initiated on line 0030  
+  LOOP         /* closes loop initiated on line 0020
+LOOP           /* closes loop initiated on line 0010</pre> 
+          
+        
+       <div class="noprint">
+         <div class="nospy">
+            <p><a href="loop.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../sm/loop.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/sm/loop.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="sm-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="limit.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="method.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

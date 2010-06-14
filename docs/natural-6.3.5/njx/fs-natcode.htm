@@ -1,0 +1,541 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Creating the Natural Code</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="fs-natcode"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../njx/fs-natcode.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/njx/fs-natcode.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="fs-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="fs-setupnjx.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="fs-background.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Natural for Ajax&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+       
+      <div class="nospytext">
+         <h1>Creating the Natural Code</h1>
+      </div> 
+        
+      <p>This document contains the following
+            exercises:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="fs-natcode.htm#fs-natcode-import">Importing the Adapter into Natural</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="fs-natcode.htm#fs-natcode-main">Creating the Main Program</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="fs-natcode.htm#fs-natcode-test">Testing the Completed Application</a></p>
+         </li>
+      </ul>
+      <hr> 
+       
+      <div><a name="fs-natcode-import"></a></div> 
+        
+      <h2>Importing the Adapter into Natural</h2> 
+         
+         
+      <p>You will now import the generated adapter into Natural to make it
+             available to your application.
+      </p> 
+         
+      <p>When you saved your page layout, Application Designer created the Natural adapter
+             <code>HELLO-A</code> for your page. This is the name that you have specified
+             earlier in this tutorial. Your application program will use the adapter to
+             communicate with the page. The adapter has been generated into the following
+             directory: 
+      </p> 
+         
+      <p><cite><var>&lt;installdir&gt;</var>/cisnatfirst/nat</cite></p>
+         
+         
+      <p class="note"><strong>Note:</strong><br>The location of <var>&lt;installdir&gt;</var> depends
+             on your application server environment.
+      </p> 
+         
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To import the adapter</strong></p>
+      <ol class="steps">
+         <li> 
+                  
+                  
+            <p class="instep">Import the adapter source into the Natural library
+                      <code>CISHELLO</code> which you have created earlier in this tutorial. To do
+                      so, use either drag-and-drop or the import function of the <code>SYSMAIN</code>
+                      utility.
+            </p> 
+                  
+                  
+            <p class="instep">The adapter looks as follows:</p> 
+                  <pre class="verbatim">* PAGE1: PROTOTYPE       --- CREATED BY Application Designer --- /*&lt;RO&gt;&gt;
+* PROCESS PAGE USING 'XXXXXXXX' WITH
+* NAME RESULT
+DEFINE DATA PARAMETER
+1 NAME (U) DYNAMIC
+1 RESULT (U) DYNAMIC
+END-DEFINE
+*
+PROCESS PAGE U'/cisnatfirst/helloworld' WITH
+PARAMETERS
+ NAME U'name'
+  VALUE NAME
+ NAME U'result'
+  VALUE RESULT
+END-PARAMETERS
+*
+*  TODO: Copy to your calling program and implement.
+/*/*( DEFINE EVENT HANDLER
+* DECIDE ON FIRST *PAGE-EVENT
+*  VALUE U'nat:page.end'
+*   /* Page closed.
+*   IGNORE
+*  VALUE U'sayHello'
+*   /* TODO: Implement event code.
+*   PROCESS PAGE UPDATE FULL
+*  NONE VALUE
+*   /* Unhandled events.
+*   PROCESS PAGE UPDATE
+* END-DECIDE
+/*/*) END-HANDLER
+*
+END /*&lt;&lt;RO&gt;</pre> 
+                  
+                </li>
+         <li> 
+                  
+                  
+            <p class="instep">Stow the adapter.</p> 
+                  
+                
+         </li>
+      </ol> 
+        
+       
+      <div class="noprint">
+         <p><a href="fs-natcode.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="fs-natcode-main"></a></div> 
+        
+      <h2>Creating the Main Program</h2> 
+         
+         
+      <p>You will now create the main program which uses the adapter to display
+             the page and which handles its events. The name of the program will be
+             <code>HELLO-P</code> and you will store it in the library
+             <code>CISHELLO</code>.
+      </p> 
+         
+      <p>This description assumes that you are working with Natural Studio.</p> 
+         
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To create the main program</strong></p>
+      <ol class="steps">
+         <li> 
+                  
+                  
+            <p class="instep">Make sure that the library <code>CISHELLO</code> is selected.
+            </p> 
+                  
+                
+         </li>
+         <li> 
+                  
+                  
+            <p class="instep">From the <span class="guimenu">Object</span> menu, choose <span class="guimenuitem">New &gt;
+                  Program</span>.
+            </p> 
+                  
+                
+         </li>
+         <li> 
+                  
+                  
+            <p class="instep">Enter a <code>DEFINE DATA</code> statement: 
+            </p> 
+                  <pre class="verbatim">DEFINE DATA LOCAL
+END-DEFINE</pre> 
+                  
+                </li>
+         <li> 
+                  
+                  
+            <p class="instep">Import the adapter interface into the <code>DEFINE DATA</code>
+                      statement: 
+            </p> 
+                  
+            <ol> 
+                      
+               <li> 
+                          
+                  <p class="initem">Place the cursor in <code>END-DEFINE</code>.
+                  </p> 
+                         
+               </li> 
+                      
+               <li> 
+                          
+                  <p class="initem">From the <span class="guimenu">Program</span> menu, choose
+                              <span class="guimenuitem">Import</span>.
+                  </p> 
+                         
+               </li> 
+                      
+               <li> 
+                          
+                  <p class="initem">In the resulting dialog box, select the <span class="selectable_label">Adapter</span>
+                              option button.
+                  </p> 
+                         
+               </li> 
+                      
+               <li> 
+                          
+                  <p class="initem">Select the object <code>HELLO-A</code>.
+                  </p> 
+                         
+               </li> 
+                      
+               <li> 
+                          
+                  <p class="initem">Select all importable data fields.</p> 
+                         
+               </li> 
+                      
+               <li> 
+                          
+                  <p class="initem">Choose the <span class="guibutton">Import</span> button.
+                  </p> 
+                         
+               </li> 
+                     
+            </ol> 
+                  
+                  
+            <p class="instep">The result is your completed <code>DEFINE DATA</code> statement:
+            </p> 
+                  <pre class="verbatim">DEFINE DATA LOCAL
+<strong>1 NAME (A) DYNAMIC
+1 RESULT (A) DYNAMIC</strong>
+END-DEFINE</pre> 
+                </li>
+         <li> 
+                  
+                  
+            <p class="instep">Enter the <code>PROCESS PAGE</code> statement. The statement uses the
+                      page adapter to display the page in the web browser and to pass data to the
+                      controls on the page:
+            </p> 
+                  <pre class="verbatim">DEFINE DATA LOCAL
+1 NAME (A) DYNAMIC
+1 RESULT (A) DYNAMIC
+END-DEFINE
+*
+<strong>PROCESS PAGE USING 'HELLO-A'
+WITH NAME RESULT</strong></pre> 
+                  
+                </li>
+         <li> 
+                  
+                  
+            <p class="instep">Initialize the page data. In the page layout definition, the property
+                      <code>name</code> has been bound to the FIELD control with the
+                      label <span class="selectable_label">Your Name</span>. For the property
+                      <code>name</code>, a parameter <code>NAME</code> has been
+                      generated into the parameter data area of the adapter. Thus, in order to preset
+                      the FIELD control, we will preset the variable <code>NAME</code> with the value
+                      "Application Designer". 
+            </p> 
+                  <pre class="verbatim">DEFINE DATA LOCAL
+1 NAME (A) DYNAMIC
+1 RESULT (A) DYNAMIC
+END-DEFINE
+*
+<strong>NAME := 'Application Designer'</strong>
+PROCESS PAGE USING 'HELLO-A'
+WITH NAME RESULT</pre> 
+                 
+                  
+                </li>
+         <li> 
+                  
+                  
+            <p class="instep">Handle the events that can occur on the page. A template for the event
+                      handler code has been generated as a comment block into the page adapter
+                      <code>HELLO-A</code>. List the adapter <code>HELLO-A</code> and copy this
+                      comment block into your main program and terminate the program with an
+                      <code>END</code> statement:
+            </p> 
+                  <pre class="verbatim">DEFINE DATA LOCAL
+1 NAME (A) DYNAMIC
+1 RESULT (A) DYNAMIC
+END-DEFINE
+*
+NAME := 'Application Designer'
+PROCESS PAGE USING 'HELLO-A'
+WITH NAME RESULT
+*
+<strong>DECIDE ON FIRST *PAGE-EVENT
+  VALUE 'nat:page.end'
+  /* Page closed.
+    IGNORE
+  VALUE 'sayHello'
+  /* TODO: Implement event code.
+    PROCESS PAGE UPDATE FULL
+  NONE VALUE
+  /* Unhandled events.
+    PROCESS PAGE UPDATE
+END-DECIDE
+*
+END</strong></pre> 
+                  <p class="instep">After the page has been displayed, the user raises events on the page
+                      by using the controls. The name of the raised event is then contained in the
+                      system variable <code>*PAGE-EVENT</code>. Depending on the
+                      event, the program modifies the page data, resends it to browser with a
+                      <code>PROCESS PAGE UPDATE FULL</code> statement and waits for the next event to
+                      occur. 
+            </p> 
+                  
+            <p class="instep">The predefined event <code>nat:page.end</code> is raised
+                      when the user closes the page. The event <code>sayHello</code> is
+                      raised when the user chooses the <span class="guibutton">Say Hello</span> button.
+                      Previously in this tutorial, you have bound the event
+                      <code>sayHello</code> to this button while designing the page. The
+                      <code>NONE VALUE</code> block should always be defined as above. It contains
+                      the default handling of all events that are not handled explicitly. 
+            </p> 
+                  
+                
+         </li>
+         <li> 
+                  
+                  
+            <p class="instep">When the event <code>sayHello</code> occurs, we want to
+                      display a greeting in the FIELD control with the label
+                      <span class="selectable_label">Result</span>. Therefore, we modify the variable
+                      <code>RESULT</code> (which is bound to the corresponding FIELD control in the
+                      page layout) accordingly before we resend the page data.
+            </p> 
+                  <pre class="verbatim">DEFINE DATA LOCAL
+1 NAME (A) DYNAMIC
+1 RESULT (A) DYNAMIC
+END-DEFINE
+*
+NAME := 'Application Designer'
+PROCESS PAGE USING 'HELLO-A'
+WITH NAME RESULT
+*
+DECIDE ON FIRST *PAGE-EVENT
+  VALUE 'nat:page.end'
+  /* Page closed.
+    IGNORE
+  VALUE 'sayHello'
+  /* TODO: Implement event code.
+    <strong>COMPRESS 'Hello, ' NAME '!' TO RESULT</strong>
+    PROCESS PAGE UPDATE FULL
+  NONE VALUE
+  /* Unhandled events.
+    PROCESS PAGE UPDATE
+END-DECIDE
+*
+END</pre> 
+                  <p class="instep"></p> 
+                  
+            <p class="instep">The main program is now complete.</p> 
+                  
+            <p class="instep">If you have not yet saved the program, save or stow it now with the
+                      name "HELLO-P".
+            </p> 
+                  
+                
+         </li>
+         <li> 
+                  
+                  
+            <p class="instep">Catalog all modules in the library <code>CISHELLO</code>.
+            </p> 
+                  
+                
+         </li>
+      </ol> 
+        
+      <div class="noprint">
+         <p><a href="fs-natcode.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="fs-natcode-test"></a></div> 
+        
+      <h2>Testing the Completed Application</h2> 
+         
+         
+      <p>You will now run the application in your web browser and check whether it
+             provides the desired result.
+      </p> 
+         
+      <p>The generated HTML file <cite>helloworld.html</cite> (which is
+             updated each time you save your layout) can be found within the root of your
+             application project, that is in
+             <cite><var>&lt;installdir&gt;</var>/cisnatfirst</cite>.
+             
+      </p> 
+         
+      <p>This HTML page has some prerequisites concerning the browser workplace in
+             which it is running. Therefore, it is per se not usable as a directly
+             accessible page but needs to be embedded into a frame providing a defined set
+             of functions. 
+      </p> 
+         
+      <p>It is necessary to logon to Natural before starting an application.
+             Therefore, Natural applications are started using a logon page. 
+      </p> 
+         
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To test the application</strong></p>
+      <ol class="steps">
+         <li> 
+                  
+                  
+            <p class="instep">Enter the following URL inside your browser: </p><pre class="command-input">http://localhost:8080/cisnatural/servlet/StartCISPage?PAGEURL=/cisnatural/NatLogon.html</pre> 
+                  
+                  
+                  <p class="instep">The logon page should now appear.</p> 
+                  
+            <p><img src="graphics/fs-natlogon.png" alt="Logon to Natural" width="605" height="348"></p> 
+                  
+            <p class="instep">If the logon page is not displayed, check the following: </p> 
+                  
+            <ul> 
+                      
+               <li> 
+                          
+                  <p class="initem"> URLs are case-sensitive. Double-check your input.</p> 
+                         
+               </li> 
+                      
+               <li> 
+                          
+                  <p class="initem">Check whether the file <cite>NatLogon.html</cite> is
+                              available in the directory <cite>cisnatural</cite>.
+                  </p> 
+                         
+               </li> 
+                     
+            </ul> 
+                  
+                
+         </li>
+         <li> 
+                  
+                  
+            <p class="instep">On the logon page, select the entry <span class="selectable_label">Execute
+                  samples</span> from the <span class="selectable_label">Session ID</span> drop-down list box.
+                      You have prepared this entry earlier in this tutorial when you have set up the
+                      runtime environment.
+            </p> 
+                  
+                
+         </li>
+         <li> 
+                  
+                  
+            <p class="instep">Provide your user ID and password valid for the machine on which the
+                      Natural application will be running.
+            </p> 
+                  
+                
+         </li>
+         <li> 
+                  
+                  
+            <p class="instep">In the <span class="selectable_label">Natural parameters</span> text box, enter the
+                      Natural command line which is necessary to start your application:
+            </p><pre class="command-input">STACK=(LOGON CISHELLO;HELLO-P;FIN)</pre> 
+                  
+                </li>
+         <li> 
+                  
+                  
+            <p class="instep">Choose the <span class="guibutton">Connect</span> button. 
+            </p> 
+                  
+                  
+            <p class="instep">Your application should be started now.</p> 
+                
+         </li>
+         <li> 
+                  
+                  
+            <p class="instep">Enter your name and choose the <span class="guibutton">Say Hello</span>
+                      button.
+            </p> 
+                  
+                  
+            <p class="instep">The page should now successfully "talk" to your
+                      adapter.
+            </p> 
+                  
+            <p><img src="graphics/fs-helloworld-jo.png" alt="Hello world, Jo!" width="467" height="112"></p>
+                 
+                
+         </li>
+      </ol> 
+         
+      <p>You have now completed this tutorial. See the remaining section of these
+             <cite>First Steps</cite> for <a href="fs-background.htm#fs-background">some
+                background information</a>. 
+      </p> 
+        
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="fs-natcode.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../njx/fs-natcode.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/njx/fs-natcode.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="fs-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="fs-setupnjx.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="fs-background.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

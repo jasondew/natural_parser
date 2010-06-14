@@ -1,0 +1,633 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Support of Different Character Sets with NATCONV.INI</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="ops-char"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../ops/ops-char.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/ops/ops-char.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="ops-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="ops-batchmode.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="ops-exitcodes.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Operations&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+         
+      <div class="nospytext">
+         <h1> 
+                <a name="x179"></a> 
+                <a name="x180"></a>Support of Different Character Sets with
+                <cite>NATCONV.INI</cite></h1>
+      </div> 
+          
+          
+      <p>The settings in the configuration file <cite>NATCONV.INI</cite>
+              apply to the A format. For the U format, the ICU library is used.
+      </p> 
+          
+      <p>This document describes how Natural supports different character
+              sets. It covers the following topics:
+      </p>
+          
+      <ul>
+         <li>
+            <p class="initem"><a href="ops-char.htm#ops-char-why">Why is the Support of Different Character Sets Important?</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="ops-char.htm#ops-char-supp">Character Sets that are Supported</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="ops-char.htm#ops-char-howto">How to Use Different Character Sets</a></p>
+         </li>
+      </ul> 
+         
+      <hr> 
+         
+      <div><a name="ops-char-why"></a></div> 
+          
+      <h2>Why is the Support of Different Character Sets Important?</h2> 
+           
+           
+      <p>The support of multiple languages with different character sets
+               represents Natural's approach towards internationalization. It can help you
+               when using: 
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">terminals and printers with different character sets, all
+                       communicating with the same Natural environment;
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">several Natural environments sharing one database and located on
+                       different platforms;
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">upper-/lower-case translation of language-specific characters;</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">language-specific characters in Natural identifiers, object names and
+                       library names;
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">language-specific characters in an operand compared with a mask
+                       definition (see <a href="../pg/pg_furth_lcc.htm#MASK_Option">MASK
+                  Option</a> in the <cite>Programming Guide</cite>).
+            </p>
+                   
+                  
+         </li> 
+              
+      </ul> 
+           
+         
+         
+      <div class="noprint">
+         <p><a href="ops-char.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="ops-char-supp"></a></div> 
+          
+      <h2>Character Sets that are Supported</h2> 
+           
+      <p>Natural supports any single-byte character set that conforms to the
+               ASCII character set in the lowest seven bits. 
+      </p> 
+           
+      <p>Natural distinguishes between an internal character and several
+               external character sets; the internal character set is used by Natural itself.
+               
+      </p> 
+           
+      <p>As illustrated below, conversion between the internal and an external
+               character set is performed after the input from a terminal and before the
+               output to a terminal or printer. There is no conversion to an external
+               character set available for work file I/Os, database I/Os and reading/writing
+               of Natural objects. 
+      </p> 
+           
+      <p><img src="graphics/ops-charset.png" alt="Conversion" width="500" height="420"></p>
+      <div><a name="ops-char-supp-int"></a></div> 
+           
+      <h3>Internal Character Set</h3> 
+            
+            
+      <p>By default, Natural uses the internal character set
+                "ISO8859_1". If the default character set does not
+                meet your requirements, you can choose either one of the predefined character
+                sets provided by Natural or any other standard character set. 
+      </p> 
+            
+      <p class="note"><strong>Note:</strong><br>Problems may occur if you run computers with different internal
+                character sets sharing the same database, or if you try to exchange data or
+                programming objects between such computers. 
+      </p> 
+           
+      <div><a name="ops-char-supp-ext"></a></div> 
+           
+      <h3>External Character Sets</h3> 
+            
+            
+      <p>You can define an external character set for any terminal and printer.
+                
+      </p> 
+            
+      <p>For a terminal, the name of its character set is defined by the TCS
+                entry in the terminal database, for example: ":TCS =
+                usascii:". 
+      </p> 
+            
+      <p>You can also use the UNIX environment variable
+                <code>$NATTCHARSET</code> which overrides all TCS settings.
+                
+      </p> 
+            
+      <p>If neither a TCS entry nor the logical
+                <code>NATTCHARSET</code> (which is set with the environment variable
+                <code>$NATTCHARSET</code>) is defined, no conversion is
+                performed during terminal I/O. 
+      </p> 
+             
+            
+      <p>For a printer, the name of an external character set name can be
+                defined in the printer profile. This is part of the global configuration file.
+                See <a href="../config/cfg-confparm.htm#cfg-cf-glo-printer">Printer
+            Profiles</a> in the <cite>Overview of Configuration File
+                   Parameters</cite> of the <cite>Configuration Utility</cite>
+                documentation.
+      </p> 
+           
+      <div class="noprint">
+         <p><a href="ops-char.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="ops-char-howto"></a></div> 
+          
+      <h2>How to Use Different Character Sets</h2> 
+           
+           
+      <p>All check, translation and classification tables used by Natural to
+               support language-specific characters reside in the configuration file
+               <cite>NATCONV.INI</cite>. By default, this file is located in Natural's
+               <cite>etc</cite> directory
+               (<cite>$NATDIR/$NATVERS/etc/</cite>).
+      </p> 
+           
+      <p>You can modify <cite>NATCONV.INI</cite> to support local or
+               application-specific character sets.
+      </p> 
+           
+      <p>In a standard application, <cite>NATCONV.INI</cite> need not
+               and should not be modified, because this could lead to serious inconsistencies,
+               in particular if Natural objects and database data are already present.
+      </p> 
+           
+      <p>Modifications are necessary if you want to do any of the
+               following: 
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">use an internal character set other than the default one, </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">use a terminal or printer whose character set is not supported by
+                       <cite>NATCONV.INI</cite>, 
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">allow or disallow the use of certain characters in identifiers, </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">support local characters when evaluating the
+                       <a href="../pg/pg_furth_lcc.htm#MASK_Option"><code>MASK</code>
+                          option</a>. 
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>Any modifications of <cite>NATCONV.INI</cite> should be well
+               considered and carefully performed, otherwise problems might occur that are
+               difficult to locate.
+      </p> 
+           
+      <p><cite>NATCONV.INI</cite> is subdivided in sections and
+               subsections. The following sections are defined:
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>Section</th> 
+                        
+               <th>Description</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> 
+                  <a name="x181"></a><code>CHARACTERSET-DEFINITION</code></td> 
+                        
+               <td>This section defines the name of the internal character set.
+                  The default is "ISO8859_1". 
+                  
+                  <p>If you choose a different character set, subsections for this
+                                character set must be contained in the sections described below.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> 
+                  <a name="x182"></a><code>CHARACTERSET-TRANSLATION</code></td> 
+                        
+               <td>This section contains the tables required for
+                  the conversion between the internal character set and external character sets. 
+                  
+                  <p>If you use, for example, a terminal with an entry in
+                                <code>SAGtermcap</code> of ":TCS = ASCII_GERMAN:"
+                                and if "ISO8859_1" is used as internal character
+                                set, the following two subsections must be contained in this section: 
+                  </p> 
+                            
+                  <ul> 
+                                
+                     <li> 
+                                    
+                        <p class="initem"><code>[ISO8859_1-&gt;ASCII_GERMAN]</code></p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem"><code>[ASCII_GERMAN-&gt;ISO8859_1]</code></p> 
+                                   
+                     </li> 
+                               
+                  </ul>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> 
+                  <a name="x183"></a><code>CASE-TRANSLATION</code></td> 
+                        
+               <td>This section contains the tables required for the conversion
+                  from upper-case to lower-case which is performed when one of the following is
+                  specified: 
+                  
+                  <ul> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">the terminal command <a href="../tcom/pcu.htm"><code>%U</code></a>,
+                        </p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">the field attribute <a href="../parms/sp_ad.htm"><code>AD=T</code></a>,
+                        </p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">the statement
+                                        <a href="../sm/examine.htm#syntax2_examine_translate"><code>EXAMINE
+                                              TRANSLATE</code></a>.
+                        </p> 
+                                   
+                     </li> 
+                               
+                  </ul>This conversion is done within the internal character
+                            set. If the internal character set is, for example,
+                            "ISO8859_5", the following two subsections must be
+                            contained in this section: 
+                            
+                  <ul> 
+                                
+                     <li> 
+                                    
+                        <p class="initem"><code>[ISO8859_5-&gt;UPPER]</code></p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem"><code>[ISO8859_5-&gt;LOWER]</code></p> 
+                                   
+                     </li> 
+                               
+                  </ul>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> 
+                  <a name="x184"></a><code>IDENTIFIER-VALIDATION</code> 
+               </td> 
+                        
+               <td>This section contains the tables required for the validation of
+                  identifiers (that is, user-defined variables in source programs), object names
+                  and library names. It contains a subsection for each defined internal character
+                  set. 
+                  
+                  <p>The special characters "#" (for
+                     non-database variables), "+" (for
+                     application-independent variables), "@" (for SQL and
+                       Adabas null or length indicators) and "&amp;" (for
+                                dynamic source generation) can be redefined in this section. In addition, the
+                                set of valid first and subsequent characters for identifiers, object names and
+                                library names can be modified.
+                  </p> 
+                            
+                  <p class="note"><strong>Note:</strong><br>When extending the set of valid characters for object names
+                                with values greater than "x7f" (decimal 127), the
+                                sorting sequence of the objects (for example, during a <code>LIST
+                                   *</code> command) may not be in the numerical order.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> 
+                  <a name="x185"></a><code>CHARACTER-CLASSIFICATION</code> 
+               </td> 
+                        
+               <td>This section contains the tables required for the
+                  classification of characters, which, for example, are used when evaluating the
+                  <a href="../pg/pg_furth_lcc.htm#MASK_Option"><code>MASK</code>
+                               option</a>. It contains a subsection for each defined internal character
+                            set.
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>The section <code>CHARACTERSET-DEFINITION</code> and each subsection
+               contain lines which describe how characters are to be converted and which
+               characters are related with which attributes. These lines are represented as
+               follows:
+      </p> 
+           <pre class="verbatim">line         ::=  key = value 
+key          ::=  name_key | range_key 
+name_key     ::=  keyword{ CHARS } 
+keyword      ::=  INTERNAL-CHARACTERSET | NON-DB-VARI | DYNAMIC-SOURCE | 
+                    GLOBAL-VARI | FIRST-CHAR | SUBSEQUENT-CHAR | 
+                    LIB-FIRST-CHAR | LIB-SUBSEQUENT-CHAR | ALTERNATE-CARET 
+                    ISASCII | ISALPHA | ISALNUM | ISDIGIT | ISXDIGIT | 
+                    ISLOWER | ISUPPER | ISCNTRL | ISPRINT | ISPUNCT | 
+                    ISGRAPH | ISSPACE 
+range_key    ::=  hexnum | hexnum-hexnum 
+value        ::=  val {, val } 
+val          ::=  hexnum | hexnum-hexnum 
+hexnum       ::=  xhexdigithexdigit | xhexdigithexdigit </pre> 
+           <p class="notes"><strong>Notes:</strong></p>
+      <ol class="note-list"> 
+               
+         <li>If the <code>range_key</code> variable is
+                   specified on the left-hand side, the number of values specified on the
+                   right-hand side must correspond to the number of values specified in the key
+                   range, unless only one value is specified on the right-hand side, which is then
+                   assigned to each element of the key range. 
+         </li> 
+               
+         <li>When the <code>name_key</code> variable is
+                   specified on the left-hand side and the corresponding list of character codes
+                   does not fit in one line, it can be continued on the next line by specifying
+                   "name_key =" again. You must not start the lines
+                   with leading blanks or tabulators. 
+         </li> 
+              
+      </ol> 
+           
+      <h4 class="floating-title">Examples of Valid Lines</h4> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="26%">
+            <col width="71%">
+         </colgroup> 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td>x00-x1f = x00</td> 
+                        
+               <td>All characters between "x00" and
+                  "x1f" are converted to
+                  "x00".
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>x00-x7f = x00-x7f</td> 
+                        
+               <td>All characters between "x00" and
+                  "x7f" are not converted.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>x00-x08 = x00,x01-x07,x00</td> 
+                        
+               <td>The characters "x00" and
+                  "x08" are converted to
+                  "x00" and characters between
+                  "x01" and "x07" are not
+                  converted.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> 
+                  
+                  <p class="mini-list"> 
+                     ISALPHA = x41-x5a,x61-x7a,xc0-xd6,xd8<br> 
+                                ISALPHA = xd9-xf6,xf8-xff 
+                               
+                  </p>
+               </td> 
+                        
+               <td>The attribute <code>ISALPHA</code> is
+                  assigned to all characters specified in these two lines. 
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <h4 class="floating-title">Examples of Invalid Lines</h4> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="26%">
+            <col width="71%">
+         </colgroup> 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td>x41 = 'A'</td> 
+                        
+               <td>All characters must be specified in hexadecimal format.</td>
+                        
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>0x00-0x1f = 0x00</td> 
+                        
+               <td>Hexadecimal values have to be specified in either of the
+                  following ways: 
+                  
+                  <p class="mini-list"> 
+                                x<var>digitdigit</var><br> 
+                                X<var>digitdigit</var> 
+                               
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>x00-x0f = x00,x01</td> 
+                        
+               <td>The number of specified values does not correspond to the
+                  number of elements in the key range.
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+         
+        
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="ops-char.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../ops/ops-char.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/ops/ops-char.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="ops-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="ops-batchmode.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="ops-exitcodes.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

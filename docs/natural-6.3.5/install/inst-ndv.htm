@@ -1,0 +1,523 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Activating the Natural Development Server on UNIX</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="inst-ndv"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../install/inst-ndv.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/install/inst-ndv.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="inst-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="inst-bp.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="inst-nwodaemon.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Installation on UNIX&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x6"></a> 
+               <a name="x7"></a> 
+               <a name="x8"></a>Activating the Natural Development Server on UNIX
+         </h1>
+      </div> 
+         
+         
+      <p>When a Natural Development Server is used, a procedure to activate the
+             server may be called during system startup.
+      </p> 
+         
+      <p>The Natural installation process provides a Natural Development Server
+             start/stop service procedure. The name of the procedure will be generated
+             depending on the <cite>$SAG</cite> directory and the Natural
+             Development Server version.
+      </p> 
+         
+      <p>Furthermore, the Natural installation process determines the platform
+             automatically and prepares the system (V style or AIX) to execute the
+             start/stop service procedure during start/stop of the system. Depending on the
+             platform, the system directory for initialization and, if needed, the runlevel
+             startup directories will be selected. The start/stop service procedure will be
+             copied to the system directory for initialization and links will be created in
+             the runlevel startup directories.
+      </p> 
+         
+      <p>The Natural installation process installs the Natural Development Server
+             start/stop service as an optional feature. You can also set up this service
+             manually as described below.
+      </p> 
+         
+      <p>This document covers the following
+             topics:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="inst-ndv.htm#inst-ndv-systemv">Preparing the System V Style Startup Procedure</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="inst-ndv.htm#inst-ndv-aix">Preparing the AIX Startup Procedure</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="inst-ndv.htm#inst-ndv-sample">Sample of a Natural Development Server Start/Stop Procedure</a></p>
+         </li>
+      </ul> 
+         
+      <p>To verify the operation of the Natural Development Server, invoke a
+             Natural for Windows and connect to the system on which the servers runs. Use
+             the port specified at start of the Natural Development Server.
+      </p> 
+        
+      <hr> 
+        
+      <div><a name="inst-ndv-systemv"></a></div> 
+         
+      <h2> Preparing the System V Style Startup Procedure </h2> 
+          
+          
+      <p>The procedure template <cite>natdvsrv.tpl</cite> in the
+              <cite>$NATDIR/$NATVERS/INSTALL</cite> directory may be used to create a
+              script which is used to invoke the Natural Development Server during system
+              startup.
+      </p> 
+          
+      <p>The following table shows where the <cite>init.d</cite> and
+              <cite>rc3.d</cite> directories are located on the various platforms. In
+              the following description, <cite>init.d</cite> or
+              <cite>rc3.d</cite> stand for the relevant path indicated below for the
+              platform you are using.
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th>Platform</th> 
+                       
+               <th align="center">System Directory for Initialization</th> 
+                       
+               <th align="center">Runlevel Startup Directory</th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td>Solaris</td> 
+                       
+               <td align="center"> <cite>/etc/init.d</cite></td> 
+                       
+               <td align="center"> <cite>/etc/rc3.d </cite></td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>HP-UX</td> 
+                       
+               <td align="center"> <cite>/sbin/init.d</cite> 
+               </td> 
+                       
+               <td align="center"> <cite>/sbin/rc3.d</cite></td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>Linux</td> 
+                       
+               <td align="center"> <cite>/etc/init.d</cite> 
+               </td> 
+                       
+               <td align="center"> <cite>/etc/init.d/rc3.d or
+                     /etc/init.d/rc5.d</cite> 
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>A sample copy of the Natural Development Server start/stop procedure is
+              shown below. It can be edited with a text editor.
+      </p> 
+          
+      <p>To set up the system, proceed as described below:</p> 
+          
+      <ol> 
+              
+         <li> 
+                  
+            <p class="initem">Log in as user "root".</p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Copy the template <cite>natdvsrv.tpl</cite> to the
+                      <cite>init.d</cite> system directory and rename it, for example to
+                      <cite>sag1ndv22srv</cite>.
+            </p>
+                  
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">If already available, create a backup copy of your current
+                      <cite>sag1ndv22srv</cite> file contained in the
+                      <cite>init.d</cite> directory (see the above table).
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Set the following environment variables in the
+                      <cite>sag1ndv22srv</cite> procedure:
+            </p> 
+                   
+                   
+            <table border="1" class="color" cellpadding="3" width="80%">
+               <colgroup>
+                  <col width="13%">
+                  <col width="67%">
+               </colgroup> 
+                        
+                       
+               <tbody align="left" valign="top"> 
+                           
+                  <tr> 
+                               
+                     <th><code>NATDIR</code></th> 
+                               
+                     <td>Location where Natural was installed.</td> 
+                              
+                  </tr> 
+                           
+                  <tr> 
+                               
+                     <th><code>NATVERS</code></th> 
+                               
+                     <td>Natural version number.</td> 
+                              
+                  </tr> 
+                           
+                  <tr> 
+                               
+                     <th><code>NATADM</code></th> 
+                               
+                     <td>The login name of the Natural system administrator responsible
+                        for this Natural Development Server. It is assumed that this administrator
+                        account is called "sag", and that the user ID is
+                        already known to the system. It does not have to be a user with root
+                        privileges.
+                     </td> 
+                              
+                  </tr> 
+                          
+               </tbody> 
+                      
+            </table> 
+                   
+                  
+            <p class="note"><strong>Note:</strong><br> The Bourne shell does not allow blanks before and after the equals
+                      sign in the lines to be customized.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Create a link
+                      "S<var>99</var>sag1ndv22srv" to the
+                      <cite>sag1ndv22srv</cite> procedure in the <cite>rc3.d</cite>
+                      directory.
+            </p> 
+                 
+         </li> 
+             
+      </ol> 
+          
+      <p>You may create a link to the Natural Development Server start/stop
+              procedure in the runlevel 3 startup directory of your UNIX machine. The
+              <cite>rc3.d</cite> directory contains several Bourne shell scripts or
+              links to Bourne shell scripts that start with "S"
+              followed by a number, for example "99". A lower
+              number will be executed first. If you add a file or a link to this directory,
+              the respective code is executed when the system changes to "multi-user
+              mode".
+      </p> 
+          
+      <p>Make sure that the Natural Development Server is started after the
+              buffer pool and is stopped before the buffer pool.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="inst-ndv.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="inst-ndv-aix"></a></div> 
+         
+      <h2> Preparing the AIX Startup Procedure</h2> 
+          
+          
+      <p>The procedure template <cite>natdvsrv.tpl</cite> in the
+              <cite>$NATDIR/$NATVERS/INSTALL</cite> directory may be used to create a
+              script which is used to invoke the Natural Development Server during system
+              startup.
+      </p> 
+          
+      <p>To set up the system, proceed as described below:</p> 
+          
+      <ol> 
+              
+         <li> 
+                  
+            <p class="initem">Log in as user "root".</p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Copy the template <cite>natdvsrv.tpl</cite> to the
+                      <cite>etc</cite> system directory and rename it, for example to
+                      <cite>sag1ndv22srv</cite>.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Set the following environment variables in the
+                      <cite>sag1ndv22srv</cite> procedure:
+            </p> 
+                   
+                   
+            <table border="1" class="color" cellpadding="3" width="80%">
+               <colgroup>
+                  <col width="12%">
+                  <col width="68%">
+               </colgroup> 
+                        
+                       
+               <tbody align="left" valign="top"> 
+                           
+                  <tr> 
+                               
+                     <th><code>NATDIR</code></th> 
+                               
+                     <td>Location where Natural was installed.</td> 
+                              
+                  </tr> 
+                           
+                  <tr> 
+                               
+                     <th><code>NATVERS</code></th> 
+                               
+                     <td>Natural version number.</td> 
+                              
+                  </tr> 
+                           
+                  <tr> 
+                               
+                     <th><code>NATADM</code></th> 
+                               
+                     <td>The login name of the Natural system administrator responsible
+                        for this Natural Development Server. It is assumed that this administrator
+                        account is called "sag", and that the user ID is
+                        already known to the system. It does not have to be a user with root
+                        privileges.
+                     </td> 
+                              
+                  </tr> 
+                          
+               </tbody> 
+                      
+            </table> 
+                   
+                  
+            <p class="note"><strong>Note:</strong><br> The Bourne shell does not allow blanks before and after the equals
+                      sign in the lines to be customized.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">The <cite>/etc/inittab</cite> file supplies the script to the
+                      init command's role as a general process dispatcher. Therefore, enter a record
+                      with the <cite>sag1ndv22srv</cite> script in the
+                      <cite>/etc/inittab</cite> file using the
+                      <code>mkitab</code> command. For example:
+            </p><pre class="command-input">mkitab "sag1ndv22srv:3:wait:/etc/sag1ndv22srv &gt; dev/console"</pre> 
+                 </li> 
+              
+         <li> 
+                  
+            <p class="initem">Verify your changes to make sure that the changes made consist only of
+                      those changes desired.
+            </p> 
+                 
+         </li> 
+             
+      </ol> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="inst-ndv.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="inst-ndv-sample"></a></div> 
+         
+      <h2> Sample of a Natural Development Server Start/Stop Procedure</h2> 
+          
+           
+          
+          <pre class="verbatim">#!/bin/sh
+#
+# Copyright (c) 2007 Software AG, Germany. All rights reserved.
+#
+# Start/stop script for Natural Development Server 
+#
+#===================================================================
+
+
+if [ ! -r "/SAG/ada/v51103/INSTALL/adaenv" ] ; then
+  echo "$0: Adaenv not found!"
+  exit 1
+else
+  adaenv="/SAG/ada/v51103/INSTALL/adaenv &gt; /dev/null"
+fi
+
+if [ ! -r  /SAG/nat/v6320/INSTALL/natenv ] ; then
+  echo "$0: Natenv not found!"
+  exit 1
+else
+  natenv="/SAG/nat/v6320/INSTALL/natenv &gt; /dev/null"
+fi
+
+NATDIR=/usr/SAG/nat      # customize
+NATVERS=v6320            # customize
+NATADM=sag               # customize
+
+PORT=pnum                # customize
+PARM=NDVPARM             # customize
+
+export NATDIR NATVERS PORT PARM
+#
+#-------------------------------------------------------------------
+#
+natdvsrv=$NATDIR/$NATVERS/bin/natdvsrv
+
+if [ "${LOGNAME}" = "" ]; then
+  LOGNAME=root
+  HOME=/
+  export LOGNAME HOME
+  UNDO=1
+else
+  UNDO=0
+fi
+
+case "$1" in
+  start)
+    echo "Starting Natural Development Server ..."
+    if [ -x "${natdvsrv}" ]; then
+      su ${NATADM} -c ". ${adaenv} \
+        &amp;&amp; . ${natenv} \
+        &amp;&amp; ${natdvsrv} -port=${PORT} parm=${PARM}" 
+    else
+      exit 1
+    fi
+    echo "done..."
+    ;;
+  stop)
+    echo "Stopping Natural Development Server ..."
+    if [ -x "${natdvsrv}" ]; then
+      su ${NATADM} -c ". ${adaenv} \
+        &amp;&amp; . ${natenv} \
+        &amp;&amp; ${natdvsrv} -terminate=${PORT}" 
+    else
+      exit 1
+    fi
+    echo "done..."
+    ;;
+  *)
+    echo "Usage: $0 {start|stop}"
+    exit 1
+    ;;
+esac
+
+if [ ${UNDO} ]; then
+  unset LOGNAME HOME
+fi
+unset UNDO
+#
+#===================================================================
+#</pre> 
+          
+        
+       <div class="noprint">
+         <div class="nospy">
+            <p><a href="inst-ndv.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../install/inst-ndv.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/install/inst-ndv.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="inst-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="inst-bp.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="inst-nwodaemon.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

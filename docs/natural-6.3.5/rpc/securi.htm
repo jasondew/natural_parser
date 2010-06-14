@@ -1,0 +1,2562 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Using Security</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="securi"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../rpc/securi.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/rpc/securi.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="rpc-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="rds.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="rpc-exx-broker-support.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Natural Remote Procedure Call (RPC)&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1>Using Security</h1>
+      </div> 
+         
+      <p>This section covers the following topics:</p>
+         
+      <ul>
+         <li>
+            <p class="initem"><a href="securi.htm#securi_Using_Natural_RPC_with_Natural_Security">Using Natural RPC with Natural Security</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="securi.htm#securi_rpc_impersonation_zos">Impersonation (z/OS Batch Mode only)</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="securi.htm#securi_rpc_impersonation_cics">Impersonation (CICS)</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="securi.htm#securi_Using_Natural_RPC_with_EntireX_Security">Using Natural RPC with EntireX Security</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="securi.htm#rpc-iaf">Using the Integrated Authentication Framework</a></p>
+         </li>
+      </ul>
+      <hr>
+      <div><a name="securi_Using_Natural_RPC_with_Natural_Security"></a></div> 
+         
+      <h2>Using Natural RPC with Natural Security</h2> 
+          
+      <p>Natural RPC also supports Natural Security in client/server
+              environments, where security may be active on either (or both) sides.
+      </p> 
+          
+      <p>For general information, refer to the
+              <a href="../nsc/nsc-over.htm">Natural
+            Security</a> documentation.
+      </p> 
+          
+      <p>For information on how to control the use of Natural remote procedure
+              calls in a client/server environment, see <a href="../nsc/nsc_rpc.htm">Protecting Natural RPC Servers and
+            Services</a> in the <cite>Natural Security</cite>
+              documentation.
+      </p>
+      <div><a name="d0e14579"></a></div> 
+          
+      <h3>Client Side</h3> 
+           
+           
+      <p>The client must send logon data together with the RPC request. The
+               logon data consist of user ID, password and library. 
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">User ID and password are used to perform the authentication of the
+                       client on the Natural RPC server side. 
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">The library is used to perform a Natural Security protected logon to
+                       the requested library.
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>The following applies to Natural RPC clients only. For EntireX RPC
+               clients that access a Natural Security protected Natural RPC server, refer to
+               the EntireX Developer&#8217;s Kit documentation. 
+      </p> 
+           
+      <h4 class="floating-title">Logon Data</h4> 
+           
+      <p>To send logon data to the Natural RPC server, the Logon option must be
+               used. See <cite>Operating a Natural RPC Environment</cite>,
+               <a href="oper.htm#oper_Using_LOGON">Using the Logon
+            Option</a>. The logon data parts are established as
+               follows:
+      </p> 
+           
+      <ol> 
+               
+         <li> 
+                   
+            <p class="initem">The user ID and password:</p> 
+                   
+            <h4 class="floating-title">If the client runs under Natural
+                       Security
+            </h4> 
+                   
+            <p class="initem">The user ID and password from the Natural Security logon on the
+                       client are used and passed to the Natural RPC server.
+            </p> 
+                   
+            <p class="initem">If you want to use a different user ID and/or password for the
+                       Natural Security logon on the server side, you may use the application
+                       programming interface <code>USR1071N</code> (see below).
+            </p> 
+                   
+            <p class="note"><strong>Note:</strong><br> You may disallow the use of <code>USR1071N</code> in the Natural
+                       RPC restrictions part of the
+                       <a href="../nsc/nsc_lib.htm#Session_Parameters">Session
+                  Parameters</a> restrictions of the Natural Security library
+                       profile.
+            </p> 
+                   
+            <h4 class="floating-title">If the client does not run under Natural
+                       Security
+            </h4> 
+                   
+            <p class="initem">To specify the user ID and password that are passed to the Natural
+                       RPC server, the client must call application programming interface
+                       <code>USR1071N</code> (see below) before the first RPC request is sent. 
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">The library:</p> 
+                   
+            <p class="initem">By default, the name of the library to which the client is currently
+                       logged on is used. If you want to pass another library name to the Natural RPC
+                       server, you may use the application programming interface
+                       <a href="oper.htm#oper_usr4008n"><code>USR4008N</code></a>.
+            </p> 
+                  
+         </li> 
+              
+      </ol> 
+           
+      <h4 class="floating-title"> 
+               <a name="x4"></a>USR1071N
+      </h4> 
+           
+      <p>The application programming interface <code>USR1071N</code> is provided
+               in the library <code>SYSEXT</code>. It is used to specify the user ID and
+               password that are passed to the Natural RPC server.
+      </p> 
+           
+      <div><a name="securi_USR1071"></a></div>
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To make use of <code>USR1071N</code></strong></p>
+      <ol class="steps">
+         <li> 
+                    
+                    
+            <p class="instep">Copy the subprogram <code>USR1071N</code> and the program
+                        <code>USR1071P</code> from libray <code>SYSEXT</code> to the library
+                        <code>SYSTEM</code> or to the steplib library or to any application in the
+                        server environment.
+            </p> 
+                    
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">Using a <a href="../sm/defineda_pda.htm"><code>DEFINE DATA
+                     PARAMETER</code></a> statement, specify the following parameters: 
+            </p> 
+                     
+                     
+            <table border="1" class="color" cellpadding="3" width="97%"> 
+                         
+               <thead align="left" valign="top"> 
+                             
+                  <tr> 
+                                 
+                     <th>Parameter</th> 
+                                 
+                     <th>I/O</th> 
+                                 
+                     <th>Format</th> 
+                                 
+                     <th colspan="2">Description</th> 
+                                
+                  </tr> 
+                            
+               </thead> 
+                         
+               <tbody align="left" valign="top"> 
+                             
+                  <tr> 
+                                 
+                     <td><code>USERID</code></td> 
+                                 
+                     <td>I</td> 
+                                 
+                     <td>A08</td> 
+                                 
+                     <td colspan="2">User ID to be used.</td> 
+                                
+                  </tr> 
+                             
+                  <tr> 
+                                 
+                     <td><code>PASSWORD</code></td> 
+                                 
+                     <td>I</td> 
+                                 
+                     <td>A08</td> 
+                                 
+                     <td colspan="2">Password to validate the user
+                        ID. This password is not validated on the client side.
+                     </td> 
+                                
+                  </tr> 
+                             
+                  <tr> 
+                                 
+                     <td rowspan="3"><code>MIXEDCASE</code></td> 
+                                 
+                     <td rowspan="3">I</td> 
+                                 
+                     <td rowspan="3">A01</td> 
+                                 
+                     <td colspan="2">Mixed case option for password
+                        (optional).
+                     </td> 
+                                
+                  </tr> 
+                             
+                  <tr> 
+                                 
+                     <td><code>Y</code></td> 
+                                 
+                     <td>Allow mixed case password.</td> 
+                                
+                  </tr> 
+                             
+                  <tr> 
+                                 
+                     <td><code>N</code></td> 
+                                 
+                     <td>Convert passwords to upper case.</td> 
+                                
+                  </tr> 
+                            
+               </tbody> 
+                        
+            </table> 
+                     
+                    
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">In the calling program on the client side, specify the following
+                        statement:
+            </p> 
+                    
+            <p class="instep"> <code>FETCH RETURN 'USR1071P' <var>USERID PASSWORD
+                              [MIXEDCASE]</var></code></p> 
+                    
+                  
+         </li>
+      </ol> 
+           
+      <p>You may alternatively invoke <code>USR1071P</code> from the command
+               line and enter user ID and password in the displayed window.
+      </p> 
+           
+      <p>For a more detailed description, see the <code>USR1071T</code> member
+               in library <a href="../utis/sysext.htm"><code>SYSEXT</code></a>.
+      </p> 
+           
+      <p class="note"><strong>Note:</strong><br>Two samples are provided to call <code>USR1071N</code>:
+               <code>USR1071P</code>, which is passing just user ID and password, and
+               <code>USR1071X</code> (extended version), which in addition enables the user to
+               set/retrieve various data.
+      </p> 
+          
+      <div><a name="d0e14876"></a></div> 
+          
+      <h3>Server Side</h3> 
+           
+           
+      <p>If Natural Security is installed on the server side and
+               <a href="../parms/auto.htm"><code>AUTO</code></a><code>=ON</code>
+               is not specified, a Natural logon with user ID and password is required. It is
+               recommended to use the Natural profile parameter
+               <a href="../parms/stack.htm"><code>STACK</code></a> to
+               pass the Natural system command <a href="../syscom/logon.htm"><code>LOGON</code></a>. If
+               <code>AUTO=ON</code> is specified the contents of
+               <a href="../vari/natenv.htm#INIT_USER"><code>*INIT-USER</code></a>
+               is used for an internal logon as usual.
+      </p> 
+           
+      <p>To enforce the Logon option - that is, if you want a server to accept
+               only requests from clients where the Logon option is set - set the
+               <a href="../parms/logonrq.htm"><code>LOGONRQ</code></a>
+               profile parameter
+               to <code>ON</code> for the server. If the Logon option is not enforced, client
+               request without logon data are accepted and executed in the server library or
+               one of its steplibs. This allows you to provide public as well as secured
+               services.
+      </p> 
+           
+      <p>If the client passes logon data, the user ID and password from the
+               client are verified against the corresponding user security profile on the
+               server, and the logon to the requested library and the execution of the
+               subprogram are performed according to the corresponding Natural Security
+               library and user profile definitions on the server. 
+      </p> 
+           
+      <p>After the execution of the subprogram, the library used before the
+               <code>CALLNAT</code> request is updated again on the server. In the case of a
+               conversational RPC, the first <code>CALLNAT</code> request within the
+               conversation sets the library ID on the server, and the <code>CLOSE
+            CONVERSATION</code> statement resets the library ID on the server to the one
+               used before the conversation was opened.
+      </p> 
+           
+      <p>As part of the <a href="../nsc/nsc_lib.htm#nat_rpc_restr">Natural RPC
+            Restrictions</a> in the library profiles of Natural Security,
+               a server session option <code>Close all databases</code> is provided. It causes
+               all databases which have been opened by remote subprograms contained in the
+               library to be closed when a Natural logon/logoff to/from the libraries is
+               performed. This means that each client uses its own database session. 
+      </p> 
+           
+      <p>If the <code>Close all databases</code> option is set, it is also
+               possible to use a client specific ETID for all Adabas accesses which are
+               executed by the server for this client. In this case, you should start the
+               Natural RPC server with <a href="../parms/etid.htm"><code>ETID=OFF</code></a> and define an
+               appropriate ETID in the user profile for each client that needs an ETID,
+               forexample, by specifying the ETID <code>*USER</code>. Please note that in this
+               case two clients with the same name cannot issue two concurrent requests with
+               Adabas calls.
+      </p> 
+           
+           
+      <p><strong>Changing Password</strong></p> 
+           
+      <p><a name="securi_usr2074n_change_password"></a>It is possible to change the
+               Natural Security password on the Natural RPC server via a Natural RPC service
+               request. For this purpose, the application programming interface
+               <code>USR2074N</code> is provided in the library <code>SYSEXT</code>.
+      </p> 
+           
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To make use of <code>USR2074N</code></strong></p>
+      <ol class="steps">
+         <li> 
+                    
+                    
+            <p class="instep">Copy the subprogram <code>USR2074N</code>, and optionally program
+                        <code>USR2074P</code>, from libray <code>SYSEXT</code> to the library
+                        <code>SYSTEM</code> or to the steplib library or to any application in the
+                        server environment.
+            </p> 
+                    
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">Using a <a href="../sm/defineda_pda.htm"><code>DEFINE DATA
+                     PARAMETER</code></a> statement, specify the following parameters: 
+            </p> 
+                     
+                     
+            <table border="1" class="color" cellpadding="3" width="97%"> 
+                         
+               <thead align="left" valign="top"> 
+                             
+                  <tr> 
+                                 
+                     <th nowrap>Parameter</th> 
+                                 
+                     <th>I/O</th> 
+                                 
+                     <th>Format</th> 
+                                 
+                     <th colspan="2">Description</th> 
+                                
+                  </tr> 
+                            
+               </thead> 
+                         
+               <tbody align="left" valign="top"> 
+                             
+                  <tr> 
+                                 
+                     <td nowrap><code>USERID</code></td> 
+                                 
+                     <td>I</td> 
+                                 
+                     <td>A08</td> 
+                                 
+                     <td colspan="2">User ID to be used.</td> 
+                                
+                  </tr> 
+                             
+                  <tr> 
+                                 
+                     <td nowrap><code>PASSWORD</code></td> 
+                                 
+                     <td>I</td> 
+                                 
+                     <td>A08</td> 
+                                 
+                     <td colspan="2">Password to validate the user
+                        ID. This password is not validated on the client side.
+                     </td> 
+                                
+                  </tr> 
+                             
+                  <tr> 
+                                 
+                     <td nowrap><code>NEWPASSWORD</code></td> 
+                                 
+                     <td>I</td> 
+                                 
+                     <td>A08</td> 
+                                 
+                     <td colspan="2">New password for the user ID.
+                        This password is not validated on the client side.
+                     </td> 
+                                
+                  </tr> 
+                             
+                  <tr> 
+                                 
+                     <td nowrap><code>NODE-NAME</code></td> 
+                                 
+                     <td>I</td> 
+                                 
+                     <td>A192</td> 
+                                 
+                     <td colspan="2"> 
+                        
+                        <p>Name of the server node to be addressed.</p> 
+                                     
+                        <p>The node name may have up to 32 characters for physical node
+                           names and up to 192 characters for logical node names. See
+                                         <a href="oper.htm#oper_use_location_transparency">Using EntireX
+                                            Location Transparency</a> in <a href="oper.htm#oper">Operating a Natural RPC
+                                            Environment</a>.
+                        </p> 
+                                     
+                        <p>The sample <code>USR2074P</code> provided in library
+                                         <code>SYSEXT</code> supports up to 32 characters.
+                        </p> 
+                     </td> 
+                                
+                  </tr> 
+                             
+                  <tr> 
+                                 
+                     <td nowrap><code>SERVER-NAME</code></td> 
+                                 
+                     <td>I</td> 
+                                 
+                     <td>A192</td> 
+                                 
+                     <td colspan="2"> 
+                        
+                        <p>Name of the server to be addressed.</p> 
+                                     
+                        <p>The server name may have up to 32 characters for physical
+                           server names and up to 192 characters for logical service names. See
+                                         <a href="oper.htm#oper_use_location_transparency">Using EntireX
+                                            Location Transparency</a> in <a href="oper.htm#oper">Operating a Natural RPC
+                                            Environment</a>.
+                        </p> 
+                                     
+                        <p>The sample <code>USR2074P</code> provided in library
+                                         <code>SYSEXT</code> supports up to 32 characters.
+                        </p> 
+                     </td> 
+                                
+                  </tr> 
+                             
+                  <tr> 
+                                 
+                     <td rowspan="2" nowrap><code>PROTOCOL</code></td> 
+                                 
+                     <td rowspan="2">I</td> 
+                                 
+                     <td rowspan="2">A1</td> 
+                                 
+                     <td colspan="2"> The transport protocol to
+                        address the server node. Valid value:
+                     </td> 
+                                
+                  </tr> 
+                             
+                  <tr> 
+                                 
+                     <td><code>B</code></td> 
+                                 
+                     <td>EntireX Broker</td> 
+                                
+                  </tr> 
+                             
+                  <tr> 
+                                 
+                     <td rowspan="5" nowrap><code>RC</code></td>
+                                 
+                                 
+                     <td rowspan="5">O</td> 
+                                 
+                     <td rowspan="5">I2</td> 
+                                 
+                     <td colspan="2">Return value:</td> 
+                                
+                  </tr> 
+                             
+                  <tr> 
+                                 
+                     <td><code>0</code></td> 
+                                 
+                     <td>OK, <code>MESSAGE</code> contains a confirmation
+                           message.
+                     </td> 
+                                
+                  </tr> 
+                             
+                  <tr> 
+                                 
+                     <td><code>1</code></td> 
+                                 
+                     <td>Error from RPC or server node,
+                        <code>MESSAGE</code> contains the error message.
+                     </td> 
+                                
+                  </tr> 
+                             
+                  <tr> 
+                                 
+                     <td><code>2</code></td> 
+                                 
+                     <td>Error from the interface, <code>MESSAGE</code>
+                              contains the error message.
+                     </td> 
+                                
+                  </tr> 
+                             
+                  <tr> 
+                                 
+                     <td><code>3</code></td> 
+                                 
+                     <td>Natural Security error, <code>MESSAGE#</code>
+                        contains the Natural error number and <code>MESSAGE</code> contains
+                                     the corresponding message text.
+                     </td> 
+                                
+                  </tr> 
+                             
+                  <tr> 
+                                 
+                     <td nowrap><code>MESSAGE#</code></td> 
+                                 
+                     <td>O</td> 
+                                 
+                     <td>N4</td> 
+                                 
+                     <td colspan="2"> Message number returned.
+                        
+                     </td> 
+                                
+                  </tr> 
+                             
+                  <tr> 
+                                 
+                     <td nowrap><code>MESSAGE</code></td> 
+                                 
+                     <td>O</td> 
+                                 
+                     <td>A80</td> 
+                                 
+                     <td colspan="2"> Message text returned.
+                        
+                     </td> 
+                                
+                  </tr> 
+                            
+               </tbody> 
+                        
+            </table> 
+                     
+                    
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">In the calling program on the client side, specify the following
+                        statement:
+            </p> 
+                    
+            <p class="instep"> <code>CALLNAT 'USR2074N' <var>user-id password newpassword
+                     node-name server-name protocol rc message# message</var></code></p> 
+                    
+                  
+         </li>
+      </ol> 
+           
+      <p>You may alternatively use program <code>USR2074P</code> from library
+               <code>SYSEXT</code>. Invoke <code>USR2074P</code> from the command line and
+               enter the required data in the displayed window. In this case, all input except
+               for the passwords are translated into upper case. For the passwords, you have
+               the option to enter them in mixed case or not.
+      </p> 
+          
+      <div class="noprint">
+         <p><a href="securi.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="securi_rpc_impersonation_zos"></a></div> 
+         
+      <h2>Impersonation (z/OS Batch Mode only)</h2>
+          
+      <ul>
+         <li>
+            <p class="initem"><a href="securi.htm#securi_rpc_impersonation_purpose">Purpose of Impersonation</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="securi.htm#securi_rpc_impersonation_activate_srv">Steps to Activate Impersonation (Server Side)</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="securi.htm#securi_rpc_impersonation_use_client">Steps to Use Impersonation (Client Side)</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="securi.htm#securi_rpc_impersonation_rules">Rules for Impersonation</a></p>
+         </li>
+      </ul> 
+         
+      <div><a name="securi_rpc_impersonation_purpose"></a></div> 
+          
+      <h3>Purpose of Impersonation</h3> 
+           
+           
+      <p><a href="intro_rpc.htm#intro_rpc_rpc_terms_impersonation">Impersonation</a> is an
+               optional feature on the Natural RPC server side and is only available if the
+               Natural RPC server runs under Natural Security. The impersonation feature is
+               controlled by the <a href="../nsc/nsc_rpc.htm#RPCprofiles">Natural Security Profiles for
+            Natural RPC Servers</a>. See also
+               <a href="../nsc/nsc_rpc.htm">Protecting Natural RPC Servers and
+            Services</a> in the <cite>Natural Security</cite>
+               documentation.
+      </p> 
+           
+      <p>Impersonation in z/OS batch mode requires the use of the Natural RPC
+               server front-end under z/OS and uses the SAF interface provided by z/OS.
+      </p> 
+           
+      <p>If impersonation is active for the Natural RPC server, a client request
+               that uses the <a href="oper.htm#oper_Using_LOGON">Logon
+            Option</a> is from the perspective of the operating system
+               executed under the user ID that the client passes in the <code>LOGON</code>
+               data (called Natural RPC user ID). Impersonation assumes that access to the
+               operating system on which a Natural RPC server is running is controlled by an
+               SAF-compliant external security system. User authentication (verification of
+               the Natural RPC user ID and password) is performed by this external security
+               system. After successful authentication, the user's identity is established for
+               the operating system (that is, an ACEE is created and linked to the TCB under
+               which the current client request is executed). Any subsequent authorization
+               checks will be performed based on this identity. This means that all accesses
+               to resources that are controlled by the SAF compliant external security system
+               are authorized for this identity. This applies especially to accesses to work
+               files and to data bases.
+      </p> 
+           
+      <p>Impersonation does not turn off Natural Security. After successful
+               authentication of the user's identity by the external security system, a
+               Natural Security logon takes place using the same <code>LOGON</code> data but
+               without password verification.
+      </p> 
+           
+      <p>To start a Natural RPC server using impersonation, see
+               <a href="start.htm#start_server_start_via_front_end">Starting a
+            Natural Server Using the RPC Server Front-End</a> in
+               <a href="start.htm#start">Starting a Natural RPC
+            Server</a>.
+      </p> 
+           
+      <p class="note"><strong>Note:</strong><br> Without impersonation, a client request that uses the Logon option
+               is from the perspective of the operating system executed with the user ID under
+               which the Natural RPC server has been started.
+      </p> 
+          
+      <div><a name="securi_rpc_impersonation_activate_srv"></a></div> 
+          
+      <h3>Steps to Activate Impersonation (Server Side)</h3> 
+           
+           
+      <ol> 
+               
+         <li> 
+                   
+            <h4 class="floating-title">Install RPC server front-end</h4> 
+                   
+            <p class="initem">Proceed as described in the Natural for Mainframes Installation
+                       documentation; see
+                       <cite>Installation
+                          Procedure for Natural under z/OS</cite>.
+            </p> 
+                   
+            <p class="initem"> If you choose to use the recommended APF-authorized
+                       <code>LINKLIST</code> library, you must ensure that the resulting load module
+                       does not exist in the <code>STEPLIB</code> or <code>JOBLIB</code>
+                       concatenation.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <h4 class="floating-title">Link Natural z/OS batch nucleus with DB2 interface
+                       <code>DSNRLI</code></h4> 
+                   
+            <p class="initem"> This step applies to Natural for DB2 users only.</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <h4 class="floating-title">Use reentrant Adabas batch link routine
+                       <code>ADALNKR</code> instead of <code>ADALNK</code></h4> 
+                   
+            <p class="initem"> Refer to
+                       <a href="start.htm#start_Considerations_for_Natural_RPC_Servers_with_Replicates">Considerations
+                  for Mainframe Natural RPC Servers with Replicas</a> in
+                       <a href="start.htm#start">Starting a Natural RPC
+                  Server</a>.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <h4 class="floating-title">Use EntireX Broker stub
+                       <code>BKIMBTSO</code></h4> 
+                   
+            <p class="initem">See <a href="setup.htm#setup_rpc_setup_etx_broker_stub_access">Provide Access to
+                  the EntireX Broker Stub</a> in <a href="setup.htm#setup">Setting Up a Natural RPC
+                  Environment</a>.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <h4 class="floating-title">Define all required RPC server-specific Natural profile
+                       parameters
+            </h4> 
+                   
+            <p class="initem"> Refer to <a href="setup.htm#setup_rpc_setup_srv_profparms">Set the RPC Server-Specific
+                  Natural Parameters</a> in <a href="setup.htm#setup">Setting Up a Natural RPC
+                  Environment</a>. The parameters are either defined in the
+                       NATPARM parameter
+                       module or in the
+                       <code>CMPRMIN</code>
+                       dataset. The parameter <code>PARM=</code> of the <code>JCL
+                  EXEC</code> statement is not used to provide Natural profile parameters.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <h4 class="floating-title">Define an RPC server profile in Natural
+                       Security
+            </h4> 
+                   
+            <p class="initem">Define an RPC server profile in Natural Security (NSC) for the server
+                       name that is used by the RPC server (<code>SRVNAME</code>) and activate the
+                       impersonation.
+            </p> 
+                   
+            <p class="initem"> Refer to <a href="../nsc/nsc_rpc.htm#RPCprofiles">Security Profiles for Natural RPC
+                  Servers</a> in <a href="../nsc/nsc_rpc.htm">Protecting Natural RPC Servers and
+                  Services</a> of the <cite>Natural Security</cite>
+                       documentation.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <h4 class="floating-title">Check SAF definitions</h4> 
+                   
+            <p class="initem"> (This step applies to Natural for DB2 users only.)</p> 
+                   
+            <p class="initem">If the SAF resource class <code>DSNR</code> is active, you must check
+                       whether you need the following SAF definitions:
+            </p> 
+                   
+            <p class="initem"><code> RDEFINE DSNR (<var>subsys</var>.RRSAF)
+                          OWNER(<var>DB2owner</var>)</code></p> 
+                   
+            <p class="initem"> <code>PERMIT <var>subsys</var>.RRSAF CLASS(DSNR)
+                          ID(<var>DB2group</var>) ACCESS(READ)</code></p> 
+                   
+            <p class="initem"> where <code><var>subsys</var></code> is your DB2
+                       subsystem ID.
+            </p> 
+                   
+            <p class="initem"> Each user who wants to access DB2 must be a member of group
+                       <code><var>DB2group</var></code>.
+            </p> 
+                   
+            <p class="initem"> For further information, refer to the relevant DB2 documentation of
+                       IBM.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <h4 class="floating-title">Create user exit <code>NATRPC02</code></h4> 
+                   
+            <p class="initem"> (This step applies to Natural for DB2 users only.)</p> 
+                   
+            <p class="initem">Create the Natural RPC user exit
+                       <a href="oper.htm#oper_usr_NTRPC02"><code>NATRPC02</code></a> with a
+                       call to <code>NATPLAN</code> to set the required DB2 plan.
+            </p> 
+                   
+            <p class="initem"> Make sure that you use a <code>NATPLAN</code> of your current
+                       Natural for DB2 version.
+            </p> 
+                   
+            <p class="initem"> Sample <code>NATRPC02</code>:
+            </p> 
+                   <pre class="verbatim">DEFINE DATA PARAMETER
+  1 SUBPROGRAM (A8) BY VALUE END-DEFINE
+FETCH RETURN 'NATPLAN' '<var>planname</var>'</pre> 
+                  </li> 
+               
+         <li> 
+                   
+            <h4 class="floating-title">Start Roll Server</h4> 
+                   
+            <p class="initem">Start the
+                       Roll
+                       Server for the
+                       <code><var>subsystem-id</var></code>
+                       used by the Natural RPC server.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <h4 class="floating-title">Start Natural RPC server front-end</h4> 
+                   
+            <p class="initem">Start the Natural RPC server front-end.</p> 
+                   
+            <p class="initem"> Refer to <a href="start.htm#start_server_start_via_front_end">Starting a Natural RPC
+                  Server Using the RPC Server Front-End</a> in
+                       <a href="start.htm#start">Starting a Natural RPC
+                  Server</a>.
+            </p> 
+                   
+            <p class="initem"> Make sure you have added all required load libaries to your
+                       <code>STEPLIB</code> concatenation. You will especially need the following:
+            </p>
+                   
+                   
+            <ul style="margin-top: 0px; margin-bottom: 0px;"> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem"> Natural load library</p> 
+                          
+               </li> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem"> EntireX load library</p> 
+                          
+               </li> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem">Adabas load library (if you use the Adabas link routine
+                               <code>ADAUSER</code>)
+                  </p> 
+                          
+               </li> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem">DB2 load library (if you want to access DB2)</p> 
+                          
+               </li> 
+                      
+            </ul> 
+                   
+            <p class="initem"> The impersonation is successfully activated if you see the following
+                       messages: 
+            </p> 
+                   
+            <ul style="margin-top: 0px; margin-bottom: 0px;"> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem">In the job log:</p> 
+                           
+                  <p class="initem"><code>RPC0010 Authorized environment for impersonation
+                        established</code></p> 
+                          
+               </li> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem">In the RPC trace file: </p> 
+                           
+                  <p class="initem"><code>M *** Server is running under NSC with
+                        impersonation</code></p> 
+                          
+               </li> 
+                      
+            </ul> 
+                  
+         </li> 
+              
+      </ol> 
+          
+      <div><a name="securi_rpc_impersonation_use_client"></a></div> 
+          
+      <h3>Steps to Use Impersonation (Client Side)</h3> 
+           
+      <p>The client must send logon data together with the RPC request as it is
+               already done for a standard Natural Security (NSC) protected Natural RPC
+               server. In contrast to a standard Natural RPC server, the user ID must be a
+               valid SAF user ID and the password must be the corresponding SAF password. User
+               ID and password are validated by the Natural RPC server on the z/OS system
+               under which the server is executing. In case of impersonation under z/OS, the
+               user ID is validated by NSC according to the defined rules. The password is
+               ignored. Therefore, it is not required to set the NSC password to your SAF
+               password.
+      </p> 
+           
+      <p>Depending on the kind of client, the logon data are set
+               differently:
+      </p>
+      <div><a name="d0e15748"></a></div> 
+           
+      <h4>Natural Clients</h4> 
+            
+            
+      <ol> 
+                
+         <li> 
+                    
+            <p class="initem">Turn on the logon option in the
+                        <a href="../utis/sysrpc_sm.htm">Service Directory
+                  Maintenance</a> function or in the
+                        <a href="../parms/dfs.htm"><code>DFS</code></a> keyword
+                        subparameter
+            </p>
+                    
+                    
+            <p class="initem"> Alternatively, you can use the
+                        <a href="oper.htm#oper_Spec_Default_Server_Dynamic"><code>USR2007N</code></a> to
+                        turn it on.
+            </p> 
+                    
+            <p class="initem"> Refer to <a href="oper.htm#oper_Using_LOGON">Using the
+                  Logon Option</a> in <a href="oper.htm#oper">Operating a Natural RPC
+                  Environment</a>.
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">Set the SAF user ID and the SAF password, using application
+                        programming interface <a href="securi.htm#securi_USR1071"><code>USR1071P</code></a>.
+            </p> 
+                    
+            <p class="initem"> If your client runs under Natural Security (NSC) and the user ID
+                        and password of NSC are identical to the SAF user ID and the SAF password, then
+                        <code>USR1071P</code> is not required.
+            </p> 
+                   
+         </li> 
+               
+      </ol> 
+           
+      <div><a name="d0e15815"></a></div> 
+           
+      <h4>EntireX RPC Clients</h4> 
+            
+            
+      <ol> 
+                
+         <li> 
+                    
+            <p class="initem">Turn on the Natural logon option according to your application
+                        environment.
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">Set the RPC user ID and the RPC password to the SAF user ID and SAF
+                        password according to your application environment.
+            </p> 
+                   
+         </li> 
+               
+      </ol> 
+           
+      <div><a name="securi_rpc_impersonation_rules"></a></div> 
+          
+      <h3>Rules for Impersonation</h3> 
+           
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">Impersonation takes place at the start of each non-conversational
+                       <code>CALLNAT</code> and at the start of each conversation.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">The authentication of the Natural RPC user ID and password is
+                       performed by the external security system. The password on the
+                       <code>FSEC</code> system file is not used.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">After successful authentication, the Natural RPC user ID is
+                       established for the operating system (user is impersonated).
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">After successful impersonation: </p> 
+                   
+            <ol style="margin-top: 0px; margin-bottom: 0px;"> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem">A Natural security logon is performed for the Natural RPC user ID
+                               without password check.
+                  </p> 
+                          
+               </li> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem">All work files with a <code>DDNAME</code> that does not start with
+                               CM are opened with the Natural RPC user ID.
+                  </p> 
+                          
+               </li> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem">All Adabas databases are opened with the Natural RPC user ID
+                               (applies to Adabas external security only).
+                  </p> 
+                          
+               </li> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem">If an <code>ETID</code> is specified in the NSC user profile, this
+                               <code>ETID</code> is used in the Adabas open request.
+                  </p> 
+                          
+               </li> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem">The DB2 connection is opened with the Natural RPC user ID (applies
+                               to Natural for DB2 users only).
+                  </p> 
+                          
+               </li> 
+                      
+            </ol> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">At the end of each non-conversational <code>CALLNAT</code> and at the
+                       end of each conversation, the Natural RPC user ID is logged off from the
+                       operating system.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">After log off: </p> 
+                   
+            <ol style="margin-top: 0px; margin-bottom: 0px;"> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem">All work files with a <code>DDNAME</code> that does not start with
+                               <code>CM</code> are closed.
+                  </p> 
+                          
+               </li> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem">All Adabas databases are closed.</p> 
+                          
+               </li> 
+                      
+            </ol> 
+                  
+         </li> 
+              
+      </ul> 
+          
+      <div class="noprint">
+         <p><a href="securi.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="securi_rpc_impersonation_cics"></a></div> 
+         
+      <h2>Impersonation (CICS)</h2> 
+          
+      <p>The following topics are covered
+              below:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="securi.htm#securi_rpc_impersonation_purpose_cics">Purpose of Impersonation</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="securi.htm#securi_rpc_impersonation_activate_srv_cics">Steps to Activate Impersonation (Server Side)</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="securi.htm#securi_rpc_impersonation_use_client_cics">Steps to Use Impersonation (Client Side)</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="securi.htm#securi_rpc_impersonation_rules_cics">Rules for Impersonation</a></p>
+         </li>
+      </ul>
+      <div><a name="securi_rpc_impersonation_purpose_cics"></a></div> 
+          
+      <h3>Purpose of Impersonation</h3> 
+           
+           
+      <p><a href="intro_rpc.htm#intro_rpc_rpc_terms_impersonation">Impersonation</a> is an
+               optional feature on the Natural RPC server side and is only available if the
+               Natural RPC server runs under Natural Security. The impersonation feature is
+               controlled by the <a href="../nsc/nsc_rpc.htm#RPCprofiles">Natural Security Profiles for
+            Natural RPC Servers</a>. See also
+               <a href="../nsc/nsc_rpc.htm">Protecting Natural RPC Servers and
+            Services</a> in the Natural Security documentation.
+      </p> 
+           
+      <p>Impersonation under CICS requires the use of the Natural RPC server
+               front-end under CICS and uses the interface provided by CICS.
+      </p> 
+           
+      <p>If impersonation is active for the Natural RPC server, a client request
+               that uses the Logon Option is from the perspective of CICS executed under the
+               user ID that the client passes in the <code>LOGON</code> data
+               (called Natural RPC user ID). Impersonation under CICS uses the CICS option to
+               start a CICS task under a given user ID. After a client request has arrived the
+               Natural RPC server front-end starts a new CICS task using the
+               <code>USERID()</code> option of the <code>EXEC CICS START TRANSID()</code>
+               command, where <code>USERID</code> is the Natural RPC user ID. The User
+               authentication (verification of the Natural RPC user ID) is performed by CICS,
+               typically by using the underlying external security system. After successful
+               authentication, the user's identity is established for the CICS task. Any
+               subsequent authorization checks will be performed based on this identity. This
+               means that all accesses to resources that are controlled by CICS are authorized
+               for this identity. This applies especially to accesses to CICS resources and to
+               data bases.
+      </p> 
+           
+      <p>Impersonation does not turn off Natural Security. After successful
+               authentication of the user's identity by CICS, a Natural Security logon takes
+               place using the same <code>LOGON</code> data with password
+               verification.
+      </p> 
+           
+      <p>To start a Natural RPC server using impersonation, see
+               <a href="start.htm#start_server_start_via_front_end_cics">Starting a Natural
+                  Server Using the RPC Server Front-End</a> (CICS only) in
+               <a href="start.htm#start">Starting a Natural RPC Server</a>.
+      </p> 
+           
+      <p class="note"><strong>Note:</strong><br> Without impersonation, a client request that uses the Logon option
+               is from the perspective of the operating system executed with the user ID under
+               which the Natural RPC server has been started.
+      </p> 
+          
+      <div><a name="securi_rpc_impersonation_activate_srv_cics"></a></div> 
+          
+      <h3>Steps to Activate Impersonation (Server Side)</h3> 
+           
+           
+      <ol> 
+               
+         <li> 
+                   
+            <h4 class="floating-title">Install the RPC server front-end under
+                       CICS
+            </h4> 
+                   
+            <p class="initem"> Proceed as described in the corresponding steps of the Natural for
+                       Mainframes <cite>Installation</cite> documentation, section
+                       <cite>Installing the Natural
+                          CICS Interface</cite>.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <h4 class="floating-title">Install the Adabas link routine for Adabas external
+                       security
+            </h4> 
+                   
+            <p class="initem"> For further information, refer to the relevant Adabas documentation
+                       (applies to Adabas external security users only).
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <h4 class="floating-title">Use Broker stub <code>CICSETB</code> instead of
+                       <code>NATETB23</code></h4> 
+                   
+            <p class="initem">See <a href="setup.htm#setup_rpc_setup_etx_broker_stub_access_mf">Providing Access
+                  to the EntireX Broker Stub on Mainframe</a> in
+                       <a href="setup.htm#setup">Setting Up a Natural RPC
+                  Environment</a>.
+            </p> 
+                   
+            <p class="initem"> You must link <code>CICSETB</code> to your Natural CICS interface
+                       nucleus.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <h4 class="floating-title">Define all required RPC server-specific Natural profile
+                       parameters
+            </h4> 
+                   
+            <p class="initem"> Refer to <a href="setup.htm#setup_rpc_setup_srv_profparms">Set the RPC Server-Specific
+                  Natural Parameters</a> in <a href="setup.htm#setup">Setting Up a Natural RPC
+                  Environment</a>.
+            </p> 
+                   
+            <p class="initem"> The parameters are either defined in the parameter module
+                       <code>NATPARM</code>
+                       or in the dataset
+                       <code>CMPRMIN</code>.
+            </p>
+                   
+                  
+         </li> 
+               
+         <li> 
+                   
+            <h4 class="floating-title">Define an RPC Server Profile in Natural
+                       Security
+            </h4> 
+                   
+            <p class="initem">Define an RPC Server Profile in Natural Security (NSC) for the server
+                       name that is used by the RPC server (<code>SRVNAME</code>) and activate the
+                       impersonation.
+            </p> 
+                   
+            <p class="initem"> Refer to<a href="../nsc/nsc_rpc.htm#RPCprofiles">Security Profiles for Natural RPC
+                  Servers</a> in <a href="../nsc/nsc_rpc.htm">Protecting Natural RPC Servers and
+                  Services</a> of the <cite>Natural Security</cite>
+                       documentation.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <h4 class="floating-title">If CICS startup parameter
+                       <code>XUSER=YES</code></h4> 
+                   
+            <p class="initem">If the CICS startup parameter <code>XUSER=YES</code> is specified you
+                       must define surrogate users for each client user:
+            </p> 
+                   
+            <p class="initem"> <code>RDEFINE SURROGATE <var>userid1</var>.DFHSTART
+                          UACC(NONE) OWNER(<var>userid1</var>) PERMIT
+                          <var>userid1</var>.DFHSTART CLASS(SURROGATE)
+                          ID(<var>userid2</var>) ACCESS(READ)</code></p> 
+                   
+            <p class="initem"> where</p> 
+                   
+            <p class="initem"> <code><var>userid1</var></code> is the user ID of
+                       the client,
+            </p> 
+                   
+            <p class="initem"> <code><var>userid2</var></code> is the user ID under
+                       which the Natural RPC server front-end is started.
+            </p> 
+                   
+            <p class="initem"> For further information, refer to the relevant CICS documentation of
+                       IBM.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <h4 class="floating-title">Define a CICS <code>PROGRAM</code> entry for the RPC
+                       server front-end
+            </h4> 
+                   
+            <p class="initem"> Refer to the corresponding step in
+                       <cite>Installing the Natural
+                          CICS Interface</cite>.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Define a CICS <code>TRANSACTION</code> entry for the transaction ID
+                       that invokes the RPC server front-end.
+            </p> 
+                   
+            <p class="initem"> Refer to the corresponding step in
+                       <cite>Installing the Natural
+                          CICS Interface</cite>.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <h4 class="floating-title">Define a <code>DB2TRAN</code> and <code>DB2ENTRY</code>
+                       entry
+            </h4> 
+                   
+            <p class="initem"> (This step applies to Natural for DB2 users only.)</p> 
+                   
+            <p class="initem">Define a <code>DB2TRAN</code> and <code>DB2ENTRY</code> entry for the
+                       transaction ID that invokes the RPC server front-end.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <h4 class="floating-title">Start the Roll Server</h4> 
+                   
+            <p class="initem">Start the
+                       <cite>Roll
+                          Server</cite> for the subsystem used by the Natural RPC
+                       server.
+            </p> 
+                   
+            <p class="initem"> (This step applies only if the
+                       <code>NCMDIR</code>
+                       macro parameter <code>ROLLSRV</code> is
+                       set to <code>YES</code>.)
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <h4 class="floating-title">Start the Natural RPC server front-end under
+                       CICS
+            </h4> 
+                   
+            <p class="initem"> Refer to <a href="start.htm#start_server_start_via_front_end_cics">Starting a Natural
+                  RPC Server Using the RPC Server Front-End (CICS only)</a> in
+                       <a href="start.htm#start">Starting a Natural RPC
+                  Server</a>.
+            </p> 
+                   
+            <p class="initem"> The impersonation is successfully activated if you see the following
+                       message in the RPC trace file:
+            </p> 
+                   
+            <p class="initem"> <code>M *** Server is running under NSC with
+                  impersonation</code></p> 
+                  
+         </li> 
+              
+      </ol> 
+          
+      <div><a name="securi_rpc_impersonation_use_client_cics"></a></div> 
+          
+      <h3>Steps to Use Impersonation (Client Side)</h3> 
+           
+           
+      <p>The client must send logon data together with the RPC request as it is
+               already done for a standard Natural Security (NSC) protected Natural RPC
+               server. User ID and password are validated by NSC according to the defined
+               rules. In contrast to a standard Natural RPC server, the user ID must also be a
+               valid CICS user ID.
+      </p> 
+           
+      <p>Depending on the kind of client, the logon data are set
+               differently:
+      </p> 
+           
+      <h4 class="floating-title">Natural Clients</h4> 
+           
+      <ol> 
+               
+         <li> 
+                   
+            <h4 class="floating-title">Turn on the logon option</h4> 
+                   
+            <p class="initem">Turn on the logon option in the <a href="../utis/sysrpc_sm.htm">Service Directory
+                  Maintenance</a> function or in the
+                       <a href="../parms/dfs.htm"><code>DFS</code></a> keyword
+                       subparameter of profile parameter
+                       <code>RPC</code> or parameter macro
+                       <code>NTRPC</code>.
+            </p> 
+                   
+            <p class="initem">Alternatively, you can use the application programming interface
+                       <a href="oper.htm#oper_Spec_Default_Server_Dynamic"><code>USR2007N</code></a> to
+                       turn it on.
+            </p> 
+                   
+            <p class="initem"> Refer to <a href="oper.htm#oper_Using_LOGON">Using the
+                  Logon Option</a> in <a href="oper.htm#oper">Operating a Natural RPC
+                  Environment</a>.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <h4 class="floating-title">Set user ID and password</h4> 
+                   
+            <p class="initem">Set the user ID and the password, using application programming
+                       interface <a href="securi.htm#securi_USR1071"><code>USR1071P</code></a>.
+            </p> 
+                   
+            <p class="initem"> If your client runs under Natural Security (NSC) and the user ID and
+                       password of NSC are identical to the user ID and password on the server side,
+                       then <code>USR1071P</code> is not required.
+            </p> 
+                  
+         </li> 
+              
+      </ol> 
+           
+      <h4 class="floating-title">EntireX RPC Clients</h4> 
+           
+      <ol> 
+               
+         <li> 
+                   
+            <h4 class="floating-title">Turn on the Natural logon option</h4> 
+                   
+            <p class="initem">Turn on the Natural logon option according to your application
+                       environment.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <h4 class="floating-title">Set RPC user ID and password</h4> 
+                   
+            <p class="initem">Set the RPC user ID and the RPC password according to your
+                       application environment.
+            </p> 
+                  
+         </li> 
+              
+      </ol> 
+          
+      <div><a name="securi_rpc_impersonation_rules_cics"></a></div> 
+          
+      <h3>Rules for Impersonation</h3> 
+           
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">Impersonation takes place at the start of each non-conversational
+                       <code>CALLNAT</code> and at the start of each conversation.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">The authentication of the Natural RPC user ID is performed by CICS.
+                       The password is not used.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">After successful authentication, the Natural RPC user ID is
+                       established for CICS (user is impersonated).
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">After successful impersonation: </p> 
+                   
+            <ol style="margin-top: 0px; margin-bottom: 0px;"> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem">A Natural security logon is performed for the Natural RPC user ID
+                               with password check according to the defined rules.
+                  </p> 
+                          
+               </li> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem">All CICS resources are accessed with the Natural RPC user ID.</p> 
+                          
+               </li> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem">All Adabas databases are opened with the Natural RPC user ID
+                               (applies to Adabas external security only).
+                  </p> 
+                          
+               </li> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem">If an <code>ETID</code> is specified in the NSC user profile, this
+                               <code>ETID</code> is used in the Adabas open request.
+                  </p> 
+                          
+               </li> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem">The DB2 connection is opened with the Natural RPC user ID (applies
+                               to Natural for DB2 users only).
+                  </p> 
+                          
+               </li> 
+                      
+            </ol> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">At the end of each non-conversational <code>CALLNAT</code> and at the
+                       end of each conversation, the Natural RPC user ID is logged off from CICS.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">After log off: </p> 
+                   
+            <ol style="margin-top: 0px; margin-bottom: 0px;"> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem">All CICS resources are closed.</p> 
+                          
+               </li> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem">All Adabas databases are closed.</p> 
+                          
+               </li> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem">The connection to DB2 is closed (applies to Natural for DB2 users
+                               only).
+                  </p> 
+                          
+               </li> 
+                      
+            </ol> 
+                  
+         </li> 
+              
+      </ul> 
+          
+      <div class="noprint">
+         <p><a href="securi.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="securi_Using_Natural_RPC_with_EntireX_Security"></a></div> 
+         
+      <h2>Using Natural RPC with EntireX Security</h2> 
+          
+      <p>Natural RPC fully supports EntireX Security on the client side and on
+              the server side.
+      </p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="securi.htm#securi_entirex_sec_client_side">EntireX Security on the Client Side</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="securi.htm#securi_entirex_sec_server_side">EntireX Security on the Server Side</a></p>
+         </li>
+      </ul>
+      <div><a name="securi_entirex_sec_client_side"></a></div> 
+          
+      <h3>EntireX Security on the Client Side</h3> 
+           
+           
+      <p><a name="securi_Interface_USR2071N"></a>To logon to and logoff from the EntireX
+               Broker, the Natural Application Programming Interface
+               <a href="securi.htm#securi_Interface_USR2071N"><code>USR2071N</code></a>
+               is provided. To logon to EntireX Broker, you use the logon function of
+               <code>USR2071N</code> and pass your user ID and password to the selected
+               EntireX Broker. After a successful logon, the security token returned is saved
+               by Natural and passed to the EntireX Broker on each subsequent call. The Logon
+               option is fully transparent to the Natural application.
+      </p> 
+           
+      <p>If EntireX Security is installed or if <code>AUTOLOGON=NO</code> is
+               specified in the EntireX Broker attribute file, you must invoke
+               <code>USR2071N</code> with the logon function before the very first remote
+               <code>CALLNAT</code> execution.
+      </p> 
+           
+      <p>You are recommended to invoke <code>USR2071N</code> with the logoff
+               function as soon as you no longer intend to use a remote
+               <code>CALLNAT</code>.
+      </p> 
+           
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To make use of <code>USR2071N</code></strong></p>
+      <ol class="steps">
+         <li> 
+                    
+                    
+            <p class="instep">Copy the subprogram <code>USR2071N</code> from libray
+                        <code>SYSEXT</code> to the library <code>SYSTEM</code> or to the steplib
+                        library or to any application in the server environment.
+            </p> 
+                    
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">Using a <a href="../sm/defineda_pda.htm"><code>DEFINE DATA
+                     PARAMETER</code></a> statement, specify the following parameters: 
+            </p> 
+                     
+                     
+            <table border="1" class="color" cellpadding="3" width="97%"> 
+                         
+               <thead align="left" valign="top"> 
+                             
+                  <tr> 
+                                 
+                     <th>Parameter</th> 
+                                 
+                     <th>I/O</th> 
+                                 
+                     <th>Format</th> 
+                                 
+                     <th colspan="2">Description</th> 
+                                
+                  </tr> 
+                            
+               </thead> 
+                         
+               <tbody align="left" valign="top"> 
+                             
+                  <tr> 
+                                 
+                     <td rowspan="3"><code><var>function</var></code></td> 
+                                 
+                     <td rowspan="3">I</td> 
+                                 
+                     <td rowspan="3">A08</td> 
+                                 
+                     <td colspan="2"> 
+                        
+                        <p>Function code; possible values are:</p> 
+                     </td> 
+                                
+                  </tr> 
+                             
+                  <tr> 
+                                 
+                     <td><code>LOGON</code></td> 
+                                 
+                     <td>Logon to EntireX Broker</td> 
+                                
+                  </tr> 
+                             
+                  <tr> 
+                                 
+                     <td><code>LOGOFF</code>&nbsp;
+                     </td> 
+                                 
+                     <td>Logoff from EntireX Broker</td> 
+                                
+                  </tr> 
+                             
+                  <tr> 
+                                 
+                     <td><code><var>broker-id</var></code></td> 
+                                 
+                     <td>I</td> 
+                                 
+                     <td>A192</td> 
+                                 
+                     <td colspan="2"> 
+                        
+                        <p>Broker ID<br>
+                                         The <var>broker-id</var> may have up to 32
+                           characters for physical node names and up to 192 characters for logical node
+                                         names or logical service names. See <cite>Operating a Natural RPC
+                                            Environment</cite>, <a href="oper.htm#oper_use_location_transparency">Using EntireX Location
+                                            Transparency</a>.
+                        </p> 
+                                     
+                        <p class="note"><strong>Note:</strong><br> For compatibility reasons
+                                         <var>broker-id</var> is defined with <code>BY VALUE
+                                            RESULT</code> to support existing callers which pass an A8 field for the
+                                         <var>broker-id</var>.
+                        </p> 
+                                     
+                        <p>The sample <code>USR2071P</code> provided in library
+                                         <code>SYSEXT</code> supports up to 32 characters.
+                        </p> 
+                     </td> 
+                                
+                  </tr> 
+                             
+                  <tr> 
+                                 
+                     <td><code><var>user-id&nbsp;</var></code></td> 
+                                 
+                     <td>I</td> 
+                                 
+                     <td>A08</td> 
+                                 
+                     <td colspan="2">User ID.</td> 
+                                
+                  </tr> 
+                             
+                  <tr> 
+                                 
+                     <td><code><var>password&nbsp;</var></code></td> 
+                                 
+                     <td>I</td> 
+                                 
+                     <td>A08</td> 
+                                 
+                     <td colspan="2">User ID's password.</td> 
+                                
+                  </tr> 
+                             
+                  <tr> 
+                                 
+                     <td><code><var>newpassw</var></code>&nbsp;
+                     </td> 
+                                 
+                     <td>I</td> 
+                                 
+                     <td>A08</td> 
+                                 
+                     <td colspan="2">User ID's new password.</td>
+                                 
+                                
+                  </tr> 
+                             
+                  <tr> 
+                                 
+                     <td rowspan="4"><code><var>rc</var></code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                     </td> 
+                                 
+                     <td rowspan="4">O</td> 
+                                 
+                     <td rowspan="4">N04</td> 
+                                 
+                     <td colspan="2"> 
+                        
+                        <p>Return value:</p> 
+                     </td> 
+                                
+                  </tr> 
+                             
+                  <tr> 
+                                 
+                     <td><code>0</code></td> 
+                                 
+                     <td>OK</td> 
+                                
+                  </tr> 
+                             
+                  <tr> 
+                                 
+                     <td><code>1</code></td> 
+                                 
+                     <td>invalid function code</td> 
+                                
+                  </tr> 
+                             
+                  <tr> 
+                                 
+                     <td><code>9999</code></td> 
+                                 
+                     <td>EntireX Broker error (see
+                        <var>message</var>)
+                     </td> 
+                                
+                  </tr> 
+                             
+                  <tr> 
+                                 
+                     <td><code><var>message</var></code></td> 
+                                 
+                     <td>O</td> 
+                                 
+                     <td>A80</td> 
+                                 
+                     <td colspan="2">Message text returned by
+                        EntireX Broker.
+                     </td> 
+                                
+                  </tr> 
+                            
+               </tbody> 
+                        
+            </table> 
+                     
+                    
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">In the calling program on the client side, specify the following
+                        statement: 
+            </p> 
+                    <pre class="verbatim">CALLNAT 'USR2071N' <var>function broker-id user-id password newpassword rc message</var></pre> 
+                    <p class="instep">See also the <a href="../sm/callnat.htm#syntax_descr_callnat">Syntax
+                  Description</a> of the <code>CALLNAT</code> statement.
+            </p> 
+                    
+                  
+         </li>
+      </ol> 
+           
+      <p>You may alternatively invoke <code>USR2071P</code> from the command
+               line and enter user ID and password in the displayed window. In this case, all
+               input except for the passwords is translated into upper case. For the
+               passwords, you have the option to enter them in mixed case or not.
+      </p> 
+           
+      <h4 class="floating-title">Special Considerations when Using Location
+               Transparency:
+      </h4> 
+           
+      <p>If you want to <code>LOGON</code> using a logical node name, you have
+               to use the <code>LOGBROKER</code> keyword.
+      </p> 
+           <pre class="verbatim">BROKER-ID := 'LOGBROKER=<var>my_logical_node,my_set</var>'</pre> 
+           <p>If you want to <code>LOGON</code> using a logical service name, you
+               have to use the <code>LOGSERVICE</code> keyword.
+      </p> 
+           <pre class="verbatim">BROKER-ID := 'LOGSERVICE=<var>my_logical_service,my_set</var>'</pre> 
+           <h4 class="floating-title">Functionality:</h4> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td><code>LOGON</code></td> 
+                        
+               <td> 
+                  
+                  <p>An EntireX Broker <code>LOGON</code> function is executed to the
+                                named <var>broker-id</var> with the
+                                <code><var>user-id</var></code> and the
+                                <code><var>password</var></code> passed. After a successful
+                                <code>LOGON</code> call, the client can communicate with the EntireX Broker
+                                <code><var>broker-id</var></code> as usual.
+                  </p> 
+                            
+                  <p>With <code><var>newpassw</var></code> the client
+                                user can change her/his password via the EntireX Security features.
+                  </p> 
+                            
+                  <div><strong class="floating-title">Notes:</strong></div> 
+                            
+                  <ul> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">If a successful logon has been performed, the user ID used in
+                                        this <code>LOGON</code> will be passed to the named EntireX Broker on all
+                                        subsequent remote procedure <code>CALLNAT</code>s which are routed via this
+                                        EntireX Broker.
+                        </p> 
+                                    
+                        <p class="initem"> Without an explicit <code>LOGON</code>, the current contents of
+                                        system variable <a href="../vari/natenv.htm#USER"><code>*USER</code></a> is
+                                        used. The same applies if you have issued a <code>LOGON</code> to EntireX
+                                        Broker 1, but your remote procedure <code>CALLNAT</code> is routed via EntireX
+                                        Broker 2.
+                        </p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">It is possible to concurrently log on to multiple EntireX
+                                        Brokers. For each <code>LOGON</code>, a different user ID may be used.
+                        </p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">The user ID used for the <code>LOGON</code> to the EntireX
+                                        Broker may be different from the Natural user ID under which the client
+                                        application runs.
+                        </p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">An internal re-logon is done after an EntireX Broker timeout has
+                                        occurred, if the original <code>LOGON</code> was done without a password (the
+                                        password used in the <code>LOGON</code> is not saved). If no internal re-logon
+                                        is possible after a timeout has occurred, the client has to explicitly reissue
+                                        the <code>LOGON</code>.
+                        </p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">At the end of the Natural session, an implicit
+                                        <code>LOGOFF</code> is executed to all EntireX Brokers to which a logon has
+                                        been performed.
+                        </p> 
+                                   
+                     </li> 
+                               
+                  </ul> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td><code>LOGOFF</code></td> 
+                        
+               <td>An EntireX Broker <code>LOGOFF</code> function is executed to
+                            the <var>broker-id</var> named.
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+          
+      <div><a name="securi_entirex_sec_server_side"></a></div> 
+          
+      <h3>EntireX Security on the Server Side</h3> 
+           
+      <p>If the value of profile
+               parameter
+               <a href="../parms/acivers.htm"><code>ACIVERS</code></a>
+               is <code>2</code> or higher, the server will log on to the EntireX Broker at
+               the session start using the <code>LOGON</code> function. The user ID is the
+               same as the user ID defined by <code>SRVUSER</code>.
+      </p> 
+           
+      <p>If EntireX Security has been installed and if the EntireX trusted user
+               ID feature is not available, there are two alternative ways to specify the
+               required password:
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">Setting <code>SRVUSER=*NSC</code></p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Using application programming interface <code>USR2072N</code></p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>These alternatives are described below.</p>
+      <div><a name="d0e17119"></a></div> 
+           
+      <h4>Setting SRVUSER=*NSC</h4> 
+            
+            
+      <p>If Natural Security is installed on the server, you can set
+                profile parameter <a href="../parms/srvuser.htm"><code>SRVUSER</code></a>
+                to <code>*NSC</code> to specify that the current Natural
+                Security user ID which was used when the server was started is used for the
+                <code>LOGON</code> in conjunction with the accompanying Natural Security
+                password. In this case, the value set for <code>ACIVERS</code> must
+                be at least <code>4</code>.
+      </p> 
+           
+      <div><a name="securi_usr2072_passw_spec"></a></div> 
+           
+      <h4>Using Application Programming Interface USR2072N to Specify a
+               Password
+      </h4> 
+            
+            
+      <p><a name="securi_USR2072"></a>The Application Programming Interface
+                <code>USR2072N</code> enables you to specify a password which is used for the
+                <code>LOGON</code> in conjunction with profile
+                parameter
+                <a href="../parms/srvuser.htm"><code>SRVUSER</code></a>.
+      </p>
+            
+            
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong>To make use of USR2072N</strong></p>
+      <ol class="steps">
+         <li> 
+                     
+                     
+            <p class="instep">Copy the subprogram <code>USR2072N</code> and optionally program
+                         <code>USR2072P</code> from libray <code>SYSEXT</code> to the library
+                         <code>SYSTEM</code> or to the steplib library or to any application in the
+                         server environment.
+            </p> 
+                     
+                   
+         </li>
+         <li> 
+                     
+                     
+            <p class="instep">Using a <a href="../sm/defineda_pda.htm"><code>DEFINE DATA
+                     PARAMETER</code></a> statement, specify the following parameter: 
+            </p> 
+                      
+                      
+            <table border="1" class="color" cellpadding="3" width="97%"> 
+                          
+               <thead align="left" valign="top"> 
+                              
+                  <tr> 
+                                  
+                     <th>Parameter</th> 
+                                  
+                     <th>I/O</th> 
+                                  
+                     <th>Format</th> 
+                                  
+                     <th>Description</th> 
+                                 
+                  </tr> 
+                             
+               </thead> 
+                          
+               <tbody align="left" valign="top"> 
+                              
+                  <tr> 
+                                  
+                     <td><code><var>password</var></code></td> 
+                                  
+                     <td>I</td> 
+                                  
+                     <td>A08</td> 
+                                  
+                     <td>User ID's password.</td> 
+                                 
+                  </tr> 
+                             
+               </tbody> 
+                         
+            </table> 
+                      
+                     
+                   
+         </li>
+         <li> 
+                     
+                     
+            <p class="instep">In the calling program on the client side, specify the following
+                         statement: 
+            </p> 
+                     <pre class="verbatim">CALLNAT 'USR2072' <var>password</var></pre> 
+                     <p class="instep">See also the <a href="../sm/callnat.htm#syntax_descr_callnat">Syntax
+                  Description</a> of the <code>CALLNAT</code> statement.
+            </p> 
+                     
+                   
+         </li>
+         <li> 
+                     
+                     
+            <p class="instep">The calling program must be executed before the Natural RPC server
+                         has started its initialization. To accomplish this, put the name of the calling
+                         program on the Natural stack when starting the server. For this purpose, you
+                         may also use the program <code>USR2072P</code> from library
+                         <code>SYSEXT</code>. In this case, the password is translated into upper case
+                         by default. You have the option to enter the password in mixed case by passing
+                         the mixed case option Y as second parameter. 
+            </p> 
+                     <pre class="verbatim">STACK=(LOGON <var>server-library</var>;USR2072P <var>password</var> [Y])</pre> 
+                     
+                   </li>
+      </ol> 
+           
+      <div class="noprint">
+         <p><a href="securi.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="rpc-iaf"></a></div> 
+         
+      <h2>Using the Integrated Authentication Framework</h2> 
+          
+      <p>The Integrated Authentication Framework (IAF) is an optional feature
+              that can be used on the Natural RPC server
+              side.
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="securi.htm#rpc-iaf-purpose">Purpose of the Integrated Authentication Framework</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="securi.htm#rpc-iaf-use">Steps to Use the Integrated Authentication Framework (Client Side)</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="securi.htm#rpc-iaf-activate">Steps to Activate the Integrated Authentication Framework (Server Side)</a></p>
+         </li>
+      </ul>
+      <div><a name="rpc-iaf-purpose"></a></div> 
+          
+      <h3>Purpose of the Integrated Authentication Framework</h3> 
+           
+           
+      <p>The Integrated Authentication Framework is available under the
+               following conditions:
+      </p> 
+           
+      <ol> 
+               
+         <li> 
+                   
+            <p class="initem">The Natural RPC server runs under Natural Security.</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">The EntireX Broker is protected by an IAF server.</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">The Natural RPC server and the EntireX Broker use the same IAF
+                       server.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">The Software AG Security eXtension (SSX) must have been installed by
+                       EntireX.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">The Natural RPC server runs under TSO, z/OS batch mode, UNIX or
+                       Windows. 
+            </p> 
+                  
+         </li> 
+              
+      </ol> 
+           
+      <p>The IAF feature is controlled by the Natural Security Profiles for
+               Natural RPC Servers. See <a href="../nsc/nsc_rpc.htm#nsc_rpc">Protecting Natural RPC Servers and
+            Services</a> in the <cite>Natural Security</cite>
+               documentation.
+      </p> 
+           
+      <p>If a Natural RPC server is configured to use the Integrated
+               Authentication framework, the Natural RPC server will no longer authenticate a
+               client request by the user ID and password passed in the logon data. Instead,
+               the user ID with which the client has logged on to the EntireX Broker is used
+               as a trusted user ID without authentication. The following steps take place:
+               
+      </p> 
+           
+      <ol> 
+               
+         <li> 
+                   
+            <p class="initem">The client request is authenticated by the EntireX Broker using the
+                       IAF server.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">The IAF server returns an encrypted and signed token that contains
+                       the user ID.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">The EntireX Broker passes the IAF token together with the RPC request
+                       to the Natural RPC server.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">The Natural RPC server validates and decrypts the IAF token and
+                       treats the user ID that is contained in the IAF token as trusted.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Natural Security validates the user ID and performs a logon to the
+                       requested library using the defined rules for authorization. No password is
+                       used.
+            </p> 
+                  
+         </li> 
+              
+      </ol> 
+           
+      <p>As a consequence, after a successful Natural Security logon, the
+               Natural user ID in the Natural system variable
+               <a href="../vari/natenv.htm#USER"><code>*USER</code></a> and
+               the EntireX user ID are identical.
+      </p> 
+          
+      <div><a name="rpc-iaf-use"></a></div> 
+          
+      <h3>Steps to Use the Integrated Authentication Framework (Client
+              Side)
+      </h3> 
+           
+           
+      <p>The client must logon to the EntireX Broker as it is done within a
+               standard EntireX Security environment. It is transparent to the client that
+               User ID and password are authenticated by the IAF server.
+      </p> 
+           
+      <p>The client must also send logon data together with the RPC request as
+               it is done for a standard Natural Security protected Natural RPC server.
+      </p> 
+           
+      <p>In contrast to a standard Natural Security protected Natural RPC server
+               the user ID and password provided in the logon data are ignored and no
+               authentication takes place (see above). Only the Natural library is evaluated
+               by the Natural RPC server. User ID and password may therefore be omitted in the
+               logon data.
+      </p> 
+          
+      <div><a name="rpc-iaf-activate"></a></div> 
+          
+      <h3>Steps to Activate the Integrated Authentication Framework (Server
+              Side) 
+      </h3> 
+           
+      <p>To activate the Integrated Authentication Framework on the server side,
+               perform the following steps according to your
+               environment:
+      </p>
+      <ul>
+         <li><a href="securi.htm#rpc-iaf-activate-tso-batch">Under TSO and in z/OS Batch Mode</a></li>
+         <li><a href="securi.htm#rpc-iaf-activate-allenv">Under Windows and UNIX</a></li>
+      </ul>
+      <div><a name="rpc-iaf-activate-tso-batch"></a></div> 
+           
+      <h4>Under TSO and in z/OS Batch Mode</h4> 
+            
+            
+      <ol> 
+                
+         <li> 
+                    
+            <p class="initem">Define the IAF service in Natural Security Refer to
+                        <a href="../nsc/nsc_rpc.htm#IAFsupport">IAF
+                  Support</a> in the section
+                        <a href="../nsc/nsc_rpc.htm#nsc_rpc">Protecting Natural RPC
+                  Servers and Services</a> of the <cite>Natural
+                           Security</cite> documentation. 
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">Add the CA certificate that is used by your IAF server to the RACF
+                        keyring that is referenced in the Trust store field of
+                        <a href="../nsc/nsc_rpc.htm#IAFsupport">IAF
+                  Support</a>.
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">Permit access to keyrings to the RACF user ID under which the
+                        Natural RPC server will be started.
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">Define an RPC Server Profile in Natural Security for the server name
+                        that is used by the RPC server (<code>SRVNAME</code>) and activate the IAF
+                        support. Refer to Security Profiles for Natural RPC Servers in the section
+                        <a href="../nsc/nsc_rpc.htm#nsc_rpc">Protecting Natural RPC
+                  Servers and Services</a> of the Natural Security
+                        documentation. 
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">Generate the Natural z/OS batch nucleus that is used by the Natural
+                        RPC server with LE support (<code>LE370=YES</code>).
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">Set <code>ACIVERS=9</code> or above in the Natural profile
+                        parameters that are used by your Natural RPC server.
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">Turn on POSIX in your batch JCL that executes the Natural RPC server
+                        by using the <code>CEEOPTS</code> input data set. See
+                        <a href="start.htm#start_start_server_mf_batch_zos">Starting a Batch
+                  Server under z/OS</a>.
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">Add the Software AG Security eXtension (SSX) load library to your
+                        JCL. See <a href="start.htm#start_start_server_mf_batch_zos">Starting
+                  a Batch Server under z/OS</a>.
+            </p> 
+                   
+         </li> 
+               
+      </ol> 
+           
+      <div><a name="rpc-iaf-activate-allenv"></a></div> 
+           
+      <h4>Under Windows and UNIX</h4> 
+            
+            
+      <ol> 
+                
+         <li> 
+                    
+            <p class="initem">Define the IAF service in Natural Security. Refer to
+                        <a href="../nsc/nsc_rpc.htm#IAFsupport">IAF
+                  Support</a> in the section
+                        <a href="../nsc/nsc_rpc.htm#nsc_rpc">Protecting Natural RPC
+                  Servers and Services</a> of the <cite>Natural
+                           Security</cite> documentation. 
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">Define an RPC Server Profile in Natural Security for the server name
+                        that is used by the RPC server (<code>SRVNAME</code>) and activate the IAF
+                        support. Refer to <a href="../nsc/nsc_rpc.htm#RPCprofiles">Security Profiles for Natural RPC
+                  Servers</a> in the section
+                        <a href="../nsc/nsc_rpc.htm#nsc_rpc">Protecting Natural RPC
+                  Servers and Services</a> of the Natural Security
+                        documentation. 
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">Set <code>ACIVERS=9</code> or above in the Natural profile
+                        parameters that are used by your Natural RPC server.
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">Modify the environment variable:</p> 
+                     
+                     
+            <table border="1" class="color" cellpadding="3" width="97%"> 
+                         
+               <tbody align="left" valign="top"> 
+                             
+                  <tr> 
+                                 
+                     <td>UNIX:</td> 
+                                 
+                     <td>Add the
+                        <code>$SAG/iaf/v<var>XX</var>/lib/</code> directory to the
+                                     <code>$LD_LIBRARY_PATH</code> (<code>$SHLIB_PATH</code> on HP-UX systems)
+                                     environment variable. 
+                                     
+                        <p><var>XX</var> stands for the current version
+                                         number.
+                        </p>
+                     </td> 
+                                
+                  </tr> 
+                             
+                  <tr> 
+                                 
+                     <td>Windows:</td> 
+                                 
+                     <td>Add the <code>%ProgramFiles%\Software AG\EntireX\Bin</code>
+                                     directory to the <code>%PATH%</code> environment variable.
+                     </td> 
+                                
+                  </tr> 
+                            
+               </tbody> 
+                        
+            </table> 
+                     
+                   
+         </li> 
+               
+      </ol> 
+           
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="securi.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../rpc/securi.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/rpc/securi.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="rpc-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="rds.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="rpc-exx-broker-support.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

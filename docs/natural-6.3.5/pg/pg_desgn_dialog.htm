@@ -1,0 +1,1104 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Dialog Design</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="pg_desgn_dialog"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_desgn_dialog.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_desgn_dialog.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_desgn-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_desgn_screen.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_nni-over.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Programming Guide&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> Dialog Design 
+               <a name="x546"></a></h1>
+      </div> 
+         
+         
+      <p>This document tells you how you can design character-based user interfaces that make user
+             interaction with the application simple and flexible.
+      </p> 
+          
+         
+      <p>The following topics are covered:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_desgn_dialog.htm#Field-Sensitive_Processing">Field-Sensitive Processing</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_desgn_dialog.htm#Simplifying_Programming">Simplifying Programming</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_desgn_dialog.htm#Line-Sensitive_Processing">Line-Sensitive Processing</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_desgn_dialog.htm#Column-Sensitive_Processing">Column-Sensitive Processing</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_desgn_dialog.htm#Processing_Based_on_Function_Keys">Processing Based on Function Keys</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_desgn_dialog.htm#Processing_Based_on_Function-Key_Names">Processing Based on Function-Key Names</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_desgn_dialog.htm#Processing_Data_Outside_an_Active_Window">Processing Data Outside an Active Window</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_desgn_dialog.htm#Copying_Data_from_a_Screen">Copying Data from a Screen</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_desgn_dialog.htm#The_Statements_REINPUT_REINPUT_FULL">Statements REINPUT/REINPUT FULL</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_desgn_dialog.htm#Object-Oriented_Processing">Object-Oriented Processing - The Natural Command Processor</a></p>
+         </li>
+      </ul> 
+        
+      <hr> 
+        
+      <div><a name="Field-Sensitive_Processing"></a></div> 
+         
+      <h2> 
+             <a name="x547"></a>Field-Sensitive Processing
+      </h2> 
+         
+      <div><a name="d0e76564"></a></div> 
+          
+      <h3> 
+              <a name="x548"></a> 
+              <a name="x549"></a>*CURS-FIELD and
+              POS(<var>field-name</var>)
+      </h3> 
+           
+           
+      <p>Using the system variable <a href="../vari/inout.htm#CURS_FIELD"><code>*CURS-FIELD</code></a>
+               together with the system function <a href="../func/func_pos.htm"><code>POS(<var>field-name</var>)</code></a>,
+               you can define processing based on the field where the cursor is positioned at
+               the time the user presses <span class="key">Enter</span>.
+      </p> 
+           
+      <p><code>*CURS-FIELD</code> contains the internal
+               identification of the field where the cursor is currently positioned; it cannot
+               be used by itself, but only in conjunction with
+               <code>POS(<var>field-name</var>)</code>.
+      </p> 
+           
+      <p>You can use <code>*CURS-FIELD</code> and
+               <code>POS(<var>field-name</var>)</code>, for example, to enable
+               a user to select a function simply by placing the cursor on a specific field
+               and pressing <span class="key">Enter</span>.
+      </p> 
+           
+      <p>The example below illustrates such an application:</p> 
+           <pre class="verbatim">
+DEFINE DATA LOCAL
+1 #EMP (A1)
+1 #CAR (A1)
+1 #CODE (N1)
+END-DEFINE
+*
+INPUT USING MAP 'CURS'
+*
+<strong>DECIDE FOR FIRST CONDITION
+  WHEN *CURS-FIELD = POS(#EMP) OR #EMP = 'X' OR #CODE = 1
+    FETCH 'LISTEMP'
+  WHEN *CURS-FIELD = POS(#CAR) OR #CAR = 'X' OR #CODE = 2
+    FETCH 'LISTCAR'
+   WHEN NONE
+    REINPUT 'PLEASE MAKE A VALID SELECTION'
+END-DECIDE</strong>
+END
+</pre> 
+           <p>And the result:</p> 
+           
+      <table border="1" cellpadding="5" class="screen">
+         <tr>
+            <td><pre>                                  SAMPLE MAP
+                                                                              
+                    Please select a function                                  
+                                                                             
+                                                                 
+                    1.) Employee information  _      
+                    2.) Vehicle information   _  <strong>&lt;== Cursor positioned</strong>
+                                                      <strong>on field</strong> 
+  
+                        Enter code:  _                      
+  
+  To select a function, do one of the following:
+  
+  - place the cursor on the input field next to desired function and press Enter 
+  - mark the input field next to desired function with an X and press Enter      
+  - enter the desired function code (1 or 2) in the 'Enter code' field and press 
+Enter    
+</pre></td>
+         </tr>
+      </table> 
+           
+      <p>If the user places the cursor on the input field (<code>#EMP</code>)
+               next to Employee information, and presses <span class="key">Enter</span>, the program LISTEMP
+               displays a list of employee names:
+      </p> 
+           
+      <table border="1" cellpadding="5" class="screen">
+         <tr>
+            <td><pre>
+  Page      1                                                2001-01-22  09:39:32
+                                                                                 
+          NAME                                                                   
+  -------------------- 
+                                                            
+  ABELLAN
+  ACHIESON
+  ADAM
+  ADKINSON
+  ADKINSON
+  ADKINSON
+  ADKINSON
+  ADKINSON
+  ADKINSON
+  ADKINSON
+  ADKINSON
+  AECKERLE
+  AFANASSIEV
+  AFANASSIEV
+  AHL
+  AKROYD
+</pre></td>
+         </tr>
+      </table> 
+           
+      <p class="note"><strong>Note:</strong><br> The values of <a href="../vari/inout.htm#CURS_FIELD"><code>*CURS-FIELD</code></a>
+               and <code>POS(<var>field-name</var>)</code> serve for internal
+               identification of the fields only. They cannot be used for arithmetical
+               operations.
+      </p> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_desgn_dialog.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Simplifying_Programming"></a></div> 
+         
+      <h2> Simplifying Programming </h2> 
+         
+      <div><a name="pos-sysfunct"></a></div> 
+          
+      <h3> 
+              <a name="x550"></a>System Function POS 
+      </h3> 
+           
+           
+      <p>The Natural system function <a href="../func/func_pos.htm"><code>POS(<var>field-name</var>)</code></a>
+               contains the internal identification of the field whose name is specified with
+               the system function.
+      </p> 
+           
+      <p><code>POS(<var>field-name</var>)</code> may be used to
+               identify a specific field, regardless of its position in a map. This means that
+               the sequence and number of fields in a map may be changed, but
+               <code>POS(<var>field-name</var>)</code> will still uniquely
+               identify the same field. With this, for example, you need only a single
+               <a href="../sm/reinput.htm"><code>REINPUT</code></a> statement to
+               make the field to be <code>MARK</code>ed dependent on the program logic.
+      </p> 
+           
+      <p class="note"><strong>Note:</strong><br> The value <code>POS(<var>field-name</var>)</code>
+               serves for internal identification of the fields only. It cannot be used for
+               arithmetical operations.
+      </p> 
+           
+      <p> Example: </p> 
+           <pre class="verbatim">
+...
+DECIDE ON FIRST VALUE OF ...
+   VALUE ...
+      COMPUTE #FIELDX = POS(FIELD1)
+   VALUE ...
+      COMPUTE #FIELDX = POS(FIELD2)
+   ...
+END-DECIDE
+...
+REINPUT ... MARK #FIELDX
+...
+</pre> 
+           <p>Full details on <a href="../vari/inout.htm#CURS_FIELD"><code>*CURS-FIELD</code></a>
+               and <a href="../func/func_pos.htm"><code>POS(<var>field-name</var>)</code></a>
+               are described in the <cite>System Variables</cite> and <cite>System
+                  Functions</cite> documention.
+      </p> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_desgn_dialog.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Line-Sensitive_Processing"></a></div> 
+         
+      <h2> 
+             <a name="x551"></a>Line-Sensitive Processing
+      </h2> 
+         
+      <div><a name="curs-line_sysvar"></a></div> 
+          
+      <h3> 
+              <a name="x552"></a> System Variable *CURS-LINE 
+      </h3> 
+           
+           
+      <p>Using the system variable <a href="../vari/inout.htm#CURS_LINE"><code>*CURS-LINE</code></a>,
+               you can make processing dependent on the line where the cursor is positioned at
+               the time the user presses <span class="key">Enter</span>.
+      </p> 
+           
+      <p>Using this variable, you can make user-friendly menus. With the
+               appropriate programming, the user merely has to place the cursor on the line of
+               the desired menu option and press <span class="key">Enter</span> to execute the option.
+      </p> 
+           
+      <p>The cursor position is defined within the current active window,
+               regardless of its physical placement on the screen.
+      </p> 
+           
+      <p class="note"><strong>Note:</strong><br> The message line, function-key lines and statistics line/infoline
+               are not counted as data lines on the screen.
+      </p> 
+           
+      <p>The example below demonstrates line-sensitive processing using the
+               <a href="../vari/inout.htm#CURS_LINE"><code>*CURS-LINE</code></a>
+               system variable. When the user presses <span class="key">Enter</span> on the map, the program
+               checks if the cursor is positioned on line 8 of the screen which contains the
+               option <code>Employee information</code>. If this is the case, the program that
+               lists the names of employees LISTEMP is executed.
+      </p> 
+           <pre class="verbatim">
+DEFINE DATA LOCAL
+1 #EMP (A1)      
+1 #CAR (A1)      
+1 #CODE (N1)     
+END-DEFINE
+*
+INPUT USING MAP 'CURS' 
+*
+DECIDE FOR FIRST CONDITION
+  <strong>WHEN *CURS-LINE = 8
+     FETCH 'LISTEMP'</strong>   
+   WHEN NONE            
+     REINPUT 'PLACE CURSOR ON LINE OF OPTION YOU WISH TO SELECT' 
+END-DECIDE
+END
+</pre> 
+           <p>Output:</p> 
+           
+      <table border="1" cellpadding="5" class="screen">
+         <tr>
+            <td><pre>                                 Company Information                            
+                                                                                 
+                                                                                 
+                    Please select a function                                   
+                                                                                 
+                                                                                 
+                 <strong>[]</strong> 1.) Employee information                                     
+                                                                                 
+                    2.) Vehicle information                                      
+                                                                                 
+                                                                                 
+                                                                                 
+                                                                                 
+                                                                                 
+                                                                                 
+                                                                                 
+                                                                                 
+    Place the cursor on the line of the option you wish to select and press   
+    Enter</pre></td>
+         </tr>
+      </table> 
+           
+      <p>The user places the cursor indicated by square brackets [] on the line
+               of the desired option and presses <span class="key">Enter</span> and the corresponding
+               program is executed.
+      </p> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_desgn_dialog.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Column-Sensitive_Processing"></a></div> 
+         
+      <h2> 
+             <a name="x553"></a>Column-Sensitive Processing 
+      </h2> 
+         
+      <div><a name="curs-col_sysvar"></a></div> 
+          
+      <h3> 
+              <a name="x554"></a> System Variable *CURS-COL 
+      </h3> 
+           
+           
+      <p>The system variable <a href="../vari/inout.htm#CURS_COL"><code>*CURS-COL</code></a>
+               can be used in a similar way to <code>*CURS-LINE</code>
+               described above. With <code>*CURS-COL</code> you can make
+               processing dependent on the column where the cursor is positioned on the
+               screen.
+      </p> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_desgn_dialog.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Processing_Based_on_Function_Keys"></a></div> 
+         
+      <h2> 
+             <a name="x555"></a>Processing Based on Function Keys 
+      </h2> 
+         
+      <div><a name="pf_key_sysvar"></a></div> 
+          
+      <h3> 
+              <a name="x556"></a> System Variable *PF-KEY 
+      </h3> 
+           
+           
+      <p>Frequently you may wish to make processing dependent on the function
+               key a user presses.
+      </p> 
+           
+      <p>This is achieved with the statement <a href="../sm/setkey.htm"><code>SET KEY</code></a>, the system variable
+               <a href="../vari/inout.htm#PF_KEY"><code>*PF-KEY</code></a>
+               and a modification of the default map settings (<code>Standard Keys =
+            Y</code>).
+      </p> 
+           
+      <p>The <code>SET KEY</code> statement assigns functions to function keys
+               during program execution. The system variable
+               <code>*PF-KEY</code> contains the identification of the last
+               function key the user pressed.
+      </p> 
+           
+      <p>The example below illustrates the use of <code>SET KEY</code> in
+               combination with <code>*PF-KEY</code>.
+      </p> 
+           <pre class="verbatim">
+...
+SET KEY PF1 
+*
+INPUT USING MAP 'DEMO&amp;'
+IF *PF-KEY = 'PF1'
+  WRITE 'Help is currently not active'
+END-IF
+...
+</pre> 
+           <p>The <code>SET KEY</code> statement activates <span class="key">PF1</span> as a
+               function key.
+      </p> 
+           
+      <p>The <code>IF</code> statement defines what action is to be taken when
+               the user presses <span class="key">PF1</span>. The system variable
+               <code>*PF-KEY</code> is checked for its current content; if it
+               contains <span class="key">PF1</span>, the corresponding action is taken.
+      </p> 
+           
+      <p>Further details regarding the statement
+               <a href="../sm/setkey.htm"><code>SET KEY</code></a> and the system
+               variable <a href="../vari/inout.htm#PF_KEY"><code>*PF-KEY</code></a>
+               are described in the <cite>Statements</cite> and the <cite>System
+                  Variables</cite> documentation respectively.
+      </p> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_desgn_dialog.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Processing_Based_on_Function-Key_Names"></a></div> 
+         
+      <h2> 
+             <a name="x557"></a>Processing Based on Function-Key Names 
+      </h2> 
+         
+      <div><a name="d0e77013"></a></div> 
+          
+      <h3> 
+              <a name="x558"></a>System Variable *PF-NAME
+      </h3> 
+           
+           
+      <p>When defining processing based on function keys, further comfort can be
+               added by using the system variable <a href="../vari/inout.htm#PF_NAME"><code>*PF-NAME</code></a>.
+               With this variable you can make processing dependent on the name of a function,
+               not on a specific key.
+      </p> 
+           
+      <p>The variable <code>*PF-NAME</code> contains the name of
+               the last function key the user pressed (that is, the name as assigned to the
+               key with the <a href="../sm/setkey.htm#Assigning_Names"><code>NAMED</code></a> clause of
+               the <a href="../sm/setkey.htm"><code>SET KEY</code></a>
+               statement).
+      </p> 
+           
+      <p>For example, if you wish to allow users to invoke help by pressing
+               either <span class="key">PF3</span> or <span class="key">PF12</span>, you assign the same name (in the
+               example below: <code>INFO</code>) to both keys. When the user presses either
+               one of the keys, the processing defined in the <a href="../sm/if.htm"><code>IF</code></a> statement is performed. 
+      </p> 
+           <pre class="verbatim">
+<strong>...           
+SET KEY PF3  NAMED 'INFO'
+        PF12 NAMED 'INFO'</strong>
+INPUT USING MAP 'DEMO&amp;'
+IF *PF-NAME = 'INFO'
+  WRITE 'Help is currently not active'
+END-IF
+...
+</pre> 
+           <p>The function names defined with <code>NAMED</code> appear in the
+               function-key lines:
+      </p> 
+            
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_desgn_dialog.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Processing_Data_Outside_an_Active_Window"></a></div> 
+         
+      <h2> Processing Data Outside an Active Window </h2> 
+          
+          
+      <p>Below is information on:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_desgn_dialog.htm#System_Variable_COM">System Variable *COM</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_desgn_dialog.htm#Example_Usage_of_COM">Example Usage of *COM</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_desgn_dialog.htm#Positioning_the_Cursor_to_COM">Positioning the Cursor to *COM - the %T* Terminal Command</a></p>
+         </li>
+      </ul> 
+          
+         
+      <div><a name="System_Variable_COM"></a></div> 
+          
+      <h3> 
+              <a name="x559"></a> System Variable *COM
+      </h3> 
+           
+           
+      <p>As stated in the section <cite>Screen Design</cite> -
+               <a href="pg_desgn_screen.htm#Windows">Windows</a>, only
+               <em>one</em> window is active at any one time. This normally means that input
+               is only possible within that particular window.
+      </p> 
+           
+      <p>Using the <a href="../vari/appl.htm#COM"><code>*COM</code></a> system
+               variable, which can be regarded as a communication area, it is possible to
+               enter data outside the current window.
+      </p> 
+           
+      <p>The prerequisite is that a map contains
+               <code>*COM</code> as a modifiable field. This field is then
+               available for the user to enter data when a window is currently on the screen.
+               Further processing can then be made dependent on the content of
+               <code>*COM</code>.
+      </p> 
+           
+      <p>This allows you to implement user interfaces as already used, for
+               example, by Con-nect, Software AG's office system, where a user can always
+               enter data in the command line, even when a window with its own input fields is
+               active.
+      </p> 
+           
+      <p>Note that <code>*COM</code> is only cleared when the
+               Natural session is ended.
+      </p> 
+           
+          
+         
+      <div><a name="Example_Usage_of_COM"></a></div> 
+          
+      <h3> Example Usage of *COM</h3> 
+           
+           
+      <p>In the example below, the program ADD performs a simple addition using
+               the input data from a map. In this map, <a href="../vari/appl.htm#COM"><code>*COM</code></a> has
+               been defined as a modifiable field (at the bottom of the map) with the length
+               specified in the AL field of the Extended
+         Field Editing. The result of the calculation is displayed in a
+               window. Although this window offers no possibility for input, the user can
+               still use the <code>*COM</code> field in the map outside the
+               window.
+      </p> 
+           
+      <h4 class="floating-title"> Program ADD: </h4> 
+           <pre class="verbatim">
+DEFINE DATA LOCAL
+1 #VALUE1 (N4)
+1 #VALUE2 (N4)
+1 #SUM3 (N8)
+END-DEFINE
+*
+DEFINE WINDOW EMP
+  SIZE 8*17
+  BASE 10/2
+  TITLE 'Total of Add'
+  CONTROL SCREEN
+  FRAMED POSITION SYMBOL BOT LEFT
+*
+INPUT USING MAP 'WINDOW'
+*
+COMPUTE #SUM3 = #VALUE1 + #VALUE2
+*
+SET WINDOW 'EMP'
+INPUT (AD=O) / 'Value 1 +' /
+               'Value 2 =' //
+               ' ' #SUM3
+*
+<strong>IF *COM = 'M'</strong>
+  FETCH 'MULTIPLY' #VALUE1 #VALUE2
+END-IF
+END
+</pre> 
+           <p>Output of Program ADD:</p> 
+           
+      <table border="1" cellpadding="5" class="screen">
+         <tr>
+            <td><pre>
+                   Map to Demonstrate Windows with *COM
+  
+                                    CALCULATOR
+  
+                        Enter values you wish to calculate
+  
+  
+                        Value 1:  12__
+                        Value 2:  12__
+   +-Total of Add-+
+   !              !
+   ! Value 1 +    !
+   ! Value 2 =    !
+   !              !
+   !          24  !
+   !              !
+   +--------------+
+  
+  
+    Next line is input field (*COM) for input outside the window:               
+</pre></td>
+         </tr>
+      </table> 
+           
+      <p>In this example, by entering the value <code>M</code>, the user
+               initiates a multiplication function; the two values from the input map are
+               multiplied and the result is displayed in a second window:
+      </p> 
+           
+      <table border="1" cellpadding="5" class="screen">
+         <tr>
+            <td><pre>
+                   Map to Demonstrate Windows with *COM
+  
+                                    CALCULATOR
+  
+                        Enter values you wish to calculate
+  
+  
+                        Value 1:  12__
+                        Value 2:  12__
+   +-Total of Add-+                              +--------------+
+   !              !                              !              !
+   ! Value 1 +    !                              ! Value 1 x    !
+   ! Value 2 =    !                              ! Value 2 =    !
+   !              !                              !              !
+   !          24  !                              !       144    !
+   !              !                              !              !
+   +--------------+                              +--------------+
+  
+  
+    Next line is input field (*COM) for input outside the window:                
+                <strong>M</strong>
+</pre></td>
+         </tr>
+      </table> 
+           
+          
+         
+      <div><a name="Positioning_the_Cursor_to_COM"></a></div> 
+          
+      <h3> Positioning the Cursor to *COM - the %T* Terminal Command </h3> 
+           
+           
+      <p>Normally, when a window is active and the window contains no input
+               fields (<a href="../parms/sp_ad.htm#sp_ad_Field_Input_-_Output_Characteristics"><code>AD=M</code></a>
+               or <code>AD=A</code>), the cursor is placed in the top left corner of
+               the window.
+      </p> 
+           
+      <p>With the terminal command <a href="../tcom/pctast.htm"><code>%T*</code></a>, you can
+               position the cursor to a <a href="../vari/appl.htm#COM"><code>*COM</code></a> system
+               variable outside the window when the active window contains no input
+               fields.
+      </p> 
+           
+      <p>By using <code>%T*</code> again, you can switch back to
+               standard cursor placement.
+      </p> 
+           
+      <p> Example: </p> 
+           <pre class="verbatim">...
+INPUT USING MAP 'WINDOW'
+*
+COMPUTE #SUM3 = #VALUE1 + #VALUE2
+*
+<strong>SET CONTROL 'T*'</strong>
+SET WINDOW 'EMP'
+INPUT (AD=O) / 'Value 1 +' /
+               'Value 2 =' //
+               ' ' #SUM3
+...
+</pre> 
+           
+          
+        
+        <div class="noprint">
+         <p><a href="pg_desgn_dialog.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Copying_Data_from_a_Screen"></a></div> 
+         
+      <h2> 
+             <a name="x560"></a> 
+             <a name="x561"></a>Copying Data from a Screen 
+      </h2> 
+          
+          
+      <p>Below is information on:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_desgn_dialog.htm#Terminal_Commands_CS_and_CC">Terminal Commands %CS and %CC</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_desgn_dialog.htm#Selecting_a_Line">Selecting a Line from Report Output for Further Processing</a></p>
+         </li>
+      </ul> 
+          
+         
+      <div><a name="Terminal_Commands_CS_and_CC"></a></div> 
+          
+      <h3> 
+              <a name="x562"></a> 
+              <a name="x563"></a>Terminal Commands %CS and %CC 
+      </h3> 
+           
+           
+      <p>With these terminal commands, you can copy parts of a screen into the
+               Natural stack (<a href="../tcom/pccs.htm"><code>%CS</code></a>) or into the
+               system variable <a href="../vari/appl.htm#COM"><code>*COM</code></a>
+               (<a href="../tcom/pccs.htm"><code>%CC</code></a>).
+               The protected data from a specific screen line are copied field by field.
+      </p> 
+           
+      <p>The full options of these <a href="../tcom/tcom-over.htm">terminal commands</a> are described in the
+               <cite>Terminal Commands</cite> documentation.
+      </p> 
+           
+      <p>Once copied to the stack or <a href="../vari/appl.htm#COM"><code>*COM</code></a>, the
+               data are available for further processing. Using these commands, you can make
+               user-friendly interfaces as in the example below.
+      </p> 
+           
+          
+         
+      <div><a name="Selecting_a_Line"></a></div> 
+          
+      <h3> Selecting a Line from Report Output for Further Processing </h3>
+          
+           
+           
+      <p>In the following example, the program COM1 lists all employee names
+               from Abellan to Alestia.
+      </p> 
+           
+      <h4 class="floating-title"> Program COM1: </h4> 
+           <pre class="verbatim">
+DEFINE DATA LOCAL        
+1 EMP VIEW OF EMPLOYEES  
+  2 NAME(A20)            
+  2 MIDDLE-NAME (A20)    
+  2 PERSONNEL-ID (A8)    
+END-DEFINE               
+*
+READ EMP BY NAME STARTING FROM 'ABELLAN' THRU 'ALESTIA'
+  DISPLAY NAME  
+END-READ        
+FETCH 'COM2'
+END
+</pre> 
+           <p>Output of Program COM1:</p> 
+           
+      <table border="1" cellpadding="5" class="screen">
+         <tr>
+            <td><pre>
+  Page      1                                                2006-08-12  09:41:21
+                                                                                 
+          NAME                                                                   
+  --------------------                                                           
+                                                                                 
+  ABELLAN
+  ACHIESON
+  ADAM
+  ADKINSON
+  ADKINSON
+  ADKINSON
+  ADKINSON
+  ADKINSON
+  ADKINSON
+  ADKINSON
+  ADKINSON
+  AECKERLE
+  AFANASSIEV
+  AFANASSIEV
+  AHL
+  AKROYD
+  ALEMAN
+  ALESTIA
+  MORE                                                        
+</pre></td>
+         </tr>
+      </table> 
+           
+      <p>Control is now passed to the program COM2.</p> 
+           
+      <h4 class="floating-title"> Program COM2: </h4> 
+           <pre class="verbatim">
+DEFINE DATA LOCAL        
+1 EMP VIEW OF EMPLOYEES  
+  2 NAME(A20)            
+  2 MIDDLE-NAME (A20)    
+  2 PERSONNEL-ID (A8)    
+1 SELECTNAME (A20)       
+END-DEFINE               
+* 
+SET KEY PF5 = '%CCC'     
+* 
+INPUT NO ERASE 'SELECT FIELD WITH CURSOR AND PRESS PF5' 
+*  
+<strong>MOVE *COM TO SELECTNAME          
+FIND EMP WITH NAME = SELECTNAME  
+  DISPLAY NAME PERSONNEL-ID      
+END-FIND</strong>
+END
+</pre> 
+           <p>In this program, the terminal command <a href="../tcom/pccs.htm"><code>%CCC</code></a> is assigned
+               to <span class="key">PF5</span>. The terminal command copies all protected data from the line
+               where the cursor is positioned to the system variable
+               <a href="../vari/appl.htm#COM"><code>*COM</code></a>. This
+               information is then available for further processing. This further processing
+               is defined in the program lines shown in boldface.
+      </p> 
+           
+      <p>The user can now position the cursor on the name that interests him;
+               when he/she now presses <span class="key">PF5</span>, further employee information is
+               supplied.
+      </p> 
+           
+      <table border="1" cellpadding="5" class="screen">
+         <tr>
+            <td><pre>
+SELECT FIELD WITH CURSOR AND PRESS PF5                     2006-08-12  09:44:25
+                                                                                 
+          NAME                                                                   
+  --------------------                                                           
+                                                                                 
+  ABELLAN
+  ACHIESON
+  ADAM  <strong>&lt;==  Cursor positioned on name for which more information is required</strong>
+  ADKINSON
+  ADKINSON
+  ADKINSON
+  ADKINSON
+  ADKINSON
+  ADKINSON
+  ADKINSON
+  ADKINSON
+  AECKERLE
+  AFANASSIEV
+  AFANASSIEV
+  AHL
+  AKROYD
+  ALEMAN
+  ALESTIA
+</pre></td>
+         </tr>
+      </table> 
+           
+      <p>In this case, the personnel ID of the selected employee is
+               displayed:
+      </p> 
+           
+      <table border="1" cellpadding="5" class="screen">
+         <tr>
+            <td><pre>
+  Page      1                                                2006-08-12  09:44:52
+                                                                                 
+          NAME         PERSONNEL                                                 
+                          ID                                                     
+  -------------------- ---------                                                 
+                                                                                 
+  ADAM                 50005800
+</pre></td>
+         </tr>
+      </table> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_desgn_dialog.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="The_Statements_REINPUT_REINPUT_FULL"></a></div> 
+         
+      <h2> 
+             <a name="x564"></a>Statements REINPUT/REINPUT FULL 
+      </h2> 
+          
+          
+      <p>If you wish to return to and re-execute an
+              <a href="../sm/input.htm"><code>INPUT</code></a> statement, you
+              use the <a href="../sm/reinput.htm"><code>REINPUT</code></a>
+              statement. It is generally used to display a message indicating that the data
+              input as a result of the previous <code>INPUT</code> statement were
+              invalid.
+      </p> 
+          
+      <p>If you specify the <a href="../sm/reinput.htm#FULL_reinput"><code>FULL</code></a> option in a
+              <code>REINPUT</code> statement, the corresponding <code>INPUT</code> statement
+              will be re-executed fully:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">With an ordinary <code>REINPUT</code> statement (without
+                      <code>FULL</code> option), the contents of variables that were changed between
+                      the <code>INPUT</code> and <code>REINPUT</code> statement will not be
+                      displayed; that is, all variables on the screen will show the contents they had
+                      when the <code>INPUT</code> statement was originally executed.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">With a <code>REINPUT FULL</code> statement, all changes that have been
+                      made after the initial execution of the <code>INPUT</code> statement will be
+                      applied to the <code>INPUT</code> statement when it is re-executed; that is,
+                      all variables on the screen contain the values they had when the
+                      <code>REINPUT</code> statement was executed.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">If you wish to position the cursor to a specified field, you can use
+                      the <a href="../sm/reinput.htm#MARK-option"><code>MARK</code></a>
+                      option, and to position to a particular position within a specified field, you
+                      use the <code>MARK POSITION</code> option.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>The example below illustrates the use of
+              <a href="../sm/reinput.htm#FULL_reinput"><code>REINPUT
+               FULL</code></a> with
+              <a href="../sm/reinput.htm#MARK_POSITION_reinput"><code>MARK
+               POSITION</code></a>.
+      </p> 
+          <pre class="verbatim">
+DEFINE DATA LOCAL
+1 #A (A10)
+1 #B (N4)
+1 #C (N4)
+END-DEFINE
+*
+INPUT (AD=M) #A #B #C
+<strong>IF #A = ' '</strong>
+  COMPUTE #B = #B + #C
+  RESET #C
+  <strong>REINPUT FULL 'Enter a value' MARK POSITION 5 IN *#A
+END-IF</strong>
+END
+</pre> 
+          <p>The user enters <code>3</code> in field <code>#B</code> and
+              <code>3</code> in field <code>#C</code> and presses <span class="key">Enter</span>.
+      </p> 
+          
+      <table border="1" cellpadding="5" class="screen">
+         <tr>
+            <td><pre>
+  #A            #B     3 #C     3
+</pre></td>
+         </tr>
+      </table> 
+          
+      <p>The program requires field <code>#A</code> to be non-blank. The
+              <code>REINPUT FULL</code> statement with <code>MARK POSITION 5 IN *#A</code>
+              returns the input screen; the now modified variable <code>#B</code> contains
+              the value 6 (after the <a href="../sm/compute.htm"><code>COMPUTE</code></a> calculation has been
+              performed). The cursor is positioned to the 5th position in field
+              <code>#A</code> ready for new input.
+      </p> 
+          
+      <table border="1" cellpadding="5" class="screen">
+         <tr>
+            <td><pre>
+Enter name of field                                             
+  #A    <strong>_</strong>       #B     6 #C     0
+  
+        
+                
+Enter a value
+</pre></td>
+         </tr>
+      </table> 
+          
+      <p>This is the screen that would be returned by the same statement, without
+              the <code>FULL</code> option. Note that the variables <code>#B</code> and
+              <code>#C</code> have been reset to their status at the time of execution of the
+              <code>INPUT</code> statement (each field contains the value 3).
+      </p> 
+          
+      <table border="1" cellpadding="5" class="screen">
+         <tr>
+            <td><pre>
+   #A    _       #B     3 #C     3 
+</pre></td>
+         </tr>
+      </table> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_desgn_dialog.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Object-Oriented_Processing"></a></div> 
+         
+      <h2> 
+             <a name="x565"></a> 
+             <a name="x566"></a>Object-Oriented Processing - The Natural Command Processor
+             
+      </h2> 
+          
+          
+      <p>The Natural Command Processor is used to define and control navigation
+              within an application. It consists of two parts: The development part and the
+              run-time part.
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">The development part is the utility <a href="../utis/sysncp.htm">SYSNCP</a>. With this utility, you define
+                      commands and the actions to be performed in response to the execution of these
+                      commands. From your definitions, SYSNCP generates decision tables which
+                      determine what happens when a user enters a command.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">The run-time part is the statement <a href="../sm/processc.htm"><code>PROCESS COMMAND</code></a>. This
+                      statement is used to invoke the Command Processor within a Natural program. In
+                      the statement you specify the name of the SYSNCP table to be used to handle the
+                      data input by a user at that point.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>For further information regarding the Natural Command Processor, see
+              <a href="../utis/sysncp.htm">SYSNCP Utility</a>
+              in the <cite>Utilities</cite> documentation and the statement
+              <a href="../sm/processc.htm"><code>PROCESS COMMAND</code></a> as
+              described in the <cite>Statements</cite> documentation.
+      </p> 
+          
+        
+       
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="pg_desgn_dialog.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_desgn_dialog.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_desgn_dialog.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_desgn-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_desgn_screen.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_nni-over.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

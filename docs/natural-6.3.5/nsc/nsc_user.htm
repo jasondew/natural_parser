@@ -1,0 +1,2748 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>User Maintenance</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="nsc_user"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../nsc/nsc_user.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/nsc/nsc_user.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc_admin.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc_lib.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Natural Security&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x20"></a>User Maintenance
+         </h1>
+      </div> 
+         
+         
+      <p>This section describes how to create and maintain <var>user
+                security profiles</var>. It covers the following topics:
+      </p>
+         
+      <ul>
+         <li>
+            <p class="initem"><a href="nsc_user.htm#Before_You_Begin_nsc_user">Before You Begin</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_user.htm#Components_of_a_User_Profile">Components of a User Profile</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_user.htm#CreateMaintUserPofiles">Creating and Maintaining User Profiles</a></p>
+         </li>
+      </ul> 
+        
+      <hr> 
+        
+      <div><a name="Before_You_Begin_nsc_user"></a></div> 
+         
+      <h2> Before You Begin</h2> 
+          
+          
+      <p>Before you begin to define users to Natural Security, it is recommended
+              that you take a few preparatory steps:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">Make a list of all people in your organization who are using
+                      Natural.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Divide them into groups according to the work they do and in view of
+                      the Natural libraries they are to use. The division of your company into
+                      departments may be a guideline. People using the same libraries should be in
+                      the same groups. (People may be in more than one group.)
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>It is recommended that groups be used as much as possible, as this will
+              not only reduce Natural Security maintenance considerably, but also provides
+              for a more consistent protection setup.
+      </p> 
+          
+      <p>The definition of users to Natural Security and the assignment of users
+              to groups is best done in the following order:
+      </p> 
+          
+      <ol> 
+              
+         <li> 
+                  
+            <p class="initem">Create a group security profile; that is, define a user of type
+                      GROUP.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Create individual user security profiles; that is, define users
+                      (typically of type MEMBER).
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Assign MEMBERs to the GROUP; that is, modify the GROUP security
+                      profile.
+            </p> 
+                 
+         </li> 
+             
+      </ol> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="nsc_user.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Components_of_a_User_Profile"></a></div> 
+         
+      <h2> 
+             <a name="x21"></a>Components of a User Profile
+      </h2> 
+          
+          
+      <p>This section covers the following topics:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="nsc_user.htm#UserCompOview">Overview of Components</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_user.htm#MainUserScreen">Components on Main User-Profile Screen</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_user.htm#Additional_Options_nsc_user">Additional Options</a></p>
+         </li>
+      </ul> 
+          
+         
+      <div><a name="UserCompOview"></a></div> 
+          
+      <h3> Overview of Components</h3> 
+           
+           
+      <p><img src="graphics/user0.png" alt="" width="600" height="520"></p> 
+           
+          
+         
+      <div><a name="MainUserScreen"></a></div> 
+          
+      <h3> Components on Main User-Profile Screen</h3> 
+           
+           
+      <p>The following type of screen is the "basic" user profile screen, which
+               appears when you invoke one of the functions Add, Copy, Modify, Display for a
+               user security profile:
+      </p> 
+           
+      <table border="1" cellpadding="5" class="screen">
+         <tr>
+            <td><pre>
+ 15:27:08                   *** NATURAL SECURITY ***                 2008-01-18
+                                   - Modify User -                               
+                                                                                 
+                                                 Modified ..          by         
+  User ID ...... AD                                                              
+  User Name .... ARTHUR DENT_____________________                                
+  User Type .... A (A=Administrator, P=Person, M=Member)                         
+                                                                                 
+  Privil. Groups           Libraries                 Password                    
+  --------------      -------------------      ----------------------            
+     DOC_____         Default .. SYSSEC__      New Password ________             
+     ________         Last .....               Change after 666 days             
+     ________                                                                    
+     ________                ETID              Batch User ID ..... ________      
+     ________         -------------------      Language .......... 0             
+                      Default ..  AR1R  G      Private Library ... N             
+  No. groups   3      Last .....               Logon recorded .... N             
+                                                                                 
+                                                                                 
+  Additional Options ... N                                                      
+                                                                                 
+                                                                                 
+  Enter-PF1---PF2---PF3---PF4---PF5---PF6---PF7---PF8---PF9---PF10--PF11--PF12---
+        Help  PrevM Exit  AddOp PrLib Flip                                Canc   
+ 
+</pre></td>
+         </tr>
+      </table> 
+           
+      <p>The individual items you may define as part of a user security profile
+               are explained below.
+      </p> 
+           
+      <p>The items of a user security profile may vary depending on the user
+               type. For each item explained below, the user types concerned are indicated in
+               brackets. If no user types are indicated, the item applies to users of every
+               type.
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="80%"> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>Field</th> 
+                        
+               <th>Explanation</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> User ID <br>
+                  (display only)
+               </td> 
+                        
+               <td> 
+                  
+                  <p>The ID of the user as specified when the user security profile was
+                         created.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> User Name &nbsp;</td> 
+                        
+               <td> 
+                  
+                  <p>The name of the user, which may be up to 32 characters long.</p> 
+                            
+                  <p>This name should be identical to the corresponding entry in
+                                Predict (if installed).
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> User Type &nbsp;</td> 
+                        
+               <td> 
+                  
+                  <p class="mini-list"> 
+                        G = Group<br> 
+                                M = Member<br> 
+                                A = Administrator<br> 
+                                P = Person,<br> 
+                                T = Terminal<br> 
+                                B = Batch User 
+                               
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a name="PrivGroups"></a> Privileged Groups<br>(A,
+                          P, M, T, B)
+               </td> 
+                        
+               <td> 
+                  
+                  <p>You may enter the IDs of up to five groups to which the user
+                     belongs. By this, you may influence the order in which Natural Security scans
+                     for a link to a library: 
+                  </p> 
+                            
+                  <ul> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">For users of type MEMBER the following applies: When the user
+                           tries to log on to a protected library, the privileged groups entered in
+                                        his/her security profile are checked (in order of entry) for a link to the
+                                        library before the other groups to which the user belongs are checked (in
+                                        alphabetical order) for a link to the library.
+                        </p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">For users of type ADMINISTRATOR and PERSON the following
+                                        applies: When the user tries to log on to a protected library to which he or
+                                        she is not linked directly, the privileged groups entered in his/her security
+                                        profile are checked (in order of entry) for a link to the library before the
+                                        other groups to which the user belongs are checked (in alphabetical order) for
+                                        a link to the library.
+                        </p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">For TERMINALs, the following applies: When a user tries to log
+                                        on to a protected library by means of the terminal ID (that is, without
+                                        entering a user ID), the privileged groups in the terminal's security profile
+                                        are checked (in order of entry) for a link to the library before the other
+                                        groups to which the terminal belongs are checked (in alphabetical order) for a
+                                        link to the library.
+                        </p> 
+                                   
+                     </li> 
+                               
+                  </ul> 
+                            
+                  <p>The privileged groups may also be used to influence the order in
+                                which Natural Security searches for utility profiles to apply; see
+                                <a href="nsc_util.htm#Which_Utility_Profile_Applies">Which Utility Profile
+                                   Applies?</a> in the section <cite>Protecting Utilities</cite> for
+                                details.
+                  </p> 
+                            
+                  <p>You may enter a group in the Privileged Groups list only after the
+                                user has been added to the group.
+                  </p> 
+                            
+                  <p>If you remove a group from the user's Privileged Groups list, the
+                                user will <em>not</em> be deleted as a member of that group.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Members <br>(G)
+               </td> 
+                        
+               <td> 
+                  
+                  <p>You may enter the IDs of the first five users to belong to this
+                     group. If the number of users belonging to the group exceeds five, use the Edit
+                     Group Members functions (see <a href="nsc_user.htm#Editing_Group_Members">Editing
+                                   Group Members</a> below). 
+                  </p> 
+                            
+                  <p>You can assign users to a group only after they have been defined
+                                to Natural Security.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> No. of Groups <br>(A, P, M, T, B; display only)
+               </td>
+                        
+                        
+               <td> 
+                  
+                  <p>The total number of groups to which the user belongs (including
+                     the Privileged Groups). By means of the
+                                <a href="nsc_user.htm#Additional_Options_nsc_user">"Additional
+                                   Options"</a> (see below), you can obtain a list of all these
+                                groups.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> No. of Members <br>(G; display only)
+               </td> 
+                        
+               <td> 
+                  
+                  <p>The total number of users which belong to the group. By means of
+                             the <a href="nsc_user.htm#Additional_Options_nsc_user">"Additional
+                                   Options"</a> (see below), you can obtain a list of all these
+                                users.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Default Library &nbsp;</td> 
+                        
+               <td> 
+                  
+                  <p>In this field, you may enter the ID of a default library. </p> 
+                            
+                  <ul> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">For users of type ADMINISTRATOR, PERSON, or MEMBER the following
+                           applies: The default library specified in a user's security profile will be
+                                      invoked automatically when the user logs on to Natural without entering a
+                                        library ID.
+                        </p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">For TERMINALs, the following applies: The default library
+                                        specified in a terminal's security profile will be invoked automatically when a
+                                        user logs on to Natural by means of the terminal without entering a library
+                                        ID.
+                        </p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">For GROUPs, the following applies: The library specified in a
+                                        group's security profile will be invoked automatically when a user logs on to
+                                        Natural without entering a library ID if the user has no default library
+                                        specified in his/her own security profile, and if the group is among the
+                                        privileged groups listed in the user's security profile.
+                        </p> 
+                                   
+                     </li> 
+                               
+                  </ul>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Last Library <br>(A, P, M, T, B; display only)
+               </td> 
+                        
+               <td> 
+                  
+                  <p>The last RESTARTable library to which the user was logged on. <br>
+                     (The Restart option in a library profile determines whether a
+                                library can be RESTARTed.)
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a name="defaultETID"></a> Default ETID <br>(A,
+                      P, M, T, B)
+               </td> 
+                        
+               <td> 
+                  
+                  <p>This field displays the ID to identify End of Transaction data
+                         (ETID). 
+                  </p> 
+                            
+                  <ul> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">If this field is prefixed with "S&gt;", this
+                           indicates that time-stamp-related ETIDs for all users are generated by Natural
+                           Security at session start. In this case, the actual ETID value shown in the
+                                        user profile will not be used. See ETID=S under
+                                        <a href="nsc_admin.htm#Set_Library_and_User_Defaults">Library and User
+                                           Preset Values</a> in the section <cite>Administrator
+                                           Services</cite> for details.
+                        </p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">If the ETID displayed is followed by a "G", this
+                                        indicates that it has been generated by Natural Security as described for
+                                        ETID=G under <a href="nsc_admin.htm#Set_Library_and_User_Defaults">Library and User Preset
+                                           Values</a>. If it has not been generated and you wish it to be
+                                        generated, enter a "?" in the Default ETID field.
+                        </p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">Other possible ETID values (user ID, TP user ID or terminal ID)
+                                        are described under <a href="nsc_admin.htm#Set_Library_and_User_Defaults">Library and User Preset
+                                           Values</a>. 
+                        </p> 
+                                   
+                     </li> 
+                               
+                  </ul> 
+                            
+                  <p class="note"><strong>Note:</strong><br>ETIDs can only be supplied by Natural Security if the Natural
+                                session is started with the Natural profile parameter
+                                <a href="../parms/etid.htm">ETID</a> being set to
+                                "OFF" or its default value.
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Last ETID <br>(A, P, M, T, B; display only)
+               </td> 
+                        
+               <td> 
+                  
+                  <p>The ETID which was last generated/set for the user.</p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> New Password <br>(A, P, M)
+               </td> 
+                        
+               <td> 
+                  
+                  <p>You may enter a password for the user to be used when he or she
+                        logs on. 
+                  </p> 
+                            
+                  <p>This password may be modified by the user (during the logon
+                                procedure) or by an owner of the user's security profile (in the security
+                                profile).
+                  </p> 
+                            
+                  <p>If no password is entered here, Natural Security will assume the
+                                password to be identical to the user ID.
+                  </p> 
+                            
+                  <p>The minimum length of the password is set in the
+                                <a href="nsc_admin.htm#Set_Library_and_User_Defaults">Library and User
+                                   Preset Values</a> section of Administrator
+                                Services.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Change after <var>nnn</var> days <br>(A,
+                            P, M)
+               </td> 
+                        
+               <td> 
+                  
+                  <p>In this field, you may specify a time interval after which the
+                     user will be forced to change his or her password during the logon procedure.
+                                
+                  </p> 
+                            
+                  <p>For example, if you set the time interval to "007",
+                                the user has to enter a new password on the logon screen every 7 days. If the
+                                user fails to do so, he or she cannot log on.
+                  </p> 
+                            
+                  <p>If you wish to prevent the user from changing the password, set
+                                this field to "999"; the user will then not be able to change
+                                his/her password at the logon.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Batch User ID <br>(A, P, M, G)
+               </td> 
+                        
+               <td> 
+                  
+                  <p>If the Natural system variable *DEVICE is set to
+                     "BATCH", the following applies: 
+                  </p> 
+                            
+                  <p>You may enter the ID of a batch user profile. Before you can enter
+                                a batch user ID, a security profile for this batch user ID must have been
+                                defined.
+                  </p> 
+                            
+                  <p>In batch mode, a user logs on with his/her "normal"
+                                user ID and password. Natural Security will then use the batch user ID
+                                specified in the user's security profile, and the conditions of use defined for
+                                that batch user ID will apply.
+                  </p> 
+                            
+                  <p>If no batch user ID is specified in the user's security profile,
+                                the "Privileged Groups" specified in the user's security profile
+                                will be checked (in order of entry) for a batch user ID. If none of the
+                                Privileged Groups has a batch user ID either, the user's own user ID will be
+                                used.
+                  </p> 
+                            
+                  <p class="note"><strong>Note:</strong><br> This option only applies if the Natural system variable
+                                *DEVICE is set to "BATCH"; otherwise, this option has no
+                                effect.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a name="Language"></a> Language <br>(A, P, M,
+                        G, B)
+               </td> 
+                        
+               <td> 
+                  
+                  <p>This corresponds to the Natural system variable *LANGUAGE and
+                     controls the usage of Natural error messages. 
+                  </p> 
+                            
+                  <p>You may enter a numeric value from 1 to 60. Each value represents
+                     one language (for example, "1" stands for "English").
+                                If you set the value to "0", the value of the Natural profile
+                                parameter ULANG applies.
+                  </p> 
+                            
+                  <p>For further information, see the system variable
+                                <a href="../vari/vari-over.htm">*LANGUAGE</a> and the profile
+                                parameter <a href="../parms/ulang.htm">ULANG</a> (in the Natural
+                                <cite>System Variables</cite> and <cite>Parameter
+                                   Reference</cite> documentation respectively).
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a name="TimeDifferential"></a> Time Differential <br>(T,
+                            G)
+               </td> 
+                        
+               <td> 
+                  
+                  <p>This only applies to an environment in which remote nodes are used
+                     in a computer network. It corresponds to the Natural profile parameter
+                                <a href="../parms/td.htm">TD</a> (which is described in the
+                                Natural <cite>Parameter Reference</cite> documentation).
+                  </p> 
+                            
+                  <p>You may enter a value from "-23" to
+                     "+23" for hours, and "00" or "30" for
+                                minutes. The values indicate the number of hours/minutes added to/subtracted
+                                from computer centre time to obtain local time. The default value is
+                                "0" (which means that computer centre time will be used).
+                  </p> 
+                            
+                  <p>If, for example, your location time is 5 hours ahead of computer
+                                centre time, you may set the value to "+5" if you wish to use
+                                actual local time instead of computer centre time.
+                  </p> 
+                            
+                  <p>You can also specify an asterisk (*); this has the same effect as
+                                the profile parameter setting TD=AUTO (that is, the time differential will be
+                                computed automatically be comparison of physical and logical machine
+                                times).
+                  </p> 
+                            
+                  <p>You can use either Time Differential or Time Zone (described
+                                below), but not both.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a name="TimeZone"></a> Time Zone <br>(T,
+                            G)
+               </td> 
+                        
+               <td> 
+                  
+                  <p>This only applies to an environment in which remote nodes are used
+                     in a computer network. 
+                  </p> 
+                            
+                  <p>You may enter the name of a time zone. A time zone of this name
+                     must be defined in the NTTZ macro of the Natural configuration module NATCONFG.
+                     The definition in the NTTZ macro determines the number of hours/minutes added
+                                to/subtracted from computer centre time to obtain local time.
+                  </p> 
+                            
+                  <p>You can use either Time Zone or Time Differential (described
+                                above), but not both.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a name="Private_Library_for_AdministratorPerson"></a> Private
+                  Library<br>(A, P)
+               </td> 
+                        
+               <td> 
+                  
+                  <p>This option determines whether the user may have a
+                                <a href="nsc_user.htm#What_is_a_Private_Library">private library</a> (see
+                                below).
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a name="Logonrecorded"></a> Logon recorded
+               </td> 
+                        
+               <td> 
+                  
+                  <p>All logons by the user to any library will be recorded. </p> 
+                            
+                  <p>See <a href="nsc_admin.htm#Logon_Records_Processing">Logon
+                                   Records</a> in the section <cite>Administrator Services</cite> for
+                                information on logon records.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+          
+         
+      <div><a name="Additional_Options_nsc_user"></a></div> 
+          
+      <h3> Additional Options</h3> 
+           
+           
+      <p>If you mark the field "Additional Options" on the basic
+               security profile screen with "Y", a window will be displayed from
+               which you can select the following options:
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem"> <a href="nsc_user.htm#MaintInfo_nsc_user">Maintenance
+                          Information</a></p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"> <a href="nsc_user.htm#SecNotes_nsc_user">Security Notes</a>
+                       
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"> <a href="nsc_user.htm#Owners_nsc_user">Owners</a></p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"> <a href="nsc_user.htm#Mailboxes_nsc_user">Mailboxes</a></p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"> <a href="nsc_user.htm#ActivDates">Activation Dates</a></p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"> <a href="nsc_user.htm#FuncSec_nsc_user">Functional Security</a>
+                       
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"> <a href="nsc_user.htm#GroupsMembers">Groups/Members</a></p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"> <a href="nsc_user.htm#GroupEditor">Group Editor</a></p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"> <a href="nsc_user.htm#What_is_a_Private_Library">Private
+                          Library</a></p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem"> <a href="nsc_user.htm#SessionOptions">Session Options</a></p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>The options for which something has already been specified or defined
+               are marked with a plus sign (+).
+      </p> 
+           
+      <p>Some options are only available for certain user types.</p> 
+           
+      <p>You can select one or more items from the window by marking them with
+               any character. For each item selected, an additional window/screen will be
+               displayed (in the order of the items in the selection window).
+      </p> 
+           
+      <p>The Private Library screen can also be invoked directly by pressing
+               <span class="key">PF5</span> on the basic security profile screen.
+      </p> 
+           
+      <p>The individual options are explained below.</p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="80%"> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>Additional Option</th> 
+                        
+               <th>Explanation</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> <a name="MaintInfo_nsc_user"></a> Maintenance Information
+                   <br>(display only)
+               </td> 
+                        
+               <td>In this window, the following information is displayed: 
+                  
+                  <ul> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">the date and time when the security profile was created, the ID
+                           of the ADMINISTRATOR who created it, and (if applicable) the IDs of the
+                                        co-owners who countersigned for the creation;
+                        </p> 
+                                   
+                     </li> 
+                                
+                     <li> 
+                                    
+                        <p class="initem">the date and time when the security profile was last modified,
+                                        the ID of the ADMINISTRATOR who made the last modification, and (if applicable)
+                                        the IDs of the co-owners who countersigned for the modification.
+                        </p> 
+                                   
+                     </li> 
+                               
+                  </ul>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a name="SecNotes_nsc_user"></a> Security Notes
+                  &nbsp;
+               </td> 
+                        
+               <td>In this window, you may enter your notes on the security
+                  profile.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a name="Owners_nsc_user"></a> Owners &nbsp;
+               </td> 
+                        
+               <td>In this window, you may enter up to eight IDs of
+                  ADMINISTRATORs. Only the ADMINISTRATORs specified here will be allowed to
+                  maintain this user security profile. 
+                  
+                  <p>If no owner is specified, any user of type ADMINISTRATOR may
+                                maintain the security profile.
+                  </p> 
+                            
+                  <p>For each owner, the number of co-owners whose countersignatures
+                                will be required for maintenance permission may optionally be specified in the
+                                field after the ID.
+                  </p> 
+                            
+                  <p>For information on owners and co-owners, see the section
+                                <a href="nsc_count.htm#nsc_count">Countersignatures</a>.
+                  </p>
+               </td>
+                        
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a name="Mailboxes_nsc_user"></a> Mailboxes &nbsp;
+               </td> 
+                        
+               <td>In this window, you may enter up to five mailbox IDs. 
+                  
+                  <p>For information on mailboxes, see the section
+                                <a href="nsc_mail.htm#nsc_mail">Mailboxes</a>.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a name="ActivDates"></a> Activation Dates <br>(A,
+                            P, M, G)
+               </td> 
+                        
+               <td>In this window, you may define dates as of which or until when
+                  the security profile shall be valid. 
+                  
+                  <p>The message "This security profile is currently not
+                     active." is displayed if the security profile is not yet or no longer or
+                     temporarily not valid, which means that the corresponding user ID cannot be
+                                used before or after a certain date or within a certain period of time.
+                  </p>
+                            
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a name="FuncSec_nsc_user"></a> Functional Security
+                  &nbsp;
+               </td> 
+                        
+               <td>In this window, you may define functional security for the user
+                  with respect to the command processors defined in the libraries the user has
+                  access to. 
+                  
+                  <p>This is only relevant if command processors have been created with
+                                the Natural utility SYSNCP. See the section <a href="nsc_func.htm#nsc_func">Functional Security</a> for
+                                details.
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a name="GroupsMembers"></a> Groups/Members <br>(display
+                            only)
+               </td> 
+                        
+               <td>If you mark this field, a list of all groups to which the user
+                  belongs will be displayed. 
+                  
+                  <p>If the user is a GROUP, a list of all users who belong to the
+                                GROUP will be displayed.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a name="GroupEditor"></a> Group Editor <br>(G)
+               </td>
+                        
+                        
+               <td>If you mark this field, the Edit Group Members function will be
+                  invoked. This function is explained under
+                  <a href="nsc_user.htm#Editing_Group_Members">Editing Group
+                               Members</a> below.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <a name="What_is_a_Private_Library"></a>Private
+                  Library <br>(A, P)
+               </td> 
+                        
+               <td> 
+                  
+                  <p>A user may have a "personal" library whose ID is the
+                     same as his/her user ID. Such a library is called a <var>private
+                                   library</var>.
+                  </p> 
+                            
+                  <p>Private libraries can be made available in two modes:</p> 
+                            
+                  <ul> 
+                                
+                     <li> 
+                                     
+                                    
+                        <p class="initem"><strong>Public mode:</strong><br> In this mode, private libraries are treated like any other
+                           libraries, that is, their use can be controlled in the same way as that of
+                                        "normal" libraries. The only difference is that if a private
+                                        library is protected (which is the default), the user with the same ID can
+                                        access it without having to be linked to it, while other users need a link to
+                                        it (see <a href="nsc_prolib.htm#ProtPrivLib">Protecting a Private
+                                           Library</a> in the section <cite>Protecting Libraries</cite>).
+                        </p>
+                                    
+                                   
+                     </li> 
+                                
+                     <li> 
+                                     
+                                    
+                        <p class="initem"><strong>Private mode:</strong><br> In this mode, a private library can only be accessed by the
+                                        user who is directly attached to it, that is, whose user ID is the same as the
+                                        library ID. Not even a Natural Security administrator has access to it. (The
+                                        only way for an administrator to gain access to a private library is by
+                                        modifying the user's password in the user's security profile and then logging
+                                        on to the private library with the user's user ID and the new password.) Thus,
+                                        such a private library provides a certain degree of seclusion for the user; and
+                                        possible misuse of this seclusion is hard to eliminate. Therefore it is
+                                        recommended that this mode <var>not</var> be used.
+                        </p> 
+                                   
+                     </li> 
+                               
+                  </ul> 
+                            
+                  <p>The mode is set with the general option
+                                <a href="nsc_admin.htm#PrivLibInPublicMode">"Private libraries in public
+                                   mode"</a> (described in the section <cite>Administrator
+                                   Services</cite>) and applies to all private libraries.
+                  </p> 
+                            
+                  <p>For information on <a href="nsc_lib.htm#Defining_Private_Libraries">creating and maintaining a private
+                                   library</a>, see the section <cite>Library Maintenance</cite>.
+                  </p>
+                            
+                            
+                  <p>As far as access to DDMs/files is concerned, there is no
+                                difference between private libraries and "normal" libraries.
+                  </p> 
+                            
+                  <p class="note"><strong>Note:</strong><br> Unless explicitly stated otherwise, what is said in the
+                                Natural Security documentation about libraries also applies to private
+                                libraries.
+                  </p>
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Session Options <br>(A, P, G)
+               </td> 
+                        
+               <td> 
+                  
+                  <p><a href="nsc_user.htm#SessionOptions">See below.</a></p>
+                            
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+          
+      <div><a name="SessionOptions"></a></div> 
+           
+      <h4> Session Options</h4> 
+            
+             
+             
+      <table border="1" class="color" cellpadding="3" width="80%">
+         <colgroup>
+            <col width="20%">
+            <col width="60%">
+         </colgroup> 
+                 
+         <thead align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <th>Option</th> 
+                         
+               <th>Explanation</th> 
+                        
+            </tr> 
+                    
+         </thead> 
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <td>Unlock Objects</td> 
+                         
+               <td>
+                  <table border="0" width="100%">
+                     <colgroup>
+                        <col width="18%">
+                        <col width="82%">
+                     </colgroup> 
+                                
+                     <tbody align="left" valign="top"> 
+                                    
+                        <tr> 
+                                        
+                           <td colspan="2">This option controls the use
+                              of the Natural system command UNLOCK, which is used in conjunction with the Natural
+                              Development Server. You can specify one of the following values:
+                           </td> 
+                                       
+                        </tr> 
+                                    
+                        <tr> 
+                                        
+                           <th>N</th> 
+                                        
+                           <td>The user cannot use the UNLOCK
+                              command.
+                           </td> 
+                                       
+                        </tr> 
+                                    
+                        <tr> 
+                                        
+                           <th>Y</th> 
+                                        
+                           <td>The user can use the UNLOCK command, but
+                              only for his/her own programming objects (that is, objects locked under his/her
+                              user ID).
+                           </td> 
+                                       
+                        </tr> 
+                                    
+                        <tr> 
+                                        
+                           <th>F</th> 
+                                        
+                           <td>The user can use the UNLOCK command for any
+                              locked programming object.
+                           </td> 
+                                       
+                        </tr> 
+                                    
+                        <tr> 
+                                        
+                           <td colspan="2">The default value is
+                              "Y".
+                           </td> 
+                                       
+                        </tr> 
+                                   
+                     </tbody> 
+                               
+                  </table>
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>Environment Protection <br>(display
+                             only)
+               </td> 
+                         
+               <td>
+                  <table border="0" width="100%">
+                     <colgroup>
+                        <col width="19%">
+                        <col width="81%">
+                     </colgroup> 
+                                
+                     <tbody align="left" valign="top"> 
+                                    
+                        <tr> 
+                                        
+                           <td colspan="2">This field is only relevant if
+                              environment protection is active (that is, if the general option
+                              <a href="nsc_admin.htm#SysFileProtection">Environment Protection</a> is set
+                                            to "Y"); it indicates if there are environments which the user is
+                                            not allowed to access:
+                           </td> 
+                                       
+                        </tr> 
+                                    
+                        <tr> 
+                                        
+                           <th>N</th> 
+                                        
+                           <td>The user can access any environment for
+                              which a security profile is defined.
+                           </td> 
+                                       
+                        </tr> 
+                                    
+                        <tr> 
+                                        
+                           <th>Y</th> 
+                                        
+                           <td>Access to at least one defined environment
+                              is disallowed for the user.
+                           </td> 
+                                       
+                        </tr> 
+                                    
+                        <tr> 
+                                        
+                           <td colspan="2">For details on environment
+                              protection, see the section <a href="nsc_environ.htm#nsc_environ">Protecting
+                                               Environments</a>.
+                           </td> 
+                                       
+                        </tr> 
+                                   
+                     </tbody> 
+                               
+                  </table>
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>Suspend Line Protection</td> 
+                         
+               <td>
+                  <table border="0" width="100%">
+                     <colgroup>
+                        <col width="19%">
+                        <col width="81%">
+                     </colgroup> 
+                                
+                     <tbody align="left" valign="top"> 
+                                    
+                        <tr> 
+                                        
+                           <td colspan="2">This field determines whether
+                              or not the user is allowed to use the Natural Studio program editor function
+                              "Suspend Line Protection":
+                           </td> 
+                                       
+                        </tr> 
+                                    
+                        <tr> 
+                                        
+                           <th>Y</th> 
+                                        
+                           <td>The user may use the function.</td> 
+                                       
+                        </tr> 
+                                    
+                        <tr> 
+                                        
+                           <th>N</th> 
+                                        
+                           <td>The user cannot use the function.</td> 
+                                       
+                        </tr> 
+                                   
+                     </tbody> 
+                               
+                  </table>
+               </td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="nsc_user.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="CreateMaintUserPofiles"></a></div> 
+         
+      <h2> 
+             <a name="x22"></a> Creating and Maintaining User Profiles
+      </h2> 
+          
+          
+      <p>This section describes the functions used to create and maintain user
+              profiles. It covers the following topics:
+      </p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="nsc_user.htm#How_to_Invoke_User_Maintenance">Invoking User Maintenance</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_user.htm#Adding_a_New_User">Adding a New User</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_user.htm#Adding_Multiple_New_Users">Adding Multiple New Users</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_user.htm#Selecting_Existing_Users_for_Processing">Selecting Existing Users for Processing</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_user.htm#Copying_a_User">Copying a User</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_user.htm#Modifying_a_User">Modifying a User</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_user.htm#Renaming_a_User">Renaming a User</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_user.htm#Deleting_a_User">Deleting a User</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_user.htm#Displaying_a_User">Displaying a User</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_user.htm#Editing_Group_Members">Editing Group Members</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="nsc_user.htm#CopyUsersLinks">Copying a User's Links</a></p>
+         </li>
+      </ul> 
+         
+      <div><a name="How_to_Invoke_User_Maintenance"></a></div> 
+          
+      <h3> Invoking User Maintenance</h3> 
+           
+           
+      <p>On the Main Menu, enter code "M" for
+               "Maintenance". A window will be displayed.
+      </p> 
+           
+      <p>In the window, mark the object type "User" with a
+               character or with the cursor. The User Maintenance selection list will be
+               displayed.
+      </p> 
+           
+      <p>From this selection list, you invoke all user maintenance functions as
+               described below.
+      </p> 
+           
+          
+         
+      <div><a name="Adding_a_New_User"></a></div> 
+          
+      <h3> Adding a New User</h3> 
+           
+           
+      <p>The Add User function is used to define new users to Natural Security,
+               that is, create user security profiles.
+      </p> 
+           
+      <p>When you add a new user, you have to specify:</p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">a user ID,</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">a user type,</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">the ID of a default profile (optional).</p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+          
+      <div><a name="User_ID"></a></div> 
+           
+      <h4> User ID</h4> 
+            
+            
+      <p>The user ID is used by Natural Security to identify the user. It may
+                be 1 to 8 characters long. The ID must be unique among all user IDs and library
+                IDs defined to Natural Security. For user IDs, the same naming conventions
+                apply as for <a href="nsc_lib.htm#Library_ID">library IDs</a> (see the
+                section <cite>Library Maintenance</cite>).
+      </p> 
+            
+      <ul> 
+                
+         <li> 
+                    
+            <p class="initem">If the user is an individual, usually an ID is chosen which is
+                        related to the user's name.
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">If the user is a terminal, the ID must be identical to the terminal
+                        ID by which the terminal is defined to the computer (ask your system
+                        programmer).
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">If the user is a group, choose whatever ID you like.</p> 
+                   
+         </li> 
+               
+      </ul> 
+            
+           
+          
+      <div><a name="User_Type"></a></div> 
+           
+      <h4> User Type</h4> 
+            
+            
+      <p>When you add a user, you specify the code for one of the following
+                user types:
+      </p> 
+             
+             
+      <table border="1" class="color" cellpadding="3" width="80%"> 
+                  
+                 
+         <thead align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <th>Code</th> 
+                         
+               <th>User Type</th> 
+                        
+            </tr> 
+                    
+         </thead> 
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <td> G &nbsp;</td> 
+                         
+               <td>Group</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> M &nbsp;</td> 
+                         
+               <td>Member</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> P &nbsp;</td> 
+                         
+               <td>Person</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> A &nbsp;</td> 
+                         
+               <td>Administrator</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> T &nbsp;</td> 
+                         
+               <td>Terminal</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td> B &nbsp;</td> 
+                         
+               <td>Batch User (see
+                  <a href="nsc_batch.htm#Batch_User_Security_Profiles">Batch User Security
+                                Profiles</a> in the section <cite>Natural Security In Batch
+                                Mode</cite>)
+               </td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+      <p>If the user to be defined is a group, the user type must be
+                "G". If the user to be defined is a terminal, the user type must
+                be "T". If the user to be defined is an individual, the user type
+                should be "M" (except individuals who are Natural Security
+                administrators and have to be user type "A").
+      </p> 
+            
+      <p>The access rights of different types of users to libraries are
+                summarized in the following diagram:
+      </p> 
+            
+      <p><img src="graphics/user1.png" alt="" width="600" height="500"></p> 
+            
+      <p>If you have doubts about the correct user type specification, please
+                refer to <a href="nsc_struct.htm#Users">Users</a> in the
+                section <cite>The Structure And Terminology Of Natural
+                   Security</cite>.
+      </p> 
+            
+      <p>Once an individual has been defined, you can later change his/her user
+                type classification (as explained under
+                <a href="nsc_user.htm#Upgrading_and_Downgrading_Users">Upgrading and
+            Downgrading Users</a> below.
+      </p> 
+            
+           
+          
+      <div><a name="Default_Profile_nsc_user"></a></div> 
+           
+      <h4> Default Profile</h4> 
+            
+            
+      <p>When you add a new user, you can either type in every item within the
+                user security profile by hand; or you can use a pre-defined user default
+                profile as a template for the security profile you are creating.
+      </p> 
+            
+      <p>Before you use default profiles, you should be familiar with the
+                "normal" way of defining users (that is, without default profile).
+      </p> 
+            
+      <p>Default profiles are created and maintained in the Administrator
+                Services subsystem.
+      </p> 
+            
+      <p>The <var>user type</var> of the default profile you
+                specify must be the same as that of the user security profile you are
+                creating.
+      </p> 
+            
+      <p>If you specify the ID of a default profile in the Add User window, the
+                items from the default profile will be copied into the user profile - except
+                the user ID, user name and the owners.
+      </p> 
+            
+      <p>On the Add User screen, you can then overwrite the items copied into
+                the user profile and specify further items.
+      </p> 
+            
+      <p>For further information, see
+                <a href="nsc_admin.htm#Default_User_Profiles">User Default Profiles</a> in
+                the section <cite>Administrator Services</cite>.
+      </p> 
+            
+      <p class="note"><strong>Note:</strong><br> To define numerous users with identical security profiles, you can
+                also use the Multiple Add User function (see
+                <a href="nsc_user.htm#Adding_Multiple_New_Users">Adding Multiple New
+                   Users</a> below).
+      </p> 
+            
+           
+          
+      <div><a name="How_to_Add_a_New_User"></a></div> 
+           
+      <h4> How to Add a New User</h4> 
+            
+            
+      <p>In the command line of the User Maintenance selection list, you enter
+                the command:
+      </p> 
+            
+      <p> <code>ADD</code></p> 
+            
+      <p>A window will be displayed. In this window, you enter the
+                following:
+      </p> 
+            
+      <ul> 
+                
+         <li> 
+                    
+            <p class="initem">a user ID,</p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">a user type,</p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">the ID of a default profile (optional).</p> 
+                   
+         </li> 
+               
+      </ul> 
+            
+      <p>The Add User screen for the specified user type will be displayed. On
+                this screen, you define a security profile for the user.
+      </p> 
+            
+      <p>The Add User screen and the subsequent screens/windows that are part
+                of a user security profile as well as the individual items you may define are
+                described under <a href="nsc_user.htm#Components_of_a_User_Profile">Components of a User
+            Profile</a> above.
+      </p> 
+            
+      <p>When you add a new user, the owners specified in your own user
+                security profile will automatically be copied into the user security profile
+                you are creating.
+      </p> 
+            
+           
+          
+         
+      <div><a name="Adding_Multiple_New_Users"></a></div> 
+          
+      <h3> Adding Multiple New Users</h3> 
+           
+           
+      <p>Before you use the Multiple Add User function you should be familiar
+               with the "normal" way of defining users (as described under
+               <a href="nsc_user.htm#Adding_a_New_User">Adding a New
+            User</a> above).
+      </p> 
+           
+      <p>The Multiple Add User function allows you to define large numbers of
+               users to Natural Security in a fast and easy way. You can use this function to
+               define numerous users who are to have identical security profiles.
+      </p> 
+           
+      <p>In the command line of the User Maintenance selection list, you enter
+               the command:
+      </p> 
+           
+      <p> <code>ADDM</code></p> 
+           
+      <p>A window will be displayed. In this window, enter a <var>user
+                  ID</var> and a <var>user type</var> specification (and,
+               optionally, the ID of a <var>default profile</var>).
+      </p> 
+           
+      <p>The Multiple Add User screen for the specified user type will be
+               displayed. On this screen you may define a security profile for the user.
+      </p> 
+           
+      <p>The Multiple Add User screen and the subsequent screens/windows that
+               are part of a user security profile as well as the individual items you may
+               define are described under <a href="nsc_user.htm#Components_of_a_User_Profile">Components of a User
+            Profile</a> above.
+      </p> 
+           
+      <p>When you add a new user, the owners specified in your own user security
+               profile will automatically be copied into the user security profile you are
+               creating.
+      </p> 
+           
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong> To create multiple user security profiles</strong></p>
+      <ol class="steps">
+         <li> 
+                    
+                    
+            <p class="instep">On the first screen (and any additional screens/windows), you define
+                        a security profile for one user.
+            </p> 
+                    
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">Once you have finished typing in the items to be defined and are
+                        back on the Multiple Add User screen without any additional screens/windows
+                        being active, press <span class="key">ENTER</span>. The first user is now defined.
+            </p> 
+                    
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">Then press <span class="key">PF5</span> - the same security profile will be
+                        displayed again omitting the user ID and user name entries. Type in a user ID
+                        and the name of the next user and press <span class="key">ENTER</span>. The second user is
+                        now defined.
+            </p> 
+                    
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">Then press <span class="key">PF5</span> - the same security profile will be
+                        displayed again omitting the user ID and user name entries. In this manner, you
+                        may continue to define more users all with identical security profiles.
+            </p> 
+                    
+                  
+         </li>
+         <li> 
+                    
+                    
+            <p class="instep">To leave the Multiple Add User function, press <span class="key">PF3</span>.
+            </p> 
+                    
+                  
+         </li>
+      </ol> 
+           
+          
+         
+      <div><a name="Selecting_Existing_Users_for_Processing"></a></div> 
+          
+      <h3> Selecting Existing Users for Processing</h3> 
+           
+           
+      <p>When you invoke User Maintenance, a list of all users that have been
+               defined to Natural Security will be displayed.
+      </p> 
+           
+      <p>If you do not wish to get a list of all existing users but would like
+               only certain users to be listed, you may use the Start Value and Type/Status
+               options as described in the section <a href="nsc_way.htm#nsc_way">Finding Your Way In Natural
+            Security</a>.
+      </p> 
+           
+      <p>On the Main Menu, enter code "M" for
+               "Maintenance". A window will be displayed. In the window, mark the
+               object type "User" with a character or with the cursor (and, if
+               desired, enter a start value and/or user type). The User Maintenance selection
+               list will be displayed:
+      </p> 
+           
+      <table border="1" cellpadding="5" class="screen">
+         <tr>
+            <td><pre>
+ 11:11:11                   *** NATURAL SECURITY ***                 2008-10-31
+                                - User Maintenance -                             
+                                                                                 
+  Co User ID  User Name                        Type Message                      
+  __ ________ ________________________________ ____ _____________________        
+  __ AAZ      ABDUL ALHAZRED                   A                                 
+  __ AD       ARTHUR DENT                      A                                 
+  __ CDW      CHARLES DEXTER WARD              A                                 
+  __ CZ       CODY ZAMORA                      P                                 
+  __ DI       DAVID INNES                      A                                 
+  __ EW       ESMERALDA WEATHERWAX             M                                 
+  __ HC       HAGBARD CELINE                   A                                 
+  __ HW       HENRY WILT                       A                                 
+  __ IW       IRENE WILDE                      M                                 
+  __ LL       LOCKE LAMORA                     M                                 
+  __ PE       PALMER ELDRITCH                  M                                 
+  __ PR       PRECIOUS RAMOTSWE                M                                 
+  __ SV       SAM VIMES                        M                                 
+  __ TN       THURSDAY NEXT                    P                                 
+  __ VV       VINCENT VEGA                     M                                 
+                                                                                 
+  Command ===&gt;                                                                   
+  Enter-PF1---PF2---PF3---PF4---PF5---PF6---PF7---PF8---PF9---PF10--PF11--PF12---
+        Help        Exit              Flip  -     +                       Canc  
+</pre></td>
+         </tr>
+      </table> 
+           
+      <p>For each user, the user ID, user name and user type are displayed.</p> 
+           
+      <p>The list can be scrolled as described in the section
+               <a href="nsc_way.htm#nsc_way">Finding Your Way In Natural
+            Security</a>.
+      </p> 
+           
+      <p>The following user maintenance functions are available (possible code
+               abbreviations are underlined):
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="80%"> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>Code</th> 
+                        
+               <th>Function</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> <code><u>C</u>O</code></td> 
+                        
+               <td> <a href="nsc_user.htm#Copying_a_User">Copy user</a>
+                           &nbsp;
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code><u>M</u>O</code></td> 
+                        
+               <td> <a href="nsc_user.htm#Modifying_a_User">Modify user</a>
+                            &nbsp;
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>RE</code> &nbsp;
+               </td> 
+                        
+               <td> <a href="nsc_user.htm#Renaming_a_User">Rename user</a>
+                            &nbsp;
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>DE</code> &nbsp;
+               </td> 
+                        
+               <td> <a href="nsc_user.htm#Deleting_a_User">Delete user</a>
+                            &nbsp;
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code><u>D</u>I</code></td> 
+                        
+               <td> <a href="nsc_user.htm#Displaying_a_User">Display user</a>
+                            &nbsp;
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>EG</code> &nbsp;
+               </td> 
+                        
+               <td> <a href="nsc_user.htm#Editing_Group_Members">Edit group
+                     members</a> &nbsp;
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>LA</code> &nbsp;
+               </td> 
+                        
+               <td> <a href="nsc_appl.htm#Linking_Users_to_Applications">Link user
+                     to applications</a></td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>LL</code> &nbsp;
+               </td> 
+                        
+               <td> <a href="nsc_prolib.htm#Linking_Users_to_Libraries">Link user to
+                     libraries</a> &nbsp;
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>LO</code> &nbsp;
+               </td> 
+                        
+               <td> <a href="nsc_extobj.htm#Linking_Users_to_External_Objects">Link
+                     user to external objects</a></td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>CP</code></td> 
+                        
+               <td> <a href="nsc_user.htm#CopyUsersLinks">Copy user's
+                     links</a></td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>EP</code></td> 
+                        
+               <td> <a href="nsc_environ.htm#LinkUserEnvs">Protect environments for
+                     user</a></td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <code>MD</code> &nbsp;
+               </td> 
+                        
+               <td> <a href="nsc_ddmos.htm#Modify_DDM_Profile">Modify DDM
+                     restrictions in user's private library</a> (this function is not
+                            available on mainframes)&nbsp;
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>To invoke a specific function for a user, mark the user with the
+               appropriate function code in column "Co".
+      </p> 
+           
+      <p>You can select various users for various functions at the same time;
+               that is, you can mark several users on the screen with a function code. For
+               each user marked, the appropriate processing screen will be displayed. You can
+               then perform for one user after another the selected functions.
+      </p> 
+           
+          
+         
+      <div><a name="Copying_a_User"></a></div> 
+          
+      <h3> Copying a User</h3> 
+           
+           
+      <p>The Copy User function is used to define a new user to Natural Security
+               by creating a security profile which is identical to an already existing user
+               security profile.
+      </p> 
+           
+          
+      <div><a name="What_is_Copied_nsc_user"></a></div> 
+           
+      <h4> What is Copied?</h4> 
+            
+            
+      <p>All components of the existing security profile will be copied into
+                the new security profile - <em>except</em>:
+      </p> 
+            
+      <ul> 
+                
+         <li> 
+                    
+            <p class="initem">the user name,</p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">the password,</p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">the ETID (which identifies End of Transaction data),</p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">the owners (these will be copied from your own user security profile
+                        into the new user security profile you are creating).
+            </p> 
+                   
+         </li> 
+               
+      </ul> 
+            
+      <p>Whether the groups entered in the "Privileged Groups"
+                column and any links to libraries are copied depends on whether you copy with
+                or without links (see below).
+      </p> 
+            
+           
+          
+      <div><a name="How_to_Copy_nsc_user"></a></div> 
+           
+      <h4> How to Copy</h4> 
+            
+            
+      <p>On the User Maintenance selection list, mark the user whose security
+                profile you wish to duplicate with function code "CO".
+      </p> 
+            
+      <p>A window will be displayed. In this window, specify the following:</p>
+            
+            
+      <ul> 
+                
+         <li> 
+                     
+                    
+            <p class="initem"><strong>To user:</strong><br> Enter the ID of the "new" user.
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                     
+                    
+            <p class="initem"><strong>With links:</strong><br> If you wish links <em>not</em> to be copied, leave the
+                        "N" in this field untouched; if you wish any links existing for
+                        the existing user also to apply to the new user, type in a "Y"
+                        (see below for details).
+            </p> 
+                   
+         </li> 
+               
+      </ul> 
+            
+      <p>The Copy User screen will be displayed showing the new security
+                profile.
+      </p> 
+            
+      <p>The Copy User screen and the subsequent screens/windows that are part
+                of a user security profile as well as the individual items you may define are
+                described under <a href="nsc_user.htm#Components_of_a_User_Profile">Components of a User
+            Profile</a> above.
+      </p> 
+            
+           
+          
+      <div><a name="Copying_Without_Links"></a></div> 
+           
+      <h4> Copying Without Links</h4> 
+            
+            
+      <p>If you leave the "N" in the "with links" field of the
+                Copy User window:
+      </p> 
+            
+      <ul> 
+                
+         <li> 
+                    
+            <p class="initem">the groups entered in the Privileged
+               Groups column of the existing user will not be copied into the
+                        new user security profile;
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">any links defined for the existing user will not apply to the new
+                        user;
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">any user-specific and user-library-specific utility profiles for the
+                        existing user will not apply to the new user.
+            </p> 
+                   
+         </li> 
+               
+      </ul> 
+            
+           
+          
+      <div><a name="Copying_With_Links"></a></div> 
+           
+      <h4> Copying With Links</h4> 
+            
+            
+      <p>If you enter a "Y" in the "with links" field of the Copy
+                User window:
+      </p> 
+            
+      <ul> 
+                
+         <li> 
+                    
+            <p class="initem">any links that existed for the existing user are copied for the new
+                        user, and you have the option to cancel the links you wish not to apply for the
+                        new user;
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">the new user will be added to all groups in which the existing user
+                        is contained (and all access right of the groups to libraries then also apply
+                        for the new user), and you have the option to delete the new user from any of
+                        these groups;
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">any user-specific and user-library specific utility profiles that
+                        existed for the existing user are copied for the new user.
+            </p> 
+                   
+         </li> 
+               
+      </ul> 
+            
+      <p>The procedure is as follows:</p> 
+            
+      <ol> 
+                
+         <li> 
+                    
+            <p class="initem">Once you have made any changes to the copied security profile and
+                        then leave the Copy User screen by pressing <span class="key">PF3</span>, a list of libraries
+                        is displayed: the list contains all libraries to which the existing user is
+                        linked directly.
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">On the list, you may mark individual libraries with
+                        "CL" to cancel any links you wish <em>not</em> to apply for the
+                        new user; to all libraries you do not mark, the new user will automatically be
+                        linked in the same manner - normal or special link - as the existing user.
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">Once you have established all direct links and then leave the list
+                        of libraries by pressing <span class="key">PF3</span>, a list of groups is displayed: the
+                        list contains all groups in which the existing user is contained.
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">On the list you may mark with "CL" the groups to which
+                        you wish the new user <em>not</em> to be added; the new user will automatically
+                        be added to all groups you do not mark. If any of the groups to which the new
+                        user is added is entered as "Privileged Group" in the security
+                        profile of the existing user, they will automatically also be entered as
+                        "Privileged Groups" in the new user security profile.
+            </p> 
+                   
+         </li> 
+               
+      </ol> 
+            
+           
+          
+         
+      <div><a name="Modifying_a_User"></a></div> 
+          
+      <h3> Modifying a User</h3> 
+           
+           
+      <p>The Modify User function is used to change an existing user security
+               profile.
+      </p> 
+           
+      <p>On the User Maintenance selection list, mark the user whose security
+               profile you wish to change with function code "MO". The Modify
+               User screen will be displayed.
+      </p> 
+           
+      <p>The Modify User screen and the subsequent screens/windows that are part
+               of a user security profile as well as the individual items you may define or
+               modify are described under <a href="nsc_user.htm#Components_of_a_User_Profile">Components of a User
+            Profile</a> above.
+      </p> 
+           
+          
+      <div><a name="Upgrading_and_Downgrading_Users"></a></div> 
+           
+      <h4> Upgrading and Downgrading Users</h4> 
+            
+            
+      <p>If need be, you may change the user type classification of an
+                individual.
+      </p> 
+            
+      <p>If you wish to change the user type, first type in the new user type
+                and press <span class="key">ENTER</span> to obtain the appropriate Modify User screen before
+                you further modify the security profile, because the Modify User screens for
+                the different user types are not identical to one another.
+      </p> 
+            
+      <h4 class="floating-title"> <a name="Upgrading_a_User"></a>Upgrading a User
+                
+      </h4> 
+            
+      <p>You may "promote" a MEMBER to become a PERSON or an
+                ADMINISTRATOR; and you may "promote" a PERSON to become an
+                ADMINISTRATOR.
+      </p> 
+            
+      <h4 class="floating-title"> <a name="Downgrading_a_User"></a>Downgrading a
+                User
+      </h4> 
+            
+      <p>You may downgrade an ADMINISTRATOR to become a PERSON or a MEMBER; and
+                you may downgrade a PERSON to become a MEMBER.
+      </p> 
+            
+      <ul> 
+                
+         <li> 
+                    
+            <p class="initem">Before you can downgrade a user from ADMINISTRATOR to PERSON, you
+                        have to remove him/her as owner from every security profile in which he/she is
+                        specified as owner. As long as an ADMINISTRATOR is still owner of any security
+                        profile, he/she cannot be downgraded.
+            </p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">Before you can downgrade a user from ADMINISTRATOR to MEMBER, you
+                        have to perform the following:
+            </p> 
+                    
+            <ul style="margin-top: 0px; margin-bottom: 0px;"> 
+                        
+               <li class="nesteditem"> 
+                            
+                  <p class="initem">You have to remove him/her as owner from every security profile in
+                                which he/she is specified as owner. As long as an ADMINISTRATOR is still owner
+                                of any security profile, he/she cannot be downgraded.
+                  </p> 
+                           
+               </li> 
+                        
+               <li class="nesteditem"> 
+                            
+                  <p class="initem">You have to cancel all direct links from the user to
+                                libraries/external objects. As long as the user is linked to any library or
+                                external object, he/she cannot become a MEMBER.
+                  </p> 
+                           
+               </li> 
+                        
+               <li class="nesteditem"> 
+                            
+                  <p class="initem">You have to delete the ADMINISTRATOR's private library (if
+                                defined). As long as the user has a private library, he/she cannot become a
+                                MEMBER.
+                  </p> 
+                           
+               </li> 
+                       
+            </ul> 
+                    
+            <p class="initem"></p> 
+                   
+         </li> 
+                
+         <li> 
+                    
+            <p class="initem">Before you can downgrade a user from PERSON to MEMBER, you have to
+                        cancel all direct links from the user to libraries/external objects. As long as
+                        the user is linked to any library or external object, he/she cannot become a
+                        MEMBER. In addition, you have to delete the PERSON's private library (if
+                        defined). As long as the user has a private library, he/she cannot become a
+                        MEMBER.
+            </p> 
+                   
+         </li> 
+               
+      </ul> 
+            
+           
+          
+      <div><a name="User_Locked_modifying"></a></div> 
+           
+      <h4> User Locked?</h4> 
+            
+            
+      <p>When the <a href="nsc_admin.htm#Lock_User_Option">"Lock User
+                   Option"</a> (described in the section <cite>Administrator
+                   Services</cite>) is active, it may occur that the user security profile has
+                been locked.
+      </p> 
+            
+      <p>If the security profile is locked, this will be indicated on the
+                Modify User screen by the message:
+      </p><pre class="system-output">This user is currently locked due to logon/countersign error!</pre> 
+            <p> If you enter a "Y" in the "Unlock? (Y/N)"
+                field, a window will be displayed which provides detailed information on how
+                and when the locking occurred. In that window you may also unlock the security
+                profile.
+      </p> 
+            
+      <p class="note"><strong>Note:</strong><br> You may also view and unlock locked users by means of the
+                <a href="nsc_admin.htm#ListUnlock_Locked_Users">"List/Unlock Locked
+                   Users"</a> function (which is described in the section
+                <cite>Administrator Services</cite>).
+      </p> 
+            
+           
+          
+         
+      <div><a name="Renaming_a_User"></a></div> 
+          
+      <h3> Renaming a User</h3> 
+           
+           
+      <p>The Rename User function allows you to change the user ID of an
+               existing user security profile.
+      </p> 
+           
+      <p>On the User Maintenance selection list, you mark the user whose ID you
+               wish to change with function code "RE". A window will be displayed
+               in which you can enter a new ID for the user (and, optionally, change the
+               user's name).
+      </p> 
+           
+      <p>An ADMINISTRATOR who is an owner of one or more security profiles
+               cannot be renamed. A user who is specified as DDM modifier in one or more
+               DDM/file security profiles, cannot be renamed either.
+      </p> 
+           
+          
+         
+      <div><a name="Deleting_a_User"></a></div> 
+          
+      <h3> Deleting a User</h3> 
+           
+           
+      <p>The Delete User function is used to delete an existing user security
+               profile.
+      </p> 
+           
+      <p>On the User Maintenance selection list, you mark the user you wish to
+               delete with function code "DE". A window will be displayed.
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">If you have invoked the Delete User function and should then decide
+                       against deleting the given user security profile, leave the Delete User window
+                       by pressing <span class="key">ENTER</span> without having typed in anything.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">If you wish to delete the given user security profile, enter the
+                       user's ID in the window to confirm the deletion.
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>Depending on the setting of the general option
+               <a href="nsc_admin.htm#DeleteOwners">"Allow Deletion of Users Who Are
+                  Owners/DDM Modifiers"</a> (described in the section
+               <cite>Administrator Services</cite>), it may not be possible to delete a
+               user security profile if the user is specified as owner in any security profile
+               or as DDM modifier in any DDM/file security profile.
+      </p> 
+           
+      <p>If you mark more than one user with "DE", a window will
+               appear in which you are asked whether you wish to confirm the deletion of each
+               user security profile by entering the user's ID, or whether all users selected
+               for deletion are to be deleted without this individual confirmation. Be careful
+               not to delete a user accidentally.
+      </p> 
+           
+      <p class="note"><strong>Note:</strong><br> If you delete a GROUP security profile, this will <em>not</em>
+               delete the individual security profiles of the users assigned to this
+               GROUP.
+      </p> 
+           
+          
+         
+      <div><a name="Displaying_a_User"></a></div> 
+          
+      <h3> Displaying a User</h3> 
+           
+           
+      <p>The Display User function is used to display an existing user security
+               profile.
+      </p> 
+           
+      <p>On the User Maintenance selection list, mark the user whose security
+               profile you wish to view with function code "DI". The Display User
+               screen will be displayed.
+      </p> 
+           
+      <p>The items displayed on the Display User screen and any additional
+               windows that are part of a user security profile are explained under
+               <a href="nsc_user.htm#Components_of_a_User_Profile">Components of a User
+            Profile</a> above.
+      </p> 
+           
+          
+      <div><a name="User_Locked_displaying"></a></div> 
+           
+      <h4> User Locked?</h4> 
+            
+            
+      <p>When the <a href="nsc_admin.htm#Lock_User_Option">"Lock User
+                   Option"</a> (described in the section <cite>Administrator
+                   Services</cite>) is active, it may occur that the user security profile has
+                been locked.
+      </p> 
+            
+      <p>If the security profile is locked, this will be indicated on the
+                Display User screen by the message:
+      </p><pre class="system-output">This user is currently locked due to logon/countersign error!</pre> 
+            <p>If you enter a "Y" in the "Lock Info (Y/N)"
+                field, a window will be displayed which provides detailed information on how
+                and when the locking occurred.
+      </p> 
+            
+           
+          
+         
+      <div><a name="Editing_Group_Members"></a></div> 
+          
+      <h3> Editing Group Members</h3> 
+           
+           
+      <p>The Edit Group Members function is used to assign users to or delete
+               users from a group.
+      </p> 
+           
+      <p>As long as the number of users assigned to a group does not exceed 5,
+               the group members may be maintained in the "Members" column of the
+               group's security profile by using the Modify User function. For larger groups,
+               membership maintenance has to be done with the Edit Group Members function.
+      </p>
+           
+           
+      <p>You can invoke the Edit Group Members function either from the User
+               Maintenance selection list or from within a group's security profile:
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">On the User Maintenance selection list, mark the group you wish to
+                       edit with function code "EG".
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">In a group's security profile, mark the option "Group
+                       Editor" in the Additional Options window with any character.
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>The Edit Group Members screen will be displayed:</p> 
+           
+      <table border="1" cellpadding="5" class="screen">
+         <tr>
+            <td><pre>
+&gt;                      &gt; +   Gr ELGRUPO                  Size 5    Line 1
+  ALL  User ID             User Name              Type        Status
+       -------- --------------------------------- ---- --------------------
+       AD       ARTHUR DENT                       A                             
+       AT       TIFFANY ACHING                    A                             
+       MT       MERCY THOMPSON                    M                             
+       RM       RACHEL MORGAN                     M                             
+       T2112    WEINRIB'S TERMINAL                T                            
+</pre></td>
+         </tr>
+      </table> 
+           
+      <p>The Edit Group Members screen is a modified Natural program editor.
+               When you invoke it, the users already contained in the given group are read
+               into the source area. The list of group members will be in alphabetical order
+               of user IDs. For each user, the user ID, user name and user type are
+               displayed.
+      </p> 
+           
+      <p>To add a user to the group, add the user ID to the list. To delete a
+               user from the group, delete the user ID from the list.
+      </p> 
+           
+      <p>Remember that users have to be defined to Natural Security before they
+               can be added to a group.
+      </p> 
+           
+      <p>It does not matter in which order you add new user IDs: when you
+               catalog the list of group members (see command "CAT" below), they
+               will automatically be sorted alphabetically.
+      </p> 
+           
+      <p>To edit the list, you can use the Natural program editor scrolling
+               commands, line commands and editor commands (as described in the Natural
+               <cite>Editors</cite> documentation).
+      </p> 
+           
+      <p>To add <em>all</em> users contained in one group to the group you are
+               editing, enter the command <code>INCLUDE
+            <var>group-ID</var></code> in the command line of the
+               Edit Group Members screen. All users contained in the group whose ID you
+               specify with the INCLUDE command will then be added to the list. They will be
+               included before the user who is displayed in the top line of the screen.
+      </p> 
+           
+      <p>Remember that a user of type "group" must not be contained
+               within another group.
+      </p> 
+           
+      <p>Modifications are only processed in the source area until you enter the
+               command "CAT" in the command line (or press <span class="key">PF3</span>). This
+               command first invokes a procedure which checks for duplicate IDs. If the IDs
+               are unique, the edited list of members will be entered in the group's security
+               profile.
+      </p> 
+           
+      <p>With the command "CHECK" you invoke the checking procedure
+               only.
+      </p> 
+           
+      <p>To leave the Edit Group Members screen, enter a period (.) in the
+               command line.
+      </p> 
+           
+          
+         
+      <div><a name="CopyUsersLinks"></a></div> 
+          
+      <h3> Copying a User's Links</h3> 
+           
+           
+      <p>The Copy User's Links function is used to copy links from one existing
+               user profile to another one of the same user type.
+      </p> 
+           
+      <p>You can individually select the links to be copied. In addition to
+               links, you can copy group memberships (including "Privileged
+               Groups" specifications) and functional security definitions.
+      </p> 
+           
+      <p>On the User Maintenance selection list, you mark the user whose links
+               you wish to copy with function code "CP". A window will be
+               displayed in which you enter the ID of the user to which you wish to copy
+               links. In addition, you can restrict the selection of link types in the
+               window:
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">Library links</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Groups/Members</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Utility links</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Functional security</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">File links (if the user has a private library)</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Environment links</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">External object links</p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>By default, all the above are selected. To deselect one type, you
+               remove the "X".
+      </p> 
+           
+      <p>A list of all the first user's existing links (of the selected types)
+               will then be displayed.
+      </p> 
+           
+      <p>The listed links are not automatically preselected for copying. In the
+               "Co" column of the list, you have to mark with function code
+               "CO" each link you wish to be copied from the one user to the
+               other.
+      </p> 
+           
+      <p>You can mark one or more links per screen. For each link marked, a
+               message indicating if it has been copied will be displayed. If a link cannot be
+               copied, this will also be indicated. For example, if the user already has a
+               link to a specific object, this cannot be replaced by a link copied from the
+               other user.
+      </p> 
+           
+          
+        
+       
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="nsc_user.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../nsc/nsc_user.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/nsc/nsc_user.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc_admin.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="nsc_lib.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

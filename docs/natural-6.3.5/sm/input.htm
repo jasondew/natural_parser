@@ -1,0 +1,655 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>INPUT</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="input" id="16816"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../sm/input.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/sm/input.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="sm-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="include.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="input1.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Statements&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> INPUT 
+               <a name="x112"></a></h1>
+      </div> 
+         
+         
+      <p>This document covers the following topics:</p>
+         
+      <ul>
+         <li>
+            <p class="initem"><a href="input.htm#Function_input">Function</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="input.htm#Input_Modes">Input Modes</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="input.htm#Entering_Data_in_Response_to_an_INPUT_Statement">Entering Data in Response to an INPUT Statement</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="input.htm#SB">SB - Selection Box</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="input.htm#Error_Correction">Error Correction</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="input.htm#Split-Screen_Feature">Split-Screen Feature</a></p>
+         </li>
+      </ul> 
+         
+      <p>The syntax is described separately. See:</p> 
+         
+      <ul> 
+             
+         <li> 
+                 
+            <p class="initem"><a href="input1.htm#input1">INPUT Syntax 1 - Dynamic Screen Layout
+                        Specification</a></p> 
+                
+         </li> 
+             
+         <li> 
+                 
+            <p class="initem"><a href="input2.htm#input2">INPUT Syntax 2 - Using Predefined Map
+                        Layout</a></p> 
+                
+         </li> 
+            
+      </ul> 
+          
+         
+      <p>Related Statements: <a href="definewi.htm#definewi">DEFINE
+                WINDOW</a> | <a href="reinput.htm#reinput">REINPUT</a> |
+             <a href="setwindo.htm#setwindo">SET WINDOW</a> 
+      </p> 
+         
+      <p>Belongs to Function Group:
+             <a href="stmt.htm#Screen_Generation_for_Interactive_Processing">Screen
+            Generation for Interactive Processing</a></p> 
+        
+      <hr> 
+        
+      <div><a name="Function_input"></a></div> 
+         
+      <h2> Function </h2> 
+          
+          
+      <p>The <code>INPUT</code> statement is used in interactive mode to create a
+              formatted screen or map for data entry.
+      </p> 
+          
+      <p>It may also be used in conjunction with the Natural stack (see the
+              <a href="stack.htm#stack"><code>STACK</code></a> statement); and on
+              mainframe computers, it may also be used to provide user data for programs
+              being executed in batch mode.
+      </p> 
+          
+      <p> For Natural RPC: See
+              <a href="../rpc/limits.htm#limits_notes_on_statements">Notes on
+            Natural Statements on the Server</a> (in the <cite>Natural
+                 Remote Procedure Call (RPC)</cite> documentation).
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="input.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Input_Modes"></a></div> 
+         
+      <h2> Input Modes </h2> 
+          
+          
+      <p>The <code>INPUT</code> statement may be used in screen, forms, or
+              keyword/delimiter mode. Screen mode is generally used with video
+              terminals/screens. Forms mode may be used with TTY terminals. Delimiter mode is
+              used with TTY terminals, and also in batch mode (on mainframe computers). The
+              default mode is screen mode.
+      </p> 
+          
+      <p>You can change the input mode with the session parameter
+              <a href="../parms/im.htm"><code>IM</code></a>.
+      </p> 
+          
+         
+      <div><a name="d0e82018"></a></div> 
+          
+      <h3>Screen Mode</h3> 
+           
+           
+      <p>In screen mode, execution of the <code>INPUT</code> statement results
+               in the display of a screen according to the fields and positioning notation
+               specified. The message line of the screen is used by Natural for error
+               messages. The position of the message line (top or bottom of screen) may be
+               controlled by the terminal command <a href="../tcom/pcm.htm"><code>%M</code></a>. The terminal user may
+               position to specific fields using the various tabulation keys.
+      </p> 
+           
+      <p>As Natural allows for screen window processing, the layout of the
+               logical screen map may be larger (theoretically 250 characters per line and 250
+               lines, but limited by the internal screen buffer) than the physical screen
+               size.
+      </p> 
+           
+      <p>The windowing terminal command <a href="../tcom/pcw.htm"><code>%W</code></a> may be used to modify logical
+               and physical window position and size (see the terminal command <code>%W</code>
+               for details of window handling).
+      </p> 
+           
+      <p>For input fields (<a href="../parms/sp_ad.htm"><code>AD=A</code></a> or
+               <a href="../parms/sp_ad.htm#sp_ad_ad_m"><code>AD=M</code></a>)
+               that are not fully displayed on the physical screen, the following rules
+               apply:
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">Input fields whose beginning is not inside the window are always made
+                       protected.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Input fields which begin inside and end outside the window are only
+                       made protected if the values they contain cannot be displayed completely in the
+                       window. Please note that in this case it is decisive whether the value length,
+                       not the field length, exceeds the window size. Filler characters (as specified
+                       with the profile parameter <a href="../parms/fc.htm"><code>FC</code></a> or session parameter
+                       <a href="../parms/sp_ad.htm"><code>AD</code></a>) do not
+                       count as part of the value.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Before an input field thus protected can be accessed and processed,
+                       the window size must be adjusted so as to fully display the field or value
+                       respectively (see the terminal command <a href="../tcom/pcw.htm"><code>%W</code></a>).
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+          
+         
+      <div><a name="d0e82094"></a></div> 
+          
+      <h3>Non-Screen Modes</h3> 
+           
+           
+      <p>The <code>INPUT</code> statement may be used for an operation on
+               line-oriented devices or for the processing of batch input from sequential
+               files.
+      </p> 
+           
+      <p>The same map layouts as defined for screen mode operation can also be
+               processed in non-screen mode.
+      </p> 
+           
+      <p>Forms mode and keyword/delimiter mode are also available to process the
+               input either by simulating the screen layout in line mode or by just processing
+               the data without any map layout.
+      </p> 
+           
+      <p>See also:</p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem"> <a href="input2.htm#INPUT_Statement_in_Non-Screen_Modes">Using the INPUT
+                  Statement in Non-Screen Modes</a></p> 
+                  
+         </li> 
+                
+               
+         <li> 
+                   
+            <p class="initem"> <a href="input2.htm#Processing_Data_from_the_Natural_Stack">Processing Data from
+                  the Natural Stack</a></p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="input.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Entering_Data_in_Response_to_an_INPUT_Statement"></a></div> 
+         
+      <h2> Entering Data in Response to an INPUT Statement </h2> 
+          
+          
+      <p>Data for an alphanumeric field must be entered left-justified. Any
+              character, including a blank, is meaningful. The data are assigned one
+              character per byte to the internal field. Data entered for an alphanumeric
+              field are not validated.
+      </p> 
+          
+      <p>Lower and upper case translation are controlled by the terminal commands
+              <a href="../tcom/pcl.htm"><code>%L</code></a> and
+              <a href="../tcom/pcu.htm"><code>%U</code></a> as well as the
+              attributes <a href="../parms/sp_ad.htm"><code>AD=T</code></a> and
+              <a href="../parms/sp_ad.htm#sp_ad_Field_Upper_-_Lower_Case_Characteristics"><code>AD=W</code></a>.
+      </p>
+          
+          
+      <p>Data for a numeric field may be placed anywhere in the input field.
+              Leading and/or trailing blanks, leading zeros, a leading sign and one decimal
+              point are permitted. Natural adjusts the value according to the internal
+              definition of the field. If <a href="../parms/sp_sg.htm"><code>SG=OFF</code></a> is specified,
+              Natural does not assume or allocate a position for a sign position. Data for a
+              field defined with format P must be entered in decimal form. Natural will
+              convert decimal to packed wherever necessary. A field containing all blanks is
+              interpreted as a zero value. Data for a numeric field are validated by Natural
+              to ensure that the value consists only of leading and/or trailing blanks, an
+              optional leading sign, an optional decimal point, and numeric characters. If no
+              decimal point is entered, it is assumed to be to the right of the value
+              entered.
+      </p> 
+          
+      <p>Data for a binary field must be entered for all positions (two
+              characters per byte). Only valid hexadecimal characters (0 - 9, A - F) may be
+              used. A blank (H'20' in ASCII or H'40' in EBCDIC respectively) is valid and is
+              converted to binary zeros. Data for a binary field are validated by Natural for
+              hexadecimal characters.
+      </p> 
+          
+      <p>Data for format L fields may be entered as blank (false) or non-blank
+              (true).
+      </p> 
+          
+      <p>Data for format F, D, and T are entered according to the rules stated
+              for F, D, and T constants.
+      </p> 
+          
+         
+      <div><a name="nemfm"></a></div> 
+          
+      <h3> Numeric Edit Mask Free Mode </h3> 
+           
+           
+      <p>Within a field element, you may format the representation of the field
+               content with an edit mask. The edit mask is used for two purposes:
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">to build the layout for displaying the field on the screen;</p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">when a string has been modified and <span class="key">ENTER</span> has been
+                       pressed, to extract the field data from the string entered.
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>The advantage of improving the format of the field data displayed with
+               additional insert characters may actually be a disadvantage, because a new data
+               value entered has to perfectly match the format of the edit mask.
+      </p> 
+           
+      <h4 class="floating-title"> Example: </h4> 
+           <pre class="verbatim">SET GLOBALS ID=; DC=,
+RESET N (N7,3)
+INPUT N (AD=M EM=Z'.'ZZZ'.'ZZZ,999EUR)
+END</pre> 
+            
+            <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                  
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>Output value</th> 
+                        
+               <th>is displayed as:</th> 
+                        
+               <th>Input value</th> 
+                        
+               <th>must be entered as:</th> 
+                        
+               <th>leads to an input error if entered as:</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td>0</td> 
+                        
+               <td align="right">,000EUR</td> 
+                        
+               <td>1</td> 
+                        
+               <td>1,000EUR</td> 
+                        
+               <td> 
+                  
+                  <p class="mini-list"> 
+                                1<br> 
+                                1EUR<br> 
+                                01,000EUR 
+                               
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>1234</td> 
+                        
+               <td align="right">1.234,000EUR</td> 
+                        
+               <td>1234567</td> 
+                        
+               <td>1.234.567,000EUR</td> 
+                        
+               <td> 
+                  
+                  <p class="mini-list"> 
+                          1234567<br> 
+                                1.234.567<br> 
+                                1.234.567EUR 
+                               
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>0,123</td> 
+                        
+               <td align="right">,123EUR</td> 
+                        
+               <td>1,234</td> 
+                        
+               <td>1,234EUR</td> 
+                        
+               <td>1,234</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>Another option for entering numeric fields with the edit mask is to use
+               an alternative <code>INPUT</code> mode, which is called the edit mask free
+               mode. When activated (either at session startup with the profile parameter
+               <a href="../parms/emfm.htm"><code>EMFM</code></a> or in
+               a running Natural session via the terminal command
+               <a href="../tcom/pcfm.htm"><code>%FM+</code></a>), all or some of
+               the edit mask insert characters may be left out from input.
+      </p> 
+           
+      <p>However, when a contiguous string of insertion characters appears in
+               the edit mask (like <code>EUR</code> in the example below), you may only supply
+               or leave out the string completely. The number of optional or mandatory digits
+               (edit-mask character <code>Z</code> and <code>9</code>) to be supplied is not
+               affected.
+      </p> 
+           
+      <h4 class="floating-title"> Example with Edit Mask Free Mode activated:
+               
+      </h4> 
+           <pre class="verbatim">SET GLOBALS ID=; DC=,
+SET CONTROL 'FM+'         /* activate numeric Edit Mask Free Mode
+RESET N (N7,3)
+INPUT N (AD=M EM=Z'.'ZZZ'.'ZZZ,999EUR)
+END</pre> 
+            
+            <table border="1" class="color" cellpadding="3" width="97%"> 
+                  
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>Input value</th> 
+                        
+               <th>can be entered as:</th> 
+                        
+               <th>leads to an error if entered as:</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td>1</td> 
+                        
+               <td> 
+                  
+                  <p class="mini-list"> 
+                                1<br> 
+                                1,0<br> 
+                                001<br> 
+                                1,00EUR<br> 
+                                0.001<br> 
+                                1,EUR 
+                               
+                  </p> 
+               </td> 
+                        
+               <td>1EUR</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>1234567</td> 
+                        
+               <td> 
+                  
+                  <p class="mini-list"> 
+                          1234567<br> 
+                                1.234.567<br> 
+                                1234.567<br> 
+                                1234567,0<br> 
+                                1.234.567,0<br> 
+                                1.234.567,EUR<br> 
+                                1.234.567,0EUR<br> 
+                                1.234.567,000EUR 
+                               
+                  </p> 
+               </td> 
+                        
+               <td> 1.234.567EUR </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>1,234</td> 
+                        
+               <td> 
+                  
+                  <p class="mini-list"> 
+                            1,234<br> 
+                                1,234EUR <br> 
+                                 001,234 <br> 
+                                0.001,234EUR<br> 
+                                00001,234EUR 
+                               
+                  </p> 
+               </td> 
+                        
+               <td>1,234EU</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p class="note"><strong>Note:</strong><br> The edit mask free mode applies only for <code>INPUT</code>, but is
+               ignored in a <a href="move.htm#MOVE_ED"><code>MOVE EDITED</code></a>
+               statement.
+      </p> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="input.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="SB"></a></div> 
+         
+      <h2> SB - Selection Box </h2> 
+          
+          
+      <p>Selection boxes in an <code>INPUT</code> statement are available on
+              mainframe computers only. On Windows, selection boxes may be defined in the map
+              editor only. On UNIX and OpenVMS, selection boxes cannot be defined and are
+              ignored, if they are imported from a Windows or mainframe environment.
+      </p> 
+          
+      <p>Selection boxes can be attached to input fields. They are a comfortable
+              alternative to help routines attached to fields, since you can code a selection
+              box direct in your program. You do not need an extra program as with help
+              routines.
+      </p> 
+          
+      <p>For more information, see the session parameter
+              <a href="../parms/sp_sb.htm"><code>SB</code></a> in the
+              <cite>Parameter Reference</cite>.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="input.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Error_Correction"></a></div> 
+         
+      <h2> Error Correction </h2> 
+          
+          
+      <p>If the value entered in an input field does not correspond to the format
+              or edit mask of the field, Natural displays an error message (without
+              terminating the program execution) and positions the cursor in the field in
+              error. The user may then enter a valid value, whereupon processing
+              continues.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="input.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Split-Screen_Feature"></a></div> 
+         
+      <h2> Split-Screen Feature </h2> 
+          
+          
+      <p>In general, each <code>INPUT</code> statement generates a new page (or
+              terminal screen) of output. Any <code>INPUT</code> statement which is specified
+              within an <a href="atendpag.htm#atendpag"><code>AT END OF PAGE</code></a>
+              statement will not produce a new screen. This feature allows for the creation
+              of a split screen where the upper portion of the screen may be used to display
+              multiple lines and the lower portion can be used to create an input map for
+              communication. The profile parameter <a href="../parms/ps.htm"><code>PS</code></a> (page size) should
+              be used, either in a <a href="setgloba.htm#setgloba"><code>SET
+               GLOBALS</code></a> or <a href="format.htm#format"><code>FORMAT</code></a> statement, to set the logical
+              page size to ensure that the input map is built on the same physical
+              screen.
+      </p> 
+          
+      <p>The first <code>INPUT</code> line will be placed after the last
+              displayed line. If the <a href="input1.htm#NO_ERASE_1"><code>NO
+               ERASE</code></a> option is used, the first <code>INPUT</code> line will
+              be placed at the top of the page.
+      </p> 
+          
+        
+       
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="input.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../sm/input.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/sm/input.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="sm-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="include.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="input1.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

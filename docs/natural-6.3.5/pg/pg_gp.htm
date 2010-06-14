@@ -1,0 +1,420 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Portable Natural Generated Programs</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="pg_gp"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_gp.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_gp.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_furth_internet.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_desgn-over.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Programming Guide&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x394"></a> 
+               <a name="x395"></a> 
+               <a name="x396"></a> Portable Natural Generated Programs
+         </h1>
+      </div> 
+        
+         
+         
+      <p>As of Natural Version 5, Natural generated programs (GPs) are portable
+             across UNIX, OpenVMS and Windows platforms.
+      </p> 
+         
+      <p>This document covers the following topics:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_gp.htm#gp_compat">Compatibility</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_gp.htm#gp_endian_mode">Endian Mode Considerations</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_gp.htm#gp_endian_para">ENDIAN Parameter</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_gp.htm#gp_transfer">Transferring Natural Generated Programs</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_gp.htm#gp_port">Portable FILEDIR.SAG and Error Message Files</a></p>
+         </li>
+      </ul> 
+        
+      <hr> 
+        
+      <div><a name="gp_compat"></a></div> 
+         
+      <h2> Compatibility </h2> 
+          
+          
+      <p>As of Natural Version 5, a source which was cataloged on any
+              Natural-supported UNIX, OpenVMS and Windows platform is executable with all of
+              these Open Systems platforms without recompilation. This feature simplifies the
+              deployment of applications across Open Systems platforms.
+      </p> 
+          
+      <p>Natural applications generated with Natural Version 4 or Natural Version
+              3 can be executed with Natural Version 5 or above without cataloging the
+              applications again (upward compatibility). In this case, the portable GP
+              functionality is not available. To make use of the portable GP and other
+              improvements, cataloging with Natural Version 5 or above is required.
+      </p> 
+          
+      <p>Command processor GPs are not portable. The portable GP feature is not
+              available for mainframe platforms. This means that Natural GPs which are
+              generated on mainframe computers are not executable on UNIX, OpenVMS and
+              Windows platforms without recompilation of the application and vice versa.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_gp.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="gp_endian_mode"></a></div> 
+         
+      <h2> Endian Mode Considerations </h2> 
+          
+          
+      <p>As of Natural Version 5, Natural acts as follows: Depending on which
+              UNIX, OpenVMS or Windows platform it is running, Natural will consider the byte
+              order in which multi-byte numbers are stored in the GP. The two byte order
+              modes are called "Little Endian" and "Big
+              Endian".
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">"Little Endian" means that the low-order byte of the
+                      number is stored in memory at the lowest address, and the high-order byte at
+                      the highest address (the little end comes first).
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">"Big Endian" means that the high-order byte of the number
+                      is stored in memory at the lowest address, and the low-order byte at the
+                      highest address (the big end comes first).
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>The UNIX, OpenVMS and Windows platforms use both endian modes: Intel
+              processors and AXP computers have "Little Endian" byte order,
+              other processors such as HP-UX, Sun Solaris, or RS6000 use "Big
+              Endian" mode. 
+      </p> 
+          
+      <p>Natural converts a portable GP automatically into the endian mode of the
+              execution platform, if necessary. This endian conversion is not performed if
+              the GP has been generated in the endian mode of the platform.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_gp.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="gp_endian_para"></a></div> 
+         
+      <h2> 
+             <a name="x397"></a>ENDIAN Parameter 
+      </h2> 
+          
+          
+      <p>In order to increase execution performance of portable GPs, the profile
+              parameter <a href="../parms/endian.htm"><code>ENDIAN</code></a> has been
+              introduced. <code>ENDIAN</code> determines the endian mode in which a
+              GP is generated during compilation:
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td><code>DEFAULT</code></td> 
+                       
+               <td>The endian mode of the machine on which the GP is
+                  generated.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>BIG</code></td> 
+                       
+               <td>Big endian mode (high order byte first).</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code>LITTLE</code></td> 
+                       
+               <td>Little endian mode (low order byte first).</td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>The values <code>DEFAULT</code>, <code>BIG</code> and
+              <code>LITTLE</code> are alternatives whereby the default value is
+              <code>DEFAULT</code>.
+      </p> 
+          
+      <p>The <code>ENDIAN</code> mode parameter may be set
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">as a profile parameter with the Natural Configuration Utility,</p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">as a start-up parameter,</p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">as a session parameter or with the <code>GLOBALS</code>
+                      command.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_gp.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="gp_transfer"></a></div> 
+         
+      <h2> 
+             <a name="x398"></a> Transferring Natural Generated Programs 
+      </h2> 
+          
+          
+      <p>To make use of the portable GP on different platforms (UNIX, OpenVMS and
+              Windows), the generated Natural objects must be transferred to the target
+              platform or must be accessible from the target platform, for example, via
+              NFS.
+      </p> 
+          
+      <p>Using the <a href="../utis/sysobjh.htm">Natural Object
+                 Handler</a> is the recommended way to distribute Natural generated
+              objects or even entire Natural applications. This is done by unloading the
+              objects in the source environment into a work file, transferring the work file
+              to the target environment and loading the objects from the work file.
+      </p> 
+          
+      <p class="to"><img src="../graphics/bluearro.png" alt="Start of instruction set" width="18" height="15"><strong> To deploy your Natural generated objects across Open Systems
+                  platforms</strong></p>
+      <ol class="steps">
+         <li> 
+                   
+                   
+            <p class="instep">Start the Natural Object Handler. Unload all necessary cataloged
+                       objects into a work file of type <code>PORTABLE</code>. 
+            </p> 
+                   
+            <p class="instep">Error messages, if needed, can also be unloaded to the work file.</p>
+                   
+                   
+            <p class="important"><strong>Important:</strong><br>The specified work file type must be of type
+                       <code>PORTABLE</code>. <code>PORTABLE</code> performs an automatic endian
+                       conversion of a work file when it is transferred to a different machine. See
+                       also the information on the
+                       <a href="../sm/definewo.htm#Work_File_Type_winux">work file
+                          type</a> in the description of the <code>DEFINE WORK FILE</code>
+                       statement (in the <cite>Statements</cite> documentation).
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Transfer the work file to the target environment. Depending on the
+                       transfer mechanism (network, CD, diskette, tape, email, download, etc.), the
+                       use of a compressed archive such as a ZIP file or encoding with
+                       UUENCODE/UUDECODE or similar may make sense. Copying via FTP requires binary
+                       transfer type. 
+            </p> 
+                   
+            <p class="note"><strong>Note:</strong><br>According to the transfer method used, it may be necessary to
+                       adjust the record format and attributes or block size of the transferred work
+                       file depending on the specific target platform, before continuing with the load
+                       function. The work file should have the same format and attributes on the
+                       target platform as a work file of the same type that was generated on the
+                       target platform itself. Use operating system tools if an adaptation is
+                       necessary.
+            </p> 
+                   
+                 
+         </li>
+         <li> 
+                   
+                   
+            <p class="instep">Start the Natural Object Handler in the target environment. Select
+                       <code>PORTABLE</code> as work file type. Load the Natural objects and error
+                       messages from the work file.
+            </p> 
+                   
+                 
+         </li>
+      </ol> 
+          
+      <p>For more details on how to use the Natural Object Handler, refer to
+              <a href="../utis/sysobjh.htm">Object
+            Handler</a> in the <cite>Utilities</cite>
+              documentation.
+      </p> 
+           
+          
+      <p>Beside the aforementioned preferred method, there are various other ways
+              of "moving" or copying single Natural generated objects or even
+              entire libraries or parts thereof, using operating system tools and different
+              transfer methods. In all of these cases, to make the objects executable by
+              Natural, they have to be imported into the Natural system file
+              <a href="../parms/fuser.htm"><code>FUSER</code></a> so that the
+              <cite>FILEDIR.SAG</cite> structure is adapted. For information on the
+              <code>FNAT</code> or <code>FUSER</code> directory, see
+              <a href="../ops/ops-systemfiles.htm#ops-sysfile-fnat-fuser">System Files
+            FNAT and FUSER</a> in the <cite>Operations</cite>
+              documentation.
+      </p> 
+          
+      <p>This can be done with either of the following methods:</p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">Using the Import function of the <a href="../utis/sysmain_ux-over.htm"><code>SYSMAIN</code></a>
+                      utility.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Using the <a href="../utis/ftouch.htm"><code>FTOUCH</code></a> utility. This utility
+                      can be used without entering Natural.
+            </p> 
+                 
+         </li> 
+               
+             
+      </ul> 
+          
+      <p>The same applies when direct access is possible from a target platform
+              to the generated objects in the source environment, for example, via NSF,
+              network file server, etc. In this case, the objects have to be imported,
+              too.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_gp.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="gp_port"></a></div> 
+         
+      <h2>Portable FILEDIR.SAG and Error Message Files</h2> 
+          
+          
+      <p>As of Natural Version 6.2, the file <cite>FILEDIR.SAG</cite> and
+              the error message files are platform independent. Hence, it is possible to
+              share common <code>FUSER</code> system files among different Open Systems
+              platforms. For example, it is possible to copy sets of Natural libraries from
+              one Open Systems platform to another with operating system copy procedures.
+              However, it is not recommended to share <code>FNAT</code> system files. For
+              more information about the portable <cite>FILEDIR.SAG</cite>, refer to
+              <a href="../ops/ops-systemfiles.htm#ops-sysfile-portable">Portable Natural
+            System Files</a> in the <cite>Operations</cite>
+              documentation.
+      </p> 
+         
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="pg_gp.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_gp.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_gp.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_furth_internet.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_desgn-over.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

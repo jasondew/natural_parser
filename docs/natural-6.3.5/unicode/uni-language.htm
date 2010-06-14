@@ -1,0 +1,926 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Unicode and Code Page Support in the Natural Programming Language</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="uni-language"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../unicode/uni-language.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/unicode/uni-language.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="uni-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="uni-intro.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="uni-config.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Unicode and Code Page Support&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1>Unicode and Code Page Support in the Natural Programming
+               Language
+         </h1>
+      </div> 
+         
+      <p>This document covers the following
+             topics:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="uni-language.htm#uni-language-uformat">Natural Data Format U for Unicode-Based Data</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="uni-language.htm#uni-language-statements">Statements</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="uni-language.htm#uni-language-lcc">Logical Condition Criteria</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="uni-language.htm#uni-language-sysvar">System Variables</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="uni-language.htm#uni-language-largedynvar">Large and Dynamic Variables</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="uni-language.htm#uni-language-sessparm">Session Parameters</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="uni-language.htm#uni-language-samples">Sample Programs</a></p>
+         </li>
+      </ul> 
+        
+      <hr>
+      <div><a name="uni-language-uformat"></a></div> 
+         
+      <h2> 
+             <a name="x5"></a> 
+             <a name="x6"></a>Natural Data Format U for Unicode-Based Data
+      </h2> 
+          
+          
+      <p>In Natural, you can specify Unicode strings with the format U and U
+              constants.
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                   
+                  
+            <p class="initem"><strong>Format U</strong><br>With format U, you can define data which holds Unicode strings. The
+                      Natural data format U is internally UTF-16.
+            </p> 
+                  
+            <p class="initem">See also <a href="../pg/pg_defi_dv.htm#Format_Length_Def">Format and Length of
+                  User-Defined Variables</a> in the <cite>Programming
+                         Guide</cite>. 
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                   
+                  
+            <p class="initem"><strong>U Constants</strong><br>You can define Unicode constants with the prefix
+                      "U". For example:
+            </p> 
+                  <pre class="verbatim">U'&Auml;pfel'</pre> 
+                  <p class="initem">The prefix "UH" can be used for defining
+                      Unicode constants in hexadecimal format. Four hexadecimal digits represent one
+                      UTF-16 code unit as defined by the Unicode Standard. So the overall length must
+                      be a multiple of four. For example, if you need the hexadecimal form of 
+            </p> 
+                  <pre class="verbatim">U'&Auml;pfel'</pre> 
+                  <p class="initem">you need the UTF-16 code units for "&Auml;",
+                      "p", "f",
+                      "e" and "l" (which are
+                      "U+00C4", "U+0070",
+                      "U+0066", "U+0065" and
+                      "U+006C") and you have to combine them to the
+                      following hexadecimal string:
+            </p> 
+                  <pre class="verbatim">UH'00C4007000660065006C'</pre> 
+                  <p class="initem">See also <a href="../pg/pg_defi_udc.htm#u_constants">Unicode
+                  Constants</a> in the <cite>Programming Guide</cite>.
+                      
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>The data format U is endian-dependant. This has to be considered when
+              moving between the formats B and U.
+      </p> 
+          
+      <h4 class="floating-title">U versus A</h4> 
+          
+      <p>The advantage of the U format (as compared with the A format) is, that
+              it can hold any combinations of characters from different languages and that it
+              does not depend on the default code page (value of the system variable
+              <a href="../vari/sysenv.htm#CODEPAGE"><code>*CODEPAGE</code></a>).
+              Moreover, the U format makes it easier to share data between different
+              platforms; no more conversions (for example, from EBCDIC to ASCII) are
+              necessary. 
+      </p> 
+          
+      <p>On the other hand, U format data often
+              consumes more memory than A format data. For languages in which most
+              strings can be represented by single-byte encoding, U format will result in
+              strings occupying twice the space that was previously required. However, for
+              East Asian languages, the memory consumption will often not be higher. 
+      </p> 
+         
+      <div class="noprint">
+         <p><a href="uni-language.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="uni-language-statements"></a></div> 
+         
+      <h2> 
+             <a name="x7"></a>Statements
+      </h2> 
+          
+      <p>Basically, U format can be used in most statements which allow A format.
+              However, if a Natural object name is given as an operand of a statement (for
+              example, in the <a href="../sm/callnat.htm"><code>CALLNAT</code></a> statement), U cannot be
+              used because Natural object names have A format. For information on a specific
+              statement, see the <a href="../sm/sm-over.htm">Statements</a>
+              documentation. 
+      </p> 
+          
+          
+      <p>Basically, A and U format can be used together in one
+              statement, however, it is recommended that you use only one format within one
+              statement, either A or U. If both formats are used together, all variables have
+              to be converted to a uniform format; this may lead to conversion errors. 
+      </p> 
+           
+           
+           
+           
+           
+          
+      <p>The following statements are particularly affected when using
+              Unicode:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="uni-language.htm#uni-language-movenormalized">MOVE NORMALIZED</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="uni-language.htm#uni-language-moveencoded">MOVE ENCODED</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="uni-language.htm#uni-language-examine">EXAMINE</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="uni-language.htm#uni-language-parsexml">PARSE XML</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="uni-language.htm#uni-language-requestdoc">REQUEST DOCUMENT</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="uni-language.htm#uni-language-defineprinter">DEFINE PRINTER</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="uni-language.htm#uni-language-callnat">CALLNAT (RPC)</a></p>
+         </li>
+      </ul> 
+         
+      <div><a name="uni-language-movenormalized"></a></div> 
+          
+      <h3> 
+              <a name="x8"></a>MOVE NORMALIZED
+      </h3> 
+           
+           
+      <p>Normalization in Unicode: A process of removing alternate
+               representations of equivalent sequences from textual data in order to convert
+               the data into a form that can be binary-compared for equivalence. The Unicode
+               Standard defines different normalization forms. The normalization form that
+               results from the canonical decomposition of a Unicode string, followed by the
+               replacement of all decomposed sequences by primary composites where possible,
+               is called "Normalization Form Composed" (NFC). 
+      </p> 
+           
+      <p>Natural assumes that all Unicode data is in NFC format to assure that
+               string operations can be performed without partial truncation of a Unicode
+               character. Natural conversion operations assure that the resulting Unicode
+               string is in NFC. If Unicode data is received from outside of Natural and it is
+               not guaranteed that the data has NFC format, the
+               <a href="../sm/move.htm#syntax7_move"><code>MOVE
+               NORMALIZED</code></a> statement can be applied. 
+      </p> 
+           
+      <p>Example:</p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>Character Sequence</th> 
+                        
+               <th>NFC</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td>&ecirc; (U+00EA) </td> 
+                        
+               <td>&ecirc; (U+00EA) </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>e (U+0065) + ^ (U+0302) </td> 
+                        
+               <td>&ecirc; (U+00EA) </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p class="note"><strong>Note:</strong><br>Concatenating two or more strings in NFC format can result in
+               not-NFC format. 
+      </p> 
+          
+      <div><a name="uni-language-moveencoded"></a></div> 
+          
+      <h3> 
+              <a name="x9"></a>MOVE ENCODED
+      </h3> 
+           
+           
+      <p>An implicit conversion between Unicode and the default code page (value
+               of the system variable <a href="../vari/sysenv.htm#CODEPAGE"><code>*CODEPAGE</code></a>)
+               is performed when moving strings from U to A or vice versa with the
+               <a href="../sm/move.htm"><code>MOVE</code></a> statement. 
+      </p> 
+           
+      <p>Furthermore, the <a href="../sm/move.htm#syntax8_move"><code>MOVE
+               ENCODED</code></a> statement can be used for conversion between
+               different code pages or from any available code page to Unicode and vice versa.
+               This can be helpful if data is coming from outside of Natural and this data is
+               coded in a code page which differs from the default code page. But even for
+               conversions between the default code page and Unicode, this statement can be
+               used if you want to obtain a potential conversion error with the
+               <code>GIVING</code> clause; if <a href="../parms/cpcverr.htm"><code>CPCVERR</code></a> is set to
+               "ON", the <code>MOVE</code> statement will stop with
+               a runtime error in this case. 
+      </p> 
+           
+      <p>If a character cannot be converted, it depends on the setting of the
+               <code>CPCVERR</code> parameter whether a substitution character is
+               used for this character or whether the conversion fails. On Windows, UNIX and
+               OpenVMS platforms, the default substitution character (defined by ICU) for the
+               conversion from Unicode to the default code page (<a href="../parms/cp.htm"><code>CP</code></a>) can be changed with
+               the profile parameter <a href="../parms/subchar.htm"><code>SUBCHAR</code></a>. 
+      </p> 
+           
+      <p>This statement can also be used for conversion from U data into UTF-8
+               format. 
+      </p> 
+           
+      <p class="note"><strong>Note:</strong><br>If you convert data to a code page which differs from the default
+               code page, it is recommended not to use this data in I/O. I/O is only
+               meaningful with the default code page. 
+      </p> 
+          
+      <div><a name="uni-language-examine"></a></div> 
+          
+      <h3> 
+              <a name="x10"></a>EXAMINE
+      </h3> 
+           
+           
+      <p>A "grapheme" is what a user normally thinks of as a
+               character. In most cases, a Unicode code point is a grapheme, however, a
+               grapheme can also consist of several Unicode code points. For example, a
+               sequence of one base character and one or more combining characters is a
+               grapheme.
+      </p> 
+           
+      <p>Example: "a" (U+0061) +
+               "." (U+0323) + "^"
+               (U+0302) defines one grapheme which is displayed as follows:
+      </p> 
+           
+      <p><img src="graphics/uni-a-grapheme.gif" alt="graphics/uni-a-grapheme.gif" width="6" height="13"></p> 
+           
+      <p class="note"><strong>Note:</strong><br>If a base/combining character sequence is normalized, this does not
+               mean that the sequence is always replaced by a pre-composed character, because
+               not all characters are available in a pre-composed format. 
+      </p> 
+           
+      <p>A "supplementary code point" is a Unicode code point
+               between "U+10000" and
+               "U+10FFFF". A supplementary code point is in UTF-16,
+               represented by a surrogate pair which consists of two code units where the
+               first value of the pair is a "high-surrogate code unit", and the
+               second is a "low-surrogate code unit". Such characters are
+               generally rare, but some are used, for example, as part of Chinese and Japanese
+               personal names, and therefore support for these characters is commonly required
+               for government applications in East Asian countries. 
+      </p> 
+           
+      <p>The string handling statements such as
+               <a href="../sm/examine.htm"><code>EXAMINE</code></a> and its
+               <code>SUBSTRING</code> option work on UTF-16 code units. It is the user's
+               responsibility that the code does not separate graphemes or surrogate pairs.
+               
+      </p> 
+           
+      <p>However, the clauses <code>CHARPOSITION</code> and
+               <code>CHARLENGTH</code> of the <code>EXAMINE</code> statement (see
+               <a href="../sm/examine.htm#syntax3_examine_unicode">Syntax 3 -
+            EXAMINE for Unicode Graphemes</a>) can be used to ask for the
+               start and length (in UTF-16 code units) of graphemes. The result values can be
+               used for <code>SUBSTRING</code> calls. With these clauses, it is possible to
+               scan a string grapheme by grapheme.
+      </p> 
+           
+      <p>Example: </p> 
+           <pre class="verbatim">DEFINE DATA LOCAL
+1 #UNICODE-STRING    (U15)
+1 #CODE-UNIT-INDEX   (N4)
+1 #CODE-UNIT-LEN     (N4)
+1 #GRAPHEME-NUMBER   (N4)
+END-DEFINE
+
+MOVE U'<img src="graphics/uni-examine-grapheme.gif" alt="graphics/uni-examine-grapheme.gif" width="71" height="13">' TO #UNICODE-STRING
+
+#GRAPHEME-NUMBER := 1
+
+REPEAT
+EXAMINE
+        FULL VALUE OF #UNICODE-STRING
+        FOR CHARPOSITION #GRAPHEME-NUMBER
+        GIVING POSITION IN #CODE-UNIT-INDEX
+        GIVING LENGTH IN #CODE-UNIT-LEN
+
+        DISPLAY #UNICODE-STRING #GRAPHEME-NUMBER #CODE-UNIT-INDEX #CODE-UNIT-LEN
+
+        #GRAPHEME-NUMBER := #GRAPHEME-NUMBER + 1
+WHILE #CODE-UNIT-INDEX NE 0
+END-REPEAT
+
+END</pre> 
+           <p>The above example program provides the following output:</p> 
+           <pre class="verbatim">Page     1                                                   05-12-15  09:33:49
+
+#UNICODE-STRING #GRAPHEME-NUMBER #CODE-UNIT-INDEX #CODE-UNIT-LEN
+--------------- ---------------- ---------------- --------------
+
+<img src="graphics/uni-examine-grapheme.gif" alt="graphics/uni-examine-grapheme.gif" width="71" height="13">           1                1                1
+<img src="graphics/uni-examine-grapheme.gif" alt="graphics/uni-examine-grapheme.gif" width="71" height="13">           2                2                2
+<img src="graphics/uni-examine-grapheme.gif" alt="graphics/uni-examine-grapheme.gif" width="71" height="13">           3                4                1
+<img src="graphics/uni-examine-grapheme.gif" alt="graphics/uni-examine-grapheme.gif" width="71" height="13">           4                5                3
+<img src="graphics/uni-examine-grapheme.gif" alt="graphics/uni-examine-grapheme.gif" width="71" height="13">           5                8                1
+<img src="graphics/uni-examine-grapheme.gif" alt="graphics/uni-examine-grapheme.gif" width="71" height="13">           6                9                3
+<img src="graphics/uni-examine-grapheme.gif" alt="graphics/uni-examine-grapheme.gif" width="71" height="13">           7               12                1
+<img src="graphics/uni-examine-grapheme.gif" alt="graphics/uni-examine-grapheme.gif" width="71" height="13">           8               13                3
+<img src="graphics/uni-examine-grapheme.gif" alt="graphics/uni-examine-grapheme.gif" width="71" height="13">           9                0                0</pre> 
+          <div><a name="uni-language-parsexml"></a></div> 
+          
+      <h3> 
+              <a name="x11"></a>PARSE XML
+      </h3>
+      
+           
+           
+      <p>XML documents can contain information within the XML document header
+               about the encoding of the document (for example, <code>&lt;?xml version="1.0"
+            encoding="UTF-8" ?&gt;</code>). If an XML document contains this information,
+               the parsing of the XML document on Windows, UNIX and OpenVMS platforms always
+               includes a conversion of the code page given within the XML document header to
+               the default code page of Natural (value of the system variable
+               <a href="../vari/sysenv.htm#CODEPAGE"><code>*CODEPAGE</code></a>),
+               if the receiving field is not of format U.
+      </p> 
+           
+      <p>On mainframe platforms, the document to be parsed is always internally
+               converted to UTF-16 (if the document is not already encoded in UTF-16).
+      </p> 
+           
+      <p>See the description of the <a href="../sm/parse.htm"><code>PARSE
+               XML</code></a> statement for further information.
+      </p> 
+           
+      <p>See also <a href="../pg/pg_furth_internet.htm">Statements for Internet and XML
+            Access</a> in the <cite>Programming
+                  Guide</cite>.
+      </p> 
+          
+      <div><a name="uni-language-requestdoc"></a></div> 
+          
+      <h3> 
+              <a name="x12"></a>REQUEST DOCUMENT
+      </h3> 
+          
+           
+           
+      <p>Data transfer with the <code>REQUEST DOCUMENT</code> statement normally
+               does not involve any code page conversion. If you want to have the outgoing
+               and/or incoming data encoded in a specific code page, you can use the
+               <code>DATA ALL</code> clause and/or the <code>RETURN PAGE</code> clause of the
+               <code>REQUEST DOCUMENT</code> statement to specify this. 
+      </p> 
+           
+      <p>See the description of the <a href="../sm/reqdocu.htm"><code>REQUEST DOCUMENT</code></a> statement for
+               further information. 
+      </p> 
+           
+      <p>See also <a href="../pg/pg_furth_internet.htm">Statements for Internet and XML
+            Access</a> in the <cite>Programming
+                  Guide</cite>.
+      </p> 
+          
+      <div><a name="uni-language-defineprinter"></a></div> 
+          
+      <h3> 
+              <a name="x13"></a>DEFINE PRINTER
+      </h3> 
+           
+           
+      <p>On mainframe platforms, the
+               <code>DEFINE
+            PRINTER</code> statement provides a <code>CODEPAGE</code> clause to
+               provide for conversion of print report data into a code page different from the
+               default code page (value of the system variable
+               <a href="../vari/sysenv.htm#CODEPAGE"><code>*CODEPAGE</code></a>).
+               On Windows, UNIX and OpenVMS platforms, the
+               <a href="../sm/definepr_uw.htm"><code>DEFINE
+               PRINTER</code></a> statement does not provide such a clause; if the
+               <code>CODEPAGE</code> clause is defined, it is ignored on Windows, UNIX and
+               OpenVMS platforms.
+      </p> 
+          
+      <div><a name="uni-language-callnat"></a></div> 
+          
+      <h3> 
+              <a name="x14"></a>CALLNAT (RPC)
+      </h3>
+           
+           
+      <p>Data exchange in Unicode format via RPC is supported. See the
+               description of the <a href="../sm/callnat.htm"><code>CALLNAT</code></a> statement.
+      </p> 
+           
+      <p>If U data is sent from a platform with big endian encoding to a
+               platform with little endian encoding or vice versa, the encoding is adapted so
+               that it conforms with the encoding on the receiving platform. For example, when
+               U data in little endian encoding arrives on a big endian platform, this data is
+               converted to big endian encoding before it is handed over to the program. When
+               this data is sent back, it is converted back to little endian encoding. 
+      </p> 
+          
+      <div class="noprint">
+         <p><a href="uni-language.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="uni-language-lcc"></a></div> 
+         
+      <h2> 
+             <a name="x15"></a>Logical Condition Criteria
+      </h2> 
+          
+          
+      <p>In a logical condition criterion, Unicode operands can be used together
+              with alphanumeric and binary operands. If not all operands are Unicode operands
+              (format U), the second and all following operands are converted to the format
+              of the first operand. If a binary operand (format B) is specified as the second
+              or a following operand, the length of the binary operand must be even; the
+              binary operand is assumed to contain Unicode code points. 
+      </p> 
+          
+      <p>If the first operand is a Unicode operand (format U) and the comparison
+              is therefore performed as a Unicode comparison, the ICU collation algorithm is
+              used. The ICU algorithm does not perform a plain binary comparison. For
+              example,
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">some code points such as "U+0000" are
+                      ignored during the comparison process,
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">combined characters are considered as being equal to the equivalent
+                      single code point (for example, the German character
+                      "&auml;" represented by
+                      "U+00E4" and the combination of the code points
+                      "U+0061" and "U+0308" are
+                      considered as being equal by ICU).
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p class="note"><strong>Note:</strong><br>Comparing an alphanumeric and a Unicode operand can deliver different
+              results, depending on the sequence of the fields. 
+      </p> 
+          
+      <p>See also <a href="../pg/pg_furth_lcc.htm">Logical
+            Condition Criteria</a> in the <cite>Programming
+                 Guide</cite>.
+      </p> 
+         
+      <div class="noprint">
+         <p><a href="uni-language.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="uni-language-sysvar"></a></div> 
+         
+      <h2> 
+             <a name="x16"></a>System Variables
+      </h2> 
+          
+      <p>This section covers the following
+              topics:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="uni-language.htm#uni-language-codepage">*CODEPAGE</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="uni-language.htm#uni-language-locale">*LOCALE</a></p>
+         </li>
+      </ul>
+      <div><a name="uni-language-codepage"></a></div> 
+          
+      <h3>*CODEPAGE</h3> 
+           
+           
+      <p>The system variable <a href="../vari/sysenv.htm#CODEPAGE"><code>*CODEPAGE</code></a>
+               is used to return the IANA name of the default code page, that is, the code
+               page used for conversions between Unicode and code page format.
+      </p> 
+          
+      <div><a name="uni-language-locale"></a></div> 
+          
+      <h3>*LOCALE</h3> 
+           
+           
+      <p>The system variable <a href="../vari/sysenv.htm#LOCALE"><code>*LOCALE</code></a>
+               contains the language and country of the current locale.
+      </p> 
+          
+      <div class="noprint">
+         <p><a href="uni-language.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="uni-language-largedynvar"></a></div> 
+         
+      <h2>Large and Dynamic Variables</h2> 
+          
+          
+      <p>U format can be used for large and dynamic variables. For dynamic U
+              variables, <a href="../vari/appl.htm#LENGTH"><code>*LENGTH</code></a>
+              returns the number of UTF-16 code units.
+      </p> 
+          
+      <p>See also <a href="../pg/pg_defi_ldvfin.htm">Introduction
+            to Dynamic Variables and Fields</a> in the
+              <cite>Programming Guide</cite>.
+      </p> 
+         
+      <div class="noprint">
+         <p><a href="uni-language.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="uni-language-sessparm"></a></div> 
+         
+      <h2> 
+             <a name="x17"></a>Session Parameters
+      </h2> 
+          
+          
+      <p>The following session parameters are available:</p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th> Parameter</th> 
+                       
+               <th>Description</th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td><a href="../parms/sp_dl.htm"><code>DL</code></a></td> 
+                       
+               <td>Specifies the display length for a field of
+                  format A or U. See also
+                  <a href="../pg/pg_output_parms.htm#display_length">Display
+                              Length for Output - DL Parameter</a> in the
+                           <cite>Programming Guide</cite>.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><a href="../parms/sp_emu.htm"><code>EMU</code></a> <sup>*</sup></td> 
+                       
+               <td>Edit mask in Unicode.</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><a href="../parms/sp_icu.htm"><code>ICU</code></a> <sup>*</sup></td> 
+                       
+               <td>Insertion character in Unicode.</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><a href="../parms/sp_lcu.htm"><code>LCU</code></a> <sup>*</sup></td> 
+                       
+               <td>Leading characters in Unicode.</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><a href="../parms/sp_tcu.htm"><code>TCU</code></a> <sup>*</sup></td> 
+                       
+               <td>Trailing characters in Unicode.</td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>Session parameters marked with an asterisk (*) in the above table are
+              only available on Windows, UNIX and OpenVMS platforms.
+      </p> 
+          
+      <h4 class="floating-title"><code>DL</code> versus
+              <code>AL</code></h4> 
+          
+      <p>As long as Natural was not Unicode-enabled, the length of an
+              alphanumeric field was always identical to the number of columns needed for
+              displaying the field (called number of display columns). This was even true for
+              the East Asian languages which use DBCS code pages: an A format field can hold
+              only half the characters (for example, A10 results in A5). 
+      </p> 
+          
+      <p>Example:</p> 
+          <pre class="verbatim">DEFINE DATA LOCAL
+1  #A8 (A8)
+END-DEFINE                                   
+#A8 := 'computer'
+WRITE #A8
+#A8 := '<img src="graphics/uni-chinese-char.gif" alt="graphics/uni-chinese-char.gif" width="55" height="12">'
+WRITE #A8
+END</pre> 
+          <p>The above code results in the following output:</p> 
+          <pre class="verbatim">Page      1 ...
+
+computer
+<img src="graphics/uni-chinese-char.gif" alt="graphics/uni-chinese-char.gif" width="55" height="12"></pre> 
+          <p>With U format fields, the length of a field and the number of display
+              columns is no longer identical. U characters can have narrow width (for
+              example, Latin characters), wide width (for example, Chinese characters) or no
+              width (for example, combining characters). Therefore, it is totally unknown how
+              many display columns a U field needs; this depends on the contents of the
+              field. Natural cannot automatically decide how many columns are to be reserved
+              on the screen: if the maximum size is assumed, Latin output will have large
+              gaps, and if the minimum size is assumed, Chinese output cannot be displayed
+              totally. Therefore, the Natural programmer has to define the display width of a
+              field; this is done with the <a href="../parms/sp_dl.htm"><code>DL</code></a> parameter. The
+              <a href="../parms/sp_al.htm"><code>AL</code></a>
+              parameter cannot be used for this purpose, because it cuts away the part of the
+              field which exceeds the defined length. But we do not want to cut any
+              characters from the U field; we only want to define the start position of the
+              following field.
+      </p> 
+          
+      <p>Example:</p> 
+          <pre class="verbatim">DEFINE DATA LOCAL
+1  #U8 (U8)
+1  #U4 (U4)
+END-DEFINE                                   
+#U8 := 'computer'
+WRITE #U8
+#U4 := U'<img src="graphics/uni-chinese-char.gif" alt="graphics/uni-chinese-char.gif" width="55" height="12">'
+WRITE #U4 (DL=8)
+END</pre> 
+          <p>The above code results in the same output as above:</p> 
+          <pre class="verbatim">Page      1 ...
+
+computer
+<img src="graphics/uni-chinese-char.gif" alt="graphics/uni-chinese-char.gif" width="55" height="12"></pre> 
+          <p>On Windows, either locally with the
+              output window
+              or in a remote development environment with the Natural Web I/O Interface
+              client, it is possible to scroll in a field where the defined value for the
+              <code>DL</code> parameter is smaller than the real display width of
+              the field.
+      </p> 
+          
+      <h4 class="floating-title"><code>EMU</code>, <code>ICU</code>,
+              <code>LCU</code>, <code>TCU</code> versus
+              <code>EM</code>, <code>IC</code>,
+              <code>LC</code>, <code>TC</code></h4> 
+          
+      <p>The parameters <a href="../parms/sp_emu.htm"><code>EMU</code></a>,
+              <a href="../parms/sp_icu.htm"><code>ICU</code></a>,
+              <a href="../parms/sp_lcu.htm"><code>LCU</code></a> and
+              <a href="../parms/sp_tcu.htm"><code>TCU</code></a> (which are only available
+              on Windows, UNIX and OpenVMS platforms)
+              allow using characters which are not included in the default code page.
+              They are stored in Unicode format in the generated program. These parameters
+              can be used with all field formats. 
+      </p> 
+          
+      <p>The parameters <a href="../parms/sp_em.htm"><code>EM</code></a>,
+              <a href="../parms/sp_ic.htm"><code>IC</code></a>,
+              <a href="../parms/sp_lc.htm"><code>LC</code></a> and
+              <a href="../parms/sp_tc.htm"><code>TC</code></a> can
+              also be used with U format fields. These parameters may also be useful if
+              characters which are contained in the default code page have different
+              encodings in other code pages. For example, the Euro sign (&#8364;) has the code
+              point "0x80" in the
+              "windows-1252" (Latin 1) code page, but the code
+              point "0x88" in the
+              "windows-1251" (Cyrillic) code page. Thus, using a
+              Unicode parameter will assure that the Euro sign is always displayed correctly,
+              no matter what code page is installed on the PC. 
+      </p> 
+          
+      <p>Example for <code>EMU</code>: 
+      </p> 
+          <pre class="verbatim">DEFINE DATA
+LOCAL
+ 01 EMPLOYEES-VIEW VIEW OF EMPLOYEES
+   02 FIRST-NAME
+   02 NAME
+   02 SALARY (1)
+END-DEFINE
+*
+  READ (6) EMPLOYEES-VIEW
+    DISPLAY NAME FIRST-NAME SALARY(1) (EMU=999,999<img src="graphics/uni-euro-sign.gif" alt="graphics/uni-euro-sign.gif" width="7" height="10">)
+  END-READ
+*
+END</pre> 
+          <p>The above code results in the following output:</p> 
+          <pre class="verbatim">Page     1                                                   05-12-15  11:45:36
+
+        NAME              FIRST-NAME       ANNUAL
+                                           SALARY
+-------------------- -------------------- --------
+
+ADAM                 SIMONE               159,980<img src="graphics/uni-euro-sign.gif" alt="graphics/uni-euro-sign.gif" width="7" height="10"> 
+MORENO               HUMBERTO             165,810<img src="graphics/uni-euro-sign.gif" alt="graphics/uni-euro-sign.gif" width="7" height="10"> 
+BLOND                ALEXANDRE            172,000<img src="graphics/uni-euro-sign.gif" alt="graphics/uni-euro-sign.gif" width="7" height="10"> 
+MAIZIERE             ELISABETH            166,900<img src="graphics/uni-euro-sign.gif" alt="graphics/uni-euro-sign.gif" width="7" height="10"> 
+CAOUDAL              ALBERT               167,350<img src="graphics/uni-euro-sign.gif" alt="graphics/uni-euro-sign.gif" width="7" height="10"> 
+VERDIE               BERNARD              170,100<img src="graphics/uni-euro-sign.gif" alt="graphics/uni-euro-sign.gif" width="7" height="10"> </pre> 
+         <div class="noprint">
+         <p><a href="uni-language.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="uni-language-samples"></a></div> 
+         
+      <h2>Sample Programs</h2> 
+          
+          
+      <p>The library <code>SYSEXPG</code> contains sample programs for Unicode
+              and code page support in Natural: 
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem"><code>UNICOX01</code> lists all Unicode characters.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"><code>UNICOX02</code> converts Unicode characters to code points and
+                      vice versa.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"><code>CODEPX01</code> lists all code pages, whether the code page is
+                      supported in Natural and which encoding it uses. For all supported code pages,
+                      it offers services to list the characters of the code page and to convert a
+                      string from the code page into its hexadecimal representation and vice
+                      versa.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"><code>CODEPXL1</code> lists all characters of any 1-byte code
+                      page.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <code>CODEPXL2</code> lists all characters of any 2-byte code
+                      page.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <code>CODEPXC1</code> converts a string from any code page into its
+                      hexadecimal representation and vice versa.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+         
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="uni-language.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../unicode/uni-language.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/unicode/uni-language.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="uni-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="uni-intro.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="uni-config.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

@@ -1,0 +1,4767 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Logical Condition Criteria</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="pg_furth_lcc"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_furth_lcc.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_furth_lcc.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_furth-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_furth_ucom.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_furth_arithm.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Programming Guide&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x359"></a> Logical Condition Criteria
+         </h1>
+      </div> 
+         
+         
+      <p>This document describes purpose and use of logical condition criteria
+             that can be used in the statements <a href="../sm/find.htm"><code>FIND</code></a>,
+             <a href="../sm/read.htm"><code>READ</code></a>,
+             <a href="../sm/histogra.htm"><code>HISTOGRAM</code></a>,
+             <a href="../sm/accept.htm"><code>ACCEPT</code></a>/<a href="../sm/reject.htm"><code>REJECT</code></a>,
+             <a href="../sm/if.htm"><code>IF</code></a>,
+             <a href="../sm/decidefo.htm"><code>DECIDE FOR</code></a>,
+             <a href="../sm/repeat.htm"><code>REPEAT</code></a>.
+      </p> 
+         
+      <p>The following topics are covered:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_furth_lcc.htm#lcc_intro">Introduction</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_lcc.htm#Rel_Expression">Relational Expression</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_lcc.htm#Ext_Rel_Expression">Extended Relational Expression</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_lcc.htm#MASK_Option">MASK Option</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_lcc.htm#SCAN_Option">SCAN Option</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_lcc.htm#BREAK_WLCC">BREAK within Logical Condition Criteria</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_lcc.htm#IS_Option_CFLV">IS Option - Checking Format and Length of Value</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_lcc.htm#LV_Evaluation">Evaluation of a Logical Variable</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_lcc.htm#Modified_CV">MODIFIED Option</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_lcc.htm#SPECIFIED_Option">SPECIFIED Option</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_lcc.htm#Fields_Used_WLCC">Fields Used within Logical Condition Criteria</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_lcc.htm#Log_Operators_CLE">Logical Operators in Complex Logical Expressions</a></p>
+         </li>
+      </ul> 
+        
+      <hr> 
+        
+      <div><a name="lcc_intro"></a></div> 
+         
+      <h2> Introduction </h2> 
+          
+          
+      <p>The basic criterion is a <a href="pg_furth_lcc.htm#Rel_Expression">relational
+                 expression</a>. Multiple relational expressions may be combined with
+              logical operators (<code>AND</code>, <code>OR</code>) to form complex
+              criteria.
+      </p> 
+          
+      <p>Arithmetic expressions may also be used to form a relational
+              expression.
+      </p> 
+          
+      <p>Logical condition criteria can be used in the following statements:</p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th>Statement</th> 
+                       
+               <th>Usage</th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> <a href="../sm/find.htm">FIND</a> 
+               </td> 
+                       
+               <td>A <code>WHERE</code> clause containing logical condition
+                  criteria may be used to indicate criteria in addition to the basic selection
+                  criteria as specified in the <code>WITH</code> clause. The logical condition
+                           criteria specified with the <code>WHERE</code> clause are evaluated after the
+                           record has been selected and read. 
+                           
+                  <p>In a <code>WITH</code> clause, "basic search criteria"
+                               (as described with the <code>FIND</code> statement) are used, but not logical
+                               condition criteria. 
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a href="../sm/read.htm">READ</a> 
+               </td> 
+                       
+               <td>A <code>WHERE</code> clause containing logical condition
+                  criteria may be used to specify whether a record that has just been read is to
+                  be processed. The logical condition criteria are evaluated after the record has
+                  been read.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a href="../sm/histogra.htm">HISTOGRAM</a>
+                           
+               </td> 
+                       
+               <td>A <code>WHERE</code> clause containing logical condition
+                  criteria may be used to specify whether the value that has just been read is to
+                  be processed. The logical condition criteria are evaluated after the value has
+                  been read.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a href="../sm/accept.htm">ACCEPT</a>/<a href="../sm/reject.htm">REJECT</a> 
+               </td> 
+                       
+               <td>An <code>IF</code> clause may be used with an
+                       <code>ACCEPT</code> or <code>REJECT</code> statement to specify logical
+                  condition criteria in addition to that specified when the record was
+                           selected/read with a <code>FIND</code>, <code>READ</code>, or
+                           <code>HISTOGRAM</code> statement. The logical condition criteria are evaluated
+                           after the record has been read and after record processing has started.
+               </td>
+                       
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a href="../sm/if.htm">IF</a> 
+               </td> 
+                       
+               <td>Logical condition criteria are used to control statement
+                  execution.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a href="../sm/decidefo.htm">DECIDE FOR</a>
+                           
+               </td> 
+                       
+               <td>Logical condition criteria are used to control statement
+                  execution.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <a href="../sm/repeat.htm">REPEAT</a> 
+               </td> 
+                       
+               <td>The <code>UNTIL</code> or <code>WHILE</code> clause of a
+                           <code>REPEAT</code> statement contain logical condition criteria which
+                  determine when a processing loop is to be terminated.
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_furth_lcc.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Rel_Expression"></a></div> 
+         
+      <h2> 
+             <a name="x360"></a> Relational Expression 
+      </h2> 
+          
+          
+      <p>Syntax:</p> 
+           
+           
+      <table border="0" class="syntax" cellpadding="3"> 
+                
+                 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> <var>operand1</var> 
+               </td> 
+                       
+               <td> 
+                  
+                  <p><img src="../graphics/cbo17.gif" alt="" width="10" height="380"></p> 
+               </td> 
+                       
+               <td nowrap> 
+                  
+                  <p class="mini-list"> 
+                               <code class="keyword">EQ</code><br> 
+                               <code class="keyword">=</code><br> 
+                               <code class="keyword">EQUAL</code><br> 
+                               <code class="keyword">EQUAL TO</code><br> 
+                               <code class="keyword">NE</code><br> 
+                                
+                               <code class="keyword">&lt;&gt;</code><br> 
+                               <code class="keyword">NOT =</code><br> 
+                               <code class="keyword">NOT EQ</code><br> 
+                               <code class="keyword">NOTEQUAL</code><br> 
+                               <code class="keyword">NOT EQUAL</code><br> 
+                               <code class="keyword">NOT EQUAL TO</code><br> 
+                               <code class="keyword">LT</code><br> 
+                               <code class="keyword">LESS THAN</code><br> 
+                               <code class="keyword">&lt;</code><br> 
+                               <code class="keyword">GE</code><br> 
+                               <code class="keyword">GREATER EQUAL</code><br> 
+                               <code class="keyword">&gt;=</code><br> 
+                               <code class="keyword">NOT &lt;</code><br> 
+                               <code class="keyword">NOT LT</code><br> 
+                               <code class="keyword">GREATER THAN</code><br> 
+                               <code class="keyword">&gt;</code><br> 
+                               <code class="keyword">LE</code><br> 
+                               <code class="keyword">LESS EQUAL</code><br> 
+                               <code class="keyword">&lt;=</code><br> 
+                               <code class="keyword">NOT &gt;</code><br> 
+                               <code class="keyword">NOT GT</code> 
+                              
+                  </p> 
+               </td> 
+                       
+               <td> 
+                  
+                  <p><img src="../graphics/cbc17.gif" alt="" width="10" height="380"></p> 
+               </td> 
+                       
+               <td> <var>operand2</var> 
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>Operand Definition Table:</p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th>Operand</th> 
+                       
+               <th colspan="6" align="center">
+                  <a href="../sm/synsym.htm#statem_poss_struct">Possible
+                      Structure</a> 
+               </th> 
+                       
+               <th colspan="13" align="center">
+                  <a href="../sm/synsym.htm#statem_poss_form">Possible Formats</a>
+                           
+               </th> 
+                       
+               <th align="center"> <a href="../sm/synsym.htm#statem_ref_perm">Referencing Permitted</a>
+                           
+               </th> 
+                       
+               <th align="center"> <a href="../sm/synsym.htm#statem_dyn_def">Dynamic Definition</a> 
+               </th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> <var>operand1</var> 
+               </td> 
+                       
+               <td>C</td> 
+                       
+               <td>S</td> 
+                       
+               <td>A</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>N</td> 
+                       
+               <td>E</td> 
+                       
+               <td>A</td> 
+                       
+               <td>U</td> 
+                       
+               <td>N</td> 
+                       
+               <td>P</td> 
+                       
+               <td>I</td> 
+                       
+               <td>F</td> 
+                       
+               <td>B</td> 
+                       
+               <td>D</td> 
+                       
+               <td>T</td> 
+                       
+               <td>L</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>G</td> 
+                       
+               <td>O</td> 
+                       
+               <td align="center">yes</td> 
+                       
+               <td align="center">yes</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <var>operand2</var> 
+               </td> 
+                       
+               <td>C</td> 
+                       
+               <td>S</td> 
+                       
+               <td>A</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>N</td> 
+                       
+               <td>E</td> 
+                       
+               <td>A</td> 
+                       
+               <td>U</td> 
+                       
+               <td>N</td> 
+                       
+               <td>P</td> 
+                       
+               <td>I</td> 
+                       
+               <td>F</td> 
+                       
+               <td>B</td> 
+                       
+               <td>D</td> 
+                       
+               <td>T</td> 
+                       
+               <td>L</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>G</td> 
+                       
+               <td>O</td> 
+                       
+               <td align="center">yes</td> 
+                       
+               <td align="center">no</td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>For an explanation of the Operand Definition Table shown above, see
+              <a href="../sm/synsym.htm">Syntax Symbols and Operand Definition
+            Tables</a> in the <cite>Statements</cite>
+              documentation.
+      </p> 
+          
+      <p>In the "Possible Structure" column of the table above,
+              "E" stands for arithmetic expressions; that is, any arithmetic
+              expression may be specified as an operand within the relational expression. For
+              further information on arithmetic expressions, see
+              <a href="../sm/compute.htm#arith_expression"><var>arithmetic-expression</var></a>
+              in the <a href="../sm/compute.htm"><code>COMPUTE</code></a>
+              statement description.
+      </p> 
+          
+      <h4 class="floating-title"> Examples of Relational Expressions: </h4> 
+          <pre class="verbatim">
+IF NAME = 'SMITH'
+IF LEAVE-DUE GT 40
+IF NAME = #NAME
+</pre> 
+          <p>For information on comparing arrays in a relational expression, see
+              <a href="pg_furth_arithm.htm#Array_Processing">Processing of
+            Arrays</a>.
+      </p> 
+          
+      <p class="note"><strong>Note:</strong><br> If a floating-point operand is used, comparison is performed in
+              floating point. <a href="pg_furth_arithm.htm#AO_FP_Numbers">Floating-point
+                 numbers</a> as such have only a limited precision; therefore,
+              rounding/truncation errors cannot be precluded when numbers are converted
+              to/from floating-point representation.
+      </p> 
+          
+      <div><a name="LC_Arithm_Exp"></a></div>
+      <h4 class="floating-title"> Arithmetic Expressions in Logical
+              Conditions 
+      </h4> 
+          
+      <p>The following example shows how arithmetic expressions can be used in
+              logical conditions:
+      </p> 
+          <pre class="verbatim">IF #A + 3 GT #B - 5 AND #C * 3 LE #A + #B</pre> 
+          <h4 class="floating-title"> Handles in Logical Conditions</h4> 
+          
+      <p>If the operands in a relation expression are handles, only
+              <code>EQUAL</code> and <code>NOT EQUAL</code> operators may be used.
+      </p> 
+          
+      <h4 class="floating-title"> SUBSTRING Option in Relational Expression</h4>
+          
+          
+      <p>Syntax:</p> 
+           
+           
+           
+           
+      <table border="0" class="syntax" cellpadding="3">
+                
+                
+                
+                 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> 
+                  
+                  <p><img src="../graphics/cbo2.gif" alt="" width="6" height="38"></p>
+               </td> 
+                       
+               <td> 
+                  
+                  <p class="mini-list"> 
+                               <code class="keyword"> <u>SUBSTR</u>ING</code>
+                                (<var>operand1,operand3,operand4</var>)<br> 
+                               <var>operand1</var> 
+                              
+                  </p> 
+               </td> 
+                       
+               <td> 
+                  
+                  <p><img src="../graphics/cbc2.gif" alt="" width="6" height="38"></p>
+               </td> 
+                       
+               <td nowrap> 
+                  
+                  <p><img src="../graphics/cbo17.gif" alt="" width="10" height="380"></p>
+               </td> 
+                       
+               <td nowrap> 
+                  
+                  <p class="mini-list"> 
+                               <code class="keyword">=</code><br> 
+                               <code class="keyword">EQ</code><br> 
+                               <code class="keyword">EQUAL [TO]</code><br> 
+                               
+                               
+                               <code class="keyword">&lt;&gt;</code><br> 
+                               <code class="keyword">NE</code><br> 
+                               <code class="keyword">NOT =</code><br> 
+                               <code class="keyword">NOT EQ</code><br> 
+                               <code class="keyword">NOT EQUAL</code><br> 
+                               <code class="keyword">NOT EQUAL TO</code><br> 
+                               <code class="keyword">&lt;</code><br> 
+                               <code class="keyword">LT</code><br> 
+                               <code class="keyword">LESS THAN</code><br> 
+                               <code class="keyword">&lt;=</code><br> 
+                               <code class="keyword">LE</code><br> 
+                               <code class="keyword">LESS EQUAL</code><br> 
+                               <code class="keyword">&gt;</code><br> 
+                               <code class="keyword">GT</code><br> 
+                               <code class="keyword">GREATER THAN</code><br> 
+                               <code class="keyword">&gt;=</code><br> 
+                               <code class="keyword">GE</code><br> 
+                               <code class="keyword">GREATER EQUAL</code> 
+                              
+                  </p>
+               </td> 
+                       
+               <td nowrap> 
+                  
+                  <p><img src="../graphics/cbc17.gif" alt="" width="10" height="380"></p>
+               </td> 
+                       
+               <td> 
+                  
+                  <p><img src="../graphics/cbo2.gif" alt="" width="6" height="38"></p>
+               </td> 
+                       
+               <td> 
+                  
+                  <p class="mini-list"> 
+                               <var>operand2</var><br> 
+                               <code class="keyword"> <u>SUBSTR</u>ING</code>
+                                (<var>operand2,operand5,operand6</var>) 
+                              
+                  </p>
+               </td> 
+                       
+               <td> 
+                  
+                  <p><img src="../graphics/cbc2.gif" alt="" width="6" height="38"></p>
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>Operand Definition Table:</p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th>Operand</th> 
+                       
+               <th colspan="6" align="center">
+                  <a href="../sm/synsym.htm#statem_poss_struct">Possible
+                      Structure</a> 
+               </th> 
+                       
+               <th colspan="13" align="center">
+                  <a href="../sm/synsym.htm#statem_poss_form">Possible Formats</a>
+                           
+               </th> 
+                       
+               <th align="center"> <a href="../sm/synsym.htm#statem_ref_perm">Referencing Permitted</a>
+                           
+               </th> 
+                       
+               <th align="center"> <a href="../sm/synsym.htm#statem_dyn_def">Dynamic Definition</a> 
+               </th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> <var>operand1</var> 
+               </td> 
+                       
+               <td>C</td> 
+                       
+               <td>S</td> 
+                       
+               <td>A</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>N</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>A</td> 
+                       
+               <td>U</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>B</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td align="center">yes</td> 
+                       
+               <td align="center">yes</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <var>operand2</var> 
+               </td> 
+                       
+               <td>C</td> 
+                       
+               <td>S</td> 
+                       
+               <td>A</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>N</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>A</td> 
+                       
+               <td>U</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>B</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td align="center">yes</td> 
+                       
+               <td align="center">no</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><var>operand3</var></td> 
+                       
+               <td>C</td> 
+                       
+               <td>S</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>N</td> 
+                       
+               <td>P</td> 
+                       
+               <td>I</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>B</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td align="center">yes</td> 
+                       
+               <td align="center">no</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><var>operand4</var></td> 
+                       
+               <td>C</td> 
+                       
+               <td>S</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>N</td> 
+                       
+               <td>P</td> 
+                       
+               <td>I</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td align="center">yes</td> 
+                       
+               <td align="center">no</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><var>operand5</var></td> 
+                       
+               <td>C</td> 
+                       
+               <td>S</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>N</td> 
+                       
+               <td>P</td> 
+                       
+               <td>I</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td align="center">yes</td> 
+                       
+               <td align="center">no</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><var>operand6</var></td> 
+                       
+               <td>C</td> 
+                       
+               <td>S</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>N</td> 
+                       
+               <td>P</td> 
+                       
+               <td>I</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td align="center">yes</td> 
+                       
+               <td align="center">no</td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>With the <code>SUBSTRING</code> option, you can compare a <em>part</em>
+              of an alphanumeric, a binary or a Unicode field. After the field name
+              (<var>operand1</var>) you specify first the starting position
+              (<var>operand3</var>) and then the
+              <a href="pg_defi_dv.htm#Format_Length_Def">length</a>
+              (<var>operand4</var>) of the field portion to be compared.
+      </p> 
+          
+      <p>Also, you can compare a field value with part of another field value.
+              After the field name (<var>operand2</var>) you specify first
+              the starting position (<var>operand5</var>) and then the length
+              (<var>operand6</var>) of the field portion
+              <var>operand1</var> is to be compared with.
+      </p> 
+          
+      <p>You can also combine both forms, that is, you can specify a
+              <code>SUBSTRING</code> for both <var>operand1</var> and
+              <var>operand2</var>.
+      </p> 
+          
+      <h4 class="floating-title"> Examples: </h4> 
+          
+      <p>The following expression compares the 5th to 12th position inclusive of
+              the value in field <code>#A</code> with the value of field <code>#B</code>:
+      </p>
+          
+          <pre class="verbatim">SUBSTRING(#A,5,8) = #B</pre> 
+          <p>- where 5 is the starting position and 8 is the length.</p> 
+          
+      <p>The following expression compares the value of field <code>#A</code>
+              with the 3rd to 6th position inclusive of the value in field
+              <code>#B</code>:
+      </p> 
+          <pre class="verbatim">#A = SUBSTRING(#B,3,4)</pre> 
+          <p class="note"><strong>Note:</strong><br> If you omit
+              <var>operand3</var>/<var>operand5</var>, the
+              starting position is assumed to be <code>1</code>. If you omit
+              <var>operand4</var>/<var>operand6</var>, the
+              length is assumed to be from the starting position to the end of the
+              field.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_furth_lcc.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Ext_Rel_Expression"></a></div> 
+         
+      <h2> Extended Relational Expression </h2> 
+          
+          
+      <p>Syntax:</p> 
+           
+           
+      <table border="0" class="syntax" cellpadding="3"> 
+                
+                
+                
+                
+                
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> <var>operand1</var> 
+               </td> 
+                       
+               <td> 
+                  
+                  <p><img src="../graphics/cbo3.gif" alt="" width="6" height="59"></p> 
+               </td> 
+                       
+               <td> 
+                  
+                  <p class="mini-list"> 
+                               <code>=</code><br> 
+                               <code class="keyword">EQ</code><br> 
+                               <code class="keyword">EQUAL</code> [<code class="keyword">TO</code>] 
+                              
+                  </p> 
+               </td> 
+                       
+               <td> 
+                  
+                  <p><img src="../graphics/cbc3.gif" alt="" width="6" height="59"></p>
+               </td> 
+                       
+               <td> 
+                  
+                  <p><img src="../graphics/cbc3.gif" alt="" width="6" height="59"></p> 
+               </td> 
+                       
+               <td colspan="5">
+                  <var>operand2</var> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td rowspan="2">&nbsp;</td> 
+                       
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/cbo4.gif" alt="" width="6" height="100"></p> 
+               </td> 
+                       
+               <td align="right"> 
+                  
+                  <p><img src="../graphics/cbo3.gif" alt="" width="6" height="59"></p> 
+               </td> 
+                       
+               <td> <code class="keyword">OR</code> 
+               </td> 
+                       
+               <td> 
+                  
+                  <p><img src="../graphics/cbo3.gif" alt="" width="6" height="59"></p> 
+               </td> 
+                       
+               <td> 
+                  
+                  <p class="mini-list"> 
+                               <code>=</code><br> 
+                               <code class="keyword">EQ</code><br> 
+                               <code class="keyword">EQUAL</code> [<code class="keyword">TO</code>] 
+                              
+                  </p>
+               </td> 
+                       
+               <td> 
+                  
+                  <p><img src="../graphics/cbc3.gif" alt="" width="6" height="59"></p> 
+               </td> 
+                       
+               <td align="left"> <var>operand3</var> 
+               </td> 
+                       
+               <td align="left"> 
+                  
+                  <p><img src="../graphics/cbc3.gif" alt="" width="6" height="59"></p> 
+                           
+                  <p><img src="../graphics/dot3.gif" alt="" width="12" height="4"></p> 
+               </td> 
+                       
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/cbc4.gif" alt="" width="6" height="100"></p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td colspan="7" nowrap> <code class="keyword">THRU</code> <var>operand4</var> [<code class="keyword">BUT NOT</code> <var>operand5</var> [<code class="keyword">THRU</code> <var>operand6</var>]] 
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>Operand Definition Table:</p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th>Operand</th> 
+                       
+               <th colspan="6" align="center">
+                  <a href="../sm/synsym.htm#statem_poss_struct">Possible
+                      Structure</a> 
+               </th> 
+                       
+               <th colspan="13" align="center">
+                  <a href="../sm/synsym.htm#statem_poss_form">Possible Formats</a>
+                           
+               </th> 
+                       
+               <th align="center"> <a href="../sm/synsym.htm#statem_ref_perm">Referencing Permitted</a>
+                           
+               </th> 
+                       
+               <th align="center"> <a href="../sm/synsym.htm#statem_dyn_def">Dynamic Definition</a> 
+               </th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> <var>operand1</var> 
+               </td> 
+                       
+               <td>C</td> 
+                       
+               <td>S</td> 
+                       
+               <td>A</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>N*</td> 
+                       
+               <td>E</td> 
+                       
+               <td>A</td> 
+                       
+               <td>U</td> 
+                       
+               <td>N</td> 
+                       
+               <td>P</td> 
+                       
+               <td>I</td> 
+                       
+               <td>F</td> 
+                       
+               <td>B</td> 
+                       
+               <td>D</td> 
+                       
+               <td>T</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>G</td> 
+                       
+               <td>O</td> 
+                       
+               <td align="center">yes</td> 
+                       
+               <td align="center">no</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <var>operand2</var> 
+               </td> 
+                       
+               <td>C</td> 
+                       
+               <td>S</td> 
+                       
+               <td>A</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>N*</td> 
+                       
+               <td>E</td> 
+                       
+               <td>A</td> 
+                       
+               <td>U</td> 
+                       
+               <td>N</td> 
+                       
+               <td>P</td> 
+                       
+               <td>I</td> 
+                       
+               <td>F</td> 
+                       
+               <td>B</td> 
+                       
+               <td>D</td> 
+                       
+               <td>T</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>G</td> 
+                       
+               <td>O</td> 
+                       
+               <td align="center">yes</td> 
+                       
+               <td align="center">no</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><var>operand3</var></td> 
+                       
+               <td>C</td> 
+                       
+               <td>S</td> 
+                       
+               <td>A</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>N*</td> 
+                       
+               <td>E</td> 
+                       
+               <td>A</td> 
+                       
+               <td>U</td> 
+                       
+               <td>N</td> 
+                       
+               <td>P</td> 
+                       
+               <td>I</td> 
+                       
+               <td>F</td> 
+                       
+               <td>B</td> 
+                       
+               <td>D</td> 
+                       
+               <td>T</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>G</td> 
+                       
+               <td>O</td> 
+                       
+               <td align="center">yes</td> 
+                       
+               <td align="center">no</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><var>operand4</var></td> 
+                       
+               <td>C</td> 
+                       
+               <td>S</td> 
+                       
+               <td>A</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>N*</td> 
+                       
+               <td>E</td> 
+                       
+               <td>A</td> 
+                       
+               <td>U</td> 
+                       
+               <td>N</td> 
+                       
+               <td>P</td> 
+                       
+               <td>I</td> 
+                       
+               <td>F</td> 
+                       
+               <td>B</td> 
+                       
+               <td>D</td> 
+                       
+               <td>T</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>G</td> 
+                       
+               <td>O</td> 
+                       
+               <td align="center">yes</td> 
+                       
+               <td align="center">no</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><var>operand5</var></td> 
+                       
+               <td>C</td> 
+                       
+               <td>S</td> 
+                       
+               <td>A</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>N*</td> 
+                       
+               <td>E</td> 
+                       
+               <td>A</td> 
+                       
+               <td>U</td> 
+                       
+               <td>N</td> 
+                       
+               <td>P</td> 
+                       
+               <td>I</td> 
+                       
+               <td>F</td> 
+                       
+               <td>B</td> 
+                       
+               <td>D</td> 
+                       
+               <td>T</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>G</td> 
+                       
+               <td>O</td> 
+                       
+               <td align="center">yes</td> 
+                       
+               <td align="center">no</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><var>operand6</var></td> 
+                       
+               <td>C</td> 
+                       
+               <td>S</td> 
+                       
+               <td>A</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>N*</td> 
+                       
+               <td>E</td> 
+                       
+               <td>A</td> 
+                       
+               <td>U</td> 
+                       
+               <td>N</td> 
+                       
+               <td>P</td> 
+                       
+               <td>I</td> 
+                       
+               <td>F</td> 
+                       
+               <td>B</td> 
+                       
+               <td>D</td> 
+                       
+               <td>T</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>G</td> 
+                       
+               <td>O</td> 
+                       
+               <td align="center">yes</td> 
+                       
+               <td align="center">no</td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p> <sup>*</sup> Mathematical functions and system variables are permitted.
+              Break functions are not permitted.
+      </p> 
+          
+      <p> <var>operand3</var> can also be specified using a
+              <code>MASK</code> or <code>SCAN</code> option; that is, it can be specified
+              as:
+      </p> 
+           
+           
+      <table border="0" class="syntax" cellpadding="3">  
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> <code class="keyword">MASK</code>
+                      (<var>mask-definition</var>)
+                           [<var>operand</var>]
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code class="keyword">MASK</code>
+                      <var>operand</var> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><code class="keyword">SCAN</code>
+                      <var>operand</var></td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>For details on these options, see the sections
+              <a href="pg_furth_lcc.htm#MASK_Option">MASK Option</a> and
+              <a href="pg_furth_lcc.htm#SCAN_Option">SCAN Option</a>.
+      </p>
+          
+          
+      <h4 class="floating-title"> Examples: </h4> 
+          <pre class="verbatim">
+IF #A = 2 OR = 4 OR = 7
+IF #A = 5 THRU 11 BUT NOT 7 THRU 8
+</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_furth_lcc.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="MASK_Option" id="16521"></a></div> 
+         
+      <h2> 
+             <a name="x361"></a> MASK Option 
+      </h2> 
+          
+          
+      <p><a name="MASK"></a>With the <code>MASK</code> option, you can check selected
+              positions of a field for specific content.
+      </p> 
+          
+      <p>The following topics are covered below:</p> 
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_furth_lcc.htm#const_mask">Constant Mask</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_lcc.htm#Variable_Mask">Variable Mask</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_lcc.htm#Mask_Characters">Characters in a Mask</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_lcc.htm#mask_length">Mask Length</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_lcc.htm#Checking_Dates">Checking Dates</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_lcc.htm#constants_variables">Checking Against the Content of Constants or Variables</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_lcc.htm#range_checks">Range Checks</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_lcc.htm#numeric_data">Checking Packed or Unpacked Numeric Data</a></p>
+         </li>
+      </ul> 
+          
+         
+      <div><a name="const_mask"></a></div> 
+          
+      <h3> 
+              <a name="x362"></a> Constant Mask
+      </h3> 
+           
+           
+      <p>Syntax:</p> 
+            
+            
+      <table border="0" class="syntax" cellpadding="3"> 
+                 
+                  
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> <var>operand1</var> 
+               </td> 
+                        
+               <td> 
+                  
+                  <p><img src="../graphics/cbo5.gif" alt="" width="6" height="100"></p> 
+               </td> 
+                        
+               <td nowrap> 
+                  
+                  <p class="mini-list"> 
+                                <code class="keyword">=</code><br> 
+                                <code class="keyword">EQ</code><br> 
+                                <code class="keyword">EQUAL TO</code><br> 
+                                <code class="keyword">NE</code><br> 
+                                <code class="keyword">NOT EQUAL</code> 
+                               
+                  </p>
+               </td> 
+                        
+               <td> 
+                  
+                  <p><img src="../graphics/cbc5.gif" alt="" width="6" height="100"></p> 
+               </td> 
+                        
+               <td nowrap> <code class="keyword">MASK</code>
+                      (<var>mask-definition</var>)
+                            [<var>operand2</var>] 
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>Operand Definition Table:</p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>Operand</th> 
+                        
+               <th colspan="6" align="center">
+                  <a href="../sm/synsym.htm#statem_poss_struct">Possible
+                       Structure</a> 
+               </th> 
+                        
+               <th colspan="13" align="center">
+                  <a href="../sm/synsym.htm#statem_poss_form">Possible Formats</a>
+                            
+               </th> 
+                        
+               <th align="center">
+                  <a href="../sm/synsym.htm#statem_ref_perm">Referencing
+                       Permitted</a> 
+               </th> 
+                        
+               <th align="center"> <a href="../sm/synsym.htm#statem_dyn_def">Dynamic Definition</a> 
+               </th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> <var>operand1</var> 
+               </td> 
+                        
+               <td>C</td> 
+                        
+               <td>S</td> 
+                        
+               <td>A</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>N</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>A</td> 
+                        
+               <td>U</td> 
+                        
+               <td>N</td> 
+                        
+               <td>P</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td align="center">yes</td> 
+                        
+               <td align="center">no</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <var>operand2</var> 
+               </td> 
+                        
+               <td>C</td> 
+                        
+               <td>S</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>A</td> 
+                        
+               <td>U</td> 
+                        
+               <td>N</td> 
+                        
+               <td>P</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>B</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td align="center">yes</td> 
+                        
+               <td align="center">no</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p> <var>Operand2</var> can only be used if the
+               <var>mask-definition</var> contains at least one
+               <code>X</code>. <var>Operand1</var> and
+               <var>operand2</var> must be format-compatible:
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">If <var>operand1</var> is of format A,
+                       <var>operand2</var> must be of format A, B, N or U.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">If <var>operand1</var> is of format U,
+                       <var>operand2</var> must be of format A, B, N or U. 
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">If <var>operand1</var> is of format N or P,
+                       <var>operand2</var> must be of format N or P.
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>An <code>X</code> in the <var>mask-definition</var>
+               selects the corresponding positions of the content of
+               <var>operand1</var> and <var>operand2</var> for
+               comparison.
+      </p> 
+           
+          
+         
+      <div><a name="Variable_Mask"></a></div> 
+          
+      <h3> 
+              <a name="x363"></a> Variable Mask
+      </h3> 
+           
+           
+      <p>Apart from a constant <var>mask-definition</var> (see
+               above), you may also specify a variable mask definition.
+      </p> 
+           
+      <p>Syntax:</p> 
+            
+            
+      <table border="0" class="syntax" cellpadding="3"> 
+                 
+                  
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> <var>operand1</var> 
+               </td> 
+                        
+               <td> 
+                  
+                  <p><img src="../graphics/cbo5.gif" alt="" width="6" height="100"></p> 
+               </td> 
+                        
+               <td nowrap> 
+                  
+                  <p class="mini-list"> 
+                                <code class="keyword">=</code><br> 
+                                <code class="keyword">EQ</code><br> 
+                                <code class="keyword">EQUAL TO</code><br> 
+                                <code class="keyword">NE</code><br> 
+                                <code class="keyword">NOT EQUAL</code> 
+                               
+                  </p>
+               </td> 
+                        
+               <td> 
+                  
+                  <p><img src="../graphics/cbc5.gif" alt="" width="6" height="100"></p> 
+               </td> 
+                        
+               <td> <code class="keyword">MASK</code>
+                       <var>operand2</var></td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>Operand Definition Table:</p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>Operand</th> 
+                        
+               <th colspan="6" align="center">
+                  <a href="../sm/synsym.htm#statem_poss_struct">Possible
+                       Structure</a> 
+               </th> 
+                        
+               <th colspan="13" align="center">
+                  <a href="../sm/synsym.htm#statem_poss_form">Possible Formats</a>
+                            
+               </th> 
+                        
+               <th align="center">
+                  <a href="../sm/synsym.htm#statem_ref_perm">Referencing
+                       Permitted</a> 
+               </th> 
+                        
+               <th align="center"> <a href="../sm/synsym.htm#statem_dyn_def">Dynamic Definition</a> 
+               </th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td> <var>operand1</var> 
+               </td> 
+                        
+               <td>C</td> 
+                        
+               <td>S</td> 
+                        
+               <td>A</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>N</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>A</td> 
+                        
+               <td>U</td> 
+                        
+               <td>N</td> 
+                        
+               <td>P</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td align="center">yes</td> 
+                        
+               <td align="center">no</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <var>operand2</var> 
+               </td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>S</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>A</td> 
+                        
+               <td>U</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td>&nbsp;</td> 
+                        
+               <td align="center">yes</td> 
+                        
+               <td align="center">no</td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>The content of <var>operand2</var> will be taken as the
+               mask definition. Trailing blanks in <var>operand2</var> will be
+               ignored.
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">If <var>operand1</var> is of format A, N or P,
+                       <var>operand2</var> must be of format A. 
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">If <var>operand1</var> is of format U,
+                       <var>operand2</var> must be of format U. 
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+          
+         
+      <div><a name="Mask_Characters"></a></div> 
+          
+      <h3> Characters in a Mask</h3> 
+           
+           
+      <p>The following characters may be used within a mask definition (the mask
+               definition is contained in <em>mask-definition</em> for a constant mask and
+               <var>operand2</var> for a variable mask):
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+                
+         <thead align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>Character</th> 
+                        
+               <th>Meaning</th> 
+                       
+            </tr> 
+                   
+         </thead> 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td>. or ? or _</td> 
+                        
+               <td>A period, question mark or underscore indicates a single
+                  position that is not to be checked.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>* or %</td> 
+                        
+               <td>An asterisk or percent mark is used to indicate any number of
+                  positions not to be checked.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>/</td> 
+                        
+               <td>A slash (/) is used to check if a value ends with a specific
+                  character (or string of characters). 
+                  
+                  <p>For example, the following condition will be true if there is
+                                either an <code>E</code> in the last position of the field, or the last
+                                <code>E</code> in the field is followed by nothing but blanks: 
+                  </p> 
+                            <pre class="verbatim">IF #FIELD = MASK (*'E'/)</pre> </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> A </td> 
+                        
+               <td>The position is to be checked for an alphabetical character
+                  (upper or lower case).
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>'<var>c</var>'
+               </td> 
+                        
+               <td>One or more positions are to be checked for the characters
+                  bounded by apostrophes (a double apostrophe indicates that a single apostrophe
+                  is the character to be checked for). If
+                  <var>operand1</var> is in Unicode format,
+                            '<var>c</var>' must contain Unicode characters.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> C </td> 
+                        
+               <td>The position is to be checked for an alphabetical character
+                  (upper or lower case), a numeric character, or a blank.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> DD </td> 
+                        
+               <td>The two positions are to be checked for a valid day notation
+                  (01 - 31; dependent on the values of MM and YY/YYYY, if specified; see also
+                  <a href="pg_furth_lcc.htm#Checking_Dates">Checking
+                               Dates</a>).
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> H </td> 
+                        
+               <td>The position is to be checked for hexadecimal content (A - F, 0
+                  - 9).
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> JJJ </td> 
+                        
+               <td>The positions are to be checked for a valid Julian Day; that
+                  is, the day number in the year (001-366, dependent on the value of YY/YYYY, if
+                  specified. See also <a href="pg_furth_lcc.htm#Checking_Dates">Checking
+                               Dates</a>.)
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> L </td> 
+                        
+               <td>The position is to be checked for a lower-case alphabetical
+                  character (a - z).
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> MM </td> 
+                        
+               <td>The positions are to be checked for a valid month (01 - 12);
+                  see also <a href="pg_furth_lcc.htm#Checking_Dates">Checking
+                               Dates</a>.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> N </td> 
+                        
+               <td>The position is to be checked for a numeric digit.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> <var>n</var>...
+               </td> 
+                        
+               <td>One (or more) positions are to be checked for a numeric value
+                  in the range 0 - <var>n</var>.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td nowrap>
+                  <var>n</var>1-<var>n</var>2 or
+                            <var>n</var>1:<var>n</var>2 
+               </td> 
+                        
+               <td>The positions are checked for a numeric value in the range
+                  <var>n</var>1-<var>n</var>2. 
+                            
+                  <p> <var>n</var>1 and <var>n</var>2
+                                must be of the same length.
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> P </td> 
+                        
+               <td>The position is to be checked for a displayable character (U,
+                  L, N or S).
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> S </td> 
+                        
+               <td>The position is to be checked for special characters.
+                  See also <a href="../ops/ops-char.htm">Support of Different Character Sets with
+                               NATCONV.INI</a> in the <cite>Operations</cite>
+                            documentation.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> U </td> 
+                        
+               <td>The position is to be checked for an upper-case alphabetical
+                  character (A - Z).
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> X </td> 
+                        
+               <td>The position is to be checked against the equivalent position
+                  in the value (<var>operand2</var>) following the
+                            mask-definition. 
+                            
+                  <p><code>X</code> is not allowed in a variable mask definition, as it
+                                makes no sense.
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> YY </td> 
+                        
+               <td>The two positions are to be checked for a valid year (00 - 99).
+                  See also <a href="pg_furth_lcc.htm#Checking_Dates">Checking
+                               Dates</a>.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> YYYY </td> 
+                        
+               <td>The four positions are checked for a valid year (0000 - 2699).
+                  
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td> Z </td> 
+                        
+               <td>The position is to be checked for a character whose left
+                  half-byte is hexadecimally 3 or 7, and whose right half-byte is hexadecimally 0 - 9. 
+                  
+                  <p>This may be used to correctly check for numeric digits in negative
+                                numbers. With <code>N</code> (which indicates a position to be checked for a
+                     numeric digit), a check for numeric digits in negative numbers leads to
+                                incorrect results, because the sign of the number is stored in the last digit
+                                of the number, causing that digit to be hexadecimally represented as
+                                non-numeric.
+                  </p> 
+                            
+                  <p>Within a mask, use only one <code>Z</code> for each sequence of
+                                numeric digits that is checked.
+                  </p> 
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+          
+         
+      <div><a name="mask_length"></a></div> 
+          
+      <h3> Mask Length </h3> 
+           
+           
+      <p>The length of the mask determines how many positions are to be
+               checked.
+      </p> 
+           
+      <h4 class="floating-title"> Example: </h4> 
+           <pre class="verbatim">
+DEFINE DATA LOCAL
+1 #CODE (A15)
+END-DEFINE
+...
+IF #CODE = MASK (NN'ABC'....NN)
+...
+</pre> 
+           <p>In the above example, the first two positions of <code>#CODE</code> are
+               to be checked for numeric content. The three following positions are checked
+               for the contents <code>ABC</code>. The next four positions are not to be
+               checked. Positions ten and eleven are to be checked for numeric content.
+               Positions twelve to fifteen are not to be checked.
+      </p> 
+           
+          
+         
+      <div><a name="Checking_Dates"></a></div> 
+          
+      <h3> Checking Dates </h3> 
+           
+           
+      <p>Only one date may be checked within a given mask.</p> 
+           
+      <p>When dates are checked for a day (DD) and no month (MM) is specified in
+               the mask, the current month will be assumed.
+      </p> 
+           
+      <p>When dates are checked for a day (DD) or a Julian day (JJJ) and no year
+               (YY or YYYY) is specified in the mask, the current year will be assumed.
+      </p> 
+           
+      <p>When dates are checked for a 2-digit year (YY), the current century
+               will be assumed if no Sliding or Fixed Window is set. For more details about
+               Sliding or Fixed Windows, refer to profile parameter
+               <a href="../parms/yslw.htm"><code>YSLW</code></a> in the
+               <cite>Parameter Reference</cite>.
+      </p> 
+           
+      <h4 class="floating-title"> Example 1: </h4> 
+           <pre class="verbatim">
+MOVE 1131 TO #DATE (N4)
+IF #DATE = MASK (MMDD)
+</pre> 
+           <p>In this example, month and day are checked for validity. The value for
+               month (11) will be considered valid, whereas the value for day (31) will be
+               invalid since the 11th month has only 30 days.
+      </p> 
+           
+      <h4 class="floating-title"> Example 2: </h4> 
+           <pre class="verbatim">IF #DATE(A8) = MASK (MM'/'DD'/'YY)</pre> 
+           <p>In this example, the content of the field <code>#DATE</code> is be
+               checked for a valid date with the format MM/DD/YY (month/day/year).
+      </p> 
+           
+      <h4 class="floating-title"> Example 3: </h4> 
+           <pre class="verbatim">IF #DATE (A4) = MASK (19-20YY)</pre> 
+           <p>In this example, the content of field <code>#DATE</code> is checked for
+               a two-digit number in the range 19 to 20 followed by a valid two-digit year (00
+               through 99). The century is supplied by Natural as described above.
+      </p> 
+           
+      <p class="note"><strong>Note:</strong><br> Although apparent, the above mask does not allow to check for a
+               valid year in the range 1900 through 2099, because the numeric value range
+               19-20 is checked independent of the year validation. To check for year ranges,
+               code one check for the date validation and another for the range
+               validation:
+      </p> 
+           <pre class="verbatim">IF #DATE (A10) = MASK (YYYY'-'MM'-'DD) AND #DATE = MASK (19-20)</pre> 
+           
+          
+         <div><a name="constants_variables"></a></div> 
+          
+      <h3> Checking Against the Content of Constants or Variables </h3> 
+           
+           
+      <p>If the value for the mask check is to be taken from either a constant
+               or a variable, this value (<var>operand2</var>) must be
+               specified immediately following the
+               <var>mask-definition</var>.
+      </p> 
+           
+      <p> <var>Operand2</var> must be at least as long as the
+               mask.
+      </p> 
+           
+      <p>In the mask, you indicate each position to be checked with an
+               <code>X</code>, and each position not to be checked with a period (.) or a
+               question mark (?) or an underscore (_).
+      </p> 
+           
+      <h4 class="floating-title"> Example: </h4> 
+           <pre class="verbatim">
+DEFINE DATA LOCAL
+1 #NAME (A15)
+END-DEFINE
+...
+IF #NAME = MASK (..XX) 'ABCD'
+...
+</pre> 
+           <p>In the above example, it is checked whether the field
+               <code>#NAME</code> contains <code>CD</code> in the third and fourth positions.
+               Positions one and two are not checked.
+      </p> 
+           
+      <p>The length of the mask determines how many positions are to be checked.
+               The mask is left-justified against any field or constant used in the mask
+               operation. The format of the field (or constant) on the right side of the
+               expression must be the same as the format of the field on the left side of the
+               expression.
+      </p> 
+           
+      <p>If the field to be checked (<var>operand1</var>) is of
+               format A, any constant used (<var>operand2</var>) must be
+               enclosed in apostrophes. If the field is numeric, the value used must be a
+               numeric constant or the content of a numeric database field or user-defined
+               variable.
+      </p> 
+           
+      <p>In either case, any characters/digits within the value specified whose
+               positions do not match the <code>X</code> indicator within the mask are
+               ignored.
+      </p> 
+           
+      <p>The result of the <code>MASK</code> operation is true when the
+               indicated positions in both values are identical.
+      </p> 
+           
+      <h4 class="floating-title"> Example: </h4> 
+           <pre class="verbatim">
+** Example 'LOGICX01': MASK option in logical condition
+************************************************************************
+DEFINE DATA LOCAL
+1 EMPLOY-VIEW VIEW OF EMPLOYEES
+  2 CITY
+END-DEFINE
+*
+HISTOGRAM EMPLOY-VIEW CITY
+  IF CITY = 
+MASK (....XX) '....NN'
+
+
+    DISPLAY NOTITLE CITY *NUMBER
+  END-IF
+END-HISTOGRAM
+*
+END
+</pre> 
+           <p>In the above example, the record will be accepted if the fifth and
+               sixth positions of the field <code>CITY</code> each contain the character
+               <code>N</code>.
+      </p> 
+           
+          
+         
+      <div><a name="range_checks"></a></div> 
+          
+      <h3> Range Checks </h3> 
+           
+           
+      <p>When performing range checks, the number of positions verified in the
+               supplied variable is defined by the precision of the value supplied in the mask
+               specification. For example, a mask of <code>(...193...)</code> will verify
+               positions 4 to 6 for a three-digit number in the range 000 to 193.
+      </p> 
+           
+      <p>Additional Examples of Mask Definitions:</p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">In this example, each character of <code>#NAME</code> is checked for
+                       an alphabetical character: 
+            </p> 
+                   <pre class="verbatim">IF #NAME (A10) = MASK (AAAAAAAAAA)</pre> 
+                  </li> 
+              
+      </ul> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">In this example, positions 4 to 6 of <code>#NUMBER</code> are checked
+                       for a numeric value: 
+            </p> 
+                   <pre class="verbatim">IF #NUMBER (A6) = MASK (...NNN)</pre> 
+                  </li> 
+              
+      </ul> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">In this example, positions 4 to 6 of <code>#VALUE</code> are to be
+                       checked for the value <code>123</code>: 
+            </p> 
+                   <pre class="verbatim">IF #VALUE(A10) = MASK (...'123')</pre> 
+                  </li> 
+              
+      </ul> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">This example will check if <code>#LICENSE</code> contains a license
+                       number which begins with <code>NY-</code> and whose last five characters are
+                       identical to the last five positions of <code>#VALUE</code>: 
+            </p> 
+                   <pre class="verbatim">
+DEFINE DATA LOCAL
+1 #VALUE(A8)
+1 #LICENSE(A8)
+END-DEFINE
+INPUT 'ENTER KNOWN POSITIONS OF LICENSE PLATE:' #VALUE
+IF #LICENSE = <strong>MASK ('NY-'XXXXX) #VALUE</strong>
+</pre> 
+                  </li> 
+              
+      </ul> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">The following condition would be met by any value which contains
+                       <code>NAT</code> and <code>AL</code> no matter which and how many other
+                       characters are between <code>NAT</code> and <code>AL</code> (this would include
+                       the values <code>NATURAL</code> and <code>NATIONALITY</code> as well as
+                       <code>NATAL</code>): 
+            </p> 
+                   <pre class="verbatim">MASK('NAT'*'AL')</pre> 
+                  </li> 
+              
+      </ul> 
+           
+          
+         
+      <div><a name="numeric_data"></a></div> 
+          
+      <h3> Checking Packed or Unpacked Numeric Data </h3> 
+           
+           
+      <p>Legacy applications often have packed or unpacked numeric variables
+               redefined with alphanumeric or binary fields. Such redefinitions are not
+               recommended, because using the packed or unpacked variable in an assignment or
+               computation may lead to errors or unpredictable results. To validate the
+               contents of such a redefined variable before the variable is used, use the N
+               option (see <a href="pg_furth_lcc.htm#Mask_Characters">Characters in a
+            Mask</a>) as many as number of digits - 1 times followed by a
+               single Z option.
+      </p> 
+           
+      <h4 class="floating-title"> Examples :</h4> 
+           <pre class="verbatim">IF #P1 (P1) = MASK (Z)
+IF #N4 (N4) = MASK (NNNZ)
+IF #P5 (P5) = MASK (NNNNZ)</pre> 
+           
+          
+        
+        <div class="noprint">
+         <p><a href="pg_furth_lcc.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="SCAN_Option"></a></div> 
+         
+      <h2> 
+             <a name="x364"></a> SCAN Option 
+      </h2> 
+          
+          
+      <p>Syntax:</p> 
+           
+           
+      <table border="0" class="syntax" cellpadding="3"> 
+                
+                
+                
+                
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td nowrap> &nbsp; <var>operand1</var> 
+               </td> 
+                       
+               <td nowrap> 
+                  
+                  <p><img src="../graphics/cbo5.gif" alt="" width="6" height="100"></p> 
+               </td> 
+                       
+               <td nowrap> 
+                  
+                  <p class="mini-list"> 
+                               <code class="keyword">=</code><br> 
+                               <code class="keyword">EQ</code><br> 
+                               <code class="keyword">EQUAL TO</code><br> 
+                               <code class="keyword">NE</code><br> 
+                               <code class="keyword">NOT EQUAL</code> 
+                              
+                  </p>
+               </td> 
+                       
+               <td nowrap> 
+                  
+                  <p><img src="../graphics/cbc5.gif" alt="" width="6" height="100"></p> 
+               </td> 
+                       
+               <td nowrap> <code class="keyword"> SCAN</code> 
+               </td> 
+                       
+               <td nowrap> 
+                  
+                  <p><img src="../graphics/cbo2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                       
+               <td nowrap> 
+                  
+                  <p class="mini-list"> 
+                               <var>operand2 </var><br> 
+                               (<var>operand2</var>)  
+                              
+                  </p> 
+               </td> 
+                       
+               <td nowrap> 
+                  
+                  <p><img src="../graphics/cbc2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>Operand Definition Table:</p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th>Operand</th> 
+                       
+               <th colspan="6" align="center">
+                  <a href="../sm/synsym.htm#statem_poss_struct">Possible
+                      Structure</a> 
+               </th> 
+                       
+               <th colspan="13" align="center">
+                  <a href="../sm/synsym.htm#statem_poss_form">Possible Formats</a>
+                           
+               </th> 
+                       
+               <th align="center"> <a href="../sm/synsym.htm#statem_ref_perm">Referencing Permitted</a>
+                           
+               </th> 
+                       
+               <th align="center"> <a href="../sm/synsym.htm#statem_dyn_def">Dynamic Definition</a> 
+               </th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> <var>operand1</var> 
+               </td> 
+                       
+               <td>C</td> 
+                       
+               <td>S</td> 
+                       
+               <td>A</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>N</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>A</td> 
+                       
+               <td>U</td> 
+                       
+               <td>N</td> 
+                       
+               <td>P</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td align="center">yes</td> 
+                       
+               <td align="center">no</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <var>operand2</var> 
+               </td> 
+                       
+               <td>C</td> 
+                       
+               <td>S</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>A</td> 
+                       
+               <td>U</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>B*</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td align="center">yes</td> 
+                       
+               <td align="center">no</td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p><sup>*</sup> <var>operand2</var> may only be binary if
+              <var>operand1</var> is of format A or U. If
+              <var>operand1</var> is of format U and
+              <var>operand2</var> is of format B, then the length of
+              <var>operand2</var> must be even. 
+      </p> 
+          
+      <p>The <code>SCAN</code> option is used to scan for a specific value within
+              a field.
+      </p> 
+          
+      <p>The characters used in the <code>SCAN</code> option
+              (<var>operand2</var>) may be specified as an alphanumeric or
+              Unicode constant (a character string bounded by apostrophes) or the contents of
+              an alphanumeric or Unicode database field or user-defined variable. 
+      </p> 
+          
+      <p class="caution"><strong>Caution:</strong><br>Trailing blanks are automatically eliminated from
+              <var>operand1</var> and <var>operand2</var>.
+              Therefore, the <code>SCAN</code> option cannot be used to scan for values
+              containing trailing blanks. <var>operand1</var> and
+              <var>operand2</var> may contain leading or embedded blanks. If
+              <var>operand2</var> consists of blanks only, scanning will be
+              assumed to be successful, regardless of the value of
+              <var>operand1</var>; confer
+              <a href="../sm/examine.htm#FULL_examine"><code>EXAMINE
+               FULL</code></a> statement if trailing blanks are not to be ignored in
+              the scan operation.
+      </p> 
+          
+      <p>The field to be scanned (<var>operand1</var>) may be of
+              format A, N, P or U. The <code>SCAN</code> operation may be specified with the
+              equal (<code>EQ</code>) or not equal (<code>NE</code>) operators. 
+      </p> 
+          
+      <p>The length of the character string for the <code>SCAN</code> operation
+              should be less than the length of the field to be scanned. If the length of the
+              character string specified is identical to the length of the field to be
+              scanned, then an <code>EQUAL</code> operator should be used instead of
+              <code>SCAN</code>.
+      </p> 
+          
+      <h4 class="floating-title"> Example of SCAN Option: </h4> 
+          <pre class="verbatim">
+** Example 'LOGICX02': SCAN option in logical condition
+************************************************************************
+DEFINE DATA
+LOCAL
+1 EMPLOY-VIEW VIEW OF EMPLOYEES
+  2 NAME
+*
+1 #VALUE   (A4)
+1 #COMMENT (A10)
+END-DEFINE
+*
+INPUT 'ENTER SCAN VALUE:' <strong>#VALUE</strong>
+LIMIT 15
+*
+HISTOGRAM EMPLOY-VIEW FOR NAME
+  RESET #COMMENT
+  <strong>IF NAME = SCAN #VALUE</strong>
+    MOVE 'MATCH' TO #COMMENT
+  END-IF
+  DISPLAY NOTITLE NAME *NUMBER #COMMENT
+END-HISTOGRAM
+*
+END
+</pre> 
+          <p>Output of Program LOGICX02:</p> <pre class="system-output">
+ENTER SCAN VALUE:  
+</pre> 
+          <p>A scan for example for <code>LL</code> delivers three matches in 15
+              names:
+      </p> <pre class="system-output">
+        NAME          NMBR      #COMMENT
+-------------------- --------- ----------
+ 
+<strong>ABELLAN                      1 MATCH</strong>
+ACHIESON                     1 
+ADAM                         1
+ADKINSON                     8
+AECKERLE                     1
+AFANASSIEV                   2
+AHL                          1
+AKROYD                       1
+ALEMAN                       1
+ALESTIA                      1
+ALEXANDER                    5
+<strong>ALLEGRE                      1 MATCH
+ALLSOP                       1 MATCH</strong>
+ALTINOK                      1
+ALVAREZ                      1
+</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_furth_lcc.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="BREAK_WLCC"></a></div> 
+         
+      <h2> 
+             <a name="x365"></a> BREAK within Logical Condition Criteria 
+      </h2> 
+          
+          
+      <p>The <code>BREAK</code> option allows the current value or a portion of a
+              value of a field to be compared to the value contained in the same field in the
+              previous pass through the processing loop.
+      </p> 
+          
+      <p>Syntax:</p> 
+           
+           
+      <table border="0" class="syntax" cellpadding="3">  
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> <code class="keyword">BREAK</code> [OF]
+                        <a href="pg_furth_lcc.htm#break_of_operand1"><var>operand1</var></a>
+                           [<a href="pg_furth_lcc.htm#break_of_n_notation">/<var>n</var>/</a>]
+                           
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>Operand Definition Table:</p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th>Operand</th> 
+                       
+               <th colspan="6" align="center">
+                  <a href="../sm/synsym.htm#statem_poss_struct">Possible
+                      Structure</a> 
+               </th> 
+                       
+               <th colspan="13" align="center">
+                  <a href="../sm/synsym.htm#statem_poss_form">Possible Formats</a>
+                           
+               </th> 
+                       
+               <th align="center"> <a href="../sm/synsym.htm#statem_ref_perm">Referencing Permitted</a>
+                           
+               </th> 
+                       
+               <th align="center"> <a href="../sm/synsym.htm#statem_dyn_def">Dynamic Definition</a> 
+               </th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> <var>operand1</var> 
+               </td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>S</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>A</td> 
+                       
+               <td>U</td> 
+                       
+               <td>N</td> 
+                       
+               <td>P</td> 
+                       
+               <td>I</td> 
+                       
+               <td>F</td> 
+                       
+               <td>B</td> 
+                       
+               <td>D</td> 
+                       
+               <td>T</td> 
+                       
+               <td>L</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td align="center">yes</td> 
+                       
+               <td align="center">no</td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>Syntax Element Description:</p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th nowrap> <a name="break_of_operand1"></a><var>operand1</var> 
+               </th> 
+                       
+               <td>Specifies the control field which is to be checked. A specific
+                  occurrence of an array can also be used as a control field. 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th nowrap> <a name="break_of_n_notation"></a>/<var>n</var>/ 
+               </th> 
+                       
+               <td>
+                  
+                  <p>The notation <code>/<var>n</var>/</code> may be
+                     used to indicate that only the first <var>n</var> positions
+                     (counting from left to right) of the control field are to be checked for a
+                     change in value. This notation can only be used with operands of format A, B,
+                               N, or P. 
+                  </p> 
+                           
+                  <p>The result of the <code>BREAK</code> operation is true when a
+                               change in the specified positions of the field occurs. The result of the
+                               <code>BREAK</code> operation is not true if an <code>AT END OF DATA</code>
+                               condition occurs. 
+                  </p> 
+                           
+                  <p>Example:</p> 
+                           
+                  <p>In this example, a check is made for a different value in the first
+                               position of the field <code>FIRST-NAME</code>.
+                  </p> 
+                           <pre class="verbatim">BREAK FIRST-NAME /1/</pre> 
+                           <p>Natural system functions (which are available with the <code>AT
+                                  BREAK</code> statement) are not available with this option. 
+                  </p>
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <h4 class="floating-title"> Example of BREAK Option: </h4> 
+          <pre class="verbatim">
+** Example 'LOGICX03': BREAK option in logical condition
+************************************************************************
+DEFINE DATA LOCAL
+1 EMPLOY-VIEW VIEW OF EMPLOYEES
+  2 NAME
+  2 FIRST-NAME
+  2 BIRTH
+*
+1 #BIRTH (A8)
+END-DEFINE
+*
+LIMIT 10
+READ EMPLOY-VIEW BY BIRTH
+  MOVE EDITED BIRTH (EM=YYYYMMDD) TO #BIRTH
+  /*
+  IF <strong>BREAK OF #BIRTH /6/</strong>
+    NEWPAGE IF LESS THAN 5 LINES LEFT
+    WRITE / '-' (50) /
+  END-IF
+  /*
+  DISPLAY NOTITLE BIRTH (EM=YYYY-MM-DD) NAME FIRST-NAME 
+END-READ 
+END
+</pre> 
+          <p>Output of Program LOGICX03:</p> <pre class="system-output">
+  DATE            NAME              FIRST-NAME
+   OF
+ BIRTH
+---------- -------------------- --------------------
+  
+1940-01-01 GARRET               WILLIAM
+1940-01-09 TAILOR               ROBERT
+1940-01-09 PIETSCH              VENUS
+1940-01-31 LYTTLETON            BETTY
+ 
+--------------------------------------------------
+  
+1940-02-02 WINTRICH             MARIA
+1940-02-13 KUNEY                MARY
+1940-02-14 KOLENCE              MARSHA
+1940-02-24 DILWORTH             TOM
+ 
+--------------------------------------------------
+ 
+1940-03-03 DEKKER               SYLVIA
+1940-03-06 STEFFERUD            BILL
+</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_furth_lcc.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="IS_Option_CFLV"></a></div> 
+         
+      <h2> 
+             <a name="x366"></a> IS Option - Checking Format and Length of Value 
+      </h2> 
+          
+          
+      <p>Syntax:</p> 
+           
+           
+      <table border="0" class="syntax" cellpadding="3">  
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> <var>operand1</var> IS
+                          (<var>format</var>) 
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>This option is used to check whether the content of an alphanumeric or
+              Unicode field (<var>operand1</var>) can be converted to a
+              specific other format. 
+      </p> 
+          
+      <p>Operand Definition Table:</p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th>Operand</th> 
+                       
+               <th colspan="6" align="center">
+                  <a href="../sm/synsym.htm#statem_poss_struct">Possible
+                      Structure</a> 
+               </th> 
+                       
+               <th colspan="13" align="center">
+                  <a href="../sm/synsym.htm#statem_poss_form">Possible Formats</a>
+                           
+               </th> 
+                       
+               <th align="center"> <a href="../sm/synsym.htm#statem_ref_perm">Referencing Permitted</a>
+                           
+               </th> 
+                       
+               <th align="center"> <a href="../sm/synsym.htm#statem_dyn_def">Dynamic Definition</a> 
+               </th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> <var>operand1</var> 
+               </td> 
+                       
+               <td>C</td> 
+                       
+               <td>S</td> 
+                       
+               <td>A</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>N</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>A</td> 
+                       
+               <td>U</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td align="center">yes</td> 
+                       
+               <td align="center">no</td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>The <var>format</var> for which the check is performed
+              can be:
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="16%">
+            <col width="81%">
+         </colgroup> 
+                
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th> N<var>ll.ll</var> 
+               </th> 
+                       
+               <td>Numeric with length <var>ll.ll</var>.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> F<var>ll</var> 
+               </th> 
+                       
+               <td>Floating point with length
+                  <var>ll</var>.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> D </th> 
+                       
+               <td>Date. The following date formats are possible:
+                  <var>dd-mm-yy</var>, <var>dd-mm-yyyy</var>,
+                           <var>ddmmyyyy</var> (<var>dd</var> = day,
+                           <var>mm</var> = month, <var>yy</var> or
+                           <var>yyyy</var> = year). The sequence of the day, month and
+                           year components as well as the characters between the components are determined
+                           by the profile parameter <a href="../parms/dtform.htm"><code>DTFORM</code></a> (which is
+                           described in the <cite>Parameter Reference</cite>).
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> T </th> 
+                       
+               <td>Time (according to the default time display format).</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> P<var>ll.ll</var> 
+               </th> 
+                       
+               <td>Packed numeric with length
+                  <var>ll.ll</var>.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> I<var>ll</var> 
+               </th> 
+                       
+               <td>Integer with length <var>ll</var>.
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>When the check is performed, leading and trailing blanks in
+              <var>operand1</var> will be ignored.
+      </p> 
+          
+      <p>The <code>IS</code> option may, for example, be used to check the
+              content of a field before the mathematical function
+              <a href="../func/func_math.htm#VAL_System_Function"><code>VAL</code></a>
+              (extract numeric value from an alphanumeric field) is used to ensure that it
+              will not result in a runtime error.
+      </p> 
+          
+      <p class="note"><strong>Note:</strong><br> The <code>IS</code> option cannot be used to check if the value of
+              an alphanumeric field is in the specified "format", but if it can
+              be <em>converted</em> to that "format". To check if a value is in
+              a specific format, you can use the <a href="pg_furth_lcc.htm#MASK_Option"><code>MASK</code></a> option.
+      </p> 
+          
+      <h4 class="floating-title"> Example of IS Option: </h4> 
+          <pre class="verbatim">
+** Example 'LOGICX04': IS option as format/length check
+************************************************************************
+DEFINE DATA LOCAL
+1 #FIELDA (A10)          /* INPUT FIELD TO BE CHECKED
+1 #FIELDB (N5)           /* RECEIVING FIELD OF VAL FUNCTION
+1 #DATE   (A10)          /* INPUT FIELD FOR DATE
+END-DEFINE
+*
+INPUT #DATE #FIELDA
+IF <strong>#DATE IS(D)</strong>
+  IF <strong>#FIELDA IS (N5)</strong>
+    COMPUTE #FIELDB = VAL(#FIELDA)
+    WRITE NOTITLE 'VAL FUNCTION OK' //  '=' #FIELDA '=' #FIELDB
+  ELSE
+    REINPUT 'FIELD DOES NOT FIT INTO N5 FORMAT'
+            MARK *#FIELDA
+  END-IF
+ELSE
+  REINPUT 'INPUT IS NOT IN DATE FORMAT (YY-MM-DD) '
+          MARK *#DATE
+END-IF
+*
+END
+</pre> 
+          <p>Output of Program LOGICX04:</p> <pre class="system-output">
+#DATE 150487    #FIELDA
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+INPUT IS NOT IN DATE FORMAT (YY-MM-DD)
+</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_furth_lcc.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="LV_Evaluation"></a></div> 
+         
+      <h2> 
+             <a name="x367"></a> Evaluation of a Logical Variable 
+      </h2> 
+          
+          
+      <p>Syntax:</p> 
+           
+           
+      <table border="0" class="syntax" cellpadding="3">  
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> <var>operand1</var> 
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>This option is used in conjunction with a logical variable (format L). A
+              logical variable may take the value <code>TRUE</code> or <code>FALSE</code>. As
+              <var>operand1</var> you specify the name of the logical
+              variable to be used.
+      </p> 
+          
+      <p>Operand Definition Table:</p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th>Operand</th> 
+                       
+               <th colspan="6" align="center">
+                  <a href="../sm/synsym.htm#statem_poss_struct">Possible
+                      Structure</a> 
+               </th> 
+                       
+               <th colspan="13" align="center">
+                  <a href="../sm/synsym.htm#statem_poss_form">Possible Formats</a>
+                           
+               </th> 
+                       
+               <th align="center"> <a href="../sm/synsym.htm#statem_ref_perm">Referencing Permitted</a>
+                           
+               </th> 
+                       
+               <th align="center"> <a href="../sm/synsym.htm#statem_dyn_def">Dynamic Definition</a> 
+               </th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> <var>operand1</var> 
+               </td> 
+                       
+               <td>C</td> 
+                       
+               <td>S</td> 
+                       
+               <td>A</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>L</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td align="center">no</td> 
+                       
+               <td align="center">no</td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <h4 class="floating-title"> Example of Logical Variable: </h4> 
+          <pre class="verbatim">
+** Example 'LOGICX05': Logical variable in logical condition
+************************************************************************
+DEFINE DATA LOCAL
+1 #SWITCH (L)  INIT &lt;true&gt;
+1 #INDEX  (I1)
+END-DEFINE
+*
+FOR #INDEX 1 5
+  WRITE NOTITLE #SWITCH (EM=FALSE/TRUE) 5X 'INDEX =' #INDEX
+  WRITE NOTITLE #SWITCH (EM=OFF/ON) 7X 'INDEX =' #INDEX
+  IF <strong>#SWITCH</strong>
+    MOVE FALSE TO #SWITCH
+  ELSE
+    MOVE TRUE TO #SWITCH
+  END-IF
+  /*
+  SKIP 1
+END-FOR
+END
+</pre> 
+          <p>Output of Program LOGICX05:</p> <pre class="system-output">
+TRUE     INDEX =    1
+ON       INDEX =    1
+ 
+FALSE    INDEX =    2
+OFF      INDEX =    2
+ 
+TRUE     INDEX =    3
+ON       INDEX =    3
+ 
+FALSE    INDEX =    4
+OFF      INDEX =    4
+ 
+TRUE     INDEX =    5
+ON       INDEX =    5
+</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_furth_lcc.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Modified_CV"></a></div> 
+         
+      <h2> 
+             <a name="x368"></a> MODIFIED Option 
+      </h2> 
+          
+          
+      <p>Syntax:</p> 
+           
+           
+      <table border="0" class="syntax" cellpadding="3">  
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td nowrap> <var>operand1</var> [<code class="keyword">NOT</code>] <code class="keyword">MODIFIED</code> 
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>This option is used to determine if the content of a field which has
+              been assigned attributes dynamically has been modified during the execution of
+              an <code>INPUT</code> statement.
+      </p> 
+          
+      <p>Operand Definition Table:</p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th>Operand</th> 
+                       
+               <th colspan="6" align="center">
+                  <a href="../sm/synsym.htm#statem_poss_struct">Possible
+                      Structure</a> 
+               </th> 
+                       
+               <th colspan="13" align="center">
+                  <a href="../sm/synsym.htm#statem_poss_form">Possible Formats</a>
+                           
+               </th> 
+                       
+               <th align="center"> <a href="../sm/synsym.htm#statem_ref_perm">Referencing Permitted</a>
+                           
+               </th> 
+                       
+               <th align="center"> <a href="../sm/synsym.htm#statem_dyn_def">Dynamic Definition</a> 
+               </th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> <var>operand1</var> 
+               </td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>S</td> 
+                       
+               <td>A</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;C</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td align="center">no</td> 
+                       
+               <td align="center">no</td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>Attribute control variables referenced in an <code>INPUT</code>
+              statement are always assigned the status <code>NOT MODIFIED</code> when the map
+              is transmitted to the terminal.
+      </p> 
+          
+      <p>Whenever the content of a field referencing an attribute control
+              variable is modified, the attribute control variable has been assigned the
+              status <code>MODIFIED</code>. When multiple fields reference the same attribute
+              control variable, the variable is marked <code>MODIFIED</code> if any of these
+              fields is modified.
+      </p> 
+          
+      <p>If <var>operand1</var> is an array, the result will be
+              true if at least one of the array elements has been assigned the status
+              <code>MODIFIED</code> (<code>OR</code> operation).
+      </p> 
+           
+          
+      <h4 class="floating-title"> Example of MODIFIED Option: </h4> 
+          <pre class="verbatim">
+** Example 'LOGICX06': MODIFIED option in logical condition
+************************************************************************
+DEFINE DATA LOCAL
+1 #ATTR (C)
+1 #A    (A1)
+1 #B    (A1)
+END-DEFINE
+*
+MOVE (AD=I) TO #ATTR
+*
+INPUT (CV=#ATTR) #A #B
+IF <strong>#ATTR NOT MODIFIED</strong>
+  WRITE NOTITLE 'FIELD #A OR #B HAS NOT BEEN MODIFIED'
+END-IF
+*
+IF <strong>#ATTR MODIFIED</strong>
+  WRITE NOTITLE 'FIELD #A OR #B HAS BEEN MODIFIED'
+END-IF
+*
+END
+</pre> 
+          <p>Output of Program LOGICX06:</p> <pre class="system-output">
+#A   #B 
+</pre> 
+          <p>After entering any value and pressing <span class="key">ENTER</span>, the following
+              output is displayed:
+      </p> <pre class="system-output">
+FIELD #A OR #B HAS BEEN MODIFIED
+</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_furth_lcc.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="SPECIFIED_Option"></a></div> 
+         
+      <h2> 
+             <a name="x369"></a> SPECIFIED Option 
+      </h2> 
+          
+          
+      <p>Syntax:</p> 
+           
+           
+      <table border="0" class="syntax" cellpadding="3">  
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td> <var>operand1</var> [<code class="keyword">NOT</code>] <code class="keyword">SPECIFIED</code> 
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>This option is used to check whether an optional parameter in an invoked
+              object (subprogram, external subroutine or ActiveX control)
+              has received a value from the invoking object or not.
+      </p> 
+          
+      <p>An optional parameter is a field defined with the keyword
+              <a href="../sm/defineda_pda.htm#OPTIONAL"><code>OPTIONAL</code></a> in the
+              <a href="../sm/defineda_pda.htm"><code>DEFINE DATA
+               PARAMETER</code></a> statement of the invoked object. If a field is
+              defined as <code>OPTIONAL</code>, a value can - but need not - be passed from
+              an invoking object to this field.
+      </p> 
+          
+      <p>In the invoking statement, the notation
+              <code><var>n</var>X</code> is used to indicate parameters for
+              which no values are passed.
+      </p> 
+          
+      <p>If you process an optional parameter which has not received a value,
+              this will cause a runtime error. To avoid such an error, you use the
+              <code>SPECIFIED</code> option in the invoked object to check whether an
+              optional parameter has received a value or not, and then only process it if it
+              has.
+      </p> 
+          
+      <p> <var>Parameter-name</var> is the name of the parameter
+              as specified in the <code>DEFINE DATA PARAMETER</code> statement of the invoked
+              object.
+      </p> 
+          
+      <p>For a field not defined as <code>OPTIONAL</code>, the
+              <code>SPECIFIED</code> condition is always <code>TRUE</code>.
+      </p> 
+          
+      <h4 class="floating-title"> Example of SPECIFIED Option: </h4> 
+          
+      <p>Calling Programming:</p> 
+          <pre class="verbatim">
+** Example 'LOGICX07': SPECIFIED option in logical condition            
+************************************************************************
+DEFINE DATA LOCAL                                                       
+1 #PARM1 (A3)                                                           
+1 #PARM3 (N2)                                                           
+END-DEFINE                                                              
+*                                                                       
+#PARM1 := 'ABC'                                                         
+#PARM3 := 20                                                            
+*                                                                       
+CALLNAT 'LOGICX08' #PARM1 <strong>1X</strong> #PARM3                                     
+*                                                                       
+END  
+</pre> 
+          <p>Subprogram Called:</p> 
+          <pre class="verbatim">
+** Example 'LOGICX08': SPECIFIED option in logical condition            
+************************************************************************
+DEFINE DATA PARAMETER                                                   
+1 #PARM1 (A3)                                                           
+1 #PARM2 (N2) <strong>OPTIONAL</strong>                                                  
+1 #PARM3 (N2) <strong>OPTIONAL</strong>                                                  
+END-DEFINE                                                              
+*                                                                       
+WRITE '=' #PARM1                                                        
+*                                                                       
+IF #PARM2 <strong>SPECIFIED</strong>                                                     
+  WRITE '#PARM2 is specified'                                           
+  WRITE '=' #PARM2                                                      
+ELSE                                                                    
+  WRITE '#PARM2 is not specified'                                       
+* WRITE '=' #PARM2                /* would cause runtime error NAT1322  
+END-IF                                                                  
+*                                                                       
+IF #PARM3 <strong>NOT SPECIFIED</strong>
+  WRITE '#PARM3 is not specified'
+ELSE                             
+  WRITE '#PARM3 is specified'    
+  WRITE '=' #PARM3               
+END-IF                           
+END 
+</pre> 
+          <p>Output of Program LOGICX07:</p> <pre class="system-output">
+Page      1                                                  04-12-15  11:25:41
+                                                                               
+#PARM1: ABC                                                                    
+#PARM2 is not specified                                                        
+#PARM3 is specified                                                            
+#PARM3:  20
+</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_furth_lcc.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Fields_Used_WLCC"></a></div> 
+         
+      <h2> Fields Used within Logical Condition Criteria </h2> 
+          
+          
+      <p>Database fields and user-defined variables may be used to construct
+              logical condition criteria. A database field which is a multiple-value field or
+              is contained in a periodic group can also be used. If a range of values for a
+              multiple-value field or a range of occurrences for a periodic group is
+              specified, the condition is true if the search value is found in any
+              value/occurrence within the specified range.
+      </p> 
+          
+      <p>Each value used must be compatible with the field used on the opposite
+              side of the expression. Decimal notation may be specified only for values used
+              with numeric fields, and the number of decimal positions of the value must
+              agree with the number of decimal positions defined for the field.
+      </p> 
+          
+      <p>If the operands are not of the same format, the second operand is
+              converted to the format of the first operand.
+      </p> 
+           
+           
+      <p class="note"><strong>Note:</strong><br>A numeric constant without decimal point notation is stored with
+               format I for the values -2147483648 to +2147483647, see
+               <a href="pg_defi_udc.htm#Numeric_Constants">Numeric
+            Constants</a>. Consequently the comparison with such an
+               integer constant as <var>operand1</var> is performed by
+               converting <var>operand2</var> to a integer value. This means
+               that the digits after the decimal point of <var>operand2</var>
+               are not considered due to truncation.
+      </p> 
+           
+      <p>Example:</p> 
+           <pre class="verbatim">
+ IF 0 = 0.5  	 /* is true because 0.5 (operand2) is converted to 0 (format I of operand1)
+ IF 0.0 = 0.5  /* is false 
+ IF 0.5 = 0  	 /* is false 
+ IF 0.5 = 0.0  /* is false 
+</pre> 
+          <p>The following table shows which operand formats can be used together in
+              a logical condition:
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+                
+                
+                
+                
+                 
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th rowspan="2"><var>operand1</var> 
+               </th> 
+                       
+               <th colspan="13" align="center"><var>operand2</var></th> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th>A</th> 
+                       
+               <th>U</th> 
+                       
+               <th>B<var>n</var>
+                   (<var>n</var>=&lt;4)
+               </th> 
+                       
+               <th>B<var>n</var>
+                   (<var>n</var>&gt;=5)
+               </th> 
+                       
+               <th>D</th> 
+                       
+               <th>T</th> 
+                       
+               <th>I</th> 
+                       
+               <th>F</th> 
+                       
+               <th>L</th> 
+                       
+               <th>N</th> 
+                       
+               <th>P</th> 
+                       
+               <th>GH</th> 
+                       
+               <th>OH</th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th>A</th> 
+                       
+               <td>Y</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th>U</th> 
+                       
+               <td>Y</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>[2]</td> 
+                       
+               <td>[2]</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th nowrap>B<var>n</var>
+                   (<var>n</var>=&lt;4)
+               </th> 
+                       
+               <td>Y</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th nowrap>B<var>n</var>
+                   (<var>n</var>&gt;=5)
+               </th> 
+                       
+               <td>Y</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th>D</th> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th>T</th> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th>I</th> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>Y&nbsp;</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th>F</th> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th>L</th> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th>N</th> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th>P</th> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th>GH [1]</th> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>Y</td> 
+                       
+               <td>&nbsp;</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th>OH [1]</th> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>Y</td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p class="notes"><strong>Notes:</strong></p>
+      <ol class="note-list"> 
+              
+         <li>[1] where GH = GUI handle, OH = object handle.</li> 
+              
+         <li>[2] The binary value will be assumed to contain Unicode code
+                  points, and the comparison is performed as for a comparison of two Unicode
+                  values. The length of the binary field must be even. 
+         </li> 
+             
+      </ol> 
+          
+      <p>If two values are compared as alphanumeric values, the shorter value is
+              assumed to be extended with trailing blanks in order to get the same length as
+              the longer value. 
+      </p> 
+          
+      <p>If two values are compared as binary values, the shorter value is
+              assumed to be extended with leading binary zeroes in order to get the same
+              length as the longer value. 
+      </p> 
+          
+      <p>If two values are compared as Unicode values, trailing blanks are
+              removed from both values before the ICU collation algorithm is used to compare
+              the two resulting values. See also
+              <a href="../unicode/uni-language.htm#uni-language-lcc">Logical
+            Condition Criteria</a> in the <cite>Unicode and Code Page
+                 Support</cite> documentation.
+      </p> 
+          
+      <h4 class="floating-title">Comparison Examples:</h4> 
+          <pre class="verbatim">A1(A1) := 'A'            
+A5(A5) := 'A    '        
+B1(B1) := H'FF'          
+B5(B5) := H'00000000FF'  
+U1(U1) := UH'00E4'       
+U2(U2) := UH'00610308'   
+IF A1 = A5 THEN ...                 /* TRUE 
+IF B1 = B5 THEN ...                 /* TRUE
+IF U1 = U2 THEN ...                 /* TRUE </pre> 
+          <p>If an array is compared with a scalar value, each element of the array
+              will be compared with the scalar value. The condition will be true if at least
+              one of the array elements meets the condition (<code>OR</code> operation).
+      </p> 
+          
+      <p>If an array is compared with an array, each element in the array is
+              compared with the corresponding element of the other array. The result is true
+              only if all element comparisons meet the condition (<code>AND</code>
+              operation).
+      </p> 
+          
+      <p>See also <a href="pg_furth_arithm.htm#Array_Processing">Processing of
+            Arrays</a>.
+      </p> 
+          
+      <p class="note"><strong>Note:</strong><br> An Adabas phonetic descriptor cannot be used within a logical
+              condition.
+      </p> 
+          
+      <h4 class="floating-title"> Examples of Logical Condition Criteria:</h4> 
+          <pre class="verbatim">FIND EMPLOYEES-VIEW WITH CITY = 'BOSTON' WHERE SEX = 'M'
+READ EMPLOYEES-VIEW BY NAME WHERE SEX = 'M'
+ACCEPT IF LEAVE-DUE GT 45
+IF #A GT #B THEN COMPUTE #C = #A + #B
+REPEAT UNTIL #X = 500</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_furth_lcc.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Log_Operators_CLE"></a></div> 
+         
+      <h2> Logical Operators in Complex Logical Expressions </h2> 
+          
+          
+      <p>Logical condition criteria may be combined using the Boolean operators
+              <code>AND</code>, <code>OR</code>, and <code>NOT</code>. Parentheses may also
+              be used to indicate logical grouping.
+      </p> 
+          
+      <p>The operators are evaluated in the following order:</p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th> Priority </th> 
+                       
+               <th> Operator </th> 
+                       
+               <th> Meaning </th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td>1</td> 
+                       
+               <td> ( ) </td> 
+                       
+               <td>Parentheses</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>2</td> 
+                       
+               <td> NOT </td> 
+                       
+               <td>Negation</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>3</td> 
+                       
+               <td> AND </td> 
+                       
+               <td><code>AND</code> operation
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>4</td> 
+                       
+               <td> OR </td> 
+                       
+               <td><code>OR</code> operation
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>The following <em>logical-condition-criteria</em> may be combined by
+              logical operators to form a complex <em>logical-expression</em>:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="pg_furth_lcc.htm#Rel_Expression">Relational
+                         expressions</a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="pg_furth_lcc.htm#Ext_Rel_Expression">Extended relational
+                         expressions</a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="pg_furth_lcc.htm#MASK_Option"><code>MASK</code>
+                         option</a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="pg_furth_lcc.htm#SCAN_Option"><code>SCAN</code>
+                         option</a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="pg_furth_lcc.htm#BREAK_WLCC"><code>BREAK</code>
+                         option</a></p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>The syntax for a <em>logical-expression</em> is as follows:
+      </p> 
+           
+           
+      <table border="0" class="syntax" cellpadding="3"> 
+                
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td rowspan="2"> <code class="keyword">[NOT]</code> 
+               </td> 
+                       
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/cbo2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                       
+               <td rowspan="2"> 
+                  
+                  <p class="mini-list"> 
+                               <var>logical-condition-criterion</var><br>
+                               
+                               (<var>logical-expression</var>) 
+                              
+                  </p> 
+               </td> 
+                       
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/cbc2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                       
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/sbo2.gif" alt="" width="5" height="40"></p> 
+               </td> 
+                       
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/cbo2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                       
+               <td> <code class="keyword">OR</code> 
+               </td> 
+                       
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/cbc2.gif" alt="" width="6" height="38"></p> 
+               </td> 
+                       
+               <td rowspan="2"> <var>logical-expression</var>
+                           
+               </td> 
+                       
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/sbc2.gif" alt="" width="5" height="40"></p> 
+               </td> 
+                       
+               <td rowspan="2"> 
+                  
+                  <p><img src="../graphics/dot3.gif" alt="" width="12" height="4"></p> 
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td> <code class="keyword">AND</code> 
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <h4 class="floating-title"> Examples of Logical Expressions: </h4> 
+          <pre class="verbatim">FIND STAFF-VIEW WITH CITY = 'TOKYO'
+     WHERE BIRTH GT 19610101 AND SEX = 'F'
+IF NOT (#CITY = 'A' THRU 'E')</pre> 
+          <p>For information on comparing arrays in a logical expression, see
+              <a href="pg_furth_arithm.htm#Array_Processing">Processing of
+            Arrays</a>.
+      </p> 
+          
+      <p class="note"><strong>Note:</strong><br> If multiple logical-condition-criteria are connected with
+              <code>AND</code>, the evaluation terminates as soon as the first of these
+              criteria is not true.
+      </p> 
+          
+        
+       
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="pg_furth_lcc.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_furth_lcc.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_furth_lcc.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_furth-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_furth_ucom.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_furth_arithm.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

@@ -1,0 +1,918 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>Loop Processing</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="pg_furth_loop"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_furth_loop.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_furth_loop.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_furth-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_furth_condi.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_furth_break.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Programming Guide&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1> 
+               <a name="x313"></a> 
+               <a name="x314"></a> Loop Processing
+         </h1>
+      </div> 
+         
+         
+      <p>A processing loop is a group of statements which are executed repeatedly
+             until a stated condition has been satisfied, or as long as a certain condition
+             prevails.
+      </p> 
+         
+      <p>This document covers the following topics:</p>
+         
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_furth_loop.htm#proc_loops_use">Use of Processing Loops</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_loop.htm#Limiting_Database_Loops">Limiting Database Loops</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_loop.htm#Limiting_Non-Database_Loops_-_The_REPEAT_Statement">Limiting Non-Database Loops - REPEAT Statement</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_loop.htm#repeat_statem_exa">Example of REPEAT Statement</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_loop.htm#Terminating_a_Processing_Loop_-_The_ESCAPE_Statement">Terminating a Processing Loop - ESCAPE Statement</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_loop.htm#Loops_Within_Loops">Loops Within Loops</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_loop.htm#nested_find_exa">Example of Nested FIND Statements</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_loop.htm#Referencing_Statements_within_a_Program">Referencing Statements within a Program</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_loop.htm#referencing_line_nos_exa">Example of Referencing with Line Numbers</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_loop.htm#referencing_statem_exa">Example with Statement Reference Labels</a></p>
+         </li>
+      </ul> 
+        
+      <hr> 
+        
+      <div><a name="proc_loops_use"></a></div> 
+         
+      <h2> Use of Processing Loops </h2> 
+          
+          
+      <p>Processing loops can be subdivided into database loops and non-database
+              loops:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                   
+                  
+            <p class="initem"><strong>Database processing loops</strong><br> are those created automatically by Natural to process data selected
+                      from a database as a result of a <a href="../sm/read.htm"><code>READ</code></a>,
+                      <a href="../sm/find.htm"><code>FIND</code></a> or
+                      <a href="../sm/histogra.htm"><code>HISTOGRAM</code></a> statement.
+                      These statements are described in the section <a href="pg_dbms_ada.htm#pg_dbms_ada">Database Access</a>.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                   
+                  
+            <p class="initem"><strong>Non-database processing loops</strong><br> are initiated by the statements <a href="../sm/repeat.htm"><code>REPEAT</code></a>,
+                      <a href="../sm/for.htm"><code>FOR</code></a>,
+                      <a href="../sm/callfile.htm"><code>CALL FILE</code></a>,
+                      <a href="../sm/callloop.htm"><code>CALL LOOP</code></a>,
+                      <a href="../sm/sort.htm"><code>SORT</code></a>, and
+                      <a href="../sm/readwork.htm"><code>READ WORK FILE</code></a>.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>More than one processing loop may be active at the same time. Loops may
+              be embedded or nested within other loops which remain active (open).
+      </p> 
+          
+      <p>A processing loop must be explicitly closed with a corresponding
+              <code>END-...</code> statement (for example, <code>END-REPEAT</code>,
+              <code>END-FOR</code>)
+      </p> 
+          
+      <p>The <a href="../sm/sort.htm"><code>SORT</code></a>
+              statement, which invokes the sort program of the operating system, closes all
+              active processing loops and initiates a new processing loop.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_furth_loop.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Limiting_Database_Loops"></a></div> 
+         
+      <h2> 
+             <a name="x315"></a>Limiting Database Loops
+      </h2> 
+          
+          
+      <p>The following topics are covered below: </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="pg_furth_loop.htm#ways_of_limiting">Possible Ways of Limiting Database Loops</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_loop.htm#LT_Session_Parameter">LT Session Parameter</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_loop.htm#LIMIT_Statement">LIMIT Statement</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_loop.htm#Limit_Notation">Limit Notation</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="pg_furth_loop.htm#limit_setting_prio">Priority of Limit Settings</a></p>
+         </li>
+      </ul> 
+          
+         
+      <div><a name="ways_of_limiting"></a></div> 
+          
+      <h3> Possible Ways of Limiting Database Loops </h3> 
+           
+           
+      <p>With the statements <a href="../sm/read.htm"><code>READ</code></a>,
+               <a href="../sm/find.htm"><code>FIND</code></a> or
+               <a href="../sm/histogra.htm"><code>HISTOGRAM</code></a>, you have
+               three ways of limiting the number of repetitions of the processing loops
+               initiated with these statements:
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">using the session parameter <a href="pg_furth_loop.htm#LT_Session_Parameter"><code>LT</code></a>,
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">using a <a href="pg_furth_loop.htm#LIMIT_Statement"><code>LIMIT</code></a> statement,
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">or using a <a href="pg_furth_loop.htm#Limit_Notation">limit
+                          notation</a> in a
+                       <code>READ</code>/<code>FIND</code>/<code>HISTOGRAM</code> statement
+                       itself.
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+          
+         
+      <div><a name="LT_Session_Parameter"></a></div> 
+          
+      <h3> LT Session Parameter </h3> 
+           
+           
+      <p>With the system command <a href="../syscom/globals.htm"><code>GLOBALS</code></a>, you
+               can specify the session parameter <a href="../parms/lt.htm"><code>LT</code></a>, which limits the
+               number of records which may be read in a database processing loop.
+      </p> 
+           
+      <h4 class="floating-title"> Example: </h4> <pre class="command-input">GLOBALS LT=100</pre> 
+           <p>This limit applies to all <a href="../sm/read.htm"><code>READ</code></a>,
+               <a href="../sm/find.htm"><code>FIND</code></a> and
+               <a href="../sm/histogra.htm"><code>HISTOGRAM</code></a> statements
+               in the entire session.
+      </p> 
+           
+          
+         
+      <div><a name="LIMIT_Statement"></a></div> 
+          
+      <h3> LIMIT Statement </h3> 
+           
+           
+      <p>In a program, you can use the <a href="../sm/limit.htm"><code>LIMIT</code></a> statement to limit the
+               number of records which may be read in a database processing loop.
+      </p> 
+           
+      <h4 class="floating-title"> Example: </h4> 
+           <pre class="verbatim">LIMIT 100</pre> 
+           <p>The <code>LIMIT</code> statement applies to the remainder of the
+               program unless it is overridden by another <code>LIMIT</code> statement or
+               limit notation.
+      </p> 
+           
+          
+         
+      <div><a name="Limit_Notation"></a></div> 
+          
+      <h3> Limit Notation </h3> 
+           
+           
+      <p>With a <a href="../sm/read.htm"><code>READ</code></a>,
+               <a href="../sm/find.htm"><code>FIND</code></a> or
+               <a href="../sm/histogra.htm"><code>HISTOGRAM</code></a> statement
+               itself, you can specify the number of records to be read in parentheses
+               immediately after the statement name.
+      </p> 
+           
+      <h4 class="floating-title"> Example: </h4> 
+           <pre class="verbatim">READ (10) VIEWXYZ BY NAME</pre> 
+           <p>This limit notation overrides any other limit in effect, but applies
+               only to the statement in which it is specified.
+      </p> 
+           
+          
+         
+      <div><a name="limit_setting_prio"></a></div> 
+          
+      <h3> Priority of Limit Settings </h3> 
+           
+           
+      <p>If the limit set with the <a href="../parms/lt.htm"><code>LT</code></a> parameter is smaller
+               than a limit specified with a <a href="../sm/limit.htm"><code>LIMIT</code></a> statement or a limit
+               notation, the <code>LT</code> limit has priority over any of these
+               other limits.
+      </p> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_furth_loop.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Limiting_Non-Database_Loops_-_The_REPEAT_Statement"></a></div> 
+         
+      <h2> 
+             <a name="x316"></a>Limiting Non-Database Loops - REPEAT Statement 
+      </h2> 
+          
+          
+      <p>Non-database processing loops begin and end based on logical condition
+              criteria or some other specified limiting condition.
+      </p> 
+          
+      <p>The <a href="../sm/repeat.htm"><code>REPEAT</code></a>
+              statement is discussed here as representative of a non-database loop
+              statement.
+      </p> 
+          
+      <p>With the <code>REPEAT</code> statement, you specify one or more
+              statements which are to be executed repeatedly. Moreover, you can specify a
+              logical condition, so that the statements are only executed either until or as
+              long as that condition is met. For this purpose you use an
+              <a href="../sm/repeat.htm#UNTIL"><code>UNTIL</code></a> or
+              <a href="../sm/repeat.htm#WHILE"><code>WHILE</code></a>
+              clause.
+      </p> 
+          
+      <p>If you specify the logical condition</p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">in an <code>UNTIL</code> clause, the <code>REPEAT</code> loop will
+                      continue <em>until</em> the logical condition is met;
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">in a <code>WHILE</code> clause, the <code>REPEAT</code> loop will
+                      continue <em>as long as</em> the logical condition remains true.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>If you specify <em>no</em> logical condition, the <code>REPEAT</code>
+              loop must be exited with one of the following statements:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../sm/escape.htm"><code>ESCAPE</code></a>
+                      terminates the execution of the processing loop and continues processing
+                      outside the loop (see
+                      <a href="pg_furth_loop.htm#Terminating_a_Processing_Loop_-_The_ESCAPE_Statement">below</a>).
+            </p>
+                  
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../sm/stop.htm"><code>STOP</code></a> stops the
+                      execution of the entire Natural application.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../sm/terminat.htm"><code>TERMINATE</code></a>
+                      stops the execution of the Natural application and also ends the Natural
+                      session.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_furth_loop.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="repeat_statem_exa"></a></div> 
+         
+      <h2> Example of REPEAT Statement </h2> 
+          
+          <pre class="verbatim">
+** Example 'REPEAX01': REPEAT
+************************************************************************
+DEFINE DATA LOCAL
+1 MYVIEW VIEW OF EMPLOYEES
+  2 NAME
+  2 SALARY (1:1)
+*
+1 #PAY1    (N8)
+END-DEFINE
+*
+READ (5) MYVIEW BY NAME WHERE SALARY (1) = 30000 THRU 39999
+  MOVE SALARY (1) TO #PAY1
+  /*
+  REPEAT WHILE #PAY1 LT 40000
+    MULTIPLY #PAY1 BY 1.1
+    DISPLAY NAME (IS=ON) SALARY (1)(IS=ON) #PAY1
+  END-REPEAT
+  /*
+  SKIP 1
+END-READ
+END
+</pre> 
+          <p>Output of Program REPEAX01:</p> <pre class="system-output">
+Page      1                                                  04-11-11  14:15:54
+                                                                                 
+        NAME           ANNUAL     #PAY1                                  
+                       SALARY                                            
+-------------------- ---------- ---------                                
+                                                                           
+ADKINSON                  34500     37950                                
+                                    41745                                
+                                                                           
+                          33500     36850                                
+                                    40535                                
+                                                                           
+                          36000     39600                                
+                                    43560                                
+                                                                           
+AFANASSIEV                37000     40700                                
+                                                                           
+ALEXANDER                 34500     37950                                
+                                    41745
+</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_furth_loop.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Terminating_a_Processing_Loop_-_The_ESCAPE_Statement"></a></div> 
+         
+      <h2> 
+             <a name="x317"></a>Terminating a Processing Loop - ESCAPE Statement 
+      </h2> 
+          
+          
+      <p>The <a href="../sm/escape.htm"><code>ESCAPE</code></a>
+              statement is used to terminate the execution of a processing loop based on a
+              logical condition.
+      </p> 
+          
+      <p>You can place an <code>ESCAPE</code> statement within loops in
+              conditional <a href="../sm/if.htm"><code>IF</code></a> statement
+              groups, in break processing statement groups (<a href="../sm/atenddat.htm"><code>AT END OF DATA</code></a>,
+              <a href="../sm/atendpag.htm"><code>AT END OF PAGE</code></a>,
+              <a href="../sm/atbreak.htm"><code>AT BREAK</code></a>), or as a
+              stand-alone statement implementing the basic logical conditions of a
+              non-database loop.
+      </p> 
+          
+      <p>The <code>ESCAPE</code> statement offers the options <code>TOP</code>
+              and <code>BOTTOM</code>, which determine where processing is to continue after
+              the processing loop has been left via the <code>ESCAPE</code> statement:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../sm/escape.htm#ESCAPE_TOP"><code>ESCAPE
+                     TOP</code></a> is used to continue processing at the top of the
+                      processing loop.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../sm/escape.htm#ESCAPE_BOTTOM"><code>ESCAPE
+                     BOTTOM</code></a> is used to continue processing with the first
+                      statement following the processing loop.
+            </p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>You can specify several <code>ESCAPE</code> statements within the same
+              processing loop.
+      </p> 
+          
+      <p>For further details and examples of the <a href="../sm/escape.htm"><code>ESCAPE</code></a> statement, see the
+              <cite>Statements</cite> documentation.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_furth_loop.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Loops_Within_Loops"></a></div> 
+         
+      <h2> 
+             <a name="x318"></a>Loops Within Loops 
+      </h2> 
+          
+          
+      <p>A database statement can be placed within a database processing loop
+              initiated by another database statement. When database loop-initiating
+              statements are embedded in this way, a "hierarchy" of loops is
+              created, each of which is processed for each record which meets the selection
+              criteria.
+      </p> 
+          
+      <p>Multiple levels of loops can be embedded. For example, non-database
+              loops can be nested one inside the other. Database loops can be nested inside
+              non-database loops. Database and non-database loops can be nested within
+              conditional statement groups.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_furth_loop.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="nested_find_exa"></a></div> 
+         
+      <h2> Example of Nested FIND Statements </h2> 
+          
+          
+      <p>The following program illustrates a hierarchy of two loops, with one
+              <a href="../sm/find.htm"><code>FIND</code></a> loop nested or
+              embedded within another <code>FIND</code> loop.
+      </p> 
+          <pre class="verbatim">
+** Example 'FINDX06': FIND (two FIND statements nested)
+************************************************************************
+DEFINE DATA LOCAL
+1 EMPLOY-VIEW VIEW OF EMPLOYEES
+  2 CITY
+  2 NAME
+  2 PERSONNEL-ID
+1 VEH-VIEW VIEW OF VEHICLES
+  2 MAKE
+  2 PERSONNEL-ID
+END-DEFINE
+*
+FND1. FIND EMPLOY-VIEW WITH CITY = 'NEW YORK' OR = 'BEVERLEY HILLS'
+  FIND (1) VEH-VIEW WITH PERSONNEL-ID = PERSONNEL-ID (FND1.)
+    DISPLAY NOTITLE NAME CITY MAKE
+  END-FIND
+END-FIND
+END
+</pre> 
+          <p>The above program selects data from multiple files. The outer
+              <code>FIND</code> loop selects from the EMPLOYEES file all persons who live in New York or
+              Beverley Hills. For each record selected in the outer loop, the inner
+              <code>FIND</code> loop is entered, selecting the car data of those persons from
+              the VEHICLES file.
+      </p> 
+          
+      <p>Output of Program FINDX06:</p> <pre class="system-output">
+        NAME                 CITY                 MAKE
+-------------------- -------------------- --------------------
+
+RUBIN                NEW YORK             FORD
+OLLE                 BEVERLEY HILLS       GENERAL MOTORS
+WALLACE              NEW YORK             MAZDA
+JONES                BEVERLEY HILLS       FORD
+SPEISER              BEVERLEY HILLS       GENERAL MOTORS
+</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_furth_loop.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Referencing_Statements_within_a_Program"></a></div> 
+         
+      <h2> 
+             <a name="x319"></a>Referencing Statements within a Program 
+      </h2> 
+          
+          
+      <p>Statement reference notation is used for the following purposes:</p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem">Referring to previous statements in a program in order to specify
+                      processing over a particular range of data.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Overriding Natural's <a href="pg_defi_dv.htm#default_ref_db_fields">default referencing</a>.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">Documenting.</p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>Any Natural statement which causes a processing loop to be initiated
+              and/or causes data elements in a database to be accessed. For example, the
+              following statements can be referenced:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../sm/read.htm"><code>READ</code></a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../sm/find.htm"><code>FIND</code></a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../sm/histogra.htm"><code>HISTOGRAM</code></a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../sm/sort.htm"><code>SORT</code></a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../sm/repeat.htm"><code>REPEAT</code></a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../sm/for.htm"><code>FOR</code></a></p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>When multiple processing loops are used in a program, reference notation
+              is used to uniquely identify the particular database field to be processed by
+              referring back to the statement that originally accessed that field in the
+              database.
+      </p> 
+          
+      <p>If a field can be referenced in such a way, this is indicated in the
+              <a href="../sm/synsym.htm#statem_ref_perm">Referencing
+                 Permitted</a> column of the
+              <a href="../sm/synsym.htm#Operand_Definition_Table">Operand
+            Definition Table</a> in the corresponding statement
+              description (in the <cite>Statements</cite> documentation). See also
+              <a href="pg_defi_dv.htm#pg_defi_dv">User-Defined
+            Variables</a>, <a href="pg_defi_dv.htm#SR_Notation_r">Referencing of Database Fields Using
+            (<var>r</var>) Notation</a>.
+      </p> 
+          
+      <p>In addition, reference notation can be specified in some statements. For
+              example:
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../sm/atstart.htm"><code>AT START OF
+                     DATA</code></a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../sm/atenddat.htm"><code>AT END OF
+                     DATA</code></a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../sm/atbreak.htm"><code>AT
+                     BREAK</code></a></p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem"> <a href="../sm/escape.htm#ESCAPE_BOTTOM"><code>ESCAPE
+                     BOTTOM</code></a></p> 
+                 
+         </li> 
+             
+      </ul> 
+          
+      <p>Without reference notation, an <code>AT START OF DATA</code>, <code>AT
+            END OF DATA</code> or <code>AT BREAK</code> statement will be related to the
+              <em>outermost</em> active <code>READ</code>, <code>FIND</code>,
+              <code>HISTOGRAM</code>, <code>SORT</code> or <code>READ WORK FILE</code> loop.
+              With reference notation, you can relate it to another active processing
+              loop.
+      </p> 
+          
+      <p>If reference notation is specified with an
+              <a href="../sm/escape.htm#ESCAPE_BOTTOM_ref"><code>ESCAPE
+               BOTTOM</code></a> statement, processing will continue with the first
+              statement following the processing loop identified by the reference
+              notation.
+      </p> 
+          
+      <p>Statement reference notation may be specified in the form of a
+              <em>statement reference label</em> or a <em>source-code line number</em>.
+      </p> 
+          
+      <ul> 
+              
+         <li> 
+                   
+                  
+            <p class="initem"><strong> 
+                         <a name="x320"></a>Statement reference label</strong><br>A statement reference label consists of several characters, the last
+                      of which must be a period (.). The period serves to identify the entry as a
+                      label.
+            </p> 
+                  
+            <p class="initem">A statement that is to be referenced is marked with a label by placing
+                      the label at the beginning of the line that contains the statement. For
+                      example:
+            </p> 
+                  <pre class="verbatim">
+0030 ... 
+0040 <strong>READ1.</strong> READ VIEWXYZ BY NAME 
+0050 ...
+</pre> 
+                  <p class="initem">In the statement that references the marked statement, the label is
+                      placed in parentheses at the location indicated in the statement's syntax
+                      diagram (as described in the <a href="../sm/sm-over.htm">Statements</a>
+                      documentation). For example:
+            </p> 
+                  <pre class="verbatim">
+AT BREAK <strong>(READ1.)</strong> OF NAME
+</pre> 
+                 </li> 
+              
+         <li> 
+                   
+                  
+            <p class="initem"><strong>Source-code line number</strong><br>If source-code line numbers are used for referencing, they must be
+                      specified as 4-digit numbers (leading zeros must not be omitted) and in
+                      parentheses. For example:
+            </p> 
+                  <pre class="verbatim">
+AT BREAK <strong>(0040)</strong> OF NAME
+</pre> 
+                  <p class="initem">In a statement where the label/line number relates a particular field
+                      to a previous statement, the label/line number is placed in parentheses after
+                      the field name. For example:
+            </p> 
+                  <pre class="verbatim">
+DISPLAY NAME <strong>(READ1.)</strong> JOB-TITLE <strong>(READ1.)</strong> MAKE MODEL
+</pre> 
+                 </li> 
+             
+      </ul> 
+          
+      <p>Line numbers and labels can be used interchangeably.</p> 
+          
+      <p>See also <a href="pg_defi_dv.htm#pg_defi_dv">User-Defined
+            Variables</a>, <a href="pg_defi_dv.htm#SR_Notation_r">Referencing of Database Fields Using
+            (<var>r</var>) Notation</a>.
+      </p> 
+          
+        
+        
+      <div class="noprint">
+         <p><a href="pg_furth_loop.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="referencing_line_nos_exa"></a></div> 
+         
+      <h2> Example of Referencing with Line Numbers </h2> 
+          
+          
+      <p>The following program uses source code line numbers (4-digit numbers in
+              parentheses) for referencing.
+      </p> 
+          
+      <p>In this particular example, the line numbers refer to the statements
+              that would be referenced in any case by default.
+      </p> 
+          <pre class="verbatim">
+0010 ** Example 'LABELX01': Labels for READ and FIND loops (line numbers)
+0020 ************************************************************************
+0030 DEFINE DATA LOCAL
+0040 1 MYVIEW1 VIEW OF EMPLOYEES
+0050   2 NAME
+0060  2 FIRST-NAME
+0070  2 PERSONNEL-ID
+0080 1 MYVIEW2 VIEW OF VEHICLES
+0090  2 PERSONNEL-ID
+0100  2 MAKE
+0110 END-DEFINE
+0120 *
+0130 LIMIT 15
+<strong>0140</strong> READ MYVIEW1 BY NAME STARTING FROM 'JONES'
+<strong>0150</strong>  FIND MYVIEW2 WITH PERSONNEL-ID = PERSONNEL-ID <strong>(0140)</strong>
+0160    IF NO RECORDS FOUND
+0170      MOVE '***NO CAR***' TO MAKE
+0180    END-NOREC
+0190    DISPLAY NOTITLE NAME       <strong>(0140)</strong> (IS=ON)
+0200                    FIRST-NAME <strong>(0140)</strong> (IS=ON)
+0210                    MAKE       <strong>(0150)</strong>
+0220  END-FIND /* <strong>(0150)</strong>
+0230 END-READ   /* <strong>(0140)</strong>
+0240 END
+</pre> 
+          
+        
+        <div class="noprint">
+         <p><a href="pg_furth_loop.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="referencing_statem_exa"></a></div> 
+         
+      <h2> Example with Statement Reference Labels </h2> 
+          
+          
+      <p>The following example illustrates the use of statement reference
+              labels.
+      </p> 
+          
+      <p>It is identical to the previous program, except that labels are used for
+              referencing instead of line numbers.
+      </p> 
+          <pre class="verbatim">
+** Example 'LABELX02': Labels for READ and FIND loops (user labels)
+************************************************************************
+DEFINE DATA LOCAL
+1 MYVIEW1 VIEW OF EMPLOYEES
+  2 NAME
+  2 FIRST-NAME
+  2 PERSONNEL-ID
+1 MYVIEW2 VIEW OF VEHICLES
+  2 PERSONNEL-ID
+  2 MAKE
+END-DEFINE
+*
+LIMIT 15
+<strong>RD.</strong> READ MYVIEW1 BY NAME STARTING FROM 'JONES'
+  <strong>FD.</strong> FIND MYVIEW2 WITH PERSONNEL-ID = PERSONNEL-ID <strong>(RD.)</strong>
+    IF NO RECORDS FOUND
+      MOVE '***NO CAR***' TO MAKE
+    END-NOREC
+    DISPLAY NOTITLE NAME       <strong>(RD.)</strong> (IS=ON)
+                    FIRST-NAME <strong>(RD.)</strong> (IS=ON)
+                    MAKE       <strong>(RD.)</strong>
+  END-FIND /* <strong>(RD.)</strong>
+END-READ   /* <strong>(RD.)</strong>
+END
+</pre> 
+          <p>Both programs produce the following output:</p> <pre class="system-output">
+        NAME              FIRST-NAME              MAKE
+-------------------- -------------------- --------------------
+
+JONES                VIRGINIA             CHRYSLER
+                     MARSHA               CHRYSLER
+                                          CHRYSLER
+                     ROBERT               GENERAL MOTORS
+                     LILLY                FORD
+                                          MG
+                     EDWARD               GENERAL MOTORS
+                     LAUREL               GENERAL MOTORS
+                     KEVIN                DATSUN
+                     GREGORY              FORD
+JOPER                MANFRED              ***NO CAR***
+JOUSSELIN            DANIEL               RENAULT
+JUBE                 GABRIEL              ***NO CAR***
+JUNG                 ERNST                ***NO CAR***
+JUNKIN               JEREMY               ***NO CAR***
+KAISER               REINER               ***NO CAR***
+KANT                 HEIKE                ***NO CAR***
+</pre> 
+          
+        
+       <div class="noprint">
+         <div class="nospy">
+            <p><a href="pg_furth_loop.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../pg/pg_furth_loop.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/pg/pg_furth_loop.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_furth-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_furth_condi.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="pg_furth_break.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>

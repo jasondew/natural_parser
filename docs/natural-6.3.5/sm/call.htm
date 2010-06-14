@@ -1,0 +1,2937 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta name="generator" content="Sagdoc XSL Stylesheets">
+      <link rel="stylesheet" type="text/css" href="../general/style2.css"><script language="JavaScript" src="../general/selbox.js"></script><script type="text/javascript" language="javascript">
+         <!--
+window.name = 'contents';
+//--></script><title>CALL</title>
+   </head>
+   <body bgcolor="#FFFFFF" background="../graphics/bar.png" style="margin-left: 20px;">
+      <div><a name="call" id="16758"></a></div>
+      <div class="noprint">
+         <div class="nospytext">
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td colspan="2" class="topline"><a name="Top"></a>&nbsp;<img src="../graphics/natux_logo.png"></td>
+                  <td class="topline" align="right"><img src="../graphics/sag_logo.png">&nbsp;
+                  </td>
+               </tr>
+               <tr>
+                  <td class="header" nowrap><img src="../graphics/blank.png" width="3" height="10"></td>
+                  <td class="header"><img src="../graphics/blank.png" width="3">Version&nbsp;6.3.5 for UNIX
+                  </td>
+                  <td class="toplinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../sm/call.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/sm/call.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="sm-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="before.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="callfile.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div class="nospytext" style="margin-top:0.25in;">
+         <div><span class="module">&nbsp;&#8212;&nbsp;&nbsp;Statements&nbsp;&nbsp;&#8212;</span></div>
+      </div> 
+        
+      <div class="nospytext">
+         <h1>CALL 
+               <a name="x36"></a></h1>
+      </div> 
+         
+          
+          
+      <table border="0" class="syntax" cellpadding="3">  
+              
+         <tbody align="left" valign="top"> 
+                  
+            <tr> 
+                      
+               <td nowrap> <a href="call.htm#Function_call">
+                      <code class="keyword">CALL</code></a> [<a href="call.htm#INTERFACE4"><code class="keyword">INTERFACE4</code></a>] &nbsp;
+                          <a href="call.htm#Program_Name_operand1_call">
+                             <var>operand1</var></a> &nbsp;
+                          <a href="call.htm#Parameters_operand2_call">[<code class="keyword">USING</code>] &nbsp; [<var>operand2</var></a>]
+                          <a href="synsym.htm#ellipsis">... 128</a></td> 
+                     
+            </tr> 
+                 
+         </tbody> 
+             
+      </table> 
+          
+         
+      <p>This document covers the following topics:</p>
+         
+      <ul>
+         <li>
+            <p class="initem"><a href="call.htm#Function_call">Function</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="call.htm#syntax_descr_call">Syntax Description</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="call.htm#Return_Code">Return Code</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="call.htm#user_exits_under_UNIX">User Exits</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="call.htm#INTERFACE4">INTERFACE4</a></p>
+         </li>
+      </ul> 
+         
+      <p>For an explanation of the symbols used in the syntax diagram, see
+             <a href="synsym.htm#Syntax_Symbols">Syntax
+            Symbols</a>.
+      </p> 
+         
+      <p>Related Statements: <a href="callfile.htm#callfile">CALL FILE</a> |
+             <a href="callloop.htm#callloop">CALL LOOP</a> |
+             <a href="callnat.htm#callnat">CALLNAT</a> | <a href="definesu.htm#definesu">DEFINE SUBROUTINE</a> | <a href="escape.htm#escape">ESCAPE</a> | <a href="fetch.htm#fetch">FETCH</a> | <a href="perform.htm#perform">PERFORM</a></p> 
+         
+      <p>Belongs to Function Group:
+             <a href="stmt.htm#Invoking_Programs_and_Routines">Invoking Programs
+            and Routines</a></p> 
+        
+      <hr> 
+        
+      <div><a name="Function_call"></a></div> 
+         
+      <h2>Function</h2> 
+          
+          
+      <p>The <code>CALL</code> statement is used to call an external
+              program or
+              function written in another standard programming language from a
+              Natural program and then return to the next statement after the
+              <code>CALL</code> statement.
+      </p> 
+          
+      <p>The called program or function may be written in any programming
+              language which supports a standard CALL interface. Multiple <code>CALL</code>
+              statements to one or more external program or functions may be specified.
+      </p> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="call.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="syntax_descr_call"></a></div> 
+         
+      <h2>Syntax Description</h2> 
+          
+          
+      <p>Operand Definition Table:</p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                 
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th>Operand</th> 
+                       
+               <th colspan="5" align="center">
+                  <a href="synsym.htm#statem_poss_struct">Possible Structure</a></th> 
+                       
+               <th colspan="13" align="center">
+                  <a href="synsym.htm#statem_poss_form">Possible Formats</a></th> 
+                       
+               <th align="center"> <a href="synsym.htm#statem_ref_perm">Referencing
+                     Permitted</a></th> 
+                       
+               <th align="center"> <a href="synsym.htm#statem_dyn_def">Dynamic
+                     Definition</a></th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td><var>operand1</var></td> 
+                       
+               <td>C</td> 
+                       
+               <td>S</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>A</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td align="center">&nbsp;</td> 
+                       
+               <td align="center">&nbsp;</td> 
+                       
+               <td align="center">yes</td> 
+                       
+               <td align="center">no</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td><var>operand2</var></td> 
+                       
+               <td>C</td> 
+                       
+               <td>S</td> 
+                       
+               <td>A</td> 
+                       
+               <td>G</td> 
+                       
+               <td>&nbsp;</td> 
+                       
+               <td>A</td> 
+                       
+               <td>U</td> 
+                       
+               <td>N</td> 
+                       
+               <td>P</td> 
+                       
+               <td>I</td> 
+                       
+               <td>F</td> 
+                       
+               <td>B</td> 
+                       
+               <td>D</td> 
+                       
+               <td>T</td> 
+                       
+               <td>L</td> 
+                       
+               <td>C</td> 
+                       
+               <td align="center">G</td> 
+                       
+               <td align="center">&nbsp;</td> 
+                       
+               <td align="center">yes</td> 
+                       
+               <td align="center">yes</td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+      <p>Syntax Element Description:</p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th>INTERFACE4</th> 
+                       
+               <td> The optional keyword <code>INTERFACE4</code> specifies the type
+                  of the interface that is used for the call of the external program. See the
+                           section <a href="call.htm#INTERFACE4">INTERFACE4</a> below.
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th> <a name="Program_Name_operand1_call"></a>
+                   <var>operand1</var></th> 
+                       
+               <td> 
+                  
+                  
+                  <div><strong class="floating-title"> Name of Called
+                                  Function:</strong></div> 
+                           
+                  <p>The name of the function to be called
+                               (<var>operand1</var>) can be specified as a constant or - if
+                     different functions are to be called dependent on program logic -
+                            as an alphanumeric variable of length 1 to 8. A function name must be
+                               placed left-justified in the variable.
+                  </p>
+               </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <th nowrap> [USING]
+                  <a name="Parameters_operand2_call"></a>
+                           <var>operand2</var></th> 
+                       
+               <td> 
+                  
+                  <div><strong class="floating-title"> Parameters:</strong></div> 
+                           
+                  <p>The <code>CALL</code> statement may contain up to 128 parameters
+                               (<var>operand2</var>). One address is passed in the parameter list for each parameter
+                               field specified.
+                  </p> 
+                           
+                  <p>If a group name is used, the group is converted to individual
+                               fields; that is, if a user wishes to specify the beginning address of a group,
+                               the first field of the group must be specified.
+                  </p> 
+                            
+                           
+                  <p class="note"><strong>Note:</strong><br> If an application-independent variable (AIV) or
+                     context variable is passed as a parameter to a user exit, the following
+                               restriction applies: if the user exit invokes a Natural subprogram which
+                               creates a new AIV or context variable, the parameter is invalid after the
+                               return from the subprogram. This is true regardless of whether the new
+                               AIV/context variable is created by the subprogram itself or by another object
+                               invoked directly or indirectly by the subprogram.
+                  </p>
+               </td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+          
+        
+        
+      <div class="noprint">
+         <p><a href="call.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="Return_Code"></a></div> 
+         
+      <h2>Return Code</h2> 
+          
+          
+      <p>The condition code of any called function may be obtained by using the Natural system
+              function <a href="../func/func_ret.htm"><code>RET</code></a>
+              (Return Code Function).
+      </p> 
+          
+      <h4 class="floating-title"> Example:</h4> 
+          <pre class="verbatim">... 
+RESET #RETURN(B4) 
+CALL 'PROG1' 
+IF RET ('PROG1') &gt; #RETURN 
+  WRITE 'ERROR OCCURRED IN PROGRAM1' 
+END-IF 
+...</pre> 
+          
+        
+        
+        
+        
+        
+        
+        
+        
+        <div class="noprint">
+         <p><a href="call.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="user_exits_under_UNIX"></a></div> 
+         
+      <h2>User Exits</h2> 
+          
+          
+      <p>User exits are needed to make external functions available and to access
+              operating-system interfaces that are not available to Natural.
+      </p> 
+          
+      <p>The user exits can be placed either in a shared library and thus linked
+              dynamically, or in a library that is linked statically to the Natural
+              nucleus.
+      </p> 
+          
+      <p>If they are placed in shared libraries, it is not necessary to relink
+              Natural whenever a user exit is modified. This makes the development and
+              testing of user exits a lot easier. This feature is available under all
+              operating systems that support shared libraries. Under all operating systems,
+              it is possible to place user exits in a library that is linked to the Natural
+              nucleus; that is, to statically link the user exits with the Natural prelinked
+              object <cite>natraw.o</cite>.
+      </p> 
+          
+      <p>A user exit is added to Natural in three steps:</p> 
+          
+      <ol> 
+              
+         <li> 
+                  
+            <p class="initem">A jump table has to be created that allows Natural to associate the
+                      name of a function invoked by a <code>CALL</code> statement with the address of
+                      the function.
+            </p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">The functions that were put into the jump table must be written.</p> 
+                 
+         </li> 
+              
+         <li> 
+                  
+            <p class="initem">In the case of a dynamic link, the shared library that contains the
+                      user exits has to be rebuilt. In the case of a static link, the jump table and
+                      the external functions must be linked together with the prelinked Natural
+                      nucleus, to produce an executable Natural nucleus that supports the external
+                      functions.
+            </p> 
+                 
+         </li> 
+             
+      </ol> 
+          
+      <p>The following topics are covered
+              below:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="call.htm#step_1_defining_the_jump_table">Step 1 - Defining the Jump Table</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="call.htm#step_2_writing_the_external_functions">Step 2 - Writing the External Functions</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="call.htm#step_3_compiling_and_linking">Step 3 - Compiling and Linking</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="call.htm#how_to_build_a_shared_library">How to Build a Shared Library</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="call.htm#using_the_shared_library">Using the Shared Library</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="call.htm#how_to_generate_a_static_nucleus">How to Generate a Static Nucleus</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="call.htm#example_programs">Example Programs</a></p>
+         </li>
+      </ul> 
+         
+      <div><a name="step_1_defining_the_jump_table"></a></div> 
+          
+      <h3>Step 1 - Defining the Jump Table</h3> 
+           
+           
+      <p>A sample of a jump table - <cite>jumptab.c</cite> - can be
+               found in the directory:
+      </p> 
+           
+      <p><cite>$NATDIR/$NATVERS/samples/sysexuex</cite></p> 
+           
+          
+         
+      <div><a name="step_2_writing_the_external_functions"></a></div> 
+          
+      <h3>Step 2 - Writing the External Functions</h3> 
+           
+           
+      <p>Each function has three parameters and returns a long integer. A
+               function prototype should be as follows:
+      </p> 
+           <pre class="verbatim">NATFCT myadd  (nparm, parmptr, parmdec)
+
+
+WORD  nparm; 
+BYTE  **parmptr; 
+FINFO  *parmdec;</pre> 
+            
+            <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="10%">
+            <col width="87%">
+         </colgroup> 
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <th>nparm</th> 
+                        
+               <td>16 bit unsigned short value, containing the total number of
+                  transferred operands (operand2).
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th>parmptr</th> 
+                        
+               <td>Array of pointers, pointing to the transferred
+                  operands.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <th>parmdec</th> 
+                        
+               <td>Array of field information for each transferred
+                  operand.
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>The data type FINFO is defined as follows:</p> 
+           <pre class="verbatim">typedef struct { 
+  unsigned char     TypeVar;      /* type of variable                       */ 
+  unsigned char     pb2;          /* if type == ('D', 'N', 'P' or 'T') ==&gt;  */ 
+                                  /*    total num of digits                 */ 
+                                  /* else                                   */ 
+  union {                         /*    unused                              */ 
+    unsigned char   pb[2];        /* if type == ('D', 'N', 'P' or 'T') ==&gt;  */ 
+    unsigned short  lfield;       /*    pb[0] = #dig before.dec.point       */ 
+  } flen;                         /*    pb[1] = #dig  after.dec.point       */ 
+                                  /* else                                   */ 
+                                  /*    lfield = length of field            */ 
+} FINFO;</pre> 
+           <p>Next, the module containing the external functions must be written. A
+               sample function - <cite>mycadd.c</cite> - can be found in the
+               directory: 
+      </p> 
+           
+      <p><cite>$NATDIR/$NATVERS/samples/sysexuex</cite> 
+      </p> 
+           
+          
+         
+      <div><a name="step_3_compiling_and_linking"></a></div> 
+          
+      <h3>Step 3 - Compiling and Linking</h3> 
+           
+           
+      <p>The file <cite>natuser.h</cite>, which is included by the
+               sample program, is delivered with Natural. It contains declarations for the
+               data types BYTE, WORD and the FINFO structure, that is, the description of the
+               internal representation of each passed parameter.
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">In the case of dynamically linked user exits, the shared library
+                       containing the user exits has to be rebuilt.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">In the case of statically linked user exits, the Natural nucleus has
+                       to be relinked.
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>For these purposes, it is strongly recommended to use the sample
+               makefiles supplied by Software AG, as they already contain the necessary
+               compiler and linker parameters. The sample makefiles can be found in the
+               directory:
+      </p> 
+           
+      <p><cite>$NATDIR/$NATVERS/samples/sysexuex</cite></p> 
+           
+      <p> For further information, see the following sections and the
+               explanations in the makefiles themselves.
+      </p> 
+           
+          
+         
+      <div><a name="how_to_build_a_shared_library"></a></div> 
+          
+      <h3>How to Build a Shared Library</h3> 
+           
+           
+      <ol> 
+               
+         <li> 
+                   
+            <p class="initem">From the example directory, which is contained in
+                       <cite>$NATDIR/$NATVERS/samples/sysexuex</cite>, copy the following
+                       files into your work directory:
+            </p> 
+                   
+            <ul style="margin-top: 0px; margin-bottom: 0px;"> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem"><cite>Makedyn</cite></p> 
+                          
+               </li> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem"><cite> jumptab.c </cite></p> 
+                          
+               </li> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem"><cite>ncuxinit.c</cite></p> 
+                          
+               </li> 
+                      
+            </ul> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Copy the C source files which contain your user exits into the same
+                       work directory.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Edit the file <cite>jumptab.c</cite> to include the names and
+                       function pointers for your user exits. To do so, you add in Section 2 the
+                       external declarations of your user exits, and in Section 3 you add the
+                       name/function-pointer pairs for your user exits. You might consider cutting and
+                       pasting the appropriate sections from your pre-2.2 version of
+                       <cite>jumptab.c</cite>.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Edit the makefile as follows: </p> 
+                   
+            <ul style="margin-top: 0px; margin-bottom: 0px;"> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem">Specify the names of the object files containing the user exits in
+                               the following line:
+                  </p> 
+                           <pre class="verbatim">USEROBJS =</pre> 
+                          </li> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem">Specify the name of the resulting shared library in the following
+                               line:
+                  </p> 
+                           <pre class="verbatim">USERLIB =</pre> 
+                          </li> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem">If you need to include private header files, specify the
+                               directories containing them in the following line: 
+                  </p> 
+                           <pre class="verbatim">INCDIR =</pre> 
+                          </li> 
+                      
+            </ul> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">To remove all unneeded files, issue the command:</p> 
+                   <pre class="verbatim">make -f Makedyn clean</pre> 
+                  </li> 
+               
+         <li> 
+                   
+            <p class="initem">To compile and link your shared library, issue the command:</p> 
+                   <pre class="verbatim">make -f Makedyn lib</pre> 
+                  </li> 
+              
+      </ol> 
+          
+      <div><a name="using_the_shared_library"></a></div> 
+          
+      <h3>Using the Shared Library</h3> 
+           
+           
+      <p>Set the environment variable NATUSER to the libraries you want to use.
+               For example:
+      </p> 
+           <pre class="verbatim">setenv NATUSER $NATDIR/$NATVERS/bin/<var>library-name</var></pre> 
+           <p>You must specify a full qualified path name for the shared library.</p>
+           
+           
+      <p>You can specify more than one path if you delimit them with a colon (:)
+               like the UNIX <code>PATH</code> variable.
+      </p> 
+           
+      <p class="note"><strong>Note:</strong><br>The libraries are searched in the order in which they are specified
+               in NATUSER. This means that if two libraries contain a function of the same
+               name, Natural always calls the function in the library which is specified first
+               in NATUSER.
+      </p> 
+           
+      <h4 class="floating-title"> Example:</h4> 
+           
+      <p>See the sample user exit function in
+               <cite>$NATDIR/$NATVERS/samples/sysexuex</cite>.
+      </p> 
+          
+      <div><a name="how_to_generate_a_static_nucleus"></a></div> 
+          
+      <h3>How to Generate a Static Nucleus</h3> 
+           
+           
+      <ol> 
+               
+         <li> 
+                   
+            <p class="initem">From the example directory, which is contained in
+                       <cite>$NATDIR/$NATVERS/samples/sysexuex</cite>, copy the following
+                       files into your work directory:
+            </p> 
+                   
+            <ul style="margin-top: 0px; margin-bottom: 0px;"> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem"><cite>Makefile </cite></p> 
+                          
+               </li> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem"><cite>jumptab.c</cite></p> 
+                          
+               </li> 
+                      
+            </ul> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Copy the C source files which contain your user exits into the same
+                       work directory.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Edit the file <cite>jumptab.c</cite> to include the names and
+                       function pointers for your user exits. To do so, you add in Section 2 the
+                       external declarations of your user exits, and in Section 3 you add the
+                       name/function-pointer pairs for your user exits. You might consider cutting and
+                       pasting the appropriate sections from your pre-2.2 version of
+                       <cite>jumptab.c</cite>.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Edit the makefile as follows:</p> 
+                   
+            <ul style="margin-top: 0px; margin-bottom: 0px;"> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem">Specify the names of the object files containing the user exits in
+                               the following line:
+                  </p> 
+                           <pre class="verbatim">USEROBJS = </pre> 
+                          </li> 
+                       
+               <li class="nesteditem"> 
+                           
+                  <p class="initem">If you need to include private header files, specify the
+                               directories containing them in the following line:
+                  </p> 
+                           <pre class="verbatim">INCDIR =</pre> 
+                          </li> 
+                      
+            </ul> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">Issue the command <code>make</code> to get information about further
+                       processing options.
+            </p> 
+                  
+         </li> 
+              
+      </ol> 
+           
+      <h4 class="floating-title"> Example:</h4> 
+           
+      <p>See the sample user exit function in
+               <cite>$NATDIR/$NATVERS/samples/sysexuex</cite>.
+      </p> 
+          
+      <div><a name="example_programs"></a></div> 
+          
+      <h3>Example Programs</h3> 
+           
+           
+      <p>After successful compilation and linking, the external programs can be
+               invoked from a Natural program. Corresponding Natural example programs are
+               provided in the library <code>SYSEXUEX</code>.
+      </p> 
+          
+        
+      <div class="noprint">
+         <p><a href="call.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+      </div>
+      <div><a name="INTERFACE4"></a></div> 
+         
+      <h2>INTERFACE4</h2> 
+          
+          
+      <p>The keyword <code>INTERFACE4</code> specifies the type of the interface
+              that is used for the call of the external program. This keyword is optional. If
+              this keyword is specified, the interface, which is defined as Interface4, is
+              used for the call of the external program.
+      </p> 
+          
+      <p>The following table lists the differences between the <code>CALL</code>
+              statement used with <code>INTERFACE4</code> and the one used without
+              <code>INTERFACE4</code>:
+      </p> 
+           
+           
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                 
+               
+         <thead align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <th>&nbsp;</th> 
+                       
+               <th>CALL statement without keyword INTERFACE4</th> 
+                       
+               <th>CALL statement with keyword INTERFACE4</th> 
+                      
+            </tr> 
+                  
+         </thead> 
+               
+         <tbody align="left" valign="top"> 
+                   
+            <tr> 
+                       
+               <td>Number of parameters possible</td> 
+                       
+               <td>128 </td> 
+                       
+               <td>32767 </td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>Maximum data size of one parameter</td> 
+                       
+               <td>65535</td> 
+                       
+               <td>1 GB</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>Retrieve array information</td> 
+                       
+               <td>no</td> 
+                       
+               <td>yes</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>Support of large and dynamic operands</td> 
+                       
+               <td>no</td> 
+                       
+               <td>yes</td> 
+                      
+            </tr> 
+                   
+            <tr> 
+                       
+               <td>Parameter access via API</td> 
+                       
+               <td>no</td> 
+                       
+               <td>yes</td> 
+                      
+            </tr> 
+                  
+         </tbody> 
+              
+      </table> 
+           
+           
+           
+          
+      <p>The following topics are covered
+              below:
+      </p>
+      <ul>
+         <li>
+            <p class="initem"><a href="call.htm#INTERFACE4_-_External_3GL_Program_Interface">INTERFACE4 - External 3GL Program Interface</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="call.htm#Operand_Structure_for_Interface4">Operand Structure for INTERFACE4</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="call.htm#INTERFACE4_-_Parameter_Access">INTERFACE4 - Parameter Access</a></p>
+         </li>
+         <li>
+            <p class="initem"><a href="call.htm#Exported_Functions">Exported Functions</a></p>
+         </li>
+      </ul> 
+         
+      <div><a name="INTERFACE4_-_External_3GL_Program_Interface"></a></div> 
+          
+      <h3>INTERFACE4 - External 3GL Program Interface</h3> 
+           
+           
+      <p>The interface of the external 3GL program is defined as follows, when
+               <code>INTERFACE4</code> is specified with the Natural <code>CALL</code>
+               statement:
+      </p> 
+           
+      <div><a name="d0e10475"></a></div> 
+            <pre class="text">NATFCT functionname (numparm, parmhandle, traditional)</pre> 
+            
+            <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="17%">
+            <col width="15%">
+            <col width="64%">
+         </colgroup> 
+                
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td>USR_WORD</td> 
+                        
+               <td>numparm;</td> 
+                        
+               <td>16 bit unsigned short value, containing the total number of
+                  transferred operands (<var>operand2</var>).
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>void</td> 
+                        
+               <td>*parmhandle;</td> 
+                        
+               <td>Pointer to the parameter passing structure.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>void</td> 
+                        
+               <td>*traditional;</td> 
+                        
+               <td>Check for interface type (if it is not a NULL pointer it is the
+                  traditional CALL interface).
+               </td> 
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+          
+         
+      <div><a name="Operand_Structure_for_Interface4"></a></div> 
+          
+      <h3>Operand Structure for INTERFACE4</h3> 
+           
+           
+      <p>The operand structure of <code>INTERFACE4</code> is named
+               "parameter_description" and is defined as follows. The structure
+               is delivered with the header file <cite>natuser.h</cite>.
+      </p> 
+            
+            
+      <table border="1" class="color" cellpadding="3" width="97%">
+         <colgroup>
+            <col width="6%">
+            <col width="27%">
+            <col width="24%">
+            <col width="39%">
+         </colgroup> 
+                
+                
+                 
+                
+         <tbody align="left" valign="top"> 
+                    
+            <tr> 
+                        
+               <td colspan="4">struct
+                  parameter_description
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>void *</td> 
+                        
+               <td>address</td> 
+                        
+               <td colspan="2">Address of the parameter data, not
+                  aligned, <code>realloc()</code> and <code>free()</code> are not
+                            allowed.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>int</td> 
+                        
+               <td>format</td> 
+                        
+               <td colspan="2">Field data format:
+                  NCXR_TYPE_ALPHA, etc. (<cite>natuser.h</cite>).
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>int</td> 
+                        
+               <td>length</td> 
+                        
+               <td colspan="2">Length (before decimal point, if
+                  applicable).
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>int</td> 
+                        
+               <td>precision</td> 
+                        
+               <td colspan="2">Length after decimal point (if
+                  applicable).
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>int</td> 
+                        
+               <td>byte_length</td> 
+                        
+               <td colspan="2">Length of field in bytes int
+                  dimension number of dimensions (0 to IF4_MAX_DIM).
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>int</td> 
+                        
+               <td>dimensions</td> 
+                        
+               <td colspan="2">Number of dimensions (0 to
+                  IF4_MAX_DIM).
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>int</td> 
+                        
+               <td>length_all</td> 
+                        
+               <td colspan="2">Total data length of array in
+                  bytes.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td rowspan="13">int</td> 
+                        
+               <td rowspan="13">flags</td> 
+                        
+               <td colspan="2"> Several flag bits combined by
+                  bitwise OR, meaning: 
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>IF4_FLG_PROTECTED:</td> 
+                        
+               <td>The parameter is write protected.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>IF4_FLG_DYNAMIC:</td> 
+                        
+               <td>The parameter is a dynamic variable.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>IF4_FLG_NOT_CONTIGUOUS:</td> 
+                        
+               <td>The array elements are not contiguous (have spaces between
+                  them).
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>IF4_FLG_AIV:</td> 
+                        
+               <td>The parameter is an application-independent variable.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>IF4_FLG_DYNVAR:</td> 
+                        
+               <td>The parameter is a dynamic variable.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>IF4_FLG_XARRAY:</td> 
+                        
+               <td>The parameter is an X-array.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>IF4_FLG_LBVAR_0:</td> 
+                        
+               <td>The lower bound of dimension 0 is variable.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>IF4_FLG_UBVAR_0:</td> 
+                        
+               <td>The upper bound of dimension 0 is variable.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>IF4_FLG_LBVAR_1:</td> 
+                        
+               <td>The lower bound of dimension 1 is variable.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>IF4_FLG_UBVAR_1:</td> 
+                        
+               <td>The upper bound of dimension 1 is variable.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>IF4_FLG_LBVAR_2:</td> 
+                        
+               <td>The lower bound of dimension 2 is variable.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>IF4_FLG_UBVAR_2:</td> 
+                        
+               <td>The upper bound of dimension 2 is variable.</td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>int</td> 
+                        
+               <td>occurrences[IF4_MAX_DIM]</td> 
+                        
+               <td colspan="2">Array occurrences in each
+                  dimension.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>int</td> 
+                        
+               <td>indexfactors[IF4_MAX_DIM]</td> 
+                        
+               <td colspan="2">Array indexfactors for each
+                  dimension.
+               </td> 
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>void *</td> 
+                        
+               <td>dynp</td> 
+                        
+               <td colspan="2">Reserved for internal use.</td>
+                        
+                       
+            </tr> 
+                    
+            <tr> 
+                        
+               <td>void *</td> 
+                        
+               <td>pops</td> 
+                        
+               <td colspan="2">Reserved for internal use.</td>
+                        
+                       
+            </tr> 
+                   
+         </tbody> 
+               
+      </table> 
+            
+           
+      <p>The address element is null for arrays of dynamic variables and for
+               x-arrays. In these cases, the array data cannot be accessed as a whole, but
+               must be accessed through the parameter access functions described below.
+      </p> 
+           
+      <p>For arrays with fixed bounds of variables with fixed length, the array
+               contents can be accessed directly using the address element. In these cases the
+               address of an array element (i,j,k) is computed as follows (especially if the
+               array elements are not contiguous):
+      </p> 
+           
+      <div><a name="d0e10845"></a></div> 
+            <pre class="text">elementaddress = address + i * indexfactors[0] + j * indexfactors[1] + k * indexfactors[2]</pre> 
+           <p>If the array has less than 3 dimensions, leave out the last terms.</p> 
+           
+          
+         
+      <div><a name="INTERFACE4_-_Parameter_Access"></a></div> 
+          
+      <h3>INTERFACE4 - Parameter Access</h3> 
+           
+           
+      <p>A set of functions is available to be used for the access of the
+               parameters. The process flow is as follows:
+      </p> 
+           
+      <ul> 
+               
+         <li> 
+                   
+            <p class="initem">The 3GL program is called via the <code>CALL</code> statement with
+                       the <code>INTERFACE4</code> option, and the parameters are passed to the 3GL
+                       program as described above.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">The 3GL program can now use the exported functions of Natural, to
+                       retrieve either the parameter data itself, or information about the parameter,
+                       like format, length, array information, etc.
+            </p> 
+                  
+         </li> 
+               
+         <li> 
+                   
+            <p class="initem">The <a href="call.htm#Exported_Functions">exported
+                          functions</a> can also be used to pass back parameter data.
+            </p> 
+                  
+         </li> 
+              
+      </ul> 
+           
+      <p>There are also functions to create and initialize a new parameter set
+               in order to call arbitrary subprograms from a 3GL program. With this technique
+               a parameter access is guaranteed to avoid memory overwrites done by the 3GL
+               program. (Natural's data is safe: memory overwrites within the 3GL program's
+               data are still possible).
+      </p> 
+           
+          
+         
+      <div><a name="Exported_Functions"></a></div> 
+          
+      <h3>Exported Functions</h3> 
+           
+           
+      <p>The following topics are covered below:</p>
+      <ul>
+         <li><a href="call.htm#get_parameter_information">Get Parameter Information</a></li>
+         <li><a href="call.htm#get_parameter_data">Get Parameter Data</a></li>
+         <li><a href="call.htm#write_back_operand_data">Write Back Operand Data</a></li>
+         <li><a href="call.htm#create_call">Create, Initialize and Delete a Parameter Set</a></li>
+         <li><a href="call.htm#d0e11527">Create Parameter Set</a></li>
+         <li><a href="call.htm#d0e11644">Delete Parameter Set</a></li>
+         <li><a href="call.htm#d0e11734">Initialize a Scalar of a Static Data Type</a></li>
+         <li><a href="call.htm#d0e11903">Initialize an Array of a Static Data Type</a></li>
+         <li><a href="call.htm#d0e12126">Initialize a Scalar of a Dynamic Data Type</a></li>
+         <li><a href="call.htm#d0e12268">Initialize an Array of a Dynamic Data Type</a></li>
+         <li><a href="call.htm#d0e12465">Resize an X-array Parameter</a></li>
+      </ul> 
+           
+          
+      <div><a name="get_parameter_information"></a></div> 
+           
+      <h4>Get Parameter Information</h4> 
+            
+            
+      <p>This function is used by the 3GL program to receive all necessary
+                information from any parameter. This information is returned in the
+                <code>struct parameter_description</code>, which is documented
+                <a href="call.htm#Operand_Structure_for_Interface4">above</a>.
+      </p> 
+            
+      <p>Prototype:</p> 
+            
+      <div><a name="d0e10931"></a></div> 
+             <pre class="text">
+int ncxr_get_parm_info ( int parmnum, void *parmhandle, struct parameter_description *descr );</pre> 
+            <p>Parameter Description:</p> 
+             
+             
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                   
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <th>parmnum</th> 
+                         
+               <td colspan="2">Ordinal number of the parameter.
+                  This identifies the parameter of the passed parameter list. Range: 0 ...
+                  numparm-1.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th>parmhandle</th> 
+                         
+               <td colspan="2">Pointer to the internal parameter
+                  structure
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th>descr</th> 
+                         
+               <td colspan="2">Address of a struct
+                  parameter_description
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th rowspan="5">return</th> 
+                         
+               <td>Return Value:</td> 
+                         
+               <td>Information:</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>0</td> 
+                         
+               <td>OK</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>-1</td> 
+                         
+               <td>Illegal parameter number.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>-2&nbsp;</td> 
+                         
+               <td>Internal error.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>-7</td> 
+                         
+               <td>Interface version conflict.</td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+           
+          
+      <div><a name="get_parameter_data"></a></div> 
+           
+      <h4>Get Parameter Data</h4> 
+            
+            
+      <p>This function is used by the 3GL program to get the data from any
+                parameter.
+      </p> 
+            
+      <p>Natural identifies the parameter by the given parameter number and
+                writes the parameter data to the given buffer address with the given buffer
+                size.
+      </p> 
+            
+      <p>If the parameter data is longer than the given buffer size, Natural
+                will truncate the data to the given length. The external 3GL program can make
+                use of the function <code>ncxr_get_parm_info</code>, to request the length of
+                the parameter data.
+      </p> 
+            
+      <p>There are two functions to get parameter data:
+                <code>ncxr_get_parm</code> gets the whole parameter (even if the parameter is
+                an array), whereas <code>ncxr_get_parm_array</code> gets the specified array
+                element.
+      </p> 
+            
+      <p>If no memory of the indicated size is allocated for
+                "buffer" by the 3GL program (dynamically or statically), results
+                of the operation are unpredictable. Natural will only check for a null
+                pointer.
+      </p> 
+            
+      <p>If data gets truncated for variables of the type I2/I4/F4/F8 (buffer
+                length not equal to the total parameter length), the results depend on the
+                machine type (little endian/big endian). In some applications, the user exit
+                must be programmed to use no static data to make recursion possible.
+      </p> 
+            
+      <p>Prototypes:</p> 
+            
+      <div><a name="d0e11071"></a></div> 
+             <pre class="text">
+int ncxr_get_parm( int parmnum, void *parmhandle, int buffer_length, void *buffer )
+
+int ncxr_get_parm_array( int parmnum, void *parmhandle, int buffer_length, void *buffer, int *indexes )
+</pre> 
+            <p>This function is identical to <code>ncxr_get_parm</code>, except that
+                the indexes for each dimension can be specified. The indexes for unused
+                dimensions should be specified as 0.
+      </p> 
+            
+      <p>Parameter Description:</p> 
+             
+             
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                   
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <th>parmnum</th> 
+                         
+               <td colspan="2">Ordinal number of the parameter.
+                  This identifies the parameter of the passed parameter list. Range: 0 ...
+                  numparm-1.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th>parmhandle</th> 
+                         
+               <td colspan="2">Pointer to the internal parameter
+                  structure
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th>buffer_length</th> 
+                         
+               <td colspan="2">Length of the buffer, where the
+                  requested data has to be written to
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th>buffer</th> 
+                         
+               <td colspan="2">Address of buffer, where the
+                  requested data has to be written to. This buffer should be aligned to allow
+                  easy access to I2/I4/F4/F8 variables.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th>indexes</th> 
+                         
+               <td colspan="2">Array with index
+                  information
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th rowspan="12">return</th> 
+                         
+               <td>Return Value:</td> 
+                         
+               <td>Information:</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>&lt; 0</td> 
+                         
+               <td>Error during retrieval of the information:</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>-1</td> 
+                         
+               <td>Illegal parameter number.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>-2</td> 
+                         
+               <td>Internal error.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>-3</td> 
+                         
+               <td>Data has been truncated.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>-4</td> 
+                         
+               <td>Data is not an array.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>-7</td> 
+                         
+               <td>Interface version conflict.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>-100</td> 
+                         
+               <td>Index for dimension 0 is out of range.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>-101</td> 
+                         
+               <td>Index for dimension 1 is out of range.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>-102</td> 
+                         
+               <td>Index for dimension 2 is out of range.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>0</td> 
+                         
+               <td>Successful operation.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>&gt; 0</td> 
+                         
+               <td>Successful operation, but the data was only this number of
+                  bytes long (buffer was longer than the data).
+               </td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+           
+          
+      <div><a name="write_back_operand_data"></a></div> 
+           
+      <h4>Write Back Operand Data</h4> 
+            
+            
+      <p>These functions are used by the 3GL program to write back the data to
+                any parameter. Natural identifies the parameter by the given parameter number
+                and writes the parameter data from the given buffer address with the given
+                buffer size to the parameter data. If the parameter data is shorter than the
+                given buffer size, the data will be truncated to the parameters data length,
+                i.e., the rest of the buffer will be ignored. If the parameter data is longer
+                than the given buffer size, the data will be copied only to the given buffer
+                length, the rest of the parameter stays untouched. This applies to arrays in
+                the same way. For dynamic variables as parameters, the parameter is resized to
+                the given buffer length.
+      </p> 
+            
+      <p>If data gets truncated for variables of the type I2/I4/F4/F8 (buffer
+                length not equal to the total parameter length), the results depend on the
+                machine type (little endian/big endian). In some applications, the user exit
+                must be programmed to use no static data to make recursion possible.
+      </p> 
+            
+      <p>Prototypes:</p> 
+            
+      <div><a name="d0e11274"></a></div> 
+             <pre class="text">
+int ncxr_put_parm        ( int parmnum, void *parmhandle,
+                             int buffer_length, void *buffer );
+int ncxr_put_parm_array  ( int parmnum, void *parmhandle, 
+                            int buffer_length, void *buffer,
+                           int *indexes );</pre> 
+            <p>Parameter Description:</p> 
+             
+             
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                   
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <th>parmnum</th> 
+                         
+               <td colspan="2">Ordinal number of the parameter.
+                  This identifies the parameter of the passed parameter list. Range: 0 ...
+                  numparm-1.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th>parmhandle</th> 
+                         
+               <td colspan="2">Pointer to the internal parameter
+                  structure.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th>buffer_length</th> 
+                         
+               <td colspan="2">Length of the data to be copied
+                  back to the address of buffer, where the data comes from.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th>indexes</th> 
+                         
+               <td rowspan="2" colspan="2">Index
+                  information
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th rowspan="16">return</th> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>Return Value:</td> 
+                         
+               <td>Information:</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>&lt; 0</td> 
+                         
+               <td>Error during copying of the information:</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>-1</td> 
+                         
+               <td>Illegal parameter number.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>-2</td> 
+                         
+               <td>Internal error.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>-3</td> 
+                         
+               <td>Too much data has been given. The copy back was done with
+                  parameter length.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>-4</td> 
+                         
+               <td>Parameter is not an array.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>-5</td> 
+                         
+               <td>Parameter is protected (constant or AD=O).</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>-6</td> 
+                         
+               <td>Dynamic variable could not be resized due to an "out of
+                  memory" condition.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>-7</td> 
+                         
+               <td>Interface version conflict.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>-13</td> 
+                         
+               <td>The given buffer includes an incomplete Unicode
+                  character.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>-100</td> 
+                         
+               <td>Index for dimension 0 is out of range.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>-101</td> 
+                         
+               <td>Index for dimension 1 is out of range.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>-102</td> 
+                         
+               <td>Index for dimension 2 is out of range.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>0</td> 
+                         
+               <td>Successful operation.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>&gt; 0</td> 
+                         
+               <td>Successful operation., but the parameter was this number of
+                  bytes long (length of parameter &gt; given length).
+               </td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+           
+          
+      <div><a name="create_call"></a></div> 
+           
+      <h4>Create, Initialize and Delete a Parameter Set</h4> 
+            
+            
+      <p>If a 3GL program wants to call a Natural subprogram, it needs to build
+                a parameter set that corresponds to the parameters the subprogram expects. The
+                function <code>ncxr_create_parm</code> is used to create a set of parameters to
+                be passed with a call to <code>ncxr_if_callnat</code>. The set of parameters
+                created is represented by an opaque parameter handle, like the parameter set
+                that is passed to the 3GL program with the <code>CALL INTERFACE4</code>
+                statement. Thus, the newly created parameter set can be manipulated with
+                functions <code>ncxr_put_parm*</code> and <code>ncxr_get_parm*</code> as
+                described above.
+      </p> 
+            
+      <p>The newly created parameter set is not yet initialized after having
+                called the function <code>ncxr_create_parm</code>. An individual parameter is
+                initialized to a specific data type by a set of <code>ncxr_parm_init*</code>
+                functions described below. The functions <code>ncxr_put_parm*</code> and
+                <code>ncxr_get_parm*</code> are then used to access the contents of each
+                individual parameter. After the caller has finished with the parameter set,
+                they must delete the parameter handle. Thus, a typical sequence in creating and
+                using a set of parameters for a subprogram to be called through
+                <code>ncxr_if4_callnat</code> will be:
+      </p> 
+            <pre class="verbatim">ncxr_create_parm
+ncxr_init_ parm*
+ncxr_init_ parm*
+...
+ncxr_put_ parm*
+ncxr_put_ parm*
+...
+ncxr_get_parm_info*
+ncxr_get_parm_info*
+...
+ncxr_if4_callnat
+...
+ncxr_get_parm_info*
+ncxr_get_parm_info*
+...
+ncxr_get_ parm*
+ncxr_get_ parm*
+...
+ncxr_delete_parm
+</pre> 
+            
+           
+          <div><a name="d0e11527"></a></div> 
+           
+      <h4>Create Parameter Set</h4> 
+            
+            
+      <p>The function <code>ncxr_create_parm</code> is used to create a set of
+                parameters to be passed with a call to <code>ncxr_if_callnat</code>.
+      </p> 
+            
+      <p>Prototype:</p> 
+            
+      <div><a name="d0e11546"></a></div> 
+             <pre class="text">int ncxr_create_parm( int parmnum, void** pparmhandle )</pre> 
+            <p>Parameter Description:</p> 
+             
+             
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                   
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <th align="left">parmnum</th> 
+                         
+               <td colspan="2">Number of parameters to be
+                  created.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th align="left">pparmhandle</th> 
+                         
+               <td colspan="2">Pointer to the created parameter
+                  handle.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th rowspan="6" align="left">return</th> 
+                         
+               <td>Return Value:</td> 
+                         
+               <td>Information:</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>&lt; 0</td> 
+                         
+               <td>Error:</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>-1</td> 
+                         
+               <td>Illegal parameter count.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>-2</td> 
+                         
+               <td>Internal error.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>-6</td> 
+                         
+               <td>Out of memory condition.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>0</td> 
+                         
+               <td>Successful operation.</td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+           
+      <div><a name="d0e11644"></a></div> 
+           
+      <h4> Delete Parameter Set</h4> 
+            
+            
+      <p>The function <code>ncxr_delete_parm</code> is used to delete a set of
+                parameters that was created with <code>ncxr_create_parm</code>.
+      </p> 
+            
+      <p>Prototype:</p> 
+            
+      <div><a name="d0e11663"></a></div> 
+             <pre class="text">
+int ncxr_delete_parm( void* parmhandle )</pre> 
+            <p>Parameter Description:</p> 
+             
+             
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                   
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <th align="left">parmhandle</th> 
+                         
+               <td colspan="2">Pointer to the parameter handle
+                  to be deleted.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th rowspan="4" align="left">return</th> 
+                         
+               <td>Return Value:</td> 
+                         
+               <td>Information:</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>&lt; 0</td> 
+                         
+               <td>Error:</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>-2</td> 
+                         
+               <td>Internal error.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>0</td> 
+                         
+               <td>Successful operation.</td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+           
+      <div><a name="d0e11734"></a></div> 
+           
+      <h4>Initialize a Scalar of a Static Data Type</h4> 
+            
+            
+      <p>Prototype:</p> 
+            
+      <div><a name="d0e11744"></a></div> 
+             <pre class="text">
+int ncxr_init_parm_s( int parmnum, void *parmhandle,
+    char format, int length, int precision, int flags );</pre> 
+            <p>Parameter Description:</p> 
+             
+             
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                   
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <th align="left">parmnum</th> 
+                         
+               <td colspan="2">Ordinal number of the parameter.
+                  This identifies the parameter in the passed parameter list. Range: 0 ...
+                  numparm-1.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th align="left">parmhandle</th> 
+                         
+               <td colspan="2">Pointer to the parameter
+                  handle.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th align="left">format</th> 
+                         
+               <td colspan="2">Format of the parameter.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th align="left">length</th> 
+                         
+               <td colspan="2">Length of the parameter.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th align="left">precision</th> 
+                         
+               <td colspan="2">Precision of the
+                  parameter.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th align="left">flags</th> 
+                         
+               <td colspan="2">A combination of the flags 
+                  
+                  <p class="mini-list"> 
+                              IF4_FLG_PROTECTED 
+                                
+                  </p>
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th rowspan="8" align="left">return</th> 
+                         
+               <td>Return Value:</td> 
+                         
+               <td>Information:</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>&lt; 0</td> 
+                         
+               <td>Error:</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>-1</td> 
+                         
+               <td>Invalid parameter number.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>-2</td> 
+                         
+               <td>Internal error.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>-6</td> 
+                         
+               <td>Out of memory condition.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>-8</td> 
+                         
+               <td>Invalid format.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>-9</td> 
+                         
+               <td>Invalid length or precision.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>0</td> 
+                         
+               <td>Successful operation.</td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+           
+          
+      <div><a name="d0e11903"></a></div> 
+           
+      <h4>Initialize an Array of a Static Data Type</h4> 
+            
+            
+      <p>Prototype:</p> 
+            
+      <div><a name="d0e11913"></a></div> 
+             <pre class="text">
+int ncxr_init_parm_sa( int parmnum, void *parmhandle,
+    char format, int length, int precision,
+    int dim, int *occ, int flags );
+</pre> 
+            <p>Parameter Description:</p> 
+             
+             
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                   
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <th align="left">parmnum</th> 
+                         
+               <td colspan="2">Ordinal number of the parameter.
+                  This identifies the parameter in the passed parameter list. Range: 0 ...
+                  numparm-1.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th align="left">parmhandle</th> 
+                         
+               <td colspan="2">Pointer to the parameter
+                  handle.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th align="left">format</th> 
+                         
+               <td colspan="2">Format of the parameter.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th align="left">length</th> 
+                         
+               <td colspan="2">Length of the parameter.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th align="left">precision</th> 
+                         
+               <td colspan="2">Precision of the
+                  parameter.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th align="left">dim</th> 
+                         
+               <td colspan="2">Dimension of the array.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th align="left">occ</th> 
+                         
+               <td colspan="2">Number of occurrences per
+                  dimension.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th align="left">flags</th> 
+                         
+               <td colspan="2">A combination of the flags 
+                  
+                  <p class="mini-list"> 
+                                 IF4_FLG_PROTECTED<br> 
+                                 IF4_FLG_LBVAR_0<br> 
+                                 IF4_FLG_UBVAR_0<br> 
+                                 IF4_FLG_LBVAR_1<br> 
+                                 IF4_FLG_UBVAR_1<br> 
+                                 IF4_FLG_LBVAR_2<br> 
+                                 IF4_FLG_UBVAR_2 
+                                
+                  </p>
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th rowspan="10" align="left">return</th> 
+                         
+               <td>Return Value:</td> 
+                         
+               <td>Information:</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>&lt; 0</td> 
+                         
+               <td>Error:</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>-1</td> 
+                         
+               <td>Invalid parameter number.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>-2</td> 
+                         
+               <td>Internal error.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>-6</td> 
+                         
+               <td>Out of memory condition.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>-8</td> 
+                         
+               <td>Invalid format.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>-9</td> 
+                         
+               <td>Invalid length or precision.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>-10</td> 
+                         
+               <td>Invalid dimension count.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>-11</td> 
+                         
+               <td>Invalid combination of variable bounds.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>0</td> 
+                         
+               <td>Successful operation.</td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+           
+          
+      <div><a name="d0e12126"></a></div> 
+           
+      <h4>Initialize a Scalar of a Dynamic Data Type</h4> 
+            
+            
+      <p>Prototype:</p> 
+            
+      <div><a name="d0e12136"></a></div> 
+             <pre class="text">
+int ncxr_init_parm_d( int parmnum, void *parmhandle, 
+    char format, int flags );</pre> 
+            <p>Parameter Description:</p> 
+             
+             
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                   
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <th align="left">parmnum</th> 
+                         
+               <td colspan="2">Ordinal number of the parameter.
+                  This identifies the parameter in the passed parameter list. Range: 0 ...
+                  numparm-1.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th align="left">parmhandle</th> 
+                         
+               <td colspan="2">Pointer to the parameter
+                  handle.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th align="left">format</th> 
+                         
+               <td colspan="2">Format of the parameter.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th align="left">flags</th> 
+                         
+               <td colspan="2">A combination of the flags 
+                  
+                  <p class="mini-list"> 
+                              IF4_FLG_PROTECTED 
+                                
+                  </p>
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th rowspan="7" align="left">return</th> 
+                         
+               <td>Return Value:</td> 
+                         
+               <td>Information:</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>&lt; 0</td> 
+                         
+               <td>Error:</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>-1</td> 
+                         
+               <td>Invalid parameter number.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>-2</td> 
+                         
+               <td>Internal error.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>-6</td> 
+                         
+               <td>Out of memory condition.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>-8</td> 
+                         
+               <td>Invalid format.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>0</td> 
+                         
+               <td>Successful operation.</td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+           
+          
+      <div><a name="d0e12268"></a></div> 
+           
+      <h4>Initialize an Array of a Dynamic Data Type</h4> 
+            
+            
+      <p>Prototype:</p> 
+            
+      <div><a name="d0e12278"></a></div> 
+             <pre class="text">int ncxr_init_parm_da( int parmnum, void *parmhandle,
+    char format, int dim, int *occ, int flags );</pre> 
+            <p>Parameter Description:</p> 
+             
+             
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                   
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <th align="left">parmnum</th> 
+                         
+               <td colspan="2">Ordinal number of the parameter.
+                  This identifies the parameter in the passed parameter list. Range: 0 ...
+                  numparm-1.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th align="left">parmhandle</th> 
+                         
+               <td colspan="2">Pointer to the parameter
+                  handle.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th align="left">format</th> 
+                         
+               <td colspan="2">Format of the parameter.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th align="left">dim</th> 
+                         
+               <td colspan="2">Dimension of the array.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th align="left">occ</th> 
+                         
+               <td colspan="2">Number of occurrences per
+                  dimension.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th align="left">flags</th> 
+                         
+               <td colspan="2">A combination of the flags 
+                  
+                  <p class="mini-list"> 
+                                 IF4_FLG_PROTECTED<br> 
+                                 IF4_FLG_LBVAR_0<br> 
+                                 IF4_FLG_UBVAR_0<br> 
+                                 IF4_FLG_LBVAR_1<br> 
+                                 IF4_FLG_UBVAR_1<br> 
+                                 IF4_FLG_LBVAR_2<br> 
+                                 IF4_FLG_UBVAR_2 
+                                
+                  </p> 
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th rowspan="9" align="left">return</th> 
+                         
+               <td>Return Value:</td> 
+                         
+               <td>Information:</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>&lt; 0</td> 
+                         
+               <td>Error:</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>-1</td> 
+                         
+               <td>Invalid parameter number.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>-2</td> 
+                         
+               <td>Internal error.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>-6</td> 
+                         
+               <td>Out of memory condition.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>-8</td> 
+                         
+               <td>Invalid format.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>-10</td> 
+                         
+               <td>Invalid dimension count.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>-11</td> 
+                         
+               <td>Invalid combination of variable bounds.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>0</td> 
+                         
+               <td>Successful operation.</td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+           
+          
+      <div><a name="d0e12465"></a></div> 
+           
+      <h4>Resize an X-array Parameter</h4> 
+            
+            
+      <p>Prototype:</p> 
+            
+      <div><a name="d0e12475"></a></div> 
+             <pre class="text">
+int ncxr_resize_parm_array( int parmnum, void *parmhandle, int *occ );
+</pre> 
+            <p>Parameter Description:</p> 
+             
+             
+      <table border="1" class="color" cellpadding="3" width="97%"> 
+                   
+                 
+         <tbody align="left" valign="top"> 
+                     
+            <tr> 
+                         
+               <th align="left">parmnum</th> 
+                         
+               <td colspan="2">Ordinal number of the parameter.
+                  This identifies the parameter in the passed parameter list. Range: 0 ...
+                  numparm-1.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th align="left">parmhandle</th> 
+                         
+               <td colspan="2">Pointer to the parameter
+                  handle.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th align="left">occ</th> 
+                         
+               <td colspan="2">New number of occurrences per
+                  dimension.
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <th rowspan="7" align="left">return</th> 
+                         
+               <td>Return Value:</td> 
+                         
+               <td>Information:</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>&lt; 0</td> 
+                         
+               <td>Error:</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>-1</td> 
+                         
+               <td>Invalid parameter number.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>-2</td> 
+                         
+               <td>Internal error.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>-6</td> 
+                         
+               <td>Out of memory condition.</td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>-12</td> 
+                         
+               <td>Operand is not resizable (in one of the specified
+                  dimensions).
+               </td> 
+                        
+            </tr> 
+                     
+            <tr> 
+                         
+               <td>0</td> 
+                         
+               <td>Successful operation.</td> 
+                        
+            </tr> 
+                    
+         </tbody> 
+                
+      </table> 
+             
+            
+      <p>All function prototypes are declared in the file
+                <cite>natuser.h</cite>.
+      </p> 
+            
+           
+          
+        
+       
+      <div class="noprint">
+         <div class="nospy">
+            <p><a href="call.htm#Top"><img src="../graphics/uparrow.png" alt="Top of page" height="17" width="17" border="0"></a></p>
+            <table border="0" cellpadding="0" cellspacing="0" width="97%">
+               <col width="15%">
+               <col width="34%">
+               <col width="48%">
+               <tr>
+                  <td class="footer"><img src="../graphics/blank.png" width="3" height="10">&nbsp;<a class="navig" target="_blank" href="http://www.softwareag.com">www.softwareag.com</a>&nbsp;
+                  </td>
+                  <td nowrap class="footer"><img src="../graphics/blank.png" width="3"><a class="navig" href="../general/legal.htm" target="_blank">Copyright &copy; Software AG 1992-2008. All rights reserved.&nbsp;</a></td>
+                  <td class="bottomlinks" align="right" nowrap><img src="../graphics/blank.png" width="3"><a class="navig" target="_blank" href="../fts/search.htm" onclick="window.open('../fts/search.htm', 'fts', 'dependent,width=555,height=420,resizable'); return false">SEARCH</a>
+                     &nbsp;&nbsp;<a class="navig" href="javascript:sized_window('../navig/navig.htm')" onclick="document.cookie='sagphdcc=../sm/call.htm;path=/'; window.open('../navig/navig.htm', 'nvgtr', 'dependent,width=450,height=270,resizable'); return false">CONTENTS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="http://documentation.softwareag.com/natural/nat635unx/pdf/sm/call.pdf">PDF PAGE</a>
+                     &nbsp;&nbsp;<a class="navig" target="_blank" href="../general/print.htm">PDF BOOKS</a>&nbsp;&nbsp;&nbsp;|
+                     &nbsp;&nbsp;<a class="navig" href="../overview.htm">HOME</a>
+                     &nbsp;&nbsp;<a class="navig" href="sm-over.htm">UP</a>
+                     &nbsp;&nbsp;<a class="navig" href="before.htm">PREV</a>
+                     &nbsp;&nbsp;<a class="navig" href="callfile.htm">NEXT</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </body>
+</html>
